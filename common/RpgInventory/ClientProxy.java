@@ -34,7 +34,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy {
-    
+    //Testing
     private HashMap<String, RpgInv> invs;
     public static int sphereID;
     public static boolean firstUpdate = false;
