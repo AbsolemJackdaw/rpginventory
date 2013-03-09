@@ -4,16 +4,6 @@
  */
 package RpgPlusPlus;
 
-import RpgInventory.CommonTickHandler;
-import RpgInventory.EnumRpgClass;
-import RpgInventory.gui.inventory.RpgInv;
-import RpgInventory.mod_RpgInventory;
-import RpgPlusPlus.minions.EntityMinionS;
-import RpgPlusPlus.minions.EntityMinionZ;
-import RpgPlusPlus.minions.IMinion;
-import RpgPlusPlus.minions.MinionRegistry;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -21,13 +11,22 @@ import java.util.List;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import RpgInventory.CommonTickHandler;
+import RpgInventory.EnumRpgClass;
+import RpgInventory.mod_RpgInventory;
+import RpgInventory.gui.inventory.RpgInv;
+import RpgPlusPlus.minions.EntityMinionS;
+import RpgPlusPlus.minions.EntityMinionZ;
+import RpgPlusPlus.minions.IMinion;
+import RpgPlusPlus.minions.MinionRegistry;
+import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.Player;
 
 /**
  *
@@ -124,7 +123,7 @@ public class RpgPlusPacketHandler implements IPacketHandler {
                         ex.printStackTrace();
                     }
                     inv.onInventoryChanged();
-                    if (!mod_RpgInventory.developers.contains(p.username.toLowerCase()) || weapon == null) {
+                    if (!mod_RpgInventory.developers.contains(p.username) || weapon == null) {
                         if (!inv.hasClass(EnumRpgClass.PALADIN)) {
                             break;
                         }
@@ -144,7 +143,7 @@ public class RpgPlusPacketHandler implements IPacketHandler {
                             p.renderBrokenItemStack(weapon);
                             p.setCurrentItemOrArmor(0, (ItemStack) null);
                         } else {
-                            if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+                            if (!mod_RpgInventory.developers.contains(p.username)) {
                                 weapon.damageItem(3, p);
                             }
                         }

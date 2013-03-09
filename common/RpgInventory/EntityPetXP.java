@@ -3,14 +3,12 @@
  * and open the template in the editor.
  */
 package RpgInventory;
-
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -112,9 +110,5 @@ public class EntityPetXP extends EntityXPOrb {
             }
         }
         return var11;
-    }
-    public void onCollideWithPlayer(EntityPlayer par1EntityPlayer)
-    {
-        //Do Nothing
     }
 }

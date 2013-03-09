@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 package RpgInventory;
-
 import RpgPlusPlus.minions.IMinion;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;

@@ -6,7 +6,6 @@ package RpgRB.beastmaster;
 
 import RpgInventory.EntityPetXP;
 import RpgInventory.IPet;
-import RpgInventory.gui.inventory.RpgInv;
 import RpgInventory.mod_RpgInventory;
 import RpgPlusPlus.minions.CustomMinionEntitySelector;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -277,28 +276,14 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     public boolean isAIEnabled() {
         return true;
     }
-    private int xpThrottle = 10;
 
     protected void updateAITick() {
-        if (xpThrottle == 0) {
-            xpThrottle = 10;
-        } else {
-            xpThrottle--;
-        }
         this.dataWatcher.updateObject(HP, Integer.valueOf(this.getHealth()));
-        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.expand(0.4D, 0.4D, 0.4D));
-        if (xps != null && xps.size() > 0) {
-            for (EntityPetXP xp : xps) {
-                if (xpThrottle <= 0) {
-                    this.playSound("random.orb", 0.1F, 0.5F * ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.8F));
-                    this.giveXP(xp.getXpValue());
-                    xp.setDead();
-                }
-
-            }
-
+        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.expand(0.1D, 0.1D, 0.1D));
+        for (EntityPetXP xp : xps) {
+            this.giveXP(xp.getXpValue());
+            xp.setDead();
         }
-
     }
 
     @Override
@@ -313,10 +298,16 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public void onDeath(DamageSource par1DamageSource) {
+        //world.remote check without a world.
+        //Always do .getEffectiveSide(), unless you want to know
+        //if this is a SSP world or SMP world.
+        //FMLCommonHandler.instance().getSide().isServer() seems to only returns true
+        //from the dedicated server.
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            RpgInv rpginv = mod_RpgInventory.proxy.getInventory(getOwnerName());
+            addExperienceLevel(-1);
+            setEntityHealth(getMaxHealth() / 2);
             ItemStack itemizedPet = writePetToItemStack(new ItemStack(mod_RpgInventory.crystal));
-            rpginv.setInventorySlotContents(6, itemizedPet);
+            entityDropItem(itemizedPet, 1.0F);
             IPet.playersWithActivePets.remove(this.getOwnerName());
         }
         setDead();

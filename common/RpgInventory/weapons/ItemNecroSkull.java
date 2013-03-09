@@ -1,36 +1,33 @@
 package RpgInventory.weapons;
 
-import RpgInventory.EnumRpgClass;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import RpgInventory.EnumRpgClass;
 import RpgInventory.mod_RpgInventory;
 import RpgInventory.gui.inventory.RpgInv;
 import RpgPlusPlus.RpgPlusPacketHandler;
-import RpgPlusPlus.mod_RpgPlus;
 import RpgPlusPlus.minions.EntityMinionS;
 import RpgPlusPlus.minions.EntityMinionZ;
 import RpgPlusPlus.minions.IMinion;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.network.packet.Packet250CustomPayload;
 
 public class ItemNecroSkull extends Item {
 

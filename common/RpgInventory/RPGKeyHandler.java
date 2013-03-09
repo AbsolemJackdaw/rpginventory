@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 package RpgInventory;
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

@@ -5,6 +5,7 @@
 //import java.io.IOException;
 //import java.io.ObjectOutput;
 //
+//import RpgInventory.AARpgBaseClass;
 //
 //import net.minecraft.client.gui.GuiButton;
 //import net.minecraft.client.gui.inventory.GuiContainerCreative;
@@ -20,8 +21,8 @@
 //public class AlternativeGui extends GuiInventory
 //{
 //
-//	public int	var1	= 85;
-//	public int	var2	= 90;
+//	public int	var1	= 75;
+//	public int	var2	= -110;
 //
 //	@SideOnly(Side.CLIENT)
 //	public AlternativeGui(EntityPlayer par1EntityPlayer)
@@ -29,6 +30,7 @@
 //		super(par1EntityPlayer);
 //
 //	}
+//
 //	/**
 //	 * Adds the buttons (and other controls) to the screen in question.
 //	 */
@@ -45,8 +47,8 @@
 //			super.initGui();
 //			int posX = (this.width) / 2;
 //			int posY = (this.height) / 2;
-//			this.controlList.add(new GuiButton(0, posX - var1, posY + var2, 80, 20, "Rpg Inventory"));
-//			this.controlList.add(new GuiButton(1, posX - var1 + 80 + 5, posY + var2, 80, 20, "Close"));
+//			this.controlList.add(new GuiButton(0, posX - var1, posY + var2, 75, 20, "Rpg Inventory"));
+//			this.controlList.add(new GuiButton(1, posX - var1 + 80, posY + var2, 75, 20, "Close"));
 //		}
 //	}
 //
@@ -56,24 +58,31 @@
 //		
 //		if (button.id == 0)
 //		{
+//			int i = 1;
+//
 //			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+//			ObjectOutput out;
 //			DataOutputStream outputStream = new DataOutputStream(bytes);
+//
 //			try
 //			{
-//				outputStream.writeInt(1);
-//				Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
+//				outputStream.writeInt(i);
+//				Packet250CustomPayload packet = new Packet250CustomPayload("RPGInv", bytes.toByteArray());
 //				PacketDispatcher.sendPacketToServer(packet);
 //				System.out.println("Packet send");
+//
 //			}
 //			catch (IOException e)
 //			{
 //				e.printStackTrace();
 //			}
+//			
 //
 //		}
 //		if (button.id == 1)
 //		{
 //			player.closeScreen();
 //		}
+//
 //	}
 //}

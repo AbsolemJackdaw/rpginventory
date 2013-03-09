@@ -3,13 +3,11 @@
  * and open the template in the editor.
  */
 package RpgInventory;
-
-import RpgInventory.gui.inventory.RpgInv;
-import RpgPlusPlus.minions.IMinion;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -26,9 +24,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import RpgInventory.gui.inventory.RpgInv;
 
 /**
  *
@@ -450,7 +448,7 @@ public class RPGEventHooks {
     }
 
     public void damageItem(ItemStack item, RpgInv inv, EntityPlayer p, int slot, int amount) {
-    	if (mod_RpgInventory.developers.contains(p.username.toLowerCase())) return;
+
         try {
             if (item.getItemDamage() + amount >= item.getMaxDamage()) {
                 //Trigger item break stuff
