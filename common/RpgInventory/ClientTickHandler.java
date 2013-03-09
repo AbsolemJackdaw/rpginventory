@@ -31,10 +31,10 @@ public class ClientTickHandler implements ITickHandler {
         //The button prevents calls to the parent GUI if clicked, and calls our packet
         //instead. I see no incompatibilies.
         if (Minecraft.getMinecraft().currentScreen != null && Minecraft.getMinecraft().theWorld != null && Minecraft.getMinecraft().thePlayer != null) {
-            if (Minecraft.getMinecraft().currentScreen instanceof GuiInventory) {
+            if (Minecraft.getMinecraft().currentScreen instanceof GuiInventory || Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) {
                 if (!added) {
                     added = true;
-                    GuiInventory gui = (GuiInventory) Minecraft.getMinecraft().currentScreen;
+                    GuiScreen gui = Minecraft.getMinecraft().currentScreen;
                     List currentButtons = null;
                     for (Field f : GuiScreen.class.getDeclaredFields()) {
                         f.setAccessible(true);
@@ -46,12 +46,12 @@ public class ClientTickHandler implements ITickHandler {
                                 modfield.setAccessible(true);
                                 modfield.setInt(f, f.getModifiers() & ~Modifier.PROTECTED);
                                 currentButtons = (List) f.get(gui);
-                                int offsetx = 85;
-                                int offsety = 90;
+                                int offsetx = 75;
+                                int offsety = 93;
                                 int posX = (Minecraft.getMinecraft().currentScreen.width) / 2;
                                 int posY = (Minecraft.getMinecraft().currentScreen.height) / 2;
                                 currentButtons.add(new ButtonInventory(currentButtons.size() + 1, posX - offsetx, posY + offsety, "Rpg Inventory"));
-                                currentButtons.add(new ButtonInventory(currentButtons.size() + 1, posX - offsetx + 80 + 5, posY + offsety, "Close"));
+                                currentButtons.add(new ButtonInventory(currentButtons.size() + 1, posX - offsetx + 80 + 15, posY + offsety, "Close"));
                             }
                         } catch (Exception e) {
                             System.err.println("Severe error, please report this to the mod author:");
