@@ -280,15 +280,23 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     private int xpThrottle = 10;
 
     protected void updateAITick() {
+        if (xpThrottle == 0) {
+            xpThrottle = 10;
+        } else {
+            xpThrottle--;
+        }
         this.dataWatcher.updateObject(HP, Integer.valueOf(this.getHealth()));
         List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.expand(0.4D, 0.4D, 0.4D));
         if (xps != null && xps.size() > 0) {
-            if (xpThrottle <= 0) {
-                for (EntityPetXP xp : xps) {
+            for (EntityPetXP xp : xps) {
+                if (xpThrottle <= 0) {
+                    this.playSound("random.orb", 0.1F, 0.5F * ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.8F));
                     this.giveXP(xp.getXpValue());
                     xp.setDead();
                 }
+
             }
+
         }
 
     }
