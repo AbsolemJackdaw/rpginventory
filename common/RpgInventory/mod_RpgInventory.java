@@ -244,8 +244,9 @@ public class mod_RpgInventory {
             hasMage = false;
         }
 
-        developers.add("Unjustice");
+        developers.add("unjustice");
         developers.add("artix_all_mighty");
+        developers.add("rich1051414");
 
         forgeBlock = new BlockForge(RpgConfig.instance.forgeblockID, Material.rock).setHardness(5f).setBlockName("MoldForge").setCreativeTab(tab);
 
