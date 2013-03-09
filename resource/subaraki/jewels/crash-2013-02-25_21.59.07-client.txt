@@ -1,0 +1,80 @@
+---- Minecraft Crash Report ----
+// Daisy, daisy...
+
+Time: 2/25/13 9:59 PM
+Description: Failed to start game
+
+java.lang.IllegalArgumentException: Slot 575 is already occupied by xolova.blued00r.divinerpg.blocks.BlockHellSpiderPumpkin@189ce8ce when adding RpgInventory.forge.BlockForge@65783901
+	at amq.<init>(Block.java:326)
+	at akb.<init>(BlockContainer.java:11)
+	at RpgInventory.forge.BlockForge.<init>(BlockForge.java:33)
+	at RpgInventory.mod_RpgInventory.load(mod_RpgInventory.java:187)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at cpw.mods.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:485)
+	at sun.reflect.GeneratedMethodAccessor5.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at com.google.common.eventbus.EventHandler.handleEvent(EventHandler.java:69)
+	at com.google.common.eventbus.SynchronizedEventHandler.handleEvent(SynchronizedEventHandler.java:45)
+	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:317)
+	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:300)
+	at com.google.common.eventbus.EventBus.post(EventBus.java:268)
+	at cpw.mods.fml.common.LoadController.propogateStateMessage(LoadController.java:140)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at com.google.common.eventbus.EventHandler.handleEvent(EventHandler.java:69)
+	at com.google.common.eventbus.SynchronizedEventHandler.handleEvent(SynchronizedEventHandler.java:45)
+	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:317)
+	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:300)
+	at com.google.common.eventbus.EventBus.post(EventBus.java:268)
+	at cpw.mods.fml.common.LoadController.distributeStateMessage(LoadController.java:83)
+	at cpw.mods.fml.common.Loader.initializeMods(Loader.java:657)
+	at cpw.mods.fml.client.FMLClientHandler.finishMinecraftLoading(FMLClientHandler.java:207)
+	at net.minecraft.client.Minecraft.a(Minecraft.java:456)
+	at asq.a(SourceFile:56)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:744)
+	at java.lang.Thread.run(Unknown Source)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- System Details --
+Details:
+	Minecraft Version: 1.4.7
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.7.0_09, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 367606408 bytes (350 MB) / 648740864 bytes (618 MB) up to 954466304 bytes (910 MB)
+	JVM Flags: 2 total; -Xms512m -Xmx1024m
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Suspicious classes: FML and Forge are installed
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v7.26 FML v4.7.4.520 Minecraft Forge 6.6.0.497 Optifine OptiFine_1.4.6_HD_U_A3 15 mods loaded, 15 mods active
+	mcp [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized
+	FML [Forge Mod Loader] (coremods) Unloaded->Constructed->Pre-initialized->Initialized
+	Forge [Minecraft Forge] (coremods) Unloaded->Constructed->Pre-initialized->Initialized
+	CodeChickenCore [CodeChicken Core] (coremods) Unloaded->Constructed->Pre-initialized->Initialized
+	NotEnoughItems [Not Enough Items] (coremods) Unloaded->Constructed->Pre-initialized->Initialized
+	mod_ReiMinimap [mod_ReiMinimap] ([1.4.7]ReiMinimap_v3.2_06.zip) Unloaded->Constructed->Pre-initialized->Initialized
+	Backpack [Backpack] (backpack-1.5.6-1.4.6.zip) Unloaded->Constructed->Pre-initialized->Initialized
+	BiblioCraft [BiblioCraft] (BiblioCraft [v1.0.2].zip) Unloaded->Constructed->Pre-initialized->Initialized
+	DamageIndicatorsMod [Damage Indicators] (DamageIndicators[1.4.6]2.2.8 (1).zip) Unloaded->Constructed->Pre-initialized->Initialized
+	DivineRPG [DivineRPG] (Divine RPG.zip) Unloaded->Constructed->Pre-initialized->Initialized
+	ExtrabiomesXL [ExtrabiomesXL] (ExtrabiomesXL-universal-1.4.6-3.7.0a.jar) Unloaded->Constructed->Pre-initialized->Initialized
+	GraviGun [GraviGun] (GravityGun1.4.6v1.zip) Unloaded->Constructed->Pre-initialized->Initialized
+	RPGInventoryMod [Subarakis RPG Inventory mod] (RpgInventory.zip) Unloaded->Constructed->Pre-initialized->Errored
+	RPGPlusPlus [Subarakis RPG++ mod] (RpgInventory.zip) Unloaded->Constructed->Pre-initialized->Initialized
+	SwordPedestal [Sword Pedestal] (SwordPedestal - 1.1.1.zip) Unloaded->Constructed->Pre-initialized->Initialized
+	LWJGL: 2.4.2
+	OpenGL: GeForce GTX 670/PCIe/SSE2 GL version 4.2.0, NVIDIA Corporation
+	Is Modded: Definitely; Client brand changed to 'forge,fml'
+	Type: Client (map_client.txt)
+	Texture Pack: Default
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: ~~ERROR~~ NullPointerException: null
