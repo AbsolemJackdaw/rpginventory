@@ -9,12 +9,14 @@ import RpgInventory.IPet;
 import RpgInventory.mod_RpgInventory;
 import RpgPlusPlus.minions.CustomMinionEntitySelector;
 import cpw.mods.fml.common.FMLCommonHandler;
+import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -54,7 +56,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     int sprintToggleTimer;
     int jumpTicks;
     public double speedBonus;
-
+    private List aiBackup;
     private BMPetImpl(World par1World) {
         super(par1World);
         this.moveSpeed = 0.35F;
@@ -74,7 +76,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        ignoreFrustumCheck = true;
     }
 
     @Override
@@ -140,10 +141,14 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         }
         super.onLivingUpdate();
     }
-
+    
     public void moveEntity(double d, double d1, double d2) {
 
         if (riddenByEntity != null) {
+            aiBackup = new ArrayList(this.tasks.taskEntries);
+            this.tasks.taskEntries.clear();
+            
+            
             /**
              * initiate sprinting while ridden via keybind. Basically, if the
              * player has tapped once, it begins the timer which counts down
@@ -189,6 +194,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             }
             super.moveEntity(motionX, motionY, motionZ);
         } else {
+            if(aiBackup != null){
+                this.tasks.taskEntries.addAll(aiBackup);
+                aiBackup = null;
+            }
             super.moveEntity(d, d1, d2);
         }
     }
