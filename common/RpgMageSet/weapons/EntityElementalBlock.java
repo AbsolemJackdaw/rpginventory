@@ -57,9 +57,9 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 		super.onUpdate();
 		this.size++;
 		if (this.size >= 10) {
-			this.setDead();
 			MovingObjectPosition pos = new MovingObjectPosition((int)this.posX, (int)this.posY, (int)this.posZ, 4, Vec3.createVectorHelper(this.posX, this.posY, this.posZ));
 			this.onImpact(pos);
+			//this.setDead();
 		}
 		//System.out.println);
 		this.setSize(this.size, this.size);
@@ -98,7 +98,6 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 					var1.entityHit.attackEntityFrom(DamageSource.onFire, 2);
 				}
 			}
-			this.setDead();
 			break;
 		case 2:
 			AxisAlignedBB pool1 = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
@@ -144,7 +143,6 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 					}
 				}
 			}
-			this.setDead();
 			break;
 		case 3:
 			pool = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
@@ -179,7 +177,17 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 					}
 				}
 			}
-
+			if (!this.worldObj.isRemote) {
+				if (this.getThrower().getDistanceToEntity(this) < 2) {
+					double xdir = this.getThrower().posX - this.posX;
+					double ydir = this.getThrower().posY - this.posY;
+					double zdir = this.getThrower().posZ - this.posZ;
+					this.getThrower().motionX = xdir * 1.5F;
+					this.getThrower().motionY = ydir * 1.5F;
+					this.getThrower().motionZ = zdir * 1.5F;
+					System.out.println(xdir * 1.5F + " " +  ydir * 1.5F+ " " +  zdir * 1.5F);
+				}
+			}
 			break;
 		case 5:
 			specialAttack(var1, 1);
@@ -190,6 +198,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 		default:
 			break;
 		}
+		this.setDead();
 	}
 
 	@Override

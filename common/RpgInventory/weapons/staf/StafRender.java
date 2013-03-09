@@ -118,7 +118,7 @@ public class StafRender implements IItemRenderer {
 			}
 
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			blockLoop((Entity)data[1],30);
+			blockLoop((Entity)data[1],15);
 			ForgeHooksClient.unbindTexture();
 			GL11.glPopMatrix();
 		}
@@ -151,7 +151,7 @@ public class StafRender implements IItemRenderer {
 			GL11.glTranslatef( 0.2F, 0F, 0F);
 
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			blockLoop((Entity)data[1],30);
+			blockLoop((Entity)data[1],15);
 
 			ForgeHooksClient.unbindTexture();
 
