@@ -42,6 +42,9 @@ public class ItemRBMats2 extends Item {
                             BoarPet Boar = new BoarPet(world, player, stack);
                             Boar.setPosition(player.posX, player.posY, player.posZ);
                             Boar.setTamed(true);
+                            if(Boar.getHealth() <= 0){
+                                Boar.setEntityHealth(1);
+                            }
                             world.spawnEntityInWorld(Boar);
                             break;
                         case 2:
@@ -49,12 +52,18 @@ public class ItemRBMats2 extends Item {
                             spider.setPosition(player.posX, player.posY, player.posZ);
                             spider.setOwner(player.username);
                             spider.setTamed(true);
+                            if(spider.getHealth() <= 0){
+                                spider.setEntityHealth(1);
+                            }
                             world.spawnEntityInWorld(spider);
                             break;
                         case 3:
                             BullPet bull = new BullPet(world, player, stack);
                             bull.setPosition(player.posX, player.posY, player.posZ);
                             bull.setTamed(true);
+                            if(bull.getHealth() <= 0){
+                                bull.setEntityHealth(1);
+                            }
                             world.spawnEntityInWorld(bull);
                             break;
                     }
