@@ -1,6 +1,6 @@
 RPG-Inventory mod
 ==========
 Team:
-Saburaki
+Subaraki
 Rich
 Zeta

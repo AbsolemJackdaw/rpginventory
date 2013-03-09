@@ -163,7 +163,7 @@ public class CommonTickHandler implements ITickHandler {
             if (entry.getValue() > 0) {
                 entry.setValue(entry.getValue() - 1);
             }
-            if (mod_RpgInventory.developers.contains(entry.getKey())) {
+            if (mod_RpgInventory.developers.contains(entry.getKey().toLowerCase())) {
                 entry.setValue(0);
             }
         }

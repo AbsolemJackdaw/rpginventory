@@ -124,7 +124,7 @@ public class RpgPlusPacketHandler implements IPacketHandler {
                         ex.printStackTrace();
                     }
                     inv.onInventoryChanged();
-                    if (!mod_RpgInventory.developers.contains(p.username) || weapon == null) {
+                    if (!mod_RpgInventory.developers.contains(p.username.toLowerCase()) || weapon == null) {
                         if (!inv.hasClass(EnumRpgClass.PALADIN)) {
                             break;
                         }
@@ -144,7 +144,7 @@ public class RpgPlusPacketHandler implements IPacketHandler {
                             p.renderBrokenItemStack(weapon);
                             p.setCurrentItemOrArmor(0, (ItemStack) null);
                         } else {
-                            if (!mod_RpgInventory.developers.contains(p.username)) {
+                            if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
                                 weapon.damageItem(3, p);
                             }
                         }

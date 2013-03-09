@@ -166,18 +166,33 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			if (entl != null && entl.size() > 0) {
 				for (EntityLiving el : entl) {
 					if (el != null && el != this.getThrower()) {
-			            try {
-			                double xdir = el.posX - this.getThrower().posX;
-			                double zdir = el.posZ - this.getThrower().posZ;
-			                el.motionX = xdir * 0.1F;
-			                el.motionY = 0.1F;
-			                el.motionZ = zdir * 0.1F;
-			            } catch (Throwable ex) {
-			            }
+						try {
+							double xdir = el.posX - this.getThrower().posX;
+							double zdir = el.posZ - this.getThrower().posZ;
+							el.motionX = xdir * 0.1F;
+							el.motionY = 0.1F;
+							el.motionZ = zdir * 0.1F;
+						} catch (Throwable ex) {
+						}
 					}
 				}
 			}
-			if (!this.worldObj.isRemote) {
+			if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
+				if (var1.entityHit.isEntityAlive()) {
+					EntityLiving el = (EntityLiving) var1.entityHit;
+					if (el != null && el != this.getThrower()) {
+						try {
+							double xdir = el.posX - this.getThrower().posX;
+							double zdir = el.posZ - this.getThrower().posZ;
+							el.motionX = xdir * 0.1F;
+							el.motionY = 0.1F;
+							el.motionZ = zdir * 0.1F;
+						} catch (Throwable ex) {
+						}
+					}
+				}
+			}
+			if (this.getThrower() != null) {
 				if (this.getThrower().getDistanceToEntity(this) < 2) {
 					double xdir = this.getThrower().posX - this.posX;
 					double ydir = this.getThrower().posY - this.posY;
