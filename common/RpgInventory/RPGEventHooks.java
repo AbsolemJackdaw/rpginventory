@@ -450,7 +450,7 @@ public class RPGEventHooks {
     }
 
     public void damageItem(ItemStack item, RpgInv inv, EntityPlayer p, int slot, int amount) {
-
+    	if (mod_RpgInventory.developers.contains(p.username.toLowerCase())) return;
         try {
             if (item.getItemDamage() + amount >= item.getMaxDamage()) {
                 //Trigger item break stuff
