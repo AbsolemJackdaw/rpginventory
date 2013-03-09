@@ -36,7 +36,7 @@ public class RenderElementalBlock extends Render
         GL11.glRotatef((new Random()).nextInt(360), 1, 1, 1);
         int size = theEntity.size;
         GL11.glScalef(0.0F + (size * 0.2F), 0.0F + (size * 0.2F), 0.0F + (size * 0.2F));
-        this.loadTexture("/subaraki/weapons/Fire.png");
+        this.loadTexture("/subaraki/elementum.png");
         //this.loadTexture("/terrain.png");
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_LIGHTING);

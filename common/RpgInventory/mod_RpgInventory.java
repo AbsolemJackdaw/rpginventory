@@ -422,7 +422,7 @@ public class mod_RpgInventory {
             earthStaff = new ItemElementalStaff(RpgConfig.instance.staffEarth, 3).setItemName("EarthStaff").setMaxStackSize(1).setMaxDamage(150).setIconIndex(55).setCreativeTab(mod_RpgInventory.tab);
             windStaff = new ItemElementalStaff(RpgConfig.instance.staffWind, 4).setItemName("WindStaff").setMaxStackSize(1).setMaxDamage(150).setIconIndex(56).setCreativeTab(mod_RpgInventory.tab);
             ultimateStaff = new ItemElementalStaff(RpgConfig.instance.staffUltimate, 5).setItemName("UltimateStaff").setMaxStackSize(1).setMaxDamage(150).setIconIndex(57).setCreativeTab(mod_RpgInventory.tab);
-            archBook = new ItemRpgArmor(RpgConfig.instance.archBook, 1, 300, "").setIconCoord(4, 5).setCreativeTab(tab);
+            archBook = new ItemRpgArmor(RpgConfig.instance.archBook, 1, 300, "").setItemName("ArchBook").setIconCoord(4, 5).setCreativeTab(tab);
 
             LanguageRegistry.addName(fireStaff, "Fire Staff");
             LanguageRegistry.addName(frostStaff, "Frost Staff");
