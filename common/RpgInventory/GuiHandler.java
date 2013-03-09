@@ -5,7 +5,6 @@ import net.minecraft.world.World;
 import RpgInventory.forge.GuiMF;
 import RpgInventory.forge.MoldContainer;
 import RpgInventory.forge.TEMold;
-import RpgInventory.gui.AlternativeGui;
 import RpgInventory.gui.inventory.RpgContainer;
 import RpgInventory.gui.inventory.RpgGui;
 import RpgInventory.gui.inventory.RpgInv;
@@ -32,9 +31,9 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         //System.out.println("CLIENT READ GUI " + ID);
-        if(ID == 0){
-            return new AlternativeGui(player);
-        }
+        //if(ID == 0){
+        //    return new AlternativeGui(player);
+        //}
         if (ID == 1) {
             return new RpgGui(player, new RpgInv(player.username));
         }
