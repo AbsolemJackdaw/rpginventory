@@ -99,7 +99,7 @@ public class ClientProxy extends CommonProxy {
                 RenderingRegistry.registerEntityRenderingHandler(clazz, renderballs);
             }
         }
-        //TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+        TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
     }
     
     public void openGUI(EntityPlayer p1, int id) {

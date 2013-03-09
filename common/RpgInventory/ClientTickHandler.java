@@ -5,6 +5,8 @@ import cpw.mods.fml.common.TickType;
 import java.util.EnumSet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.client.renderer.InventoryEffectRenderer;
 
 public class ClientTickHandler implements ITickHandler {
 
@@ -15,8 +17,10 @@ public class ClientTickHandler implements ITickHandler {
     @Override
     public void tickEnd(EnumSet<TickType> type, Object... tickData) {
         if (Minecraft.getMinecraft().currentScreen != null && Minecraft.getMinecraft().theWorld != null && Minecraft.getMinecraft().thePlayer != null) {
-            if (Minecraft.getMinecraft().currentScreen.getClass() == GuiInventory.class) {
-                Minecraft.getMinecraft().thePlayer.openGui(mod_RpgInventory.instance, 0, Minecraft.getMinecraft().theWorld, Minecraft.getMinecraft().thePlayer.serverPosX, Minecraft.getMinecraft().thePlayer.serverPosY, Minecraft.getMinecraft().thePlayer.serverPosZ);
+            if (Minecraft.getMinecraft().currentScreen instanceof GuiInventory) {
+                //TODO:Add Button
+                //GuiInventory gui = (GuiInventory)Minecraft.getMinecraft().currentScreen;
+                //gui.controlList.add(gui);
             }
         }
     }
