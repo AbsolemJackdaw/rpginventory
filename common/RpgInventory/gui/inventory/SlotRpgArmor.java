@@ -18,6 +18,7 @@ class SlotRpgArmor extends Slot {
 
     SlotRpgArmor(IInventory par2IInventory, int par3, int par4, int par5, EntityPlayer player) {
         super(par2IInventory, par3, par4, par5);
+        this.player = player;
         slotIndex = par3;
     }
 
