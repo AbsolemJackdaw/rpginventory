@@ -5,6 +5,7 @@ import RpgInventory.mod_RpgInventory;
 import RpgRB.beastmaster.BMPetImpl;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
@@ -55,6 +56,9 @@ public class PetGui extends GuiScreen {
 	public static String petStats = "Stats :";
 	public static String info = "Additional Info";
 	public static String levelNr ;
+	public static String petAtk ;
+	public static String currentHP ;
+	public static String totalHP ;
 	public static String saddle;
 
 	public void initGui() {
@@ -98,6 +102,21 @@ public class PetGui extends GuiScreen {
 		if (guibutton.id == 2) {
 			this.mc.thePlayer.closeScreen();
 		}
+		if (guibutton.id == 3) {
+			int i = 1;
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            ObjectOutput out;
+            DataOutputStream outputStream = new DataOutputStream(bytes);
+            try {
+                outputStream.writeInt(i);
+                Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
+                PacketDispatcher.sendPacketToServer(packet);
+                //System.out.println("Packet send");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+		}
+
 	}
 
 	protected void keyTyped(char c, int i) {
@@ -123,7 +142,12 @@ public class PetGui extends GuiScreen {
 		NBTTagCompound tags = petCrystal.getTagCompound();
 
 		levelNr = petCrystal.getTagCompound().getString(String.valueOf(tags.getInteger("PetLevel")));
+		petAtk  = petCrystal.getTagCompound().getString(String.valueOf(tags.getInteger("PetAttack")));
+		currentHP = String.valueOf(tags.getInteger("PetPrevHealth"));
+		totalHP   = String.valueOf(tags.getInteger("PetHealth"));
+
 		if (tags.hasKey("PetLevel")) {
+
 			if (tags.getInteger("PetLevel") >= 50) {
 				if (tags.hasKey("isSaddled")) {
 					if (tags.getBoolean("isSaddled") == true) {
@@ -150,7 +174,9 @@ public class PetGui extends GuiScreen {
 		}
 		drawString(fontRenderer, petName, this.width / 2 -20, this.height / 2-79 , 0xffffff);
 		drawString(fontRenderer, petStats, this.width / 2-85, this.height / 2-10, 0x00ffff);
-		drawString(fontRenderer, "Lvl : "+ levelNr,this.width / 2, this.height / 2, 0xffffff);
+		drawString(fontRenderer, "Lvl : "+ levelNr,this.width / 2-80, this.height / 2, 0xffffff);
+		drawString(fontRenderer, "Atk : "+ levelNr,this.width / 2-80, this.height / 2+10, 0xffffff);
+		drawString(fontRenderer, "HP : "+ currentHP +"/"+totalHP,this.width / 2-80, this.height / 2+20, 0xffffff);
 
 		drawString(fontRenderer, info, this.width / 2-85, this.height / 2+45, 0xff00ff);
 		drawString(fontRenderer,saddle, this.width / 2-80, this.height / 2+55, 0xffffff);
