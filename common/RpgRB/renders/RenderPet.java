@@ -29,6 +29,7 @@ public class RenderPet extends RenderLiving {
     protected void scalePet(BMPetImpl pet, float par2) {
         float var3 = pet.getSize();
         GL11.glScalef(var3, var3, var3);
+        
     }
 
     /**
@@ -46,6 +47,8 @@ public class RenderPet extends RenderLiving {
 
     public void doRenderLiving(EntityLiving pet, double par2, double par4, double par6, float par8, float par9) {
         this.renderCow((BMPetImpl) pet, par2, par4, par6, par8, par9);
+        this.renderLivingLabel(pet, pet.getEntityName(), par2, par4, par6, 32);      
+
     }
 
     public void doRender(Entity pet, double par2, double par4, double par6, float par8, float par9) {
