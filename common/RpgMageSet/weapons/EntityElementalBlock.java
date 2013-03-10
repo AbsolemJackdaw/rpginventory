@@ -74,6 +74,11 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 
 	public void specialAttack(MovingObjectPosition var1, int type) {
 		EntityLiving p = this.worldObj.getPlayerEntityByName(this.owner);
+		if (p == null) {
+			/*Omg my boss is not in world...*/
+			this.setDead();
+			return;
+		}
 		switch (type) {
 		case 1:
 			AxisAlignedBB pool = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
