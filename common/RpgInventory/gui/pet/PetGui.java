@@ -44,6 +44,8 @@ public class PetGui extends GuiScreen {
         if (thePet == null || ((EntityLiving) thePet).isDead) {
             petType = petCrystal.getItemDamage();
         }
+        //works
+        System.out.println(String.valueOf(petCrystal.getTagCompound().getInteger("PetLevel")));
     }
     private GuiTextField textfield;
     public final int xSizeOfTexture = 181;

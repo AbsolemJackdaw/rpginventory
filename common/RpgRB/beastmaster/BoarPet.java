@@ -29,6 +29,11 @@ public class BoarPet extends BMPetImpl {
         super(par1World, 1, owner, is);
     }
 
+    @Override
+    public AxisAlignedBB getBoundingBox() {
+        return super.getBoundingBox();
+    }
+
     public AxisAlignedBB getCollisionBox(Entity par1Entity) {
         
         return this.boundingBox;
