@@ -80,7 +80,7 @@ public class RenderElementalBlock extends Render
 		default:
 			break;
 		}
-		this.renderAABB(AxisAlignedBB.getBoundingBox(0, 0, 0, 1, 1, 1));
+		this.renderAABB(AxisAlignedBB.getBoundingBox(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5));
 		GL11.glPopMatrix();
 	}
 	public void renderAABBwithUV(AxisAlignedBB par0AxisAlignedBB) {

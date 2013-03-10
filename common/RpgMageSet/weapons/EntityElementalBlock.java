@@ -228,6 +228,14 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 					p.motionX = p.motionX * 5F;
 					p.motionY = ydir * 0.5F;
 					p.motionZ = p.motionZ * 5F;
+					if (p.motionX < -5) p.motionX = -4;
+					if (p.motionX > 5) p.motionX = 4;
+					if (p.motionY < -5) p.motionY = -4;
+					if (p.motionY > 5) p.motionY = 4;
+					if (p.motionZ < -5) p.motionZ = -4;
+					if (p.motionZ > 5) p.motionZ = 4;
+					
+					System.out.println(p.motionX + " " + p.motionY +  " " + p.motionZ);
 				}
 			}
 			break;
