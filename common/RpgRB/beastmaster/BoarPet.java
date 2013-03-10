@@ -4,6 +4,7 @@
  */
 package RpgRB.beastmaster;
 
+import RpgRB.models.ModelBoar;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -75,6 +76,6 @@ public class BoarPet extends BMPetImpl {
 
     @Override
     public ModelBase getModel() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new ModelBoar();
     }
 }
