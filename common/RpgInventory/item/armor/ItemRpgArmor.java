@@ -1,15 +1,22 @@
 package RpgInventory.item.armor;
 
 
+import java.util.List;
+
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.StatCollector;
+import RpgInventory.EnumRpgClass;
 import RpgInventory.mod_RpgInventory;
+import RpgInventory.gui.inventory.RpgInv;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.List;
-import net.minecraft.util.StatCollector;
 
 public class ItemRpgArmor extends Item {
 
@@ -145,7 +152,34 @@ public class ItemRpgArmor extends Item {
 			list.add(StatCollector.translateToLocal("Strenght/Passive Weapon Healing"));
 		}
 	}
-	
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
+	{
+		RpgInv rpg = mod_RpgInventory.proxy.getInventory(((EntityPlayer)par3EntityLiving).username);
+
+		if(((EntityPlayer)par3EntityLiving).getCurrentEquippedItem().getItem() == mod_RpgInventory.daggers)
+		{
+			if(rpg.hasClass(EnumRpgClass.ROGUE))
+			{
+				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 40,0));
+				if(((EntityPlayer)par3EntityLiving).worldObj.getWorldTime() > 12500)
+					par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)par3EntityLiving), 12);
+
+			}
+			else if(rpg.hasClass(EnumRpgClass.NINJA))
+			{
+				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 80,1));
+
+
+			}
+			if(((EntityPlayer)par3EntityLiving).worldObj.getWorldTime() > 12500)
+				par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)par3EntityLiving), 12);
+			else
+				par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)par3EntityLiving), 6);
+
+		}
+
+		return false;
+	}
 	@Override
 	public String toString(){
 		return Name;

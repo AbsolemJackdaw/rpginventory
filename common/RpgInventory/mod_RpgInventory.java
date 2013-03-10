@@ -49,8 +49,8 @@ import RpgMageSet.weapons.ItemElementalStaff;
 import RpgRB.ItemCrystal;
 import RpgRB.ItemRBMats;
 import RpgRB.ItemRBMats2;
-import RpgRB.axe.AxeRender;
-import RpgRB.axe.ItemBeastAxe;
+import RpgRB.weapons.axe.AxeRender;
+import RpgRB.weapons.axe.ItemBeastAxe;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PreInit;
@@ -196,8 +196,9 @@ public class mod_RpgInventory {
     EnumArmorMaterial armoury = EnumHelper.addArmorMaterial("armoury", 20, new int[]{2, 4, 3, 2}, 5);
     EnumArmorMaterial rogueArmor = EnumHelper.addArmorMaterial("rogue", 20, new int[]{3, 5, 4, 3}, 5);
     EnumArmorMaterial beastMaster = EnumHelper.addArmorMaterial("beast", 20, new int[]{4, 5, 4, 3}, 5);
-    EnumToolMaterial clay = EnumHelper.addToolMaterial("claymore", 0, 1024, 5F, 6, 0);
-    EnumToolMaterial stone = EnumHelper.addToolMaterial("RageBreaker", 0, 750, 5F, 4, 0);
+    EnumToolMaterial clay = EnumHelper.addToolMaterial("claymore", 0, 750, 5F, 6, 0);
+    EnumToolMaterial stone = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 5F, 4, 0);
+
     public EnumToolMaterial NecroToolMaterial;
     public EnumToolMaterial PalaToolMaterial;
     public static CreativeTabs tab;

@@ -68,7 +68,7 @@ public class ItemClaymore extends Item{
 	public boolean hitEntity(ItemStack is, EntityLiving mob, EntityLiving player)
 	{
 		is.damageItem(1, mob);
-		mob.attackEntityFrom(DamageSource.cactus, 8);
+		mob.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)player), 8);
 
 		if(mob instanceof EntityPlayer)
 		{
