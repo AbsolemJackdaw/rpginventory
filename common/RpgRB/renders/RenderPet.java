@@ -32,10 +32,6 @@ public class RenderPet extends RenderLiving {
         
     }
 
-    /**
-     * Allows the render to do any OpenGL state modifications necessary before
-     * the model is rendered. Args: entityLiving, partialTickTime
-     */
     protected void preRenderCallback(EntityLiving pet, float par2) {
         this.scalePet((BMPetImpl) pet, par2);
     }
