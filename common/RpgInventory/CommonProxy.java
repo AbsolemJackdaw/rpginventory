@@ -36,6 +36,11 @@ public class CommonProxy {
 
     public void openGUI(EntityPlayer player, int id) {
     }
+    
+    public void playerLevel(EntityPlayer player, int amount)
+    {
+    	player.addExperienceLevel(-amount);
+    }
 
     public RpgInv getInventory(String username) {
         for(String s: invs.keySet()){

@@ -127,6 +127,20 @@ public class PetGui extends GuiScreen {
 				levelInfo2 = "Cost: "+ MathHelper.floor_float(petCrystal.getTagCompound().getInteger("PetLevel")/2)+" player levels;" ;
 				Minecraft.getMinecraft().thePlayer.addExperienceLevel(-(MathHelper.floor_float(petCrystal.getTagCompound().getInteger("PetLevel")/2)));
 				petCrystal.getTagCompound().setInteger("PetLevel", petCrystal.getTagCompound().getInteger("PetLevel")+1);
+
+				int i = 10;
+				int level = MathHelper.floor_float(petCrystal.getTagCompound().getInteger("PetLevel")/2);
+				ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+				ObjectOutput out;
+				DataOutputStream outputStream = new DataOutputStream(bytes);
+				try {
+					outputStream.writeInt(i);
+					outputStream.writeInt(level);
+					Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
+					PacketDispatcher.sendPacketToServer(packet);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 
 		}
