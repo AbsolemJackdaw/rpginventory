@@ -11,13 +11,14 @@ import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.Color;
 
 import RpgInventory.gui.inventory.RpgGui;
 
 public class StafRender implements IItemRenderer {
 
 	ModelStaf swordmodel;
-
+	public int step;
 	public StafRender()
 	{
 		swordmodel = new ModelStaf();
@@ -46,55 +47,20 @@ public class StafRender implements IItemRenderer {
 		case  EQUIPPED:
 		{
 			GL11.glPushMatrix();
-			switch(item.getIconIndex())
-			{
+			//			switch(item.getIconIndex())
+			//			{
+			//			case 37:/*regular*/
 
-			case 53:/*fire*/
-			{
-				ForgeHooksClient.bindTexture("/subaraki/weapons/ElementalStaff.png", 0);
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.5F);
-			}
-			break;
-			case 54:/*ice*/
-			{
-				ForgeHooksClient.bindTexture("/subaraki/weapons/ElementalStaff.png", 0);
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4f(0.0F, 0.0F, 1.0F, 0.5F);
-			}break;
-			case 55:/*earth*/
-			{
-				ForgeHooksClient.bindTexture("/subaraki/weapons/ElementalStaff.png", 0);
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4f(0.0F, 1.0F, 0.0F, 0.5F);
-			}break;
-			case 56:/*wind*/
-			{
-				ForgeHooksClient.bindTexture("/subaraki/weapons/ElementalStaff.png", 0);
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
-			}break;
-			case 57:/*ultimate*/
-			{
-				ForgeHooksClient.bindTexture("/subaraki/weapons/ElementalStaff.png", 0);
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4f(0.1F, 0.1F, 0.1F, 1F);
-			}break;
-			case 37:/*regular*/
-			{
-				ForgeHooksClient.bindTexture("/subaraki/weapons/Staff.png", 0);
-			}break;
-			}
+			ForgeHooksClient.bindTexture("/subaraki/weapons/Staff.png", 0);
+			//				break;
+			//			default:
+			//				ForgeHooksClient.bindTexture("/subaraki/weapons/ElementalStaff.png", 0);
+			//				GL11.glEnable(GL11.GL_BLEND);
+			//				GL11.glDisable(GL11.GL_LIGHTING);
+			//				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			//				GL11.glColor4f(0.3F, 1F, 0.59F, 1F);
+			//				break;
+			//			}
 
 			boolean isFirstPerson;
 
@@ -124,9 +90,8 @@ public class StafRender implements IItemRenderer {
 			{
 				GL11.glTranslatef(0.35F, -0.5F, -0.2F);
 			}
-
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			blockLoop((Entity)data[1],15);
+			blockLoop((Entity)data[1],15, item);
 			ForgeHooksClient.unbindTexture();
 			GL11.glPopMatrix();
 		}
@@ -148,6 +113,8 @@ public class StafRender implements IItemRenderer {
 				ForgeHooksClient.bindTexture("/subaraki/weapons/Staff.png", 0);
 			case 56:/*wind*/
 				ForgeHooksClient.bindTexture("/subaraki/weapons/Staff.png", 0);
+			case 57:/*ultimate*/
+				ForgeHooksClient.bindTexture("/subaraki/weapons/Staff.png", 0);
 			case 37:/*regular*/
 				ForgeHooksClient.bindTexture("/subaraki/weapons/Staff.png", 0);
 
@@ -157,9 +124,8 @@ public class StafRender implements IItemRenderer {
 			GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
 
 			GL11.glTranslatef( 0.2F, 0F, 0F);
-
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			blockLoop((Entity)data[1],15);
+			blockLoop((Entity)data[1],15, item);
 
 			ForgeHooksClient.unbindTexture();
 
@@ -170,11 +136,59 @@ public class StafRender implements IItemRenderer {
 		default: break;
 		}
 	}
-	public void blockLoop(Entity p, float repeat)
+	public void blockLoop(Entity p, float repeat , ItemStack item)
 	{
+		ForgeHooksClient.bindTexture("/subaraki/weapons/ElementalStaff.png", 0);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		switch(item.getIconIndex())
+		{
+		case 53:/*fire*/
+		{
+			GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.5F);
+		}
+		break;
+		case 54:/*ice*/
+		{
+
+			GL11.glColor4f(0.0F, 0.0F, 1.0F, 0.5F);
+		}break;
+		case 55:/*earth*/
+		{
+			GL11.glColor4f(0.0F, 1.0F, 0.0F, 0.5F);
+		}break;
+		case 56:/*wind*/
+		{
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
+		}break;
+		case 57:/*ultimate*/
+		{
+			Color clr = getColor(.1,.2,.3,0,0,0, this.step);
+			this.step++;
+			GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, (float)((clr.getGreen()*100) / 255)/100, (float)((clr.getBlue()*100) / 255)/100, 0.5F);
+		}break;
+		default:
+		{
+			GL11.glColor4f(0, 0, 0, 1F);
+		} break;
+		}
 		for(float var1 =0f; var1 <repeat; var1+= 0.1F)
 		{
-			swordmodel.render(p, var1, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			
+			swordmodel.sphere(p, var1, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 		}
+	}
+	public Color getColor(double d, double e, double f,
+			int phase1, int phase2, int phase3, int i)
+	{
+		int center = 128;
+		int width = 127;
+
+			int red = (int) (Math.sin(d*i + phase1) * width + center);
+			int grn = (int) (Math.sin(e*i + phase2) * width + center);
+			int blu = (int) (Math.sin(f*i + phase3) * width + center);
+
+		return new Color(red, grn, blu);
 	}
 }

@@ -180,12 +180,9 @@ public class ModelStaf extends ModelBase
 		setRotation(Shape22, 0F, 0F, 0F);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void sphere(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5,entity);
-		Shape1.render(f5);
-		
 		GL11.glPushMatrix();
         GL11.glScalef(2F , 2F, 2F );
         GL11.glTranslatef(0.0F, 0.355F , -0.015F);
@@ -193,7 +190,13 @@ public class ModelStaf extends ModelBase
 		FloatingSphere2.render(f5);
 		FloatingSphere3.render(f5);
 		GL11.glPopMatrix();
-		
+	}
+	
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	{
+		super.render(entity, f, f1, f2, f3, f4, f5);
+		setRotationAngles(f, f1, f2, f3, f4, f5,entity);
+		Shape1.render(f5);		
 		Shape5.render(f5);
 		Shape6.render(f5);
 		Shape8.render(f5);

@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -34,15 +35,19 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 	public int size = 0;
 	public int type = 1;
 	public int contacts = 0;
+	public int sizeLimit = 10;
+	public int step = 0;
 
+	
 	public EntityElementalBlock(World world)
 	{
 		super(world);
 	}
 
-	public EntityElementalBlock(World w, EntityLiving e, float p, int type)
+	public EntityElementalBlock(World w, EntityLiving e, float p, int type, int sizeLimit)
 	{
 		super(w,e);
+		this.sizeLimit = sizeLimit;
 		this.type = type;
 		this.noClip = true;
 		this.owner = e.getEntityName();
@@ -59,17 +64,17 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 	public void onUpdate() {
 		super.onUpdate();
 		this.size++;
-		if (this.size >= 10) {
+		if (this.size >= this.sizeLimit) {
 			MovingObjectPosition pos = new MovingObjectPosition((int)this.posX, (int)this.posY, (int)this.posZ, 4, Vec3.createVectorHelper(this.posX, this.posY, this.posZ));
 			this.onImpact(pos);
-			//this.setDead();
+			this.setDead();
 		}
 		//System.out.println);
-		this.setSize(this.size, this.size);
+		this.setSize(this.getRadius(), this.getRadius());
 	}
 
-	public int getRadius() {
-		return this.size/2;
+	public float getRadius() {
+		return this.size * 0.3F;
 	}
 
 	public void specialAttack(MovingObjectPosition var1, int type) {
@@ -156,15 +161,16 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			}
 			break;
 		case 3:
+			int dmg = (int) (5 + Math.floor(getRadius()));
 			pool = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
 			entl = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
 			if (entl != null && entl.size() > 0) {
 				for (EntityLiving el : entl) {
 					if (el != null && el != p) {
 						if (p instanceof EntityPlayer) {
-							el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) p), 5);
+							el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) p), dmg);
 						} else {
-							el.attackEntityFrom(DamageSource.anvil, 5);
+							el.attackEntityFrom(DamageSource.anvil, dmg);
 						}
 						el.addPotionEffect(new PotionEffect(Potion.blindness.id, 120, 2));	
 					}
@@ -175,9 +181,9 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 					EntityLiving el = (EntityLiving) var1.entityHit;
 					if (el != null && el != p) {
 						if (p instanceof EntityPlayer) {
-							el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) p), 5);
+							el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) p), dmg);
 						} else {
-							el.attackEntityFrom(DamageSource.anvil, 5);
+							el.attackEntityFrom(DamageSource.anvil, dmg);
 						}
 						el.addPotionEffect(new PotionEffect(Potion.blindness.id, 120, 2));
 					}
@@ -240,39 +246,32 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 	@Override
 	protected void onImpact(MovingObjectPosition var1) {
 		specialAttack(var1,this.type);
-
-		/*
-		 * Be sure this will make mess...
-		double xx = this.posX; double yy = this.posY; double zz = this.posZ;
-		for (int x = (int)-getRadius(); x < getRadius(); x++)
-		{
-			for (int y = (int)-getRadius(); y < getRadius(); y++)
-			{
-				for (int z = (int)-getRadius(); z < getRadius(); z++)
-				{
-					Vec3 position = Vec3.createVectorHelper(xx, yy, zz);
-					Vec3 targetPosition = position.addVector(x, y, z);
-					double dist = position.distanceTo(targetPosition);
-
-					if (dist < getRadius())
-					{
-						if ((dist < getRadius() + 5.0F))
-						{	
-							if (this.worldObj.getBlockId((int)targetPosition.xCoord,(int) targetPosition.yCoord,(int) targetPosition.zCoord) == 0){
-								this.worldObj.setBlockWithNotify((int)targetPosition.xCoord,(int) targetPosition.yCoord,(int) targetPosition.zCoord, Block.stone.blockID);
-							}
-						}
-					}
-				}
-			}
-		}
-		 */
 	}
 
+	@Override
+    public void writeToNBT(NBTTagCompound nbt) {
+    	super.writeToNBT(nbt);
+    	nbt.setString("creator", this.owner);
+    	nbt.setInteger("size_", this.size);
+    	nbt.setInteger("sizeLimit_", this.sizeLimit);
+    	
+    }
+    
+	@Override
+    public void readFromNBT(NBTTagCompound nbt) {
+    	super.readFromNBT(nbt);
+    	this.owner = nbt.getString("creator");
+    	this.size = nbt.getInteger("size_");
+    	this.sizeLimit = nbt.getInteger("sizeLimit_");
+    	
+    }
+	
 	@Override
 	public void writeSpawnData(ByteArrayDataOutput data) {
 		data.writeInt(this.size);
 		data.writeInt(this.type);
+		data.writeInt(this.step);
+		data.writeInt(this.sizeLimit);
 		data.writeUTF(this.owner);
 	}
 
@@ -280,6 +279,8 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 	public void readSpawnData(ByteArrayDataInput data) {
 		this.size = data.readInt();
 		this.type = data.readInt();	
+		this.step = data.readInt();
+		this.sizeLimit = data.readInt();
 		this.owner = data.readUTF();
 	}
 }
