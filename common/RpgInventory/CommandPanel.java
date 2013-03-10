@@ -199,6 +199,16 @@ public class CommandPanel extends CommandBase {
 							{
 
 							}
+							if (args[2].matches("heal")) {
+								EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(sender.getCommandSenderName());
+								NBTTagCompound nbt = player.getCurrentEquippedItem().getTagCompound();
+								if (nbt.hasKey("RPGPetInfo")) {
+									nbt.setInteger("PetPrevHealth", nbt.getInteger("PetHealth"));
+									player.getCurrentEquippedItem().setTagCompound(nbt);
+								} else {
+									sender.sendChatToPlayer("Sorry Master, I am afraid this crystal is empty...");
+								}
+							}
 						}
 						if (args[1].matches("get"))
 						{
