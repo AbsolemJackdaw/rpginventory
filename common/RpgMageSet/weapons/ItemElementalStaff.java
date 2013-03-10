@@ -19,17 +19,18 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import RpgInventory.EnumRpgClass;
 import RpgInventory.mod_RpgInventory;
 
 public class ItemElementalStaff extends ItemSword {
 
 	protected boolean hasAttacked = false;
 	public int type = 1;
-	
+
 	public ItemElementalStaff(int par1, int type) {
 		super(par1, EnumToolMaterial.EMERALD);
 		this.type = type;
-		
+
 	}
 
 	/**
@@ -43,76 +44,76 @@ public class ItemElementalStaff extends ItemSword {
 		int time = this.getMaxItemUseDuration(stack) - count;
 		NBTTagCompound nbt = stack.getTagCompound();
 		if (!p.worldObj.isRemote) {
-		if ( nbt.getFloat("EnergyCharge") < 150 && !nbt.getBoolean("ReCharging")) {
-            float var7 = (float)time / 20.0F;
-            var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
-		EntityElementalBlock var9 = new EntityElementalBlock(p.worldObj, p, var7 * 2, this.type);
-		p.worldObj.spawnEntityInWorld(var9);
-		nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")+1.0F);
-		} else {
-			nbt.setBoolean("ReCharging", true);
-			p.stopUsingItem();
-		}
+			if ( nbt.getFloat("EnergyCharge") < 150 && !nbt.getBoolean("ReCharging")) {
+				float var7 = (float)time / 20.0F;
+				var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
+				EntityElementalBlock var9 = new EntityElementalBlock(p.worldObj, p, var7 * 2, this.type);
+				p.worldObj.spawnEntityInWorld(var9);
+				if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")+1.0F);
+			} else {
+				nbt.setBoolean("ReCharging", true);
+				p.stopUsingItem();
+			}
 		}
 		stack.setTagCompound(nbt);
 	}
 
-    public void onUpdate(ItemStack stack, World w, Entity e, int par4, boolean par5) 
-    {
-    	NBTTagCompound nbt = stack.getTagCompound();
-    	if (nbt == null) stack.setTagCompound(baseNBT());
-    	nbt = stack.getTagCompound();
-    	if (nbt.getBoolean("ReCharging")) {
-    		nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")-0.2F);
-    	} else {
-    		nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")-0.1F);	
-    	}
-    	
-    	if (nbt.getFloat("EnergyCharge") <= 0) {
-    		nbt.setBoolean("ReCharging", false);
-    		nbt.setFloat("EnergyCharge", 0.0F);
-    	}
-    	stack.setTagCompound(nbt);
-    }
+	public void onUpdate(ItemStack stack, World w, Entity e, int par4, boolean par5) 
+	{
+		NBTTagCompound nbt = stack.getTagCompound();
+		if (nbt == null) stack.setTagCompound(baseNBT());
+		nbt = stack.getTagCompound();
+		if (nbt.getBoolean("ReCharging")) {
+			nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")-0.2F);
+		} else {
+			nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")-0.1F);	
+		}
 
-    public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
-    	NBTTagCompound nbt = stack.getTagCompound();
-    	if (nbt == null) stack.setTagCompound(baseNBT());
-    	nbt = stack.getTagCompound();
-    	if (nbt.getBoolean("ReCharging")) list.add("Recharging");
-    	list.add("Overflow: "+Math.floor(nbt.getFloat("EnergyCharge"))+"/150");
-    }
-    
-    public NBTTagCompound baseNBT() {
-    	NBTTagCompound nbt = new NBTTagCompound(); //stack.getTagCompound();
-    	nbt.setFloat("EnergyCharge", 0.0F);
-    	nbt.setBoolean("ReCharging", false);
-    	return nbt;
-    }
-    
-    public void onCreated(ItemStack stack, World world, EntityPlayer p) 
-    {
-    	stack.setTagCompound(baseNBT());
-    }
-	
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
-    {
-        //par1ItemStack.damageItem(1, par3EntityLiving);
-        return true;
-    }
+		if (nbt.getFloat("EnergyCharge") <= 0) {
+			nbt.setBoolean("ReCharging", false);
+			nbt.setFloat("EnergyCharge", 0.0F);
+		}
+		stack.setTagCompound(nbt);
+	}
 
-    public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
-    {
-        if ((double)Block.blocksList[par3].getBlockHardness(par2World, par4, par5, par6) != 0.0D)
-        {
-            //par1ItemStack.damageItem(2, par7EntityLiving);
-        }
+	public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
+		NBTTagCompound nbt = stack.getTagCompound();
+		if (nbt == null) stack.setTagCompound(baseNBT());
+		nbt = stack.getTagCompound();
+		if (nbt.getBoolean("ReCharging")) list.add("Recharging");
+		list.add("Overflow: "+Math.floor(nbt.getFloat("EnergyCharge"))+"/150");
+	}
 
-        return true;
-    }
-    
-    
-	
+	public NBTTagCompound baseNBT() {
+		NBTTagCompound nbt = new NBTTagCompound(); //stack.getTagCompound();
+		nbt.setFloat("EnergyCharge", 0.0F);
+		nbt.setBoolean("ReCharging", false);
+		return nbt;
+	}
+
+	public void onCreated(ItemStack stack, World world, EntityPlayer p) 
+	{
+		stack.setTagCompound(baseNBT());
+	}
+
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
+	{
+		//par1ItemStack.damageItem(1, par3EntityLiving);
+		return true;
+	}
+
+	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
+	{
+		if ((double)Block.blocksList[par3].getBlockHardness(par2World, par4, par5, par6) != 0.0D)
+		{
+			//par1ItemStack.damageItem(2, par7EntityLiving);
+		}
+
+		return true;
+	}
+
+
+
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer p, int count) {
 		int time = this.getMaxItemUseDuration(stack) - count;
 	}
@@ -126,11 +127,12 @@ public class ItemElementalStaff extends ItemSword {
 	}
 
 	public ItemStack onItemRightClick(ItemStack is, World par2World, EntityPlayer p) {
-		
-		if (p.isUsingItem()) {
-			p.stopUsingItem();
-		} else {
-			p.setItemInUse(is, this.getMaxItemUseDuration(is));	
+		if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.SHIELDEDARCHMAGE) || mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+			if (p.isUsingItem()) {
+				p.stopUsingItem();
+			} else {
+				p.setItemInUse(is, this.getMaxItemUseDuration(is));	
+			}
 		}
 		return is;
 	}

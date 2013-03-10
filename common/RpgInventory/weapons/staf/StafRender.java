@@ -82,6 +82,14 @@ public class StafRender implements IItemRenderer {
 				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 			}break;
+			case 57:/*ultimate*/
+			{
+				ForgeHooksClient.bindTexture("/subaraki/weapons/ElementalStaff.png", 0);
+				GL11.glEnable(GL11.GL_BLEND);
+				GL11.glDisable(GL11.GL_LIGHTING);
+				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				GL11.glColor4f(0.1F, 0.1F, 0.1F, 1F);
+			}break;
 			case 37:/*regular*/
 			{
 				ForgeHooksClient.bindTexture("/subaraki/weapons/Staff.png", 0);

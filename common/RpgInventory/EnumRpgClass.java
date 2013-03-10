@@ -19,8 +19,9 @@ import net.minecraft.item.ItemStack;
  */
 public enum EnumRpgClass {
 
-    ARCHER, MAGE, BERSERKER, NECRO, PALADIN,
-    SHIELDEDARCHER, SHIELDEDMAGE, SHIELDEDBERSERKER, SHIELDEDNECRO, SHIELDEDPALADIN,
+    ARCHER, MAGE, BERSERKER, NECRO, PALADIN, ARCHMAGE,
+    SHIELDEDARCHER, SHIELDEDMAGE, SHIELDEDBERSERKER, SHIELDEDNECRO, SHIELDEDPALADIN, SHIELDEDARCHMAGE,
+    
     WOOD, IRON, GOLD, DIAMOND, CRYSTAL;
 
     public static EnumSet<EnumRpgClass> getPlayerClasses(EntityPlayer p) {
@@ -97,6 +98,15 @@ public enum EnumRpgClass {
                             classenum = null;
                             break;
                         }
+                    } else if (is.getItem().equals(mod_RpgInventory.archmageHood) || is.getItem().equals(mod_RpgInventory.archmageChest) 
+                    		|| is.getItem().equals(mod_RpgInventory.archmageLegs) || is.getItem().equals(mod_RpgInventory.archMageBoots)) {
+                    	if (classenum == null) {
+                    		classenum = ARCHMAGE;
+                    	}
+                    	if (classenum != ARCHMAGE) {
+                    		classenum = null;
+                    		break;
+                    	}
                     }
                 } else {
                     //tmp represents the base class enum, break the for loop instead of return
@@ -122,6 +132,8 @@ public enum EnumRpgClass {
                         shieldenum = SHIELDEDPALADIN;
                     } else if (shield.getItem().equals(mod_RpgInventory.necro_shield) && classenum == NECRO) {
                         shieldenum = SHIELDEDNECRO;
+                    } else if (shield.getItem().equals(mod_RpgInventory.archBook) && classenum == ARCHMAGE) {
+                        shieldenum = SHIELDEDARCHMAGE;
                     }
                 }
                 //So classes can use the vanilla armor too if they want

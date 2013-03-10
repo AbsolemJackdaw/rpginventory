@@ -22,6 +22,7 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 public class EntityElementalBlock extends EntityThrowable implements IEntityAdditionalSpawnData {
 
 	private EntityLiving shootingEntity;
+	public String owner;
 
 	private int xTile = -1;
 	private int yTile = -1;
@@ -44,6 +45,8 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 		super(w,e);
 		this.type = type;
 		this.noClip = true;
+		this.owner = e.getEntityName();
+		this.shootingEntity = e;
 
 	}
 
@@ -70,13 +73,14 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 	}
 
 	public void specialAttack(MovingObjectPosition var1, int type) {
+		EntityLiving p = this.worldObj.getPlayerEntityByName(this.owner);
 		switch (type) {
 		case 1:
 			AxisAlignedBB pool = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
 			List<EntityLiving> entl = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
 			if (entl != null && entl.size() > 0) {
 				for (EntityLiving el : entl) {
-					if (el != null && el != this.getThrower()) {
+					if (el != null && el != p) {
 						el.setFire(30);
 						if (this.getThrower() instanceof EntityPlayer) {
 							el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)this.getThrower()), 1);
@@ -90,9 +94,10 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			}
 			if (var1.typeOfHit == EnumMovingObjectType.TILE) {
 			} else if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
+				if (var1.entityHit == p) break;
 				var1.entityHit.setFire(30);
-				if (this.getThrower() instanceof EntityPlayer) {
-					var1.entityHit.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)this.getThrower()), 1);
+				if (p instanceof EntityPlayer) {
+					var1.entityHit.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)p), 1);
 					var1.entityHit.attackEntityFrom(DamageSource.onFire, 2);
 				} else {
 					var1.entityHit.attackEntityFrom(DamageSource.onFire, 2);
@@ -104,7 +109,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			List<EntityLiving> entl1 = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool1);
 			if (entl1 != null && entl1.size() > 0) {
 				for (EntityLiving el : entl1) {
-					if (el != null && el != this.getThrower()) {
+					if (el != null && el != p) {
 						if (el.isEntityUndead()) {
 							el.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 120, 2));	
 							el.attackEntityFrom(DamageSource.magic, 4);
@@ -113,8 +118,8 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 							el.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 120, 2));	
 						}
 						el.addPotionEffect(new PotionEffect(Potion.weakness.id, 120, 5));
-						if (this.getThrower() instanceof EntityPlayer) {
-							el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)this.getThrower()), 1);
+						if (p instanceof EntityPlayer) {
+							el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)p), 1);
 							el.attackEntityFrom(DamageSource.drown, 2);
 						} else {
 							el.attackEntityFrom(DamageSource.drown, 2);
@@ -125,6 +130,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			}
 			if (var1.typeOfHit == EnumMovingObjectType.TILE) {
 			} else if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
+				if (var1.entityHit == p) break;
 				if (var1.entityHit.isEntityAlive()) {
 					EntityLiving el = (EntityLiving) var1.entityHit;
 					if (el.isEntityUndead()) {
@@ -135,8 +141,8 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 						el.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 120, 2));	
 					}
 					el.addPotionEffect(new PotionEffect(Potion.weakness.id, 120, 5));
-					if (this.getThrower() instanceof EntityPlayer) {
-						el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)this.getThrower()), 1);
+					if (p instanceof EntityPlayer) {
+						el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)p), 1);
 						el.attackEntityFrom(DamageSource.drown, 2);
 					} else {
 						el.attackEntityFrom(DamageSource.drown, 2);
@@ -149,13 +155,26 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			entl = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
 			if (entl != null && entl.size() > 0) {
 				for (EntityLiving el : entl) {
-					if (el != null && el != this.getThrower()) {
-						if (this.getThrower() instanceof EntityPlayer) {
-							el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) this.getThrower()), 5);
+					if (el != null && el != p) {
+						if (p instanceof EntityPlayer) {
+							el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) p), 5);
 						} else {
 							el.attackEntityFrom(DamageSource.anvil, 5);
 						}
 						el.addPotionEffect(new PotionEffect(Potion.blindness.id, 120, 2));	
+					}
+				}
+			}
+			if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
+				if (var1.entityHit.isEntityAlive()) {
+					EntityLiving el = (EntityLiving) var1.entityHit;
+					if (el != null && el != p) {
+						if (p instanceof EntityPlayer) {
+							el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) p), 5);
+						} else {
+							el.attackEntityFrom(DamageSource.anvil, 5);
+						}
+						el.addPotionEffect(new PotionEffect(Potion.blindness.id, 120, 2));
 					}
 				}
 			}
@@ -165,7 +184,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			entl = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
 			if (entl != null && entl.size() > 0) {
 				for (EntityLiving el : entl) {
-					if (el != null && el != this.getThrower()) {
+					if (el != null && el != p) {
 						try {
 							double xdir = el.posX - this.getThrower().posX;
 							double zdir = el.posZ - this.getThrower().posZ;
@@ -180,7 +199,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
 				if (var1.entityHit.isEntityAlive()) {
 					EntityLiving el = (EntityLiving) var1.entityHit;
-					if (el != null && el != this.getThrower()) {
+					if (el != null && el != p) {
 						try {
 							double xdir = el.posX - this.getThrower().posX;
 							double zdir = el.posZ - this.getThrower().posZ;
@@ -192,15 +211,16 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 					}
 				}
 			}
-			if (this.getThrower() != null) {
-				if (this.getThrower().getDistanceToEntity(this) < 2) {
-					double xdir = this.getThrower().posX - this.posX;
-					double ydir = this.getThrower().posY - this.posY;
-					double zdir = this.getThrower().posZ - this.posZ;
-					this.getThrower().motionX = xdir * 1.5F;
-					this.getThrower().motionY = ydir * 1.5F;
-					this.getThrower().motionZ = zdir * 1.5F;
-					System.out.println(xdir * 1.5F + " " +  ydir * 1.5F+ " " +  zdir * 1.5F);
+
+			if (p != null) {
+				if (p.getDistanceToEntity(this) < 3) {
+					double xdir = p.posX - this.posX;
+					double ydir = p.posY - this.posY;
+					double zdir = p.posZ - this.posZ;
+					p.motionX = xdir * 0.5F;
+					p.motionY = ydir * 0.5F;
+					p.motionZ = zdir * 0.5F;
+					System.out.println(p.motionX + " " +  p.motionY + " " +  p.motionZ);
 				}
 			}
 			break;
@@ -252,11 +272,13 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 	public void writeSpawnData(ByteArrayDataOutput data) {
 		data.writeInt(this.size);
 		data.writeInt(this.type);
+		data.writeUTF(this.owner);
 	}
 
 	@Override
 	public void readSpawnData(ByteArrayDataInput data) {
 		this.size = data.readInt();
 		this.type = data.readInt();	
+		this.owner = data.readUTF();
 	}
 }
