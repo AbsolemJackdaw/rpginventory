@@ -46,7 +46,7 @@ public class ClientTickHandler implements ITickHandler {
                                 modfield.setAccessible(true);
                                 modfield.setInt(f, f.getModifiers() & ~Modifier.PROTECTED);
                                 currentButtons = (List) f.get(gui);
-                                int offsetx = 75;
+                                int offsetx = 80;
                                 int offsety = 93;
                                 int posX = (Minecraft.getMinecraft().currentScreen.width) / 2;
                                 int posY = (Minecraft.getMinecraft().currentScreen.height) / 2;
