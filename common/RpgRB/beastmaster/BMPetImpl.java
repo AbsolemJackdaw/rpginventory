@@ -136,8 +136,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             rotationPitch = 0;
 
             //Control where the pet is facing (doesn't work while standing still)
-            EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
-            rotationYaw = prevRotationYaw = entityRider.rotationYaw;
+            
         }
         super.onLivingUpdate();
     }
@@ -195,6 +194,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     }
 
     public void updateRidden() {
+        EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
+            rotationYaw = prevRotationYaw = entityRider.rotationYaw;
         if (ridingEntity == null) {
             return;
         }
@@ -280,23 +281,15 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     private int xpThrottle = 10;
 
     protected void updateAITick() {
-        if (xpThrottle == 0) {
-            xpThrottle = 10;
-        } else {
-            xpThrottle--;
-        }
         this.dataWatcher.updateObject(HP, Integer.valueOf(this.getHealth()));
         List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.expand(0.4D, 0.4D, 0.4D));
         if (xps != null && xps.size() > 0) {
-            for (EntityPetXP xp : xps) {
-                if (xpThrottle <= 0) {
-                    this.playSound("random.orb", 0.1F, 0.5F * ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.8F));
+            if (xpThrottle <= 0) {
+                for (EntityPetXP xp : xps) {
                     this.giveXP(xp.getXpValue());
                     xp.setDead();
                 }
-
             }
-
         }
 
     }
