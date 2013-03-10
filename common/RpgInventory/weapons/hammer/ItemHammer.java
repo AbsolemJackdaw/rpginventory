@@ -1,9 +1,7 @@
 package RpgInventory.weapons.hammer;
 
-import RpgInventory.EnumRpgClass;
-import RpgInventory.gui.inventory.RpgInv;
-import RpgInventory.mod_RpgInventory;
 import java.util.Random;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
@@ -12,6 +10,9 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import RpgInventory.EnumRpgClass;
+import RpgInventory.mod_RpgInventory;
+import RpgInventory.gui.inventory.RpgInv;
 
 public class ItemHammer extends ItemSword {
 
@@ -25,7 +26,7 @@ public class ItemHammer extends ItemSword {
     }
 
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
-        RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
+    	RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
         if (rpg.hasClass(EnumRpgClass.BERSERKER)) {
             if (rpg.hasClass(EnumRpgClass.SHIELDEDBERSERKER)) {
                 if (player.getFoodStats().getFoodLevel() < 6

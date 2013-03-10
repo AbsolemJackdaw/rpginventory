@@ -1,6 +1,13 @@
 package RpgMageSet;
 
+import net.minecraft.item.Item;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.MinecraftForgeClient;
+import RpgInventory.mod_RpgInventory;
+import RpgInventory.Configuration.RpgConfig;
 import RpgMageSet.weapons.EntityElementalBlock;
+import RpgMageSet.weapons.ItemElementalStaff;
+import RpgMageSet.weapons.StafRender;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.SidedProxy;
@@ -8,6 +15,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
 @Mod(modid = "RPGMS", name = "RpgInv Mage Addon", version = "1.0")

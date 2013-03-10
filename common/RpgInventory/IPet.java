@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 package RpgInventory;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

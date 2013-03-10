@@ -1,20 +1,18 @@
 package RpgInventory;
-
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.Potion;
@@ -27,12 +25,6 @@ import RpgInventory.weapons.bow.EntityHellArrow;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
-import java.io.ObjectInputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 
 public class RpgPacketHandler implements IPacketHandler {
 
@@ -102,7 +94,7 @@ public class RpgPacketHandler implements IPacketHandler {
                         ItemStack var2 = p.inventory.armorItemInSlot(2);
                         ItemStack var1 = p.inventory.armorItemInSlot(1);
                         ItemStack var0 = p.inventory.armorItemInSlot(0);
-                        if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+                        if (!mod_RpgInventory.developers.contains(p.username)) {
                             if (item == null || var3 == null || var2 == null || var1 == null || var0 == null) {
                                 break;
                             }
@@ -124,7 +116,7 @@ public class RpgPacketHandler implements IPacketHandler {
                                 p.renderBrokenItemStack(item);
                                 p.setCurrentItemOrArmor(0, (ItemStack) null);
                             } else {
-                                if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+                                if (!mod_RpgInventory.developers.contains(p.username)) {
                                     item.damageItem(3, p);
                                 }
                             }
@@ -154,7 +146,7 @@ public class RpgPacketHandler implements IPacketHandler {
                         ItemStack var11 = p.inventory.armorItemInSlot(1);
                         ItemStack var01 = p.inventory.armorItemInSlot(0);
 
-                        if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+                        if (!mod_RpgInventory.developers.contains(p.username)) {
                             if (item1 == null || var31 == null || var21 == null || var11 == null || var01 == null) {
                                 break;
                             }
@@ -170,7 +162,7 @@ public class RpgPacketHandler implements IPacketHandler {
                             if (item1.getItemDamage() + 3 >= item1.getMaxDamage()) {
                                 //Trigger item break stuff
                                 //Only damage what is left
-                                if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+                                if (!mod_RpgInventory.developers.contains(p.username)) {
                                     item1.damageItem(item1.getMaxDamage() - item1.getItemDamage(), p);
                                 }
                                 //Do the break item stuff
@@ -178,7 +170,7 @@ public class RpgPacketHandler implements IPacketHandler {
                                 //delete the item
                                 p.setCurrentItemOrArmor(0, (ItemStack) null);
                             } else {
-                                if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+                                if (!mod_RpgInventory.developers.contains(p.username)) {
                                     item1.damageItem(3, p);
                                 }
                             }
@@ -224,7 +216,7 @@ public class RpgPacketHandler implements IPacketHandler {
                         ItemStack middle = p.inventory.armorItemInSlot(2);
                         ItemStack middle2 = p.inventory.armorItemInSlot(1);
                         ItemStack bottom = p.inventory.armorItemInSlot(0);
-                        if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+                        if (!mod_RpgInventory.developers.contains(p.username)) {
                             if (bow == null || top == null || middle == null || middle2 == null || bottom == null) {
                                 break;
                             }
@@ -237,7 +229,7 @@ public class RpgPacketHandler implements IPacketHandler {
                         }
                         if (CommonTickHandler.globalCooldownMap.get(p.username) <= 0) {
                             CommonTickHandler.globalCooldownMap.put(p.username, 30 * 20);
-                            if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+                            if (!mod_RpgInventory.developers.contains(p.username)) {
                                 bow.damageItem(10, p);
                             }
                             for (int x1 = (int) -10; x1 < 10; x1++) {
@@ -295,7 +287,7 @@ public class RpgPacketHandler implements IPacketHandler {
                         ItemStack var211 = p.inventory.armorItemInSlot(2);
                         ItemStack var111 = p.inventory.armorItemInSlot(1);
                         ItemStack var011 = p.inventory.armorItemInSlot(0);
-                        if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+                        if (!mod_RpgInventory.developers.contains(p.username)) {
                             if (wand == null || var311 == null || var211 == null || var111 == null || var011 == null) {
                                 break;
                             }
@@ -317,7 +309,7 @@ public class RpgPacketHandler implements IPacketHandler {
                                 //delete the item
                                 p.setCurrentItemOrArmor(0, (ItemStack) null);
                             } else {
-                                if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+                                if (!mod_RpgInventory.developers.contains(p.username)) {
                                     wand.damageItem(3, p);
                                 }
                             }

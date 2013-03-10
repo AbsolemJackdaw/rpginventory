@@ -5,7 +5,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import RpgInventory.mod_RpgInventory;
-import RpgRB.ItemCrystal;
+import RpgInventory.item.ItemCrystal;
 import RpgInventory.item.armor.ItemRpgArmor;
 
 public class RpgContainer extends Container {

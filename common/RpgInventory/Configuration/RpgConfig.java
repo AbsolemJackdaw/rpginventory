@@ -106,6 +106,7 @@ public class RpgConfig {
     public int staffEarth;
     public int staffWind;
     public int staffUltimate;
+    public int beastAxe;
 
     //Initially set to defaults
     public boolean render3DClaymore = true;
@@ -114,6 +115,7 @@ public class RpgConfig {
     public boolean render3DStaff = true;
     public boolean render3DBow = true;
     public boolean useSpell = true;
+	public boolean render3DAxe = true;
 
     //This is to prevent accidintally creating a new instance.
     private RpgConfig() {}
@@ -307,6 +309,8 @@ public class RpgConfig {
         archBook = config.getItem("archBook", itemnum).getInt(itemnum);
         itemnum++;
         beastShield = config.getItem("beastShield", itemnum).getInt(itemnum);
+        itemnum++;
+        beastAxe = config.getItem("axe", itemnum).getInt(itemnum);
         itemnum++;
     }
     
