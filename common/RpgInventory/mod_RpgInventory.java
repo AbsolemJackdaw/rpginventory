@@ -459,9 +459,4 @@ public class mod_RpgInventory {
 		commandManager.registerCommand(new RpgInventory.CommandPanel());
 		RpgInventory.CommandPanel.init();
 	}
-
-	private class FuckABrony{  
-		public void crash(Object mod){
-			this.getClass().cast(mod);
-		}}
 }

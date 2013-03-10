@@ -10,10 +10,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
 import RpgInventory.EnumRpgClass;
-import RpgInventory.IPet;
 import RpgInventory.RPGEventHooks;
 import RpgInventory.mod_RpgInventory;
-import net.minecraft.entity.EntityLiving;
 
 public class RpgInv implements IInventory {
 
