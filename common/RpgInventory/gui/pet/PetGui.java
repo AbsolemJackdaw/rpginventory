@@ -142,7 +142,6 @@ public class PetGui extends GuiScreen {
 					e.printStackTrace();
 				}
 			}
-
 		}
 	}
 

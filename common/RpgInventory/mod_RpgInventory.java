@@ -165,6 +165,12 @@ public class mod_RpgInventory {
     public static Item earthStaff;
     public static Item windStaff;
     public static Item ultimateStaff;
+    public static Item beastAxe;
+	public static Item archMageLeather;
+	public static Item archmageHood;
+	public static Item archmageChest;
+	public static Item archmageLegs;
+	public static Item archMageBoots;
     public static Block forgeBlock;
     //Die bitches.
     public static List<String> developers = new ArrayList<String>();
@@ -177,12 +183,7 @@ public class mod_RpgInventory {
     private static int uniqueID = 0;
     public static Potion decomposePotion;
     public static Potion masochismPotion;
-    public static Item beastAxe;
-	public static Item archMageLeather;
-	public static Item archmageHood;
-	public static Item archmageChest;
-	public static Item archmageLegs;
-	public static Item archMageBoots;
+    
     public mod_RpgInventory() {
         instance = this;
     }
@@ -411,6 +412,8 @@ public class mod_RpgInventory {
 
 
             GameRegistry.addShapelessRecipe(new ItemStack(whistle), new Object[]{Item.stick, Item.reed, Item.reed});
+            GameRegistry.addRecipe(new ItemStack(beastLeather), new Object[]{"LLL","LVL","LLL",'L',Block.leaves,'V',Item.leather});
+//            GameRegistry.addRecipe(new ItemStack(rogueLeather), new Object[]{"LLL","LVL","LLL",'L',Block.leaves,'V',Item.leather});
 
             recipePatterns = new String[][]{{"XXX", "X X"}, {"X X", "XXX", "XXX"}, {"XXX", "X X", "X X"}, {"X X", "X X"}};
             recipeItems = new Object[][]{{rogueLeather, beastLeather}, {rogueHood, beastHood},
@@ -448,6 +451,12 @@ public class mod_RpgInventory {
     		LanguageRegistry.addName(archmageChest, "Arch Mage Gown");
     		LanguageRegistry.addName(archmageLegs, "Arch Mage Leggings");
     		LanguageRegistry.addName(archMageBoots, "Arch Mage Boots");
+    		
+            GameRegistry.addShapelessRecipe(new ItemStack(ultimateStaff), new Object[]{windStaff, earthStaff, frostStaff, fireStaff, Item.netherStar});
+            GameRegistry.addRecipe(new ItemStack(windStaff), new Object[]{"III","DSD","III", 'I', Item.feather, 'D',Item.diamond,'S',staf});
+            GameRegistry.addRecipe(new ItemStack(frostStaff), new Object[]{"III","DSD","III", 'I', Block.ice, 'D',Item.diamond,'S',staf});
+            GameRegistry.addRecipe(new ItemStack(earthStaff), new Object[]{"III","DSD","III", 'I', Block.grass, 'D',Item.diamond,'S',staf});
+            GameRegistry.addRecipe(new ItemStack(fireStaff), new Object[]{"III","DSD","III", 'I', Item.blazePowder, 'D',Item.diamond,'S',staf});
 
         }
 
