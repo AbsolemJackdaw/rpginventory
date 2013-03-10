@@ -6,17 +6,16 @@ package RpgRB.beastmaster;
 
 import RpgInventory.EntityPetXP;
 import RpgInventory.IPet;
+import RpgInventory.gui.inventory.RpgInv;
 import RpgInventory.mod_RpgInventory;
 import RpgPlusPlus.minions.CustomMinionEntitySelector;
 import cpw.mods.fml.common.FMLCommonHandler;
-import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -56,7 +55,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     int sprintToggleTimer;
     int jumpTicks;
     public double speedBonus;
-    private List aiBackup;
+
     private BMPetImpl(World par1World) {
         super(par1World);
         this.moveSpeed = 0.35F;
@@ -76,6 +75,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+        ignoreFrustumCheck = true;
     }
 
     @Override
@@ -141,14 +141,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         }
         super.onLivingUpdate();
     }
-    
+
     public void moveEntity(double d, double d1, double d2) {
 
         if (riddenByEntity != null) {
-            aiBackup = new ArrayList(this.tasks.taskEntries);
-            this.tasks.taskEntries.clear();
-            
-            
             /**
              * initiate sprinting while ridden via keybind. Basically, if the
              * player has tapped once, it begins the timer which counts down
@@ -194,10 +190,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             }
             super.moveEntity(motionX, motionY, motionZ);
         } else {
-            if(aiBackup != null){
-                this.tasks.taskEntries.addAll(aiBackup);
-                aiBackup = null;
-            }
             super.moveEntity(d, d1, d2);
         }
     }
@@ -285,14 +277,29 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     public boolean isAIEnabled() {
         return true;
     }
+    private int xpThrottle = 10;
 
     protected void updateAITick() {
-        this.dataWatcher.updateObject(HP, Integer.valueOf(this.getHealth()));
-        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.expand(0.1D, 0.1D, 0.1D));
-        for (EntityPetXP xp : xps) {
-            this.giveXP(xp.getXpValue());
-            xp.setDead();
+        if (riddenByEntity != null) {
+            //stops up-and-down head movement
+            rotationPitch = 0;
+
+            //Control where the pet is facing (doesn't work while standing still)
+            EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
+            rotationYaw = prevRotationYaw = entityRider.rotationYaw;
         }
+        
+        this.dataWatcher.updateObject(HP, Integer.valueOf(this.getHealth()));
+        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.expand(0.4D, 0.4D, 0.4D));
+        if (xps != null && xps.size() > 0) {
+            if (xpThrottle <= 0) {
+                for (EntityPetXP xp : xps) {
+                    this.giveXP(xp.getXpValue());
+                    xp.setDead();
+                }
+            }
+        }
+
     }
 
     @Override
@@ -307,16 +314,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public void onDeath(DamageSource par1DamageSource) {
-        //world.remote check without a world.
-        //Always do .getEffectiveSide(), unless you want to know
-        //if this is a SSP world or SMP world.
-        //FMLCommonHandler.instance().getSide().isServer() seems to only returns true
-        //from the dedicated server.
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            addExperienceLevel(-1);
-            setEntityHealth(getMaxHealth() / 2);
+            RpgInv rpginv = mod_RpgInventory.proxy.getInventory(getOwnerName());
             ItemStack itemizedPet = writePetToItemStack(new ItemStack(mod_RpgInventory.crystal));
-            entityDropItem(itemizedPet, 1.0F);
+            rpginv.setInventorySlotContents(6, itemizedPet);
             IPet.playersWithActivePets.remove(this.getOwnerName());
         }
         setDead();

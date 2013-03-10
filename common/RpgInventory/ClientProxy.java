@@ -31,6 +31,8 @@ import RpgInventory.weapons.bow.EntityHellArrow;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy {
 
@@ -46,7 +48,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.preloadTexture("/subaraki/RPGinventoryTM.png");
 		KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler());
 		RenderingRegistry.registerEntityRenderingHandler(EntityHellArrow.class, new RenderArrow());
-
+                TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 
 		Sphere sphere = new Sphere();
 		//GLU_POINT will render it as dots.
@@ -98,6 +100,7 @@ public class ClientProxy extends CommonProxy {
 				RenderingRegistry.registerEntityRenderingHandler(clazz, renderballs);
 			}
 		}
+                
 	}
 
 	public int wizarShield() {

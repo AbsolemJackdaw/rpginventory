@@ -60,7 +60,7 @@ public class BoarPet extends BMPetImpl {
     @Override
     public float getSize() {
         if (getLevel() <= 200) {
-            return 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
+            return 0.5F + ((((float) getLevel()) / 200.0F));
         } else {
             return 2.0F;
         }
