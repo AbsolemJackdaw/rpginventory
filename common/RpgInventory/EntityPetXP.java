@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package RpgInventory;
+
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
