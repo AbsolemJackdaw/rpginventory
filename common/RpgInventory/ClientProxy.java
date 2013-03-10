@@ -56,7 +56,7 @@ public class ClientProxy extends CommonProxy {
         //GLU_LINE will render as wireframe
         //GLU_SILHOUETTE will render as ?shadowed? wireframe
         //GLU_FILL as a solid.
-        sphere.setDrawStyle(GLU.GLU_LINE);
+        sphere.setDrawStyle(GLU.GLU_FILL);
         //GLU_SMOOTH will try to smoothly apply lighting
         //GLU_FLAT will have a solid brightness per face, and will not shade.
         //GLU_NONE will be completely solid, and probably will have no depth to it's appearance.        
