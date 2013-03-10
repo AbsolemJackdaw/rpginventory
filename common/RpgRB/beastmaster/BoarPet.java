@@ -66,4 +66,9 @@ public class BoarPet extends BMPetImpl {
             return 2.0F;
         }
     }
+
+    @Override
+    public float getMountedSpeed() {
+        return 0.9F;
+    }
 }

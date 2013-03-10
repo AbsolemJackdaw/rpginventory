@@ -50,7 +50,7 @@ public class SpiderPet extends BMPetImpl {
     public boolean attackEntityAsMob(Entity par1Entity) {
         if (super.attackEntityAsMob(par1Entity)) {
             if (par1Entity instanceof EntityLiving) {
-                ((EntityLiving)par1Entity).addPotionEffect(new PotionEffect(Potion.poison.id, 200, 0));
+                ((EntityLiving) par1Entity).addPotionEffect(new PotionEffect(Potion.poison.id, 200, 0));
             }
             return true;
         }
@@ -70,6 +70,11 @@ public class SpiderPet extends BMPetImpl {
     @Override
     public int getMaxHealth() {
         return 18 + MathHelper.floor_float(((float) getLevel()) / 2.2F);
+    }
+
+    @Override
+    public float getMountedSpeed() {
+        return 0.7F;
     }
 
     @Override

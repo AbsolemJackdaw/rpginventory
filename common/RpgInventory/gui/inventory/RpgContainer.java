@@ -19,13 +19,13 @@ public class RpgContainer extends Container {
         if (this.isPlayerNotUsingContainer(player)) {
             this.setPlayerIsPresent(player, true);
         }
-        this.addSlotToContainer(new SlotRpgArmor(inv, 0, 6, 16));// necklace 
-        this.addSlotToContainer(new SlotRpgArmor(inv, 1, 6, 37));//shield
-        this.addSlotToContainer(new SlotRpgArmor(inv, 2, 82, 16));//cloak
-        this.addSlotToContainer(new SlotRpgArmor(inv, 3, 82, 38));//gloves
-        this.addSlotToContainer(new SlotRpgArmor(inv, 4, 82, 59));//ring
-        this.addSlotToContainer(new SlotRpgArmor(inv, 5, 6, 58));//ring
-        this.addSlotToContainer(new SlotRpgArmor(inv, 6, 105, 16));//crystal
+        this.addSlotToContainer(new SlotRpgArmor(inv, 0, 6, 16,player));// necklace 
+        this.addSlotToContainer(new SlotRpgArmor(inv, 1, 6, 37,player));//shield
+        this.addSlotToContainer(new SlotRpgArmor(inv, 2, 82, 16,player));//cloak
+        this.addSlotToContainer(new SlotRpgArmor(inv, 3, 82, 38,player));//gloves
+        this.addSlotToContainer(new SlotRpgArmor(inv, 4, 82, 59,player));//ring
+        this.addSlotToContainer(new SlotRpgArmor(inv, 5, 6, 58,player));//ring
+        this.addSlotToContainer(new SlotRpgArmor(inv, 6, 105, 16,player));//crystal
 
 
         //ADD THIS FIRST

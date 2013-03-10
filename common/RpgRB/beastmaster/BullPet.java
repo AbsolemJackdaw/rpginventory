@@ -20,7 +20,10 @@ public class BullPet extends BMPetImpl {
     public BullPet(World par1World) {
         super(par1World, 3, null, null);
     }
-
+@Override
+    public float getMountedSpeed() {
+        return 0.5F;
+    }
     public BullPet(World par1World, EntityPlayer owner, ItemStack is) {
         super(par1World, 3, owner, is);
     }
