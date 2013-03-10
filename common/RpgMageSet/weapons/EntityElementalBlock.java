@@ -216,16 +216,12 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 					}
 				}
 			}
-
 			if (p != null) {
-				if (p.getDistanceToEntity(this) < 3) {
-					double xdir = p.posX - this.posX;
+				if (p.getDistanceToEntity(this) < 3 && (p.rotationPitch > 70 && p.rotationPitch < 110)) {
 					double ydir = p.posY - this.posY;
-					double zdir = p.posZ - this.posZ;
-					p.motionX = xdir * 0.5F;
+					p.motionX = p.motionX * 5F;
 					p.motionY = ydir * 0.5F;
-					p.motionZ = zdir * 0.5F;
-					System.out.println(p.motionX + " " +  p.motionY + " " +  p.motionZ);
+					p.motionZ = p.motionZ * 5F;
 				}
 			}
 			break;
