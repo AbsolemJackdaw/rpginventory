@@ -54,6 +54,7 @@ public class PetGui extends GuiScreen {
 	public static String petName = "Name";
 	public static String petStats = "Stats :";
 	public static String info = "Additional Info";
+	public static String levelNr ;
 	public static String saddle;
 
 	public void initGui() {
@@ -120,7 +121,8 @@ public class PetGui extends GuiScreen {
 	public void drawScreen(int i, int j, float f) {
 		drawDefaultBackground();
 		NBTTagCompound tags = petCrystal.getTagCompound();
-		
+
+		levelNr = petCrystal.getTagCompound().getString(String.valueOf(tags.getInteger("PetLevel")));
 		if (tags.hasKey("PetLevel")) {
 			if (tags.getInteger("PetLevel") >= 50) {
 				if (tags.hasKey("isSaddled")) {
@@ -135,24 +137,24 @@ public class PetGui extends GuiScreen {
 				saddle = tags.getString("PetName") + " can not be ridden yet. Lvl 50 requiered.";
 			}
 		}
-			
-			try {
-				int var4 = this.mc.renderEngine.getTexture("/subaraki/petgui.png");
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				this.mc.renderEngine.bindTexture(var4);
-				int posX = (this.width - xSizeOfTexture) / 2;
-				int posY = (this.height - ySizeOfTexture) / 2;
-				drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
-			} finally {
-				textfield.drawTextBox();
-			}
-			drawString(fontRenderer, petName, this.width / 2 -20, this.height / 2-79 , 0xffffff);
-			drawString(fontRenderer, petStats, this.width / 2-85, this.height / 2-10, 0x00ffff);
-			drawString(fontRenderer, "Lvl : "+ tags.getString(String.valueOf(tags.getInteger("PetLevel"))),this.width / 2, this.height / 2, 0xffffff);
 
-			drawString(fontRenderer, info, this.width / 2-85, this.height / 2+45, 0xff00ff);
-			drawString(fontRenderer,saddle, this.width / 2-80, this.height / 2+55, 0xffffff);
-
-			super.drawScreen(i, j, f);
+		try {
+			int var4 = this.mc.renderEngine.getTexture("/subaraki/petgui.png");
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			this.mc.renderEngine.bindTexture(var4);
+			int posX = (this.width - xSizeOfTexture) / 2;
+			int posY = (this.height - ySizeOfTexture) / 2;
+			drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
+		} finally {
+			textfield.drawTextBox();
 		}
+		drawString(fontRenderer, petName, this.width / 2 -20, this.height / 2-79 , 0xffffff);
+		drawString(fontRenderer, petStats, this.width / 2-85, this.height / 2-10, 0x00ffff);
+		drawString(fontRenderer, "Lvl : "+ levelNr,this.width / 2, this.height / 2, 0xffffff);
+
+		drawString(fontRenderer, info, this.width / 2-85, this.height / 2+45, 0xff00ff);
+		drawString(fontRenderer,saddle, this.width / 2-80, this.height / 2+55, 0xffffff);
+
+		super.drawScreen(i, j, f);
 	}
+}
