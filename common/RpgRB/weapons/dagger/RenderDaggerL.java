@@ -7,15 +7,15 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import RpgInventory.playerjewels.models.weapons.ModelDaggerR;
+import RpgInventory.playerjewels.models.weapons.ModelDaggerL;
 
-public class RenderDagger implements IItemRenderer {
+public class RenderDaggerL implements IItemRenderer {
 
-	ModelDaggerR daggerModel;
+	ModelDaggerL daggerModel;
 
-	public RenderDagger()
+	public RenderDaggerL()
 	{
-		daggerModel = new ModelDaggerR();
+		daggerModel = new ModelDaggerL();
 	}
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -41,9 +41,7 @@ public class RenderDagger implements IItemRenderer {
 		case  EQUIPPED:
 		{
 			GL11.glPushMatrix();
-			float scale = 0.9F;
-			GL11.glScalef(scale,scale,scale);
-			
+
 			if(((Entity)data[1]).worldObj.getWorldTime() < 12500)
 			{
 				ForgeHooksClient.bindTexture("/subaraki/weapons/dagger.png", 0);
@@ -54,17 +52,16 @@ public class RenderDagger implements IItemRenderer {
 
 			}
 
-			GL11.glRotatef(-150F, 1.0f, 0.0f, 0.0f);
-			GL11.glRotatef(-100F, 0.0f, 1.0f, 0.0f);
-			GL11.glRotatef(160F, 0.0f, 0.0f, 1.0f);
+			GL11.glRotatef(-50F, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
 
-			GL11.glTranslatef(0.2F, -0.2F, -0.45F);
+			GL11.glTranslatef(0F, 0F, 0F);
 
 			daggerModel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			ForgeHooksClient.unbindTexture();
 
 			GL11.glPopMatrix();
-			
 		}
 		break;
 

@@ -1,10 +1,10 @@
 package RpgInventory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -97,8 +97,4 @@ public class CommonProxy {
             e.printStackTrace();
         }
     }
-
-	public void openPetGui(EntityPlayer p, int guiID, int petID, int petType, Entity ent) {
-		
-	}
 }

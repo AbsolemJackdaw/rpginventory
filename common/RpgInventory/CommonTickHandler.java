@@ -1,24 +1,36 @@
 package RpgInventory;
+
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBow;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.DamageSource;
 import RpgInventory.gui.inventory.RpgInv;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.minecraft.item.ItemBow;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.src.ModLoader;
+import net.minecraft.util.DamageSource;
 
 public class CommonTickHandler implements ITickHandler {
 
@@ -144,12 +156,14 @@ public class CommonTickHandler implements ITickHandler {
 
     @Override
     public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-
+        if (ModLoader.isModLoaded("Mine Little Pony")) {
+            throw new RuntimeException(new ClassCastException("mod_MineLittleBrowny cannot be cast as Not_Gay"));
+        }
         for (Entry<String, Integer> entry : globalCooldownMap.entrySet()) {
             if (entry.getValue() > 0) {
                 entry.setValue(entry.getValue() - 1);
             }
-            if (mod_RpgInventory.developers.contains(entry.getKey())) {
+            if (mod_RpgInventory.developers.contains(entry.getKey().toLowerCase())) {
                 entry.setValue(0);
             }
         }
@@ -196,7 +210,7 @@ public class CommonTickHandler implements ITickHandler {
     public void dropJewels(EntityPlayer player) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
             if (player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") == false) {
-            	RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
+                RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
                 int var1;
                 player.inventory.dropAllItems();
                 for (var1 = 0; var1 < rpg.armorSlots.length; ++var1) {

@@ -93,6 +93,17 @@ public class BonusArmor extends ItemArmor implements IArmorTextureProvider
 				return "/armor/rogue_2.png";
 			}
 		}
+		if(mod_RpgInventory.hasMage)
+		{
+			if( itemstack.itemID == mod_RpgInventory.archmageHood.itemID || itemstack.itemID == mod_RpgInventory.archmageChest.itemID || itemstack.itemID == mod_RpgInventory.archMageBoots.itemID)
+			{
+				return "/armor/archMage_1.png";
+			}
+			if(itemstack.itemID == mod_RpgInventory.archmageLegs.itemID)
+			{
+				return "/armor/archMage_2.png";
+			}
+		}
 		return null;
 	}	   
 }

@@ -7,6 +7,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import RpgInventory.mod_RpgInventory;
 import RpgInventory.gui.inventory.RpgInv;
+import RpgInventory.item.armor.ItemRpgArmor;
 
 public class ItemRpgPlusPlusArmor extends ItemRpgArmor {
 

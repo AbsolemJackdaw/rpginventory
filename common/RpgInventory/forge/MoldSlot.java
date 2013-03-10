@@ -4,7 +4,7 @@
  */
 package RpgInventory.forge;
 
-import RpgInventory.item.ItemMold;
+import RpgInventory.ItemMold;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;

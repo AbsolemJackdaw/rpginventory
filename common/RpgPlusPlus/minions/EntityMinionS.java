@@ -1,8 +1,10 @@
 package RpgPlusPlus.minions;
 
+import RpgInventory.EnumRpgClass;
+import RpgInventory.gui.inventory.RpgInv;
+import RpgInventory.mod_RpgInventory;
 import java.util.ArrayList;
 import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;

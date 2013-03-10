@@ -1,11 +1,10 @@
 package RpgPlusPlus;
 
+import cpw.mods.fml.common.ITickHandler;
+import cpw.mods.fml.common.TickType;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map.Entry;
-
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
 
 public class CommonTickHandlerRpgPlus implements ITickHandler {
 

@@ -3,12 +3,15 @@
  * and open the template in the editor.
  */
 package RpgInventory;
-import java.util.EnumSet;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import RpgInventory.gui.inventory.RpgInv;
 import RpgInventory.item.armor.BonusArmor;
+import RpgInventory.item.armor.ItemRpgArmor;
+import java.util.EnumSet;
+import java.util.Iterator;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 /**
  *

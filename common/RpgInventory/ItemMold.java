@@ -1,4 +1,5 @@
-package RpgInventory.item;
+package RpgInventory;
+
 import net.minecraft.item.Item;
 
 

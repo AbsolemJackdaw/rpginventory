@@ -12,7 +12,6 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -26,7 +25,6 @@ import org.lwjgl.util.glu.Sphere;
 
 import RpgInventory.gui.BookGui;
 import RpgInventory.gui.inventory.RpgInv;
-import RpgInventory.gui.pet.PetGui;
 import RpgInventory.playerjewels.RenderPlayerJewels;
 import RpgInventory.weapons.bow.EntityHellArrow;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
@@ -36,21 +34,21 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy {
-
+    //Testing
     private HashMap<String, RpgInv> invs;
     public static int sphereID;
     public static boolean firstUpdate = false;
-
+    
     public int getSphereID() {
         return sphereID;
     }
-
+    
     public void registerRenderInformation() {
         MinecraftForgeClient.preloadTexture("/subaraki/RPGinventoryTM.png");
         KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler());
         RenderingRegistry.registerEntityRenderingHandler(EntityHellArrow.class, new RenderArrow());
-        TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
-
+        
+        
         Sphere sphere = new Sphere();
         //GLU_POINT will render it as dots.
         //GLU_LINE will render as wireframe
@@ -60,7 +58,7 @@ public class ClientProxy extends CommonProxy {
         //GLU_SMOOTH will try to smoothly apply lighting
         //GLU_FLAT will have a solid brightness per face, and will not shade.
         //GLU_NONE will be completely solid, and probably will have no depth to it's appearance.        
-        sphere.setNormals(GLU.GLU_NONE);
+        sphere.setNormals(GLU.GLU_FLAT);
         //GLU_INSIDE will render as if you are inside the sphere, making it appear inside out.(Similar to how ender portals are rendered)
         sphere.setOrientation(GLU.GLU_OUTSIDE);
 
@@ -73,17 +71,19 @@ public class ClientProxy extends CommonProxy {
         //Offset the sphere by it's radius so it will be centered
         GL11.glTranslatef((float) 0.50F, (float) 0.50F, (float) 0.50F);
         //Call our string that we mapped to our texture
-        //        ForgeHooksClient.bindTexture("/subaraki/jewels/talisman.png", 0);
+//        ForgeHooksClient.bindTexture("/subaraki/jewels/talisman.png", 0);
         //The drawing the sphere is automattically doing is getting added to our list. Careful, the last 2 variables 
         //control the detail, but have a massive impact on performance. 32x32 is a good balance on my machine.
         //GLU.
-        sphere.draw(0.5F, 24, 32);
+        sphere.draw(0.5F, 12, 24);
         //Drawing done, unbind our texture
-        //        ForgeHooksClient.unbindTexture();
+//        ForgeHooksClient.unbindTexture();
         //Tell LWJGL that we are done creating our list.
         GL11.glEndList();
     }
-
+    
+    
+    
     public void registerLate() {
         //RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerJewels(new ModelBiped()));
         RenderPlayerJewels renderballs = new RenderPlayerJewels(new ModelBiped());
@@ -99,13 +99,9 @@ public class ClientProxy extends CommonProxy {
                 RenderingRegistry.registerEntityRenderingHandler(clazz, renderballs);
             }
         }
-
+        TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
     }
-
-    public int wizarShield() {
-        return sphereID;
-    }
-
+    
     public void openGUI(EntityPlayer p1, int id) {
         switch (id) {
             case 1:
@@ -119,14 +115,11 @@ public class ClientProxy extends CommonProxy {
                 Minecraft.getMinecraft().displayGuiScreen(new BookGui(p1));
                 break;
             case 3:
-                Minecraft.getMinecraft().displayGuiScreen(new PetGui(p1));
-                break;
+                Minecraft.getMinecraft().displayGuiScreen(new RpgInventory.gui.pet.PetGui(p1));
+                
         }
     }
-
-    public void openPetGui(EntityPlayer p, int guiID, int petID, int petType, Entity ent) {
-    }
-
+    
     public RpgInv getInventory(String username) {
         if (invs == null) {
             invs = new HashMap();
@@ -136,7 +129,7 @@ public class ClientProxy extends CommonProxy {
         }
         return invs.get(username);
     }
-
+    
     public void addEntry(String username, RpgInv inv) {
         if (invs == null) {
             invs = new HashMap();
@@ -152,10 +145,10 @@ public class ClientProxy extends CommonProxy {
             invs.put(username, inv);
         }
     }
-
+    
     public void loadInventory(String username) {
         RpgInv inv = new RpgInv(username);
-
+        
         File file = new File(DimensionManager.getCurrentSaveRootDirectory(), "InventoryRPG.dat");
         if (file.exists()) // ONLY if the file exists...
         {
@@ -173,13 +166,13 @@ public class ClientProxy extends CommonProxy {
         }
         invs.put(username, inv);
     }
-
+    
     public void discardInventory(String username) {
         if (invs.get(username) == null) // nothing to unload here.
         {
             return;
         }
-
+        
         File file = new File(DimensionManager.getCurrentSaveRootDirectory(), "InventoryRPG.dat");
         if (!file.getParentFile().exists() || !file.getParentFile().isDirectory()) {
             file.getParentFile().mkdirs();  // create the folders if they don' exist.
@@ -188,10 +181,10 @@ public class ClientProxy extends CommonProxy {
             if (!file.exists()) {
                 file.createNewFile();
             }
-
+            
             NBTTagCompound nbt = invs.get(username).writeToNBT(new NBTTagCompound());
             CompressedStreamTools.writeCompressed(nbt, new FileOutputStream(file));
-
+            
         } catch (Exception e) {
             // log it as severe
             FMLCommonHandler.instance().getFMLLogger().severe("[RPGInventoryMod] Error writing RPG Inventory for player " + username);

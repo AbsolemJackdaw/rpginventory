@@ -1,9 +1,12 @@
 package RpgInventory;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+
 import RpgInventory.gui.inventory.RpgInv;
+import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.IPlayerTracker;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 
 /**
  * To catch login/Logouts for readingw/writing the Inventory
@@ -23,10 +26,10 @@ public class PlayerTracker implements IPlayerTracker {
             EntityLiving pet = (EntityLiving) IPet.playersWithActivePets.get(player.username);
             //This should never happen, but if it does, don't lose the players pet
             //AND crash them at the same time D:
-            if (pet != null) {
+            if (pet != null && !((EntityLiving) pet).isDead) {
                 RpgInv inv = mod_RpgInventory.proxy.getInventory(player.username);
-                inv.setInventorySlotContents(6, ((IPet) pet).writePetToItemStack(new ItemStack(mod_RpgInventory.crystal)));
-                ((EntityLiving) pet).setDead();
+                inv.setInventorySlotContents(6, ((IPet) pet).writePetToItemStack());
+                pet.setDead();
             }
             //Keep Hashmap clean.
             IPet.playersWithActivePets.remove(player.username);
@@ -41,12 +44,11 @@ public class PlayerTracker implements IPlayerTracker {
     public void onPlayerChangedDimension(EntityPlayer player) {
         //Allow the pet to follow the player to other worlds(Dimensions).
         if (IPet.playersWithActivePets.containsKey(player.username)) {
-            EntityLiving pet = (EntityLiving) IPet.playersWithActivePets.get(player.username);
-            if (pet == null) {
-                IPet.playersWithActivePets.remove(player.username);
-            } else {
+            try {
+                EntityLiving pet = (EntityLiving) IPet.playersWithActivePets.get(player.username);
                 pet.setWorld(player.worldObj);
                 pet.setPositionAndUpdate(player.posX, player.posY, player.posZ);
+            } catch (Throwable ex) {
             }
         }
     }

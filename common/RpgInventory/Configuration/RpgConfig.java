@@ -106,6 +106,10 @@ public class RpgConfig {
     public int staffEarth;
     public int staffWind;
     public int staffUltimate;
+    public int archmageHood;
+    public int archmageChest;
+    public int archmageLegs;
+    public int archmageBoots;
     public int beastAxe;
 
     //Initially set to defaults
@@ -115,7 +119,7 @@ public class RpgConfig {
     public boolean render3DStaff = true;
     public boolean render3DBow = true;
     public boolean useSpell = true;
-	public boolean render3DAxe = true;
+    public boolean render3DAxe = true;
 
     //This is to prevent accidintally creating a new instance.
     private RpgConfig() {}
@@ -136,6 +140,7 @@ public class RpgConfig {
         render3DSoulSphere = config.get("Rendering", "Render_SoulSphere", true).getBoolean(true);
         render3DStaff = config.get("Rendering", "Render_Staff", true).getBoolean(true);
         render3DBow = config.get("Rendering", "Render_Bow", true).getBoolean(true);
+        render3DAxe = config.get("Rendering", "Render_Axe", true).getBoolean(true);
         useSpell = config.get(Configuration.CATEGORY_GENERAL, "Allow Day/Night Cycle Spell", true,"Disable the spell that toggles the day night cycle.").getBoolean(true);
     }
     private void loadItems(Configuration config){
@@ -310,7 +315,15 @@ public class RpgConfig {
         itemnum++;
         beastShield = config.getItem("beastShield", itemnum).getInt(itemnum);
         itemnum++;
-        beastAxe = config.getItem("axe", itemnum).getInt(itemnum);
+        archmageHood= config.getItem("archmageHood", itemnum).getInt(itemnum);
+        itemnum++;
+        archmageChest= config.getItem("archmageChest", itemnum).getInt(itemnum);
+        itemnum++;
+        archmageLegs= config.getItem("archmageLegs", itemnum).getInt(itemnum);
+        itemnum++;
+        archmageBoots= config.getItem("archmageBoots", itemnum).getInt(itemnum);
+        itemnum++;
+        beastAxe= config.getItem("axe", itemnum).getInt(itemnum);
         itemnum++;
     }
     

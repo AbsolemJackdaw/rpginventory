@@ -121,7 +121,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     public void onLivingUpdate() {
         //Check if player has crystal equipped.
         //RpgInventory rpginv = mod_RpgInventory.proxy.getInventory(this.getOwnerName());
-        this.width = (float)(this.boundingBox.maxX - this.boundingBox.minX + 0.1F);
+        this.width = getSize() * 2;
         IPet.playersWithActivePets.put(this.getOwnerName(), this);
         if (sprintToggleTimer > 0) { //used to determine if sprinting should be activated.
             sprintToggleTimer--;
@@ -130,13 +130,21 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         {
             jumpTicks--;
         }
+
+        if (riddenByEntity != null) {
+            //stops up-and-down head movement
+            rotationPitch = 0;
+
+            //Control where the pet is facing (doesn't work while standing still)
+            EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
+            rotationYaw = prevRotationYaw = entityRider.rotationYaw;
+        }
         super.onLivingUpdate();
     }
 
     public void moveEntity(double d, double d1, double d2) {
+
         if (riddenByEntity != null) {
-            EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
-            entityRider.prevCameraYaw = rotationYaw = prevRotationYaw = entityRider.rotationYaw;
             /**
              * initiate sprinting while ridden via keybind. Basically, if the
              * player has tapped once, it begins the timer which counts down
@@ -161,8 +169,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             if (((EntityPlayer) riddenByEntity).isJumping) { //hijacking the preset 'jump' input.
                 jump(true); //this method is seen overridden in here
             }
-            //This is currently bugged so temporarily disabled.
-            speedBonus= 0F;
             if (isSprinting() && onGround) { //if sprinting on the ground
                 motionX += riddenByEntity.motionX * speedBonus * f;
                 motionZ += riddenByEntity.motionZ * speedBonus * f;
@@ -274,26 +280,23 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     private int xpThrottle = 10;
 
     protected void updateAITick() {
-        
-        if (riddenByEntity != null) {
-            //stops up-and-down head movement
-            rotationPitch = 0;
-
-            //Control where the pet is facing (doesn't work while standing still)
-            EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
-            rotationYaw = prevRotationYaw = entityRider.rotationYaw;
+        if (xpThrottle == 0) {
+            xpThrottle = 10;
+        } else {
+            xpThrottle--;
         }
-        
         this.dataWatcher.updateObject(HP, Integer.valueOf(this.getHealth()));
         List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.expand(0.4D, 0.4D, 0.4D));
         if (xps != null && xps.size() > 0) {
-            if (xpThrottle-- <= 0) {
-                xpThrottle = 10;
-                for (EntityPetXP xp : xps) {
+            for (EntityPetXP xp : xps) {
+                if (xpThrottle <= 0) {
+                    this.playSound("random.orb", 0.1F, 0.5F * ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.8F));
                     this.giveXP(xp.getXpValue());
                     xp.setDead();
                 }
+
             }
+
         }
 
     }

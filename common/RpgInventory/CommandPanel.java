@@ -1,7 +1,6 @@
 package RpgInventory;
 
 import RpgInventory.item.ItemMats;
-import RpgInventory.item.ItemMold;
 import RpgInventory.item.ItemRpg;
 import RpgInventory.item.armor.BonusArmor;
 import RpgInventory.item.armor.ItemRpgArmor;
@@ -156,7 +155,6 @@ public class CommandPanel extends CommandBase {
                         {
                             if (args[2].matches("level"))
                             {
-                                
                             	int level = parseIntWithMin(sender, args[3], 1);
                             	EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(sender.getCommandSenderName());
                             	NBTTagCompound nbt = player.getCurrentEquippedItem().getTagCompound();
