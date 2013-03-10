@@ -21,7 +21,7 @@ public class ItemRBMats2 extends Item {
     }
 
     public ItemStack onItemRightClick(ItemStack whistle, World world, EntityPlayer player) {
-        if (!world.isRemote) {
+        if (!world.isRemote && player.ridingEntity == null) {
             try {
                 RpgInv rpginv = mod_RpgInventory.proxy.getInventory(player.username);
                 ItemStack stack = rpginv.getCrystal();

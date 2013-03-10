@@ -175,7 +175,7 @@ public class PetGui extends GuiScreen {
 		drawString(fontRenderer, petName, this.width / 2 -20, this.height / 2-79 , 0xffffff);
 		drawString(fontRenderer, petStats, this.width / 2-85, this.height / 2-10, 0x00ffff);
 		drawString(fontRenderer, "Lvl : "+ levelNr,this.width / 2-80, this.height / 2, 0xffffff);
-		drawString(fontRenderer, "Atk : "+ levelNr,this.width / 2-80, this.height / 2+10, 0xffffff);
+		drawString(fontRenderer, "Atk : "+ petAtk,this.width / 2-80, this.height / 2+10, 0xffffff);
 		drawString(fontRenderer, "HP : "+ currentHP +"/"+totalHP,this.width / 2-80, this.height / 2+20, 0xffffff);
 
 		drawString(fontRenderer, info, this.width / 2-85, this.height / 2+45, 0xff00ff);
