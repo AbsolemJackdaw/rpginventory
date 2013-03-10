@@ -12,9 +12,7 @@ import RpgInventory.mod_RpgInventory;
 import RpgRB.beastmaster.BoarPet;
 import RpgRB.beastmaster.BullPet;
 import RpgRB.beastmaster.SpiderPet;
-import RpgRB.renders.RenderBoar;
-import RpgRB.renders.RenderBull;
-import RpgRB.renders.RenderSpiderB;
+import RpgRB.renders.RenderPet;
 import RpgRB.weapons.dagger.RenderDagger;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -26,9 +24,9 @@ public class RBClientProxy extends RBCommonProxy{
 	public void registerRendering(){
 		MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.daggers.itemID, (IItemRenderer) new RenderDagger());
 
-		RenderingRegistry.registerEntityRenderingHandler(BullPet.class, new RenderBull());
-		RenderingRegistry.registerEntityRenderingHandler(SpiderPet.class, new RenderSpiderB());
-		RenderingRegistry.registerEntityRenderingHandler(BoarPet.class, new RenderBoar());
+		RenderingRegistry.registerEntityRenderingHandler(BullPet.class, new RenderPet());
+		RenderingRegistry.registerEntityRenderingHandler(SpiderPet.class, new RenderPet());
+		RenderingRegistry.registerEntityRenderingHandler(BoarPet.class, new RenderPet());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class, new RenderXPOrb());
 	}
 }

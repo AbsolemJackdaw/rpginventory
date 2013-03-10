@@ -4,6 +4,7 @@
  */
 package RpgRB.beastmaster;
 
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -29,14 +30,9 @@ public class BoarPet extends BMPetImpl {
         super(par1World, 1, owner, is);
     }
 
-    @Override
-    public AxisAlignedBB getBoundingBox() {
-        return super.getBoundingBox();
-    }
-
     public AxisAlignedBB getCollisionBox(Entity par1Entity) {
         
-        return this.boundingBox;
+        return this.boundingBox.contract(1.0D, 1.0D, 1.0D);
     }
 
     public double getMountedYOffset() {
@@ -75,5 +71,10 @@ public class BoarPet extends BMPetImpl {
     @Override
     public float getMountedSpeed() {
         return 0.9F;
+    }
+
+    @Override
+    public ModelBase getModel() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

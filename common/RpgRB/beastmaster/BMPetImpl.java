@@ -10,8 +10,11 @@ import RpgInventory.gui.inventory.RpgInv;
 import RpgInventory.mod_RpgInventory;
 import RpgPlusPlus.minions.CustomMinionEntitySelector;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 import net.minecraft.block.Block;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -332,7 +335,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public abstract String getTexture();
-
+    @SideOnly(Side.CLIENT)
+    public abstract ModelBase getModel();
     private void Following() {
         float var1 = 18.0F;
 
