@@ -2,9 +2,10 @@ package RpgRB.weapons.axe;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class ItemBeastAxe extends Item {
@@ -28,11 +29,7 @@ public class ItemBeastAxe extends Item {
 
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
 	{
-		if(par2EntityLiving instanceof EntityMob)
-		{
-			
-			return true;
-		}
+		par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)par3EntityLiving), 6);
 		return false;
 	}
 	@Override
