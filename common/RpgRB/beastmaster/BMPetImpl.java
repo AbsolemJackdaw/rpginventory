@@ -347,7 +347,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             }
         }
     }
-
+    private int currentLevel;
     public abstract String getDefaultName();
 
     @Override
@@ -434,7 +434,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         NBTTagCompound itemstacknbt = new NBTTagCompound("tag");
         writeEntityToNBT(petnbt);
         itemstacknbt.setCompoundTag("RPGPetInfo", petnbt);
-        itemstacknbt.setInteger("PetLevel", getLevel());
+        itemstacknbt.setInteger("PetLevel", this.dataWatcher.getWatchableObjectInt(LEVELID));
         itemstacknbt.setString("PetName", getEntityName());
         itemstacknbt.setString("OwnerName", getOwnerName());
         itemstacknbt.setInteger("PetAttack", getAttackDamage());
