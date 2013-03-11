@@ -51,6 +51,7 @@ import RpgRB.ItemRBMats;
 import RpgRB.ItemRBMats2;
 import RpgRB.weapons.axe.AxeRender;
 import RpgRB.weapons.axe.ItemBeastAxe;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PreInit;
@@ -470,7 +471,7 @@ public class mod_RpgInventory {
         addChestLoot(new ItemStack(mod_RpgInventory.ringmold), 1, 1, 30, "Ring Mold");
         addChestLoot(new ItemStack(mod_RpgInventory.wantmold), 1, 1, 40, "Gloves Mold");
         
-        addCandyChestLoot(new ItemStack(mod_RpgInventory.petCandy), 1, 6, 20, "Pet Candy");
+        addCandyChestLoot(new ItemStack(mod_RpgInventory.petCandy), 1, 6, 20, "Easter Egg");
 
         GameRegistry.registerTileEntity(TEMold.class, "temold");
 
@@ -705,7 +706,8 @@ public class mod_RpgInventory {
     }
 
     public void addChestLoot(ItemStack is, int min, int max, int rarity, String item) {
-        System.out.println("Added " + item + " to chests");
+       // System.out.println("Added " + item + " to chests");
+        FMLLog.info("Adding to chests: "+item, min);
         WeightedRandomChestContent chestGen = new WeightedRandomChestContent(is.copy(), min, max, rarity);
 
         ChestGenHooks.getInfo("dungeonChest").addItem(chestGen);
@@ -716,7 +718,8 @@ public class mod_RpgInventory {
 
     }
     public void addCandyChestLoot(ItemStack is, int min, int max, int rarity, String item) {
-        System.out.println("Added " + item + " to chests");
+//        System.out.println("Added " + item + " to chests");
+        FMLLog.info("Adding to chests: "+item, min);
         WeightedRandomChestContent chestGen = new WeightedRandomChestContent(is.copy(), min, max, rarity);
 
         ChestGenHooks.getInfo("dungeonChest").addItem(chestGen);
