@@ -18,8 +18,11 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
+import net.minecraft.entity.ai.EntityAICreeperSwell;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -28,8 +31,12 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -58,28 +65,27 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     int sprintToggleTimer;
     int jumpTicks;
     public double speedBonus;
+    private boolean checked = false;
 
     private BMPetImpl(World par1World) {
         super(par1World);
         this.moveSpeed = 0.35F;
-        this.Following();
         this.getNavigator().setAvoidsWater(true);
         this.setPathToEntity((PathEntity) null);
         this.setAttackTarget((EntityLiving) null);
         this.tasks.addTask(1, new EntityAISwimming(this));
-
-        this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, getMountedSpeed()));
-        this.tasks.addTask(3, new EntityAIFollowOwner(this, this.moveSpeed, 10.0F, 2.0F));
-        this.tasks.addTask(4, new EntityAIWander(this, this.moveSpeed));
-        this.tasks.addTask(5, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(6, new EntityAIAttackOnCollide(this, EntityLiving.class, this.moveSpeed, true));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, Entity.class, 8.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.tasks.addTask(9, this.aiSit);
-        this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
-        this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
+        this.tasks.addTask(1, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.34F));
+        this.tasks.addTask(2, new EntityAIFollowOwner(this, this.moveSpeed, 15.0F, 2.0F));
+        this.tasks.addTask(3, new EntityAIWander(this, this.moveSpeed));
+        this.tasks.addTask(4, new EntityAILeapAtTarget(this, 0.4F));
+        this.tasks.addTask(5, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, Entity.class, 8.0F));
+        this.tasks.addTask(7, new EntityAILookIdle(this));
+        this.tasks.addTask(8, new EntityAITempt(this, 0.3F, Item.porkRaw.itemID, false));
+        this.targetTasks.addTask(1, new EntityAIOwnerHurtTarget(this));
+        this.targetTasks.addTask(2, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        ignoreFrustumCheck = true;
+        //this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, IMob.class, 16.0F, 0, true));
     }
 
     public abstract float getMountedSpeed();
@@ -104,13 +110,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             this.setOwner(owner.username);
             IPet.playersWithActivePets.put(owner.username, this);
             this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, true, false, new CustomMinionEntitySelector(owner)));
-            this.Following();
         }
     }
 
     public abstract int getAttackDamage();
-
-    public abstract AxisAlignedBB getCollisionBox(Entity par1Entity);
 
     public abstract double getMountedYOffset();
 
@@ -127,7 +130,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     public void onLivingUpdate() {
         //Check if player has crystal equipped.
         //RpgInventory rpginv = mod_RpgInventory.proxy.getInventory(this.getOwnerName());
-        this.width = (float) (this.boundingBox.maxX - this.boundingBox.minX + 0.1F);
+        //this.width = (float) (this.boundingBox.maxX - this.boundingBox.minX + 0.1F);
         IPet.playersWithActivePets.put(this.getOwnerName(), this);
         if (sprintToggleTimer > 0) { //used to determine if sprinting should be activated.
             sprintToggleTimer--;
@@ -143,6 +146,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         if (riddenByEntity != null) {
             EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
             entityRider.prevCameraYaw = rotationYaw = prevRotationYaw = entityRider.rotationYaw;
+            this.width = getSize();
+            this.height = getSize() * 0.75F;
             /**
              * initiate sprinting while ridden via keybind. Basically, if the
              * player has tapped once, it begins the timer which counts down
@@ -193,21 +198,22 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             super.moveEntity(d, d1, d2);
         }
     }
-/*
-    public void updateRidden() {
-        if (ridingEntity == null) {
-            return;
-        }
-        if (ridingEntity.isDead) {
-            ridingEntity = null;
-            return;
-        }
-        motionX = 0.0D;
-        motionY = 0.0D;
-        motionZ = 0.0D;
-        onUpdate();
-    }
-*/
+    /*
+     public void updateRidden() {
+     if (ridingEntity == null) {
+     return;
+     }
+     if (ridingEntity.isDead) {
+     ridingEntity = null;
+     return;
+     }
+     motionX = 0.0D;
+     motionY = 0.0D;
+     motionZ = 0.0D;
+     onUpdate();
+     }
+     */
+
     public void jump(Boolean flag) { //boolean. true = 2.5-high jump. false = normal jump.
         if (onGround && jumpTicks == 0) {
             super.jump();
@@ -262,6 +268,15 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
                     }
                 }
             }
+            if (par1EntityPlayer.getCurrentEquippedItem().itemID == Item.porkRaw.itemID) {
+                if (par1EntityPlayer.getCurrentEquippedItem().stackSize <= 1) {
+                    par1EntityPlayer.inventory.setItemStack(null);
+                } else {
+                    par1EntityPlayer.getCurrentEquippedItem().stackSize -= 1;
+
+                    par1EntityPlayer.inventory.setItemStack(par1EntityPlayer.getCurrentEquippedItem());
+                }
+            }
         } else if (this.getSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == par1EntityPlayer)) {
             par1EntityPlayer.mountEntity(this);
             return true;
@@ -279,8 +294,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     }
     private int xpThrottle = 10;
 
-    protected void updateAITick() {
-
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
         if (riddenByEntity != null) {
             //stops up-and-down head movement
             rotationPitch = 0;
@@ -289,9 +305,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
             rotationYaw = prevRotationYaw = entityRider.rotationYaw;
         }
-
-        this.dataWatcher.updateObject(HP, Integer.valueOf(this.getHealth()));
-        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.expand(0.4D, 0.4D, 0.4D));
+        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
         if (xps != null && xps.size() > 0) {
             if (xpThrottle-- <= 0) {
                 xpThrottle = 10;
@@ -301,7 +315,11 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
                 }
             }
         }
+    }
 
+    protected void updateAITick() {
+        //DON'T UPDATE WATCHABLES HERE, IT WILL PACKET FLOOD
+        //this.dataWatcher.updateObject(HP, Integer.valueOf(this.getHealth()));
     }
 
     @Override
@@ -311,7 +329,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public void setDead() {
-        EntityPlayer player = (EntityPlayer)getOwner();
+        EntityPlayer player = (EntityPlayer) getOwner();
         RpgInv inv = mod_RpgInventory.proxy.getInventory(player.username);
         inv.setInventorySlotContents(6, writePetToItemStack());
         super.setDead();
@@ -335,23 +353,11 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public abstract String getTexture();
+
     @SideOnly(Side.CLIENT)
     public abstract ModelBase getModel();
-    private void Following() {
-        float var1 = 18.0F;
-
-        if (getOwner() != null) {
-            var1 = this.getDistanceToEntity(getOwner());
-
-            if (var1 > 5.0F && var1 < 18.0F) {
-                PathEntity var2 = this.worldObj.getPathEntityToEntity(this, getOwner(), 16.0F, true, false, false, true);
-                this.setPathToEntity(var2);
-            } else {
-                this.setPathToEntity((PathEntity) null);
-            }
-        }
-    }
     private int currentLevel;
+
     public abstract String getDefaultName();
 
     @Override
@@ -483,6 +489,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         this.experienceTotal = par1NBTTagCompound.getInteger("XpTotal");
         this.prevTicksExisted = par1NBTTagCompound.getInteger("prevTicksExisted");
         this.setSaddled(par1NBTTagCompound.getBoolean("Saddle"));
+        if (!checked) {
+            checked = true;
+            this.setSize(width * getSize() * 2, height * getSize());
+        }
 
     }
 

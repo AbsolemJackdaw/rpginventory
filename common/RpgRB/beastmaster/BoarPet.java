@@ -9,6 +9,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -18,7 +19,7 @@ import net.minecraft.world.World;
  * @author Home
  */
 public class BoarPet extends BMPetImpl {
-
+    boolean checked = false;
     public BoarPet(World par1World) {
         super(par1World, 1, null, null);
         this.moveSpeed = 0.50F;
@@ -29,11 +30,6 @@ public class BoarPet extends BMPetImpl {
 
     public BoarPet(World par1World, EntityPlayer owner, ItemStack is) {
         super(par1World, 1, owner, is);
-    }
-
-    public AxisAlignedBB getCollisionBox(Entity par1Entity) {
-        
-        return this.boundingBox.contract(1.0D, 1.0D, 1.0D);
     }
 
     public double getMountedYOffset() {
@@ -67,6 +63,11 @@ public class BoarPet extends BMPetImpl {
         } else {
             return 2.0F;
         }
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
     }
 
     @Override

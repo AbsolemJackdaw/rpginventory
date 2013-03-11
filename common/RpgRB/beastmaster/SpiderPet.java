@@ -31,10 +31,6 @@ public class SpiderPet extends BMPetImpl {
         super(par1World, 2, owner, is);
     }
 
-    public AxisAlignedBB getCollisionBox(Entity par1Entity) {
-        return par1Entity.boundingBox.contract(1.0D, 1.0D, 1.0D);
-    }
-
     public double getMountedYOffset() {
         return (double) this.height * (double) 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F) - 0.5;
     }
@@ -43,7 +39,6 @@ public class SpiderPet extends BMPetImpl {
     protected void updateAITick() {
         super.updateAITick();
     }
-
     @Override
     public ModelBase getModel() {
         return new ModelSpiderB();

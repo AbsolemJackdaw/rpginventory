@@ -25,10 +25,7 @@ public class BullPet extends BMPetImpl {
 
     public BullPet(World par1World, EntityPlayer owner, ItemStack is) {
         super(par1World, 3, owner, is);
-    }
-
-    public AxisAlignedBB getCollisionBox(Entity par1Entity) {
-        return this.boundingBox.contract(1F, 1F, 1F);
+        this.setSize(width * getSize(), height * getSize());
     }
 
     public double getMountedYOffset() {
