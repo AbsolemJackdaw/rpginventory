@@ -146,21 +146,28 @@ public class StafRender implements IItemRenderer {
 		{
 		case 53:/*fire*/
 		{
-			GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.5F);
+			Color clr = getColor(2,0,0,3,0,0, (float) this.step/20);
+			this.step++;
+			GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, 0.0F, 0.0F, 0.5F);
 		}
 		break;
 		case 54:/*ice*/
 		{
-
-			GL11.glColor4f(0.0F, 0.0F, 1.0F, 0.5F);
+			Color clr = getColor(2,0,0,3,0,0, (float) this.step/20);
+			this.step++;
+			GL11.glColor4f(0.0F, 0.0F, (float)((clr.getRed()*100) / 255)/100, 0.5F);
 		}break;
 		case 55:/*earth*/
 		{
-			GL11.glColor4f(0.0F, 1.0F, 0.0F, 0.5F);
+			Color clr = getColor(2,0,0,3,0,0, (float) this.step/20);
+			this.step++;
+			GL11.glColor4f(0.0F, (float)((clr.getRed()*100) / 255)/100, 0.0F, 0.5F);
 		}break;
 		case 56:/*wind*/
 		{
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
+			Color clr = getColor(2,0,0,3,0,0, (float) this.step/20);
+			this.step++;
+			GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, (float)((clr.getRed()*100) / 255)/100,(float)((clr.getRed()*100) / 255)/100, 0.5F);
 		}break;
 		case 57:/*ultimate*/
 		{
@@ -180,7 +187,7 @@ public class StafRender implements IItemRenderer {
 		}
 	}
 	public Color getColor(double d, double e, double f,
-			int phase1, int phase2, int phase3, int i)
+			int phase1, int phase2, int phase3, float i)
 	{
 		int center = 128;
 		int width = 127;

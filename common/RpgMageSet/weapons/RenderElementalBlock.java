@@ -30,14 +30,14 @@ public class RenderElementalBlock extends Render
 	}
 
 	public Color getColor(double d, double e, double f,
-			int phase1, int phase2, int phase3, int i)
+			int phase1, int phase2, int phase3, float g)
 	{
 		int center = 128;
 		int width = 127;
 
-			int red = (int) (Math.sin(d*i + phase1) * width + center);
-			int grn = (int) (Math.sin(e*i + phase2) * width + center);
-			int blu = (int) (Math.sin(f*i + phase3) * width + center);
+			int red = (int) (Math.sin(d*g + phase1) * width + center);
+			int grn = (int) (Math.sin(e*g + phase2) * width + center);
+			int blu = (int) (Math.sin(f*g + phase3) * width + center);
 
 		return new Color(red, grn, blu);
 	}
@@ -58,19 +58,26 @@ public class RenderElementalBlock extends Render
 		switch (theEntity.type)
 		{
 		case 1:
-			GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.5F);
+			Color clr = getColor(2,0,0,3,0,0, (float) theEntity.step/5);
+			theEntity.step++;
+			GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, 0, 0, 0.5F);
+			
 			break;
 		case 2:
-			GL11.glColor4f(0.0F, 0.0F, 1.0F, 0.5F);
+			clr = getColor(2,0,0,3,0,0, (float) theEntity.step/5);
+			theEntity.step++;
+			GL11.glColor4f(0, 0, (float)((clr.getRed()*100) / 255)/100, 0.5F);
 			break;
 		case 3:
-			GL11.glColor4f(0.0F, 1.0F, 0.0F, 0.5F);
+			clr = getColor(2,0,0,3,0,0, (float) theEntity.step/5);
+			theEntity.step++;
+			GL11.glColor4f(0.0F,(float)((clr.getRed()*100) / 255)/100, 0.0F, 0.5F);
 			break;
 		case 4:
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 			break;
 		case 5:
-			Color clr = getColor(.3,.2,.1,3,2,1, theEntity.step);
+			clr = getColor(0.3,0.2,0.1,1,2,1,(float) theEntity.step/2);
 			theEntity.step++;
 			GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, (float)((clr.getGreen()*100) / 255)/100, (float)((clr.getBlue()*100) / 255)/100, 0.5F);
 			break;

@@ -77,7 +77,7 @@ public class ItemElementalStaff extends ItemSword {
 		}
 		stack.setTagCompound(nbt);
 	}
-
+	
 	public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
 		NBTTagCompound nbt = stack.getTagCompound();
 		if (nbt == null) stack.setTagCompound(baseNBT());
