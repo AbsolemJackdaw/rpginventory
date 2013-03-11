@@ -326,7 +326,7 @@ public class RpgConfig {
         itemnum++;
         beastAxe= config.getItem("axe", itemnum).getInt(itemnum);
         itemnum++;
-        candy= config.getItem("RareCandy", itemnum).getInt(itemnum);
+        candy= config.getItem("Easter Egg Item", itemnum).getInt(itemnum);
         itemnum++;
     }
     
