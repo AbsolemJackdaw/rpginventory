@@ -111,6 +111,7 @@ public class RpgConfig {
     public int archmageLegs;
     public int archmageBoots;
     public int beastAxe;
+    public int candy;
 
     //Initially set to defaults
     public boolean render3DClaymore = true;
@@ -324,6 +325,8 @@ public class RpgConfig {
         archmageBoots= config.getItem("archmageBoots", itemnum).getInt(itemnum);
         itemnum++;
         beastAxe= config.getItem("axe", itemnum).getInt(itemnum);
+        itemnum++;
+        candy= config.getItem("RareCandy", itemnum).getInt(itemnum);
         itemnum++;
     }
     

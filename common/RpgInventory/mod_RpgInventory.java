@@ -171,6 +171,7 @@ public class mod_RpgInventory {
 	public static Item archmageChest;
 	public static Item archmageLegs;
 	public static Item archMageBoots;
+	public static Item petCandy;
     public static Block forgeBlock;
     //Die bitches.
     public static List<String> developers = new ArrayList<String>();
@@ -394,6 +395,8 @@ public class mod_RpgInventory {
 
             whistle = new ItemRBMats2(RpgConfig.instance.whistleID).setIconIndex(40).setItemName("whistle").setCreativeTab(tab);
 
+            petCandy = new ItemCandy(RpgConfig.instance.candy).setItemName("RarePetCandy").setIconCoord(5,5);
+            
             LanguageRegistry.addName(daggers, "Rogue Daggers");
             LanguageRegistry.addName(rogueLeather, "Rogue Leather");
             LanguageRegistry.addName(beastLeather, "BeastMaster Leather");
@@ -409,6 +412,7 @@ public class mod_RpgInventory {
             LanguageRegistry.addName(whistle, "Pet Whistle");
             LanguageRegistry.addName(beastShield, "BeastMaster Shield");
 			LanguageRegistry.addName(beastAxe, "BeastMaster Forest Axe");
+			LanguageRegistry.addName(petCandy, "Rare Pet Candy");
 
 
             GameRegistry.addShapelessRecipe(new ItemStack(whistle), new Object[]{Item.stick, Item.reed, Item.reed});
