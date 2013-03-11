@@ -38,6 +38,11 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 	public int sizeLimit = 10;
 	public int step = 0;
 
+	@Override
+    public float getGravityVelocity()
+    {
+        return 0F;
+    }
 	
 	public EntityElementalBlock(World world)
 	{
@@ -104,6 +109,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			}
 			if (var1.typeOfHit == EnumMovingObjectType.TILE) {
 			} else if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
+				if (!(var1.entityHit instanceof EntityLiving)) break;
 				if (var1.entityHit == p) break;
 				var1.entityHit.setFire(30);
 				if (p instanceof EntityPlayer) {
@@ -141,7 +147,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			if (var1.typeOfHit == EnumMovingObjectType.TILE) {
 			} else if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
 				if (var1.entityHit == p) break;
-				if (var1.entityHit.isEntityAlive()) {
+				if (var1.entityHit instanceof EntityLiving) {
 					EntityLiving el = (EntityLiving) var1.entityHit;
 					if (el.isEntityUndead()) {
 						el.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 120, 2));	
@@ -177,18 +183,18 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 				}
 			}
 			if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
-				if (var1.entityHit.isEntityAlive()) {
-					EntityLiving el = (EntityLiving) var1.entityHit;
-					if (el != null && el != p) {
-						if (p instanceof EntityPlayer) {
-							el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) p), dmg);
-						} else {
-							el.attackEntityFrom(DamageSource.anvil, dmg);
-						}
-						el.addPotionEffect(new PotionEffect(Potion.blindness.id, 120, 2));
+				if (!(var1.entityHit instanceof EntityLiving)) break;
+				EntityLiving el = (EntityLiving) var1.entityHit;
+				if (el != null && el != p) {
+					if (p instanceof EntityPlayer) {
+						el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) p), dmg);
+					} else {
+						el.attackEntityFrom(DamageSource.anvil, dmg);
 					}
+					el.addPotionEffect(new PotionEffect(Potion.blindness.id, 120, 2));
 				}
 			}
+
 			break;
 		case 4:
 			pool = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
@@ -208,20 +214,20 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 				}
 			}
 			if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
-				if (var1.entityHit.isEntityAlive()) {
-					EntityLiving el = (EntityLiving) var1.entityHit;
-					if (el != null && el != p) {
-						try {
-							double xdir = el.posX - this.getThrower().posX;
-							double zdir = el.posZ - this.getThrower().posZ;
-							el.motionX = xdir * 0.1F;
-							el.motionY = 0.1F;
-							el.motionZ = zdir * 0.1F;
-						} catch (Throwable ex) {
-						}
+				if (!(var1.entityHit instanceof EntityLiving)) break;
+				EntityLiving el = (EntityLiving) var1.entityHit;
+				if (el != null && el != p) {
+					try {
+						double xdir = el.posX - this.getThrower().posX;
+						double zdir = el.posZ - this.getThrower().posZ;
+						el.motionX = xdir * 0.1F;
+						el.motionY = 0.1F;
+						el.motionZ = zdir * 0.1F;
+					} catch (Throwable ex) {
 					}
 				}
 			}
+
 			if (p != null) {
 				if (p.getDistanceToEntity(this) < 3 && (p.rotationPitch > 70 && p.rotationPitch < 110)) {
 					double ydir = p.posY - this.posY;
@@ -234,8 +240,6 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 					if (p.motionY > 5) p.motionY = 4;
 					if (p.motionZ < -5) p.motionZ = -4;
 					if (p.motionZ > 5) p.motionZ = 4;
-					
-					System.out.println(p.motionX + " " + p.motionY +  " " + p.motionZ);
 				}
 			}
 			break;
@@ -257,23 +261,23 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 	}
 
 	@Override
-    public void writeToNBT(NBTTagCompound nbt) {
-    	super.writeToNBT(nbt);
-    	nbt.setString("creator", this.owner);
-    	nbt.setInteger("size_", this.size);
-    	nbt.setInteger("sizeLimit_", this.sizeLimit);
-    	
-    }
-    
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		nbt.setString("creator", this.owner);
+		nbt.setInteger("size_", this.size);
+		nbt.setInteger("sizeLimit_", this.sizeLimit);
+
+	}
+
 	@Override
-    public void readFromNBT(NBTTagCompound nbt) {
-    	super.readFromNBT(nbt);
-    	this.owner = nbt.getString("creator");
-    	this.size = nbt.getInteger("size_");
-    	this.sizeLimit = nbt.getInteger("sizeLimit_");
-    	
-    }
-	
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		this.owner = nbt.getString("creator");
+		this.size = nbt.getInteger("size_");
+		this.sizeLimit = nbt.getInteger("sizeLimit_");
+
+	}
+
 	@Override
 	public void writeSpawnData(ByteArrayDataOutput data) {
 		data.writeInt(this.size);

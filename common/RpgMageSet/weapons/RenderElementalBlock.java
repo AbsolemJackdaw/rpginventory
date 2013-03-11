@@ -50,9 +50,7 @@ public class RenderElementalBlock extends Render
 		GL11.glRotatef((new Random()).nextInt(360), 1, 1, 1);
 		int size = theEntity.size;
 		GL11.glScalef(0.0F + (size * 0.3F), 0.0F + (size * 0.3F), 0.0F + (size * 0.3F));
-
 		this.loadTexture("/subaraki/weapons/elementum.png");
-		//this.loadTexture("/terrain.png");
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -72,9 +70,8 @@ public class RenderElementalBlock extends Render
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 			break;
 		case 5:
-			Color clr = getColor(.3,.3,.3,0,2,4, theEntity.step);
+			Color clr = getColor(.3,.2,.1,3,2,1, theEntity.step);
 			theEntity.step++;
-			//if (theEntity.step > 50) theEntity.step = 0;
 			GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, (float)((clr.getGreen()*100) / 255)/100, (float)((clr.getBlue()*100) / 255)/100, 0.5F);
 			break;
 		default:

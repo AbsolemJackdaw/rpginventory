@@ -619,9 +619,9 @@ public class mod_RpgInventory {
             MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.staf.itemID, (IItemRenderer) new StafRender());
             MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.frostStaff.itemID, (IItemRenderer) new StafRender());
             MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.fireStaff.itemID, (IItemRenderer) new StafRender());
-            MinecraftForgeClient.registerItemRenderer(earthStaff.itemID, (IItemRenderer) new StafRender());
-            MinecraftForgeClient.registerItemRenderer(windStaff.itemID, (IItemRenderer) new StafRender());
-            MinecraftForgeClient.registerItemRenderer(ultimateStaff.itemID, (IItemRenderer) new StafRender());
+            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.earthStaff.itemID, (IItemRenderer) new StafRender());
+            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.windStaff.itemID, (IItemRenderer) new StafRender());
+            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.ultimateStaff.itemID, (IItemRenderer) new StafRender());
         }
         if (RpgConfig.instance.render3DBow == true) {
             MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.elfbow.itemID, (IItemRenderer) new BowRender());

@@ -28,7 +28,7 @@ public class ItemElementalStaff extends ItemSword {
 	public int type = 1;
 
 	public ItemElementalStaff(int par1, int type) {
-		super(par1, EnumToolMaterial.EMERALD);
+		super(par1, EnumToolMaterial.WOOD);
 		this.type = type;
 
 	}
@@ -52,6 +52,7 @@ public class ItemElementalStaff extends ItemSword {
 				p.worldObj.spawnEntityInWorld(var9);
 				if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")+1.0F);
 			} else {
+				if (!nbt.getBoolean("ReCharging")) stack.damageItem(5, p);
 				nbt.setBoolean("ReCharging", true);
 				p.stopUsingItem();
 			}
