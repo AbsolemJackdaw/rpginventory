@@ -51,7 +51,7 @@ public class RenderElementalBlock extends Render
 		int size = theEntity.size;
 		GL11.glScalef(0.0F + (size * 0.3F), 0.0F + (size * 0.3F), 0.0F + (size * 0.3F));
 
-		this.loadTexture("/subaraki/elementum.png");
+		this.loadTexture("/subaraki/weapons/elementum.png");
 		//this.loadTexture("/terrain.png");
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_LIGHTING);
