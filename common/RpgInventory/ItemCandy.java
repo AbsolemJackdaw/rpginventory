@@ -6,7 +6,7 @@ public class ItemCandy extends Item {
 
 	public ItemCandy(int par1) {
 		super(par1);
-		this.maxStackSize = 1;
+		this.maxStackSize = 6;
 	}
 	public String getTextureFile()
 	{

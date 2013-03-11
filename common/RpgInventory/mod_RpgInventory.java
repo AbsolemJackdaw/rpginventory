@@ -469,6 +469,8 @@ public class mod_RpgInventory {
         addChestLoot(new ItemStack(mod_RpgInventory.colmold), 1, 1, 40, "Necklace Mold");
         addChestLoot(new ItemStack(mod_RpgInventory.ringmold), 1, 1, 30, "Ring Mold");
         addChestLoot(new ItemStack(mod_RpgInventory.wantmold), 1, 1, 40, "Gloves Mold");
+        
+        addCandyChestLoot(new ItemStack(mod_RpgInventory.petCandy), 1, 6, 20, "Pet Candy");
 
         GameRegistry.registerTileEntity(TEMold.class, "temold");
 
@@ -711,6 +713,18 @@ public class mod_RpgInventory {
         ChestGenHooks.getInfo("pyramidJungleChest").addItem(chestGen);
         ChestGenHooks.getInfo("pyramidDesertyChest").addItem(chestGen);
         ChestGenHooks.getInfo("mineshaftCorridor").addItem(chestGen);
+
+    }
+    public void addCandyChestLoot(ItemStack is, int min, int max, int rarity, String item) {
+        System.out.println("Added " + item + " to chests");
+        WeightedRandomChestContent chestGen = new WeightedRandomChestContent(is.copy(), min, max, rarity);
+
+        ChestGenHooks.getInfo("dungeonChest").addItem(chestGen);
+        ChestGenHooks.getInfo("mineshaftCorridor").addItem(chestGen);
+        ChestGenHooks.getInfo("strongholdCorridor").addItem(chestGen);
+        ChestGenHooks.getInfo("strongholdLibrary").addItem(chestGen);
+        ChestGenHooks.getInfo("strongholdCrossing").addItem(chestGen);
+        ChestGenHooks.getInfo("bonusChest").addItem(chestGen);
 
     }
 
