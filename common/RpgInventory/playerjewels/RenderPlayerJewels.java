@@ -401,6 +401,10 @@ public class RenderPlayerJewels extends RenderPlayer {
                 }
 
             } else if (shield.itemID == mod_RpgInventory.talisman.itemID) {
+                rotation++;
+                if(rotation == 360){
+                    rotation = 0;
+                }
                 ForgeHooksClient.bindTexture("/subaraki/jewels/talisman.png", 0);
 
                 GL11.glScalef(3F, 3F, 3F);
@@ -415,12 +419,14 @@ public class RenderPlayerJewels extends RenderPlayer {
                         GL11.glEnable(GL11.GL_TEXTURE_2D);
                         GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
                         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
+                        GL11.glRotatef(rotation, 1.5F, 1.5F, 1.5F);
                         GL11.glCallList(mod_RpgInventory.proxy.getSphereID());
                     }
                 } else {
                     GL11.glEnable(GL11.GL_BLEND);
                     GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
                     GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
+                    GL11.glRotatef(rotation, 1.5F, 1.5F, 1.5F);
                     GL11.glCallList(mod_RpgInventory.proxy.getSphereID());
                 }
             } // bypass import for mod_RpgPlus
@@ -520,6 +526,9 @@ public class RenderPlayerJewels extends RenderPlayer {
             if (mod_RpgInventory.hasMage == true) {
                 if (shield.getItem() == mod_RpgInventory.archBook) {
                     rotation++;
+                    if(rotation == 360){
+                        rotation = 0;
+                    }
                     ForgeHooksClient.bindTexture("/subaraki/jewels/book.png", 0);
                     GL11.glPushMatrix();
                     GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
@@ -557,6 +566,7 @@ public class RenderPlayerJewels extends RenderPlayer {
                         GL11.glEnable(GL11.GL_BLEND);
                         GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
                         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
+                        GL11.glRotatef(rotation, 1.5F, 1.5F, 1.5F);
                         GL11.glCallList(mod_RpgInventory.proxy.getSphereID());
                     }
                 }
