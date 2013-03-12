@@ -60,7 +60,7 @@ public class RpgContainer extends Container {
                         }
                         player.inventory.setItemStack(player.inventory.getStackInSlot(slotnumber - 7));
                         player.inventory.setInventorySlotContents(slotnumber - 7, null);
-                        this.slotClick(1, 0, 0, player);
+                        this.slotClick(0, 0, 0, player);
                     case mod_RpgInventory.ITEMTYPE.SHIELD:
                         if (((SlotRpgArmor) this.getSlot(1)).getStack() != null) {
                             return null;

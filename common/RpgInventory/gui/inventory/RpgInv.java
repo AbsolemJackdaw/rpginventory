@@ -161,7 +161,7 @@ public class RpgInv implements IInventory {
 
     @Override
     public ItemStack getStackInSlot(int par1) {
-        if (par1 > 0 && par1 < armorSlots.length) {
+        if (par1 >= 0 && par1 < armorSlots.length) {
             return armorSlots[par1];
         }
         return null;

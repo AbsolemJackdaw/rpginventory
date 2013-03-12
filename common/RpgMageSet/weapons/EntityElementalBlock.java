@@ -83,6 +83,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 	}
 
 	public void specialAttack(MovingObjectPosition var1, int type) {
+            if (!worldObj.isRemote) {
 		EntityLiving p = this.worldObj.getPlayerEntityByName(this.owner);
 		if (p == null) {
 			/*Omg my boss is not in world...*/
@@ -121,6 +122,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			}
 			break;
 		case 2:
+                    if (!worldObj.isRemote) {
 			AxisAlignedBB pool1 = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
 			List<EntityLiving> entl1 = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool1);
 			if (entl1 != null && entl1.size() > 0) {
@@ -165,6 +167,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 					}
 				}
 			}
+                    }
 			break;
 		case 3:
 			int dmg = (int) (5 + Math.floor(getRadius()));
@@ -251,7 +254,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			break;
 		default:
 			break;
-		}
+		}}
 		this.setDead();
 	}
 

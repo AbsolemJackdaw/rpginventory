@@ -94,7 +94,7 @@ public class RenderPlayerJewels extends RenderPlayer {
     protected void renderSpecialsRpg(EntityPlayer player, float par2) {
         ItemStack chest = player.inventory.armorItemInSlot(2);
         ItemStack hoed = player.inventory.armorItemInSlot(3);
-
+        GL11.glColor4f(1,1,1,1);
         rpg = mod_RpgInventory.proxy.getInventory(player.username);
         float var11;
 
@@ -537,6 +537,7 @@ public class RenderPlayerJewels extends RenderPlayer {
             ForgeHooksClient.unbindTexture();
             GL11.glPopMatrix();
             GL11.glPopAttrib();
+            GL11.glColor4f(1,1,1,1);
         }
     }
 
@@ -557,6 +558,11 @@ public class RenderPlayerJewels extends RenderPlayer {
     }
 
     @Override
+    public void setRenderPassModel(ModelBase par1ModelBase) {
+        //
+    }
+    
+    @Override
     public void doRender(Entity par1EntityPlayer, double par2, double par4, double par6, float par8, float par9) {
         Class clazz = par1EntityPlayer.getClass();
         Render render = defaultPlayerRender.get(clazz);
@@ -565,14 +571,13 @@ public class RenderPlayerJewels extends RenderPlayer {
             render = defaultPlayerRender.get(clazz);
         }
         render.doRender(par1EntityPlayer, par2, par4, par6, par8, par9);
-        
         for (Field f : RenderPlayer.class.getDeclaredFields()) {
             f.setAccessible(true);
             try {
                 if (f.getName().equals("modelBipedMain") || f.getName().equals("a")) {
                     Field modfield = Field.class.getDeclaredField("modifiers");
                     modfield.setAccessible(true);
-                    modfield.setInt(f, f.getModifiers() & ~Modifier.PRIVATE);
+                    modfield.setInt(f, f.getModifiers() & ~Modifier.PROTECTED);
                     ModelBiped privatebiped = (ModelBiped)f.get(render);
                     this.modelBipedMain = (ModelBiped) privatebiped;
                 }

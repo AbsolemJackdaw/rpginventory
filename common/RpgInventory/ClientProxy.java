@@ -31,6 +31,7 @@ import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.asm.transformers.MCPMerger;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import java.lang.reflect.Field;
@@ -38,6 +39,8 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.Entity;
@@ -102,10 +105,16 @@ public class ClientProxy extends CommonProxy {
         Map<Class<? extends Entity>, Render> map = RenderManager.instance.entityRenderMap;
         for (Entry<Class<? extends Entity>, Render> entry : map.entrySet()) {
             if (EntityPlayer.class.isAssignableFrom(entry.getKey())) {
-                RenderPlayerJewels.defaultPlayerRender.put(entry.getKey(), entry.getValue());
-                RenderingRegistry.registerEntityRenderingHandler(entry.getKey(), renderballs);
+                Class clazz = entry.getValue().getClass();
+                if (clazz.getName().equals("net.smart.moving.render.RenderPlayer")) {
+                    RenderPlayerJewels.defaultPlayerRender.put(entry.getKey(), entry.getValue());
+                    RenderingRegistry.registerEntityRenderingHandler(entry.getKey(), renderballs);
+                    return;
+                }
             }
         }
+        RenderPlayerJewels.defaultPlayerRender.put(EntityPlayer.class, map.get(EntityPlayer.class));
+        RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, renderballs);
     }
 
     public void openGUI(EntityPlayer p1, int id) {
