@@ -30,25 +30,36 @@ import RpgInventory.weapons.bow.EntityHellArrow;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.entity.Entity;
+import net.minecraft.potion.Potion;
 
 public class ClientProxy extends CommonProxy {
     //Testing
+
     private HashMap<String, RpgInv> invs;
     public static int sphereID;
     public static boolean firstUpdate = false;
-    
+
     public int getSphereID() {
         return sphereID;
     }
-    
+
     public void registerRenderInformation() {
         MinecraftForgeClient.preloadTexture("/subaraki/RPGinventoryTM.png");
         KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler());
         RenderingRegistry.registerEntityRenderingHandler(EntityHellArrow.class, new RenderArrow());
-        
-        
+
+
         Sphere sphere = new Sphere();
         //GLU_POINT will render it as dots.
         //GLU_LINE will render as wireframe
@@ -81,27 +92,22 @@ public class ClientProxy extends CommonProxy {
         //Tell LWJGL that we are done creating our list.
         GL11.glEndList();
     }
-    
-    
-    
+
     public void registerLate() {
-        //RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerJewels(new ModelBiped()));
         RenderPlayerJewels renderballs = new RenderPlayerJewels(new ModelBiped());
-        Map<Class, Object> map = EntityList.classToStringMapping;
-        for (Class clazz : map.keySet()) {
-            if (EntityPlayer.class.isAssignableFrom(clazz)) {
-                RenderingRegistry.registerEntityRenderingHandler(clazz, renderballs);
-            }
-        }
-        map = RenderManager.instance.entityRenderMap;
-        for (Class clazz : map.keySet()) {
-            if (EntityPlayer.class.isAssignableFrom(clazz)) {
-                RenderingRegistry.registerEntityRenderingHandler(clazz, renderballs);
-            }
-        }
         TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+        //Ok guys. This is a workaround for other mods the hook the player render(smart moving)
+        //Basically we want to learn the currently bound renderers, and use them to
+        //render the player, and then render our items.
+        Map<Class<? extends Entity>, Render> map = RenderManager.instance.entityRenderMap;
+        for (Entry<Class<? extends Entity>, Render> entry : map.entrySet()) {
+            if (EntityPlayer.class.isAssignableFrom(entry.getKey())) {
+                RenderPlayerJewels.defaultPlayerRender.put(entry.getKey(), entry.getValue());
+                RenderingRegistry.registerEntityRenderingHandler(entry.getKey(), renderballs);
+            }
+        }
     }
-    
+
     public void openGUI(EntityPlayer p1, int id) {
         switch (id) {
             case 1:
@@ -116,10 +122,10 @@ public class ClientProxy extends CommonProxy {
                 break;
             case 3:
                 Minecraft.getMinecraft().displayGuiScreen(new RpgInventory.gui.pet.PetGui(p1));
-                
+
         }
     }
-    
+
     public RpgInv getInventory(String username) {
         if (invs == null) {
             invs = new HashMap();
@@ -129,7 +135,7 @@ public class ClientProxy extends CommonProxy {
         }
         return invs.get(username);
     }
-    
+
     public void addEntry(String username, RpgInv inv) {
         if (invs == null) {
             invs = new HashMap();
@@ -145,10 +151,10 @@ public class ClientProxy extends CommonProxy {
             invs.put(username, inv);
         }
     }
-    
+
     public void loadInventory(String username) {
         RpgInv inv = new RpgInv(username);
-        
+
         File file = new File(DimensionManager.getCurrentSaveRootDirectory(), "InventoryRPG.dat");
         if (file.exists()) // ONLY if the file exists...
         {
@@ -166,13 +172,13 @@ public class ClientProxy extends CommonProxy {
         }
         invs.put(username, inv);
     }
-    
+
     public void discardInventory(String username) {
         if (invs.get(username) == null) // nothing to unload here.
         {
             return;
         }
-        
+
         File file = new File(DimensionManager.getCurrentSaveRootDirectory(), "InventoryRPG.dat");
         if (!file.getParentFile().exists() || !file.getParentFile().isDirectory()) {
             file.getParentFile().mkdirs();  // create the folders if they don' exist.
@@ -181,10 +187,10 @@ public class ClientProxy extends CommonProxy {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            
+
             NBTTagCompound nbt = invs.get(username).writeToNBT(new NBTTagCompound());
             CompressedStreamTools.writeCompressed(nbt, new FileOutputStream(file));
-            
+
         } catch (Exception e) {
             // log it as severe
             FMLCommonHandler.instance().getFMLLogger().severe("[RPGInventoryMod] Error writing RPG Inventory for player " + username);
