@@ -83,7 +83,6 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 	}
 
 	public void specialAttack(MovingObjectPosition var1, int type) {
-            if (!worldObj.isRemote) {
 		EntityLiving p = this.worldObj.getPlayerEntityByName(this.owner);
 		if (p == null) {
 			/*Omg my boss is not in world...*/
@@ -152,11 +151,15 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 				if (var1.entityHit instanceof EntityLiving) {
 					EntityLiving el = (EntityLiving) var1.entityHit;
 					if (el.isEntityUndead()) {
+                                            if (!worldObj.isRemote) {
 						el.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 120, 2));	
 						el.attackEntityFrom(DamageSource.magic, 4);
+                                            }
 					} else {
+                                            if (!worldObj.isRemote) {
 						el.addPotionEffect(new PotionEffect(Potion.poison.id, 120, 2));	
 						el.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 120, 2));	
+                                            }
 					}
 					el.addPotionEffect(new PotionEffect(Potion.weakness.id, 120, 5));
 					if (p instanceof EntityPlayer) {
@@ -181,7 +184,9 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 						} else {
 							el.attackEntityFrom(DamageSource.anvil, dmg);
 						}
+                                                if (!worldObj.isRemote) {
 						el.addPotionEffect(new PotionEffect(Potion.blindness.id, 120, 2));	
+                                                }
 					}
 				}
 			}
@@ -194,7 +199,9 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 					} else {
 						el.attackEntityFrom(DamageSource.anvil, dmg);
 					}
+                                        if (!worldObj.isRemote) {
 					el.addPotionEffect(new PotionEffect(Potion.blindness.id, 120, 2));
+                                        }
 				}
 			}
 
@@ -254,7 +261,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			break;
 		default:
 			break;
-		}}
+		}
 		this.setDead();
 	}
 
