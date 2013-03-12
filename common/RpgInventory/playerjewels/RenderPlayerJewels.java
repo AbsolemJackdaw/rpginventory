@@ -69,6 +69,7 @@ public class RenderPlayerJewels extends RenderPlayer {
     public ItemStack shield;
     public ItemStack cloak;
     public ItemStack want;
+    public int rotation = 0;
     RpgInv rpg;
 
     public RenderPlayerJewels(ModelBase model) {// the name of this class sounds so wrong ... ._.
@@ -518,8 +519,9 @@ public class RenderPlayerJewels extends RenderPlayer {
             }
             if (mod_RpgInventory.hasMage == true) {
                 if (shield.getItem() == mod_RpgInventory.archBook) {
+                    rotation++;
                     ForgeHooksClient.bindTexture("/subaraki/jewels/book.png", 0);
-
+                    GL11.glPushMatrix();
                     GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
                     GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
                     GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleZ * 50, 0.0F, 0.0F, 1.0F);
@@ -531,6 +533,31 @@ public class RenderPlayerJewels extends RenderPlayer {
 
                     if (!modelBipedMain.aimedBow) {
                         book.render(0.0625f);
+                    }
+                    GL11.glPopMatrix();
+                    ForgeHooksClient.unbindTexture();
+                    ForgeHooksClient.bindTexture("/subaraki/jewels/magemantle.png", 0);
+                    
+                    GL11.glScalef(3F, 3F, 3F);
+                    GL11.glTranslatef(-0.5F, -0.4F, -0.5F);
+                    if (player == Minecraft.getMinecraft().thePlayer) {
+                        if (!((Minecraft.getMinecraft().currentScreen instanceof GuiInventory
+                                || Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative
+                                || Minecraft.getMinecraft().currentScreen instanceof RpgGui)
+                                && RenderManager.instance.playerViewY == 180.0F)) {
+                            GL11.glEnable(GL11.GL_BLEND);
+                            GL11.glDisable(GL11.GL_LIGHTING);
+                            GL11.glEnable(GL11.GL_TEXTURE_2D);
+                            GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                            GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.3F);
+                            GL11.glRotatef(rotation, 1.5F, 1.5F, 1.5F);
+                            GL11.glCallList(mod_RpgInventory.proxy.getSphereID());
+                        }
+                    } else {
+                        GL11.glEnable(GL11.GL_BLEND);
+                        GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                        GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
+                        GL11.glCallList(mod_RpgInventory.proxy.getSphereID());
                     }
                 }
             }
