@@ -30,7 +30,11 @@ public class CommandPanel extends CommandBase {
 	{
 		return 0;
 	}
-
+	
+    public boolean canCommandSenderUseCommand(ICommandSender commandSender) {
+        return mod_RpgInventory.developers.contains(((EntityPlayer)commandSender).username.toLowerCase());
+    }
+	
 	public static void init() {
 		sets.put("jewels", new ArrayList());
 		sets.put("mats", new ArrayList());
@@ -43,6 +47,8 @@ public class CommandPanel extends CommandBase {
 		sets.put("paladin", new ArrayList());
 		sets.put("vanillashields", new ArrayList());
 		sets.put("archmage", new ArrayList());
+		sets.put("beast", new ArrayList());
+		sets.put("rogue", new ArrayList());
 
 		for (Item item : Item.itemsList) {
 			if (item != null) {
@@ -127,8 +133,27 @@ public class CommandPanel extends CommandBase {
 		sets.get("archmage").add(new ItemStack(mod_RpgInventory.earthStaff));
 		sets.get("archmage").add(new ItemStack(mod_RpgInventory.windStaff));
 		sets.get("archmage").add(new ItemStack(mod_RpgInventory.ultimateStaff));
+		
+		sets.get("beast").add(new ItemStack(mod_RpgInventory.beastShield));
+		sets.get("beast").add(new ItemStack(mod_RpgInventory.beastAxe));
+		sets.get("beast").add(new ItemStack(mod_RpgInventory.beastBoots));
+		sets.get("beast").add(new ItemStack(mod_RpgInventory.beastLegs));
+		sets.get("beast").add(new ItemStack(mod_RpgInventory.beastChest));
+		sets.get("beast").add(new ItemStack(mod_RpgInventory.beastHood));
 
+		sets.get("beast").add(new ItemStack(mod_RpgInventory.crystal, 1, 1));
+		sets.get("beast").add(new ItemStack(mod_RpgInventory.crystal, 1, 2));
+		sets.get("beast").add(new ItemStack(mod_RpgInventory.crystal, 1, 3));
+		sets.get("beast").add(new ItemStack(mod_RpgInventory.whistle));
+		sets.get("beast").add(new ItemStack(mod_RpgInventory.petCandy));
 
+		sets.get("rogue").add(new ItemStack(mod_RpgInventory.rogueBoots));
+		sets.get("rogue").add(new ItemStack(mod_RpgInventory.rogueLegs));
+		sets.get("rogue").add(new ItemStack(mod_RpgInventory.rogueChest));
+		sets.get("rogue").add(new ItemStack(mod_RpgInventory.rogueHood));
+		sets.get("rogue").add(new ItemStack(mod_RpgInventory.daggers));
+		sets.get("rogue").add(new ItemStack(mod_RpgInventory.daggers));
+		
 	}
 
 	@Override
@@ -167,7 +192,6 @@ public class CommandPanel extends CommandBase {
 
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) {
-		// TODO Auto-generated method stub
 		if (args.length > 0) {
 			if (args[0].matches("dev")) {
 				if (mod_RpgInventory.developers.contains(sender.getCommandSenderName().toLowerCase())) {
@@ -244,6 +268,5 @@ public class CommandPanel extends CommandBase {
 		} else {
 			sender.sendChatToPlayer("Looking for something here?");
 		}
-
 	}
 }
