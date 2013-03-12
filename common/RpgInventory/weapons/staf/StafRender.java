@@ -171,7 +171,7 @@ public class StafRender implements IItemRenderer {
 		}break;
 		case 57:/*ultimate*/
 		{
-			Color clr = getColor(.1,.2,.3,0,0,0, this.step);
+			Color clr = getColor(.1,.2,.3,0,0,0, (float) this.step/10);
 			this.step++;
 			GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, (float)((clr.getGreen()*100) / 255)/100, (float)((clr.getBlue()*100) / 255)/100, 0.5F);
 		}break;
@@ -179,6 +179,9 @@ public class StafRender implements IItemRenderer {
 		{
 			GL11.glColor4f(0, 0, 0, 1F);
 		} break;
+		}
+		if (this.step > 1000) {
+			this.step = 0;
 		}
 		for(float var1 =0f; var1 <repeat; var1+= 0.1F)
 		{

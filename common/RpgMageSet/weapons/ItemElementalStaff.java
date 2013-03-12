@@ -66,9 +66,9 @@ public class ItemElementalStaff extends ItemSword {
 		if (nbt == null) stack.setTagCompound(baseNBT());
 		nbt = stack.getTagCompound();
 		if (nbt.getBoolean("ReCharging")) {
-			nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")-0.2F);
+			nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")-0.04F);
 		} else {
-			nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")-0.1F);	
+			nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")-0.02F);	
 		}
 
 		if (nbt.getFloat("EnergyCharge") <= 0) {

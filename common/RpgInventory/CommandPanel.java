@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.entity.RenderEntity;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.NumberInvalidException;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -199,7 +200,11 @@ public class CommandPanel extends CommandBase {
 						if (sets.containsKey(args[1])) {
 							EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(sender.getCommandSenderName());
 							for (ItemStack is : sets.get(args[1])) {
-								player.inventory.addItemStackToInventory(is);
+								//player.sendChatToPlayer(player.worldObj.isRemote?"Client":"Server");
+								//player.inventory.addItemStackToInventory(is);
+								ItemStack item = is.copy();
+				                EntityItem drop = player.dropPlayerItem(item);
+				                drop.delayBeforeCanPickup = 0;
 							}
 						}
 						if (args[1].matches("pet"))
@@ -249,7 +254,9 @@ public class CommandPanel extends CommandBase {
 								if (args[4] != null) {meta = parseInt(sender, args[4]);}
 								ItemStack item = new ItemStack(id, count, meta);
 								EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(sender.getCommandSenderName());
-								player.inventory.addItemStackToInventory(item);
+								//player.inventory.addItemStackToInventory(item);
+				                EntityItem drop = player.dropPlayerItem(item);
+				                drop.delayBeforeCanPickup = 0;
 							}                            
 						}
 					} else {
