@@ -78,9 +78,11 @@ public class RpgInv implements IInventory {
     public ItemStack getRing2() {
         return armorSlots[5];
     }
+
     public ItemStack getCrystal() {
         return armorSlots[6];
     }
+
     public boolean getJewel(int par1) {
         int var2 = findJewel(par1);
         return var2 >= 0;
@@ -164,7 +166,7 @@ public class RpgInv implements IInventory {
         }
         return null;
     }
-    
+
     @Override
     public String getInvName() {
         return "RpgInventory";
@@ -177,57 +179,60 @@ public class RpgInv implements IInventory {
 
     @Override
     public void onInventoryChanged() {
-        EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(playername);
-        classSets = EnumRpgClass.getPlayerClasses(player);
-        boolean addtoticks[] = new boolean[3];
-        if (hasClass(EnumRpgClass.SHIELDEDARCHER)) {
-            if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() != null) {
-                if (player.inventory.getCurrentItem().getItem().equals(mod_RpgInventory.elfbow) || player.inventory.getCurrentItem().getItem() instanceof ItemBow) {
-                    addtoticks[0] = true;
+        try {
+            EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(playername);
+            classSets = EnumRpgClass.getPlayerClasses(player);
+            boolean addtoticks[] = new boolean[3];
+            if (hasClass(EnumRpgClass.SHIELDEDARCHER)) {
+                if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() != null) {
+                    if (player.inventory.getCurrentItem().getItem().equals(mod_RpgInventory.elfbow) || player.inventory.getCurrentItem().getItem() instanceof ItemBow) {
+                        addtoticks[0] = true;
+                    }
                 }
-            }
-        } else if (hasClass(EnumRpgClass.SHIELDEDMAGE)) {
-            if (player.getCurrentEquippedItem() != null) {
-                if (player.getCurrentEquippedItem().getItem().equals(mod_RpgInventory.staf)) {
-                    addtoticks[1] = true;
+            } else if (hasClass(EnumRpgClass.SHIELDEDMAGE)) {
+                if (player.getCurrentEquippedItem() != null) {
+                    if (player.getCurrentEquippedItem().getItem().equals(mod_RpgInventory.staf)) {
+                        addtoticks[1] = true;
+                    }
                 }
+
+            }
+            if ((getNecklace() != null && getNecklace().itemID == mod_RpgInventory.neckdia.itemID)
+                    || (getRing1() != null && getRing1().itemID == mod_RpgInventory.ringdia.itemID)
+                    || (getRing2() != null && getRing2().itemID == mod_RpgInventory.ringdia.itemID)
+                    || (getGloves() != null && getGloves().itemID == mod_RpgInventory.glovesdia.itemID)) {
+                addtoticks[2] = true;
             }
 
-        }
-        if ((getNecklace() != null && getNecklace().itemID == mod_RpgInventory.neckdia.itemID)
-                || (getRing1() != null && getRing1().itemID == mod_RpgInventory.ringdia.itemID)
-                || (getRing2() != null && getRing2().itemID == mod_RpgInventory.ringdia.itemID)
-                || (getGloves() != null && getGloves().itemID == mod_RpgInventory.glovesdia.itemID)) {
-            addtoticks[2] = true;
-        }
 
-
-        if (addtoticks[0]) {
-            if (!RPGEventHooks.ArcherRepairTick.containsKey(player.username)) {
-                RPGEventHooks.ArcherRepairTick.put(player.username, 0);
+            if (addtoticks[0]) {
+                if (!RPGEventHooks.ArcherRepairTick.containsKey(player.username)) {
+                    RPGEventHooks.ArcherRepairTick.put(player.username, 0);
+                }
+            } else {
+                //keep the cooldown hashmap clean
+                RPGEventHooks.ArcherRepairTick.remove(player.username);
             }
-        } else {
-            //keep the cooldown hashmap clean
-            RPGEventHooks.ArcherRepairTick.remove(player.username);
-        }
 
 
-        if (addtoticks[1]) {
-            if (!RPGEventHooks.HealerTick.containsKey(player.username)) {
-                RPGEventHooks.HealerTick.put(player.username, 0);
+            if (addtoticks[1]) {
+                if (!RPGEventHooks.HealerTick.containsKey(player.username)) {
+                    RPGEventHooks.HealerTick.put(player.username, 0);
+                }
+            } else {
+                //keep the cooldown hashmap clean
+                RPGEventHooks.HealerTick.remove(player.username);
             }
-        } else {
-            //keep the cooldown hashmap clean
-            RPGEventHooks.HealerTick.remove(player.username);
-        }
 
-        if (addtoticks[2]) {
-            if (!RPGEventHooks.DiamondTick.containsKey(player.username)) {
-                RPGEventHooks.DiamondTick.put(player.username, 0);
+            if (addtoticks[2]) {
+                if (!RPGEventHooks.DiamondTick.containsKey(player.username)) {
+                    RPGEventHooks.DiamondTick.put(player.username, 0);
+                }
+            } else {
+                //keep the cooldown hashmap clean
+                RPGEventHooks.DiamondTick.remove(player.username);
             }
-        } else {
-            //keep the cooldown hashmap clean
-            RPGEventHooks.DiamondTick.remove(player.username);
+        } catch (Throwable ex) {
         }
     }
 

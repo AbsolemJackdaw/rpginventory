@@ -74,8 +74,9 @@ public class CommonProxy {
                 e.printStackTrace();
             }
         }
-        inv.onInventoryChanged();
         invs.put(username, inv);
+        inv.onInventoryChanged();
+        
     }
 
     public void discardInventory(String username) {
