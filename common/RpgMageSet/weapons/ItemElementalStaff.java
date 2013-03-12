@@ -47,8 +47,8 @@ public class ItemElementalStaff extends ItemSword {
 			if ( nbt.getFloat("EnergyCharge") < 150 && !nbt.getBoolean("ReCharging")) {
 				float var7 = (float)time / 20.0F;
 				var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
-				
-				EntityElementalBlock var9 = new EntityElementalBlock(p.worldObj, p, var7 * 2, this.type, (this.type == 5)?((p.username.toLowerCase().matches("unjustice"))?35:25):10);
+				int limit = ((p.username.toLowerCase().matches("unjustice"))?35:((this.type == 5)?10:7));
+				EntityElementalBlock var9 = new EntityElementalBlock(p.worldObj, p, var7 * 2, this.type, limit);
 				p.worldObj.spawnEntityInWorld(var9);
 				if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")+1.0F);
 			} else {
