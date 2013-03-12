@@ -161,7 +161,9 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 						el.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 120, 2));	
                                             }
 					}
+                                        if (!worldObj.isRemote) {
 					el.addPotionEffect(new PotionEffect(Potion.weakness.id, 120, 5));
+                                        }
 					if (p instanceof EntityPlayer) {
 						el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)p), 1);
 						el.attackEntityFrom(DamageSource.drown, 2);
