@@ -173,6 +173,7 @@ public class mod_RpgInventory {
 	public static Item archmageLegs;
 	public static Item archMageBoots;
 	public static Item petCandy;
+	public static Item tangledBrench;
 	public static Block forgeBlock;
 	//Die bitches.
 	public static List<String> developers = new ArrayList<String>();
@@ -397,6 +398,7 @@ public class mod_RpgInventory {
 			whistle = new ItemRBMats2(RpgConfig.instance.whistleID).setIconIndex(40).setItemName("whistle").setCreativeTab(tab);
 
 			petCandy = new ItemCandy(RpgConfig.instance.candy).setItemName("RarePetCandy").setIconCoord(5,5);
+			tangledBrench = new ItemCandy(RpgConfig.instance.brench).setItemName("tangledBrench").setIconCoord(6,5).setCreativeTab(tab);
 
 			LanguageRegistry.addName(daggers, "Rogue Daggers");
 			LanguageRegistry.addName(rogueLeather, "Rogue Leather");
@@ -414,12 +416,15 @@ public class mod_RpgInventory {
 			LanguageRegistry.addName(beastShield, "BeastMaster Shield");
 			LanguageRegistry.addName(beastAxe, "BeastMaster Forest Axe");
 			LanguageRegistry.addName(petCandy, "Rare Pet Candy");
+			LanguageRegistry.addName(tangledBrench, "Tangled Brench");
 
 
 			GameRegistry.addShapelessRecipe(new ItemStack(whistle), new Object[]{Item.stick, Item.reed, Item.reed});
 			GameRegistry.addRecipe(new ItemStack(beastLeather), new Object[]{"LLL","LVL","LLL",'L',Block.leaves,'V',Item.leather});
 			GameRegistry.addRecipe(new ItemStack(rogueLeather), new Object[]{"DSD","SLS","DSD",'S', Item.silk,'L',Item.leather, 'D',new ItemStack(Item.dyePowder,1,5)});
 			GameRegistry.addRecipe(new ItemStack(beastShield), new Object[]{"III","IDI"," I ", 'I', beastLeather, 'D',Block.wood});
+			GameRegistry.addRecipe(new ItemStack(beastAxe), new Object[]{" IW"," SI","S  ", 'S', tangledBrench,'I', Block.blockSteel, 'W',Block.wood});
+			GameRegistry.addShapelessRecipe(new ItemStack(tangledBrench), new Object[]{Item.stick, Item.stick, Item.silk, Item.silk, Item.silk,Item.silk});
 
 			recipePatterns = new String[][]{{"XXX", "X X"}, {"X X", "XXX", "XXX"}, {"XXX", "X X", "X X"}, {"X X", "X X"}};
 			recipeItems = new Object[][]{{rogueLeather, beastLeather}, {rogueHood, beastHood},
@@ -464,10 +469,10 @@ public class mod_RpgInventory {
 			GameRegistry.addRecipe(new ItemStack(earthStaff), new Object[]{"III","DSD","III", 'I', Block.grass, 'D',Item.diamond,'S',staf});
 			GameRegistry.addRecipe(new ItemStack(fireStaff), new Object[]{"III","DSD","III", 'I', Item.blazePowder, 'D',Item.diamond,'S',staf});
 			GameRegistry.addRecipe(new ItemStack(archBook), new Object[]{"III","IBI"," I ", 'I', new ItemStack(Item.dyePowder,1,4), 'B',Item.book});
-			GameRegistry.addRecipe(new ItemStack(archMageBoots), new Object[]{"III","IBI","III", 'I', mageboots, 'B',Item.goldNugget});
-			GameRegistry.addRecipe(new ItemStack(archmageLegs), new Object[]{"III","IBI","III", 'I', magepants, 'B',Item.goldNugget});
-			GameRegistry.addRecipe(new ItemStack(archmageChest), new Object[]{"III","IBI","III", 'I', magegown, 'B',Item.goldNugget});
-			GameRegistry.addRecipe(new ItemStack(archmageHood), new Object[]{"III","IBI","III", 'I', magehood, 'B',Item.goldNugget});
+			GameRegistry.addRecipe(new ItemStack(archMageBoots), new Object[]{"III","IBI","III", 'B', mageboots, 'I',Item.goldNugget});
+			GameRegistry.addRecipe(new ItemStack(archmageLegs), new Object[]{"III","IBI","III", 'B', magepants, 'I',Item.goldNugget});
+			GameRegistry.addRecipe(new ItemStack(archmageChest), new Object[]{"III","IBI","III", 'B', magegown, 'I',Item.goldNugget});
+			GameRegistry.addRecipe(new ItemStack(archmageHood), new Object[]{"III","IBI","III", 'B', magehood, 'I',Item.goldNugget});
 
 		}
 

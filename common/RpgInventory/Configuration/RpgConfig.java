@@ -112,6 +112,7 @@ public class RpgConfig {
     public int archmageBoots;
     public int beastAxe;
     public int candy;
+    public int brench;
 
     //Initially set to defaults
     public boolean render3DClaymore = true;
@@ -300,7 +301,13 @@ public class RpgConfig {
         itemnum++;
         rogueBootsID= config.getItem("rogueBoots", itemnum).getInt(itemnum);
         itemnum++;
+        beastAxe= config.getItem("axe", itemnum).getInt(itemnum);
+        itemnum++;
+        brench= config.getItem("TangledBrench", itemnum).getInt(itemnum);
+        itemnum++;
         whistleID= config.getItem("whistle", itemnum).getInt(itemnum);
+        itemnum++;
+        candy= config.getItem("Easter Egg Item", itemnum).getInt(itemnum);
         itemnum++;
         fireStaff = config.getItem("fireStaff", itemnum).getInt(itemnum);
         itemnum++;
@@ -323,10 +330,6 @@ public class RpgConfig {
         archmageLegs= config.getItem("archmageLegs", itemnum).getInt(itemnum);
         itemnum++;
         archmageBoots= config.getItem("archmageBoots", itemnum).getInt(itemnum);
-        itemnum++;
-        beastAxe= config.getItem("axe", itemnum).getInt(itemnum);
-        itemnum++;
-        candy= config.getItem("Easter Egg Item", itemnum).getInt(itemnum);
         itemnum++;
     }
     
