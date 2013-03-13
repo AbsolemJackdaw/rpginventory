@@ -383,6 +383,8 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glRotatef(50F, 0.0f, 0.0f, 1.0f);
 
 				dagger.renderDagger(0.0625f);
+				this.modelBipedMain.heldItemLeft = 1;
+				this.setRenderPassModel(dagger);
 			} else if (mod_RpgInventory.hasRogue == true && shield.getItem() == mod_RpgInventory.beastShield) {
 				ForgeHooksClient.bindTexture("/subaraki/jewels/lion.png", 0);
 
