@@ -596,80 +596,14 @@ public class RenderPlayerJewels extends RenderPlayer {
 	protected void renderSpecials(EntityPlayer par1EntityPlayer, float par2) {
 		this.renderSpecialsRpg((EntityPlayer) par1EntityPlayer, par2);
 	}
+        
 
-	//	@Override
-	//	protected int setArmorModel(EntityPlayer par1EntityPlayer, int par2, float par3) {
-	//		ItemStack var4 = par1EntityPlayer.inventory.armorItemInSlot(3 - par2);
-	//
-	//		if (var4 != null)
-	//		{
-	//			Item var5 = var4.getItem();
-	//
-	//			if (var5 instanceof ItemArmor)
-	//			{
-	//				ItemArmor var6 = (ItemArmor)var5;
-	//				this.loadTexture(ForgeHooksClient.getArmorTexture(var4, "/armor/beast_1.png"));
-	//				ModelBiped var7 = par2 == 2 ? armor : armorChest;
-	//				var7.bipedHead.showModel = par2 == 0;
-	//				var7.bipedHeadwear.showModel = par2 == 0;
-	//				var7.bipedBody.showModel = par2 == 1 || par2 == 2;
-	//				var7.bipedRightArm.showModel = par2 == 1;
-	//				var7.bipedLeftArm.showModel = par2 == 1;
-	//				var7.bipedRightLeg.showModel = par2 == 2 || par2 == 3;
-	//				var7.bipedLeftLeg.showModel = par2 == 2 || par2 == 3;
-	//				this.setRenderPassModel(var7);
-	//
-	//				if (var7 != null)
-	//				{
-	//					var7.onGround = this.mainModel.onGround;
-	//				}
-	//
-	//				if (var7 != null)
-	//				{
-	//					var7.isRiding = this.mainModel.isRiding;
-	//				}
-	//
-	//				if (var7 != null)
-	//				{
-	//					var7.isChild = this.mainModel.isChild;
-	//				}
-	//
-	//				float var8 = 1.0F;
-	//
-	//				if (var6.getArmorMaterial() == EnumArmorMaterial.CLOTH)
-	//				{
-	//					int var9 = var6.getColor(var4);
-	//					float var10 = (float)(var9 >> 16 & 255) / 255.0F;
-	//					float var11 = (float)(var9 >> 8 & 255) / 255.0F;
-	//					float var12 = (float)(var9 & 255) / 255.0F;
-	//					GL11.glColor3f(var8 * var10, var8 * var11, var8 * var12);
-	//
-	//					if (var4.isItemEnchanted())
-	//					{
-	//						return 31;
-	//					}
-	//
-	//					return 16;
-	//				}
-	//
-	//				GL11.glColor3f(var8, var8, var8);
-	//
-	//				if (var4.isItemEnchanted())
-	//				{
-	//					return 15;
-	//				}
-	//
-	//				return 1;
-	//			}
-	//		}
-	//
-	//		return -1;
-	//	}
-
-	//	@Override
-	//	public void setRenderPassModel(ModelBase par1ModelBase) {
-	//		//
-	//	}
+		@Override
+		protected int setArmorModel(EntityPlayer par1EntityPlayer, int par2, float par3) {
+                    //To prevent rendering the armor twice
+                    //we want the other render to do armor, so they can have the positioning right.
+                    return -1;
+		}
 
 	@Override
 	protected void renderModel(EntityLiving par1EntityLiving, float par2, float par3, float par4, float par5, float par6, float par7)
@@ -796,11 +730,5 @@ public class RenderPlayerJewels extends RenderPlayer {
 			}
 		}
 		super.doRender((EntityPlayer) par1EntityPlayer, par2, par4, par6, par8, par9);
-	}
-
-	@Override
-	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
-	{
-
 	}
 }
