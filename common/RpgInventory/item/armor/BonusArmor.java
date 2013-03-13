@@ -77,11 +77,11 @@ public class BonusArmor extends ItemArmor implements IArmorTextureProvider
 		{
 			if( itemstack.itemID == mod_RpgInventory.beastBoots.itemID || itemstack.itemID == mod_RpgInventory.beastChest.itemID || itemstack.itemID == mod_RpgInventory.beastHood.itemID)
 			{
-				return "/armor/empty_1.png";
+				return "/armor/beast_1.png";
 			}
 			if(itemstack.itemID == mod_RpgInventory.beastLegs.itemID)
 			{
-				return "/armor/empty_2.png";
+				return "/armor/beast_2.png";
 			}
 
 			if( itemstack.itemID == mod_RpgInventory.rogueHood.itemID || itemstack.itemID == mod_RpgInventory.rogueChest.itemID ||itemstack.itemID == mod_RpgInventory.rogueBoots.itemID)
