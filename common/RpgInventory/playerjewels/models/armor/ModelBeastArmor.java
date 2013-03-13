@@ -15,49 +15,73 @@ public class ModelBeastArmor extends ModelBiped
 	ModelRenderer Horn3;
 	ModelRenderer Horn4;
 
-	
-	public ModelBeastArmor()
+	public ModelBeastArmor(float par1, float par2, int par3, int par4)
 	{
-		textureWidth = 64;
-		textureHeight = 32;
+		par3 = 64;
+		par4 = 32;
+		textureWidth = par3;
+		textureHeight = par4;
 		
+		this.bipedHead = new ModelRenderer(this, 0, 0);
+		this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, par1);
+		this.bipedHead.setRotationPoint(0.0F, 0.0F + par2, 0.0F);
+		this.bipedHeadwear = new ModelRenderer(this, 32, 0);
+		this.bipedHeadwear.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, par1 + 0.5F);
+		this.bipedHeadwear.setRotationPoint(0.0F, 0.0F + par2, 0.0F);
+		this.bipedBody = new ModelRenderer(this, 16, 16);
+		this.bipedBody.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, par1);
+		this.bipedBody.setRotationPoint(0.0F, 0.0F + par2, 0.0F);
+		this.bipedRightArm = new ModelRenderer(this, 40, 16);
+		this.bipedRightArm.addBox(-3.0F, -2.0F, -2.0F, 4, 12, 4, par1);
+		this.bipedRightArm.setRotationPoint(-5.0F, 2.0F + par2, 0.0F);
+		this.bipedLeftArm = new ModelRenderer(this, 40, 16);
+		this.bipedLeftArm.mirror = true;
+		this.bipedLeftArm.addBox(-1.0F, -2.0F, -2.0F, 4, 12, 4, par1);
+		this.bipedLeftArm.setRotationPoint(5.0F, 2.0F + par2, 0.0F);
+		this.bipedRightLeg = new ModelRenderer(this, 0, 16);
+		this.bipedRightLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, par1);
+		this.bipedRightLeg.setRotationPoint(-1.9F, 12.0F + par2, 0.0F);
+		this.bipedLeftLeg = new ModelRenderer(this, 0, 16);
+		this.bipedLeftLeg.mirror = true;
+		this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, par1);
+		this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F + par2, 0.0F);
 		SpaulderL = new ModelRenderer(this, 44, 0);
-		SpaulderL.addBox(-1F, -3F, -2.5F, 5, 3, 5);
+		SpaulderL.addBox(-1F, -3F, -2.5F, 5, 3, 5, par1);
 		SpaulderL.setRotationPoint(0F, 0F, 0F);
 		SpaulderL.setTextureSize(64, 32);
 		SpaulderL.mirror = true;
 		setRotation(SpaulderL, 0F, 0F, 0.1745329F);
 		SpaulderR = new ModelRenderer(this, 44, 0);
-		SpaulderR.addBox(-4F, -3F, -2.5F, 5, 3, 5);
+		SpaulderR.addBox(-4F, -3F, -2.5F, 5, 3, 5, par1);
 		SpaulderR.setRotationPoint(0F, 0F, 0F);
 		SpaulderR.setTextureSize(64, 32);
 		SpaulderR.mirror = true;
 		setRotation(SpaulderR, 0F, 0F, -0.1745329F);
 		Horn1 = new ModelRenderer(this, 32, 0);
-		Horn1.addBox(4F, -7F, 1F, 1, 2, 2);
+		Horn1.addBox(4F, -7F, 1F, 1, 2, 2, par1);
 		Horn1.setRotationPoint(0F, 0F, 0F);
 		Horn1.setTextureSize(64, 32);
 		Horn1.mirror = true;
 		setRotation(Horn1, 0F, 0F, 0F);
 		Horn2 = new ModelRenderer(this, 32, 4);
-		Horn2.addBox(1F, -7F, 4F, 3, 1, 1);
+		Horn2.addBox(1F, -7F, 4F, 3, 1, 1, par1);
 		Horn2.setRotationPoint(0F, -0.5F, 0F);
 		Horn2.setTextureSize(64, 32);
 		Horn2.mirror = true;
 		setRotation(Horn2, 0F, 0.7853982F, 0.1745329F);
 		Horn3 = new ModelRenderer(this, 32, 0);
-		Horn3.addBox(-5F, -7F, 1F, 1, 2, 2);
+		Horn3.addBox(-5F, -7F, 1F, 1, 2, 2, par1);
 		Horn3.setRotationPoint(0F, 0F, 0F);
 		Horn3.setTextureSize(64, 32);
 		Horn3.mirror = true;
 		setRotation(Horn3, 0F, 0F, 0F);
 		Horn4 = new ModelRenderer(this, 32, 4);
-		Horn4.addBox(-4F, -7F, 4F, 3, 1, 1);
+		Horn4.addBox(-4F, -7F, 4F, 3, 1, 1, par1);
 		Horn4.setRotationPoint(0F, -0.5F, 0F);
 		Horn4.setTextureSize(64, 32);
 		Horn4.mirror = true;
 		setRotation(Horn4, 0F, -0.7853982F, -0.1745329F);
-		
+
 		this.bipedHead.addChild(Horn1);
 		this.bipedHead.addChild(Horn2);
 		this.bipedHead.addChild(Horn3);
@@ -85,12 +109,12 @@ public class ModelBeastArmor extends ModelBiped
 		this.bipedLeftLeg.showModel= b;
 		this.bipedRightArm.showModel= b;
 		this.bipedRightLeg.showModel= b;
-//		this.Horn1.showModel= b;
-//		this.Horn2.showModel= b;
-//		this.Horn3.showModel= b;
-//		this.Horn4.showModel= b;
-//		this.SpaulderL.showModel= b;
-//		this.SpaulderR.showModel= b;
+		//		this.Horn1.showModel= b;
+		//		this.Horn2.showModel= b;
+		//		this.Horn3.showModel= b;
+		//		this.Horn4.showModel= b;
+		//		this.SpaulderL.showModel= b;
+		//		this.SpaulderR.showModel= b;
 	}
 	private void setRotation(ModelRenderer model, float x, float y, float z)
 	{
@@ -98,12 +122,12 @@ public class ModelBeastArmor extends ModelBiped
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-	
+
 	@Override
 	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
-    {
+	{
 		super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
-    }
+	}
 	//  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
 	//  {
 	//    super.setRotationAngles(f, f1, f2, f3, f4, f5);

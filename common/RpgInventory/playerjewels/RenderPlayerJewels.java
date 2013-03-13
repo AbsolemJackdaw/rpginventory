@@ -16,7 +16,9 @@ import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -29,7 +31,6 @@ import org.lwjgl.opengl.GL11;
 import RpgInventory.mod_RpgInventory;
 import RpgInventory.gui.inventory.RpgGui;
 import RpgInventory.gui.inventory.RpgInv;
-import RpgInventory.playerjewels.models.armor.ArmorRenderers;
 import RpgInventory.playerjewels.models.armor.ModelBeastArmor;
 import RpgInventory.playerjewels.models.shields.Book;
 import RpgInventory.playerjewels.models.shields.LionHead;
@@ -73,6 +74,11 @@ public class RenderPlayerJewels extends RenderPlayer {
 	public ModelBeastArmor beastarmor;
 	public ModelBeastArmor beastarmorHead;
 	public ModelBeastArmor beastarmorLegs;
+	public ModelBeastArmor beastarmorChest;
+
+	private ModelBiped armorChest;
+	private ModelBiped armor;
+
 	public ItemStack col;
 	public ItemStack shield;
 	public ItemStack cloak;
@@ -96,11 +102,15 @@ public class RenderPlayerJewels extends RenderPlayer {
 		this.dagger = new ModelDaggerL();
 		this.lionhead = new LionHead();
 		this.book = new Book();
-		
-		this.beastarmor = new ModelBeastArmor();
-		this.beastarmorHead = new ModelBeastArmor();
-		this.beastarmorLegs = new ModelBeastArmor();
 
+		this.beastarmor = new ModelBeastArmor(0.5f,0.0f,64,32);
+		this.beastarmorHead = new ModelBeastArmor(0f,0.0f,64,32);
+		this.beastarmorLegs = new ModelBeastArmor(0.0f,0.0f,64,32);
+		this.beastarmorChest = new ModelBeastArmor(0.7f,0.0f,64,32);
+
+		this.armorChest = new ModelBiped(1.0F);
+        this.armor = new ModelBiped(0.5F);
+        
 		if (mod_RpgInventory.hasRpg) {
 			this.skull = new NecroSkull();
 		}
@@ -599,54 +609,175 @@ public class RenderPlayerJewels extends RenderPlayer {
 
 	@Override
 	protected int setArmorModel(EntityPlayer par1EntityPlayer, int par2, float par3) {
-		//Never Render armor, let vanilla or the mod do this.
+		ItemStack var4 = par1EntityPlayer.inventory.armorItemInSlot(3 - par2);
+
+		if (var4 != null)
+		{
+			Item var5 = var4.getItem();
+
+			if (var5 instanceof ItemArmor)
+			{
+				ItemArmor var6 = (ItemArmor)var5;
+				this.loadTexture(ForgeHooksClient.getArmorTexture(var4, "/armor/beast_1.png"));
+				ModelBiped var7 = par2 == 2 ? armor : armorChest;
+				var7.bipedHead.showModel = par2 == 0;
+				var7.bipedHeadwear.showModel = par2 == 0;
+				var7.bipedBody.showModel = par2 == 1 || par2 == 2;
+				var7.bipedRightArm.showModel = par2 == 1;
+				var7.bipedLeftArm.showModel = par2 == 1;
+				var7.bipedRightLeg.showModel = par2 == 2 || par2 == 3;
+				var7.bipedLeftLeg.showModel = par2 == 2 || par2 == 3;
+				this.setRenderPassModel(var7);
+
+				if (var7 != null)
+				{
+					var7.onGround = this.mainModel.onGround;
+				}
+
+				if (var7 != null)
+				{
+					var7.isRiding = this.mainModel.isRiding;
+				}
+
+				if (var7 != null)
+				{
+					var7.isChild = this.mainModel.isChild;
+				}
+
+				float var8 = 1.0F;
+
+				if (var6.getArmorMaterial() == EnumArmorMaterial.CLOTH)
+				{
+					int var9 = var6.getColor(var4);
+					float var10 = (float)(var9 >> 16 & 255) / 255.0F;
+					float var11 = (float)(var9 >> 8 & 255) / 255.0F;
+					float var12 = (float)(var9 & 255) / 255.0F;
+					GL11.glColor3f(var8 * var10, var8 * var11, var8 * var12);
+
+					if (var4.isItemEnchanted())
+					{
+						return 31;
+					}
+
+					return 16;
+				}
+
+				GL11.glColor3f(var8, var8, var8);
+
+				if (var4.isItemEnchanted())
+				{
+					return 15;
+				}
+
+				return 1;
+			}
+		}
+
 		return -1;
 	}
 
-	@Override
-	public void setRenderPassModel(ModelBase par1ModelBase) {
-		//
-	}
-	
-	
-	public void customArmor(EntityPlayer par1EntityPlayer, double par2, double par4, double par6, float par8, float par9)
-    {
-        float var10 = 1.0F;
-        GL11.glColor3f(var10, var10, var10);
-        ItemStack var11 = par1EntityPlayer.inventory.getCurrentItem();
-        this.beastarmor.heldItemRight = this.beastarmorLegs.heldItemRight = this.modelBipedMain.heldItemRight = var11 != null ? 1 : 0;
+//	@Override
+//	public void setRenderPassModel(ModelBase par1ModelBase) {
+//		//
+//	}
 
-        if (var11 != null && par1EntityPlayer.getItemInUseCount() > 0)
-        {
-            EnumAction var12 = var11.getItemUseAction();
-
-            if (var12 == EnumAction.block)
-            {
-                this.beastarmor.heldItemRight = this.beastarmorLegs.heldItemRight = this.modelBipedMain.heldItemRight = 3;
-            }
-            else if (var12 == EnumAction.bow)
-            {
-                this.beastarmor.aimedBow = this.beastarmorLegs.aimedBow = this.modelBipedMain.aimedBow = true;
-            }
-        }
-
-        this.beastarmor.isSneak = this.beastarmorLegs.isSneak = this.modelBipedMain.isSneak = par1EntityPlayer.isSneaking();
-        double var14 = par4 - (double)par1EntityPlayer.yOffset;
-
-        if (par1EntityPlayer.isSneaking() && !(par1EntityPlayer instanceof EntityPlayerSP))
-        {
-            var14 -= 0.125D;
-        }
-
-        super.doRenderLiving(par1EntityPlayer, par2, var14, par6, par8, par9);
-        this.beastarmor.aimedBow = this.modelBipedMain.aimedBow = false;
-        this.beastarmor.isSneak = this.modelBipedMain.isSneak = false;
-        this.beastarmor.heldItemRight = this.modelBipedMain.heldItemRight = 0;
-    }
 	@Override
 	protected void renderModel(EntityLiving par1EntityLiving, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
-		ArmorRenderers.renderInstance.renderModel(par1EntityLiving, par2, par3, par4, par5, par6, par7);
+		//		EntityPlayer player = (EntityPlayer)par1EntityLiving;
+		//		float var10 = 1.0F;
+		//        GL11.glColor3f(var10, var10, var10);
+		//        ItemStack var11 = player.inventory.getCurrentItem();
+		//        this.beastarmor.heldItemRight = this.beastarmorLegs.heldItemRight = this.modelBipedMain.heldItemRight = var11 != null ? 1 : 0;
+		//
+		//        if (var11 != null && player.getItemInUseCount() > 0)
+		//        {
+		//            EnumAction var12 = var11.getItemUseAction();
+		//
+		//            if (var12 == EnumAction.block)
+		//            {
+		//                this.beastarmor.heldItemRight = this.beastarmorLegs.heldItemRight = this.modelBipedMain.heldItemRight = 3;
+		//            }
+		//            else if (var12 == EnumAction.bow)
+		//            {
+		//            	this.beastarmorHead.aimedBow = this.beastarmor.aimedBow = this.beastarmorLegs.aimedBow = this.modelBipedMain.aimedBow = true;
+		//            }
+		//        }
+		//
+		//        this.beastarmor.isSneak = this.beastarmorLegs.isSneak = this.modelBipedMain.isSneak = player.isSneaking();
+		//        double var14 = par4 - (double)player.yOffset;
+		//
+		//        if (player.isSneaking() && !(player instanceof EntityPlayerSP))
+		//        {
+		//            var14 -= 0.125D;
+		//        }
+		//
+		//        this.beastarmor.aimedBow = this.modelBipedMain.aimedBow = false;
+		//        this.beastarmor.isSneak = this.modelBipedMain.isSneak = false;
+		//        this.beastarmor.heldItemRight = this.modelBipedMain.heldItemRight = 0;
+		//        
+		//		float scale = 2.4f;
+		//		float scaleHead = 1.6f;
+		//		float scaleLegs = 2.2f;
+		//
+		//		//always sets models to false, except when worn
+		//		beastarmor.setShowModel(false);
+		//		beastarmorHead.setShowModel(false);
+		//		beastarmorLegs.setShowModel(false);
+		//		
+		//		ItemStack slot0 = ((EntityPlayer)par1EntityLiving).inventory.armorInventory[0];
+		//		ItemStack slot1 = ((EntityPlayer)par1EntityLiving).inventory.armorInventory[1];
+		//		ItemStack slot2 = ((EntityPlayer)par1EntityLiving).inventory.armorInventory[2];
+		//		ItemStack slot3 = ((EntityPlayer)par1EntityLiving).inventory.armorInventory[3];
+		//
+		//		if(slot0 != null && slot0.itemID == mod_RpgInventory.beastBoots.itemID)
+		//		{
+		//			GL11.glPushMatrix();
+		//			this.loadTexture("/armor/beast_1.png");
+		//			GL11.glScalef(scale,scale,scale);
+		//			GL11.glTranslatef(0f, -0.0625f*14, 0f);
+		//			beastarmor.bipedLeftLeg.showModel = true;
+		//			beastarmor.bipedRightLeg.showModel = true;
+		//			this.beastarmor.render(par1EntityLiving, par2, par3, par4, par5, par6, par7);
+		//			GL11.glPopMatrix();
+		//		}	
+		//		if(slot2 != null && slot2.itemID == mod_RpgInventory.beastChest.itemID)
+		//		{
+		//			GL11.glPushMatrix();
+		//			this.loadTexture("/armor/beast_1.png");
+		//			GL11.glScalef(scale,scale,scale);
+		//			GL11.glTranslatef(0f, -0.755f, 0f);
+		//			this.beastarmor.bipedBody.showModel = true;
+		//			this.beastarmor.bipedLeftArm.showModel = true;
+		//			this.beastarmor.bipedRightArm.showModel = true;
+		//			beastarmor.bipedLeftLeg.showModel = false;
+		//			beastarmor.bipedRightLeg.showModel = false;
+		//			this.beastarmor.render(par1EntityLiving, par2, par3, par4, par5, par6, par7);
+		//			GL11.glPopMatrix();
+		//		}
+		//		if(slot1 != null && slot1.itemID == mod_RpgInventory.beastLegs.itemID)
+		//		{
+		//			GL11.glPushMatrix();
+		//			this.loadTexture("/armor/beast_2.png");
+		//			GL11.glScalef(scaleLegs,scaleLegs,scaleLegs);
+		//			GL11.glTranslatef(0f, -0.0625f*13, 0f);
+		//			this.beastarmorLegs.bipedLeftLeg.showModel = true;
+		//			this.beastarmorLegs.bipedRightLeg.showModel = true;
+		//			this.beastarmorLegs.render(par1EntityLiving, par2, par3, par4, par5, par6, par7);
+		//			GL11.glPopMatrix();
+		//		}
+		//		if(slot3 != null && slot3.itemID == mod_RpgInventory.beastHood.itemID)
+		//		{
+		//			GL11.glPushMatrix();
+		//			this.loadTexture("/armor/beast_1.png");
+		//			GL11.glScalef(scaleHead,scaleHead,scaleHead);
+		//			GL11.glTranslatef(0f, -0.755f, 0f);
+		//			this.beastarmorHead.bipedHead.showModel = true;
+		//			this.beastarmorHead.render(par1EntityLiving, par2, par3, par4, par5, par6, par7);
+		//			GL11.glPopMatrix();
+		//		}
+		//		this.loadDownloadableImageTexture(((EntityPlayer)par1EntityLiving).skinUrl, par1EntityLiving.getTexture());
+		//		this.mainModel.render(par1EntityLiving, par2, par3, par4, par5, par6, par7);
 	} 
 
 	@Override
@@ -675,10 +806,10 @@ public class RenderPlayerJewels extends RenderPlayer {
 		}
 		super.doRender((EntityPlayer) par1EntityPlayer, par2, par4, par6, par8, par9);
 	}
-	
+
 	@Override
 	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
-    {
-		customArmor((EntityPlayer)par1EntityLiving, par2, par4, par6, par8, par9);
-    }
+	{
+		
+	}
 }
