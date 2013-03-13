@@ -31,74 +31,56 @@ class SlotRpgArmor extends Slot {
         return 1;
     }
 
-    /**
-     * Check if the stack is a valid item for this slot. Always true beside for
-     * the armor slots.
-     */
     @Override
     public boolean isItemValid(ItemStack par1ItemStack) {
-        if (par1ItemStack != null) {
-            if ((par1ItemStack.getItem() instanceof ItemRpgArmor)) {
-                ItemRpgArmor tmp = (ItemRpgArmor) par1ItemStack.getItem();
-                switch (slotIndex) {
-                    case 0:
-                        if (tmp.armorType == mod_RpgInventory.ITEMTYPE.NECKLACE) {
+        if (par1ItemStack == null) {
+            return true;
+        }
+        if ((par1ItemStack.getItem() instanceof ItemRpgArmor)) {
+            ItemRpgArmor tmp = (ItemRpgArmor) par1ItemStack.getItem();
+            switch (slotIndex) {
+                case 0:
+                    if (tmp.armorType == mod_RpgInventory.ITEMTYPE.NECKLACE) {
+                        return true;
+                    }
+                    return false;
+                case 1:
+                    if (tmp.armorType == mod_RpgInventory.ITEMTYPE.SHIELD) {
+                        return true;
+                    }
+                    return false;
+                case 2:
+                    if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CLOAK) {
+                        return true;
+                    }
+                    return false;
+                case 3:
+                    if (tmp.armorType == mod_RpgInventory.ITEMTYPE.GLOVES) {
+                        return true;
+                    }
+                    return false;
+                case 4:
+                    if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING) {
+                        return true;
+                    }
+                    return false;
+                case 5:
+                    if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING) {
+                        return true;
+                    }
+                    return false;
+                case 6:
+                    if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CRYSTAL) {
+                        if (par1ItemStack.getItemDamage() > 0) {
                             return true;
                         }
-                        return false;
-                    case 1:
-                        if (tmp.armorType == mod_RpgInventory.ITEMTYPE.SHIELD) {
-                            return true;
-                        }
-                        return false;
-                    case 2:
-                        if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CLOAK) {
-                            return true;
-                        }
-                        return false;
-                    case 3:
-                        if (tmp.armorType == mod_RpgInventory.ITEMTYPE.GLOVES) {
-                            return true;
-                        }
-                        return false;
-                    case 4:
-                        if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING) {
-                            return true;
-                        }
-                        return false;
-                    case 5:
-                        if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING) {
-                            return true;
-                        }
-                        return false;
-                    case 6:
-                        if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CRYSTAL) {
-                            if (par1ItemStack.getItemDamage() > 0) {
-                                if (IPet.playersWithActivePets.containsKey(player.username)) {
-                                    IPet pet = IPet.playersWithActivePets.get(player.username);
-                                    if (pet != null && !((EntityLiving) pet).isDead) {
-                                        this.inventory.setInventorySlotContents(this.slotIndex, pet.writePetToItemStack());
-                                        ((EntityLiving) pet).setDead();
-                                        IPet.playersWithActivePets.remove(player.username);
-                                    }
-                                }
-                                return true;
-                            }
-                        }
-                        return false;
-                    default:
-
-                }
-            }
-        } else if (getStack() != null && mod_RpgInventory.crystal != null && getStack().itemID == mod_RpgInventory.crystal.itemID && IPet.playersWithActivePets.containsKey(player.username)) {
-            IPet pet = IPet.playersWithActivePets.get(player.username);
-            if (pet != null && !((EntityLiving) pet).isDead) {
-                this.inventory.setInventorySlotContents(this.slotIndex, pet.writePetToItemStack());
-                ((EntityLiving) pet).setDead();
-                IPet.playersWithActivePets.remove(player.username);
+                    }
+                    return false;
+                default:
+                    System.out.println("Unknown RPG Inventory type:" + slotIndex);
+                    return false;
             }
         }
-
         return false;
     }
 

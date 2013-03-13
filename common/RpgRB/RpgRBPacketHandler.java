@@ -48,7 +48,7 @@ public class RpgRBPacketHandler implements IPacketHandler {
             ItemStack petCrystal = mod_RpgInventory.proxy.getInventory(p.username).getCrystal();
             BMPetImpl thePet = null;
             if (IPet.playersWithActivePets.containsKey(p.username)) {
-                thePet = (BMPetImpl) IPet.playersWithActivePets.get(p.username);
+                thePet = (BMPetImpl) IPet.playersWithActivePets.get(p.username).getPet();
             }
             if (thePet != null && !((EntityLiving) thePet).isDead) {
                 thePet.setName(newName);

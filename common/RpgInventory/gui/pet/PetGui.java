@@ -33,14 +33,7 @@ public class PetGui extends GuiScreen {
     ItemStack petCrystal;
 
     public PetGui(EntityPlayer p1) {
-        petCrystal = mod_RpgInventory.proxy.getInventory(p1.username).getCrystal();
-        if (IPet.playersWithActivePets.containsKey(p1.username)) {
-            thePet = (BMPetImpl) IPet.playersWithActivePets.get(p1.username);
-        }
         p = p1;
-        if (thePet == null || ((EntityLiving) thePet).isDead) {
-            petType = petCrystal.getItemDamage();
-        }
     }
     private GuiTextField textfield;
     public final int xSizeOfTexture = 181;
@@ -58,7 +51,16 @@ public class PetGui extends GuiScreen {
     public static String levelInfo2;
 
     public void initGui() {
-
+        petCrystal = mod_RpgInventory.proxy.getInventory(p.username).getCrystal();
+        if (IPet.playersWithActivePets.containsKey(p.username)) {
+            thePet = (BMPetImpl) IPet.playersWithActivePets.get(p.username).getPet();
+            if(thePet != null){
+                //make sure crystal is updated with the mob info
+                petCrystal = thePet.writePetToItemStack();
+                mod_RpgInventory.proxy.getInventory(p.username).setInventorySlotContents(6, petCrystal);
+            }
+        }
+        petType = petCrystal.getItemDamage();
         int var4 = this.mc.renderEngine.getTexture("/subaraki/petgui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(var4);
@@ -76,6 +78,29 @@ public class PetGui extends GuiScreen {
         textfield.setMaxStringLength(32);
         levelInfo = "";
         levelInfo2 = "";
+        
+        NBTTagCompound tags = petCrystal.getTagCompound();
+
+        levelNr = String.valueOf(tags.getInteger("PetLevel"));
+        petAtk = String.valueOf(tags.getInteger("PetAttack"));
+        currentHP = String.valueOf(tags.getInteger("PetHealth"));
+        totalHP = String.valueOf(tags.getInteger("PetMaxHealth"));
+
+        if (tags.hasKey("PetLevel")) {
+
+            if (tags.getInteger("PetLevel") >= 50) {
+                if (tags.hasKey("isSaddled")) {
+                    if (tags.getBoolean("isSaddled") == true) {
+                        saddle = tags.getString("PetName") + " is saddled.";
+                    }
+                    if (tags.getBoolean("isSaddled") == false) {
+                        saddle = tags.getString("PetName") + " needs a Saddle to be ridden.";
+                    }
+                }
+            } else {
+                saddle = "Needs level 50 to be ridden.";
+            }
+        }
     }
 
     protected void actionPerformed(GuiButton guibutton) {
@@ -160,29 +185,7 @@ public class PetGui extends GuiScreen {
 
     public void drawScreen(int i, int j, float f) {
         drawDefaultBackground();
-        NBTTagCompound tags = petCrystal.getTagCompound();
-
-        levelNr = String.valueOf(tags.getInteger("PetLevel"));
-        petAtk = String.valueOf(tags.getInteger("PetAttack"));
-        currentHP = String.valueOf(tags.getInteger("PetPrevHealth"));
-        totalHP = String.valueOf(tags.getInteger("PetHealth"));
-
-        if (tags.hasKey("PetLevel")) {
-
-            if (tags.getInteger("PetLevel") >= 50) {
-                if (tags.hasKey("isSaddled")) {
-                    if (tags.getBoolean("isSaddled") == true) {
-                        saddle = tags.getString("PetName") + " is saddled.";
-                    }
-                    if (tags.getBoolean("isSaddled") == false) {
-                        saddle = tags.getString("PetName") + " needs a Saddle to be ridden.";
-                    }
-                }
-            } else {
-                saddle = "Needs level 50 to be ridden.";
-            }
-        }
-
+        
         try {
             int var4 = this.mc.renderEngine.getTexture("/subaraki/petgui.png");
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -204,6 +207,7 @@ public class PetGui extends GuiScreen {
 
         drawString(fontRenderer, levelInfo, this.width / 2 + 95, this.height / 2 + 65, 0xffffff);
         drawString(fontRenderer, levelInfo2, this.width / 2 + 95, this.height / 2 + 75, 0xffffff);
+        super.drawScreen(i, j, f);
         //TODO: Add Pet rendering
         //remind me to add this
     }

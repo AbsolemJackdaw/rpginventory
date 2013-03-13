@@ -4,22 +4,28 @@
  */
 package RpgInventory;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.World;
 
 /**
  *
- * @author Home
+ * @author Richard Smith <rich1051414@gmail.com>
  */
 public interface IPet {
     public final int LEVELID = 20;
     public final int NAME = 21;
     public final int HP = 22;
     public final int SADDLE = 23;
-
-    public static HashMap<String, IPet> playersWithActivePets = new HashMap();
+    public final int TOTALXP = 24;
+    public final int NEXTLEVEL = 25;
+    public static HashMap<String, PetID> playersWithActivePets = new HashMap();
     public boolean isDead();
     /**
      *
@@ -81,5 +87,27 @@ public interface IPet {
      * @return How large this pet should be. This returns the scale factor.
      */
     public float getSize();
+    
+    /**
+     * New helper to ensure we are always retrieving the correct pet instance.
+     */
+    public class PetID{
+        private final int DIM, EID;
+        public PetID(int dimension, int entityID){
+            this.DIM = dimension;
+            this.EID = entityID;
+        }
+        public IPet getPet(){
+            World world = MinecraftServer.getServer().worldServerForDimension(DIM);
+            if(world == null){
+                return null;
+            }
+            Entity test = world.getEntityByID(EID);
+            if(test == null || !(test instanceof IPet)){
+                return null;
+            }
+            return (IPet)test;
+        }
+    }
     
 }

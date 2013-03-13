@@ -1,5 +1,6 @@
 package RpgInventory.gui.inventory;
 
+import RpgInventory.IPet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -7,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import RpgInventory.mod_RpgInventory;
 import RpgRB.ItemCrystal;
 import RpgInventory.item.armor.ItemRpgArmor;
+import net.minecraft.entity.EntityLiving;
 
 public class RpgContainer extends Container {
 
@@ -40,6 +42,15 @@ public class RpgContainer extends Container {
             }
         }
         inventory = inv;
+        //Put away pet when gui is opened. This is a nerf and a fix for lag induced duping.
+        if (IPet.playersWithActivePets.containsKey(player.username)) {
+            IPet pet = IPet.playersWithActivePets.get(player.username).getPet();
+            if (pet != null && !((EntityLiving) pet).isDead) {
+                this.inventory.setInventorySlotContents(6, pet.writePetToItemStack());
+                IPet.playersWithActivePets.remove(player.username);
+                ((EntityLiving) pet).setDead();
+            }
+        }
     }
 
     public boolean doesGuiPauseGame() {
