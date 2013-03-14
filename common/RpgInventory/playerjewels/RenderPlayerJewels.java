@@ -596,7 +596,10 @@ public class RenderPlayerJewels extends RenderPlayer {
 		this.mageArmor.showMageChest(false);
 		this.mageArmor.showMageArms(false);
 		this.mageArmor.showMageFeet(false);
-
+		this.rogueArmor.showBoots(false);
+		this.rogueArmor.showKnee(false);
+		
+		
 		ItemStack var4 = par1EntityPlayer.inventory.armorItemInSlot(3 - par2);
 		if (var4 != null) {
 			Item var5 = var4.getItem();
@@ -648,10 +651,11 @@ public class RenderPlayerJewels extends RenderPlayer {
 					this.necroArmor.showBoots(true);
 				}
 				// Rogue
-				else if (var6.itemID == mod_RpgInventory.necroLeggings.itemID) {
+				else if (var6.itemID == mod_RpgInventory.rogueLegs.itemID) {
 					this.loadTexture("/armor/rogue_3.png");
 					this.rogueArmor.showKnee(true);
-				} else if (var6.itemID == mod_RpgInventory.necroBoots.itemID) {
+					
+				} else if (var6.itemID == mod_RpgInventory.rogueBoots.itemID) {
 					this.loadTexture("/armor/rogue_3.png");
 					this.rogueArmor.showBoots(true);
 				}
@@ -682,8 +686,8 @@ public class RenderPlayerJewels extends RenderPlayer {
 				{
 					var7 = par2 == 2 ? this.necroArmor : this.necroArmorChest;
 				}
-				else if(var6.itemID == mod_RpgInventory.necroBoots.itemID|| var6.itemID == mod_RpgInventory.necroChestplate.itemID
-						||var6.itemID == mod_RpgInventory.necroLeggings.itemID||var6.itemID == mod_RpgInventory.necroHood.itemID)
+				else if(var6.itemID == mod_RpgInventory.rogueBoots.itemID|| var6.itemID == mod_RpgInventory.rogueLegs.itemID
+						||var6.itemID == mod_RpgInventory.rogueChest.itemID||var6.itemID == mod_RpgInventory.rogueBoots.itemID)
 				{
 					var7 = par2 == 2 ? this.rogueArmor : this.rogueArmorChest;
 				}
@@ -709,14 +713,16 @@ public class RenderPlayerJewels extends RenderPlayer {
 				}
 
 				//let the 'hacked' armor sneak when the player does
-				beastarmor.isSneak= beastarmorChest.isSneak = mageArmor.isSneak = mageArmorChest.isSneak = par1EntityPlayer.isSneaking();
+				rogueArmor.isSneak= rogueArmorChest.isSneak= beastarmor.isSneak= beastarmorChest.isSneak = mageArmor.isSneak = mageArmorChest.isSneak = par1EntityPlayer.isSneaking();
 				//Render the armor with a small inclination when player has an item in his hand
 				if(par1EntityPlayer.inventory.getCurrentItem() != null)
+					rogueArmor.heldItemRight = rogueArmorChest.heldItemRight =
 					necroArmor.heldItemRight = necroArmorChest.heldItemRight =
 					beastarmor.heldItemRight = beastarmorChest.heldItemRight = 
 					mageArmor.heldItemRight = mageArmorChest.heldItemRight
 					=1;
 				else
+					rogueArmor.heldItemRight = rogueArmorChest.heldItemRight =
 					necroArmor.heldItemRight = necroArmorChest.heldItemRight =
 					beastarmor.heldItemRight = beastarmorChest.heldItemRight = 
 					mageArmor.heldItemRight = mageArmorChest.heldItemRight 
