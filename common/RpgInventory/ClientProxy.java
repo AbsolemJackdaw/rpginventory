@@ -97,8 +97,9 @@ public class ClientProxy extends CommonProxy {
     }
 
     public void registerLate() {
-        RenderPlayerJewels renderballs = new RenderPlayerJewels(new ModelBiped());
         TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+        
+        RenderPlayerJewels renderballs = new RenderPlayerJewels(new ModelBiped());
         //Ok guys. This is a workaround for other mods the hook the player render(smart moving)
         //Basically we want to learn the currently bound renderers, and use them to
         //render the player, and then render our items.
@@ -115,6 +116,7 @@ public class ClientProxy extends CommonProxy {
         }
         RenderPlayerJewels.defaultPlayerRender.put(EntityPlayer.class, map.get(EntityPlayer.class));
         RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, renderballs);
+        
     }
 
     public void openGUI(EntityPlayer p1, int id) {
