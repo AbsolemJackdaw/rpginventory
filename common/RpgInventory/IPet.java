@@ -31,6 +31,7 @@ public interface IPet {
      *
      * @return Returns the pet type(item damage) for this pet.
      */
+    public void addExperienceLevel(int numLevels);
     public int getType();
     /**
      *

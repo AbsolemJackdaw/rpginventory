@@ -601,10 +601,10 @@ public class RenderPlayerJewels extends RenderPlayer {
                     if (f.getName().equals("modelBipedMain") || f.getName().equals("a")) {
                         fieldPlayerModel = f;
                         modfield.setInt(fieldPlayerModel, fieldPlayerModel.getModifiers() & ~Modifier.PRIVATE);
-                    } else if (f.getName().equals("modelArmorChestplate") || f.getName().equals("f")) {
+                    } else if (f.getName().equals("modelArmorChestplate") || f.getName().equals("a")) {
                         fieldarmorModelC = f;
                         modfield.setInt(fieldarmorModelC, fieldarmorModelC.getModifiers() & ~Modifier.PRIVATE);
-                    } else if (f.getName().equals("modelArmor") || f.getName().equals("g")) {
+                    } else if (f.getName().equals("modelArmor") || f.getName().equals("a")) {
                         fieldArmorModel = f;
                         modfield.setInt(fieldArmorModel, fieldArmorModel.getModifiers() & ~Modifier.PRIVATE);
                     }
@@ -624,14 +624,13 @@ public class RenderPlayerJewels extends RenderPlayer {
             clazz = clazz.getSuperclass();
             render = defaultPlayerRender.get(clazz);
         }
-        //Inject our custom armor model into the player renderer.
         try {
             fieldArmorModel.set(render, new ModelBeastArmor(0.5F, 0.0F, 64, 32));
             fieldarmorModelC.set(render, new ModelBeastArmor(1.0F, 0.0F, 64, 32));
         } catch (Throwable ex) {
             ex.printStackTrace();
         } 
-        //let the other render render the player.
+        //let the other render render.
         render.doRender(par1EntityPlayer, par2, par4, par6, par8, par9);
         //Grab the player model and assign it here to get rotational data.
         try {

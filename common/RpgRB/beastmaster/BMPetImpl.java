@@ -82,7 +82,13 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         this.tasks.addTask(5, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, Entity.class, 8.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
-        this.tasks.addTask(8, new EntityAITempt(this, 0.3F, Item.porkRaw.itemID, false));
+        //This allows the pets to stand and look at the player if they have food.
+        for(Item item:Item.itemsList){
+            if(item instanceof ItemFood){
+                                      //This pet, speed, item, get startled by movement.
+                this.tasks.addTask(8, new EntityAITempt(this, this.moveSpeed, item.itemID, false));
+            }
+        }
         this.targetTasks.addTask(1, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
@@ -134,14 +140,14 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public void onLivingUpdate() {
-        if(getOwner() == null){
+        if (getOwner() == null) {
             IPet.playersWithActivePets.remove(this.getOwnerName());
             this.setDead();
         }
         if (!IPet.playersWithActivePets.containsKey(this.getOwnerName()) || this.dimension != getOwner().dimension) {
             this.setDead();
             return;
-        }else if(this.dimension != getOwner().dimension){
+        } else if (this.dimension != getOwner().dimension) {
             this.setDead();
             return;
         }
@@ -162,8 +168,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     }
 
     public void moveEntity(double d, double d1, double d2) {
-        this.width = getSize();
-        this.height = getSize() * 0.75F;
+        this.width = (getLevel() * 0.1F) + 0.5F;
+        this.height = (getLevel() * 0.1F) + 0.2F;
         if (riddenByEntity != null) {
             EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
             entityRider.prevCameraYaw = rotationYaw = prevRotationYaw = entityRider.rotationYaw;
@@ -256,49 +262,48 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public boolean interact(EntityPlayer par1EntityPlayer) {
-        ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
+        if (!this.isDead()) {
+            ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
+            if (var2 != null) {
+                if (this.dataWatcher.getWatchableObjectInt(HP) < this.getMaxHealth()) {
+                    if (Item.itemsList[var2.itemID] instanceof ItemFood) {
+                        ItemFood var3 = (ItemFood) Item.itemsList[var2.itemID];
 
-        if (var2 != null) {
-            if (this.dataWatcher.getWatchableObjectInt(HP) < this.getMaxHealth()) {
-                if (Item.itemsList[var2.itemID] instanceof ItemFood) {
-                    ItemFood var3 = (ItemFood) Item.itemsList[var2.itemID];
-
-                    if (!par1EntityPlayer.capabilities.isCreativeMode) {
-                        --var2.stackSize;
-                    }
-
-                    this.heal(var3.getHealAmount());
-
-                    if (var2.stackSize <= 0) {
-                        par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
-                    }
-
-                    return true;
-                }
-            }
-            if (!getSaddled()) {
-                if (var2.itemID == Item.saddle.itemID) {
-                    this.setSaddled(true);
-                    if (!par1EntityPlayer.capabilities.isCreativeMode) {
-                        --var2.stackSize;
-                    }
-                    if (var2.stackSize <= 0) {
-                        par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
+                        if (!par1EntityPlayer.capabilities.isCreativeMode) {
+                            if (--var2.stackSize == 0) {
+                                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
+                            }
+                        }
+                        if (!worldObj.isRemote) {
+                            this.heal(var3.getHealAmount());
+                        }
+                        return true;
                     }
                 }
-            }
-            if (par1EntityPlayer.getCurrentEquippedItem().itemID == Item.porkRaw.itemID) {
-                if (par1EntityPlayer.getCurrentEquippedItem().stackSize <= 1) {
-                    par1EntityPlayer.inventory.setItemStack(null);
-                } else {
-                    par1EntityPlayer.getCurrentEquippedItem().stackSize -= 1;
-
-                    par1EntityPlayer.inventory.setItemStack(par1EntityPlayer.getCurrentEquippedItem());
+                if (!getSaddled() && this.getLevel() >= 50) {
+                    if (var2.itemID == Item.saddle.itemID) {
+                        this.setSaddled(true);
+                        if (!par1EntityPlayer.capabilities.isCreativeMode) {
+                            --var2.stackSize;
+                        }
+                        if (var2.stackSize <= 0) {
+                            par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
+                        }
+                    }
                 }
+                if (par1EntityPlayer.getCurrentEquippedItem().itemID == Item.porkRaw.itemID) {
+                    if (par1EntityPlayer.getCurrentEquippedItem().stackSize <= 1) {
+                        par1EntityPlayer.inventory.setItemStack(null);
+                    } else {
+                        par1EntityPlayer.getCurrentEquippedItem().stackSize -= 1;
+
+                        par1EntityPlayer.inventory.setItemStack(par1EntityPlayer.getCurrentEquippedItem());
+                    }
+                }
+            } else if (this.getSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == par1EntityPlayer)) {
+                par1EntityPlayer.mountEntity(this);
+                return true;
             }
-        } else if (this.getSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == par1EntityPlayer)) {
-            par1EntityPlayer.mountEntity(this);
-            return true;
         }
         return super.interact(par1EntityPlayer);
     }
@@ -467,7 +472,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     @Override
     public ItemStack writePetToItemStack() {
         NBTTagCompound petnbt = new NBTTagCompound();
-        NBTTagCompound itemstacknbt = new NBTTagCompound("tag");
+        NBTTagCompound itemstacknbt = new NBTTagCompound();
         writeEntityToNBT(petnbt);
         itemstacknbt.setCompoundTag("RPGPetInfo", petnbt);
         itemstacknbt.setInteger("PetLevel", this.dataWatcher.getWatchableObjectInt(LEVELID));

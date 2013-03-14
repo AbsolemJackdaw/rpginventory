@@ -59,8 +59,9 @@ public class ClientTickHandler implements ITickHandler {
                         }
                     }
                 }
+            } else {
+                added = false;
             }
-
         } else {
             added = false;
         }

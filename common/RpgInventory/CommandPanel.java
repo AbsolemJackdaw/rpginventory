@@ -239,6 +239,25 @@ public class CommandPanel extends CommandBase {
 								}
 							}
 						}
+                                                if (args[1].matches("activepet")){
+                                                    if (args[2].matches("level")){
+                                                        EntityPlayer player = (EntityPlayer)sender;
+                                                        if(IPet.playersWithActivePets.containsKey(player.username)){
+                                                            IPet.playersWithActivePets.get(player.username).getPet().addExperienceLevel(Integer.valueOf(args[3]));
+                                                        }
+                                                    }else if(args[2].matches("name")){
+                                                        EntityPlayer player = (EntityPlayer)sender;
+                                                        if(IPet.playersWithActivePets.containsKey(player.username)){
+                                                            IPet.playersWithActivePets.get(player.username).getPet().setName(args[3]);
+                                                        }
+                                                    }else if(args[2].matches("saddled")){
+                                                        EntityPlayer player = (EntityPlayer)sender;
+                                                        if(IPet.playersWithActivePets.containsKey(player.username)){
+                                                            IPet.playersWithActivePets.get(player.username).getPet().setSaddled(Boolean.valueOf(args[3]));
+                                                        }
+                                                    }
+                                                }
+                                                
 						if (args[1].matches("get"))
 						{
 							System.out.println(args);

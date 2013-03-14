@@ -13,7 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -360,8 +359,22 @@ public class RpgPacketHandler implements IPacketHandler {
 
 				//case 9 used for Paladin
 			case 10:
-				int level = dis.readInt();
-				mod_RpgInventory.proxy.playerLevel(p, level);                    
+				int levelPetIsNow = dis.readInt();
+				mod_RpgInventory.proxy.playerLevel(p, levelPetIsNow / 2);
+                                RpgInv inv = mod_RpgInventory.proxy.getInventory(p.username);
+                                ItemStack crystal = inv.getCrystal();
+                                if(!crystal.hasTagCompound()){
+                                    crystal.setTagCompound(new NBTTagCompound());
+                                }
+                                crystal.getTagCompound().setInteger("PetLevel", levelPetIsNow);
+                                if(!crystal.getTagCompound().hasKey("RPGPetInfo")){
+                                    System.out.println("no tag compound");
+                                    crystal.getTagCompound().setTag("RPGPetInfo", new NBTTagCompound());
+                                }
+                                ((NBTTagCompound)crystal.getTagCompound().getTag("RPGPetInfo")).setInteger("XpLevel", levelPetIsNow);
+                                ItemStack newStack = new ItemStack(mod_RpgInventory.crystal, 1,crystal.getItemDamage() );
+                                newStack.setTagCompound(crystal.getTagCompound());
+                                inv.setInventorySlotContents(6, newStack);
 				break;
 			default:
 				break;
