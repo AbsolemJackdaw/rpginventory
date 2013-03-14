@@ -34,6 +34,7 @@ import RpgInventory.item.armor.ItemRpgArmor;
 import RpgInventory.item.armor.ItemRpgPlusPlusArmor;
 import RpgInventory.weapons.ItemGrandSword;
 import RpgInventory.weapons.ItemNecroSkull;
+import RpgInventory.weapons.bow.BowRender;
 import RpgInventory.weapons.bow.EntityHellArrow;
 import RpgInventory.weapons.bow.ItemArcherBow;
 import RpgInventory.weapons.claymore.ClaymoreRenderer;
@@ -45,6 +46,11 @@ import RpgInventory.weapons.staf.StafRender;
 import RpgInventory.weapons.wand.ItemMageWand;
 import RpgInventory.weapons.wand.SoulSphereRender;
 import RpgMageSet.weapons.ItemElementalStaff;
+import RpgRB.ItemCrystal;
+import RpgRB.ItemRBMats;
+import RpgRB.ItemRBMats2;
+import RpgRB.weapons.axe.AxeRender;
+import RpgRB.weapons.axe.ItemBeastAxe;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -171,8 +177,8 @@ public class mod_RpgInventory {
 	public static Block forgeBlock;
 	//Die bitches.
 	public static List<String> developers = new ArrayList<String>();
-	public static String[][] recipePatterns;
-	public static Object[][] recipeItems;
+	private String[][] recipePatterns;
+	private Object[][] recipeItems;
 	public static boolean hasRpg;
 	public static boolean hasShields;
 	public static boolean hasRogue;
@@ -192,6 +198,8 @@ public class mod_RpgInventory {
 	EnumArmorMaterial hides = EnumHelper.addArmorMaterial("hides", 20, new int[]{2, 3, 2, 2}, 5);		
 	EnumArmorMaterial archMage = EnumHelper.addArmorMaterial("archmagerobes", 20, new int[]{4, 4, 4, 2}, 5);	
 	EnumArmorMaterial armoury = EnumHelper.addArmorMaterial("armoury", 20, new int[]{2, 4, 3, 2}, 5);
+	EnumArmorMaterial rogueArmor = EnumHelper.addArmorMaterial("rogue", 20, new int[]{3, 5, 4, 3}, 5);
+	EnumArmorMaterial beastMaster = EnumHelper.addArmorMaterial("beast", 20, new int[]{4, 5, 4, 3}, 5);
 	EnumToolMaterial clay = EnumHelper.addToolMaterial("claymore", 0, 750, 5F, 6, 0);
 	EnumToolMaterial stone = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 5F, 4, 0);
 
@@ -314,7 +322,7 @@ public class mod_RpgInventory {
 		ringmold = new ItemMold(RpgConfig.instance.ringmoldID).setIconIndex(65).setItemName("ringmold").setCreativeTab(tab);
 		wantmold = new ItemMold(RpgConfig.instance.wantmoldID).setIconIndex(66).setItemName("wantmold").setCreativeTab(tab);
 
-
+		crystal = new ItemCrystal(RpgConfig.instance.crystalID, ITEMTYPE.CRYSTAL, -1, "").setIconIndex(52).setItemName("petCrystal").setCreativeTab(tab);
 		if (hasRpg == true) {
 			EnumArmorMaterial necroArmor = EnumHelper.addArmorMaterial("necro_material", 20, new int[]{2, 5, 1, 1}, 5);	// use of Souls
 			EnumArmorMaterial paladin = EnumHelper.addArmorMaterial("pala_material", 20, new int[]{4, 7, 2, 1}, 5);	// use of Steel
@@ -369,6 +377,67 @@ public class mod_RpgInventory {
 			LanguageRegistry.addName(shieldDiamond, "Diamond Shield");
 		}
 		if (hasRogue == true) {
+
+			daggers = new ItemRpgArmor(RpgConfig.instance.daggersID, 1, 0, "").setItemName("daggerRogue").setIconCoord(6, 2).setCreativeTab(tab);
+			beastAxe = new ItemBeastAxe(RpgConfig.instance.beastAxe).setFull3D().setIconIndex(39).setItemName("beastmasteraxe").setCreativeTab(tab);
+
+			rogueLeather = new ItemRBMats(RpgConfig.instance.rogueLeatherID).setItemName("rogue leather").setIconIndex(103).setCreativeTab(tab);
+			beastLeather = new ItemRBMats(RpgConfig.instance.beastLeatherID).setItemName("beast leather").setIconIndex(103).setCreativeTab(tab);
+			beastShield = new ItemRpgArmor(RpgConfig.instance.beastShield, 1, 0, "").setItemName("beastShield").setIconCoord(3, 5).setCreativeTab(tab);
+
+			rogueHood = new BonusArmor(RpgConfig.instance.rogueHoodID, rogueArmor, 4, 0).setItemName("rogue1").setIconCoord(12, 4).setCreativeTab(tab);
+			rogueChest = new BonusArmor(RpgConfig.instance.rogueChestID, rogueArmor, 4, 1).setItemName("rogue2").setIconCoord(12, 5).setCreativeTab(tab);
+			rogueLegs = new BonusArmor(RpgConfig.instance.rogueLegsID, rogueArmor, 4, 2).setItemName("rogue3").setIconCoord(12, 6).setCreativeTab(tab);
+			rogueBoots = new BonusArmor(RpgConfig.instance.rogueBootsID, rogueArmor, 4, 3).setItemName("rogue4").setIconCoord(12, 7).setCreativeTab(tab);
+
+			beastHood = new BonusArmor(RpgConfig.instance.beastHoodID, beastMaster, 4, 0).setItemName("beast1").setIconCoord(11, 4).setCreativeTab(tab);
+			beastChest = new BonusArmor(RpgConfig.instance.beastChestID, beastMaster, 4, 1).setItemName("beast2").setIconCoord(11, 5).setCreativeTab(tab);
+			beastLegs = new BonusArmor(RpgConfig.instance.beastLegsID, beastMaster, 4, 2).setItemName("beast3").setIconCoord(11, 6).setCreativeTab(tab);
+			beastBoots = new BonusArmor(RpgConfig.instance.beastBootsID, beastMaster, 4, 3).setItemName("beast4").setIconCoord(11, 7).setCreativeTab(tab);
+
+			whistle = new ItemRBMats2(RpgConfig.instance.whistleID).setIconIndex(40).setItemName("whistle").setCreativeTab(tab);
+
+			petCandy = new ItemCandy(RpgConfig.instance.candy).setItemName("RarePetCandy").setIconCoord(5,5).setCreativeTab(tab);
+			tangledBrench = new ItemCandy(RpgConfig.instance.brench).setItemName("tangledBrench").setIconCoord(6,5).setCreativeTab(tab);
+
+			LanguageRegistry.addName(daggers, "Rogue Daggers");
+			LanguageRegistry.addName(rogueLeather, "Rogue Leather");
+			LanguageRegistry.addName(beastLeather, "BeastMaster Leather");
+			LanguageRegistry.addName(rogueHood, "Rogue Hood");
+			LanguageRegistry.addName(rogueChest, "Rogue Breast Plate");
+			LanguageRegistry.addName(rogueLegs, "Rogue Chaps");
+			LanguageRegistry.addName(rogueBoots, "Rogue Boots");
+			LanguageRegistry.addName(beastHood, "BeastMaster Hood");
+			LanguageRegistry.addName(beastChest, "BeastMaster Body Protection");
+			LanguageRegistry.addName(beastLegs, "BeastMaster Leg Protection");
+			LanguageRegistry.addName(beastBoots, "BeastMaster Shoes");
+			LanguageRegistry.addName(whistle, "Pet Whistle");
+			LanguageRegistry.addName(whistle, "Pet Whistle");
+			LanguageRegistry.addName(beastShield, "BeastMaster Shield");
+			LanguageRegistry.addName(beastAxe, "BeastMaster Forest Axe");
+			LanguageRegistry.addName(petCandy, "Rare Pet Candy");
+			LanguageRegistry.addName(tangledBrench, "Tangled Brench");
+
+
+			GameRegistry.addShapelessRecipe(new ItemStack(whistle), new Object[]{Item.stick, Item.reed, Item.reed});
+			GameRegistry.addRecipe(new ItemStack(beastLeather), new Object[]{"LLL","LVL","LLL",'L',Block.leaves,'V',Item.leather});
+			GameRegistry.addRecipe(new ItemStack(rogueLeather), new Object[]{"DSD","SLS","DSD",'S', Item.silk,'L',Item.leather, 'D',new ItemStack(Item.dyePowder,1,5)});
+			GameRegistry.addRecipe(new ItemStack(beastShield), new Object[]{"III","IDI"," I ", 'I', beastLeather, 'D',Block.wood});
+			GameRegistry.addRecipe(new ItemStack(beastAxe), new Object[]{" IW"," SI","S  ", 'S', tangledBrench,'I', Block.blockSteel, 'W',Block.wood});
+			GameRegistry.addShapelessRecipe(new ItemStack(tangledBrench), new Object[]{Item.stick, Item.stick, Item.silk, Item.silk, Item.silk,Item.silk});
+
+			recipePatterns = new String[][]{{"XXX", "X X"}, {"X X", "XXX", "XXX"}, {"XXX", "X X", "X X"}, {"X X", "X X"}};
+			recipeItems = new Object[][]{{rogueLeather, beastLeather}, {rogueHood, beastHood},
+					{rogueChest, beastChest}, {rogueLegs, beastLegs}, {rogueBoots, beastBoots}};
+
+			for (int var2 = 0; var2 < this.recipeItems[0].length; ++var2) {
+				Object var3 = this.recipeItems[0][var2];
+
+				for (int var4 = 0; var4 < this.recipeItems.length - 1; ++var4) {
+					Item var5 = (Item) this.recipeItems[var4 + 1][var2];
+					GameRegistry.addRecipe(new ItemStack(var5), new Object[]{this.recipePatterns[var4], 'X', var3});
+				}
+			}
 		}
 		if (hasMage == true) {
 			fireStaff = new ItemElementalStaff(RpgConfig.instance.fireStaff, 1).setItemName("FireStaff").setMaxStackSize(1).setMaxDamage(150).setIconIndex(53).setCreativeTab(mod_RpgInventory.tab);
@@ -413,6 +482,7 @@ public class mod_RpgInventory {
 		addChestLoot(new ItemStack(mod_RpgInventory.ringmold), 1, 1, 30, "Ring Mold");
 		addChestLoot(new ItemStack(mod_RpgInventory.wantmold), 1, 1, 40, "Gloves Mold");
 
+		addCandyChestLoot(new ItemStack(mod_RpgInventory.petCandy), 1, 6, 20, "Easter Egg");
 
 		GameRegistry.registerTileEntity(TEMold.class, "temold");
 
@@ -478,6 +548,10 @@ public class mod_RpgInventory {
 		LanguageRegistry.addName(colmold, "Mold");
 		LanguageRegistry.addName(ringmold, "Mold");
 		LanguageRegistry.addName(wantmold, "Mold");
+		LanguageRegistry.addName(new ItemStack(crystal, 1, 0), "Pet Crystal");
+		LanguageRegistry.addName(new ItemStack(crystal, 1, 1), "Boar");
+		LanguageRegistry.addName(new ItemStack(crystal, 1, 2), "Spider");
+		LanguageRegistry.addName(new ItemStack(crystal, 1, 3), "Bull");
 
 		MinecraftForge.addGrassSeed(new ItemStack(rageSeed, 1), 1);
 
@@ -508,7 +582,7 @@ public class mod_RpgInventory {
 		GameRegistry.addRecipe(new ItemStack(cloakBlue, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Item.dyePowder, 1, 12)});
 		GameRegistry.addRecipe(new ItemStack(cloakSub, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Item.dyePowder, 1, 0)});
 
-		GameRegistry.addRecipe(new ItemStack(forgeBlock, 1), new Object[]{"BBB", "BOB", "BBB", 'B', Block.brick, 'O', Block.obsidian}); 
+		GameRegistry.addRecipe(new ItemStack(forgeBlock, 1), new Object[]{"BBB", "BOB", "BBB", 'B', Block.brick, 'O', Block.obsidian});
 
 		//MageBook
 		GameRegistry.addShapelessRecipe(new ItemStack(wizardBook, 1), new Object[]{magecloth, Item.paper, Item.paper, Item.paper});
@@ -560,7 +634,12 @@ public class mod_RpgInventory {
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.windStaff.itemID, (IItemRenderer) new StafRender());
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.ultimateStaff.itemID, (IItemRenderer) new StafRender());
 		}
-	
+		if (RpgConfig.instance.render3DBow == true) {
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.elfbow.itemID, (IItemRenderer) new BowRender());
+		}
+		if (RpgConfig.instance.render3DAxe == true) {
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.beastAxe.itemID, (IItemRenderer) new AxeRender());
+		}
 
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
@@ -649,7 +728,7 @@ public class mod_RpgInventory {
 		ChestGenHooks.getInfo("mineshaftCorridor").addItem(chestGen);
 
 	}
-	public static void addCandyChestLoot(ItemStack is, int min, int max, int rarity, String item) {
+	public void addCandyChestLoot(ItemStack is, int min, int max, int rarity, String item) {
 		//        System.out.println("Added " + item + " to chests");
 		FMLLog.info("Adding to chests: "+item, min);
 		WeightedRandomChestContent chestGen = new WeightedRandomChestContent(is.copy(), min, max, rarity);
