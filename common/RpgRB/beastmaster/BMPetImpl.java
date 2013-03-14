@@ -530,6 +530,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         float nextlevel = par1NBTTagCompound.getFloat("PercentToNextLevel");
         //if nextlevel is less than 0, return 0, otherwise return it's value
         this.dataWatcher.updateObject(NEXTLEVEL, String.valueOf(nextlevel < 0.0F ? 0.0F : nextlevel));
+        System.out.println(par1NBTTagCompound.getInteger("XpLevel"));
         this.dataWatcher.updateObject(LEVELID, par1NBTTagCompound.getInteger("XpLevel"));
         this.dataWatcher.updateObject(TOTALXP, par1NBTTagCompound.getInteger("XpTotal"));
         this.prevTicksExisted = par1NBTTagCompound.getInteger("prevTicksExisted");

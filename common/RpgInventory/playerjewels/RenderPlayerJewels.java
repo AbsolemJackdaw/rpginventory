@@ -579,8 +579,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 
     @Override
     protected int setArmorModel(EntityPlayer par1EntityPlayer, int par2, float par3) {
-        //To prevent rendering the armor twice
-        //we want the other render to do armor, so they can have the positioning right.
+        ModelBeastArmor.armor = par1EntityPlayer.inventory.armorInventory;
         return -1;
     }
 

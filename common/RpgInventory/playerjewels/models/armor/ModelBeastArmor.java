@@ -3,25 +3,25 @@ package RpgInventory.playerjewels.models.armor;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 
 public class ModelBeastArmor extends ModelBiped
 {
 	//fields
-
+    public static ItemStack[] armor = new ItemStack[4];
 	ModelRenderer SpaulderL;
 	ModelRenderer SpaulderR;
 	ModelRenderer Horn1;
 	ModelRenderer Horn2;
 	ModelRenderer Horn3;
 	ModelRenderer Horn4;
-
+        
 	public ModelBeastArmor(float par1, float par2, int par3, int par4)
 	{
 		par3 = 64;
 		par4 = 32;
 		textureWidth = par3;
 		textureHeight = par4;
-		
 		this.bipedHead = new ModelRenderer(this, 0, 0);
 		this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, par1);
 		this.bipedHead.setRotationPoint(0.0F, 0.0F + par2, 0.0F);

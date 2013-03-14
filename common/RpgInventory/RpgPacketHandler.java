@@ -32,6 +32,7 @@ import java.util.logging.Logger;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.MathHelper;
 
 public class RpgPacketHandler implements IPacketHandler {
 
@@ -367,11 +368,24 @@ public class RpgPacketHandler implements IPacketHandler {
                                     crystal.setTagCompound(new NBTTagCompound());
                                 }
                                 crystal.getTagCompound().setInteger("PetLevel", levelPetIsNow);
+                                int newMaxHP = 15;
+                                switch(crystal.getItemDamage()){
+                                    case 1:
+                                        newMaxHP = 15 + MathHelper.floor_float(((float) levelPetIsNow) / 2.5F);
+                                        break;
+                                    case 2:
+                                        newMaxHP = 20 + MathHelper.floor_float(((float) levelPetIsNow) / 2F);
+                                        break;
+                                    case 3:
+                                        newMaxHP = 218 + MathHelper.floor_float(((float) levelPetIsNow) / 2.2F);
+                                }
+                                crystal.getTagCompound().setInteger("PetMaxHealth", newMaxHP);
+                                crystal.getTagCompound().setInteger("PetHealth", newMaxHP);
                                 if(!crystal.getTagCompound().hasKey("RPGPetInfo")){
-                                    System.out.println("no tag compound");
                                     crystal.getTagCompound().setTag("RPGPetInfo", new NBTTagCompound());
                                 }
                                 ((NBTTagCompound)crystal.getTagCompound().getTag("RPGPetInfo")).setInteger("XpLevel", levelPetIsNow);
+                                ((NBTTagCompound)crystal.getTagCompound().getTag("RPGPetInfo")).setInteger("Health", newMaxHP);
                                 ItemStack newStack = new ItemStack(mod_RpgInventory.crystal, 1,crystal.getItemDamage() );
                                 newStack.setTagCompound(crystal.getTagCompound());
                                 inv.setInventorySlotContents(6, newStack);

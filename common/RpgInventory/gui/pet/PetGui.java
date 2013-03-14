@@ -43,10 +43,10 @@ public class PetGui extends GuiScreen {
     public static String petName = "Name";
     public static String petStats = "Stats :";
     public static String info = "Additional Info";
-    public static String levelNr;
+    public static int levelNr;
     public static String petAtk;
-    public static String currentHP;
-    public static String totalHP;
+    public static int currentHP;
+    public static int totalHP;
     public static String saddle;
     public static String levelInfo;
     public static String levelInfo2;
@@ -82,10 +82,10 @@ public class PetGui extends GuiScreen {
         
         NBTTagCompound tags = petCrystal.getTagCompound();
 
-        levelNr = String.valueOf(tags.getInteger("PetLevel"));
+        levelNr = tags.getInteger("PetLevel");
         petAtk = String.valueOf(tags.getInteger("PetAttack"));
-        currentHP = String.valueOf(tags.getInteger("PetHealth"));
-        totalHP = String.valueOf(tags.getInteger("PetMaxHealth"));
+        currentHP = tags.getInteger("PetHealth");
+        totalHP = tags.getInteger("PetMaxHealth");
 
         if (tags.hasKey("PetLevel")) {
 
@@ -149,7 +149,8 @@ public class PetGui extends GuiScreen {
                 //So first levelup is not free
                 levelInfo2 = "Cost: " + MathHelper.floor_float(petCrystal.getTagCompound().getInteger("PetLevel") / 2 + 1) + " player levels;";
                 Minecraft.getMinecraft().thePlayer.addExperienceLevel(-(MathHelper.floor_float(petCrystal.getTagCompound().getInteger("PetLevel") / 2)));
-                levelNr = "" + petCrystal.getTagCompound().getInteger("PetLevel");
+                levelNr += 1;
+                currentHP = totalHP;
                 int i = 10;
                 int levelPetIsNow = petCrystal.getTagCompound().getInteger("PetLevel") + 1;
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -165,7 +166,6 @@ public class PetGui extends GuiScreen {
                 }
             }
         }
-        petCrystal = mod_RpgInventory.proxy.getInventory(p.username).getCrystal();
     }
 
     protected void keyTyped(char c, int i) {
@@ -184,7 +184,7 @@ public class PetGui extends GuiScreen {
 
     public void drawScreen(int i, int j, float f) {
         drawDefaultBackground();
-        petCrystal = mod_RpgInventory.proxy.getInventory(p.username).getCrystal();
+        initGui();
         try {
             int var4 = this.mc.renderEngine.getTexture("/subaraki/petgui.png");
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

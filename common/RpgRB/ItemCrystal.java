@@ -41,7 +41,7 @@ public class ItemCrystal extends ItemRpgArmor {
 				if (tags.hasKey("PetLevel") && tags.hasKey("PetName")) {
 					par1ItemStack.setItemName(tags.getString("PetName")
 							+ " lv"
-							+ String.valueOf(tags.getInteger("PetLevel")) /*+ " " + pets[var2]*/);
+							+ String.valueOf(tags.getInteger("PetLevel")));
 				}
 			}
 		}
@@ -58,10 +58,10 @@ public class ItemCrystal extends ItemRpgArmor {
 			if (tags.hasKey("PetAttack")) {
 				list.add(StatCollector.translateToLocal("ATK : " + String.valueOf(tags.getInteger("PetAttack"))));
 			}
-			if (tags.hasKey("PetHealth") && tags.hasKey("PetPrevHealth")) {
+			if (tags.hasKey("PetHealth") && tags.hasKey("PetHealth")) {
 				list.add(StatCollector.translateToLocal("HP : "
-						+ String.valueOf(tags.getInteger("PetPrevHealth") + "/"
-								+ String.valueOf(tags.getInteger("PetHealth")))));
+						+ String.valueOf(tags.getInteger("PetHealth") + "/"
+								+ String.valueOf(tags.getInteger("PetMaxHealth")))));
 			}
 			if (tags.hasKey("PetLevel")) {
 				if (tags.getInteger("PetLevel") >= 50) {
