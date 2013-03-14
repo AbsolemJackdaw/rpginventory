@@ -109,10 +109,10 @@ public class mod_RpgInventory {
 	public static Item cloakYellow;
 	public static Item cloakGreen;
 	public static Item cloakBlue;
-	public static Item elfbow;			//  goes with Archers.
-	public static Item claymore;		// goes with Berserkers
+	public static Item elfbow;			
+	public static Item claymore;		
 	public static Item hammer;
-	public static Item wand;			// goes with Mages
+	public static Item wand;			
 	public static Item staf;
 	public static Item rageSeed;
 	public static Item magehood;

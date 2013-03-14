@@ -40,6 +40,7 @@ import RpgInventory.item.armor.BonusArmor;
 import RpgInventory.playerjewels.models.armor.ModelBeastArmor;
 import RpgInventory.playerjewels.models.armor.ModelMageArmor;
 import RpgInventory.playerjewels.models.armor.ModelNecroArmor;
+import RpgInventory.playerjewels.models.armor.ModelRogueArmor;
 import RpgInventory.playerjewels.models.shields.Book;
 import RpgInventory.playerjewels.models.shields.LionHead;
 import RpgInventory.playerjewels.models.weapons.ModelDaggerL;
@@ -73,6 +74,8 @@ public class RenderPlayerJewels extends RenderPlayer {
 	public ModelMageArmor mageArmorChest;
 	public ModelNecroArmor necroArmor;
 	public ModelNecroArmor necroArmorChest;
+	public ModelRogueArmor rogueArmor;
+	public ModelRogueArmor rogueArmorChest;
 	public ItemStack col;
 	public ItemStack shield;
 	public ItemStack cloak;
@@ -105,6 +108,9 @@ public class RenderPlayerJewels extends RenderPlayer {
 		mageArmorChest = new ModelMageArmor(1.0f, 0.0f, 65, 64);
 		necroArmor = new ModelNecroArmor(0.5f, 0.0f, 65, 64);
 		necroArmorChest = new ModelNecroArmor(1.0f, 0.0f, 65, 64);
+		rogueArmor = new ModelRogueArmor(0.5f, 0.0f, 65, 64);
+		rogueArmorChest = new ModelRogueArmor(1.0f, 0.0f, 65, 64);
+
 	}
 
 	protected void renderSpecialsRpg(EntityPlayer player, float par2) {
@@ -640,7 +646,17 @@ public class RenderPlayerJewels extends RenderPlayer {
 				} else if (var6.itemID == mod_RpgInventory.necroBoots.itemID) {
 					this.loadTexture("/armor/necro_3.png");
 					this.necroArmor.showBoots(true);
-				}else{
+				}
+				// Rogue
+				else if (var6.itemID == mod_RpgInventory.necroLeggings.itemID) {
+					this.loadTexture("/armor/rogue_3.png");
+					this.rogueArmor.showKnee(true);
+				} else if (var6.itemID == mod_RpgInventory.necroBoots.itemID) {
+					this.loadTexture("/armor/rogue_3.png");
+					this.rogueArmor.showBoots(true);
+				}
+				
+				else{
 					return -1;
 				}
 				//Binds our model.
@@ -665,6 +681,11 @@ public class RenderPlayerJewels extends RenderPlayer {
 						||var6.itemID == mod_RpgInventory.necroLeggings.itemID||var6.itemID == mod_RpgInventory.necroHood.itemID)
 				{
 					var7 = par2 == 2 ? this.necroArmor : this.necroArmorChest;
+				}
+				else if(var6.itemID == mod_RpgInventory.necroBoots.itemID|| var6.itemID == mod_RpgInventory.necroChestplate.itemID
+						||var6.itemID == mod_RpgInventory.necroLeggings.itemID||var6.itemID == mod_RpgInventory.necroHood.itemID)
+				{
+					var7 = par2 == 2 ? this.rogueArmor : this.rogueArmorChest;
 				}
 
 				var7.bipedHead.showModel = par2 == 0;
