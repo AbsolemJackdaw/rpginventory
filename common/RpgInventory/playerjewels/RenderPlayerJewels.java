@@ -583,37 +583,19 @@ public class RenderPlayerJewels extends RenderPlayer {
         if (var4 != null) {
             Item var5 = var4.getItem();
             if (var5 instanceof BonusArmor) {
-
                 BonusArmor var6 = (BonusArmor) var5;
-                switch (par2) {
-                    //This item is a hood from our mod.
-                    //Load the correct texture and set it to render.
-                    case 0:
-                        if (var6.itemID == mod_RpgInventory.beastHood.itemID) {
-                            //here we can load our custom texture file
-                            this.loadTexture("/armor/beast_3.png");
-                            //here we can turn on this rendering for this armor
-                            this.beastarmor.showBeastHelmet(true);
-                        }
-                        break;
-                    //This item is a chestplate from our mod.
-                    //Load the correct texture and set it to render.
-                    case 1:
-                        if (var6.itemID == mod_RpgInventory.beastChest.itemID) {
-                            //here we can load our custom texture file
-                            this.loadTexture("/armor/beast_4.png");
-                            //here we can turn on this rendering for this armor
-                            this.beastarmor.showBeastSpaulders(true);
-                        }
-                        break;
-                    //legs
-                    //nothing to do here now
-                    case 2:
-                        break;
-                    //boots
-                    //nothing to do here now
-                    case 3:
-                        break;
+                if (var6.itemID == mod_RpgInventory.beastHood.itemID) {
+                    //here we can load our custom texture file
+                    this.loadTexture("/armor/beast_3.png");
+                    //here we can turn on this rendering for this armor
+                    this.beastarmor.showBeastHelmet(true);
+                } else if (var6.itemID == mod_RpgInventory.beastChest.itemID) {
+                    //here we can load our custom texture file
+                    this.loadTexture("/armor/beast_3.png");
+                    //here we can turn on this rendering for this armor
+                    this.beastarmor.showBeastSpaulders(true);
+                } else{
+                    return -1;
                 }
                 //Binds our model.
                 //This does nothing unless a custom armor rendering bonusarmor is

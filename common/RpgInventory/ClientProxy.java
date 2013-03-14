@@ -107,16 +107,12 @@ public class ClientProxy extends CommonProxy {
         for (Entry<Class<? extends Entity>, Render> entry : map.entrySet()) {
             if (EntityPlayer.class.isAssignableFrom(entry.getKey())) {
                 Class clazz = entry.getValue().getClass();
-                if (clazz.getName().equals("net.smart.moving.render.RenderPlayer")) {
                     RenderPlayerJewels.defaultPlayerRender.put(entry.getKey(), entry.getValue());
                     RenderingRegistry.registerEntityRenderingHandler(entry.getKey(), renderballs);
-                    return;
-                }
+                    
             }
         }
-        RenderPlayerJewels.defaultPlayerRender.put(EntityPlayer.class, map.get(EntityPlayer.class));
-        RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, renderballs);
-        
+        RenderingRegistry.instance().loadEntityRenderers(RenderManager.instance.entityRenderMap);
     }
 
     public void openGUI(EntityPlayer p1, int id) {
