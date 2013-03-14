@@ -41,7 +41,10 @@ public class CommonProxy {
     {
     	player.addExperienceLevel(-amount);
     }
-
+    public void consumeItem(EntityPlayer player, int itemID)
+    {
+    	player.inventory.consumeInventoryItem(itemID);
+    }
     public RpgInv getInventory(String username) {
         for(String s: invs.keySet()){
             if(MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(s) == null){

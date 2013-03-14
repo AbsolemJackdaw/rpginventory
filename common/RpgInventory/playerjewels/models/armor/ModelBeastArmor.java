@@ -21,8 +21,8 @@ public class ModelBeastArmor extends ModelBiped {
     ModelRenderer Horn4;
 
     public ModelBeastArmor(float par1, float par2, int par3, int par4) {
-        par3 = 64;
-        par4 = 32;
+        par3 = 65;
+        par4 = 64;
         for (ItemStack is : armor) {
             if (is != null) {
                 if (is.getItem() instanceof BonusArmor) {
@@ -32,7 +32,6 @@ public class ModelBeastArmor extends ModelBiped {
                         beastSpaulder = true;
                     }
                 }
-                System.out.println(is.getItem());
             }
         }
 
@@ -61,53 +60,55 @@ public class ModelBeastArmor extends ModelBiped {
         this.bipedLeftLeg.mirror = true;
         this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, par1);
         this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F + par2, 0.0F);
-        SpaulderL = new ModelRenderer(this, 44, 0);
-        SpaulderL.addBox(-1F, -3F, -2.5F, 5, 3, 5, par1);
+        SpaulderL = new ModelRenderer(this, 0, 38);
+        SpaulderL.addBox(0F, -3F, -2.5F, 5, 3, 5, par1);
         SpaulderL.setRotationPoint(0F, 0F, 0F);
-        SpaulderL.setTextureSize(64, 32);
+        SpaulderL.setTextureSize(65, 64);
         SpaulderL.mirror = true;
         setRotation(SpaulderL, 0F, 0F, 0.1745329F);
-        SpaulderR = new ModelRenderer(this, 44, 0);
-        SpaulderR.addBox(-4F, -3F, -2.5F, 5, 3, 5, par1);
+        SpaulderR = new ModelRenderer(this, 0, 46);
+        SpaulderR.addBox(-5F, -3F, -2.5F, 5, 3, 5, par1);
         SpaulderR.setRotationPoint(0F, 0F, 0F);
-        SpaulderR.setTextureSize(64, 32);
+        SpaulderR.setTextureSize(65, 64);
         SpaulderR.mirror = true;
         setRotation(SpaulderR, 0F, 0F, -0.1745329F);
-        Horn1 = new ModelRenderer(this, 32, 0);
-        Horn1.addBox(4F, -7F, 1F, 1, 2, 2, par1);
+        Horn1 = new ModelRenderer(this, 0, 34);
+        Horn1.addBox(4F, -7F, 1F, 1, 2, 2,par1/2);
         Horn1.setRotationPoint(0F, 0F, 0F);
-        Horn1.setTextureSize(64, 32);
+        Horn1.setTextureSize(65, 64);
         Horn1.mirror = true;
         setRotation(Horn1, 0F, 0F, 0F);
-        Horn2 = new ModelRenderer(this, 32, 4);
-        Horn2.addBox(1F, -7F, 4F, 3, 1, 1, par1);
-        Horn2.setRotationPoint(0F, -0.5F, 0F);
-        Horn2.setTextureSize(64, 32);
+        Horn2 = new ModelRenderer(this, 0, 32);
+        Horn2.addBox(1F, -7F, 4F, 3, 1, 1,par1/2);
+        Horn2.setRotationPoint(0F, 0F, 0F);
+        Horn2.setTextureSize(65, 64);
         Horn2.mirror = true;
         setRotation(Horn2, 0F, 0.7853982F, 0.1745329F);
-        Horn3 = new ModelRenderer(this, 32, 0);
-        Horn3.addBox(-5F, -7F, 1F, 1, 2, 2, par1);
+        Horn3 = new ModelRenderer(this, 0, 34);
+        Horn3.addBox(-5F, -7F, 1F, 1, 2, 2,par1/2);
         Horn3.setRotationPoint(0F, 0F, 0F);
-        Horn3.setTextureSize(64, 32);
+        Horn3.setTextureSize(65, 64);
         Horn3.mirror = true;
         setRotation(Horn3, 0F, 0F, 0F);
-        Horn4 = new ModelRenderer(this, 32, 4);
-        Horn4.addBox(-4F, -7F, 4F, 3, 1, 1, par1);
-        Horn4.setRotationPoint(0F, -0.5F, 0F);
-        Horn4.setTextureSize(64, 32);
+        Horn4 = new ModelRenderer(this, 0, 32);
+        Horn4.addBox(-4F, -7F, 4F, 3, 1, 1,par1/2);
+        Horn4.setRotationPoint(0F, 0F, 0F);
+        Horn4.setTextureSize(65, 64);
         Horn4.mirror = true;
         setRotation(Horn4, 0F, -0.7853982F, -0.1745329F);
+        
         if (beastHelm) {
-            this.bipedHead.addChild(Horn1);
-            this.bipedHead.addChild(Horn2);
-            this.bipedHead.addChild(Horn3);
-            this.bipedHead.addChild(Horn4);
+            
         }
         if (beastSpaulder) {
-            this.bipedLeftArm.addChild(SpaulderL);
-            this.bipedRightArm.addChild(SpaulderR);
+           
         }
-
+        this.bipedHead.addChild(Horn1);
+        this.bipedHead.addChild(Horn2);
+        this.bipedHead.addChild(Horn3);
+        this.bipedHead.addChild(Horn4);
+        this.bipedLeftArm.addChild(SpaulderL);
+        this.bipedRightArm.addChild(SpaulderR);
     }
 
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {

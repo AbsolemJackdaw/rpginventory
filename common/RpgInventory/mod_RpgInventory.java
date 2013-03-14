@@ -397,7 +397,7 @@ public class mod_RpgInventory {
 
 			whistle = new ItemRBMats2(RpgConfig.instance.whistleID).setIconIndex(40).setItemName("whistle").setCreativeTab(tab);
 
-			petCandy = new ItemCandy(RpgConfig.instance.candy).setItemName("RarePetCandy").setIconCoord(5,5);
+			petCandy = new ItemCandy(RpgConfig.instance.candy).setItemName("RarePetCandy").setIconCoord(5,5).setCreativeTab(tab);
 			tangledBrench = new ItemCandy(RpgConfig.instance.brench).setItemName("tangledBrench").setIconCoord(6,5).setCreativeTab(tab);
 
 			LanguageRegistry.addName(daggers, "Rogue Daggers");
