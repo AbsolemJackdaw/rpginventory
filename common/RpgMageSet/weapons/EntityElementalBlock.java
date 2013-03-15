@@ -91,7 +91,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 		}
 		switch (type) {
 		case 1:
-			AxisAlignedBB pool = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
+			AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
 			List<EntityLiving> entl = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
 			if (entl != null && entl.size() > 0) {
 				for (EntityLiving el : entl) {
@@ -122,7 +122,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			break;
 		case 2:
                     if (!worldObj.isRemote) {
-			AxisAlignedBB pool1 = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
+			AxisAlignedBB pool1 = AxisAlignedBB.getAABBPool().getAABB(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
 			List<EntityLiving> entl1 = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool1);
 			if (entl1 != null && entl1.size() > 0) {
 				for (EntityLiving el : entl1) {
@@ -176,7 +176,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			break;
 		case 3:
 			int dmg = (int) (5 + Math.floor(getRadius()));
-			pool = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
+			pool = AxisAlignedBB.getAABBPool().getAABB(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
 			entl = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
 			if (entl != null && entl.size() > 0) {
 				for (EntityLiving el : entl) {
@@ -209,7 +209,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 
 			break;
 		case 4:
-			pool = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
+			pool = AxisAlignedBB.getAABBPool().getAABB(var1.hitVec.xCoord - getRadius(), var1.hitVec.yCoord - getRadius(), var1.hitVec.zCoord - getRadius(), var1.hitVec.xCoord +  getRadius(), var1.hitVec.yCoord + getRadius(), var1.hitVec.zCoord + this.size);
 			entl = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
 			if (entl != null && entl.size() > 0) {
 				for (EntityLiving el : entl) {
