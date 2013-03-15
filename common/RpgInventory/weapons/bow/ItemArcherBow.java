@@ -16,8 +16,9 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import RpgInventory.mod_RpgInventory;
 import RpgInventory.gui.inventory.RpgInv;
+import RpgInventory.weapons.ItemRpgWeapon;
 
-public class ItemArcherBow extends Item
+public class ItemArcherBow extends ItemRpgWeapon
 {
 	public static final String[] field_94601_a = new String[] {"elmBow1", "elmBow2", "elmBow3"};
 	@SideOnly(Side.CLIENT)

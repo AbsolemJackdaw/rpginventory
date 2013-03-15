@@ -3,87 +3,86 @@ package RpgRB;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import RpgInventory.IPet;
-import RpgInventory.mod_RpgInventory;
 import RpgInventory.item.armor.ItemRpgArmor;
-import RpgRB.beastmaster.BoarPet;
-import RpgRB.beastmaster.BullPet;
-import RpgRB.beastmaster.SpiderPet;
+import RpgInventory.mod_RpgInventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IconRegister;
 
 public class ItemCrystal extends ItemRpgArmor {
 
-	public static final String[] pets = new String[]{"Empty Crystal", "Boar", "Spider", "Bull"};
+    public static final String[] pets = new String[]{"Empty Crystal", "Boar", "Spider", "Bull"};
 
-	public ItemCrystal(int id, int armorType, int maxDamage, String name) {
-		super(id, armorType, maxDamage, name);
-		this.setHasSubtypes(true);
-		//Max stack size MUST be 1!
-		this.maxStackSize = 1;
-	}
+    public ItemCrystal(int id, int armorType, int maxDamage, String name) {
+        super(id, armorType, maxDamage, name);
+        this.setHasSubtypes(true);
+        //Max stack size MUST be 1!
+        this.maxStackSize = 1;
+    }
 
-	@Override
-	public String getItemDisplayName(ItemStack par1ItemStack) {
-		int var2 = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 3);
+    @Override
+    public void func_94581_a(IconRegister par1IconRegister) {
+        this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:petCrystal");
+    }
 
-		if (var2 > 0) {
-			NBTTagCompound tags = par1ItemStack.getTagCompound();
-			if (tags != null) {
-				if (tags.hasKey("PetLevel") && tags.hasKey("PetName")) {
-					par1ItemStack.setItemName(tags.getString("PetName")
-							+ " lv"
-							+ String.valueOf(tags.getInteger("PetLevel")));
-				}
-			}
-		}
-		return getStatName() + "." + pets[var2];
-	}
+    @Override
+    public String getItemDisplayName(ItemStack par1ItemStack) {
+        int var2 = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 3);
 
-	public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
-		NBTTagCompound tags = stack.getTagCompound();
-		int var2 = MathHelper.clamp_int(stack.getItemDamage(), 0, 3);
+        if (var2 > 0) {
+            NBTTagCompound tags = par1ItemStack.getTagCompound();
+            if (tags != null) {
+                if (tags.hasKey("PetLevel") && tags.hasKey("PetName")) {
+                    par1ItemStack.setItemName(tags.getString("PetName")
+                            + " lv"
+                            + String.valueOf(tags.getInteger("PetLevel")));
+                }
+            }
+        }
+        return getStatName() + "." + pets[var2];
+    }
 
-		if (var2 > 0) {
-		}
-		if (tags != null) {
-			if (tags.hasKey("PetAttack")) {
-				list.add(StatCollector.translateToLocal("ATK : " + String.valueOf(tags.getInteger("PetAttack"))));
-			}
-			if (tags.hasKey("PetHealth") && tags.hasKey("PetHealth")) {
-				list.add(StatCollector.translateToLocal("HP : "
-						+ String.valueOf(tags.getInteger("PetHealth") + "/"
-								+ String.valueOf(tags.getInteger("PetMaxHealth")))));
-			}
-			if (tags.hasKey("PetLevel")) {
-				if (tags.getInteger("PetLevel") >= 50) {
-					if (tags.hasKey("isSaddled")) {
-						if (tags.getBoolean("isSaddled") == true) {
-							list.add(StatCollector.translateToLocal("Saddled"));
-						}
-						if (tags.getBoolean("isSaddled") == false) {
-							list.add(StatCollector.translateToLocal("No Saddle"));
-						}
-					}
-				} else {
-					list.add(StatCollector.translateToLocal("N/A ") + String.valueOf(50 - tags.getInteger("PetLevel")));
-				}
-			}
-			if (tags.hasKey("OwnerName")) {
-				list.add(StatCollector.translateToLocal("Owner :" + tags.getString("OwnerName")));
-			}
-		}
-	}
+    public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
+        NBTTagCompound tags = stack.getTagCompound();
+        int var2 = MathHelper.clamp_int(stack.getItemDamage(), 0, 3);
 
-	 /**
+        if (var2 > 0) {
+        }
+        if (tags != null) {
+            if (tags.hasKey("PetAttack")) {
+                list.add(StatCollector.translateToLocal("ATK : " + String.valueOf(tags.getInteger("PetAttack"))));
+            }
+            if (tags.hasKey("PetHealth") && tags.hasKey("PetHealth")) {
+                list.add(StatCollector.translateToLocal("HP : "
+                        + String.valueOf(tags.getInteger("PetHealth") + "/"
+                        + String.valueOf(tags.getInteger("PetMaxHealth")))));
+            }
+            if (tags.hasKey("PetLevel")) {
+                if (tags.getInteger("PetLevel") >= 50) {
+                    if (tags.hasKey("isSaddled")) {
+                        if (tags.getBoolean("isSaddled") == true) {
+                            list.add(StatCollector.translateToLocal("Saddled"));
+                        }
+                        if (tags.getBoolean("isSaddled") == false) {
+                            list.add(StatCollector.translateToLocal("No Saddle"));
+                        }
+                    }
+                } else {
+                    list.add(StatCollector.translateToLocal("N/A ") + String.valueOf(50 - tags.getInteger("PetLevel")));
+                }
+            }
+            if (tags.hasKey("OwnerName")) {
+                list.add(StatCollector.translateToLocal("Owner :" + tags.getString("OwnerName")));
+            }
+        }
+    }
+
+    /**
      * returns a list of items with the same ID, but different meta (eg: dye
      * returns 16 items)
      */
@@ -122,5 +121,4 @@ public class ItemCrystal extends ItemRpgArmor {
     public String getTextureFile() {
         return "/subaraki/RPGinventoryTM.png";
     }
-
 }

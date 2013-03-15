@@ -1,6 +1,7 @@
 package RpgRB.weapons.axe;
 
 import RpgInventory.RichTools.Targetting;
+import RpgInventory.mod_RpgInventory;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -15,6 +16,7 @@ import net.minecraft.client.gui.Particle;
 import net.minecraft.client.particle.EntityExplodeFX;
 import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.client.particle.EntityLargeExplodeFX;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -43,6 +45,10 @@ public class ItemBeastAxe extends Item {
 
     public String getTextureFile() {
         return "/subaraki/RPGinventoryTM.png";
+    }
+
+    public void func_94581_a(IconRegister par1IconRegister) {
+        this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:forestAxe");
     }
 
     public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {

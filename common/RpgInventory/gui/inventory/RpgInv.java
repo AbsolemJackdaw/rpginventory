@@ -1,7 +1,9 @@
 package RpgInventory.gui.inventory;
 
+import RpgInventory.EnumRpgClass;
+import RpgInventory.RPGEventHooks;
+import RpgInventory.mod_RpgInventory;
 import java.util.EnumSet;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBow;
@@ -9,11 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
-import RpgInventory.EnumRpgClass;
-import RpgInventory.IPet;
-import RpgInventory.RPGEventHooks;
-import RpgInventory.mod_RpgInventory;
-import net.minecraft.entity.EntityLiving;
 
 public class RpgInv implements IInventory {
 

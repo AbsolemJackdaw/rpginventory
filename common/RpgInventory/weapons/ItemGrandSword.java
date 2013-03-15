@@ -18,7 +18,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemSword;
 
-public class ItemGrandSword extends ItemSword {
+public class ItemGrandSword extends ItemRpgSword {
 
     private int weaponDamage;
     private final EnumToolMaterial toolMaterial;

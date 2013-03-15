@@ -12,6 +12,7 @@ import RpgRB.beastmaster.BullPet;
 import RpgRB.beastmaster.SpiderPet;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
 
 public class ItemRBMats2 extends Item {
@@ -78,7 +79,11 @@ public class ItemRBMats2 extends Item {
         }
         return whistle;
     }
-
+@Override
+    public void func_94581_a(IconRegister par1IconRegister) {
+        String itemName = getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1);
+        this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:" + itemName);
+    }
     public String getTextureFile() {
         return "/subaraki/RPGinventoryTM.png";
     }

@@ -14,8 +14,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import RpgInventory.mod_RpgInventory;
+import RpgInventory.weapons.ItemRpgWeapon;
 
-public class ItemClaymore extends Item{
+public class ItemClaymore extends ItemRpgWeapon{
 
 	private EnumToolMaterial toolMaterial;
 	private int weaponDamage;

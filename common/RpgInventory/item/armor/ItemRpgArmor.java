@@ -37,14 +37,8 @@ public class ItemRpgArmor extends Item {
      */
     @Override
     public void func_94581_a(IconRegister par1IconRegister) {
-        if (this.itemID == mod_RpgInventory.daggers.itemID) {
-            this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:dagger");
-        }else if (this.itemID == mod_RpgInventory.crystal.itemID) {
-            this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:crystal");
-        }else if (this.itemID == mod_RpgInventory.beastAxe.itemID) {
-            this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:forestAxe");
-        }
-
+        String itemName = getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1);
+        this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:" + itemName);
     }
     public int renderJewelIndex;
     private String Name;

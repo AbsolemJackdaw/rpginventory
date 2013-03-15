@@ -32,7 +32,7 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.network.packet.Packet250CustomPayload;
 
-public class ItemNecroSkull extends Item {
+public class ItemNecroSkull extends ItemRpgWeapon {
 
     private int weaponDamage;
     private final EnumToolMaterial toolMaterial;

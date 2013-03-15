@@ -1,14 +1,13 @@
 package RpgInventory.gui.inventory;
 
 import RpgInventory.IPet;
+import RpgInventory.item.armor.ItemRpgArmor;
+import RpgInventory.mod_RpgInventory;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import RpgInventory.mod_RpgInventory;
-import RpgRB.ItemCrystal;
-import RpgInventory.item.armor.ItemRpgArmor;
-import net.minecraft.entity.EntityLiving;
 
 public class RpgContainer extends Container {
 

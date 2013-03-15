@@ -1,14 +1,10 @@
 package RpgInventory.gui.inventory;
 
-import RpgInventory.IPet;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import RpgInventory.mod_RpgInventory;
-import RpgRB.ItemCrystal;
 import RpgInventory.item.armor.ItemRpgArmor;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 
 class SlotRpgArmor extends Slot {

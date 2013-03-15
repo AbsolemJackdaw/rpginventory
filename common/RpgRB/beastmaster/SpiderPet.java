@@ -4,7 +4,6 @@
  */
 package RpgRB.beastmaster;
 
-import RpgRB.models.ModelBoar;
 import RpgRB.models.ModelSpiderB;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
@@ -13,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 

@@ -1,28 +1,21 @@
 package RpgMageSet.weapons;
 
+import RpgInventory.EnumRpgClass;
+import RpgInventory.mod_RpgInventory;
+import RpgInventory.weapons.ItemRpgSword;
 import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityEnderCrystal;
-import net.minecraft.entity.item.EntityEnderEye;
-import net.minecraft.entity.item.EntityFallingSand;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import RpgInventory.EnumRpgClass;
-import RpgInventory.mod_RpgInventory;
 
-public class ItemElementalStaff extends ItemSword {
+public class ItemElementalStaff extends ItemRpgSword {
 
 	protected boolean hasAttacked = false;
 	public int type = 1;

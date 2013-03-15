@@ -1,14 +1,7 @@
 package RpgInventory.playerjewels.models.armor;
 
-import RpgInventory.item.armor.BonusArmor;
-import RpgInventory.mod_RpgInventory;
-import java.util.Random;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.model.TextureOffset;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.item.ItemStack;
 
 public class ModelBeastArmor extends ModelBiped {
     //fields

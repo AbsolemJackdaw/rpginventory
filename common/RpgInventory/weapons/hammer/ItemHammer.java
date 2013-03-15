@@ -3,6 +3,8 @@ package RpgInventory.weapons.hammer;
 import RpgInventory.EnumRpgClass;
 import RpgInventory.gui.inventory.RpgInv;
 import RpgInventory.mod_RpgInventory;
+import RpgInventory.weapons.ItemRpgSword;
+import RpgInventory.weapons.ItemRpgWeapon;
 import java.util.Random;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +15,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class ItemHammer extends ItemSword {
+public class ItemHammer extends ItemRpgSword {
 
     Random rand = new Random();
 

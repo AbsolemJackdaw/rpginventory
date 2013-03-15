@@ -19,23 +19,8 @@ public class BonusArmor extends ItemArmor implements IArmorTextureProvider {
     }
 
     public void func_94581_a(IconRegister par1IconRegister) {
-        if (this.itemID == mod_RpgInventory.beastHood.itemID) {
-            this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:beast1");
-        } else if (this.itemID == mod_RpgInventory.beastChest.itemID) {
-            this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:beast2");
-        } else if (this.itemID == mod_RpgInventory.beastLegs.itemID) {
-            this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:beast3");
-        } else if (this.itemID == mod_RpgInventory.beastBoots.itemID) {
-            this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:beast4");
-        } else if (this.itemID == mod_RpgInventory.magehood.itemID) {
-            this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:mage1");
-        } else if (this.itemID == mod_RpgInventory.magegown.itemID) {
-            this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:mage2");
-        } else if (this.itemID == mod_RpgInventory.magepants.itemID) {
-            this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:mage3");
-        } else if (this.itemID == mod_RpgInventory.mageboots.itemID) {
-            this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:mage4");
-        }
+        String itemName = getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1);
+        this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:" + itemName);
     }
 
     public String getTextureFile() {

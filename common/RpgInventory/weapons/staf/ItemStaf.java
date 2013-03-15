@@ -1,15 +1,16 @@
 package RpgInventory.weapons.staf;
 
 import RpgInventory.mod_RpgInventory;
+import RpgInventory.weapons.ItemRpgSword;
+import RpgInventory.weapons.ItemRpgWeapon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 
-public class ItemStaf extends ItemSword {
+public class ItemStaf extends ItemRpgSword {
 
     protected boolean hasAttacked = false;
 
