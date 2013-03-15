@@ -220,16 +220,17 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob, I
         this.worldObj.spawnEntityInWorld(var2);
     }
 
-    public void attackEntityWithRangedAttack(EntityLiving par1EntityLiving) {
-        EntityArrow var2 = new EntityArrow(this.worldObj, this, par1EntityLiving, 1.6F, 12.0F);
-
-
-        this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.worldObj.spawnEntityInWorld(var2);
-    }
-
     @Override
     public EntityAgeable createChild(EntityAgeable var1) {
         return null;
     }
+
+	@Override
+	public void attackEntityWithRangedAttack(EntityLiving entityliving, float f) {
+		EntityArrow var2 = new EntityArrow(this.worldObj, this, entityliving, 1.6F, 12.0F);
+
+
+        this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+        this.worldObj.spawnEntityInWorld(var2);		
+	}
 }
