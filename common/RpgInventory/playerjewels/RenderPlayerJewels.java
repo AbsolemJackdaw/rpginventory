@@ -38,6 +38,7 @@ import RpgInventory.gui.inventory.RpgGui;
 import RpgInventory.gui.inventory.RpgInv;
 import RpgInventory.item.armor.BonusArmor;
 import RpgInventory.playerjewels.models.armor.ModelBeastArmor;
+import RpgInventory.playerjewels.models.armor.ModelBerserkerArmor;
 import RpgInventory.playerjewels.models.armor.ModelMageArmor;
 import RpgInventory.playerjewels.models.armor.ModelNecroArmor;
 import RpgInventory.playerjewels.models.armor.ModelRogueArmor;
@@ -76,6 +77,8 @@ public class RenderPlayerJewels extends RenderPlayer {
 	public ModelNecroArmor necroArmorChest;
 	public ModelRogueArmor rogueArmor;
 	public ModelRogueArmor rogueArmorChest;
+	public ModelBerserkerArmor berserkArmor;
+	public ModelBerserkerArmor berserkarmorChest;
 	public ItemStack col;
 	public ItemStack shield;
 	public ItemStack cloak;
@@ -104,7 +107,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 			this.skull = new NecroSkull();
 		}
 		mc = Minecraft.getMinecraft();
-		
+
 		beastarmor = new ModelBeastArmor(0.5F, 0.0F, 64, 32);
 		beastarmorChest = new ModelBeastArmor(1.0F, 0.0F, 64, 32);
 		mageArmor = new ModelMageArmor(0.5f, 0.0f, 65, 64);
@@ -113,6 +116,8 @@ public class RenderPlayerJewels extends RenderPlayer {
 		necroArmorChest = new ModelNecroArmor(1.0f, 0.0f, 65, 64);
 		rogueArmor = new ModelRogueArmor(0.5f, 0.0f, 65, 64);
 		rogueArmorChest = new ModelRogueArmor(1.0f, 0.0f, 65, 64);
+		berserkArmor = new ModelBerserkerArmor(0.5f, 0.0f, 65, 64);
+		berserkarmorChest = new ModelBerserkerArmor(1.0f, 0.0f, 65, 64);
 
 	}
 
@@ -312,7 +317,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glPopMatrix();
 			}
 		}
-		
+
 		//SHIELD
 		if (shield != null) {
 
@@ -563,8 +568,9 @@ public class RenderPlayerJewels extends RenderPlayer {
 		this.mageArmor.showMageFeet(false);
 		this.rogueArmor.showBoots(false);
 		this.rogueArmor.showKnee(false);
-		
-		
+		this.berserkArmor.showHorns(false);
+		this.berserkArmor.showSpaulders(false);
+
 		ItemStack var4 = par1EntityPlayer.inventory.armorItemInSlot(3 - par2);
 		if (var4 != null) {
 			Item var5 = var4.getItem();
@@ -619,13 +625,20 @@ public class RenderPlayerJewels extends RenderPlayer {
 				else if (var6.itemID == mod_RpgInventory.rogueLegs.itemID) {
 					this.loadTexture("/armor/rogue_3.png");
 					this.rogueArmor.showKnee(true);
-					
+
 				} else if (var6.itemID == mod_RpgInventory.rogueBoots.itemID) {
 					this.loadTexture("/armor/rogue_3.png");
 					this.rogueArmor.showBoots(true);
 				}
-				
-				else{
+				//Berserk
+				else if (var6.itemID == mod_RpgInventory.berserkerHood.itemID){
+					this.loadTexture("/armor/berserk_3.png");
+					this.berserkArmor.showHorns(true);
+				}else if (var6.itemID == mod_RpgInventory.berserkerChest.itemID){
+					this.loadTexture("/armor/berserk_3.png");
+					this.berserkArmor.showSpaulders(true);
+
+				}else{
 					return -1;
 				}
 				//Binds our model.
@@ -656,6 +669,11 @@ public class RenderPlayerJewels extends RenderPlayer {
 				{
 					var7 = par2 == 2 ? this.rogueArmor : this.rogueArmorChest;
 				}
+				else if(var6.itemID == mod_RpgInventory.berserkerHood.itemID|| var6.itemID == mod_RpgInventory.berserkerChest.itemID
+						||var6.itemID == mod_RpgInventory.berserkerLegs.itemID||var6.itemID == mod_RpgInventory.berserkerBoots.itemID)
+				{
+					var7 = par2 == 2 ? this.berserkArmor : this.berserkarmorChest;
+				}
 
 				var7.bipedHead.showModel = par2 == 0;
 				var7.bipedHeadwear.showModel = par2 == 0;
@@ -678,21 +696,29 @@ public class RenderPlayerJewels extends RenderPlayer {
 				}
 
 				//let the 'hacked' armor sneak when the player does
-				rogueArmor.isSneak= rogueArmorChest.isSneak= beastarmor.isSneak= beastarmorChest.isSneak = mageArmor.isSneak = mageArmorChest.isSneak = par1EntityPlayer.isSneaking();
+				berserkArmor.isSneak = berserkarmorChest.isSneak =
+						necroArmor.isSneak = necroArmorChest.isSneak =
+						rogueArmor.isSneak= rogueArmorChest.isSneak= 
+						beastarmor.isSneak= beastarmorChest.isSneak =
+						mageArmor.isSneak = mageArmorChest.isSneak =
+						par1EntityPlayer.isSneaking();
 				//Render the armor with a small inclination when player has an item in his hand
 				if(par1EntityPlayer.inventory.getCurrentItem() != null)
+					berserkArmor.heldItemRight = berserkarmorChest.heldItemRight =
 					rogueArmor.heldItemRight = rogueArmorChest.heldItemRight =
 					necroArmor.heldItemRight = necroArmorChest.heldItemRight =
 					beastarmor.heldItemRight = beastarmorChest.heldItemRight = 
 					mageArmor.heldItemRight = mageArmorChest.heldItemRight
 					=1;
 				else
+					berserkArmor.heldItemRight = berserkarmorChest.heldItemRight =
 					rogueArmor.heldItemRight = rogueArmorChest.heldItemRight =
 					necroArmor.heldItemRight = necroArmorChest.heldItemRight =
 					beastarmor.heldItemRight = beastarmorChest.heldItemRight = 
 					mageArmor.heldItemRight = mageArmorChest.heldItemRight 
 					=0;
 				// holding bow is still missing
+				// Most likely doesnt need to be added for armor.
 				float var8 = 1.0F;
 
 				if (var6.getArmorMaterial() == EnumArmorMaterial.CLOTH) {
