@@ -143,7 +143,7 @@ public class ModelMageArmor extends ModelBiped
 		Shape13.mirror = true;
 		setRotation(Shape13, 0F, 0F, 0F);
 		Shape14 = new ModelRenderer(this, 0, 39);
-		Shape14.addBox(0F, -1F, -2.5F, 5, 2, 5,par1);
+		Shape14.addBox(-1F, -1F, -2.5F, 5, 2, 5,par1);
 		Shape14.setRotationPoint(0F, 0F, 0F);
 		Shape14.setTextureSize(65, 64);
 		Shape14.mirror = true;
