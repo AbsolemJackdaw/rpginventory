@@ -1,5 +1,6 @@
 package RpgInventory.weapons.claymore;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -10,9 +11,11 @@ import org.lwjgl.opengl.GL11;
 public class ClaymoreRenderer implements IItemRenderer {
 
 	ModelClaymore swordmodel;
-	
+	Minecraft mc;
+
 	public ClaymoreRenderer()
 	{
+		mc = Minecraft.getMinecraft();
 		swordmodel = new ModelClaymore();
 	}
 	@Override
@@ -39,18 +42,17 @@ public class ClaymoreRenderer implements IItemRenderer {
 		case  EQUIPPED:
 		{
 			GL11.glPushMatrix();
-			
-			ForgeHooksClient.bindTexture("/subaraki/weapons/Sword.png", 0);
-			
+
+			mc.renderEngine.func_98187_b("/subaraki/weapons/Sword.png");
+
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(-5F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(-150F, 0.0f, 0.0f, 1.0f);
-			
-		GL11.glTranslatef(-0.8F, 0.6F, -0.1F);
+
+			GL11.glTranslatef(-0.8F, 0.6F, -0.1F);
 
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			ForgeHooksClient.unbindTexture();
-			
+
 			GL11.glPopMatrix();
 		}
 		break;
@@ -58,25 +60,24 @@ public class ClaymoreRenderer implements IItemRenderer {
 		case  ENTITY:
 		{
 			GL11.glPushMatrix();
-			
+
 			float scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
-			ForgeHooksClient.bindTexture("/subaraki/weapons/Sword.png", 0);
-			
+			mc.renderEngine.func_98187_b("/subaraki/weapons/Sword.png");
+
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(45F, 0.0f, 0.0f, 1.0f);
-			
-		GL11.glTranslatef( -0.2F, 1F, 0F);
+
+			GL11.glTranslatef( -0.2F, 1F, 0F);
 
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			ForgeHooksClient.unbindTexture();
-			
+
 			GL11.glPopMatrix();
 		}
 		break;
 
-			default: break;
+		default: break;
 		}
 	}
 

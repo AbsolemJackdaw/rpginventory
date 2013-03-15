@@ -17,10 +17,11 @@ import RpgInventory.gui.inventory.RpgGui;
 public class HammerRender implements IItemRenderer {
 
 	ModelHammer swordmodel;
-
+	Minecraft mc;
 	public HammerRender()
 	{
 		swordmodel = new ModelHammer();
+		mc = Minecraft.getMinecraft();
 	}
 
 	@Override
@@ -51,17 +52,17 @@ public class HammerRender implements IItemRenderer {
 			if(((EntityPlayer)data[1]).getFoodStats().getFoodLevel() <4
 					||((EntityPlayer)data[1]).getHealth() <4)
 			{
-				ForgeHooksClient.bindTexture("/subaraki/weapons/RageHammer.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/weapons/RageHammer.png");
 
 			}
 			else
 			{
-				ForgeHooksClient.bindTexture("/subaraki/weapons/Hammer.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/weapons/Hammer.png");
 			}
 
 			float scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
-                        
+
 			GL11.glRotatef(-180F, 0f, 0.0f, 1.0f);  
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(-50F, 1.0f, 0.0f, 0f);
@@ -90,7 +91,6 @@ public class HammerRender implements IItemRenderer {
 			}
 
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			ForgeHooksClient.unbindTexture();		
 			GL11.glPopMatrix();
 
 
@@ -101,7 +101,7 @@ public class HammerRender implements IItemRenderer {
 		{
 			GL11.glPushMatrix();
 
-			ForgeHooksClient.bindTexture("/subaraki/weapons/Hammer.png", 0);
+			mc.renderEngine.func_98187_b("/subaraki/weapons/Hammer.png");
 
 			float scale = 1.8F;
 			GL11.glScalef(scale,scale,scale);
@@ -114,7 +114,6 @@ public class HammerRender implements IItemRenderer {
 
 
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			ForgeHooksClient.unbindTexture();		
 			GL11.glPopMatrix();
 
 		}

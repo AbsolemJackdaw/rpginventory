@@ -81,6 +81,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 	public ItemStack cloak;
 	public ItemStack want;
 	public int rotation = 0;
+	private Minecraft mc;
 	RpgInv rpg;
 
 	public RenderPlayerJewels(ModelBase model) {// the name of this class sounds so wrong ... ._.
@@ -102,6 +103,8 @@ public class RenderPlayerJewels extends RenderPlayer {
 		if (mod_RpgInventory.hasRpg) {
 			this.skull = new NecroSkull();
 		}
+		mc = Minecraft.getMinecraft();
+		
 		beastarmor = new ModelBeastArmor(0.5F, 0.0F, 64, 32);
 		beastarmorChest = new ModelBeastArmor(1.0F, 0.0F, 64, 32);
 		mageArmor = new ModelMageArmor(0.5f, 0.0f, 65, 64);
@@ -142,43 +145,43 @@ public class RenderPlayerJewels extends RenderPlayer {
 					 * Dev Capes
 					 */
 					if (player.username.equals("TheCodyMaverick")) {
-						ForgeHooksClient.bindTexture("/subaraki/devcapes/ACCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/ACCape.png");
 					} else if (player.username.equals("Unjustice")) {
-						ForgeHooksClient.bindTexture("/subaraki/devcapes/UnCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/UnCape.png");
 					} else if (player.username.equals("NyhmsQuest")) {
-						ForgeHooksClient.bindTexture("/subaraki/devcapes/NymCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/NymCape.png");
 					} else if (player.username.equals("Joebuz")) {
-						ForgeHooksClient.bindTexture("/subaraki/devcapes/BuzCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/BuzCape.png");
 					} else if (player.username.equals("superv20")) {
-						ForgeHooksClient.bindTexture("/subaraki/devcapes/MRSCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/MRSCape.png");
 					} else if (player.username.equals("VIruS_Ex")) {
-						ForgeHooksClient.bindTexture("/subaraki/devcapes/PreCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/PreCape.png");
 					} else if (player.username.equals("AbrarSyed")) {
-						ForgeHooksClient.bindTexture("/subaraki/devcapes/AbrCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/AbrCape.png");
 					} else if (player.username.equals("rich1051414")) {
-						ForgeHooksClient.bindTexture("/subaraki/devcapes/TarCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/TarCape.png");
 					} else if (player.username.equals("LegendaryKoala")) {
-						ForgeHooksClient.bindTexture("/subaraki/devcapes/CoaCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/CoaCape.png");
 					} else if (player.username.equals("TheCowTheory")) {
-						ForgeHooksClient.bindTexture("/subaraki/devcapes/CowCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/CowCape.png");
 					} else if (player.username.equals("Zxapa") || player.username.equals("Spineripper64 ")) {
-						ForgeHooksClient.bindTexture("/subaraki/devcapes/ConCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/ConCape.png");
 					} else if (player.username.equals("Artix_all_mighty")) {
-						ForgeHooksClient.bindTexture("/subaraki/devcapes/SubCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/SubCape.png");
 					} else // if none of the names match, it should return a grey cape texture.
 					{
-						ForgeHooksClient.bindTexture("/subaraki/capes/GreyCape.png", 0);
+						mc.renderEngine.func_98187_b("/subaraki/capes/GreyCape.png");
 					}
 				} else if (cloak.getItem() == mod_RpgInventory.cloakYellow) {
-					ForgeHooksClient.bindTexture("/subaraki/capes/GoldCape.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/capes/GoldCape.png");
 				} else if (cloak.getItem() == mod_RpgInventory.cloakRed) {
-					ForgeHooksClient.bindTexture("/subaraki/capes/RedCape.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/capes/RedCape.png");
 				} else if (cloak.getItem() == mod_RpgInventory.cloakGreen) {
-					ForgeHooksClient.bindTexture("/subaraki/capes/GreenCape.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/capes/GreenCape.png");
 				} else if (cloak.getItem() == mod_RpgInventory.cloakBlue) {
-					ForgeHooksClient.bindTexture("/subaraki/capes/SkyCape.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/capes/SkyCape.png");
 				} else if (cloak.getItem() == mod_RpgInventory.cloakSub) {
-					ForgeHooksClient.bindTexture("/subaraki/capes/BlaCape.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/capes/BlaCape.png");
 				}
 
 
@@ -228,13 +231,13 @@ public class RenderPlayerJewels extends RenderPlayer {
 		if (want != null) {
 			GL11.glPushMatrix();
 			if (want.getItem() == mod_RpgInventory.glovesbutter) {
-				ForgeHooksClient.bindTexture("/subaraki/jewels/Glove.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/Glove.png");
 			} else if (want.getItem() == mod_RpgInventory.glovesdia) {
-				ForgeHooksClient.bindTexture("/subaraki/jewels/GloveDia.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/GloveDia.png");
 			} else if (want.getItem() == mod_RpgInventory.glovesem) {
-				ForgeHooksClient.bindTexture("/subaraki/jewels/GloveEm.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/GloveEm.png");
 			} else if (want.getItem() == mod_RpgInventory.gloveslap) {
-				ForgeHooksClient.bindTexture("/subaraki/jewels/GloveLap.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/GloveLap.png");
 			}
 
 			GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
@@ -254,13 +257,13 @@ public class RenderPlayerJewels extends RenderPlayer {
 
 			GL11.glPushMatrix();
 			if (want.getItem() == mod_RpgInventory.glovesbutter) {
-				ForgeHooksClient.bindTexture("/subaraki/jewels/Glove.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/Glove.png");
 			} else if (want.getItem() == mod_RpgInventory.glovesdia) {
-				ForgeHooksClient.bindTexture("/subaraki/jewels/GloveDia.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/GloveDia.png");
 			} else if (want.getItem() == mod_RpgInventory.glovesem) {
-				ForgeHooksClient.bindTexture("/subaraki/jewels/GloveEm.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/GloveEm.png");
 			} else if (want.getItem() == mod_RpgInventory.gloveslap) {
-				ForgeHooksClient.bindTexture("/subaraki/jewels/GloveLap.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/GloveLap.png");
 			}
 			GL11.glRotatef(this.modelBipedMain.bipedRightArm.rotateAngleX * scale, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(this.modelBipedMain.bipedRightArm.rotateAngleY * scale, 0.0F, 1.0F, 0.0F);
@@ -285,13 +288,13 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glPushMatrix();
 
 				if (col.getItem() == mod_RpgInventory.neckdia) {
-					ForgeHooksClient.bindTexture("/subaraki/jewels/NeckDia.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/jewels/NeckDia.png");
 				} else if (col.getItem() == mod_RpgInventory.neckem) {
-					ForgeHooksClient.bindTexture("/subaraki/jewels/NeckEm.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/jewels/NeckEm.png");
 				} else if (col.getItem() == mod_RpgInventory.neckgold) {
-					ForgeHooksClient.bindTexture("/subaraki/jewels/NeckGold.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/jewels/NeckGold.png");
 				} else if (col.getItem() == mod_RpgInventory.necklap) {
-					ForgeHooksClient.bindTexture("/subaraki/jewels/NeckLap.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/jewels/NeckLap.png");
 				}
 				GL11.glRotatef(this.modelBipedMain.bipedBody.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedBody.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -309,43 +312,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glPopMatrix();
 			}
 		}
-
-		float var3 = 1.0F;
-		GL11.glColor3f(var3, var3, var3);
-		//super.renderEquippedItems(player, par2);
-		//super.renderArrowsStuckInEntity(player, par2);
-		ItemStack var4 = player.inventory.armorItemInSlot(3);
-
-		if (var4 != null) {
-			GL11.glPushMatrix();
-			this.modelBipedMain.bipedHead.postRender(0.0625F);
-			float var5;
-
-			if (var4 != null && var4.getItem() instanceof ItemBlock) {
-				IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(var4, EQUIPPED);
-				boolean is3D = (customRenderer != null && customRenderer.shouldUseRenderHelper(EQUIPPED, var4, BLOCK_3D));
-
-				if (is3D || RenderBlocks.renderItemIn3d(Block.blocksList[var4.itemID].getRenderType())) {
-					var5 = 0.625F;
-					GL11.glTranslatef(0.0F, -0.25F, 0.0F);
-					GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-					GL11.glScalef(var5, -var5, -var5);
-				}
-				this.renderManager.itemRenderer.renderItem(player, var4, 0);
-			} else if (var4.getItem().itemID == Item.skull.itemID) {
-				var5 = 1.0625F;
-				GL11.glScalef(var5, -var5, -var5);
-				String var6 = "";
-
-				if (var4.hasTagCompound() && var4.getTagCompound().hasKey("SkullOwner")) {
-					var6 = var4.getTagCompound().getString("SkullOwner");
-				}
-
-				TileEntitySkullRenderer.skullRenderer.func_82393_a(-0.5F, 0.0F, -0.5F, 1, 180.0F, var4.getItemDamage(), var6);
-			}
-
-			GL11.glPopMatrix();
-		}
+		
 		//SHIELD
 		if (shield != null) {
 
@@ -355,9 +322,9 @@ public class RenderPlayerJewels extends RenderPlayer {
 			if (mod_RpgInventory.hasRogue == true && shield.getItem() == mod_RpgInventory.daggers) {
 
 				if (player.worldObj.getWorldTime() < 12500) {
-					ForgeHooksClient.bindTexture("/subaraki/weapons/dagger.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/weapons/dagger.png");
 				} else {
-					ForgeHooksClient.bindTexture("/subaraki/weapons/daggerNight.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/weapons/daggerNight.png");
 				}
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -374,7 +341,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				this.modelBipedMain.heldItemLeft = 1;
 				this.setRenderPassModel(dagger);
 			} else if (mod_RpgInventory.hasRogue == true && shield.getItem() == mod_RpgInventory.beastShield) {
-				ForgeHooksClient.bindTexture("/subaraki/jewels/lion.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/lion.png");
 
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -390,7 +357,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 
 			} else if (shield.getItem() == mod_RpgInventory.archersShield) {
 
-				ForgeHooksClient.bindTexture("/subaraki/jewels/Shield1.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/Shield1.png");
 
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -407,7 +374,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				if (rotation == 360) {
 					rotation = 0;
 				}
-				ForgeHooksClient.bindTexture("/subaraki/jewels/talisman.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/talisman.png");
 
 				GL11.glScalef(3F, 3F, 3F);
 				GL11.glTranslatef(-0.5F, -0.4F, -0.5F);
@@ -433,7 +400,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				}
 			} // bypass import for mod_RpgPlus
 			else if (mod_RpgInventory.hasRpg && shield.getItem() == mod_RpgInventory.necro_shield) {
-				ForgeHooksClient.bindTexture("/subaraki/jewels/NecroShield.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/NecroShield.png");
 
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -450,7 +417,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				}
 
 			} else if (mod_RpgInventory.hasRpg && shield.getItem() == mod_RpgInventory.pala_shield) {
-				ForgeHooksClient.bindTexture("/subaraki/jewels/PaladinShield.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/PaladinShield.png");
 
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -463,7 +430,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				}
 
 			} else if (shield.getItem() == mod_RpgInventory.berserkerShield) {
-				ForgeHooksClient.bindTexture("/subaraki/jewels/IronThorn.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/jewels/IronThorn.png");
 
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -476,7 +443,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				}
 			} else if (mod_RpgInventory.hasShields == true) {
 				if (shield.getItem() == mod_RpgInventory.shieldWood) {
-					ForgeHooksClient.bindTexture("/subaraki/jewels/ShieldWood.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/jewels/ShieldWood.png");
 
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -488,7 +455,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 						vanillaShield.renderShield(0.0625f);
 					}
 				} else if (shield.getItem() == mod_RpgInventory.shieldIron) {
-					ForgeHooksClient.bindTexture("/subaraki/jewels/ShieldIron.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/jewels/ShieldIron.png");
 
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -500,7 +467,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 						vanillaShield.renderShield(0.0625f);
 					}
 				} else if (shield.getItem() == mod_RpgInventory.shieldGold) {
-					ForgeHooksClient.bindTexture("/subaraki/jewels/ShieldGold.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/jewels/ShieldGold.png");
 
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -512,7 +479,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 						vanillaShield.renderShield(0.0625f);
 					}
 				} else if (shield.getItem() == mod_RpgInventory.shieldDiamond) {
-					ForgeHooksClient.bindTexture("/subaraki/jewels/ShieldDiamond.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/jewels/ShieldDiamond.png");
 
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -531,7 +498,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 					if (rotation == 360) {
 						rotation = 0;
 					}
-					ForgeHooksClient.bindTexture("/subaraki/jewels/book.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/jewels/book.png");
 					GL11.glPushMatrix();
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -546,8 +513,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 						book.render(0.0625f);
 					}
 					GL11.glPopMatrix();
-					ForgeHooksClient.unbindTexture();
-					ForgeHooksClient.bindTexture("/subaraki/jewels/magemantle.png", 0);
+					mc.renderEngine.func_98187_b("/subaraki/jewels/magemantle.png");
 
 					GL11.glScalef(3F, 3F, 3F);
 					GL11.glTranslatef(-0.5F, -0.4F, -0.5F);
@@ -573,7 +539,6 @@ public class RenderPlayerJewels extends RenderPlayer {
 					}
 				}
 			}
-			ForgeHooksClient.unbindTexture();
 			GL11.glPopMatrix();
 			GL11.glPopAttrib();
 			GL11.glColor4f(1, 1, 1, 1);

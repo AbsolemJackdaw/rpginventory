@@ -36,9 +36,9 @@ public class RpgGui extends GuiContainer {
     }
 
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
-        int var4 = this.mc.renderEngine.getTexture("/subaraki/RpgInv.png");
+        //int var4 = this.mc.renderEngine.getTexture("/subaraki/RpgInv.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(var4);
+        this.mc.renderEngine.func_98187_b("/subaraki/RpgInv.png");
         int var5 = this.height;
         int var6 = this.width;
         int posX = (this.width - xSize) / 2;
@@ -83,13 +83,13 @@ public class RpgGui extends GuiContainer {
 
     public void initGui() {
         super.initGui();
-        this.controlList.clear();
+        this.buttonList.clear();
 
         int posX = (this.width - xSize) / 2;
         int posY = (this.height - ySize) / 2;
 
-        this.controlList.add(new GuiButton(0, posX + 130, posY + 1, 50, 20, "Back"));
-        this.controlList.add(new GuiButton(1, posX + 130, posY + 22, 50, 20, "Pet"));
+        this.buttonList.add(new GuiButton(0, posX + 130, posY + 1, 50, 20, "Back"));
+        this.buttonList.add(new GuiButton(1, posX + 130, posY + 22, 50, 20, "Pet"));
 
     }
 

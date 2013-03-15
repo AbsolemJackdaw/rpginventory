@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -18,10 +17,11 @@ import RpgInventory.gui.inventory.RpgGui;
 public class BowRender implements IItemRenderer {
 
 	ModelBow swordmodel;
-
+	Minecraft mc;
 	public BowRender()
 	{
 		swordmodel = new ModelBow();
+		mc = Minecraft.getMinecraft();
 	}
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -48,20 +48,20 @@ public class BowRender implements IItemRenderer {
 		case  EQUIPPED:
 		{
 
-			int k = mod_RpgInventory.elfbow.getIconIndex(item, 0, ((EntityPlayer)data[1]), item, ((EntityPlayer)data[1]).getItemInUseCount());
+			int k = mod_RpgInventory.elfbow;
 			
 			GL11.glPushMatrix();
 			if(((EntityPlayer)data[1]).getCurrentEquippedItem()!= null){
 				
 				switch(k)
 				{
-				case 23:ForgeHooksClient.bindTexture("/subaraki/weapons/bow.png", 0);
+				case 23:mc.renderEngine.func_98187_b("/subaraki/weapons/bow.png");
 				break;
-				case 24:ForgeHooksClient.bindTexture("/subaraki/weapons/bow2.png", 1);
+				case 24:mc.renderEngine.func_98187_b("/subaraki/weapons/bow2.png");
 				break;
-				case 25:ForgeHooksClient.bindTexture("/subaraki/weapons/bow3.png", 2);
+				case 25:mc.renderEngine.func_98187_b("/subaraki/weapons/bow3.png");
 				break;
-				default:ForgeHooksClient.bindTexture("/subaraki/weapons/bow.png", 0);
+				default:mc.renderEngine.func_98187_b("/subaraki/weapons/bow.png");
 					break;
 				}
 				
@@ -93,7 +93,6 @@ public class BowRender implements IItemRenderer {
 			}
 
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			ForgeHooksClient.unbindTexture();
 
 			GL11.glPopMatrix();
 		}
@@ -105,7 +104,7 @@ public class BowRender implements IItemRenderer {
 
 			float scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
-			ForgeHooksClient.bindTexture("/subaraki/bow.png", 0);
+			mc.renderEngine.func_98187_b("/subaraki/bow.png");
 
 			GL11.glRotatef(0f, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
@@ -114,7 +113,6 @@ public class BowRender implements IItemRenderer {
 			GL11.glTranslatef( 0F, -0.4F, 0F);
 
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			ForgeHooksClient.unbindTexture();
 
 			GL11.glPopMatrix();
 		}

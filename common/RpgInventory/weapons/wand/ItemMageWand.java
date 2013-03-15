@@ -148,12 +148,12 @@ public class ItemMageWand extends Item{
 
 						if (var12 == Block.oreIron.blockID || var12 == Block.oreCoal.blockID || var12 == Block.oreDiamond.blockID)
 						{
-							par3World.setBlock(par4, par5, par6, Block.oreGold.blockID);
+							par3World.setBlockMetadataWithNotify(par4, par5, par6,par7, Block.oreGold.blockID);
 							par1ItemStack.damageItem(4, par2EntityPlayer);
 						}
 						if( var12 == Block.oreLapis.blockID)
 						{
-							par3World.setBlock(par4, par5, par6, Block.blockLapis.blockID);
+							par3World.setBlockMetadataWithNotify(par4, par5, par6,par7, Block.blockLapis.blockID);
 							par1ItemStack.damageItem(151, par2EntityPlayer);
 						}
 

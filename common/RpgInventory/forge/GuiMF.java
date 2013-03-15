@@ -34,9 +34,8 @@ public class GuiMF extends GuiContainer {
 	 */
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 
-		int i = mc.renderEngine.getTexture("/subaraki/Forge.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(i);
+		mc.renderEngine.func_98187_b("/subaraki/Forge.png");
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
 		drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
@@ -48,7 +47,6 @@ public class GuiMF extends GuiContainer {
 
 		int update = forgeInventory.getProgressScaled(60);
 		drawTexturedModalRect(j+78, k+43, 176, 33, update, 15);
-		ForgeHooksClient.unbindTexture();
 
 		j += 96;
 		k += 51;
@@ -56,7 +54,7 @@ public class GuiMF extends GuiContainer {
 		float x = 1 * ratio;
 		float y = 6 * ratio;
 		
-		ForgeHooksClient.bindTexture("/subaraki/RPGinventoryTM.png", 0);
+		mc.renderEngine.func_98187_b("/subaraki/RPGinventoryTM.png");
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.85F);
@@ -101,7 +99,6 @@ public class GuiMF extends GuiContainer {
 		GL11.glVertex3f(j + 16, k, 0);
 		GL11.glEnd();
 
-		ForgeHooksClient.unbindTexture();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 }

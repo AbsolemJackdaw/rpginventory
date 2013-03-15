@@ -12,12 +12,11 @@ public class ItemRageFood extends ItemFood {
     }
 
     @Override
-    public ItemStack onFoodEaten(ItemStack par1ItemStack, World par2World,
+    public void onFoodEaten(ItemStack par1ItemStack, World par2World,
             EntityPlayer p) {
         if (p.getFoodStats().getFoodLevel() > 0) {
             p.getFoodStats().addStats(p.getFoodStats().getFoodLevel() * -1, 0.0F);
         }
         par1ItemStack.stackSize--;
-        return par1ItemStack;
     }
 }

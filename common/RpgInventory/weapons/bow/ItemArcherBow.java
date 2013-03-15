@@ -1,11 +1,15 @@
 package RpgInventory.weapons.bow;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -15,6 +19,10 @@ import RpgInventory.gui.inventory.RpgInv;
 
 public class ItemArcherBow extends Item
 {
+	public static final String[] field_94601_a = new String[] {"elmBow1", "elmBow2", "elmBow3"};
+	@SideOnly(Side.CLIENT)
+	private Icon[] field_94600_b;
+
 	public ItemArcherBow(int par1)
 	{
 		super(par1);
@@ -188,22 +196,23 @@ public class ItemArcherBow extends Item
 	{
 		return -1;
 	}
-
-	public int getIconIndex(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
+	
+	@SideOnly(Side.CLIENT)
+	public void func_94581_a(IconRegister par1IconRegister)
 	{
-		int k = usingItem.getMaxItemUseDuration() - useRemaining;
+		super.func_94581_a(par1IconRegister);
+		this.field_94600_b = new Icon[field_94601_a.length];
 
-		//System.out.println(k);
-
-		if (usingItem != null && usingItem.getItem().itemID == mod_RpgInventory.elfbow.itemID )
+		for (int i = 0; i < this.field_94600_b.length; ++i)
 		{
-			if (k >=  18 && k != 72000) return 25;
-			if (k >   1  && k != 72000) return 24;
-			if (k >   0) return 23;
-
+			this.field_94600_b[i] = par1IconRegister.func_94245_a(field_94601_a[i]);
 		}
+	}
 
-		return getIconIndex(stack);
+	@SideOnly(Side.CLIENT)
+	public Icon func_94599_c(int par1)
+	{
+		return this.field_94600_b[par1];
 	}
 
 	public String getTextureFile()

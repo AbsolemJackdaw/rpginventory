@@ -258,95 +258,95 @@ public class mod_RpgInventory {
 		developers.add("artix_all_mighty");
 		developers.add("rich1051414");
 
-		forgeBlock = new BlockForge(RpgConfig.instance.forgeblockID, Material.rock).setHardness(5f).setBlockName("MoldForge").setCreativeTab(tab);
+		forgeBlock = new BlockForge(RpgConfig.instance.forgeblockID, Material.rock).setHardness(5f).setUnlocalizedName("MoldForge").setCreativeTab(tab);
 
-		neckgold = new ItemRpgArmor(RpgConfig.instance.neckgoldID, 0, -1, "").setIconIndex(0).setItemName("goldnecklace").setCreativeTab(tab);
-		neckdia = new ItemRpgArmor(RpgConfig.instance.neckdiaID, 0, -1, "").setIconIndex(0 + 16).setItemName("neckwithdia").setCreativeTab(tab);
-		neckem = new ItemRpgArmor(RpgConfig.instance.neckemID, 0, -1, "").setIconIndex(0 + 32).setItemName("neckwithem").setCreativeTab(tab);
-		necklap = new ItemRpgArmor(RpgConfig.instance.necklapID, 0, -1, "").setIconIndex(0 + 48).setItemName("neckwithlap").setCreativeTab(tab);
+		neckgold = new ItemRpgArmor(RpgConfig.instance.neckgoldID, 0, -1, "").setUnlocalizedName("neckGold").setCreativeTab(tab);
+		neckdia = new ItemRpgArmor(RpgConfig.instance.neckdiaID, 0, -1, "").setUnlocalizedName("neckDia").setCreativeTab(tab);
+		neckem = new ItemRpgArmor(RpgConfig.instance.neckemID, 0, -1, "").setUnlocalizedName("neckEm").setCreativeTab(tab);
+		necklap = new ItemRpgArmor(RpgConfig.instance.necklapID, 0, -1, "").setUnlocalizedName("neckLap").setCreativeTab(tab);
 
-		ringgold = new ItemRpgArmor(RpgConfig.instance.ringgoldID, 4, -1, "").setIconIndex(1).setItemName("goldring").setCreativeTab(tab);
-		ringdia = new ItemRpgArmor(RpgConfig.instance.ringdiaID, 4, -1, "").setIconIndex(1 + 16).setItemName("ringwithdia").setCreativeTab(tab);
-		ringem = new ItemRpgArmor(RpgConfig.instance.ringemID, 4, -1, "").setIconIndex(1 + 32).setItemName("ringwithem").setCreativeTab(tab);
-		ringlap = new ItemRpgArmor(RpgConfig.instance.ringlapID, 4, -1, "").setIconIndex(1 + 48).setItemName("ringwithlapis").setCreativeTab(tab);
+		ringgold = new ItemRpgArmor(RpgConfig.instance.ringgoldID, 4, -1, "").setUnlocalizedName("ringGold").setCreativeTab(tab);
+		ringdia = new ItemRpgArmor(RpgConfig.instance.ringdiaID, 4, -1, "").setUnlocalizedName("ringDia").setCreativeTab(tab);
+		ringem = new ItemRpgArmor(RpgConfig.instance.ringemID, 4, -1, "").setUnlocalizedName("ringEm").setCreativeTab(tab);
+		ringlap = new ItemRpgArmor(RpgConfig.instance.ringlapID, 4, -1, "").setUnlocalizedName("ringLap").setCreativeTab(tab);
 
-		glovesbutter = new ItemRpgArmor(RpgConfig.instance.glovesbutterID, 3, -1, "").setIconIndex(2).setItemName("goldrrgloves").setCreativeTab(tab);
-		glovesdia = new ItemRpgArmor(RpgConfig.instance.glovesdiaID, 3, -1, "").setIconIndex(2 + 16).setItemName("glovesdia").setCreativeTab(tab);
-		glovesem = new ItemRpgArmor(RpgConfig.instance.glovesemID, 3, -1, "").setIconIndex(2 + 32).setItemName("glovesem").setCreativeTab(tab);
-		gloveslap = new ItemRpgArmor(RpgConfig.instance.gloveslapID, 3, -1, "").setIconIndex(2 + 48).setItemName("gloveslap").setCreativeTab(tab);
+		glovesbutter = new ItemRpgArmor(RpgConfig.instance.glovesbutterID, 3, -1, "").setUnlocalizedName("gloveGold").setCreativeTab(tab);
+		glovesdia = new ItemRpgArmor(RpgConfig.instance.glovesdiaID, 3, -1, "").setUnlocalizedName("gloveDia").setCreativeTab(tab);
+		glovesem = new ItemRpgArmor(RpgConfig.instance.glovesemID, 3, -1, "").setUnlocalizedName("gloveEm").setCreativeTab(tab);
+		gloveslap = new ItemRpgArmor(RpgConfig.instance.gloveslapID, 3, -1, "").setUnlocalizedName("gloveEm").setCreativeTab(tab);
 
-		archersShield = new ItemRpgArmor(RpgConfig.instance.archersShieldID, 1, 200, "").setIconIndex(3).setItemName("woodshield").setCreativeTab(tab);
-		berserkerShield = new ItemRpgArmor(RpgConfig.instance.berserkerShieldID, 1, 350, "").setIconIndex(4).setItemName("ironshield").setCreativeTab(tab);
-		talisman = new ItemRpgArmor(RpgConfig.instance.talismanID, 1, 200, "").setIconIndex(5).setItemName("talisman").setCreativeTab(tab);
+		archersShield = new ItemRpgArmor(RpgConfig.instance.archersShieldID, 1, 200, "").setUnlocalizedName("shieldArcher").setCreativeTab(tab);
+		berserkerShield = new ItemRpgArmor(RpgConfig.instance.berserkerShieldID, 1, 350, "").setUnlocalizedName("shieldBerserker").setCreativeTab(tab);
+		talisman = new ItemRpgArmor(RpgConfig.instance.talismanID, 1, 200, "").setUnlocalizedName("shieldMage").setCreativeTab(tab);
 
-		cloak = new ItemRpgArmor(RpgConfig.instance.cloakID, 2, -1, "").setFull3D().setIconIndex(3 + 16).setItemName("cloak").setCreativeTab(tab);
-		cloakI = new ItemRpgArmor(RpgConfig.instance.cloakIID, 2, -1, "").setFull3D().setIconIndex(3 + 16).setItemName("InvisibilityCloak").setCreativeTab(tab);
+		cloak = new ItemRpgArmor(RpgConfig.instance.cloakID, 2, -1, "").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
+		cloakI = new ItemRpgArmor(RpgConfig.instance.cloakIID, 2, -1, "").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
 
-		magehood = new BonusArmor(RpgConfig.instance.magehoodID, robes, 4, 0).setItemName("magehoody").setIconIndex(15).setCreativeTab(tab);
-		magegown = new BonusArmor(RpgConfig.instance.magegownID, robes, 4, 1).setItemName("magegowny").setIconIndex(31).setCreativeTab(tab);
-		magepants = new BonusArmor(RpgConfig.instance.magepantsID, robes, 4, 2).setItemName("magepants").setIconIndex(47).setCreativeTab(tab);
-		mageboots = new BonusArmor(RpgConfig.instance.magebootsID, robes, 4, 3).setItemName("mageshoes").setIconIndex(63).setCreativeTab(tab);
+		magehood = new BonusArmor(RpgConfig.instance.magehoodID, robes, 4, 0).setUnlocalizedName("mage1").setCreativeTab(tab);
+		magegown = new BonusArmor(RpgConfig.instance.magegownID, robes, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);
+		magepants = new BonusArmor(RpgConfig.instance.magepantsID, robes, 4, 2).setUnlocalizedName("mage3").setCreativeTab(tab);
+		mageboots = new BonusArmor(RpgConfig.instance.magebootsID, robes, 4, 3).setUnlocalizedName("mage4").setCreativeTab(tab);
 
-		archerhood = new BonusArmor(RpgConfig.instance.archerhoodID, hides, 4, 0).setItemName("archerhoody").setIconIndex(14).setCreativeTab(tab);
-		archerchest = new BonusArmor(RpgConfig.instance.archerchestID, hides, 4, 1).setItemName("archerdhide").setIconIndex(30).setCreativeTab(tab);
-		archerpants = new BonusArmor(RpgConfig.instance.archerpantsID, hides, 4, 2).setItemName("archerpants").setIconIndex(46).setCreativeTab(tab);
-		archerboots = new BonusArmor(RpgConfig.instance.archerbootsID, hides, 4, 3).setItemName("archerboots").setIconIndex(62).setCreativeTab(tab);
+		archerhood = new BonusArmor(RpgConfig.instance.archerhoodID, hides, 4, 0).setUnlocalizedName("archer1").setCreativeTab(tab);
+		archerchest = new BonusArmor(RpgConfig.instance.archerchestID, hides, 4, 1).setUnlocalizedName("archer2").setCreativeTab(tab);
+		archerpants = new BonusArmor(RpgConfig.instance.archerpantsID, hides, 4, 2).setUnlocalizedName("archer3").setCreativeTab(tab);
+		archerboots = new BonusArmor(RpgConfig.instance.archerbootsID, hides, 4, 3).setUnlocalizedName("archer4").setCreativeTab(tab);
 
-		berserkerHood = new BonusArmor(RpgConfig.instance.berserkerHoodID, armoury, 4, 0).setItemName("rambo1").setIconIndex(13).setCreativeTab(tab);
-		berserkerChest = new BonusArmor(RpgConfig.instance.berserkerChestID, armoury, 4, 1).setItemName("rambo2").setIconIndex(29).setCreativeTab(tab);
-		berserkerLegs = new BonusArmor(RpgConfig.instance.berserkerLegsID, armoury, 4, 2).setItemName("rambo3").setIconIndex(45).setCreativeTab(tab);
-		berserkerBoots = new BonusArmor(RpgConfig.instance.berserkerBootsID, armoury, 4, 3).setItemName("rambo4").setIconIndex(61).setCreativeTab(tab);
+		berserkerHood = new BonusArmor(RpgConfig.instance.berserkerHoodID, armoury, 4, 0).setUnlocalizedName("berserk1").setCreativeTab(tab);
+		berserkerChest = new BonusArmor(RpgConfig.instance.berserkerChestID, armoury, 4, 1).setUnlocalizedName("berserk2").setCreativeTab(tab);
+		berserkerLegs = new BonusArmor(RpgConfig.instance.berserkerLegsID, armoury, 4, 2).setUnlocalizedName("berserk3").setCreativeTab(tab);
+		berserkerBoots = new BonusArmor(RpgConfig.instance.berserkerBootsID, armoury, 4, 3).setUnlocalizedName("berserk4").setCreativeTab(tab);
 
-		claymore = new ItemClaymore(RpgConfig.instance.claymoreID, clay).setFull3D().setMaxDamage(1024).setItemName("Daggerkiller").setIconIndex(20).setCreativeTab(tab);
-		wand = new ItemMageWand(RpgConfig.instance.wandID).setFull3D().setMaxDamage(400).setItemName("MagesWand").setIconIndex(21).setCreativeTab(tab);
-		elfbow = new ItemArcherBow(RpgConfig.instance.elfbowID).setFull3D().setMaxDamage(350).setItemName("ArcherBow").setIconIndex(22).setCreativeTab(tab);
+		claymore = new ItemClaymore(RpgConfig.instance.claymoreID, clay).setFull3D().setMaxDamage(1024).setUnlocalizedName("claymore").setCreativeTab(tab);
+		wand = new ItemMageWand(RpgConfig.instance.wandID).setFull3D().setMaxDamage(400).setUnlocalizedName("soulsphere").setCreativeTab(tab);
+		elfbow = new ItemArcherBow(RpgConfig.instance.elfbowID).setFull3D().setMaxDamage(350).setUnlocalizedName("elmBow").setCreativeTab(tab);
 
-		animalskin = new ItemRpg(RpgConfig.instance.animalskinID).setItemName("animal skin").setIconIndex(103).setCreativeTab(tab);
-		tanHide = new ItemRpg(RpgConfig.instance.tanHideID).setItemName("tanned hide").setIconIndex(103).setCreativeTab(tab);
-		magecloth = new ItemRpg(RpgConfig.instance.mageclothID).setItemName("mage cloth").setIconIndex(103).setCreativeTab(tab);
+		animalskin = new ItemRpg(RpgConfig.instance.animalskinID).setUnlocalizedName("leather").setCreativeTab(tab);
+		tanHide = new ItemRpg(RpgConfig.instance.tanHideID).setUnlocalizedName("leather").setCreativeTab(tab);
+		magecloth = new ItemRpg(RpgConfig.instance.mageclothID).setUnlocalizedName("leather").setCreativeTab(tab);
 
-		wizardBook = new ItemRpg(RpgConfig.instance.wizardBookID).setItemName("wizardbook").setIconCoord(11, 11).setCreativeTab(tab);
+		wizardBook = new ItemRpg(RpgConfig.instance.wizardBookID).setUnlocalizedName("book").setCreativeTab(tab);
 
-		hammer = new ItemHammer(RpgConfig.instance.hammerID, stone).setItemName("BerserkerHammer").setMaxDamage(750).setIconIndex(26).setCreativeTab(tab);
-		staf = new ItemStaf(RpgConfig.instance.stafID).setItemName("MageStaff").setMaxStackSize(1).setMaxDamage(1500).setIconIndex(37).setCreativeTab(tab);
+		hammer = new ItemHammer(RpgConfig.instance.hammerID, stone).setMaxDamage(750).setUnlocalizedName("rageBreaker").setCreativeTab(tab);
+		staf = new ItemStaf(RpgConfig.instance.stafID).setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);
 
-		rageSeed = new ItemRageFood(RpgConfig.instance.rageSeedID, 0, 0f, false).setAlwaysEdible().setIconCoord(9, 0).setItemName("RageSeed").setMaxStackSize(8).setCreativeTab(tab);
+		rageSeed = new ItemRageFood(RpgConfig.instance.rageSeedID, 0, 0f, false).setAlwaysEdible().setUnlocalizedName("seeds").setMaxStackSize(8).setCreativeTab(tab);
 
-		cloakRed = new ItemRpgArmor(RpgConfig.instance.cloakRedID, 2, -1, "").setFull3D().setIconIndex(3 + 16).setItemName("cloakred").setCreativeTab(tab);
-		cloakYellow = new ItemRpgArmor(RpgConfig.instance.cloakYellowID, 2, -1, "").setFull3D().setIconIndex(3 + 16).setItemName("cloakyellow").setCreativeTab(tab);
-		cloakGreen = new ItemRpgArmor(RpgConfig.instance.cloakGreenID, 2, -1, "").setFull3D().setIconIndex(3 + 16).setItemName("cloakgreen").setCreativeTab(tab);
-		cloakBlue = new ItemRpgArmor(RpgConfig.instance.cloakBlueID, 2, -1, "").setFull3D().setIconIndex(3 + 16).setItemName("cloaksaint").setCreativeTab(tab);
-		cloakSub = new ItemRpgArmor(RpgConfig.instance.cloakSubID, 2, -1, "").setFull3D().setIconIndex(3 + 16).setItemName("cloakSub").setCreativeTab(tab);
+		cloakRed = new ItemRpgArmor(RpgConfig.instance.cloakRedID, 2, -1, "capeGrey").setFull3D().setUnlocalizedName("").setCreativeTab(tab);
+		cloakYellow = new ItemRpgArmor(RpgConfig.instance.cloakYellowID, 2, -1, "capeGrey").setFull3D().setUnlocalizedName("").setCreativeTab(tab);
+		cloakGreen = new ItemRpgArmor(RpgConfig.instance.cloakGreenID, 2, -1, "capeGrey").setFull3D().setUnlocalizedName("").setCreativeTab(tab);
+		cloakBlue = new ItemRpgArmor(RpgConfig.instance.cloakBlueID, 2, -1, "capeGrey").setFull3D().setUnlocalizedName("").setCreativeTab(tab);
+		cloakSub = new ItemRpgArmor(RpgConfig.instance.cloakSubID, 2, -1, "capeGrey").setFull3D().setUnlocalizedName("").setCreativeTab(tab);
 
-		colmold = new ItemMold(RpgConfig.instance.colmoldID).setIconIndex(64).setItemName("colmold").setCreativeTab(tab);
-		ringmold = new ItemMold(RpgConfig.instance.ringmoldID).setIconIndex(65).setItemName("ringmold").setCreativeTab(tab);
-		wantmold = new ItemMold(RpgConfig.instance.wantmoldID).setIconIndex(66).setItemName("wantmold").setCreativeTab(tab);
+		colmold = new ItemMold(RpgConfig.instance.colmoldID).setUnlocalizedName("moldNeck").setCreativeTab(tab);
+		ringmold = new ItemMold(RpgConfig.instance.ringmoldID).setUnlocalizedName("moldRing").setCreativeTab(tab);
+		wantmold = new ItemMold(RpgConfig.instance.wantmoldID).setUnlocalizedName("moldGlove").setCreativeTab(tab);
 
-		crystal = new ItemCrystal(RpgConfig.instance.crystalID, ITEMTYPE.CRYSTAL, -1, "").setIconIndex(52).setItemName("petCrystal").setCreativeTab(tab);
+		crystal = new ItemCrystal(RpgConfig.instance.crystalID, ITEMTYPE.CRYSTAL, -1, "").setUnlocalizedName("petCrystal").setCreativeTab(tab);
 		if (hasRpg == true) {
 			EnumArmorMaterial necroArmor = EnumHelper.addArmorMaterial("necro_material", 20, new int[]{2, 5, 1, 1}, 5);	// use of Souls
 			EnumArmorMaterial paladin = EnumHelper.addArmorMaterial("pala_material", 20, new int[]{4, 7, 2, 1}, 5);	// use of Steel
 			NecroToolMaterial = EnumHelper.addToolMaterial("souls", 0, 1024, 5F, 1, 0);
 			PalaToolMaterial = EnumHelper.addToolMaterial("steel", 0, 1024, 5F, 1, 0);
 
-			necroHood = new BonusArmor(RpgConfig.instance.necroHoodID, necroArmor, 4, 0).setIconIndex(12).setItemName("Necro Helmet").setCreativeTab(mod_RpgInventory.tab);
-			necroChestplate = new BonusArmor(RpgConfig.instance.necroChestplateID, necroArmor, 4, 1).setIconIndex(12 + 16).setItemName("Necro Chestplate").setCreativeTab(mod_RpgInventory.tab);
-			necroLeggings = new BonusArmor(RpgConfig.instance.necroLeggingsID, necroArmor, 4, 2).setIconIndex(12 + 32).setItemName("Necro Leggings").setCreativeTab(mod_RpgInventory.tab);
-			necroBoots = new BonusArmor(RpgConfig.instance.necroBootsID, necroArmor, 4, 3).setIconIndex(12 + 48).setItemName("Necro Boots").setCreativeTab(mod_RpgInventory.tab);
+			necroHood = new BonusArmor(RpgConfig.instance.necroHoodID, necroArmor, 4, 0).setUnlocalizedName("necro1").setCreativeTab(mod_RpgInventory.tab);
+			necroChestplate = new BonusArmor(RpgConfig.instance.necroChestplateID, necroArmor, 4, 1).setUnlocalizedName("necro2").setCreativeTab(mod_RpgInventory.tab);
+			necroLeggings = new BonusArmor(RpgConfig.instance.necroLeggingsID, necroArmor, 4, 2).setUnlocalizedName("necro3").setCreativeTab(mod_RpgInventory.tab);
+			necroBoots = new BonusArmor(RpgConfig.instance.necroBootsID, necroArmor, 4, 3).setUnlocalizedName("necro4").setCreativeTab(mod_RpgInventory.tab);
 
-			palaHelm = new BonusArmor(RpgConfig.instance.palaHelmID, paladin, 4, 0).setIconIndex(11).setItemName("Pala Helmet").setCreativeTab(mod_RpgInventory.tab);
-			palaChest = new BonusArmor(RpgConfig.instance.palaChestID, paladin, 4, 1).setIconIndex(11 + 16).setItemName("Pala Chestplate").setCreativeTab(mod_RpgInventory.tab);
-			palaLeggings = new BonusArmor(RpgConfig.instance.palaLeggingsID, paladin, 4, 2).setIconIndex(11 + 32).setItemName("Pala Leggins").setCreativeTab(mod_RpgInventory.tab);
-			palaBoots = new BonusArmor(RpgConfig.instance.palaBootsID, paladin, 4, 3).setIconIndex(11 + 48).setItemName("Pala Boots").setCreativeTab(mod_RpgInventory.tab);
+			palaHelm = new BonusArmor(RpgConfig.instance.palaHelmID, paladin, 4, 0).setUnlocalizedName("paladin1").setCreativeTab(mod_RpgInventory.tab);
+			palaChest = new BonusArmor(RpgConfig.instance.palaChestID, paladin, 4, 1).setUnlocalizedName("paladin2").setCreativeTab(mod_RpgInventory.tab);
+			palaLeggings = new BonusArmor(RpgConfig.instance.palaLeggingsID, paladin, 4, 2).setUnlocalizedName("paladin3").setCreativeTab(mod_RpgInventory.tab);
+			palaBoots = new BonusArmor(RpgConfig.instance.palaBootsID, paladin, 4, 3).setUnlocalizedName("paladin4").setCreativeTab(mod_RpgInventory.tab);
 
-			necro_shield = new ItemRpgPlusPlusArmor(RpgConfig.instance.necro_shieldID, 1, 250, "necro").setIconIndex(254).setItemName("Necro Shield").setCreativeTab(tab);
-			necro_weapon = new ItemNecroSkull(RpgConfig.instance.necro_weaponID, NecroToolMaterial).setFull3D().setItemName("Necro Staff").setIconIndex(253).setCreativeTab(mod_RpgInventory.tab);
+			necro_shield = new ItemRpgPlusPlusArmor(RpgConfig.instance.necro_shieldID, 1, 250, "necro").setUnlocalizedName("shieldNecro").setCreativeTab(tab);
+			necro_weapon = new ItemNecroSkull(RpgConfig.instance.necro_weaponID, NecroToolMaterial).setFull3D().setUnlocalizedName("Skull").setCreativeTab(mod_RpgInventory.tab);
 
-			pala_shield = new ItemRpgPlusPlusArmor(RpgConfig.instance.pala_shieldID, 1, 450, "pala").setIconIndex(255).setItemName("Pala Shield").setCreativeTab(tab);
-			pala_weapon = new ItemGrandSword(RpgConfig.instance.pala_weaponID, PalaToolMaterial).setFull3D().setIconIndex(252).setItemName("Pala Sword").setCreativeTab(mod_RpgInventory.tab);
+			pala_shield = new ItemRpgPlusPlusArmor(RpgConfig.instance.pala_shieldID, 1, 450, "pala").setUnlocalizedName("shieldPaladin").setCreativeTab(tab);
+			pala_weapon = new ItemGrandSword(RpgConfig.instance.pala_weaponID, PalaToolMaterial).setFull3D().setUnlocalizedName("paladinPride").setCreativeTab(mod_RpgInventory.tab);
 
-			necro_skin = new ItemMats(RpgConfig.instance.necro_skinID).setIconIndex(103).setItemName("NecroSkin").setCreativeTab(mod_RpgInventory.tab);
-			pala_steel = new ItemMats(RpgConfig.instance.pala_steelID).setIconIndex(23).setItemName("PalaSteel").setCreativeTab(mod_RpgInventory.tab);
+			necro_skin = new ItemMats(RpgConfig.instance.necro_skinID).setUnlocalizedName("leather").setCreativeTab(mod_RpgInventory.tab);
+			pala_steel = new ItemMats(RpgConfig.instance.pala_steelID).setUnlocalizedName("leather").setCreativeTab(mod_RpgInventory.tab);
 
 			LanguageRegistry.addName(necro_shield, "NecroMancer Shield");
 			LanguageRegistry.addName(pala_shield, "Paladin Shield");
@@ -366,10 +366,10 @@ public class mod_RpgInventory {
 		}
 
 		if (hasShields == true) {
-			shieldWood = new ItemRpgArmor(RpgConfig.instance.shieldWoodID, 1, 50, "wood").setIconIndex(67).setItemName("vanillaWood").setCreativeTab(tab);
-			shieldIron = new ItemRpgArmor(RpgConfig.instance.shieldIronID, 1, 125, "iron").setIconIndex(68).setItemName("vanillaIron").setCreativeTab(tab);
-			shieldGold = new ItemRpgArmor(RpgConfig.instance.shieldGoldID, 1, 250, "gold").setIconIndex(69).setItemName("vanillaGold").setCreativeTab(tab);
-			shieldDiamond = new ItemRpgArmor(RpgConfig.instance.shieldDiamondID, 1, 500, "diamond").setIconIndex(70).setItemName("vanillaDiamond").setCreativeTab(tab);
+			shieldWood = new ItemRpgArmor(RpgConfig.instance.shieldWoodID, 1, 50, "wood").setUnlocalizedName("shieldWood").setCreativeTab(tab);
+			shieldIron = new ItemRpgArmor(RpgConfig.instance.shieldIronID, 1, 125, "iron").setUnlocalizedName("shieldIron").setCreativeTab(tab);
+			shieldGold = new ItemRpgArmor(RpgConfig.instance.shieldGoldID, 1, 250, "gold").setUnlocalizedName("shieldGold").setCreativeTab(tab);
+			shieldDiamond = new ItemRpgArmor(RpgConfig.instance.shieldDiamondID, 1, 500, "diamond").setUnlocalizedName("shieldDiamond").setCreativeTab(tab);
 
 			LanguageRegistry.addName(shieldWood, "Wooden Shield");
 			LanguageRegistry.addName(shieldIron, "Iron Shield");
@@ -378,27 +378,27 @@ public class mod_RpgInventory {
 		}
 		if (hasRogue == true) {
 
-			daggers = new ItemRpgArmor(RpgConfig.instance.daggersID, 1, 0, "").setItemName("daggerRogue").setIconCoord(6, 2).setCreativeTab(tab);
-			beastAxe = new ItemBeastAxe(RpgConfig.instance.beastAxe).setFull3D().setIconIndex(39).setItemName("beastmasteraxe").setCreativeTab(tab);
+			daggers = new ItemRpgArmor(RpgConfig.instance.daggersID, 1, 0, "").setUnlocalizedName("dagger").setCreativeTab(tab);
+			beastAxe = new ItemBeastAxe(RpgConfig.instance.beastAxe).setFull3D().setUnlocalizedName("forestAxe").setCreativeTab(tab);
 
-			rogueLeather = new ItemRBMats(RpgConfig.instance.rogueLeatherID).setItemName("rogue leather").setIconIndex(103).setCreativeTab(tab);
-			beastLeather = new ItemRBMats(RpgConfig.instance.beastLeatherID).setItemName("beast leather").setIconIndex(103).setCreativeTab(tab);
-			beastShield = new ItemRpgArmor(RpgConfig.instance.beastShield, 1, 0, "").setItemName("beastShield").setIconCoord(3, 5).setCreativeTab(tab);
+			rogueLeather = new ItemRBMats(RpgConfig.instance.rogueLeatherID).setUnlocalizedName("leather").setCreativeTab(tab);
+			beastLeather = new ItemRBMats(RpgConfig.instance.beastLeatherID).setUnlocalizedName("leather").setCreativeTab(tab);
+			beastShield = new ItemRpgArmor(RpgConfig.instance.beastShield, 1, 0, "").setUnlocalizedName("shieldBeastMaster").setCreativeTab(tab);
 
-			rogueHood = new BonusArmor(RpgConfig.instance.rogueHoodID, rogueArmor, 4, 0).setItemName("rogue1").setIconCoord(12, 4).setCreativeTab(tab);
-			rogueChest = new BonusArmor(RpgConfig.instance.rogueChestID, rogueArmor, 4, 1).setItemName("rogue2").setIconCoord(12, 5).setCreativeTab(tab);
-			rogueLegs = new BonusArmor(RpgConfig.instance.rogueLegsID, rogueArmor, 4, 2).setItemName("rogue3").setIconCoord(12, 6).setCreativeTab(tab);
-			rogueBoots = new BonusArmor(RpgConfig.instance.rogueBootsID, rogueArmor, 4, 3).setItemName("rogue4").setIconCoord(12, 7).setCreativeTab(tab);
+			rogueHood = new BonusArmor(RpgConfig.instance.rogueHoodID, rogueArmor, 4, 0).setUnlocalizedName("rogue1").setCreativeTab(tab);
+			rogueChest = new BonusArmor(RpgConfig.instance.rogueChestID, rogueArmor, 4, 1).setUnlocalizedName("rogue2").setCreativeTab(tab);
+			rogueLegs = new BonusArmor(RpgConfig.instance.rogueLegsID, rogueArmor, 4, 2).setUnlocalizedName("rogue3").setCreativeTab(tab);
+			rogueBoots = new BonusArmor(RpgConfig.instance.rogueBootsID, rogueArmor, 4, 3).setUnlocalizedName("rogue4").setCreativeTab(tab);
 
-			beastHood = new BonusArmor(RpgConfig.instance.beastHoodID, beastMaster, 4, 0).setItemName("beast1").setIconCoord(11, 4).setCreativeTab(tab);
-			beastChest = new BonusArmor(RpgConfig.instance.beastChestID, beastMaster, 4, 1).setItemName("beast2").setIconCoord(11, 5).setCreativeTab(tab);
-			beastLegs = new BonusArmor(RpgConfig.instance.beastLegsID, beastMaster, 4, 2).setItemName("beast3").setIconCoord(11, 6).setCreativeTab(tab);
-			beastBoots = new BonusArmor(RpgConfig.instance.beastBootsID, beastMaster, 4, 3).setItemName("beast4").setIconCoord(11, 7).setCreativeTab(tab);
+			beastHood = new BonusArmor(RpgConfig.instance.beastHoodID, beastMaster, 4, 0).setUnlocalizedName("beast1").setCreativeTab(tab);
+			beastChest = new BonusArmor(RpgConfig.instance.beastChestID, beastMaster, 4, 1).setUnlocalizedName("beast2").setCreativeTab(tab);
+			beastLegs = new BonusArmor(RpgConfig.instance.beastLegsID, beastMaster, 4, 2).setUnlocalizedName("beast3").setCreativeTab(tab);
+			beastBoots = new BonusArmor(RpgConfig.instance.beastBootsID, beastMaster, 4, 3).setUnlocalizedName("beast4").setCreativeTab(tab);
 
-			whistle = new ItemRBMats2(RpgConfig.instance.whistleID).setIconIndex(40).setItemName("whistle").setCreativeTab(tab);
+			whistle = new ItemRBMats2(RpgConfig.instance.whistleID).setUnlocalizedName("whistle").setCreativeTab(tab);
 
-			petCandy = new ItemCandy(RpgConfig.instance.candy).setItemName("RarePetCandy").setIconCoord(5,5).setCreativeTab(tab);
-			tangledBrench = new ItemCandy(RpgConfig.instance.brench).setItemName("tangledBrench").setIconCoord(6,5).setCreativeTab(tab);
+			petCandy = new ItemCandy(RpgConfig.instance.candy).setUnlocalizedName("petCandy");
+			tangledBrench = new ItemCandy(RpgConfig.instance.brench).setUnlocalizedName("tangledBrench").setCreativeTab(tab);
 
 			LanguageRegistry.addName(daggers, "Rogue Daggers");
 			LanguageRegistry.addName(rogueLeather, "Rogue Leather");
@@ -440,17 +440,17 @@ public class mod_RpgInventory {
 			}
 		}
 		if (hasMage == true) {
-			fireStaff = new ItemElementalStaff(RpgConfig.instance.fireStaff, 1).setItemName("FireStaff").setMaxStackSize(1).setMaxDamage(150).setIconIndex(53).setCreativeTab(mod_RpgInventory.tab);
-			frostStaff = new ItemElementalStaff(RpgConfig.instance.frostStaff, 2).setItemName("FrostStaff").setMaxStackSize(1).setMaxDamage(150).setIconIndex(54).setCreativeTab(mod_RpgInventory.tab);
-			earthStaff = new ItemElementalStaff(RpgConfig.instance.staffEarth, 3).setItemName("EarthStaff").setMaxStackSize(1).setMaxDamage(150).setIconIndex(55).setCreativeTab(mod_RpgInventory.tab);
-			windStaff = new ItemElementalStaff(RpgConfig.instance.staffWind, 4).setItemName("WindStaff").setMaxStackSize(1).setMaxDamage(150).setIconIndex(56).setCreativeTab(mod_RpgInventory.tab);
-			ultimateStaff = new ItemElementalStaff(RpgConfig.instance.staffUltimate, 5).setItemName("UltimateStaff").setMaxStackSize(1).setMaxDamage(150).setIconIndex(57).setCreativeTab(mod_RpgInventory.tab);
-			archBook = new ItemRpgArmor(RpgConfig.instance.archBook, 1, 300, "").setItemName("ArchBook").setIconCoord(4, 5).setCreativeTab(tab);
+			fireStaff = new ItemElementalStaff(RpgConfig.instance.fireStaff, 1).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffFire").setCreativeTab(mod_RpgInventory.tab);
+			frostStaff = new ItemElementalStaff(RpgConfig.instance.frostStaff, 2).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffIce").setCreativeTab(mod_RpgInventory.tab);
+			earthStaff = new ItemElementalStaff(RpgConfig.instance.staffEarth, 3).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffEarth").setCreativeTab(mod_RpgInventory.tab);
+			windStaff = new ItemElementalStaff(RpgConfig.instance.staffWind, 4).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffWind").setCreativeTab(mod_RpgInventory.tab);
+			ultimateStaff = new ItemElementalStaff(RpgConfig.instance.staffUltimate, 5).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffElemental").setCreativeTab(mod_RpgInventory.tab);
+			archBook = new ItemRpgArmor(RpgConfig.instance.archBook, 1, 300, "").setUnlocalizedName("archTome").setCreativeTab(tab);
 
-			archmageHood = new BonusArmor(RpgConfig.instance.archmageHood, archMage, 4, 0).setItemName("archmage1").setIconCoord(13,4).setCreativeTab(tab);
-			archmageChest = new BonusArmor(RpgConfig.instance.archmageChest,archMage, 4, 1).setItemName("archmage2").setIconCoord(13,5).setCreativeTab(tab);
-			archmageLegs = new BonusArmor(RpgConfig.instance.archmageLegs, archMage, 4, 2).setItemName("archmage3").setIconCoord(13,6).setCreativeTab(tab);
-			archMageBoots = new BonusArmor(RpgConfig.instance.archmageBoots, archMage, 4, 3).setItemName("archmage4").setIconCoord(13,7).setCreativeTab(tab);
+			archmageHood = new BonusArmor(RpgConfig.instance.archmageHood, archMage, 4, 0).setUnlocalizedName("archMage1").setCreativeTab(tab);
+			archmageChest = new BonusArmor(RpgConfig.instance.archmageChest,archMage, 4, 1).setUnlocalizedName("archMage2").setCreativeTab(tab);
+			archmageLegs = new BonusArmor(RpgConfig.instance.archmageLegs, archMage, 4, 2).setUnlocalizedName("archMage3").setCreativeTab(tab);
+			archMageBoots = new BonusArmor(RpgConfig.instance.archmageBoots, archMage, 4, 3).setUnlocalizedName("archMage4").setCreativeTab(tab);
 
 			LanguageRegistry.addName(fireStaff, "Fire Staff");
 			LanguageRegistry.addName(frostStaff, "Frost Staff");
