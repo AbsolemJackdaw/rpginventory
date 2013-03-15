@@ -149,7 +149,7 @@ public class RpgPlusPacketHandler implements IPacketHandler {
                             }
                         }
                         float rad = 6.0f;
-                        AxisAlignedBB pool = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(p.posX - rad, p.posY - rad, p.posZ - rad, p.posX + rad, p.posY + rad, p.posZ + rad);
+                        AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - rad, p.posY - rad, p.posZ - rad, p.posX + rad, p.posY + rad, p.posZ + rad);
                         List<EntityLiving> entl = p.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
                         if (entl != null && entl.size() > 0) {
                             for (EntityLiving el : entl) {

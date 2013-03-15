@@ -44,7 +44,7 @@ public class AxeRender implements IItemRenderer {
 
 			float f = 0.8f;
 			GL11.glScalef(f, f, f);
-			ForgeHooksClient.bindTexture("/subaraki/weapons/Axe.png");
+			mc.renderEngine.func_98187_b("/subaraki/weapons/Axe.png");
 
 			GL11.glTranslatef(0.2F, 1.35F, 0F);
 
@@ -63,7 +63,7 @@ public class AxeRender implements IItemRenderer {
 
 			float scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
-			ForgeHooksClient.bindTexture("/subaraki/weapons/Axe.png");
+			mc.renderEngine.func_98187_b("/subaraki/weapons/Axe.png");
 
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
