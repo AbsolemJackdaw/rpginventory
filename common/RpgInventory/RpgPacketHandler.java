@@ -7,12 +7,10 @@ import java.util.List;
 import java.util.Random;
 
 
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -26,9 +24,6 @@ import RpgInventory.weapons.bow.EntityHellArrow;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
-import java.io.ObjectInputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.passive.EntityCow;
@@ -46,7 +41,7 @@ public class RpgPacketHandler implements IPacketHandler {
 
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
-
+            
 		if (packet.channel.equals("RpgInv")) {
 			handleRandom(packet, player);
 		} else if (packet.channel.equals("RpgRawInv")) {
@@ -132,7 +127,7 @@ public class RpgPacketHandler implements IPacketHandler {
 								item.damageItem(3, p);
 							}
 						}
-						AxisAlignedBB pool = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(p.posX - 4.0F, p.posY - 4.0F, p.posZ - 4.0F, p.posX + 4.0F, p.posY + 4.0F, p.posZ + 4.0F);
+						AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - 4.0F, p.posY - 4.0F, p.posZ - 4.0F, p.posX + 4.0F, p.posY + 4.0F, p.posZ + 4.0F);
 						List<EntityLiving> entl = p.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
 						if (entl != null && entl.size() > 0) {
 							for (EntityLiving el : entl) {
@@ -186,7 +181,7 @@ public class RpgPacketHandler implements IPacketHandler {
 								item1.damageItem(3, p);
 							}
 						}
-						AxisAlignedBB pool = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(p.posX - 4.0F, p.posY - 4.0F, p.posZ - 4.0F, p.posX + 4.0F, p.posY + 4.0F, p.posZ + 4.0F);
+						AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - 4.0F, p.posY - 4.0F, p.posZ - 4.0F, p.posX + 4.0F, p.posY + 4.0F, p.posZ + 4.0F);
 						List<EntityLiving> entl = p.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
 						if (entl != null && entl.size() > 0) {
 							for (EntityLiving el : entl) {
@@ -325,7 +320,7 @@ public class RpgPacketHandler implements IPacketHandler {
 								wand.damageItem(3, p);
 							}
 						}
-						AxisAlignedBB pool = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(p.posX - 20.0F, p.posY - 20.0F, p.posZ - 20.0F, p.posX + 20.0F, p.posY + 20.0F, p.posZ + 20.0F);
+						AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - 20.0F, p.posY - 20.0F, p.posZ - 20.0F, p.posX + 20.0F, p.posY + 20.0F, p.posZ + 20.0F);
 						List<EntityLiving> entl = p.worldObj.getEntitiesWithinAABBExcludingEntity(p, pool);//p.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
 
 						if (entl != null && entl.size() > 0) {
