@@ -8,6 +8,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IconFlipped;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.client.renderer.texture.Stitcher;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -28,10 +29,15 @@ public class BlockForge extends BlockContainer {
     public BlockForge(int par1, Material par2Material) {
         super(par1, par2Material);
         this.setCreativeTab(mod_RpgInventory.tab);
-        temoldOvenSide = temoldOvenTop = temoldOvenBottom = Minecraft.getMinecraft().renderEngine.field_94154_l.func_94245_a("mods/RPGInventoryMod/textures/blocks/ovenSide.png");
-        temoldOvenFront = Minecraft.getMinecraft().renderEngine.field_94154_l.func_94245_a("mods/RPGInventoryMod/textures/blocks/ovenFront.png");
-        temoldOvenFrontActive = Minecraft.getMinecraft().renderEngine.field_94154_l.func_94245_a("mods/RPGInventoryMod/textures/blocks/ovenFrontBurning.png");
     }
+
+    @Override
+    public void func_94332_a(IconRegister par1IconRegister) {
+        this.field_94336_cN = temoldOvenSide = temoldOvenTop = temoldOvenBottom = par1IconRegister.func_94245_a("RPGInventoryMod:ovenSide");
+        temoldOvenFront = par1IconRegister.func_94245_a("RPGInventoryMod:ovenFront");
+        temoldOvenFrontActive = par1IconRegister.func_94245_a("RPGInventoryMod:ovenFrontBurning");
+    }
+    
     private static boolean keepInventory = true;
     //TEXTUREN
     public static Icon temoldOvenBottom;

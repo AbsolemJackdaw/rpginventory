@@ -48,7 +48,7 @@ public class BowRender implements IItemRenderer {
 		case  EQUIPPED:
 		{
 
-			int k = mod_RpgInventory.elfbow;
+			int k = mod_RpgInventory.elfbow.itemID;
 			
 			GL11.glPushMatrix();
 			if(((EntityPlayer)data[1]).getCurrentEquippedItem()!= null){

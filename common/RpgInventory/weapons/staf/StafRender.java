@@ -104,7 +104,7 @@ public class StafRender implements IItemRenderer {
 
 			float scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
-			switch(item.getIconIndex())
+			switch(item.getIconIndex().func_94208_k())
 			{
 			case 53:/*fire*/
 				mc.renderEngine.func_98187_b("/subaraki/weapons/FireStaff.png");
@@ -142,7 +142,7 @@ public class StafRender implements IItemRenderer {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		switch(item.getIconIndex())
+		switch(item.getIconIndex().func_94208_k())
 		{
 		case 53:/*fire*/
 		{
