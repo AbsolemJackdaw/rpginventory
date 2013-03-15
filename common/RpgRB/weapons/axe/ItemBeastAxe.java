@@ -1,11 +1,20 @@
 package RpgRB.weapons.axe;
 
 import RpgInventory.RichTools.Targetting;
-import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Particle;
+import net.minecraft.client.particle.EntityExplodeFX;
+import net.minecraft.client.particle.EntityHeartFX;
+import net.minecraft.client.particle.EntityLargeExplodeFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -13,18 +22,21 @@ import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class ItemBeastAxe extends Item {
+
     private List<Class> pettypes = Arrays.asList(new Class[]{EntityPig.class, EntityCow.class, EntitySpider.class, EntityCaveSpider.class});
-    private boolean charming;
     private int charmTime;
     private int particleTime;
+    private EntityLiving lastTargetted;
+    private Random rng = new Random(1051414);
+    Minecraft mc = Minecraft.getMinecraft();
+
     public ItemBeastAxe(int par1) {
         super(par1);
     }
@@ -51,37 +63,65 @@ public class ItemBeastAxe extends Item {
         par1ItemStack.damageItem(1, par7EntityLiving);
         return true;
     }
+
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World world, EntityPlayer par3EntityPlayer) {
         if (world.isRemote) {
             EntityLiving el = Targetting.isTargetingLivingEntity(4.0D);
-            if(el != null && pettypes.contains(el.getClass())){
-                charming = true;
-            }else{
-                charming = false;
+            if (el != null && pettypes.contains(el.getClass())) {
+                charmTime++;
+                particleTime++;
+                lastTargetted = el;
+            } else {
+                charmTime = 0;
+                particleTime = 0;
+            }
+
+            if (particleTime >= 4) {
+                particleTime = 0;
+                EntityHeartFX efx = new EntityHeartFX(world, el.posX, el.posY + 0.5F + rng.nextFloat(), el.posZ, rng.nextFloat(), rng.nextFloat() + 0.4F, rng.nextFloat());
+                mc.effectRenderer.addEffect(efx);
+            }
+            if (charmTime >= 16) {
+                charmTime = 0;
+                float num = rng.nextFloat();
+                if (num > 0.80F) {
+                    System.out.println("Charmed");
+                    EntityLargeExplodeFX exfx = new EntityLargeExplodeFX(mc.renderEngine, world, el.posX, el.posY + 0.5F, el.posZ, rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
+                    exfx.setRBGColorF(0F, 1.0F, 0F);
+                    mc.effectRenderer.addEffect(exfx);
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    DataOutputStream dos = new DataOutputStream(bos);
+                    try {
+                        dos.writeInt(11);
+                        dos.writeInt(el.entityId);
+                    } catch (Throwable ex) {
+                    }
+                    Packet250CustomPayload pcp = new Packet250CustomPayload("RpgInv", bos.toByteArray());
+                    PacketDispatcher.sendPacketToServer(pcp);
+                } else {
+                    System.out.println("Failed!");
+                    EntityLargeExplodeFX exfx = new EntityLargeExplodeFX(mc.renderEngine, world, el.posX, el.posY + 0.5F, el.posZ, rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
+                    exfx.setRBGColorF(1.0F, 0F, 0F);
+                    mc.effectRenderer.addEffect(exfx);
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    DataOutputStream dos = new DataOutputStream(bos);
+                    try {
+                        dos.writeInt(11);
+                        dos.writeInt(0);
+                    } catch (Throwable ex) {
+                    }
+                    Packet250CustomPayload pcp = new Packet250CustomPayload("RpgInv", bos.toByteArray());
+                    PacketDispatcher.sendPacketToServer(pcp);
+                }
+
             }
         }
         return super.onItemRightClick(par1ItemStack, world, par3EntityPlayer);
     }
 
     @Override
-    public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
-        super.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
-        if(charming){
-            charmTime++;
-            particleTime++;
-        }else{
-            charmTime = 0;
-            particleTime = 0;
-        }
-        if(particleTime >= 10){
-            particleTime = 0;
-            //TODO:Charming Particles
-        }
-        if(charmTime >= 75){
-            charmTime = 0;
-            //TODO:Charm attempt
-        }
-        
+    public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4) {
+        super.onPlayerStoppedUsing(par1ItemStack, par2World, par3EntityPlayer, par4);
     }
 }

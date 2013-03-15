@@ -29,6 +29,10 @@ import cpw.mods.fml.common.network.Player;
 import java.io.ObjectInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -390,6 +394,29 @@ public class RpgPacketHandler implements IPacketHandler {
                                 newStack.setTagCompound(crystal.getTagCompound());
                                 inv.setInventorySlotContents(6, newStack);
 				break;
+                        case 11:
+                            int entityid = dis.readInt();
+                            if(entityid == 0){
+                                p.attackEntityFrom(DamageSource.magic, 1);
+                            }else{
+                                Entity e = p.worldObj.getEntityByID(entityid);
+                                if(e != null){
+                                    if(e instanceof EntityPig){
+                                        ItemStack is = new ItemStack(mod_RpgInventory.crystal,1,1);
+                                        e.entityDropItem(is, 0.5F);
+                                        e.setDead();
+                                    }else if(e instanceof EntitySpider || e instanceof EntityCaveSpider){
+                                        ItemStack is = new ItemStack(mod_RpgInventory.crystal,1,2);
+                                        e.entityDropItem(is, 0.5F);
+                                        e.setDead();
+                                    }else if(e instanceof EntityCow){
+                                        ItemStack is = new ItemStack(mod_RpgInventory.crystal,1,3);
+                                        e.entityDropItem(is, 0.5F);
+                                        e.setDead();
+                                    }
+                                }
+                            }
+                            break;
 			default:
 				break;
 			}
