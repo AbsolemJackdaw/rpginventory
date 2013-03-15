@@ -21,11 +21,12 @@ public class SoulSphereRender implements IItemRenderer {
 	ModelSphere swordmodel;
 	public float hoverStart;
 	Random random = new Random();
-	
+	Minecraft mc;
 	public SoulSphereRender()
 	{
 		swordmodel = new ModelSphere();
 		this.hoverStart = (float)(Math.random() * Math.PI * 2.0D);
+		mc = Minecraft.getMinecraft();
 
 	}
 
@@ -54,7 +55,7 @@ public class SoulSphereRender implements IItemRenderer {
 		{
 			GL11.glPushMatrix();
 
-			ForgeHooksClient.bindTexture("/subaraki/weapons/SoulSphere.png", 0);
+			mc.renderEngine.func_98187_b("/subaraki/weapons/SoulSphere.png");
 
 			float scale = 0.45F;
 			GL11.glScalef(scale,scale,scale);
@@ -80,7 +81,6 @@ public class SoulSphereRender implements IItemRenderer {
 
 			blockLoop((Entity)data[1],30);
 
-			ForgeHooksClient.unbindTexture();
 
 			GL11.glPopMatrix();
 		}
@@ -90,7 +90,7 @@ public class SoulSphereRender implements IItemRenderer {
 		{
 			GL11.glPushMatrix();
 
-			ForgeHooksClient.bindTexture("/subaraki/weapons/SoulSphere.png", 0);
+			mc.renderEngine.func_98187_b("/subaraki/weapons/SoulSphere.png");
 
 			float scale = 0.8F;
 			GL11.glScalef(scale,scale,scale);
@@ -103,7 +103,6 @@ public class SoulSphereRender implements IItemRenderer {
 
 			blockLoop((Entity)data[1],30);
 
-			ForgeHooksClient.unbindTexture();
 
 			GL11.glPopMatrix();
 

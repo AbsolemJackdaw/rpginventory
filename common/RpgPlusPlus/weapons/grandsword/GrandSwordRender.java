@@ -1,5 +1,6 @@
 package RpgPlusPlus.weapons.grandsword;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -13,10 +14,11 @@ import RpgInventory.weapons.claymore.ModelClaymore;
 public class GrandSwordRender implements IItemRenderer {
 
 	GrandSword swordmodel;
-
+	Minecraft mc;
 	public GrandSwordRender()
 	{
 		swordmodel = new GrandSword();
+		mc = Minecraft.getMinecraft();
 	}
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -43,7 +45,7 @@ public class GrandSwordRender implements IItemRenderer {
 		{
 			GL11.glPushMatrix();
 
-			ForgeHooksClient.bindTexture("/subaraki/grand_sword.png", 0);
+			mc.renderEngine.func_98187_b("/subaraki/grand_sword.png");
 
 			float scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
@@ -54,7 +56,6 @@ public class GrandSwordRender implements IItemRenderer {
 			GL11.glTranslatef(-0.47F, -0.225F, 0F);
 
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			ForgeHooksClient.unbindTexture();
 
 			GL11.glPopMatrix();
 		}
@@ -66,7 +67,7 @@ public class GrandSwordRender implements IItemRenderer {
 
 			float scale = 1.8F;
 			GL11.glScalef(scale,scale,scale);
-			ForgeHooksClient.bindTexture("/subaraki/grand_sword.png", 0);
+			mc.renderEngine.func_98187_b("/subaraki/grand_sword.png");
 
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
@@ -74,7 +75,6 @@ public class GrandSwordRender implements IItemRenderer {
 			GL11.glTranslatef(0F, 0F, 0.0F);
 
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			ForgeHooksClient.unbindTexture();
 
 			GL11.glPopMatrix();
 		}
