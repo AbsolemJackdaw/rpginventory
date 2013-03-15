@@ -18,10 +18,11 @@ import RpgInventory.playerjewels.shields.NecroSkull;
 public class NecroRenderer implements IItemRenderer {
 
 	NecroSkull skull;
-
+	Minecraft mc;
 	public NecroRenderer()
 	{
 		skull = new NecroSkull();
+		mc = Minecraft.getMinecraft();
 	}
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -52,7 +53,7 @@ public class NecroRenderer implements IItemRenderer {
 			float scale = 0.5F;
 			GL11.glScalef(scale,scale,scale);
 			
-			ForgeHooksClient.bindTexture("/subaraki/weapons/Skull.png", 0);
+			mc.renderEngine.func_98187_b("/subaraki/weapons/Skull.png");
 
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(5F, 0.0f, 1.0f, 0.0f);
@@ -83,7 +84,6 @@ public class NecroRenderer implements IItemRenderer {
 			}
 
 			skull.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			ForgeHooksClient.unbindTexture();
 
 			GL11.glPopMatrix();
 		}
@@ -95,7 +95,7 @@ public class NecroRenderer implements IItemRenderer {
 
 //			float scale = 1.5F;
 //			GL11.glScalef(scale,scale,scale);
-			ForgeHooksClient.bindTexture("/subaraki/weapons/Skull.png", 0);
+			mc.renderEngine.func_98187_b("/subaraki/weapons/Skull.png");
 
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
@@ -104,7 +104,6 @@ public class NecroRenderer implements IItemRenderer {
 			GL11.glTranslatef( 0F, 0F, 0F);
 
 			skull.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			ForgeHooksClient.unbindTexture();
 
 			GL11.glPopMatrix();
 		}

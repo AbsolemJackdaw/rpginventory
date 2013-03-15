@@ -1,5 +1,6 @@
 package RpgRB.weapons.axe;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -10,10 +11,11 @@ import org.lwjgl.opengl.GL11;
 public class AxeRender implements IItemRenderer {
 
 	Axe axe;
-
+	Minecraft mc;
 	public AxeRender()
 	{
 		axe = new Axe();
+		mc = Minecraft.getMinecraft();
 	}
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -42,7 +44,7 @@ public class AxeRender implements IItemRenderer {
 
 			float f = 0.8f;
 			GL11.glScalef(f, f, f);
-			ForgeHooksClient.bindTexture("/subaraki/weapons/Axe.png", 0);
+			ForgeHooksClient.bindTexture("/subaraki/weapons/Axe.png");
 
 			GL11.glTranslatef(0.2F, 1.35F, 0F);
 
@@ -50,7 +52,6 @@ public class AxeRender implements IItemRenderer {
 			GL11.glRotatef(140F, 1.0f, 0.0f, 0.0f);
 
 			axe.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			ForgeHooksClient.unbindTexture();
 
 			GL11.glPopMatrix();
 		}
@@ -62,7 +63,7 @@ public class AxeRender implements IItemRenderer {
 
 			float scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
-			ForgeHooksClient.bindTexture("/subaraki/weapons/Axe.png", 0);
+			ForgeHooksClient.bindTexture("/subaraki/weapons/Axe.png");
 
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
@@ -71,7 +72,6 @@ public class AxeRender implements IItemRenderer {
 			GL11.glTranslatef( 0F, 0F, 0F);
 
 			axe.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			ForgeHooksClient.unbindTexture();
 
 			GL11.glPopMatrix();
 		}

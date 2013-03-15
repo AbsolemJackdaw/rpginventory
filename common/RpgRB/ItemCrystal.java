@@ -32,7 +32,7 @@ public class ItemCrystal extends ItemRpgArmor {
 	}
 
 	@Override
-	public String getItemNameIS(ItemStack par1ItemStack) {
+	public String getItemDisplayName(ItemStack par1ItemStack) {
 		int var2 = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 3);
 
 		if (var2 > 0) {
@@ -45,7 +45,7 @@ public class ItemCrystal extends ItemRpgArmor {
 				}
 			}
 		}
-		return getItemName() + "." + pets[var2];
+		return getStatName() + "." + pets[var2];
 	}
 
 	public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
