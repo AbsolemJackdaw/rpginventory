@@ -19,9 +19,11 @@ public class StafRender implements IItemRenderer {
 
 	ModelStaf swordmodel;
 	public int step;
+	Minecraft mc;
 	public StafRender()
 	{
 		swordmodel = new ModelStaf();
+		mc = Minecraft.getMinecraft();
 	}
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -51,10 +53,10 @@ public class StafRender implements IItemRenderer {
 			//			{
 			//			case 37:/*regular*/
 
-			ForgeHooksClient.bindTexture("/subaraki/weapons/Staff.png", 0);
+			mc.renderEngine.func_98187_b("/subaraki/weapons/Staff.png");
 			//				break;
 			//			default:
-			//				ForgeHooksClient.bindTexture("/subaraki/weapons/ElementalStaff.png", 0);
+			//				mc.renderEngine.func_98187_b("/subaraki/weapons/ElementalStaff.png");
 			//				GL11.glEnable(GL11.GL_BLEND);
 			//				GL11.glDisable(GL11.GL_LIGHTING);
 			//				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -92,7 +94,6 @@ public class StafRender implements IItemRenderer {
 			}
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			blockLoop((Entity)data[1],15, item);
-			ForgeHooksClient.unbindTexture();
 			GL11.glPopMatrix();
 		}
 		break;
@@ -106,17 +107,17 @@ public class StafRender implements IItemRenderer {
 			switch(item.getIconIndex())
 			{
 			case 53:/*fire*/
-				ForgeHooksClient.bindTexture("/subaraki/weapons/FireStaff.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/weapons/FireStaff.png");
 			case 54:/*ice*/
-				ForgeHooksClient.bindTexture("/subaraki/weapons/ForstStaff.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/weapons/ForstStaff.png");
 			case 55:/*earth*/
-				ForgeHooksClient.bindTexture("/subaraki/weapons/Staff.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/weapons/Staff.png");
 			case 56:/*wind*/
-				ForgeHooksClient.bindTexture("/subaraki/weapons/Staff.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/weapons/Staff.png");
 			case 57:/*ultimate*/
-				ForgeHooksClient.bindTexture("/subaraki/weapons/Staff.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/weapons/Staff.png");
 			case 37:/*regular*/
-				ForgeHooksClient.bindTexture("/subaraki/weapons/Staff.png", 0);
+				mc.renderEngine.func_98187_b("/subaraki/weapons/Staff.png");
 
 			}
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
@@ -127,7 +128,6 @@ public class StafRender implements IItemRenderer {
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			blockLoop((Entity)data[1],15, item);
 
-			ForgeHooksClient.unbindTexture();
 
 			GL11.glPopMatrix();
 		}
@@ -138,7 +138,7 @@ public class StafRender implements IItemRenderer {
 	}
 	public void blockLoop(Entity p, float repeat , ItemStack item)
 	{
-		ForgeHooksClient.bindTexture("/subaraki/weapons/ElementalStaff.png", 0);
+		mc.renderEngine.func_98187_b("/subaraki/weapons/ElementalStaff.png");
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
