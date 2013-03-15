@@ -7,12 +7,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IconFlipped;
+import net.minecraft.client.renderer.texture.Stitcher;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.texture.TextureStitched;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -22,14 +28,17 @@ public class BlockForge extends BlockContainer {
     public BlockForge(int par1, Material par2Material) {
         super(par1, par2Material);
         this.setCreativeTab(mod_RpgInventory.tab);
+        temoldOvenSide = temoldOvenTop = temoldOvenBottom = Minecraft.getMinecraft().renderEngine.field_94154_l.func_94245_a("mods/RPGInventoryMod/textures/blocks/ovenSide.png");
+        temoldOvenFront = Minecraft.getMinecraft().renderEngine.field_94154_l.func_94245_a("mods/RPGInventoryMod/textures/blocks/ovenFront.png");
+        temoldOvenFrontActive = Minecraft.getMinecraft().renderEngine.field_94154_l.func_94245_a("mods/RPGInventoryMod/textures/blocks/ovenFrontBurning.png");
     }
     private static boolean keepInventory = true;
     //TEXTUREN
-    public static int temoldOvenBottom = 82;
-    public static int temoldOvenTop = 82;
-    public static int temoldOvenSide = 82;
-    public static int temoldOvenFront = 80;
-    private int temoldOvenFrontActive = 81;
+    public static Icon temoldOvenBottom;
+    public static Icon temoldOvenTop;
+    public static Icon temoldOvenSide;
+    public static Icon temoldOvenFront;
+    public static Icon temoldOvenFrontActive;
     /**
      * Is the random generator used by furnace to drop the inventory contents in
      * random directions.
@@ -105,8 +114,7 @@ public class BlockForge extends BlockContainer {
             if (Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var7]) {
                 var9 = 4;
             }
-
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, var9);
+            par1World.setBlockAndMetadataWithNotify(par4, par2, par3, this.blockID, var9, 0);
         }
     }
 
@@ -114,9 +122,9 @@ public class BlockForge extends BlockContainer {
      * Retrieves the block texture to use based on the display side. Args:
      * iBlockAccess, x, y, z, side
      */
-    public int getBlockTexture(IBlockAccess access, int x, int y, int z, int side) {
+    public Icon getBlockTexture(IBlockAccess access, int x, int y, int z, int side) {
         int front = 0;
-
+        Icon icon;
         TileEntity tile = Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z);
 
         if (tile != null) {
@@ -127,40 +135,32 @@ public class BlockForge extends BlockContainer {
 
         switch (side) {
             case 0:
-                return temoldOvenBottom;
+                icon = temoldOvenBottom;
+                break;
             case 1:
-                return temoldOvenTop;
-            default:
-                if (side == front) {
-                    return ((TEMold) tile).isActive() ? temoldOvenFrontActive : temoldOvenFront;
-                } else {
-                    return temoldOvenSide;
-                }
-        }
-    }
-
-    /**
-     * Returns the block texture based on the side being looked at. Args: side
-     */
-    public int getBlockTextureFromSide(int side) {
-        switch (side) {
-            case 0:
-                return temoldOvenBottom;
-            case 1:
-                return temoldOvenTop;
+                icon = temoldOvenTop;
+                break;
             case 2:
-                return temoldOvenSide;
+                icon = temoldOvenSide;
+                break;
             case 3:
-                return temoldOvenFront;
+                icon = temoldOvenSide;
+                break;
             case 4:
-                return temoldOvenSide;
+                icon = temoldOvenSide;
+                break;
             case 5:
-                return temoldOvenSide;
+                icon = temoldOvenSide;
+                break;
             default:
-                return 0;
+                return temoldOvenSide;
+        }
+        if (side == front) {
+            return ((TEMold) tile).isActive() ? temoldOvenFrontActive : temoldOvenFront;
+        } else {
+            return icon;
         }
     }
-
     /**
      * called everytime the player right clicks this block
      */
@@ -170,32 +170,27 @@ public class BlockForge extends BlockContainer {
         return true;
     }
 
-    /**
-     * Called when the block is placed in the world.
-     */
     @Override
-    public void onBlockPlacedBy(World w, int x, int y, int z, EntityLiving entity) {
+    public void onBlockPlacedBy(World w, int x, int y, int z, EntityLiving entity, ItemStack par6ItemStack) {
         int var = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
+        //Unsure what the last var is for, 0 seems to skip what it does tho...
         switch (var) {
             case 0:
-                w.setBlockMetadataWithNotify(x, y, z, 2);
+                w.setBlockMetadataWithNotify(x, y, z, 2,0);
                 break;
 
             case 1:
-                w.setBlockMetadataWithNotify(x, y, z, 5);
+                w.setBlockMetadataWithNotify(x, y, z, 5,0);
                 break;
 
             case 2:
-                w.setBlockMetadataWithNotify(x, y, z, 3);
+                w.setBlockMetadataWithNotify(x, y, z, 3,0);
                 break;
 
             case 3:
-                w.setBlockMetadataWithNotify(x, y, z, 4);
+                w.setBlockMetadataWithNotify(x, y, z, 4,0);
                 break;
-
         }
-
     }
 
     /**
