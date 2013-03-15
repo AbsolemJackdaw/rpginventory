@@ -24,7 +24,7 @@ public class BookGui extends GuiScreen
 
 		int var4 = this.mc.renderEngine.getTexture("/subaraki/bookgui.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(var4);
+		this.mc.renderEngine.func_98187_b("/subaraki/bookgui.png");
 
 		int posX = (this.width - xSizeOfTexture) / 2;
 		int posY = (this.height - ySizeOfTexture) / 2;
@@ -60,12 +60,12 @@ public class BookGui extends GuiScreen
 	
 	public void initGui()
 	{
-	this.controlList.clear();
+	this.buttonList.clear();
 
 	int posX = (this.width - xSizeOfTexture) / 2;
 	int posY = (this.height - ySizeOfTexture) / 2;
 
-	this.controlList.add(new GuiButton(0, posX+176,  posY, 20, 20, "X"));
+	this.buttonList.add(new GuiButton(0, posX+176,  posY, 20, 20, "X"));
 	}
 	 public boolean doesGuiPauseGame()
 	    {
