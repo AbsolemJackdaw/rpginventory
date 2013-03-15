@@ -4,11 +4,7 @@
  */
 package RpgInventory;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;

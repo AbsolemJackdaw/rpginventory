@@ -1,12 +1,7 @@
 package RpgInventory;
 
-import RpgInventory.gui.inventory.RpgInv;
-import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.IPlayerTracker;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.entity.player.EntityPlayer;
 
 /**
  * To catch login/Logouts for readingw/writing the Inventory

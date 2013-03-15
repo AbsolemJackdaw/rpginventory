@@ -1,17 +1,16 @@
 package RpgInventory;
 
+import RpgInventory.gui.inventory.RpgInv;
+import cpw.mods.fml.common.FMLCommonHandler;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.HashMap;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.DimensionManager;
-import RpgInventory.gui.inventory.RpgInv;
-import cpw.mods.fml.common.FMLCommonHandler;
 
 public class CommonProxy {
     // username, Inventory map.
