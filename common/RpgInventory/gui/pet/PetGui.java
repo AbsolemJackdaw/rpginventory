@@ -21,10 +21,16 @@ import org.lwjgl.opengl.GL11;
 import RpgInventory.IPet;
 import RpgInventory.mod_RpgInventory;
 import RpgRB.beastmaster.BMPetImpl;
+import RpgRB.beastmaster.BoarPet;
+import RpgRB.beastmaster.BullPet;
+import RpgRB.beastmaster.SpiderPet;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.world.World;
 
 public class PetGui extends GuiScreen {
 
@@ -51,6 +57,7 @@ public class PetGui extends GuiScreen {
     public static int PetLevel;
     public static String PetName;
     public static int playerLevel;
+    private int rotationCounter = 0;
 
     public void initGui() {
         petCrystal = mod_RpgInventory.proxy.getInventory(p.username).getCrystal();
@@ -106,7 +113,7 @@ public class PetGui extends GuiScreen {
         } catch (NullPointerException ex) {
             PetName = petCrystal.getDisplayName();
         }
-        
+
         if (petAtk == 0) {
             petAtk = 4;
         }
@@ -132,7 +139,7 @@ public class PetGui extends GuiScreen {
         } else {
             saddle = PetName + " needs lv50 to be ridden.";
         }
-        
+
         textfield = new GuiTextField(fontRenderer, posX + 70, posY + 14, 100, 20);
         textfield.setText(petCrystal.getDisplayName());
         textfield.setMaxStringLength(32);
@@ -229,5 +236,22 @@ public class PetGui extends GuiScreen {
         super.drawScreen(i, j, f);
         //TODO: Add Pet rendering
         //remind me to add this
+        GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+        Class clazz = petType == 1 ? BoarPet.class : petType == 2 ? SpiderPet.class : BullPet.class;
+        RenderLiving ren = (RenderLiving) RenderManager.instance.getEntityClassRenderObject(clazz);
+        GL11.glTranslatef(this.width / 2 - 52, this.height / 2 - (clazz != SpiderPet.class ? 23 : 30), 15);
+        GL11.glRotatef((float) 180, 0f, 1f, 0f);
+        GL11.glRotatef((float) 180 + (clazz != SpiderPet.class ? 90 : 0), 0f, 0f, 1f);
+        GL11.glRotatef(rotationCounter++, (clazz != SpiderPet.class ? 1 : 0), (clazz != SpiderPet.class ? 0 : 1), 0);
+        GL11.glScaled(30, 30, -30);
+        BMPetImpl bmp;
+        try {
+            bmp = (BMPetImpl)clazz.getConstructor(World.class, EntityPlayer.class, ItemStack.class).newInstance(p.worldObj, p, petCrystal);
+            ren.doRender(bmp, 0, 0, 0, 0, 1);
+        } catch (Throwable ex) {
+            Logger.getLogger(PetGui.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        GL11.glPopAttrib();
     }
 }
