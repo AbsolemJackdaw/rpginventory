@@ -172,17 +172,48 @@ public class PetGui extends GuiScreen {
 		{
 			levelInfo = "";
 			levelInfo2 = "";
-			if (playerLevel < PetLevel / 2) {
+			if (playerLevel < PetLevel / 2 && PetLevel < 200) {
 				levelInfo = "You need " + (MathHelper.floor_float(PetLevel / 2) + 1) + " levels to";
 				levelInfo2 = "level your pet.";
 
-			} else if (playerLevel >= PetLevel / 2) {
+			}else if (PetLevel == 200) {
+				levelInfo = "Pet has reached";
+				levelInfo2 = "maximum level.";
+			}else if (mc.thePlayer.inventory.hasItem(mod_RpgInventory.petCandy.itemID)) {
+				levelInfo2 = "Consumed Rare PetCandy.";
+				levelInfo = "Added 1 pet level";
+				int i = 13;
+				ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+				ObjectOutput out;
+				DataOutputStream outputStream = new DataOutputStream(bytes);
+				try {
+					outputStream.writeInt(12);
+					Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
+					PacketDispatcher.sendPacketToServer(packet);
+					this.mc.thePlayer.inventory.consumeInventoryItem(mod_RpgInventory.petCandy.itemID);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}else if (playerLevel >= PetLevel / 2 && PetLevel < 200) {
 				levelInfo = "Added 1 pet Level";
 				//So first levelup is not free
 				levelInfo2 = "Cost: " + (MathHelper.floor_float(PetLevel / 2.0F) + 1) + " player levels;";
 				playerLevel -= MathHelper.floor_float(PetLevel / 2.0F) + 1;
 				PetLevel += 1;
 				currentHP = totalHP = 18 + MathHelper.floor_float(((float) PetLevel) / 2F);
+				int i = 12;
+				ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+				ObjectOutput out;
+				DataOutputStream outputStream = new DataOutputStream(bytes);
+				try {
+					outputStream.writeInt(12);
+					outputStream.writeInt(PetLevel/2);
+					Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
+					PacketDispatcher.sendPacketToServer(packet);
+					this.mc.thePlayer.addExperienceLevel(-PetLevel/2);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		NBTTagCompound newCrystal = petCrystal.getTagCompound();
@@ -192,6 +223,7 @@ public class PetGui extends GuiScreen {
 		newCrystal.setInteger("PetLevel", PetLevel);
 		newCrystal.setInteger("PetHealth", currentHP);
 		newCrystal.setInteger("PetMaxHealth", totalHP);
+		newCrystal.setInteger("PetAttack", petAtk);
 		try {
 			PacketDispatcher.sendPacketToServer(new Packet250CustomPayload("RpgRawInv", CompressedStreamTools.compress(newCrystal)));
 		} catch (IOException ex) {
@@ -235,6 +267,10 @@ public class PetGui extends GuiScreen {
 
 		drawString(fontRenderer, levelInfo, this.width / 2 + 95, this.height / 2 + 65, 0xffffff);
 		drawString(fontRenderer, levelInfo2, this.width / 2 + 95, this.height / 2 + 75, 0xffffff);
+		if(PetLevel == 200 )
+		{
+			drawString(fontRenderer, "Maxed out.", this.width / 2 - 30, this.height / 2, 0x00ff00);
+		}
 		super.drawScreen(i, j, f);
 		//TODO: Add Pet rendering
 		//remind me to add this // DONE ! :D

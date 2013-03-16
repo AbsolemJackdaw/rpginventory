@@ -45,7 +45,7 @@ public class ClientProxy extends CommonProxy {
     public int getSphereID() {
         return sphereID;
     }
-
+   
     public void registerRenderInformation() {
         MinecraftForgeClient.preloadTexture("/subaraki/RPGinventoryTM.png");
         KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler());

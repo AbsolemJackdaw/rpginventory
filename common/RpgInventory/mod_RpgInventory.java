@@ -174,11 +174,11 @@ public class mod_RpgInventory {
 	public static Item archMageBoots;
 	public static Item petCandy;
 	public static Item tangledBrench;
-        public static Item PetXPBottle;
+	public static Item PetXPBottle;
 	public static Block forgeBlock;
 	//Die bitches.
 	public static List<String> developers = new ArrayList<String>();
-        public static List<Integer>rpvInvIDs = new ArrayList();
+	public static List<Integer>rpvInvIDs = new ArrayList();
 	private String[][] recipePatterns;
 	private Object[][] recipeItems;
 	public static boolean hasRpg;
@@ -401,7 +401,7 @@ public class mod_RpgInventory {
 
 			petCandy = new ItemCandy(RpgConfig.instance.candy).setUnlocalizedName("petCandy");
 			tangledBrench = new ItemCandy(RpgConfig.instance.brench).setUnlocalizedName("tangledBrench").setCreativeTab(tab);
-                        PetXPBottle = new PetExpPotion(RpgConfig.instance.petxppotion).setUnlocalizedName("PetXPBottle").setCreativeTab(tab);
+			PetXPBottle = new PetExpPotion(RpgConfig.instance.petxppotion).setUnlocalizedName("PetXPBottle").setCreativeTab(tab);
 			LanguageRegistry.addName(daggers, "Rogue Daggers");
 			LanguageRegistry.addName(rogueLeather, "Rogue Leather");
 			LanguageRegistry.addName(beastLeather, "BeastMaster Leather");
@@ -419,7 +419,7 @@ public class mod_RpgInventory {
 			LanguageRegistry.addName(beastAxe, "BeastMaster Forest Axe");
 			LanguageRegistry.addName(petCandy, "Rare Pet Candy");
 			LanguageRegistry.addName(tangledBrench, "Tangled Brench");
-
+			LanguageRegistry.addName(PetXPBottle, "Bottle 'O Pet");
 
 			GameRegistry.addShapelessRecipe(new ItemStack(whistle), new Object[]{Item.stick, Item.reed, Item.reed});
 			GameRegistry.addRecipe(new ItemStack(beastLeather), new Object[]{"LLL","LVL","LLL",'L',Block.leaves,'V',Item.leather});

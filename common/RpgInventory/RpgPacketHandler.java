@@ -371,7 +371,6 @@ public class RpgPacketHandler implements IPacketHandler {
                 //case 9 used for Paladin
                 case 10:
                     int levelPetIsNow = dis.readInt();
-                    mod_RpgInventory.proxy.playerLevel(p, levelPetIsNow / 2);
                     RpgInv inv = mod_RpgInventory.proxy.getInventory(p.username);
                     ItemStack crystal = inv.getCrystal();
                     if (!crystal.hasTagCompound()) {
@@ -423,6 +422,15 @@ public class RpgPacketHandler implements IPacketHandler {
                         }
                     }
                     break;
+                case 12:
+                {
+                	int amount = dis.readInt();
+                    mod_RpgInventory.proxy.playerLevel(p, amount);
+                }
+                case 13:
+                {
+                    mod_RpgInventory.proxy.candy(p);
+                }
                 default:
                     break;
             }
