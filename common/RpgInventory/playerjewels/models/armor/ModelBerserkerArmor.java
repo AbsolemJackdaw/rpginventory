@@ -8,12 +8,6 @@ import net.minecraft.entity.Entity;
 public class ModelBerserkerArmor extends ModelBiped
 {
 	//fields
-	ModelRenderer head;
-	ModelRenderer body;
-	ModelRenderer rightarm;
-	ModelRenderer leftarm;
-	ModelRenderer rightleg;
-	ModelRenderer leftleg;
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
 	ModelRenderer Shape3;
@@ -124,23 +118,6 @@ public class ModelBerserkerArmor extends ModelBiped
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		head.render(f5);
-		body.render(f5);
-		rightarm.render(f5);
-		leftarm.render(f5);
-		rightleg.render(f5);
-		leftleg.render(f5);
-		Shape1.render(f5);
-		Shape2.render(f5);
-		Shape3.render(f5);
-		Shape4.render(f5);
-		Shape5.render(f5);
-		Shape6.render(f5);
-		Shape7.render(f5);
-		Shape8.render(f5);
-		Shape9.render(f5);
-		Shape10.render(f5);
-		Shape11.render(f5);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
