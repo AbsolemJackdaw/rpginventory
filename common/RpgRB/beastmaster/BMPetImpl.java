@@ -321,7 +321,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     public boolean isAIEnabled() {
         return true;
     }
-    private int xpThrottle = 10;
+    private int xpThrottle = 4;
 
     @Override
     public void onUpdate() {
@@ -334,10 +334,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
             rotationYaw = prevRotationYaw = entityRider.rotationYaw;
         }
-        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
+        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(1.0D, 1.0D, 1.0D));
         if (xps != null && xps.size() > 0) {
-            if (xpThrottle-- <= 0) {
-                xpThrottle = 10;
+            if (--xpThrottle <= 0) {
+                xpThrottle = 4;
                 for (EntityPetXP xp : xps) {
                     this.giveXP(xp.getXpValue());
                     xp.setDead();
@@ -540,7 +540,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         this.dataWatcher.updateObject(TOTALXP, par1NBTTagCompound.getInteger("XpTotal"));
         this.prevTicksExisted = par1NBTTagCompound.getInteger("prevTicksExisted");
         this.setSaddled(par1NBTTagCompound.getBoolean("Saddle"));
-        this.setSize(0.6F * par1NBTTagCompound.getInteger("XpLevel"), 0.6F * par1NBTTagCompound.getInteger("XpLevel"));
+        this.setSize(0.25F + (par1NBTTagCompound.getInteger("XpLevel") / 400), (0.25F + (par1NBTTagCompound.getInteger("XpLevel") / 400)) / 2);
     }
 
     public boolean getSaddled() {

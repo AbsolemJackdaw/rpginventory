@@ -113,6 +113,7 @@ public class RpgConfig {
     public int beastAxe;
     public int candy;
     public int brench;
+    public int petxppotion;
 
     //Initially set to defaults
     public boolean render3DClaymore = true;
@@ -148,88 +149,82 @@ public class RpgConfig {
     private void loadItems(Configuration config){
         int itemnum = iID_OFFSET;
         neckgoldID = config.getItem("neckgold", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
         itemnum++;
         neckdiaID = config.getItem("neckdia", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
         itemnum++;
         neckemID = config.getItem("neckem", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
         itemnum++;
         necklapID = config.getItem("necklap", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
         itemnum++;
         glovesbutterID = config.getItem("glovesbutter", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
         itemnum++;
         glovesdiaID = config.getItem("glovesdia", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
         itemnum++;
         glovesemID = config.getItem("glovesem", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         gloveslapID = config.getItem("gloveslap", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         ringgoldID = config.getItem("ringgold", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         ringdiaID = config.getItem("ringdia", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         ringemID = config.getItem("ringem", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         ringlapID = config.getItem("ringlap", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         archersShieldID = config.getItem("archersShield", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         berserkerShieldID = config.getItem("berserkerShield", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         talismanID = config.getItem("talisman", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         pala_shieldID = config.getItem("pala_shield", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         necro_shieldID = config.getItem("necro_shield", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         shieldWoodID = config.getItem("shieldWood", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         shieldIronID = config.getItem("shieldIron", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         shieldGoldID = config.getItem("shieldGold", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         shieldDiamondID = config.getItem("shieldDiamond", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         cloakID = config.getItem("cloak", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         cloakIID = config.getItem("cloakI", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         cloakSubID = config.getItem("cloakSub", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         cloakRedID = config.getItem("cloakRed", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         cloakYellowID = config.getItem("cloakYellow", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         cloakGreenID = config.getItem("cloakGreen", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         cloakBlueID = config.getItem("cloakBlue", itemnum).getInt(itemnum);
-        rpvInvIDs.add(itemnum);
+        
         itemnum++;
         elfbowID = config.getItem("elfbow", itemnum).getInt(itemnum);
         itemnum++;
@@ -358,6 +353,8 @@ public class RpgConfig {
         archmageLegs= config.getItem("archmageLegs", itemnum).getInt(itemnum);
         itemnum++;
         archmageBoots= config.getItem("archmageBoots", itemnum).getInt(itemnum);
+        itemnum++;
+        petxppotion = config.getItem("PetXPPotion", itemnum).getInt(itemnum);
         itemnum++;
     }
     

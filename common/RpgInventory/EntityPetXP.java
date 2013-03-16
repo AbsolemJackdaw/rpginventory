@@ -30,7 +30,6 @@ public class EntityPetXP extends EntityXPOrb {
     }
 
     public void onUpdate() {
-        super.onUpdate();
         this.xpColor = 0xFF2222;
         if (this.field_70532_c > 0) {
             --this.field_70532_c;

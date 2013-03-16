@@ -174,6 +174,7 @@ public class mod_RpgInventory {
 	public static Item archMageBoots;
 	public static Item petCandy;
 	public static Item tangledBrench;
+        public static Item PetXPBottle;
 	public static Block forgeBlock;
 	//Die bitches.
 	public static List<String> developers = new ArrayList<String>();
@@ -400,7 +401,7 @@ public class mod_RpgInventory {
 
 			petCandy = new ItemCandy(RpgConfig.instance.candy).setUnlocalizedName("petCandy");
 			tangledBrench = new ItemCandy(RpgConfig.instance.brench).setUnlocalizedName("tangledBrench").setCreativeTab(tab);
-
+                        PetXPBottle = new PetExpPotion(RpgConfig.instance.petxppotion).setUnlocalizedName("PetXPBottle").setCreativeTab(tab);
 			LanguageRegistry.addName(daggers, "Rogue Daggers");
 			LanguageRegistry.addName(rogueLeather, "Rogue Leather");
 			LanguageRegistry.addName(beastLeather, "BeastMaster Leather");
