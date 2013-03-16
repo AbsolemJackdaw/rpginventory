@@ -25,7 +25,6 @@ public class BullPet extends BMPetImpl {
 
     public BullPet(World par1World, EntityPlayer owner, ItemStack is) {
         super(par1World, 3, owner, is);
-        this.setSize(width * getSize(), height * getSize());
     }
 
     public double getMountedYOffset() {
@@ -38,8 +37,18 @@ public class BullPet extends BMPetImpl {
     }
 
     @Override
+    public float getBaseWidth() {
+        return 0.5F;
+    }
+
+    @Override
+    protected float getBaseHeight() {
+        return 0.5F;
+    }
+
+    @Override
     public int getAttackDamage() {
-        return this.getLevel() <= 100 ? 3 + this.getLevel() / 10 : 9 + this.getLevel() / 20;
+        return this.getLevel() <= 100 ? 4 + this.getLevel() / 10 : 8 + this.getLevel() / 20;
     }
 
     @Override
@@ -58,7 +67,7 @@ public class BullPet extends BMPetImpl {
     }
 
     @Override
-    public float getSize() {
+    public float getPetSize() {
         if (getLevel() <= 200) {
             return 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
         } else {

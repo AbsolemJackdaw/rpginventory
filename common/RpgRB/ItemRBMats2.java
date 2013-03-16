@@ -42,6 +42,7 @@ public class ItemRBMats2 extends Item {
                     } else {
                         switch (stack.getItemDamage()) {
                             case 1:
+
                                 BoarPet Boar = new BoarPet(world, player, stack);
                                 Boar.setPosition(player.posX, player.posY + 0.5F, player.posZ);
                                 Boar.setTamed(true);

@@ -83,7 +83,7 @@ public interface IPet {
      *
      * @return How large this pet should be. This returns the scale factor.
      */
-    public float getSize();
+    public float getPetSize();
     
     /**
      * New helper to ensure we are always retrieving the correct pet instance.
@@ -106,5 +106,7 @@ public interface IPet {
             return (IPet)test;
         }
     }
+    
+    public void setLevel(int level);
     
 }

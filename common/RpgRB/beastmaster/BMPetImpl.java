@@ -9,21 +9,16 @@ import RpgInventory.IPet;
 import RpgInventory.gui.inventory.RpgInv;
 import RpgInventory.mod_RpgInventory;
 import RpgPlusPlus.minions.CustomMinionEntitySelector;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
-import java.util.Map.Entry;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
-import net.minecraft.entity.ai.EntityAICreeperSwell;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -35,11 +30,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -47,7 +38,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -93,7 +83,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         //this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, IMob.class, 16.0F, 0, true));
-        this.setSize(0.6F, 0.6F);
     }
 
     @Override
@@ -101,7 +90,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         return false;
     }
 
-    public void setLevel(int Level){
+    public void setLevel(int Level) {
         this.dataWatcher.updateObject(LEVELID, Level);
     }
 
@@ -114,6 +103,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     public BMPetImpl(World par1World, int mobType, EntityPlayer owner, ItemStack is) {
         this(par1World);
+        boolean sizeSet = false;
         this.mobType = mobType;
         if (owner != null) {
             try {
@@ -121,12 +111,20 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
                     if (is.getTagCompound().hasKey("RPGPetInfo")) {
                         readEntityFromNBT(is.getTagCompound().getCompoundTag("RPGPetInfo"));
                     }
+                    if (is.getTagCompound().hasKey("PetLevel")) {
+                        int level = is.getTagCompound().getInteger("PetLevel");
+                        setSize(getBaseWidth() + ((level / 200) * 2.0F), getBaseHeight() + ((level / 200) * 2.0F));
+                        sizeSet = true;
+                    }
                 }
             } catch (Throwable ex) {
             }
             this.setOwner(owner.username);
             IPet.playersWithActivePets.put(owner.username, new PetID(this.dimension, this.entityId));
             this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, true, false, new CustomMinionEntitySelector(owner)));
+        }
+        if(!sizeSet){
+            setSize(getBaseWidth(), getBaseHeight());
         }
     }
 
@@ -142,9 +140,19 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         //Required! must chain up this check or will return false even when dead.
         return super.isDead;
     }
-
+    int healthregen = 60;
     @Override
     public void onLivingUpdate() {
+        if(healthregen-- <= 0){
+            this.heal(1);
+            this.healthregen = 60;
+        }
+        if(worldObj.isRemote){
+            int level = this.dataWatcher.getWatchableObjectInt(LEVELID);
+            if(level != 0){
+                setSize(getBaseWidth() + ((level / 200.0F) * (1.0F + getBaseWidth())), getBaseHeight() + ((level / 200.0F) * (1.0F + getBaseHeight()))) ;
+            }
+        }
         if (getOwner() == null) {
             IPet.playersWithActivePets.remove(this.getOwnerName());
             this.setDead();
@@ -157,8 +165,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             return;
         }
         //Check if player has crystal equipped.
-        //RpgInventory rpginv = mod_RpgInventory.proxy.getInventory(this.getOwnerName());
-        //this.width = (float) (this.boundingBox.maxX - this.boundingBox.minX + 0.1F);
         if (!worldObj.isRemote) {
             this.dataWatcher.updateObject(HP, this.health);
         }
@@ -172,9 +178,11 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         super.onLivingUpdate();
     }
 
+    protected abstract float getBaseWidth();
+
+    protected abstract float getBaseHeight();
+
     public void moveEntity(double d, double d1, double d2) {
-        this.width = (getLevel() * 0.1F) + 0.5F;
-        this.height = (getLevel() * 0.1F) + 0.2F;
         if (riddenByEntity != null) {
             EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
             entityRider.prevCameraYaw = rotationYaw = prevRotationYaw = entityRider.rotationYaw;
@@ -334,7 +342,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
             rotationYaw = prevRotationYaw = entityRider.rotationYaw;
         }
-        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(1.0D, 1.0D, 1.0D));
+        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(2.0D, 2.0D, 2.0D));
         if (xps != null && xps.size() > 0) {
             if (--xpThrottle <= 0) {
                 xpThrottle = 4;
@@ -415,20 +423,22 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public void giveXP(int amount) {
-        if (this.getLevel() < 200) {
-            int var2 = Integer.MAX_VALUE - this.experienceTotal;
+        if (!worldObj.isRemote) {
+            if (this.getLevel() < 200) {
+                int var2 = Integer.MAX_VALUE - this.experienceTotal;
 
-            if (amount > var2) {
-                amount = var2;
-            }
+                if (amount > var2) {
+                    amount = var2;
+                }
 
-            this.experience += (float) amount / (float) this.xpBarCap();
+                this.experience += (float) amount / (float) this.xpBarCap();
 
-            for (this.experienceTotal += amount; this.experience >= 1.0F; this.experience /= (float) this.xpBarCap()) {
-                this.experience = (this.experience - 1.0F) * (float) this.xpBarCap();
+                for (this.experienceTotal += amount; this.experience >= 1.0F; this.experience /= (float) this.xpBarCap()) {
+                    this.experience = (this.experience - 1.0F) * (float) this.xpBarCap();
+                    this.addExperienceLevel(1);
+                }
                 this.dataWatcher.updateObject(NEXTLEVEL, String.valueOf(this.experience));
                 this.dataWatcher.updateObject(TOTALXP, this.experienceTotal);
-                this.addExperienceLevel(1);
             }
         }
     }
@@ -453,9 +463,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             this.worldObj.playSoundAtEntity(this, "random.levelup", var2 * 0.75F, 1.0F);
             this.prevTicksExisted = this.ticksExisted;
         }
-        this.dataWatcher.updateObject(NEXTLEVEL, String.valueOf(this.experience));
-        this.dataWatcher.updateObject(TOTALXP, this.experienceTotal);
-        this.dataWatcher.updateObject(LEVELID, exp);
+        if (!worldObj.isRemote) {
+            this.dataWatcher.updateObject(LEVELID, exp);
+        }
+        this.setLevel(exp);
     }
 
     @Override
@@ -495,7 +506,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public void setName(String name) {
-        this.dataWatcher.updateObject(NAME, name);
+        if (!worldObj.isRemote) {
+            this.dataWatcher.updateObject(NAME, name);
+        }
     }
 
     @Override
@@ -504,7 +517,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     }
 
     @Override
-    public abstract float getSize();
+    public abstract float getPetSize();
 
     @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
@@ -531,16 +544,20 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     public final void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
+
         this.dataWatcher.updateObject(NAME, par1NBTTagCompound.getString("Name"));
+
         //Convert float to string
-        float nextlevel = par1NBTTagCompound.getFloat("PercentToNextLevel");
-        //if nextlevel is less than 0, return 0, otherwise return it's value
-        this.dataWatcher.updateObject(NEXTLEVEL, String.valueOf(nextlevel < 0.0F ? 0.0F : nextlevel));
+        this.experience = par1NBTTagCompound.getFloat("PercentToNextLevel");
+        this.dataWatcher.updateObject(NEXTLEVEL, String.valueOf(this.experience));
+        
         this.dataWatcher.updateObject(LEVELID, par1NBTTagCompound.getInteger("XpLevel"));
-        this.dataWatcher.updateObject(TOTALXP, par1NBTTagCompound.getInteger("XpTotal"));
+
+        this.experienceTotal = par1NBTTagCompound.getInteger("XpTotal");
+        this.dataWatcher.updateObject(TOTALXP, this.experienceTotal);
+
         this.prevTicksExisted = par1NBTTagCompound.getInteger("prevTicksExisted");
         this.setSaddled(par1NBTTagCompound.getBoolean("Saddle"));
-        this.setSize(0.25F + (par1NBTTagCompound.getInteger("XpLevel") / 400), (0.25F + (par1NBTTagCompound.getInteger("XpLevel") / 400)) / 2);
     }
 
     public boolean getSaddled() {
@@ -552,7 +569,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
      * Set or remove the saddle of the pet.
      */
     public void setSaddled(boolean par1) {
-        this.dataWatcher.updateObject(SADDLE, Byte.valueOf(par1 ? (byte) 1 : (byte) 0));
+        if (!worldObj.isRemote) {
+            this.dataWatcher.updateObject(SADDLE, Byte.valueOf(par1 ? (byte) 1 : (byte) 0));
+        }
     }
 
     @Override

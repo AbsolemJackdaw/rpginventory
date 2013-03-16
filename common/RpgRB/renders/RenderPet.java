@@ -27,7 +27,7 @@ public class RenderPet extends RenderLiving {
     }
 
     protected void scalePet(BMPetImpl pet, float par2) {
-        float var3 = pet.getSize();
+        float var3 = pet.getPetSize();
         GL11.glScalef(var3, var3, var3);
         
     }

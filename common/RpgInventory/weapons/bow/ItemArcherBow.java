@@ -141,7 +141,21 @@ public class ItemArcherBow extends Item {
     public boolean requiresMultipleRenderPasses() {
         return false;
     }
-
+    public Icon getIconIndex(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining){
+        //This never get called.
+            if(player.isUsingItem() && usingItem.itemID == mod_RpgInventory.elfbow.itemID){
+                if (usingItem != null && usingItem.getItem().itemID == mod_RpgInventory.elfbow.itemID){
+                    int k = usingItem.getMaxItemUseDuration() - useRemaining;
+                    if (k >= 6) return IconArray[1];
+                    if (k > 4) return IconArray[2];
+                    if (k > 0) return IconArray[3];
+                }
+            }
+            else{
+            iconIndex = IconArray[0];
+            }
+            return getIconIndex(stack);
+    }
     /**
      * Called whenever this item is equipped and the right mouse button is
      * pressed. Args: itemStack, world, entityPlayer

@@ -18,15 +18,15 @@ import net.minecraft.world.World;
 public class BoarPet extends BMPetImpl {
     boolean checked = false;
     public BoarPet(World par1World) {
-        super(par1World, 1, null, null);
-        this.moveSpeed = 0.50F;
-        this.getNavigator().setAvoidsWater(false);
-        this.getNavigator().setBreakDoors(true);
-        this.getNavigator().setSpeed(0.50F);
+        this(par1World, null, null);
     }
 
     public BoarPet(World par1World, EntityPlayer owner, ItemStack is) {
         super(par1World, 1, owner, is);
+        this.moveSpeed = 0.50F;
+        this.getNavigator().setAvoidsWater(false);
+        this.getNavigator().setBreakDoors(true);
+        this.getNavigator().setSpeed(0.50F);
     }
 
     public double getMountedYOffset() {
@@ -35,7 +35,7 @@ public class BoarPet extends BMPetImpl {
 
     @Override
     public int getAttackDamage() {
-        return this.getLevel() <= 100 ? 5 + this.getLevel() / 10 : 9 + this.getLevel() / 20;
+        return this.getLevel() <= 100 ? 6 + this.getLevel() / 10 : 12 + this.getLevel() / 20;
     }
 
     @Override
@@ -54,12 +54,22 @@ public class BoarPet extends BMPetImpl {
     }
 
     @Override
-    public float getSize() {
+    public float getPetSize() {
         if (getLevel() <= 200) {
             return 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
         } else {
             return 2.0F;
         }
+    }
+
+    @Override
+    public float getBaseWidth() {
+        return 0.5F;
+    }
+
+    @Override
+    protected float getBaseHeight() {
+        return 0.5F;
     }
 
     @Override
@@ -69,7 +79,7 @@ public class BoarPet extends BMPetImpl {
 
     @Override
     public float getMountedSpeed() {
-        return 0.9F;
+        return 0.7F;
     }
 
     @Override

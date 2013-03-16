@@ -44,7 +44,7 @@ public class SpiderPet extends BMPetImpl {
 
     @Override
     public int getAttackDamage() {
-        return this.getLevel() <= 100 ? 4 + this.getLevel() / 10 : 9 + this.getLevel() / 20;
+        return this.getLevel() <= 100 ? 5 + this.getLevel() / 10 : 10 + this.getLevel() / 20;
     }
 
     @Override
@@ -62,7 +62,15 @@ public class SpiderPet extends BMPetImpl {
     public String getTexture() {
         return "/subaraki/mobs/ModelSpider.png";
     }
+@Override
+    public float getBaseWidth() {
+        return 0.8F;
+    }
 
+    @Override
+    protected float getBaseHeight() {
+        return 0.45F;
+    }
     @Override
     public String getDefaultName() {
         return "Spider Pet";
@@ -79,7 +87,7 @@ public class SpiderPet extends BMPetImpl {
     }
 
     @Override
-    public float getSize() {
+    public float getPetSize() {
         if (getLevel() <= 200) {
             return 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
         } else {
