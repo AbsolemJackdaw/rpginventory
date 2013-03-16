@@ -62,9 +62,6 @@ public class ItemRpgArmor extends Item {
 
     @SideOnly(Side.CLIENT)
     public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
-        if (par1ItemStack.itemID == mod_RpgInventory.cloak.itemID) {
-            return 16777215;
-        }
         if (par1ItemStack.itemID == mod_RpgInventory.cloakRed.itemID) {
             return 0xd2120e;
         }
@@ -81,7 +78,7 @@ public class ItemRpgArmor extends Item {
             return 0x291ef6;
         }
 
-        return 16777215;
+        return 0xffffff;
     }
 
     public void armorEffects(ItemStack is, EntityPlayer player) {

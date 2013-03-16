@@ -16,208 +16,167 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import RpgInventory.mod_RpgInventory;
 import RpgInventory.gui.inventory.RpgInv;
-import RpgInventory.weapons.ItemRpgWeapon;
+import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagInt;
 
-public class ItemArcherBow extends ItemRpgWeapon
-{
-	public static final String[] field_94601_a = new String[] {"elmBow1", "elmBow2", "elmBow3"};
-	@SideOnly(Side.CLIENT)
-	private Icon[] field_94600_b;
+public class ItemArcherBow extends Item {
 
-	public ItemArcherBow(int par1)
-	{
-		super(par1);
-		this.maxStackSize = 1;
-		this.setMaxDamage(2000);
-		this.setCreativeTab(CreativeTabs.tabCombat);
-	}
+    public static final String[] ItemNameArray = new String[]{"elmBow", "elmBow2", "elmBow3", "elmBow4"};
+    @SideOnly(Side.CLIENT)
+    private Icon[] IconArray;
 
-	/**
-	 * called when the player releases the use item button. Args: itemstack, world, entityplayer, itemInUseCount
-	 */
-	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer player, int par4)
-	{
-		int var6 = this.getMaxItemUseDuration(par1ItemStack) - par4;
+    public ItemArcherBow(int par1) {
+        super(par1);
+        this.maxStackSize = 1;
+        this.setMaxDamage(1000);
+        this.setCreativeTab(CreativeTabs.tabCombat);
+    }
 
-		RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
+    @Override
+    public boolean getShareTag() {
+        return true;
+    }
 
-		ItemStack shield = rpg.getJewelInSlot(1);
+    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+        return par1ItemStack;
+    }
 
-		ArrowLooseEvent event = new ArrowLooseEvent(player, par1ItemStack, var6);
-		MinecraftForge.EVENT_BUS.post(event);
-		if (event.isCanceled())
-		{
-			return;
-		}
-		var6 = event.charge;
+    @Override
+    public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count) {
+        player.setItemInUse(stack, count);
+    }
 
-		boolean var5 = player.capabilities.isCreativeMode;
+    /**
+     * called when the player releases the use item button. Args: itemstack,
+     * world, entityplayer, itemInUseCount
+     */
+    public void onPlayerStoppedUsing(ItemStack stack, World par2World, EntityPlayer player, int par4) {
+        super.onPlayerStoppedUsing(stack, par2World, player, par4);
+        RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
 
-		ItemStack var3 = player.inventory.armorItemInSlot(3);
-		ItemStack var2 = player.inventory.armorItemInSlot(2);
-		ItemStack var1 = player.inventory.armorItemInSlot(1);
-		ItemStack var0 = player.inventory.armorItemInSlot(0);
+        ItemStack shield = rpg.getJewelInSlot(1);
 
-		if (var3 !=null && var2 !=null && var1 != null && var0 !=null)
-		{
-			Item item = var3.getItem();
-			Item item1 = var2.getItem();
-			Item item2 = var1.getItem();
-			Item item3 = var0.getItem();
+        int j = this.getMaxItemUseDuration(stack) - par4;
+        ArrowLooseEvent event = new ArrowLooseEvent(player, stack, j);
+        MinecraftForge.EVENT_BUS.post(event);
+        if (event.isCanceled()) {
+            return;
+        }
+        j = event.charge;
 
-			if(item.equals(mod_RpgInventory.archerhood) && item1.equals(mod_RpgInventory.archerchest)
-					&& item2.equals(mod_RpgInventory.archerpants)&& item3.equals(mod_RpgInventory.archerboots))
-			{
-				if(player.inventory.hasItem(Item.arrow.itemID) || shield != null && shield.itemID == mod_RpgInventory.archersShield.itemID)
-				{
+        boolean var5 = player.capabilities.isCreativeMode;
 
-					float var7 = (float)var6 / 10.0F;
+        ItemStack var3 = player.inventory.armorItemInSlot(3);
+        ItemStack var2 = player.inventory.armorItemInSlot(2);
+        ItemStack var1 = player.inventory.armorItemInSlot(1);
+        ItemStack var0 = player.inventory.armorItemInSlot(0);
 
-					var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
+        if (var3 != null && var2 != null && var1 != null && var0 != null) {
+            Item item = var3.getItem();
+            Item item1 = var2.getItem();
+            Item item2 = var1.getItem();
+            Item item3 = var0.getItem();
 
-					if ((double)var7 < 0.1D)
-					{
-						return;
-					}
+            if (item.equals(mod_RpgInventory.archerhood) && item1.equals(mod_RpgInventory.archerchest)
+                    && item2.equals(mod_RpgInventory.archerpants) && item3.equals(mod_RpgInventory.archerboots)) {
+                boolean flag = (shield != null && shield.itemID == mod_RpgInventory.archersShield.itemID) || player.capabilities.isCreativeMode;
+                if (player.inventory.hasItem(Item.arrow.itemID) || flag) {
 
-					if (var7 > 1.0F)
-					{
-						var7 = 1.0F;
-					}
+                    float f = (float) j / 20.0F;
+                    f = (f * f + f * 2.0F) / 3.0F;
 
-					EntityArrow var8 = new EntityArrow(par2World, player, var7 * 2.0F);
+                    if ((double) f < 0.1D) {
+                        return;
+                    }
 
+                    if (f > 1.0F) {
+                        f = 1.0F;
+                    }
 
-					if(par2World.isRemote)
-					{
-						var8.setIsCritical(true);
-						var8.setDamage(var8.getDamage() + (double)1);
-						var8.setKnockbackStrength(1);
-						var8.setFire(10);
-						var8.canBePickedUp = 2;   
+                    EntityArrow entityarrow = new EntityArrow(par2World, player, f * 2.0F);
 
-						par1ItemStack.damageItem(1, player);
-						par2World.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
+                    if (f == 1.0F) {
+                        entityarrow.setIsCritical(true);
+                    }
+                    entityarrow.setIsCritical(true);
+                    entityarrow.setDamage(entityarrow.getDamage() + (flag ? 2D : 1D));
+                    entityarrow.setKnockbackStrength(1);
+                    entityarrow.setFire(10);
+                    if (flag) {
+                        entityarrow.canBePickedUp = 2;
+                    } else {
+                        player.inventory.consumeInventoryItem(Item.arrow.itemID);
+                    }
+                    if (!par2World.isRemote) {
+                        par2World.spawnEntityInWorld(entityarrow);
+                    }
+                    stack.damageItem(1, player);
+                    par2World.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                }
+            }
+        }
+    }
 
-						if (!par2World.isRemote)
-						{
-							par2World.
-							spawnEntityInWorld(var8);
-							par1ItemStack.damageItem(2, player);
+    public ItemStack onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
+        return par1ItemStack;
+    }
 
-							if(shield != null && shield.itemID == mod_RpgInventory.archersShield.itemID)
-							{
+    /**
+     * How long it takes to use or consume an item
+     */
+    public int getMaxItemUseDuration(ItemStack par1ItemStack) {
+        return 72000;
+    }
 
-							}
-							else if(player.inventory.hasItem(Item.arrow.itemID))
-							{
-								player.inventory.consumeInventoryItem(Item.arrow.itemID);
-							}
+    /**
+     * returns the action that specifies what animation to play when the items
+     * is being used
+     */
+    public EnumAction getItemUseAction(ItemStack par1ItemStack) {
+        return EnumAction.bow;
+    }
 
-						}
-					}
-					else
-					{
-						var8.setIsCritical(true);
-						var8.setDamage(var8.getDamage() + (double)2 * 0.5D + 0.5D);
-						var8.setKnockbackStrength(2);
-						var8.setFire(30);
-						var8.canBePickedUp = 2;   
+    @Override
+    public boolean requiresMultipleRenderPasses() {
+        return false;
+    }
 
-						par1ItemStack.damageItem(1, player);
-						par2World.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
+    /**
+     * Called whenever this item is equipped and the right mouse button is
+     * pressed. Args: itemStack, world, entityPlayer
+     */
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
+        ArrowNockEvent event = new ArrowNockEvent(player, par1ItemStack);
+        MinecraftForge.EVENT_BUS.post(event);
+        if (event.isCanceled()) {
+            return event.result;
+        }
+        player.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
+        return par1ItemStack;
+    }
 
-						if (!par2World.isRemote)
-						{
-							par2World.spawnEntityInWorld(var8);
-							par1ItemStack.damageItem(2, player);
+    /**
+     * Return the enchantability factor of the item, most of the time is based
+     * on material.
+     */
+    public int getItemEnchantability() {
+        return -1;
+    }
 
-							if(shield != null && shield.itemID == mod_RpgInventory.archersShield.itemID)
-							{
+    public void func_94581_a(IconRegister par1IconRegister) {
+        this.IconArray = new Icon[ItemNameArray.length];
 
-							}
-							else if(player.inventory.hasItem(Item.arrow.itemID))
-							{
-								player.inventory.consumeInventoryItem(Item.arrow.itemID);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+        for (int i = 0; i < this.IconArray.length; ++i) {
+            String prefix = "RPGInventoryMod:";
+            System.out.println("RPGInventoryMod" + ":" + ItemNameArray[i]);
+            this.IconArray[i] = par1IconRegister.func_94245_a(prefix + ItemNameArray[i]);
+        }
+        this.iconIndex = this.IconArray[0];
+    }
 
-
-	public ItemStack onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer player)
-	{
-		return par1ItemStack;
-	}
-
-	/**
-	 * How long it takes to use or consume an item
-	 */
-	public int getMaxItemUseDuration(ItemStack par1ItemStack)
-	{
-		return 72000;
-	}
-
-	/**
-	 * returns the action that specifies what animation to play when the items is being used
-	 */
-	public EnumAction getItemUseAction(ItemStack par1ItemStack)
-	{
-		return EnumAction.bow;
-	}
-
-	/**
-	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-	 */
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player)
-	{
-
-		ArrowNockEvent event = new ArrowNockEvent(player, par1ItemStack);
-		MinecraftForge.EVENT_BUS.post(event);
-		if (event.isCanceled())
-		{
-			return event.result;
-		}
-
-		if (player.capabilities.isCreativeMode || player.inventory.hasItem(mod_RpgInventory.elfbow.itemID))
-		{
-			player.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
-		}
-
-		return par1ItemStack;
-	}
-
-	/**
-	 * Return the enchantability factor of the item, most of the time is based on material.
-	 */
-	public int getItemEnchantability()
-	{
-		return -1;
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void func_94581_a(IconRegister par1IconRegister)
-	{
-		super.func_94581_a(par1IconRegister);
-		this.field_94600_b = new Icon[field_94601_a.length];
-
-		for (int i = 0; i < this.field_94600_b.length; ++i)
-		{
-			this.field_94600_b[i] = par1IconRegister.func_94245_a(field_94601_a[i]);
-		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	public Icon func_94599_c(int par1)
-	{
-		return this.field_94600_b[par1];
-	}
-
-	public String getTextureFile()
-	{
-		return "/subaraki/RPGinventoryTM.png";
-	}
+    @Override
+    public Icon getIconFromDamage(int par1) {
+        return this.IconArray[0];
+    }
 }
