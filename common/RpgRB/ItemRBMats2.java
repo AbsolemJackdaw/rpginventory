@@ -38,34 +38,52 @@ public class ItemRBMats2 extends Item {
                             System.out.println("Put Away");
                             return whistle;
                         }
-                    //pet is not in the world
+                        //pet is not in the world
                     } else {
                         switch (stack.getItemDamage()) {
                             case 1:
                                 BoarPet Boar = new BoarPet(world, player, stack);
-                                Boar.setPosition(player.posX, player.posY, player.posZ);
+                                Boar.setPosition(player.posX, player.posY + 0.5F, player.posZ);
                                 Boar.setTamed(true);
-                                if (Boar.getHealth() <= 0) {
-                                    Boar.setEntityHealth(1);
+                                try {
+                                    Boar.setName(stack.stackTagCompound.getString("PetName"));
+                                    Boar.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
+                                    Boar.setEntityHealth(stack.stackTagCompound.getInteger("PetHealth"));
+                                    if (Boar.getHealth() <= 0) {
+                                        Boar.setEntityHealth(1);
+                                    }
+                                } catch (Throwable ex) {
                                 }
                                 world.spawnEntityInWorld(Boar);
                                 break;
                             case 2:
                                 SpiderPet spider = new SpiderPet(world, player, stack);
-                                spider.setPosition(player.posX, player.posY, player.posZ);
+                                spider.setPosition(player.posX, player.posY + 0.5F, player.posZ);
                                 spider.setOwner(player.username);
                                 spider.setTamed(true);
-                                if (spider.getHealth() <= 0) {
-                                    spider.setEntityHealth(1);
+                                try {
+                                    spider.setName(stack.stackTagCompound.getString("PetName"));
+                                    spider.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
+                                    spider.setEntityHealth(stack.stackTagCompound.getInteger("PetHealth"));
+                                    if (spider.getHealth() <= 0) {
+                                        spider.setEntityHealth(1);
+                                    }
+                                } catch (Throwable ex) {
                                 }
                                 world.spawnEntityInWorld(spider);
                                 break;
                             case 3:
                                 BullPet bull = new BullPet(world, player, stack);
-                                bull.setPosition(player.posX, player.posY, player.posZ);
+                                bull.setPosition(player.posX, player.posY + 0.5F, player.posZ);
                                 bull.setTamed(true);
-                                if (bull.getHealth() <= 0) {
-                                    bull.setEntityHealth(1);
+                                try {
+                                    bull.setName(stack.stackTagCompound.getString("PetName"));
+                                    bull.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
+                                    bull.setEntityHealth(stack.stackTagCompound.getInteger("PetHealth"));
+                                    if (bull.getHealth() <= 0) {
+                                        bull.setEntityHealth(1);
+                                    }
+                                } catch (Throwable ex) {
                                 }
                                 world.spawnEntityInWorld(bull);
                                 break;
@@ -79,11 +97,13 @@ public class ItemRBMats2 extends Item {
         }
         return whistle;
     }
-@Override
+
+    @Override
     public void func_94581_a(IconRegister par1IconRegister) {
         String itemName = getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1);
         this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:" + itemName);
     }
+
     public String getTextureFile() {
         return "/subaraki/RPGinventoryTM.png";
     }

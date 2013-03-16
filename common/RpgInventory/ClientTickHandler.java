@@ -36,7 +36,7 @@ public class ClientTickHandler implements ITickHandler {
                         try {
                             //"controlList" is the name deobfuscated. "i" is the name obfustcated.
                             //This adds compatibility when developing AND on release.
-                            if (f.getName().equals("controlList") || f.getName().equals("i")) {
+                            if (f.getName().equals("buttonList") || f.getName().equals("i")) {
                                 Field modfield = Field.class.getDeclaredField("modifiers");
                                 modfield.setAccessible(true);
                                 modfield.setInt(f, f.getModifiers() & ~Modifier.PROTECTED);

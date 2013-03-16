@@ -29,19 +29,20 @@ public class RenderPet extends RenderLiving {
     protected void scalePet(BMPetImpl pet, float par2) {
         float var3 = pet.getSize();
         GL11.glScalef(var3, var3, var3);
-        
+
     }
 
     protected void preRenderCallback(EntityLiving pet, float par2) {
+        GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
         this.scalePet((BMPetImpl) pet, par2);
     }
 
     public void renderCow(BMPetImpl pet, double par2, double par4, double par6, float par8, float par9) {
-       
-    	this.mainModel = pet.getModel();
-    	super.doRenderLiving(pet, par2, par4, par6, par8, par9);
-        super.renderLivingLabel(pet, pet.getEntityName(), par2, par4, par6, 32);      
 
+        this.mainModel = pet.getModel();
+        super.doRenderLiving(pet, par2, par4, par6, par8, par9);
+        super.renderLivingLabel(pet, pet.getEntityName(), par2, par4, par6, 32);
+        GL11.glPopAttrib();
     }
 
     public void doRenderLiving(EntityLiving pet, double par2, double par4, double par6, float par8, float par9) {

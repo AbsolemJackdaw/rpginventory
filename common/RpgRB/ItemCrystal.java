@@ -26,6 +26,11 @@ public class ItemCrystal extends ItemRpgArmor {
     }
 
     @Override
+    public boolean getShareTag() {
+        return true;
+    }
+
+    @Override
     public void func_94581_a(IconRegister par1IconRegister) {
         this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:petCrystal");
     }
@@ -54,6 +59,9 @@ public class ItemCrystal extends ItemRpgArmor {
         if (var2 > 0) {
         }
         if (tags != null) {
+            if (tags.hasKey("PetLevel")) {
+                list.add(StatCollector.translateToLocal("Level : " + String.valueOf(tags.getInteger("PetLevel"))));
+            }
             if (tags.hasKey("PetAttack")) {
                 list.add(StatCollector.translateToLocal("ATK : " + String.valueOf(tags.getInteger("PetAttack"))));
             }
@@ -73,7 +81,7 @@ public class ItemCrystal extends ItemRpgArmor {
                         }
                     }
                 } else {
-                    list.add(StatCollector.translateToLocal("N/A ") + String.valueOf(50 - tags.getInteger("PetLevel")));
+                    list.add(StatCollector.translateToLocal("Levels left to saddle: ") + String.valueOf(50 - tags.getInteger("PetLevel")));
                 }
             }
             if (tags.hasKey("OwnerName")) {

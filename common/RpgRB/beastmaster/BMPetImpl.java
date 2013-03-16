@@ -83,9 +83,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         this.tasks.addTask(6, new EntityAIWatchClosest(this, Entity.class, 8.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
         //This allows the pets to stand and look at the player if they have food.
-        for(Item item:Item.itemsList){
-            if(item instanceof ItemFood){
-                                      //This pet, speed, item, get startled by movement.
+        for (Item item : Item.itemsList) {
+            if (item instanceof ItemFood) {
+                //This pet, speed, item, get startled by movement.
                 this.tasks.addTask(8, new EntityAITempt(this, this.moveSpeed, item.itemID, false));
             }
         }
@@ -93,11 +93,16 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         //this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, IMob.class, 16.0F, 0, true));
+        this.setSize(0.6F, 0.6F);
     }
 
     @Override
     protected boolean canTriggerWalking() {
         return false;
+    }
+
+    public void setLevel(int Level){
+        this.dataWatcher.updateObject(LEVELID, Level);
     }
 
     public abstract float getMountedSpeed();
@@ -484,6 +489,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         itemstacknbt.setBoolean("isSaddled", getSaddled());
         ItemStack newIteamstack = new ItemStack(mod_RpgInventory.crystal, 1, getType());
         newIteamstack.setTagCompound(itemstacknbt);
+        newIteamstack.setItemName(getEntityName());
         return newIteamstack;
     }
 
@@ -535,6 +541,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         this.dataWatcher.updateObject(TOTALXP, par1NBTTagCompound.getInteger("XpTotal"));
         this.prevTicksExisted = par1NBTTagCompound.getInteger("prevTicksExisted");
         this.setSaddled(par1NBTTagCompound.getBoolean("Saddle"));
+        this.setSize(0.6F * par1NBTTagCompound.getInteger("XpLevel"), 0.6F * par1NBTTagCompound.getInteger("XpLevel"));
     }
 
     public boolean getSaddled() {
