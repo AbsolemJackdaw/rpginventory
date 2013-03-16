@@ -52,6 +52,8 @@ public class RPGKeyHandler extends KeyBindingRegistry.KeyHandler {
         abilityMap.put(mod_RpgInventory.hammer.itemID, 4);
         abilityMap.put(mod_RpgInventory.elfbow.itemID, 5);
         abilityMap.put(mod_RpgInventory.wand.itemID, 7);
+        abilityMap.put(mod_RpgInventory.daggers.itemID, 14);
+
 
     }
 

@@ -380,7 +380,7 @@ public class mod_RpgInventory {
 		}
 		if (hasRogue == true) {
 
-			daggers = new ItemRpgArmor(RpgConfig.instance.daggersID, 1, 0, "").setUnlocalizedName("dagger").setCreativeTab(tab);
+			daggers = new ItemRpgArmor(RpgConfig.instance.daggersID, 1, 800, "").setUnlocalizedName("dagger").setCreativeTab(tab);
 			beastAxe = new ItemBeastAxe(RpgConfig.instance.beastAxe).setFull3D().setUnlocalizedName("forestAxe").setCreativeTab(tab);
 
 			rogueLeather = new ItemRBMats(RpgConfig.instance.rogueLeatherID).setUnlocalizedName("leather").setCreativeTab(tab);
@@ -483,6 +483,8 @@ public class mod_RpgInventory {
 		addChestLoot(new ItemStack(mod_RpgInventory.colmold), 1, 1, 40, "Necklace Mold");
 		addChestLoot(new ItemStack(mod_RpgInventory.ringmold), 1, 1, 30, "Ring Mold");
 		addChestLoot(new ItemStack(mod_RpgInventory.wantmold), 1, 1, 40, "Gloves Mold");
+		
+		addChestLoot(new ItemStack(mod_RpgInventory.PetXPBottle), 1, 1, 40, "Pet Drinks");
 
 		addCandyChestLoot(new ItemStack(mod_RpgInventory.petCandy), 1, 6, 20, "Easter Egg");
 
@@ -719,7 +721,6 @@ public class mod_RpgInventory {
 	}
 
 	public void addChestLoot(ItemStack is, int min, int max, int rarity, String item) {
-		// System.out.println("Added " + item + " to chests");
 		FMLLog.info("Adding to chests: "+item, min);
 		WeightedRandomChestContent chestGen = new WeightedRandomChestContent(is.copy(), min, max, rarity);
 
@@ -731,7 +732,6 @@ public class mod_RpgInventory {
 
 	}
 	public void addCandyChestLoot(ItemStack is, int min, int max, int rarity, String item) {
-		//        System.out.println("Added " + item + " to chests");
 		FMLLog.info("Adding to chests: "+item, min);
 		WeightedRandomChestContent chestGen = new WeightedRandomChestContent(is.copy(), min, max, rarity);
 

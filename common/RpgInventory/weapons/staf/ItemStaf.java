@@ -78,12 +78,4 @@ public class ItemStaf extends ItemRpgSword {
         }
         return is;
     }
-
-    public int getStrenght(EntityPlayer p) {
-        return p.experienceLevel == 0 ? 1 : (int) p.experienceLevel;
-    }
-
-    public String getTextureFile() {
-        return "/subaraki/RPGinventoryTM.png";
-    }
 }

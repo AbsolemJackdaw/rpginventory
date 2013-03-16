@@ -4,7 +4,9 @@
  */
 package RpgRB;
 
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.entity.RenderXPOrb;
+import net.minecraft.item.Item;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import RpgInventory.EntityPetXP;
@@ -28,5 +30,7 @@ public class RBClientProxy extends RBCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(SpiderPet.class, new RenderPet());
 		RenderingRegistry.registerEntityRenderingHandler(BoarPet.class, new RenderPet());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class, new RenderXPOrb());
+		RenderingRegistry.registerEntityRenderingHandler(EntityTeleportStone.class, new RenderSnowball(Item.feather, 1));
+
 	}
 }
