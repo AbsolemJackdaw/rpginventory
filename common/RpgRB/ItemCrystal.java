@@ -44,7 +44,7 @@ public class ItemCrystal extends ItemRpgArmor {
                 }
             }
         }
-        return getStatName() + "." + pets[var2];
+        return pets[var2];
     }
 
     public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
@@ -91,7 +91,6 @@ public class ItemCrystal extends ItemRpgArmor {
         par3List.add(new ItemStack(par1, 1, 1));
         par3List.add(new ItemStack(par1, 1, 2));
         par3List.add(new ItemStack(par1, 1, 3));
-
     }
 
     @SideOnly(Side.CLIENT)
@@ -116,9 +115,5 @@ public class ItemCrystal extends ItemRpgArmor {
         }
 
         return 0xffffff;
-    }
-
-    public String getTextureFile() {
-        return "/subaraki/RPGinventoryTM.png";
     }
 }
