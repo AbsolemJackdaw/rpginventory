@@ -279,7 +279,7 @@ public class PetGui extends GuiScreen {
 		RenderLiving ren = (RenderLiving) RenderManager.instance.getEntityClassRenderObject(clazz);
 		GL11.glTranslatef(this.width / 2 - 52, this.height / 2 - (clazz != SpiderPet.class ? 23 : 30), 15);
 		GL11.glRotatef((float) 180, 0f, 1f, 0f);
-		GL11.glRotatef((float) 270, 0f, 0f, 1f);
+		GL11.glRotatef((float) -90, 0f, 0f, 1f);
 		GL11.glRotatef(rotationCounter++, 1,  0, 0);
 		GL11.glScaled(30, 30, -30);
 		BMPetImpl bmp;

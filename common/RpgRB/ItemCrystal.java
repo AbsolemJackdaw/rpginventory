@@ -38,18 +38,16 @@ public class ItemCrystal extends ItemRpgArmor {
     @Override
     public String getItemDisplayName(ItemStack par1ItemStack) {
         int var2 = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 3);
-
+        String itemname = pets[var2];
         if (var2 > 0) {
             NBTTagCompound tags = par1ItemStack.getTagCompound();
             if (tags != null) {
                 if (tags.hasKey("PetLevel") && tags.hasKey("PetName")) {
-                    par1ItemStack.setItemName(tags.getString("PetName")
-                            + " lv"
-                            + String.valueOf(tags.getInteger("PetLevel")));
+                    itemname = tags.getString("PetName");
                 }
             }
         }
-        return pets[var2];
+        return itemname;
     }
 
     public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
