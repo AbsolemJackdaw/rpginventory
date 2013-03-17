@@ -160,33 +160,32 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             this.heal(1);
             this.healthregen = 60;
         }
-        if (worldObj.isRemote) {
-            int level = this.dataWatcher.getWatchableObjectInt(LEVELID);
-            if (level != 0) {
-                setSize(getBaseWidth() + ((level / 200.0F) * (1.0F + getBaseWidth())), getBaseHeight() + ((level / 200.0F) * (1.0F + getBaseHeight())));
-            }
-            if (!worldObj.isRemote && getOwner() == null) {
-                IPet.playersWithActivePets.remove(this.getOwnerName());
-                this.setDead();
-                return;
-            }
-            if (!worldObj.isRemote && (!IPet.playersWithActivePets.containsKey(this.getOwnerName()) || this.dimension != getOwner().dimension)) {
-                this.setDead();
-                return;
-            }
-            //Check if player has crystal equipped.
-            if (!worldObj.isRemote) {
-                this.dataWatcher.updateObject(HP, this.health);
-            }
-            if (sprintToggleTimer > 0) { //used to determine if sprinting should be activated.
-                sprintToggleTimer--;
-            }
-            if (jumpTicks > 0) //used to limit how long the mount will rise while jumping
-            {
-                jumpTicks--;
-            }
-            super.onLivingUpdate();
+        int level = this.dataWatcher.getWatchableObjectInt(LEVELID);
+        if (level != 0) {
+            setSize(getBaseWidth() + ((level / 200.0F) * (1.0F + getBaseWidth())), getBaseHeight() + ((level / 200.0F) * (1.0F + getBaseHeight())));
         }
+        if (!worldObj.isRemote && getOwner() == null) {
+            IPet.playersWithActivePets.remove(this.getOwnerName());
+            this.setDead();
+            return;
+        }
+        if (!worldObj.isRemote && (!IPet.playersWithActivePets.containsKey(this.getOwnerName()) || this.dimension != getOwner().dimension)) {
+            this.setDead();
+            return;
+        }
+        //Check if player has crystal equipped.
+        if (!worldObj.isRemote) {
+            this.dataWatcher.updateObject(HP, this.health);
+        }
+        if (sprintToggleTimer > 0) { //used to determine if sprinting should be activated.
+            sprintToggleTimer--;
+        }
+        if (jumpTicks > 0) //used to limit how long the mount will rise while jumping
+        {
+            jumpTicks--;
+        }
+        super.onLivingUpdate();
+
     }
 
     protected abstract float getBaseWidth();
