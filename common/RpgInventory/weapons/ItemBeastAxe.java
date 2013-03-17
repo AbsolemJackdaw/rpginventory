@@ -71,7 +71,8 @@ public class ItemBeastAxe extends Item {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World world, EntityPlayer player) {
-		if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER)) {
+		if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER)) 
+		{
 			System.out.println("bm");
 			if (world.isRemote)
 			{
