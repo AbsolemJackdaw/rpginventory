@@ -57,9 +57,5 @@ public class mod_RpgRB {
 		EntityRegistry.registerModEntity(EntityTeleportStone.class, "TelePortStone", getNextUniqueID(), this, 100, 2, true);
 
 		proxy.registerRendering();
-		
-		if (RpgConfig.instance.render3DAxe == true) {
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.beastAxe.itemID, (IItemRenderer) new AxeRender());
-		}
 	}
 }

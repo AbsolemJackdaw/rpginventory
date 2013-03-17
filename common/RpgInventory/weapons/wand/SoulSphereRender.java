@@ -21,12 +21,10 @@ public class SoulSphereRender implements IItemRenderer {
 	ModelSphere swordmodel;
 	public float hoverStart;
 	Random random = new Random();
-	Minecraft mc;
 	public SoulSphereRender()
 	{
 		swordmodel = new ModelSphere();
 		this.hoverStart = (float)(Math.random() * Math.PI * 2.0D);
-		mc = Minecraft.getMinecraft();
 
 	}
 
@@ -52,7 +50,8 @@ public class SoulSphereRender implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED:
-		{
+		{	Minecraft mc = Minecraft.getMinecraft();
+
 			GL11.glPushMatrix();
 
 			mc.renderEngine.func_98187_b("/subaraki/weapons/SoulSphere.png");
@@ -87,7 +86,8 @@ public class SoulSphereRender implements IItemRenderer {
 		break;
 
 		case ENTITY:
-		{
+		{	Minecraft mc = Minecraft.getMinecraft();
+
 			GL11.glPushMatrix();
 
 			mc.renderEngine.func_98187_b("/subaraki/weapons/SoulSphere.png");

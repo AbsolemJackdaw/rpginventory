@@ -50,6 +50,7 @@ import RpgInventory.weapons.staf.ItemStaf;
 import RpgInventory.weapons.staf.StafRender;
 import RpgInventory.weapons.wand.ItemMageWand;
 import RpgInventory.weapons.wand.SoulSphereRender;
+import RpgRB.weapons.axe.AxeRender;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -646,7 +647,12 @@ public class mod_RpgInventory {
 		if (RpgConfig.instance.render3DBow == true) {
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.elfbow.itemID, (IItemRenderer) new BowRender());
 		}
-
+		if (RpgConfig.instance.render3DAxe == true) {
+			if(hasRogue)
+			{
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.beastAxe.itemID, (IItemRenderer) new AxeRender());
+			}
+		}
 
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 		GameRegistry.registerPlayerTracker(new PlayerTracker());

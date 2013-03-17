@@ -21,7 +21,7 @@ public class HammerRender implements IItemRenderer {
 	public HammerRender()
 	{
 		swordmodel = new ModelHammer();
-		mc = Minecraft.getMinecraft();
+
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class HammerRender implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED:
-		{
+		{		mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 
 			if(((EntityPlayer)data[1]).getFoodStats().getFoodLevel() <4

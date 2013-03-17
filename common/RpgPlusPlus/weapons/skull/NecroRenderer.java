@@ -18,11 +18,9 @@ import RpgInventory.playerjewels.shields.NecroSkull;
 public class NecroRenderer implements IItemRenderer {
 
 	NecroSkull skull;
-	Minecraft mc;
 	public NecroRenderer()
 	{
 		skull = new NecroSkull();
-		mc = Minecraft.getMinecraft();
 	}
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -46,7 +44,8 @@ public class NecroRenderer implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED:
-		{
+		{	Minecraft mc = Minecraft.getMinecraft();
+
 			GL11.glPushMatrix();
 
 			
@@ -90,7 +89,8 @@ public class NecroRenderer implements IItemRenderer {
 		break;
 
 		case  ENTITY:
-		{
+		{	Minecraft mc = Minecraft.getMinecraft();
+
 			GL11.glPushMatrix();
 
 //			float scale = 1.5F;

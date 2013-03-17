@@ -11,11 +11,9 @@ import org.lwjgl.opengl.GL11;
 public class ClaymoreRenderer implements IItemRenderer {
 
 	ModelClaymore swordmodel;
-	Minecraft mc;
 
 	public ClaymoreRenderer()
 	{
-		mc = Minecraft.getMinecraft();
 		swordmodel = new ModelClaymore();
 	}
 	@Override
@@ -37,10 +35,12 @@ public class ClaymoreRenderer implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		switch(type)
-		{
+		switch(type){
+
 		case  EQUIPPED:
 		{
+			Minecraft mc = Minecraft.getMinecraft();
+
 			GL11.glPushMatrix();
 
 			mc.renderEngine.func_98187_b("/subaraki/weapons/Sword.png");
@@ -59,6 +59,8 @@ public class ClaymoreRenderer implements IItemRenderer {
 
 		case  ENTITY:
 		{
+			Minecraft mc = Minecraft.getMinecraft();
+
 			GL11.glPushMatrix();
 
 			float scale = 1.5F;

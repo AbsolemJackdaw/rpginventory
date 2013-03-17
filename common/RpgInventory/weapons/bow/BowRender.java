@@ -17,11 +17,10 @@ import RpgInventory.gui.inventory.RpgGui;
 public class BowRender implements IItemRenderer {
 
 	ModelBow swordmodel;
-	Minecraft mc;
 	public BowRender()
 	{
 		swordmodel = new ModelBow();
-		mc = Minecraft.getMinecraft();
+
 	}
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -47,7 +46,7 @@ public class BowRender implements IItemRenderer {
 		{
 		case  EQUIPPED:
 		{
-
+			Minecraft mc = Minecraft.getMinecraft();
 			int k = mod_RpgInventory.elfbow.itemID;
 			
 			GL11.glPushMatrix();
@@ -99,7 +98,7 @@ public class BowRender implements IItemRenderer {
 		break;
 
 		case  ENTITY:
-		{
+		{Minecraft mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 
 			float scale = 1.5F;

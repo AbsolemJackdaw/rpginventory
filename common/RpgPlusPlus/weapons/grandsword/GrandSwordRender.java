@@ -14,11 +14,9 @@ import RpgInventory.weapons.claymore.ModelClaymore;
 public class GrandSwordRender implements IItemRenderer {
 
 	GrandSword swordmodel;
-	Minecraft mc;
 	public GrandSwordRender()
 	{
 		swordmodel = new GrandSword();
-		mc = Minecraft.getMinecraft();
 	}
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -42,7 +40,8 @@ public class GrandSwordRender implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED:
-		{
+		{	Minecraft mc = Minecraft.getMinecraft();
+
 			GL11.glPushMatrix();
 
 			mc.renderEngine.func_98187_b("/subaraki/grand_sword.png");
@@ -62,7 +61,8 @@ public class GrandSwordRender implements IItemRenderer {
 		break;
 
 		case  ENTITY:
-		{
+		{	Minecraft mc = Minecraft.getMinecraft();
+
 			GL11.glPushMatrix();
 
 			float scale = 1.8F;

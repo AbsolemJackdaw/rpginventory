@@ -19,11 +19,9 @@ public class StafRender implements IItemRenderer {
 
 	ModelStaf swordmodel;
 	public int step;
-	Minecraft mc;
 	public StafRender()
 	{
 		swordmodel = new ModelStaf();
-		mc = Minecraft.getMinecraft();
 	}
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -47,7 +45,8 @@ public class StafRender implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED:
-		{
+		{	Minecraft mc = Minecraft.getMinecraft();
+
 			GL11.glPushMatrix();
 			//			switch(item.getIconIndex())
 			//			{
@@ -101,15 +100,16 @@ public class StafRender implements IItemRenderer {
 		case  ENTITY:
 		{
 			GL11.glPushMatrix();
+			Minecraft mc = Minecraft.getMinecraft();
 
 			float scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
 			switch(item.getIconIndex().func_94208_k())
 			{
 			case 53:/*fire*/
-				mc.renderEngine.func_98187_b("/subaraki/weapons/FireStaff.png");
+				mc.renderEngine.func_98187_b("/subaraki/weapons/Staff.png");
 			case 54:/*ice*/
-				mc.renderEngine.func_98187_b("/subaraki/weapons/ForstStaff.png");
+				mc.renderEngine.func_98187_b("/subaraki/weapons/Staff.png");
 			case 55:/*earth*/
 				mc.renderEngine.func_98187_b("/subaraki/weapons/Staff.png");
 			case 56:/*wind*/
@@ -137,7 +137,7 @@ public class StafRender implements IItemRenderer {
 		}
 	}
 	public void blockLoop(Entity p, float repeat , ItemStack item)
-	{
+	{Minecraft mc = Minecraft.getMinecraft();
 		mc.renderEngine.func_98187_b("/subaraki/weapons/ElementalStaff.png");
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_LIGHTING);

@@ -17,7 +17,6 @@ public class RenderDagger implements IItemRenderer {
 	public RenderDagger()
 	{
 		daggerModel = new ModelDaggerR();
-		mc = Minecraft.getMinecraft();
 	}
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -41,7 +40,7 @@ public class RenderDagger implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED:
-		{
+		{		mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 			float scale = 0.9F;
 			GL11.glScalef(scale,scale,scale);
@@ -70,7 +69,7 @@ public class RenderDagger implements IItemRenderer {
 		break;
 
 		case  ENTITY:
-		{
+		{		mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 
 			float scale = 1.5F;

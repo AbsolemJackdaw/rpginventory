@@ -11,11 +11,10 @@ import org.lwjgl.opengl.GL11;
 public class AxeRender implements IItemRenderer {
 
 	Axe axe;
-	Minecraft mc;
 	public AxeRender()
 	{
 		axe = new Axe();
-		mc = Minecraft.getMinecraft();
+
 	}
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -39,7 +38,7 @@ public class AxeRender implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED:
-		{
+		{Minecraft mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 
 			float f = 0.8f;
@@ -58,7 +57,7 @@ public class AxeRender implements IItemRenderer {
 		break;
 
 		case  ENTITY:
-		{
+		{Minecraft mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 
 			float scale = 1.5F;
