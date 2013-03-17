@@ -687,9 +687,6 @@ public class mod_RpgInventory {
 				}
 			}
 		}
-		//0-32 is used by vanilla
-		//Check to make sure this hack wasnt already applied and >32 potions
-		//already exist. insert only when null
 		for (int pos = 32; pos < Potion.potionTypes.length; pos++) {
 			if (Potion.potionTypes[pos] == null) {
 				if (decomposePotion == null) {

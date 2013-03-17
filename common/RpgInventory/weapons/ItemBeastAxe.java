@@ -3,6 +3,7 @@ package RpgInventory.weapons;
 import RpgInventory.EnumRpgClass;
 import RpgInventory.RichTools.Targetting;
 import RpgInventory.mod_RpgInventory;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -68,7 +69,7 @@ public class ItemBeastAxe extends ItemSword {
     public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count) {
         if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER)) {
             World world = player != null ? player.worldObj : null;
-            if (world!= null && world.isRemote) {
+            if (world!= null && world.isRemote && FMLCommonHandler.instance().getEffectiveSide().isClient()) {
                 Minecraft mc = Minecraft.getMinecraft();
                 //Truer Randomization
                 rng = new Random(rng.nextLong() + System.currentTimeMillis());
@@ -83,17 +84,13 @@ public class ItemBeastAxe extends ItemSword {
 
                 if (particleTime >= 7) {
                     particleTime = 0;
-                    net.minecraft.client.particle.EntityHeartFX efx = new net.minecraft.client.particle.EntityHeartFX(world, el.posX, el.posY + 0.5F + rng.nextFloat(), el.posZ, rng.nextFloat(), rng.nextFloat() + 0.4F, rng.nextFloat());
-                    mc.effectRenderer.addEffect(efx);
+                    mod_RpgInventory.proxy.spawnParticle(world, el, rng);
                 }
                 if (charmTime >= 100) {
                     charmTime = 0;
                     float num = rng.nextFloat();
                     if (num > 0.80F) {
-                        System.out.println("Charmed");
-                        net.minecraft.client.particle.EntityLargeExplodeFX exfx = new net.minecraft.client.particle.EntityLargeExplodeFX(mc.renderEngine, world, el.posX, el.posY + 0.5F, el.posZ, rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
-                        exfx.setRBGColorF(0F, 1.0F, 0F);
-                        mc.effectRenderer.addEffect(exfx);
+                        mod_RpgInventory.proxy.spawnCharmParticle(world, el, rng,true);
                         ByteArrayOutputStream bos = new ByteArrayOutputStream();
                         DataOutputStream dos = new DataOutputStream(bos);
                         try {
@@ -104,10 +101,7 @@ public class ItemBeastAxe extends ItemSword {
                         Packet250CustomPayload pcp = new Packet250CustomPayload("RpgInv", bos.toByteArray());
                         PacketDispatcher.sendPacketToServer(pcp);
                     } else {
-                        System.out.println("Failed!");
-                        net.minecraft.client.particle.EntityLargeExplodeFX exfx = new net.minecraft.client.particle.EntityLargeExplodeFX(mc.renderEngine, world, el.posX, el.posY + 0.5F, el.posZ, rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
-                        exfx.setRBGColorF(1.0F, 0F, 0F);
-                        mc.effectRenderer.addEffect(exfx);
+                        mod_RpgInventory.proxy.spawnCharmParticle(world, el, rng,false);
                         ByteArrayOutputStream bos = new ByteArrayOutputStream();
                         DataOutputStream dos = new DataOutputStream(bos);
                         try {
