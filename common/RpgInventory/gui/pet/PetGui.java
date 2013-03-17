@@ -247,13 +247,14 @@ public class PetGui extends GuiScreen {
         super.drawScreen(i, j, f);
         //TODO: Add Pet rendering
         //remind me to add this // DONE ! :D
+        GL11.glPushMatrix();
         GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
         Class clazz = petType == 1 ? BoarPet.class : petType == 2 ? SpiderPet.class : BullPet.class;
         RenderLiving ren = (RenderLiving) RenderManager.instance.getEntityClassRenderObject(clazz);
         GL11.glTranslatef(this.width / 2 - 52, this.height / 2 - (clazz != SpiderPet.class ? 23 : 30), 15);
-        GL11.glRotatef((float) 180, 0f, 1f, 0f);
-        GL11.glRotatef((float) -90, 0f, 0f, 1f);
-        GL11.glRotatef(rotationCounter++, 1, 0, 0);
+        GL11.glRotatef((float) 180, 90f, 1f, 0f);
+        GL11.glRotatef((float) -90, 0f, 90f, 1f);
+        GL11.glRotatef(rotationCounter++, 0, 1, 0);
         GL11.glScaled(30, 30, -30);
         BMPetImpl bmp;
         try {
@@ -269,6 +270,7 @@ public class PetGui extends GuiScreen {
         }
 
         GL11.glPopAttrib();
+        GL11.glPopMatrix();
     }
 
     public void sendChanges() {
