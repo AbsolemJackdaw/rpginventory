@@ -138,12 +138,11 @@ public class ClientProxy extends CommonProxy {
             case 2:
                 Minecraft.getMinecraft().displayGuiScreen(new BookGui(p1));
                 break;
-            case 3:
-                Minecraft.getMinecraft().displayGuiScreen(new RpgInventory.gui.pet.PetGui(p1));
-            
         }
     }
-    
+    public void openGUI(EntityPlayer p1, RpgInv inv){
+        Minecraft.getMinecraft().displayGuiScreen(new RpgInventory.gui.pet.PetGui(p1, inv));
+    }
     public RpgInv getInventory(String username) {
         if (invs == null) {
             invs = new HashMap();

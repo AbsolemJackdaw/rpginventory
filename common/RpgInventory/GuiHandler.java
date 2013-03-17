@@ -41,10 +41,6 @@ public class GuiHandler implements IGuiHandler {
         if (ID == 2) {
             return new GuiMF(player.inventory, (TEMold) world.getBlockTileEntity(x, y, z));
         }
-        if (ID == 3) {
-            
-            return new RpgInventory.gui.pet.PetGui(player);
-        }
         return null;
     }
 }

@@ -17,6 +17,7 @@ import net.minecraftforge.common.DimensionManager;
 
 public class CommonProxy {
     // username, Inventory map.
+
     public void spawnParticle(World world, EntityLiving el, Random rng) {
     }
     private HashMap<String, RpgInv> invs;
@@ -41,6 +42,9 @@ public class CommonProxy {
     }
 
     public void openGUI(EntityPlayer player, int id) {
+    }
+
+    public void openGUI(EntityPlayer player, RpgInv inv) {
     }
 
     public void playerLevel(EntityPlayer player, int amount) {

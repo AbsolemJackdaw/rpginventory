@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -20,8 +19,8 @@ import org.lwjgl.opengl.GL11;
 
 import RpgInventory.IPet;
 import RpgInventory.RpgPacketHandler;
+import RpgInventory.gui.inventory.RpgInv;
 import RpgInventory.mod_RpgInventory;
-import RpgInventory.Configuration.RpgConfig;
 import RpgRB.beastmaster.BMPetImpl;
 import RpgRB.beastmaster.BoarPet;
 import RpgRB.beastmaster.BullPet;
@@ -32,14 +31,6 @@ import java.util.logging.Logger;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagByte;
-import net.minecraft.nbt.NBTTagEnd;
-import net.minecraft.nbt.NBTTagInt;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagShort;
-import net.minecraft.nbt.NBTTagString;
 import net.minecraft.world.World;
 
 public class PetGui extends GuiScreen {
@@ -49,9 +40,11 @@ public class PetGui extends GuiScreen {
 
     EntityPlayer p;
     ItemStack petCrystal;
+    RpgInv inv;
 
-    public PetGui(EntityPlayer p1) {
+    public PetGui(EntityPlayer p1, RpgInv inv) {
         p = p1;
+        this.inv = inv;
     }
     private GuiTextField textfield;
     public int xSizeOfTexture = 181;
@@ -76,13 +69,13 @@ public class PetGui extends GuiScreen {
     EntityLiving fake;
 
     public void initGui() {
-        petCrystal = mod_RpgInventory.proxy.getInventory(p.username).getCrystal();
+        petCrystal = this.inv.getCrystal();
         if (IPet.playersWithActivePets.containsKey(p.username)) {
             thePet = (BMPetImpl) IPet.playersWithActivePets.get(p.username).getPet();
             if (thePet != null) {
                 //make sure crystal is updated with the mob info
                 petCrystal = thePet.writePetToItemStack();
-                mod_RpgInventory.proxy.getInventory(p.username).setInventorySlotContents(6, petCrystal);
+                this.inv.setInventorySlotContents(6, petCrystal);
             }
         }
         petType = petCrystal.getItemDamage();

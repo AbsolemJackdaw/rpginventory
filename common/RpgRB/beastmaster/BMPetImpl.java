@@ -10,6 +10,7 @@ import RpgInventory.IPet;
 import RpgInventory.gui.inventory.RpgInv;
 import RpgInventory.mod_RpgInventory;
 import RpgPlusPlus.minions.CustomMinionEntitySelector;
+import com.google.common.collect.Multimaps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
@@ -146,13 +147,14 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     @Override
     public void onLivingUpdate() {
         EntityPlayer player = (EntityPlayer) getOwner();
-        if (player == null || !EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER)) {
+        if (!worldObj.isRemote && (player == null || !EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER))) {
             try {
                 RpgInv inv = mod_RpgInventory.proxy.getInventory(getOwnerName());
                 inv.setInventorySlotContents(6, writePetToItemStack());
             } catch (Throwable ex) {
             }
             this.setDead();
+            return;
         }
         if (healthregen-- <= 0) {
             this.heal(1);
@@ -163,30 +165,28 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             if (level != 0) {
                 setSize(getBaseWidth() + ((level / 200.0F) * (1.0F + getBaseWidth())), getBaseHeight() + ((level / 200.0F) * (1.0F + getBaseHeight())));
             }
+            if (!worldObj.isRemote && getOwner() == null) {
+                IPet.playersWithActivePets.remove(this.getOwnerName());
+                this.setDead();
+                return;
+            }
+            if (!worldObj.isRemote && (!IPet.playersWithActivePets.containsKey(this.getOwnerName()) || this.dimension != getOwner().dimension)) {
+                this.setDead();
+                return;
+            }
+            //Check if player has crystal equipped.
+            if (!worldObj.isRemote) {
+                this.dataWatcher.updateObject(HP, this.health);
+            }
+            if (sprintToggleTimer > 0) { //used to determine if sprinting should be activated.
+                sprintToggleTimer--;
+            }
+            if (jumpTicks > 0) //used to limit how long the mount will rise while jumping
+            {
+                jumpTicks--;
+            }
+            super.onLivingUpdate();
         }
-        if (getOwner() == null) {
-            IPet.playersWithActivePets.remove(this.getOwnerName());
-            this.setDead();
-        }
-        if (!IPet.playersWithActivePets.containsKey(this.getOwnerName()) || this.dimension != getOwner().dimension) {
-            this.setDead();
-            return;
-        } else if (this.dimension != getOwner().dimension) {
-            this.setDead();
-            return;
-        }
-        //Check if player has crystal equipped.
-        if (!worldObj.isRemote) {
-            this.dataWatcher.updateObject(HP, this.health);
-        }
-        if (sprintToggleTimer > 0) { //used to determine if sprinting should be activated.
-            sprintToggleTimer--;
-        }
-        if (jumpTicks > 0) //used to limit how long the mount will rise while jumping
-        {
-            jumpTicks--;
-        }
-        super.onLivingUpdate();
     }
 
     protected abstract float getBaseWidth();
@@ -334,7 +334,13 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public EntityLiving getOwner() {
-        return MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(this.getOwnerName());
+        EntityPlayer player;
+        if (worldObj.isRemote) {
+            player = this.worldObj.getPlayerEntityByName(this.getOwnerName());
+        } else {
+            player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(this.getOwnerName());
+        }
+        return player;
     }
 
     public boolean isAIEnabled() {
