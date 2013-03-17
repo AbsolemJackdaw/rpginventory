@@ -1,5 +1,6 @@
 package RpgRB;
 
+import RpgInventory.EnumRpgClass;
 import RpgInventory.IPet;
 import RpgInventory.gui.inventory.RpgInv;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,78 +23,82 @@ public class ItemRBMats2 extends Item {
     }
 
     public ItemStack onItemRightClick(ItemStack whistle, World world, EntityPlayer player) {
-        if (!world.isRemote && player.ridingEntity == null) {
-            try {
-                RpgInv rpginv = mod_RpgInventory.proxy.getInventory(player.username);
-                ItemStack stack = rpginv.getCrystal();
-                if (stack != null) {
-                    //Pet is in the world.
-                    if (IPet.playersWithActivePets.containsKey(player.username)) {
-                        EntityLiving e = (EntityLiving) IPet.playersWithActivePets.get(player.username).getPet();
-                        IPet.playersWithActivePets.remove(player.username);
-                        if (e != null && !((EntityLiving) e).isDead) {
-                            stack = ((IPet) e).writePetToItemStack();
-                            rpginv.setInventorySlotContents(6, stack);
-                            ((EntityLiving) e).setDead();
-                            System.out.println("Put Away");
-                            return whistle;
-                        }
-                        //pet is not in the world
-                    } else {
-                        switch (stack.getItemDamage()) {
-                            case 1:
+        if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER)) {
+            if (!world.isRemote && player.ridingEntity == null) {
+                try {
+                    RpgInv rpginv = mod_RpgInventory.proxy.getInventory(player.username);
+                    ItemStack stack = rpginv.getCrystal();
+                    if (stack != null) {
+                        //Pet is in the world.
+                        if (IPet.playersWithActivePets.containsKey(player.username)) {
+                            EntityLiving e = (EntityLiving) IPet.playersWithActivePets.get(player.username).getPet();
+                            IPet.playersWithActivePets.remove(player.username);
+                            if (e != null && !((EntityLiving) e).isDead) {
+                                stack = ((IPet) e).writePetToItemStack();
+                                rpginv.setInventorySlotContents(6, stack);
+                                ((EntityLiving) e).setDead();
+                                System.out.println("Put Away");
+                                return whistle;
+                            }
+                            //pet is not in the world
+                        } else {
+                            switch (stack.getItemDamage()) {
+                                case 1:
 
-                                BoarPet Boar = new BoarPet(world, player, stack);
-                                Boar.setPosition(player.posX, player.posY + 0.5F, player.posZ);
-                                Boar.setTamed(true);
-                                try {
-                                    Boar.setName(stack.stackTagCompound.getString("PetName"));
-                                    Boar.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
-                                    Boar.setEntityHealth(stack.stackTagCompound.getInteger("PetHealth"));
-                                    if (Boar.getHealth() <= 0) {
-                                        Boar.setEntityHealth(1);
+                                    BoarPet Boar = new BoarPet(world, player, stack);
+                                    Boar.setPosition(player.posX, player.posY + 0.5F, player.posZ);
+                                    Boar.setTamed(true);
+                                    try {
+                                        Boar.setName(stack.stackTagCompound.getString("PetName"));
+                                        Boar.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
+                                        Boar.setEntityHealth(stack.stackTagCompound.getInteger("PetHealth"));
+                                        if (Boar.getHealth() <= 0) {
+                                            Boar.setEntityHealth(1);
+                                        }
+                                    } catch (Throwable ex) {
                                     }
-                                } catch (Throwable ex) {
-                                }
-                                world.spawnEntityInWorld(Boar);
-                                break;
-                            case 2:
-                                SpiderPet spider = new SpiderPet(world, player, stack);
-                                spider.setPosition(player.posX, player.posY + 0.5F, player.posZ);
-                                spider.setOwner(player.username);
-                                spider.setTamed(true);
-                                try {
-                                    spider.setName(stack.stackTagCompound.getString("PetName"));
-                                    spider.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
-                                    spider.setEntityHealth(stack.stackTagCompound.getInteger("PetHealth"));
-                                    if (spider.getHealth() <= 0) {
-                                        spider.setEntityHealth(1);
+                                    world.spawnEntityInWorld(Boar);
+                                    break;
+                                case 2:
+                                    SpiderPet spider = new SpiderPet(world, player, stack);
+                                    spider.setPosition(player.posX, player.posY + 0.5F, player.posZ);
+                                    spider.setOwner(player.username);
+                                    spider.setTamed(true);
+                                    try {
+                                        spider.setName(stack.stackTagCompound.getString("PetName"));
+                                        spider.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
+                                        spider.setEntityHealth(stack.stackTagCompound.getInteger("PetHealth"));
+                                        if (spider.getHealth() <= 0) {
+                                            spider.setEntityHealth(1);
+                                        }
+                                    } catch (Throwable ex) {
                                     }
-                                } catch (Throwable ex) {
-                                }
-                                world.spawnEntityInWorld(spider);
-                                break;
-                            case 3:
-                                BullPet bull = new BullPet(world, player, stack);
-                                bull.setPosition(player.posX, player.posY + 0.5F, player.posZ);
-                                bull.setTamed(true);
-                                try {
-                                    bull.setName(stack.stackTagCompound.getString("PetName"));
-                                    bull.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
-                                    bull.setEntityHealth(stack.stackTagCompound.getInteger("PetHealth"));
-                                    if (bull.getHealth() <= 0) {
-                                        bull.setEntityHealth(1);
+                                    world.spawnEntityInWorld(spider);
+                                    break;
+                                case 3:
+                                    BullPet bull = new BullPet(world, player, stack);
+                                    bull.setPosition(player.posX, player.posY + 0.5F, player.posZ);
+                                    bull.setTamed(true);
+                                    try {
+                                        bull.setName(stack.stackTagCompound.getString("PetName"));
+                                        bull.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
+                                        bull.setEntityHealth(stack.stackTagCompound.getInteger("PetHealth"));
+                                        if (bull.getHealth() <= 0) {
+                                            bull.setEntityHealth(1);
+                                        }
+                                    } catch (Throwable ex) {
                                     }
-                                } catch (Throwable ex) {
-                                }
-                                world.spawnEntityInWorld(bull);
-                                break;
+                                    world.spawnEntityInWorld(bull);
+                                    break;
+                            }
+
+                            rpginv.setInventorySlotContents(6, stack);
+
                         }
-                        rpginv.setInventorySlotContents(6, stack);
                     }
+                } catch (Throwable ex) {
+                    ex.printStackTrace();
                 }
-            } catch (Throwable ex) {
-                ex.printStackTrace();
             }
         }
         return whistle;

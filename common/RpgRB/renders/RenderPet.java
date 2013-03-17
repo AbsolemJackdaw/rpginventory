@@ -40,7 +40,7 @@ public class RenderPet extends RenderLiving {
        
     	this.mainModel = pet.getModel();
     	super.doRenderLiving(pet, par2, par4, par6, par8, par9);
-        super.renderLivingLabel(pet, pet.getEntityName(), par2, par4, par6, 32);      
+        super.renderLivingLabel(pet, pet.getEntityName() + " Lvl." + pet.getLevel(), par2, par4, par6, 32);      
 
     }
 

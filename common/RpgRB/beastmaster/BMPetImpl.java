@@ -5,6 +5,7 @@
 package RpgRB.beastmaster;
 
 import RpgInventory.EntityPetXP;
+import RpgInventory.EnumRpgClass;
 import RpgInventory.IPet;
 import RpgInventory.gui.inventory.RpgInv;
 import RpgInventory.mod_RpgInventory;
@@ -123,7 +124,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             IPet.playersWithActivePets.put(owner.username, new PetID(this.dimension, this.entityId));
             this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, true, false, new CustomMinionEntitySelector(owner)));
         }
-        if(!sizeSet){
+        if (!sizeSet) {
             setSize(getBaseWidth(), getBaseHeight());
         }
     }
@@ -141,16 +142,26 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         return super.isDead;
     }
     int healthregen = 60;
+
     @Override
     public void onLivingUpdate() {
-        if(healthregen-- <= 0){
+        EntityPlayer player = (EntityPlayer) getOwner();
+        if (player == null || !EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER)) {
+            try {
+                RpgInv inv = mod_RpgInventory.proxy.getInventory(getOwnerName());
+                inv.setInventorySlotContents(6, writePetToItemStack());
+            } catch (Throwable ex) {
+            }
+            this.setDead();
+        }
+        if (healthregen-- <= 0) {
             this.heal(1);
             this.healthregen = 60;
         }
-        if(worldObj.isRemote){
+        if (worldObj.isRemote) {
             int level = this.dataWatcher.getWatchableObjectInt(LEVELID);
-            if(level != 0){
-                setSize(getBaseWidth() + ((level / 200.0F) * (1.0F + getBaseWidth())), getBaseHeight() + ((level / 200.0F) * (1.0F + getBaseHeight()))) ;
+            if (level != 0) {
+                setSize(getBaseWidth() + ((level / 200.0F) * (1.0F + getBaseWidth())), getBaseHeight() + ((level / 200.0F) * (1.0F + getBaseHeight())));
             }
         }
         if (getOwner() == null) {
@@ -329,7 +340,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     public boolean isAIEnabled() {
         return true;
     }
-    private int xpThrottle = 4;
+    private int xpThrottle = 5;
 
     @Override
     public void onUpdate() {
@@ -342,10 +353,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
             rotationYaw = prevRotationYaw = entityRider.rotationYaw;
         }
-        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(2.0D, 2.0D, 2.0D));
+        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
         if (xps != null && xps.size() > 0) {
             if (--xpThrottle <= 0) {
-                xpThrottle = 4;
+                xpThrottle = 5;
                 for (EntityPetXP xp : xps) {
                     this.giveXP(xp.getXpValue());
                     xp.setDead();
@@ -550,7 +561,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         //Convert float to string
         this.experience = par1NBTTagCompound.getFloat("PercentToNextLevel");
         this.dataWatcher.updateObject(NEXTLEVEL, String.valueOf(this.experience));
-        
+
         this.dataWatcher.updateObject(LEVELID, par1NBTTagCompound.getInteger("XpLevel"));
 
         this.experienceTotal = par1NBTTagCompound.getInteger("XpTotal");

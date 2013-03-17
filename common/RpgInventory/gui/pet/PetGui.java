@@ -19,6 +19,7 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 import RpgInventory.IPet;
+import RpgInventory.RpgPacketHandler;
 import RpgInventory.mod_RpgInventory;
 import RpgRB.beastmaster.BMPetImpl;
 import RpgRB.beastmaster.BoarPet;
@@ -30,271 +31,263 @@ import java.util.logging.Logger;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagByte;
+import net.minecraft.nbt.NBTTagEnd;
+import net.minecraft.nbt.NBTTagInt;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagShort;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.world.World;
 
 public class PetGui extends GuiScreen {
 
-	BMPetImpl thePet;
-	int petType; /*Spider 3, bull 2, boar 1*/
+    BMPetImpl thePet;
+    int petType; /*Spider 2, bull 3, boar 1*/
 
-	EntityPlayer p;
-	ItemStack petCrystal;
+    EntityPlayer p;
+    ItemStack petCrystal;
 
-	public PetGui(EntityPlayer p1) {
-		p = p1;
-	}
-	private GuiTextField textfield;
-	public final int xSizeOfTexture = 181;
-	public final int ySizeOfTexture = 166;
-	public static String petStats = "Stats :";
-	public static String info = "Additional Info";
-	public static int petAtk;
-	public static int currentHP;
-	public static int totalHP;
-	public static String saddle;
-	public static String levelInfo;
-	public static String levelInfo2;
-	public static int PetLevel;
-	public static String PetName;
-	public static String Name = "Name";
-	public static int playerLevel;
-	private int rotationCounter = 0;
+    public PetGui(EntityPlayer p1) {
+        p = p1;
+    }
+    private GuiTextField textfield;
+    public int xSizeOfTexture = 181;
+    public int ySizeOfTexture = 166;
+    public String petStats = "Stats :";
+    public String info = "Additional Info";
+    public short petAtk;
+    public short currentHP;
+    public short totalHP;
+    public String saddle;
+    public String levelInfo;
+    public short PetLevel;
+    public String PetName;
+    public String Name = "Name";
+    public short playerLevel;
+    private short rotationCounter = 0;
+    private short petcandyConsumed = 0;
+    private short petLevelsAdded = 0;
+    private short playerLevelsLost = 0;
 
-	public void initGui() {
-		petCrystal = mod_RpgInventory.proxy.getInventory(p.username).getCrystal();
-		if (IPet.playersWithActivePets.containsKey(p.username)) {
-			thePet = (BMPetImpl) IPet.playersWithActivePets.get(p.username).getPet();
-			if (thePet != null) {
-				//make sure crystal is updated with the mob info
-				petCrystal = thePet.writePetToItemStack();
-				mod_RpgInventory.proxy.getInventory(p.username).setInventorySlotContents(6, petCrystal);
-			}
-		}
-		petType = petCrystal.getItemDamage();
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.func_98187_b("/subaraki/petgui.png");
+    public void initGui() {
+        petCrystal = mod_RpgInventory.proxy.getInventory(p.username).getCrystal();
+        if (IPet.playersWithActivePets.containsKey(p.username)) {
+            thePet = (BMPetImpl) IPet.playersWithActivePets.get(p.username).getPet();
+            if (thePet != null) {
+                //make sure crystal is updated with the mob info
+                petCrystal = thePet.writePetToItemStack();
+                mod_RpgInventory.proxy.getInventory(p.username).setInventorySlotContents(6, petCrystal);
+            }
+        }
+        petType = petCrystal.getItemDamage();
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        this.mc.renderEngine.func_98187_b("/subaraki/petgui.png");
 
-		int posX = (this.width - xSizeOfTexture) / 2;
-		int posY = (this.height - ySizeOfTexture) / 2;
-		buttonList.clear();
-		buttonList.add(new GuiButton(1, posX + 70, posY + 36, 40, 20, "Submit"));
-		buttonList.add(new GuiButton(4, posX + 182, posY + 120, 40, 20, "Imbue"));
-		buttonList.add(new GuiButton(3, posX + 182, posY + 22, 30, 20, "Back"));
-		buttonList.add(new GuiButton(2, posX + 182, posY, 30, 20, "Close"));
+        int posX = (this.width - xSizeOfTexture) / 2;
+        int posY = (this.height - ySizeOfTexture) / 2;
+        buttonList.clear();
+        buttonList.add(new GuiButton(1, posX + 70, posY + 36, 40, 20, "Submit"));
+        buttonList.add(new GuiButton(4, posX + 182, posY + 120, 40, 20, "Imbue"));
+        buttonList.add(new GuiButton(3, posX + 182, posY + 22, 30, 20, "Back"));
+        buttonList.add(new GuiButton(2, posX + 182, posY, 30, 20, "Close"));
 
-		levelInfo = "";
-		levelInfo2 = "";
+        levelInfo = "";
 
-		NBTTagCompound tags = petCrystal.getTagCompound();
-		if (tags == null) {
-			petCrystal.setTagCompound(new NBTTagCompound());
-		}
-		try {
-			PetLevel = tags.getInteger("PetLevel");
-		} catch (NullPointerException ex) {
-			PetLevel = 0;
-		}
-		try {
-			petAtk = tags.getInteger("PetAttack");
-		} catch (NullPointerException ex) {
-			petAtk = 4;
-		}
-		try {
-			currentHP = tags.getInteger("PetHealth");
-		} catch (NullPointerException ex) {
-			currentHP = 18;
-		}
-		try {
-			totalHP = tags.getInteger("PetMaxHealth");
-		} catch (NullPointerException ex) {
-			totalHP = 18;
-		}
-		try {
-			PetName = tags.getString("PetName");
-		} catch (NullPointerException ex) {
-			PetName = petCrystal.getDisplayName();
-		}
+        NBTTagCompound tags = petCrystal.getTagCompound();
+        if (tags == null) {
+            petCrystal.setTagCompound(new NBTTagCompound());
+        }
+        try {
+            PetLevel = (short) tags.getInteger("PetLevel");
+        } catch (NullPointerException ex) {
+            PetLevel = 0;
+        }
+        try {
+            petAtk = (short) tags.getInteger("PetAttack");
+        } catch (NullPointerException ex) {
+            petAtk = 4;
+        }
+        try {
+            currentHP = (short) tags.getInteger("PetHealth");
+        } catch (NullPointerException ex) {
+            currentHP = 18;
+        }
+        try {
+            totalHP = (short) tags.getInteger("PetMaxHealth");
+        } catch (NullPointerException ex) {
+            totalHP = 18;
+        }
+        try {
+            PetName = tags.getString("PetName");
+        } catch (NullPointerException ex) {
+            PetName = petCrystal.getDisplayName();
+        }
 
-		if (petAtk == 0) {
-			petAtk = 4;
-		}
-		if (totalHP == 0) {
-			currentHP = totalHP = 18;
-		}
-		if (currentHP == 0) {
-			currentHP = 1;
-		}
-		if (PetName == null || PetName.isEmpty()) {
-			PetName = petCrystal.getDisplayName();
-		}
-		if (PetLevel >= 50) {
-			if (tags.hasKey("isSaddled")) {
-				if (tags.getBoolean("isSaddled") == true) {
-					saddle = PetName + " is saddled.";
-				} else {
-					saddle = PetName + " is not saddled.";
-				}
-			} else {
-				saddle = PetName + " is not saddled.";
-			}
-		} else {
-			saddle = PetName + " needs lv50 to be ridden.";
-		}
+        if (petAtk == 0) {
+            petAtk = 4;
+        }
+        if (totalHP == 0) {
+            currentHP = totalHP = 18;
+        }
+        if (currentHP == 0) {
+            currentHP = 1;
+        }
+        if (PetName == null || PetName.isEmpty()) {
+            PetName = petCrystal.getDisplayName();
+        }
+        if (PetLevel >= 50) {
+            if (tags.hasKey("isSaddled")) {
+                if (tags.getBoolean("isSaddled") == true) {
+                    saddle = PetName + " is saddled.";
+                } else {
+                    saddle = PetName + " is not saddled.";
+                }
+            } else {
+                saddle = PetName + " is not saddled.";
+            }
+        } else {
+            saddle = PetName + " needs lv50 to be ridden.";
+        }
 
-		textfield = new GuiTextField(fontRenderer, posX + 70, posY + 14, 100, 20);
-		textfield.setText(PetName);
-		textfield.setMaxStringLength(32);
-		playerLevel = Minecraft.getMinecraft().thePlayer.experienceLevel;
-	}
+        textfield = new GuiTextField(fontRenderer, posX + 70, posY + 14, 100, 20);
+        textfield.setText(PetName);
+        textfield.setMaxStringLength(32);
+        playerLevel = (short) Minecraft.getMinecraft().thePlayer.experienceLevel;
+    }
 
-	protected void actionPerformed(GuiButton guibutton) {
-		if (guibutton.id == 1) {
-			PetName = textfield.getText();
-		}
-		if (guibutton.id == 2) {
-			this.mc.thePlayer.closeScreen();
-		}
-		if (guibutton.id == 3) {
-			int i = 1;
-			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-			ObjectOutput out;
-			DataOutputStream outputStream = new DataOutputStream(bytes);
-			try {
-				outputStream.writeInt(i);
-				Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
-				PacketDispatcher.sendPacketToServer(packet);
-				//System.out.println("Packet send");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		if (guibutton.id == 4) 
-		{
-			levelInfo = "";
-			levelInfo2 = "";
-			if (playerLevel < PetLevel / 2 && PetLevel < 200) {
-				levelInfo = "You need " + (MathHelper.floor_float(PetLevel / 2) + 1) + " levels to";
-				levelInfo2 = "level your pet.";
+    protected void actionPerformed(GuiButton guibutton) {
+        if (guibutton.id == 1) {
+            PetName = textfield.getText();
+        }
+        if (guibutton.id == 2) {
+            this.mc.thePlayer.closeScreen();
+        }
+        if (guibutton.id == 3) {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            ObjectOutput out;
+            DataOutputStream outputStream = new DataOutputStream(bytes);
+            try {
+                outputStream.writeInt(RpgPacketHandler.OPENRPGINV);
+                Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
+                PacketDispatcher.sendPacketToServer(packet);
+                //System.out.println("Packet send");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (guibutton.id == 4) {
+            levelInfo = "";
+            if (playerLevel < PetLevel / 2 + 1 && PetLevel < 200) {
+                levelInfo = "You need " + (MathHelper.floor_float(PetLevel / 2) + 1) + " levels to level your pet.";
+            } else if (PetLevel >= 200) {
+                PetLevel = 200;
+                levelInfo = "Pet has reached maximum level.";
+            } else if (mc.thePlayer.inventory.hasItem(mod_RpgInventory.petCandy.itemID)) {
+                petcandyConsumed++;
+                levelInfo = "Consumed " + petcandyConsumed + " Rare PetCandy and added " + petcandyConsumed + " pet level";
+            } else if (playerLevel >= PetLevel / 2 + 1) {
+                levelInfo = "Added 1 pet Level and costed: " + (MathHelper.floor_float(PetLevel / 2.0F) + 1) + " player levels;";
+                //So first levelup is not free;
+                playerLevel -= MathHelper.floor_float(PetLevel / 2.0F) + 1;
+                PetLevel += 1;
+                currentHP = totalHP = (short) (petType == 1 ? 15 + MathHelper.floor_float(((float) PetLevel) / 2.5F)
+                        : petType == 2 ? 18 + MathHelper.floor_float(((float) PetLevel) / 2.2F)
+                        : 20 + MathHelper.floor_float(((float) PetLevel) / 2F));
+                petLevelsAdded++;
+                playerLevelsLost += Math.floor((float) PetLevel) / 2.0F + 1.0F;
+            }
+        }
+    }
 
-			}else if (PetLevel == 200) {
-				levelInfo = "Pet has reached";
-				levelInfo2 = "maximum level.";
-			}else if (mc.thePlayer.inventory.hasItem(mod_RpgInventory.petCandy.itemID)) {
-				levelInfo2 = "Consumed Rare PetCandy.";
-				levelInfo = "Added 1 pet level";
-				int i = 13;
-				ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-				ObjectOutput out;
-				DataOutputStream outputStream = new DataOutputStream(bytes);
-				try {
-					outputStream.writeInt(12);
-					Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
-					PacketDispatcher.sendPacketToServer(packet);
-					this.mc.thePlayer.inventory.consumeInventoryItem(mod_RpgInventory.petCandy.itemID);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}else if (playerLevel >= PetLevel / 2 && PetLevel < 200) {
-				levelInfo = "Added 1 pet Level";
-				//So first levelup is not free
-				levelInfo2 = "Cost: " + (MathHelper.floor_float(PetLevel / 2.0F) + 1) + " player levels;";
-				playerLevel -= MathHelper.floor_float(PetLevel / 2.0F) + 1;
-				PetLevel += 1;
-				currentHP = totalHP = 18 + MathHelper.floor_float(((float) PetLevel) / 2F);
-				int i = 12;
-				ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-				ObjectOutput out;
-				DataOutputStream outputStream = new DataOutputStream(bytes);
-				try {
-					outputStream.writeInt(12);
-					outputStream.writeInt(PetLevel/2);
-					Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
-					PacketDispatcher.sendPacketToServer(packet);
-					this.mc.thePlayer.addExperienceLevel(-PetLevel/2);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		NBTTagCompound newCrystal = petCrystal.getTagCompound();
-		newCrystal.setString("username", mc.thePlayer.username);
-		newCrystal.setBoolean("pet", true);
-		newCrystal.setString("PetName", PetName);
-		newCrystal.setInteger("PetLevel", PetLevel);
-		newCrystal.setInteger("PetHealth", currentHP);
-		newCrystal.setInteger("PetMaxHealth", totalHP);
-		newCrystal.setInteger("PetAttack", petAtk);
-		try {
-			PacketDispatcher.sendPacketToServer(new Packet250CustomPayload("RpgRawInv", CompressedStreamTools.compress(newCrystal)));
-		} catch (IOException ex) {
-			Logger.getLogger(PetGui.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
+    @Override
+    public void onGuiClosed() {
+        sendChanges();
+        super.onGuiClosed();
+    }
 
-	protected void keyTyped(char c, int i) {
-		super.keyTyped(c, i);
-		textfield.textboxKeyTyped(c, i);
-	}
+    protected void keyTyped(char c, int i) {
+        super.keyTyped(c, i);
+        textfield.textboxKeyTyped(c, i);
+    }
 
-	protected void mouseClicked(int i, int j, int k) {
-		super.mouseClicked(i, j, k);
-		textfield.mouseClicked(i, j, k);
-	}
+    protected void mouseClicked(int i, int j, int k) {
+        super.mouseClicked(i, j, k);
+        textfield.mouseClicked(i, j, k);
+    }
 
-	public boolean doesGuiPauseGame() {
-		return false;
-	}
+    public boolean doesGuiPauseGame() {
+        return false;
+    }
 
-	public void drawScreen(int i, int j, float f) {
-		drawDefaultBackground();
-		try {
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.mc.renderEngine.func_98187_b("/subaraki/petgui.png");
-			int posX = (this.width - xSizeOfTexture) / 2;
-			int posY = (this.height - ySizeOfTexture) / 2;
-			drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
-		} finally {
-			textfield.drawTextBox();
-		}
-		drawString(fontRenderer, Name, this.width / 2 - 20, this.height / 2 - 79, 0xffffff);
-		drawString(fontRenderer, petStats, this.width / 2 - 85, this.height / 2 - 10, 0x00ffff);
-		drawString(fontRenderer, "Lvl : " + PetLevel, this.width / 2 - 80, this.height / 2, 0xffffff);
-		drawString(fontRenderer, "Atk : " + petAtk, this.width / 2 - 80, this.height / 2 + 10, 0xffffff);
-		drawString(fontRenderer, "HP : " + currentHP + "/" + totalHP, this.width / 2 - 80, this.height / 2 + 20, 0xffffff);
+    public void drawScreen(int i, int j, float f) {
+        drawDefaultBackground();
+        try {
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            this.mc.renderEngine.func_98187_b("/subaraki/petgui.png");
+            int posX = (this.width - xSizeOfTexture) / 2;
+            int posY = (this.height - ySizeOfTexture) / 2;
+            drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
+        } finally {
+            textfield.drawTextBox();
+        }
+        drawString(fontRenderer, Name + ": " + PetName, this.width / 2 - 20, this.height / 2 - 79, 0xffffff);
+        drawString(fontRenderer, petStats, this.width / 2 - 85, this.height / 2 - 10, 0x00ffff);
+        drawString(fontRenderer, "Lvl : " + PetLevel, this.width / 2 - 80, this.height / 2, 0xffffff);
+        drawString(fontRenderer, "Atk : " + petAtk, this.width / 2 - 80, this.height / 2 + 10, 0xffffff);
+        drawString(fontRenderer, "HP : " + currentHP + "/" + totalHP, this.width / 2 - 80, this.height / 2 + 20, 0xffffff);
 
-		drawString(fontRenderer, info, this.width / 2 - 85, this.height / 2 + 45, 0xff00ff);
-		drawString(fontRenderer, saddle, this.width / 2 - 80, this.height / 2 + 55, 0xffffff);
+        drawString(fontRenderer, info, this.width / 2 - 85, this.height / 2 + 45, 0xff00ff);
+        drawString(fontRenderer, saddle, this.width / 2 - 80, this.height / 2 + 55, 0xffffff);
+        fontRenderer.drawSplitString(levelInfo, this.width / 2 + 95, this.height / 2 + 65, 20, 30);
+        //drawString(fontRenderer, levelInfo, this.width / 2 + 95, this.height / 2 + 65, 0xffffff);
+        //drawString(fontRenderer, levelInfo2, this.width / 2 + 95, this.height / 2 + 75, 0xffffff);
+        if (PetLevel == 200) {
+            drawString(fontRenderer, "Maxed out.", this.width / 2 - 30, this.height / 2, 0x00ff00);
+        }
+        super.drawScreen(i, j, f);
+        //TODO: Add Pet rendering
+        //remind me to add this // DONE ! :D
+        GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+        Class clazz = petType == 1 ? BoarPet.class : petType == 2 ? SpiderPet.class : BullPet.class;
+        RenderLiving ren = (RenderLiving) RenderManager.instance.getEntityClassRenderObject(clazz);
+        GL11.glTranslatef(this.width / 2 - 52, this.height / 2 - (clazz != SpiderPet.class ? 23 : 30), 15);
+        GL11.glRotatef((float) 180, 0f, 1f, 0f);
+        GL11.glRotatef((float) -90, 0f, 0f, 1f);
+        GL11.glRotatef(rotationCounter++, 1, 0, 0);
+        GL11.glScaled(30, 30, -30);
+        BMPetImpl bmp;
+        try {
+            bmp = (BMPetImpl) clazz.getConstructor(World.class, EntityPlayer.class, ItemStack.class).newInstance(p.worldObj, p, petCrystal);
+            if (bmp.getHealth() == 0) {
+                bmp.setEntityHealth(1);
+            }
+            bmp.isDead = false;
+            ren.doRender(bmp, 0, 0, 0, 0, 1);
+            bmp.setDead();
+        } catch (Throwable ex) {
+            Logger.getLogger(PetGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-		drawString(fontRenderer, levelInfo, this.width / 2 + 95, this.height / 2 + 65, 0xffffff);
-		drawString(fontRenderer, levelInfo2, this.width / 2 + 95, this.height / 2 + 75, 0xffffff);
-		if(PetLevel == 200 )
-		{
-			drawString(fontRenderer, "Maxed out.", this.width / 2 - 30, this.height / 2, 0x00ff00);
-		}
-		super.drawScreen(i, j, f);
-		//TODO: Add Pet rendering
-		//remind me to add this // DONE ! :D
-		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
-		Class clazz = petType == 1 ? BoarPet.class : petType == 2 ? SpiderPet.class : BullPet.class;
-		RenderLiving ren = (RenderLiving) RenderManager.instance.getEntityClassRenderObject(clazz);
-		GL11.glTranslatef(this.width / 2 - 52, this.height / 2 - (clazz != SpiderPet.class ? 23 : 30), 15);
-		GL11.glRotatef((float) 180, 0f, 1f, 0f);
-		GL11.glRotatef((float) -90, 0f, 0f, 1f);
-		GL11.glRotatef(rotationCounter++, 1,  0, 0);
-		GL11.glScaled(30, 30, -30);
-		BMPetImpl bmp;
-		try {
-			bmp = (BMPetImpl)clazz.getConstructor(World.class, EntityPlayer.class, ItemStack.class).newInstance(p.worldObj, p, petCrystal);
-			if(bmp.getHealth() == 0){
-                            bmp.setEntityHealth(1);
-                        }
-                        bmp.isDead = false;
-                        ren.doRender(bmp, 0, 0, 0, 0, 1);
-                        bmp.setDead();
-		} catch (Throwable ex) {
-			Logger.getLogger(PetGui.class.getName()).log(Level.SEVERE, null, ex);
-		} 
+        GL11.glPopAttrib();
+    }
 
-		GL11.glPopAttrib();
-	}
+    public void sendChanges() {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(bos);
+        try {
+            dos.writeInt(RpgPacketHandler.PETGUI);
+            dos.writeUTF(new String(PetName.getBytes("UTF-8"), "UTF-8"));
+            dos.writeShort(PetLevel);
+            dos.writeShort(currentHP);
+            dos.writeShort(totalHP);
+            dos.writeShort(petAtk);
+            dos.writeShort(playerLevelsLost);
+            dos.writeShort(petLevelsAdded);
+            dos.writeShort(petcandyConsumed);
+
+            PacketDispatcher.sendPacketToServer(new Packet250CustomPayload("RpgInv", bos.toByteArray()));
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
+    }
 }

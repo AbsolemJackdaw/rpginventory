@@ -102,7 +102,7 @@ public class EntityPetXP extends EntityXPOrb {
         double oldDistance = -1.0D;
         double searchdistance = 10;
         IPet var11 = null;
-        List<IPet> pets = world.getEntitiesWithinAABB(IPet.class, boundingBox.expand(10, 10, 10));
+        List<IPet> pets = world.getEntitiesWithinAABB(IPet.class, boundingBox.expand(14, 14, 14));
         for (IPet thisPet : pets) {
             double newDistance = ((EntityLiving) thisPet).getDistanceSq(par1, par3, par5);
             if ((searchdistance < 0.0D || newDistance < searchdistance * searchdistance) && (oldDistance == -1.0D || newDistance < oldDistance)) {

@@ -45,7 +45,7 @@ public class ClientProxy extends CommonProxy {
     public int getSphereID() {
         return sphereID;
     }
-   
+
     public void registerRenderInformation() {
         MinecraftForgeClient.preloadTexture("/subaraki/RPGinventoryTM.png");
         KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler());
@@ -87,7 +87,7 @@ public class ClientProxy extends CommonProxy {
 
     public void registerLate() {
         TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
-        
+
         RenderPlayerJewels renderballs = new RenderPlayerJewels(new ModelBiped());
         //Ok guys. This is a workaround for other mods the hook the player render(smart moving)
         //Basically we want to learn the currently bound renderers, and use them to
@@ -96,9 +96,9 @@ public class ClientProxy extends CommonProxy {
         for (Entry<Class<? extends Entity>, Render> entry : map.entrySet()) {
             if (EntityPlayer.class.isAssignableFrom(entry.getKey())) {
                 Class clazz = entry.getValue().getClass();
-                    RenderPlayerJewels.defaultPlayerRender.put(entry.getKey(), entry.getValue());
-                    RenderingRegistry.registerEntityRenderingHandler(entry.getKey(), renderballs);
-                    
+                RenderPlayerJewels.defaultPlayerRender.put(entry.getKey(), entry.getValue());
+                RenderingRegistry.registerEntityRenderingHandler(entry.getKey(), renderballs);
+
             }
         }
         RenderingRegistry.instance().loadEntityRenderers(RenderManager.instance.entityRenderMap);
@@ -139,13 +139,7 @@ public class ClientProxy extends CommonProxy {
         if (Minecraft.getMinecraft().thePlayer == null) {
             return;
         }
-        if ((username.equals(Minecraft.getMinecraft().thePlayer.username) && !firstUpdate)) {
-            inv.onInventoryChanged();
-            invs.put(username, inv);
-            firstUpdate = true;
-        } else if (!username.equals(Minecraft.getMinecraft().thePlayer.username)) {
-            invs.put(username, inv);
-        }
+        invs.put(username, inv);
     }
 
     public void loadInventory(String username) {
