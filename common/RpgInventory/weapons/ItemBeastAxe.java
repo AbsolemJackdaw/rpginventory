@@ -9,8 +9,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityHeartFX;
-import net.minecraft.client.particle.EntityLargeExplodeFX;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -26,8 +24,6 @@ import net.minecraft.world.World;
 import RpgInventory.EnumRpgClass;
 import RpgInventory.RichTools.Targetting;
 import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 
 public class ItemBeastAxe extends Item {
@@ -91,7 +87,7 @@ public class ItemBeastAxe extends Item {
 
 				if (particleTime >= 4) {
 					particleTime = 0;
-					EntityHeartFX efx = new EntityHeartFX(world, el.posX, el.posY + 0.5F + rng.nextFloat(), el.posZ, rng.nextFloat(), rng.nextFloat() + 0.4F, rng.nextFloat());
+					net.minecraft.client.particle.EntityHeartFX efx = new net.minecraft.client.particle.EntityHeartFX(world, el.posX, el.posY + 0.5F + rng.nextFloat(), el.posZ, rng.nextFloat(), rng.nextFloat() + 0.4F, rng.nextFloat());
 					mc.effectRenderer.addEffect(efx);
 				}
 				if (charmTime >= 16) {
@@ -99,7 +95,7 @@ public class ItemBeastAxe extends Item {
 					float num = rng.nextFloat();
 					if (num > 0.80F) {
 						System.out.println("Charmed");
-						EntityLargeExplodeFX exfx = new EntityLargeExplodeFX(mc.renderEngine, world, el.posX, el.posY + 0.5F, el.posZ, rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
+						net.minecraft.client.particle.EntityLargeExplodeFX exfx = new net.minecraft.client.particle.EntityLargeExplodeFX(mc.renderEngine, world, el.posX, el.posY + 0.5F, el.posZ, rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
 						exfx.setRBGColorF(0F, 1.0F, 0F);
 						mc.effectRenderer.addEffect(exfx);
 						ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -113,7 +109,7 @@ public class ItemBeastAxe extends Item {
 						PacketDispatcher.sendPacketToServer(pcp);
 					} else {
 						System.out.println("Failed!");
-						EntityLargeExplodeFX exfx = new EntityLargeExplodeFX(mc.renderEngine, world, el.posX, el.posY + 0.5F, el.posZ, rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
+						net.minecraft.client.particle.EntityLargeExplodeFX exfx = new net.minecraft.client.particle.EntityLargeExplodeFX(mc.renderEngine, world, el.posX, el.posY + 0.5F, el.posZ, rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
 						exfx.setRBGColorF(1.0F, 0F, 0F);
 						mc.effectRenderer.addEffect(exfx);
 						ByteArrayOutputStream bos = new ByteArrayOutputStream();
