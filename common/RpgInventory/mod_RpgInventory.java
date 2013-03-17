@@ -188,6 +188,8 @@ public class mod_RpgInventory {
 	private static int uniqueID = 0;
 	public static Potion decomposePotion;
 	public static Potion masochismPotion;
+        
+        ;
 
 	public mod_RpgInventory() {
 		instance = this;
@@ -204,6 +206,7 @@ public class mod_RpgInventory {
 	EnumArmorMaterial beastMaster = EnumHelper.addArmorMaterial("beast", 20, new int[]{4, 5, 4, 3}, 5);
 	EnumToolMaterial clay = EnumHelper.addToolMaterial("claymore", 0, 750, 5F, 6, 0);
 	EnumToolMaterial stone = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 5F, 4, 0);
+        public static EnumToolMaterial BeastAxeMaterial = EnumHelper.addToolMaterial("BeastAxe", 4, 1280, 6.0F, 3, 22);
 
 	public EnumToolMaterial NecroToolMaterial;
 	public EnumToolMaterial PalaToolMaterial;
