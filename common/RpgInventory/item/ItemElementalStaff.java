@@ -1,8 +1,10 @@
-package RpgMageSet.weapons;
+package RpgInventory.item;
 
 import RpgInventory.EnumRpgClass;
 import RpgInventory.mod_RpgInventory;
 import RpgInventory.weapons.ItemRpgSword;
+import RpgMageSet.weapons.EntityElementalBlock;
+
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;

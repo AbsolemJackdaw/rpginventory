@@ -1,4 +1,4 @@
-package RpgRB.weapons.axe;
+package RpgInventory.weapons;
 
 import RpgInventory.EnumRpgClass;
 import RpgInventory.RichTools.Targetting;

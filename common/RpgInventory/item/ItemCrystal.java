@@ -1,4 +1,4 @@
-package RpgRB;
+package RpgInventory.item;
 
 import java.util.List;
 
@@ -57,9 +57,9 @@ public class ItemCrystal extends ItemRpgArmor {
         if (var2 > 0) {
         }
         if (tags != null) {
-//            if (tags.hasKey("PetLevel")) {
-//                list.add(StatCollector.translateToLocal("Level : " + String.valueOf(tags.getInteger("PetLevel"))));
-//            }
+            if (tags.hasKey("PetLevel")) {
+                list.add(StatCollector.translateToLocal("Level : " + String.valueOf(tags.getInteger("PetLevel"))));
+            }
             if (tags.hasKey("PetAttack")) {
                 list.add(StatCollector.translateToLocal("ATK : " + String.valueOf(tags.getInteger("PetAttack"))));
             }

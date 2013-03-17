@@ -26,12 +26,17 @@ import RpgInventory.PotionEffects.MasochismPotion;
 import RpgInventory.forge.BlockForge;
 import RpgInventory.forge.TEMold;
 import RpgInventory.gui.RpgInventoryTab;
+import RpgInventory.item.ItemCrystal;
+import RpgInventory.item.ItemElementalStaff;
 import RpgInventory.item.ItemMats;
+import RpgInventory.item.ItemRBMats;
+import RpgInventory.item.ItemRBMats2;
 import RpgInventory.item.ItemRageFood;
 import RpgInventory.item.ItemRpg;
 import RpgInventory.item.armor.BonusArmor;
 import RpgInventory.item.armor.ItemRpgArmor;
 import RpgInventory.item.armor.ItemRpgPlusPlusArmor;
+import RpgInventory.weapons.ItemBeastAxe;
 import RpgInventory.weapons.ItemGrandSword;
 import RpgInventory.weapons.ItemNecroSkull;
 import RpgInventory.weapons.bow.BowRender;
@@ -45,12 +50,6 @@ import RpgInventory.weapons.staf.ItemStaf;
 import RpgInventory.weapons.staf.StafRender;
 import RpgInventory.weapons.wand.ItemMageWand;
 import RpgInventory.weapons.wand.SoulSphereRender;
-import RpgMageSet.weapons.ItemElementalStaff;
-import RpgRB.ItemCrystal;
-import RpgRB.ItemRBMats;
-import RpgRB.ItemRBMats2;
-import RpgRB.weapons.axe.AxeRender;
-import RpgRB.weapons.axe.ItemBeastAxe;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -324,7 +323,6 @@ public class mod_RpgInventory {
 		ringmold = new ItemMold(RpgConfig.instance.ringmoldID).setUnlocalizedName("moldRing").setCreativeTab(tab);
 		wantmold = new ItemMold(RpgConfig.instance.wantmoldID).setUnlocalizedName("moldGlove").setCreativeTab(tab);
 
-		crystal = new ItemCrystal(RpgConfig.instance.crystalID, ITEMTYPE.CRYSTAL, -1, "").setUnlocalizedName("petCrystal").setCreativeTab(tab);
 		if (hasRpg == true) {
 			EnumArmorMaterial necroArmor = EnumHelper.addArmorMaterial("necro_material", 20, new int[]{2, 5, 1, 1}, 5);	// use of Souls
 			EnumArmorMaterial paladin = EnumHelper.addArmorMaterial("pala_material", 20, new int[]{4, 7, 2, 1}, 5);	// use of Steel
@@ -402,6 +400,9 @@ public class mod_RpgInventory {
 			petCandy = new ItemCandy(RpgConfig.instance.candy).setUnlocalizedName("petCandy");
 			tangledBrench = new ItemCandy(RpgConfig.instance.brench).setUnlocalizedName("tangledBrench").setCreativeTab(tab);
 			PetXPBottle = new PetExpPotion(RpgConfig.instance.petxppotion).setUnlocalizedName("PetXPBottle").setCreativeTab(tab);
+
+			crystal = new ItemCrystal(RpgConfig.instance.crystalID, ITEMTYPE.CRYSTAL, -1, "").setUnlocalizedName("petCrystal").setCreativeTab(tab);
+
 			LanguageRegistry.addName(daggers, "Rogue Daggers");
 			LanguageRegistry.addName(rogueLeather, "Rogue Leather");
 			LanguageRegistry.addName(beastLeather, "BeastMaster Leather");
@@ -420,6 +421,11 @@ public class mod_RpgInventory {
 			LanguageRegistry.addName(petCandy, "Rare Pet Candy");
 			LanguageRegistry.addName(tangledBrench, "Tangled Brench");
 			LanguageRegistry.addName(PetXPBottle, "Bottle 'O Pet");
+
+			LanguageRegistry.addName(new ItemStack(crystal, 1, 0), "Pet Crystal");
+			LanguageRegistry.addName(new ItemStack(crystal, 1, 1), "Boar");
+			LanguageRegistry.addName(new ItemStack(crystal, 1, 2), "Spider");
+			LanguageRegistry.addName(new ItemStack(crystal, 1, 3), "Bull");
 
 			GameRegistry.addShapelessRecipe(new ItemStack(whistle), new Object[]{Item.stick, Item.reed, Item.reed});
 			GameRegistry.addRecipe(new ItemStack(beastLeather), new Object[]{"LLL","LVL","LLL",'L',Block.leaves,'V',Item.leather});
@@ -440,6 +446,8 @@ public class mod_RpgInventory {
 					GameRegistry.addRecipe(new ItemStack(var5), new Object[]{this.recipePatterns[var4], 'X', var3});
 				}
 			}
+			addChestLoot(new ItemStack(mod_RpgInventory.PetXPBottle), 1, 1, 40, "Pet Drinks");
+			addCandyChestLoot(new ItemStack(mod_RpgInventory.petCandy), 1, 6, 20, "Easter Egg");
 		}
 		if (hasMage == true) {
 			fireStaff = new ItemElementalStaff(RpgConfig.instance.fireStaff, 1).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffFire").setCreativeTab(mod_RpgInventory.tab);
@@ -483,10 +491,6 @@ public class mod_RpgInventory {
 		addChestLoot(new ItemStack(mod_RpgInventory.colmold), 1, 1, 40, "Necklace Mold");
 		addChestLoot(new ItemStack(mod_RpgInventory.ringmold), 1, 1, 30, "Ring Mold");
 		addChestLoot(new ItemStack(mod_RpgInventory.wantmold), 1, 1, 40, "Gloves Mold");
-		
-		addChestLoot(new ItemStack(mod_RpgInventory.PetXPBottle), 1, 1, 40, "Pet Drinks");
-
-		addCandyChestLoot(new ItemStack(mod_RpgInventory.petCandy), 1, 6, 20, "Easter Egg");
 
 		GameRegistry.registerTileEntity(TEMold.class, "temold");
 
@@ -552,10 +556,7 @@ public class mod_RpgInventory {
 		LanguageRegistry.addName(colmold, "Mold");
 		LanguageRegistry.addName(ringmold, "Mold");
 		LanguageRegistry.addName(wantmold, "Mold");
-		LanguageRegistry.addName(new ItemStack(crystal, 1, 0), "Pet Crystal");
-		LanguageRegistry.addName(new ItemStack(crystal, 1, 1), "Boar");
-		LanguageRegistry.addName(new ItemStack(crystal, 1, 2), "Spider");
-		LanguageRegistry.addName(new ItemStack(crystal, 1, 3), "Bull");
+
 
 		MinecraftForge.addGrassSeed(new ItemStack(rageSeed, 1), 1);
 
@@ -632,18 +633,20 @@ public class mod_RpgInventory {
 		}
 		if (RpgConfig.instance.render3DStaff == true) {
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.staf.itemID, (IItemRenderer) new StafRender());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.frostStaff.itemID, (IItemRenderer) new StafRender());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.fireStaff.itemID, (IItemRenderer) new StafRender());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.earthStaff.itemID, (IItemRenderer) new StafRender());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.windStaff.itemID, (IItemRenderer) new StafRender());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.ultimateStaff.itemID, (IItemRenderer) new StafRender());
+			if(hasMage)
+			{
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.frostStaff.itemID, (IItemRenderer) new StafRender());
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.fireStaff.itemID, (IItemRenderer) new StafRender());
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.earthStaff.itemID, (IItemRenderer) new StafRender());
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.windStaff.itemID, (IItemRenderer) new StafRender());
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.ultimateStaff.itemID, (IItemRenderer) new StafRender());
+			}
+
 		}
 		if (RpgConfig.instance.render3DBow == true) {
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.elfbow.itemID, (IItemRenderer) new BowRender());
 		}
-		if (RpgConfig.instance.render3DAxe == true) {
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.beastAxe.itemID, (IItemRenderer) new AxeRender());
-		}
+
 
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 		GameRegistry.registerPlayerTracker(new PlayerTracker());

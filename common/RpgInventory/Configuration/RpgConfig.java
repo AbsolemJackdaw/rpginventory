@@ -123,6 +123,8 @@ public class RpgConfig {
     public boolean render3DBow = true;
     public boolean useSpell = true;
     public boolean render3DAxe = true;
+    public boolean DefaultRotation = true;
+
 
     //This is to prevent accidintally creating a new instance.
     private RpgConfig() {}
@@ -137,13 +139,17 @@ public class RpgConfig {
     }
     private void loadSettings(Configuration config){
         config.addCustomCategoryComment("Rendering", "Set these settings to false to disable fancy item rendering.");
-        
+
         render3DClaymore = config.get("Rendering", "Render_Claymore", true).getBoolean(true);
         render3DHammer = config.get("Rendering", "Render_Hammer", true).getBoolean(true);
         render3DSoulSphere = config.get("Rendering", "Render_SoulSphere", true).getBoolean(true);
         render3DStaff = config.get("Rendering", "Render_Staff", true).getBoolean(true);
         render3DBow = config.get("Rendering", "Render_Bow", true).getBoolean(true);
         render3DAxe = config.get("Rendering", "Render_Axe", true).getBoolean(true);
+        
+        config.addCustomCategoryComment("Rotation", "Set to false for alternative PetGui Pet Rotation if default fails.");
+        DefaultRotation = config.get("Rotation", "Default Rotation", true).getBoolean(true);
+
         useSpell = config.get(Configuration.CATEGORY_GENERAL, "Allow Day/Night Cycle Spell", true,"Disable the spell that toggles the day night cycle.").getBoolean(true);
     }
     private void loadItems(Configuration config){

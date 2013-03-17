@@ -1,4 +1,4 @@
-package RpgRB;
+package RpgInventory.item;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

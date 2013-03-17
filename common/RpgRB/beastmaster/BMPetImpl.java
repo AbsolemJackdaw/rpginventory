@@ -451,6 +451,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
                 this.dataWatcher.updateObject(NEXTLEVEL, String.valueOf(this.experience));
                 this.dataWatcher.updateObject(TOTALXP, this.experienceTotal);
             }
+            if (this.getLevel() >= 200) {
+                this.dataWatcher.updateObject(TOTALXP, 200);
+
+            }
         }
     }
 

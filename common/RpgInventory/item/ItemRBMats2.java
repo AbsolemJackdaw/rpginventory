@@ -1,4 +1,4 @@
-package RpgRB;
+package RpgInventory.item;
 
 import RpgInventory.EnumRpgClass;
 import RpgInventory.IPet;
