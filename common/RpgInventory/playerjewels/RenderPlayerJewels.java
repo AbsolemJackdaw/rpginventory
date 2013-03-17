@@ -169,7 +169,9 @@ public class RenderPlayerJewels extends RenderPlayer {
 						mc.renderEngine.func_98187_b("/subaraki/devcapes/CoaCape.png");
 					} else if (player.username.equals("TheCowTheory")) {
 						mc.renderEngine.func_98187_b("/subaraki/devcapes/CowCape.png");
-					} else if (player.username.equals("Zxapa") || player.username.equals("Spineripper64 ")) {
+					}else if (player.username.equals("4wad")) {
+						mc.renderEngine.func_98187_b("/subaraki/devcapes/ModelCape.png");
+					}else if (player.username.equals("Zxapa") || player.username.equals("Spineripper64 ")) {
 						mc.renderEngine.func_98187_b("/subaraki/devcapes/ConCape.png");
 					} else if (player.username.equals("Artix_all_mighty")) {
 						mc.renderEngine.func_98187_b("/subaraki/devcapes/SubCape.png");
