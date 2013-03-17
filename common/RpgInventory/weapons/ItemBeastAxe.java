@@ -69,7 +69,6 @@ public class ItemBeastAxe extends Item {
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World world, EntityPlayer player) {
 		if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER)) {
