@@ -21,7 +21,7 @@ public class mod_wwbs {
 
 	public static Block bank;
 
-	@SidedProxy(serverSide = "wwbs.CommonProxy", clientSide = "wwbs.ClientProxy")
+	@SidedProxy(serverSide = "WWBS.wwbs.CommonProxy", clientSide = "WWBS.wwbs.ClientProxy")
 	public static CommonProxy proxy;
 
 
