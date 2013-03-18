@@ -120,7 +120,6 @@ public class ClientProxy extends CommonProxy {
                 Class clazz = entry.getValue().getClass();
                 RenderPlayerJewels.defaultPlayerRender.put(entry.getKey(), entry.getValue());
                 RenderingRegistry.registerEntityRenderingHandler(entry.getKey(), renderballs);
-                
             }
         }
         RenderingRegistry.instance().loadEntityRenderers(RenderManager.instance.entityRenderMap);

@@ -663,23 +663,18 @@ public class mod_RpgInventory {
 
 
         //hack to increase the number of potion types allowed
-        if (Potion.potionTypes.length < 256) {
-            Potion[] potionTypes = null;
 
+        if (Potion.potionTypes.length < 256) {
+            boolean found = false;
+            Field fallbackfield = null;
+            Potion[] potionTypes = null;
             for (Field f : Potion.class.getDeclaredFields()) {
                 try {
-                    f.setAccessible(true);
-                    System.out.println("===================");
-                    FMLLog.getLogger().fine(f.getName());
-                    System.out.println("===================");
-                    System.out.println(f.getName());
-                } catch (Throwable ex) {
-                }
-                try {
-                    if(f.getType() == Potion[].class){
-                        System.out.println("Found Alternate Method");
+                    if (fallbackfield != null && f.getType() == Potion[].class) {
+                        fallbackfield = f;
                     }
-                    if (f.getName().equals("potionTypes") || f.getName().equals("a")) {
+                    if (f.getName().equals("potionTypes") || f.getName().equals("a") || f.getName().equals("field_76425_a")) {
+                        found = true;
                         Field modfield = Field.class.getDeclaredField("modifiers");
                         modfield.setAccessible(true);
                         modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
@@ -688,13 +683,30 @@ public class mod_RpgInventory {
                         final Potion[] newPotionTypes = new Potion[256];
                         System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
                         f.set(null, newPotionTypes);
+                        break;
                     }
                 } catch (Exception e) {
                     System.err.println("Severe error, please report this to the mod author:");
                     System.err.println(e);
                 }
             }
+            try {
+                if (fallbackfield != null && !found) {
+                    Field modfield = Field.class.getDeclaredField("modifiers");
+                    modfield.setAccessible(true);
+                    modfield.setInt(fallbackfield, fallbackfield.getModifiers() & ~Modifier.FINAL);
+
+                    potionTypes = (Potion[]) fallbackfield.get(null);
+                    final Potion[] newPotionTypes = new Potion[256];
+                    System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+                    fallbackfield.set(null, newPotionTypes);
+                }
+            } catch (Exception ex) {
+                System.err.println("Severe error, please report this to the mod author:");
+                System.err.println(ex);
+            }
         }
+
         for (int pos = 32; pos < Potion.potionTypes.length; pos++) {
             if (Potion.potionTypes[pos] == null) {
                 if (decomposePotion == null) {

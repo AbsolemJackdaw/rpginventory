@@ -59,7 +59,11 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     int jumpTicks;
     public double speedBonus;
     private boolean checked = false;
+    private int xpThrottle = 5;
+    int healthregen = 60;
+    int levelcheck = 0;
 
+    //CONSTRUCTORS START
     private BMPetImpl(World par1World) {
         super(par1World);
         this.moveSpeed = 0.35F;
@@ -85,22 +89,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         //this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, IMob.class, 16.0F, 0, true));
-    }
-
-    @Override
-    protected boolean canTriggerWalking() {
-        return false;
-    }
-
-    public void setLevel(int Level) {
-        this.dataWatcher.updateObject(LEVELID, Level);
-    }
-
-    public abstract float getMountedSpeed();
-
-    @Override
-    public boolean attackEntityAsMob(Entity par1Entity) {
-        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), getAttackDamage());
     }
 
     public BMPetImpl(World par1World, int mobType, EntityPlayer owner, ItemStack is) {
@@ -129,10 +117,40 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             setSize(getBaseWidth(), getBaseHeight());
         }
     }
+    //CONSTRUCTORS END
+
+    //ABSTRACTS START
+    public abstract float getMountedSpeed();
 
     public abstract int getAttackDamage();
 
     public abstract double getMountedYOffset();
+
+    protected abstract float getBaseWidth();
+
+    protected abstract float getBaseHeight();
+
+    public abstract String getTexture();
+
+    @SideOnly(Side.CLIENT)
+    public abstract ModelBase getModel();
+
+    public abstract String getDefaultName();
+    //ABSTRACTS END
+
+    @Override
+    protected boolean canTriggerWalking() {
+        return false;
+    }
+
+    public void setLevel(int Level) {
+        this.dataWatcher.updateObject(LEVELID, Level);
+    }
+
+    @Override
+    public boolean attackEntityAsMob(Entity par1Entity) {
+        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), getAttackDamage());
+    }
 
     public boolean canBeSteered() {
         return true;
@@ -142,40 +160,37 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         //Required! must chain up this check or will return false even when dead.
         return super.isDead;
     }
-    int healthregen = 60;
 
     @Override
     public void onLivingUpdate() {
-        EntityPlayer player = (EntityPlayer) getOwner();
-        if (!worldObj.isRemote && (player == null || !EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER))) {
-            try {
-                RpgInv inv = mod_RpgInventory.proxy.getInventory(getOwnerName());
-                inv.setInventorySlotContents(6, writePetToItemStack());
-            } catch (Throwable ex) {
-            }
-            this.setDead();
-            return;
-        }
-        if (healthregen-- <= 0) {
-            this.heal(1);
-            this.healthregen = 60;
-        }
-        int level = this.dataWatcher.getWatchableObjectInt(LEVELID);
-        if (level != 0) {
-            setSize(getBaseWidth() + ((level / 200.0F) * (1.0F + getBaseWidth())), getBaseHeight() + ((level / 200.0F) * (1.0F + getBaseHeight())));
-        }
-        if (!worldObj.isRemote && getOwner() == null) {
-            IPet.playersWithActivePets.remove(this.getOwnerName());
-            this.setDead();
-            return;
-        }
-        if (!worldObj.isRemote && (!IPet.playersWithActivePets.containsKey(this.getOwnerName()) || this.dimension != getOwner().dimension)) {
-            this.setDead();
-            return;
-        }
-        //Check if player has crystal equipped.
         if (!worldObj.isRemote) {
+            EntityPlayer player = (EntityPlayer) getOwner();
+            if ((player == null || !EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER))) {
+                try {
+                    RpgInv inv = mod_RpgInventory.proxy.getInventory(getOwnerName());
+                    inv.setInventorySlotContents(6, writePetToItemStack());
+                } catch (Throwable ex) {
+                }
+                this.setDead();
+                return;
+            }
+            if ((!IPet.playersWithActivePets.containsKey(this.getOwnerName()) || this.dimension != getOwner().dimension)) {
+                this.setDead();
+                return;
+            }
             this.dataWatcher.updateObject(HP, this.health);
+            if (healthregen-- <= 0) {
+                this.heal(1);
+                this.healthregen = 60;
+            }
+        } else {
+            this.health = this.dataWatcher.getWatchableObjectInt(HP);
+        }
+        int prevLevel = this.dataWatcher.getWatchableObjectInt(LEVELID);
+
+        if (prevLevel != levelcheck) {
+            levelcheck = prevLevel;
+            setSize(getBaseWidth() + ((levelcheck / 200.0F) * (1.0F + getBaseWidth())), getBaseHeight() + ((levelcheck / 200.0F) * (1.0F + getBaseHeight())));
         }
         if (sprintToggleTimer > 0) { //used to determine if sprinting should be activated.
             sprintToggleTimer--;
@@ -184,13 +199,19 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         {
             jumpTicks--;
         }
+        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
+        if (xps != null && xps.size() > 0) {
+            if (--xpThrottle <= 0) {
+                xpThrottle = 5;
+                for (EntityPetXP xp : xps) {
+                    this.giveXP(xp.getXpValue());
+                    xp.setDead();
+                }
+            }
+        }
         super.onLivingUpdate();
 
     }
-
-    protected abstract float getBaseWidth();
-
-    protected abstract float getBaseHeight();
 
     public void moveEntity(double d, double d1, double d2) {
         if (riddenByEntity != null) {
@@ -342,10 +363,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         return player;
     }
 
+    @Override
     public boolean isAIEnabled() {
         return true;
     }
-    private int xpThrottle = 5;
 
     @Override
     public void onUpdate() {
@@ -358,23 +379,12 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
             rotationYaw = prevRotationYaw = entityRider.rotationYaw;
         }
-        List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
-        if (xps != null && xps.size() > 0) {
-            if (--xpThrottle <= 0) {
-                xpThrottle = 5;
-                for (EntityPetXP xp : xps) {
-                    this.giveXP(xp.getXpValue());
-                    xp.setDead();
-                }
-            }
-        }
     }
 
-    protected void updateAITick() {
-        //DON'T UPDATE WATCHABLES HERE, IT WILL PACKET FLOOD
-        //this.dataWatcher.updateObject(HP, Integer.valueOf(this.getHealth()));
-    }
-
+    /*protected void updateAITick() {
+     //DON'T UPDATE WATCHABLES HERE, IT WILL PACKET FLOOD
+     //this.dataWatcher.updateObject(HP, Integer.valueOf(this.getHealth()));
+     }*/
     @Override
     public void onKillEntity(EntityLiving par1EntityLiving) {
         super.onKillEntity(par1EntityLiving);
@@ -395,14 +405,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     public boolean canAttackClass(Class par1Class) {
         return true;
     }
-
-    @Override
-    public abstract String getTexture();
-
-    @SideOnly(Side.CLIENT)
-    public abstract ModelBase getModel();
-
-    public abstract String getDefaultName();
 
     @Override
     protected void entityInit() {
@@ -458,7 +460,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             }
             if (this.getLevel() >= 200) {
                 this.dataWatcher.updateObject(TOTALXP, 200);
-
             }
         }
     }
@@ -484,9 +485,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             this.prevTicksExisted = this.ticksExisted;
         }
         if (!worldObj.isRemote) {
-            this.dataWatcher.updateObject(LEVELID, exp);
+            this.setLevel(exp);
         }
-        this.setLevel(exp);
     }
 
     @Override
@@ -541,10 +541,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-        if (worldObj.isRemote) {
-            this.health = this.dataWatcher.getWatchableObjectInt(HP);
-        } else {
+        if (!worldObj.isRemote) {
             this.dataWatcher.updateObject(HP, this.health);
+        } else {
+            this.health = this.dataWatcher.getWatchableObjectInt(HP);
         }
         super.writeEntityToNBT(par1NBTTagCompound);
         //prevents natural despawning
