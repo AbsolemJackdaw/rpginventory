@@ -306,9 +306,9 @@ public class mod_RpgInventory {
         wand = new ItemMageWand(RpgConfig.instance.wandID).setFull3D().setMaxDamage(400).setUnlocalizedName("soulsphere").setCreativeTab(tab);
         elfbow = new ItemArcherBow(RpgConfig.instance.elfbowID).setFull3D().setMaxDamage(350).setUnlocalizedName("elmBow").setCreativeTab(tab);
 
-        animalskin = new ItemRpg(RpgConfig.instance.animalskinID).setUnlocalizedName("leather").setCreativeTab(tab);
-        tanHide = new ItemRpg(RpgConfig.instance.tanHideID).setUnlocalizedName("leather").setCreativeTab(tab);
-        magecloth = new ItemRpg(RpgConfig.instance.mageclothID).setUnlocalizedName("leather").setCreativeTab(tab);
+        animalskin = new ItemRpg(RpgConfig.instance.animalskinID).setUnlocalizedName("a.leather").setCreativeTab(tab);
+        tanHide = new ItemRpg(RpgConfig.instance.tanHideID).setUnlocalizedName("t.leather").setCreativeTab(tab);
+        magecloth = new ItemRpg(RpgConfig.instance.mageclothID).setUnlocalizedName("m.leather").setCreativeTab(tab);
 
         wizardBook = new ItemRpg(RpgConfig.instance.wizardBookID).setUnlocalizedName("book").setCreativeTab(tab);
 
@@ -349,8 +349,8 @@ public class mod_RpgInventory {
             pala_shield = new ItemRpgPlusPlusArmor(RpgConfig.instance.pala_shieldID, 1, 450, "pala").setUnlocalizedName("shieldPaladin").setCreativeTab(tab);
             pala_weapon = new ItemGrandSword(RpgConfig.instance.pala_weaponID, PalaToolMaterial).setFull3D().setUnlocalizedName("paladinPride").setCreativeTab(mod_RpgInventory.tab);
 
-            necro_skin = new ItemMats(RpgConfig.instance.necro_skinID).setUnlocalizedName("leather").setCreativeTab(mod_RpgInventory.tab);
-            pala_steel = new ItemMats(RpgConfig.instance.pala_steelID).setUnlocalizedName("leather").setCreativeTab(mod_RpgInventory.tab);
+            necro_skin = new ItemMats(RpgConfig.instance.necro_skinID).setUnlocalizedName("n.leather").setCreativeTab(mod_RpgInventory.tab);
+            pala_steel = new ItemMats(RpgConfig.instance.pala_steelID).setUnlocalizedName("p.leather").setCreativeTab(mod_RpgInventory.tab);
 
             LanguageRegistry.addName(necro_shield, "NecroMancer Shield");
             LanguageRegistry.addName(pala_shield, "Paladin Shield");
@@ -385,8 +385,8 @@ public class mod_RpgInventory {
             daggers = new ItemRpgArmor(RpgConfig.instance.daggersID, 1, 800, "").setUnlocalizedName("dagger").setCreativeTab(tab);
             beastAxe = new ItemBeastAxe(RpgConfig.instance.beastAxe).setFull3D().setUnlocalizedName("forestAxe").setCreativeTab(tab);
 
-            rogueLeather = new ItemRBMats(RpgConfig.instance.rogueLeatherID).setUnlocalizedName("leather").setCreativeTab(tab);
-            beastLeather = new ItemRBMats(RpgConfig.instance.beastLeatherID).setUnlocalizedName("leather").setCreativeTab(tab);
+            rogueLeather = new ItemRBMats(RpgConfig.instance.rogueLeatherID).setUnlocalizedName("r.leather").setCreativeTab(tab);
+            beastLeather = new ItemRBMats(RpgConfig.instance.beastLeatherID).setUnlocalizedName("b.leather").setCreativeTab(tab);
             beastShield = new ItemRpgArmor(RpgConfig.instance.beastShield, 1, 0, "").setUnlocalizedName("shieldBeastMaster").setCreativeTab(tab);
 
             rogueHood = new BonusArmor(RpgConfig.instance.rogueHoodID, rogueArmor, 4, 0).setUnlocalizedName("rogue1").setCreativeTab(tab);
