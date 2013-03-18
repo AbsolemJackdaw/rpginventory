@@ -28,7 +28,7 @@ public class BullPet extends BMPetImpl {
     }
 
     public double getMountedYOffset() {
-        return (double) this.height * (double) 0.5F + ((((float) getLevel()) / 200.0F) * 1F);
+        return (double) this.height * ((float) getPetSize())-getLevel()/200;
     }
 
     @Override

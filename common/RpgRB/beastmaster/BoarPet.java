@@ -30,7 +30,7 @@ public class BoarPet extends BMPetImpl {
     }
 
     public double getMountedYOffset() {
-        return (double) this.height * (double) 0.5F + ((float) getPetSize()) - 0.2F;
+        return (double) this.height * ((float) getPetSize())- getLevel()/100;
     }
 
     @Override

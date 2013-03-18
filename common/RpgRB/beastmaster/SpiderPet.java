@@ -30,7 +30,7 @@ public class SpiderPet extends BMPetImpl {
     }
 
     public double getMountedYOffset() {
-        return (double) this.height * (double) 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F) - 0.5;
+        return (double) this.height * ((float) getPetSize())- getLevel()/100;
     }
 
     @Override
