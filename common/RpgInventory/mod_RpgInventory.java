@@ -285,7 +285,7 @@ public class mod_RpgInventory {
         talisman = new ItemRpgArmor(RpgConfig.instance.talismanID, 1, 200, "").setUnlocalizedName("shieldMage").setCreativeTab(tab);
 
         cloak = new ItemRpgArmor(RpgConfig.instance.cloakID, 2, -1, "").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
-        cloakI = new ItemRpgArmor(RpgConfig.instance.cloakIID, 2, -1, "").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
+        cloakI = new ItemRpgArmor(RpgConfig.instance.cloakIID, 2, -1, "").setFull3D().setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
 
         magehood = new BonusArmor(RpgConfig.instance.magehoodID, robes, 4, 0).setUnlocalizedName("mage1").setCreativeTab(tab);
         magegown = new BonusArmor(RpgConfig.instance.magegownID, robes, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);
@@ -317,11 +317,11 @@ public class mod_RpgInventory {
 
         rageSeed = new ItemRageFood(RpgConfig.instance.rageSeedID, 0, 0f, false).setAlwaysEdible().setUnlocalizedName("seeds").setMaxStackSize(8).setCreativeTab(tab);
 
-        cloakRed = new ItemRpgArmor(RpgConfig.instance.cloakRedID, 2, -1, "").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
-        cloakYellow = new ItemRpgArmor(RpgConfig.instance.cloakYellowID, 2, -1, "").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
-        cloakGreen = new ItemRpgArmor(RpgConfig.instance.cloakGreenID, 2, -1, "").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
-        cloakBlue = new ItemRpgArmor(RpgConfig.instance.cloakBlueID, 2, -1, "").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
-        cloakSub = new ItemRpgArmor(RpgConfig.instance.cloakSubID, 2, -1, "").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
+        cloakRed = new ItemRpgArmor(RpgConfig.instance.cloakRedID, 2, -1, "").setFull3D().setUnlocalizedName("r.capeGrey").setCreativeTab(tab);
+        cloakYellow = new ItemRpgArmor(RpgConfig.instance.cloakYellowID, 2, -1, "").setFull3D().setUnlocalizedName("y.capeGrey").setCreativeTab(tab);
+        cloakGreen = new ItemRpgArmor(RpgConfig.instance.cloakGreenID, 2, -1, "").setFull3D().setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
+        cloakBlue = new ItemRpgArmor(RpgConfig.instance.cloakBlueID, 2, -1, "").setFull3D().setUnlocalizedName("b.capeGrey").setCreativeTab(tab);
+        cloakSub = new ItemRpgArmor(RpgConfig.instance.cloakSubID, 2, -1, "").setFull3D().setUnlocalizedName("s.capeGrey").setCreativeTab(tab);
 
         colmold = new ItemMold(RpgConfig.instance.colmoldID).setUnlocalizedName("moldNeck").setCreativeTab(tab);
         ringmold = new ItemMold(RpgConfig.instance.ringmoldID).setUnlocalizedName("moldRing").setCreativeTab(tab);
