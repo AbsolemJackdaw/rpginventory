@@ -315,7 +315,7 @@ public class mod_RpgInventory {
         hammer = new ItemHammer(RpgConfig.instance.hammerID, stone).setMaxDamage(750).setUnlocalizedName("rageBreaker").setCreativeTab(tab);
         staf = new ItemStaf(RpgConfig.instance.stafID).setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);
 
-        rageSeed = new ItemRageFood(RpgConfig.instance.rageSeedID, 0, 0f, false).setAlwaysEdible().setUnlocalizedName("seeds").setMaxStackSize(8).setCreativeTab(tab);
+        rageSeed = new ItemRageFood(RpgConfig.instance.rageSeedID, 0, 0f, false).setAlwaysEdible().setUnlocalizedName("r.seeds").setMaxStackSize(8).setCreativeTab(tab);
 
         cloakRed = new ItemRpgArmor(RpgConfig.instance.cloakRedID, 2, -1, "").setFull3D().setUnlocalizedName("r.capeGrey").setCreativeTab(tab);
         cloakYellow = new ItemRpgArmor(RpgConfig.instance.cloakYellowID, 2, -1, "").setFull3D().setUnlocalizedName("y.capeGrey").setCreativeTab(tab);
