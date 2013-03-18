@@ -21,10 +21,12 @@ public class ItemElementalStaff extends ItemRpgSword {
 
 	protected boolean hasAttacked = false;
 	public int type = 1;
+	public int maxUse = 150;
 
-	public ItemElementalStaff(int par1, int type) {
+	public ItemElementalStaff(int par1, int type, int maxUse) {
 		super(par1, EnumToolMaterial.WOOD);
 		this.type = type;
+		this.maxUse = maxUse;
 
 	}
 
@@ -39,7 +41,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 		int time = this.getMaxItemUseDuration(stack) - count;
 		NBTTagCompound nbt = stack.getTagCompound();
 		if (!p.worldObj.isRemote) {
-			if ( nbt.getFloat("EnergyCharge") < 150 && !nbt.getBoolean("ReCharging")) {
+			if ( nbt.getFloat("EnergyCharge") < this.maxUse && !nbt.getBoolean("ReCharging")) {
 				float var7 = (float)time / 20.0F;
 				var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
 				int limit = ((p.username.toLowerCase().matches("unjustice"))?35:((this.type == 5)?10:7));
@@ -61,9 +63,9 @@ public class ItemElementalStaff extends ItemRpgSword {
 		if (nbt == null) stack.setTagCompound(baseNBT());
 		nbt = stack.getTagCompound();
 		if (nbt.getBoolean("ReCharging")) {
-			nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")-0.04F);
+			nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")-0.05F);
 		} else {
-			nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")-0.02F);	
+			nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge")-0.025F);	
 		}
 
 		if (nbt.getFloat("EnergyCharge") <= 0) {
@@ -78,7 +80,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 		if (nbt == null) stack.setTagCompound(baseNBT());
 		nbt = stack.getTagCompound();
 		if (nbt.getBoolean("ReCharging")) list.add("Recharging");
-		list.add("Overflow: "+Math.floor(nbt.getFloat("EnergyCharge"))+"/150");
+		list.add("Overflow: "+Math.floor(nbt.getFloat("EnergyCharge"))+"/"+this.maxUse);
 	}
 
 	public NBTTagCompound baseNBT() {
@@ -116,7 +118,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 	}
 
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-		return 5000;
+		return 72000;
 	}
 
 	public EnumAction getItemUseAction(ItemStack par1ItemStack) {

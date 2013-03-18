@@ -454,11 +454,11 @@ public class mod_RpgInventory {
             addCandyChestLoot(new ItemStack(mod_RpgInventory.petCandy), 1, 6, 20, "Easter Egg");
         }
         if (hasMage == true) {
-            fireStaff = new ItemElementalStaff(RpgConfig.instance.fireStaff, 1).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffFire").setCreativeTab(mod_RpgInventory.tab);
-            frostStaff = new ItemElementalStaff(RpgConfig.instance.frostStaff, 2).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffIce").setCreativeTab(mod_RpgInventory.tab);
-            earthStaff = new ItemElementalStaff(RpgConfig.instance.staffEarth, 3).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffEarth").setCreativeTab(mod_RpgInventory.tab);
-            windStaff = new ItemElementalStaff(RpgConfig.instance.staffWind, 4).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffWind").setCreativeTab(mod_RpgInventory.tab);
-            ultimateStaff = new ItemElementalStaff(RpgConfig.instance.staffUltimate, 5).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffElemental").setCreativeTab(mod_RpgInventory.tab);
+            fireStaff = new ItemElementalStaff(RpgConfig.instance.fireStaff, 1, 150).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffFire").setCreativeTab(mod_RpgInventory.tab);
+            frostStaff = new ItemElementalStaff(RpgConfig.instance.frostStaff, 2, 150).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffIce").setCreativeTab(mod_RpgInventory.tab);
+            earthStaff = new ItemElementalStaff(RpgConfig.instance.staffEarth, 3, 150).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffEarth").setCreativeTab(mod_RpgInventory.tab);
+            windStaff = new ItemElementalStaff(RpgConfig.instance.staffWind, 4, 500).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffWind").setCreativeTab(mod_RpgInventory.tab);
+            ultimateStaff = new ItemElementalStaff(RpgConfig.instance.staffUltimate, 5, 300).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffElemental").setCreativeTab(mod_RpgInventory.tab);
             archBook = new ItemRpgArmor(RpgConfig.instance.archBook, 1, 300, "").setUnlocalizedName("archTome").setCreativeTab(tab);
 
             archmageHood = new BonusArmor(RpgConfig.instance.archmageHood, archMage, 4, 0).setUnlocalizedName("archMage1").setCreativeTab(tab);
