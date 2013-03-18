@@ -16,9 +16,6 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import RpgInventory.mod_RpgInventory;
 import RpgInventory.gui.inventory.RpgInv;
-import cpw.mods.fml.common.FMLCommonHandler;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagInt;
 
 public class ItemArcherBow extends Item {
 
@@ -141,21 +138,24 @@ public class ItemArcherBow extends Item {
     public boolean requiresMultipleRenderPasses() {
         return false;
     }
-    public Icon getIconIndex(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining){
+
+    public Icon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
         //This never get called.
-            if(player.isUsingItem() && usingItem.itemID == mod_RpgInventory.elfbow.itemID){
-                if (usingItem != null && usingItem.getItem().itemID == mod_RpgInventory.elfbow.itemID){
-                    int k = usingItem.getMaxItemUseDuration() - useRemaining;
-                    if (k >= 6) return IconArray[1];
-                    if (k > 4) return IconArray[2];
-                    if (k > 0) return IconArray[3];
+        //Now it gets called, added a hook in our custom renderer.
+        if (stack == usingItem) {
+            if (usingItem != null && usingItem.getItem().itemID == mod_RpgInventory.elfbow.itemID) {
+                if (useRemaining > 21) {
+                    return IconArray[3];
+                } else if (useRemaining > 14) {
+                    return IconArray[2];
+                } else if (useRemaining > 7) {
+                    return IconArray[1];
                 }
             }
-            else{
-            iconIndex = IconArray[0];
-            }
-            return getIconIndex(stack);
+        }
+        return IconArray[0];
     }
+
     /**
      * Called whenever this item is equipped and the right mouse button is
      * pressed. Args: itemStack, world, entityPlayer
