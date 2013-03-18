@@ -17,14 +17,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiMain extends GuiScreen {
+public class GuiMainME extends GuiScreen {
 
 	private float xSize_lo;
 	private float ySize_lo;
 	private int xSize = 0;
 	private int ySize = 0;
 
-	public GuiMain(EntityPlayer player) {
+	public GuiMainME(EntityPlayer player) {
 		super();
 	}
 	public static String rpg = "Rpg";
