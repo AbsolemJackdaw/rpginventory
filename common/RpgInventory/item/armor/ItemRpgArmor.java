@@ -110,9 +110,6 @@ public class ItemRpgArmor extends Item {
         return maxDamageArray;
     }
 
-    public String getTextureFile() {
-        return "/subaraki/RPGinventoryTM.png";
-    }
 
     /**
      * allows items to add custom lines of information to the mouseover

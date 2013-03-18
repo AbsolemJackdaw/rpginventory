@@ -45,7 +45,7 @@ public class mod_RpgRB {
 	@Init
 	public void load(FMLInitializationEvent event) {
 
-		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.daggers,1), new Object [] {"  i"," ie","se ", 'i', Item.ingotIron, 'e',Item.spiderEye, 's',Item.stick});
+		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.daggers,1), new Object [] {" ei","eie","se ", 'i', Item.ingotIron, 'e',Item.spiderEye, 's',Item.stick});
 
 
 		EntityRegistry.registerGlobalEntityID(BullPet.class, "BullPet", EntityRegistry.findGlobalUniqueEntityId());
