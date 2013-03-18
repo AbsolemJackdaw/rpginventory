@@ -1,9 +1,9 @@
-package wwbs;
+package WWBS.wwbs;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import wwbs.gui.blockGui.GuiMainB;
-import wwbs.gui.blockGui.GuiMainME;
+import WWBS.wwbs.gui.blockGui.GuiMainB;
+import WWBS.wwbs.gui.blockGui.GuiMainME;
 
 public class ClientProxy extends CommonProxy{
 

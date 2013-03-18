@@ -1,29 +1,31 @@
-package wwbs.gui.wwbs;
+package WWBS.wwbs.gui.blockGui;
 
-import RpgInventory.mod_RpgInventory;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import RpgInventory.mod_RpgInventory;
+import RpgInventory.gui.inventory.RpgContainer;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 @SideOnly(Side.CLIENT)
-public class GuiBS extends GuiContainer {
+public class GuiMainB extends GuiScreen {
 
 	private float xSize_lo;
 	private float ySize_lo;
+	private int xSize = 0;
+	private int ySize = 0;
 
-	public GuiBS(EntityPlayer player) {
-		super(null); // must be a container TODO
-
+	public GuiMainB(EntityPlayer player) {
+		super();
 	}
 	public static String rpg = "Rpg";
 	public static String hi = "Inventory";
@@ -45,15 +47,20 @@ public class GuiBS extends GuiContainer {
 		drawString(fontRenderer, rpg, this.width / 2 + 39, this.height / 2 - 23, 0xffffff);
 		drawString(fontRenderer, hi, this.width / 2 + 39, this.height / 2 - 15, 0xffffff);
 	}
-	public void initGui() 
-	{
+
+
+	public void initGui() {
 		super.initGui();
 		this.buttonList.clear();
 
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
 
-		this.buttonList.add(new GuiButton(0, posX + 130, posY + 1, 50, 20, "button"));
+		this.buttonList.add(new GuiButton(0, posX + 130, posY + 1, 50, 20, "Back"));
+		if (mod_RpgInventory.hasRogue == true) {
+			this.buttonList.add(new GuiButton(1, posX + 130, posY + 22, 50, 20, "Pet"));
+		}
+
 	}
 
 	public boolean doesGuiPauseGame() {
@@ -63,8 +70,13 @@ public class GuiBS extends GuiContainer {
 	@Override
 	public void actionPerformed(GuiButton button) {
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-		if (button.id == 0)
+		if (button.id == 0) 
 		{
+			
 		} 
+		else if (button.id == 1) 
+		{
+
+		}
 	}
 }

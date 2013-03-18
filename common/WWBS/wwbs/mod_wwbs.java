@@ -1,4 +1,4 @@
-package wwbs;
+package WWBS.wwbs;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
