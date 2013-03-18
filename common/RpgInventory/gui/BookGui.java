@@ -7,19 +7,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
 
 public class BookGui extends GuiScreen
-	{
+{
 	public static String hi = "Wizard's Knowledge";
 	public BookGui(EntityPlayer player)
 	{}
-	
+
 	public final int xSizeOfTexture = 166;
 	public final int ySizeOfTexture = 181;
 	private EntityPlayer player;
-	
+
 	@Override
 	public void drawScreen(int i, int j, float f){
-		
-		
+
+
 		drawDefaultBackground();
 
 		int var4 = this.mc.renderEngine.getTexture("/subaraki/bookgui.png");
@@ -53,30 +53,30 @@ public class BookGui extends GuiScreen
 
 
 		drawString(fontRenderer, hi, posX+40, posY+10 , 0xffffff);
-		
+
 
 		super.drawScreen(i, j, f);
 	}
-	
+
 	public void initGui()
 	{
-	this.buttonList.clear();
+		this.buttonList.clear();
 
-	int posX = (this.width - xSizeOfTexture) / 2;
-	int posY = (this.height - ySizeOfTexture) / 2;
+		int posX = (this.width - xSizeOfTexture) / 2;
+		int posY = (this.height - ySizeOfTexture) / 2;
 
-	this.buttonList.add(new GuiButton(0, posX+176,  posY, 20, 20, "X"));
+		this.buttonList.add(new GuiButton(0, posX+176,  posY, 20, 20, "X"));
 	}
-	 public boolean doesGuiPauseGame()
-	    {
-	        return true;
-	    }
+	public boolean doesGuiPauseGame()
+	{
+		return true;
+	}
 	public void actionPerformed(GuiButton button){
-	
+
 		if(button.id == 0)
 		{
 			this.mc.thePlayer.closeScreen();
 		}
-	
+
 	}
-	}
+}

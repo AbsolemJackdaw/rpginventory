@@ -36,7 +36,6 @@ public class RpgGui extends GuiContainer {
     }
 
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
-        //int var4 = this.mc.renderEngine.getTexture("/subaraki/RpgInv.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.func_98187_b("/subaraki/RpgInv.png");
         int var5 = this.height;
