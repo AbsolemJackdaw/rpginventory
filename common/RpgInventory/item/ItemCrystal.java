@@ -12,6 +12,7 @@ import net.minecraft.util.StatCollector;
 import RpgInventory.item.armor.ItemRpgArmor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.Icon;
 
 
 public class ItemCrystal extends ItemRpgArmor {
