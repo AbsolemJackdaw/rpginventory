@@ -557,9 +557,9 @@ public class mod_RpgInventory {
         LanguageRegistry.addName(staf, "Lunar Staff");
         LanguageRegistry.addName(rageSeed, "Rage Seeds");
 
-        LanguageRegistry.addName(colmold, "Mold");
-        LanguageRegistry.addName(ringmold, "Mold");
-        LanguageRegistry.addName(wantmold, "Mold");
+        LanguageRegistry.addName(colmold, "Necklace Mold");
+        LanguageRegistry.addName(ringmold, "Ring Mold");
+        LanguageRegistry.addName(wantmold, "Glove Mold");
 
 
         MinecraftForge.addGrassSeed(new ItemStack(rageSeed, 1), 1);
