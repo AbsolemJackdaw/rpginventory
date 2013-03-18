@@ -170,18 +170,6 @@ public class ModelSpiderB extends ModelBase {
         Leg1.addChild(Leg1ext);
         Head.addChild(Shape1);
         Head.addChild(Shape2);
-        //For body part extraction?
-        boxList.add(Head);
-        boxList.add(Body);
-        boxList.add(RearEnd);
-        boxList.add(Leg1);
-        boxList.add(Leg2);
-        boxList.add(Leg3);
-        boxList.add(Leg4);
-        boxList.add(Leg5);
-        boxList.add(Leg6);
-        boxList.add(Leg7);
-        boxList.add(Leg8);
     }
 
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {

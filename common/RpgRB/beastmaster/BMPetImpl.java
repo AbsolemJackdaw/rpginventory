@@ -62,6 +62,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     private int xpThrottle = 5;
     int healthregen = 60;
     int levelcheck = 0;
+    int localLevel = 0;
 
     //CONSTRUCTORS START
     private BMPetImpl(World par1World) {
@@ -374,10 +375,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         if (riddenByEntity != null) {
             //stops up-and-down head movement
             rotationPitch = 0;
-
             //Control where the pet is facing (doesn't work while standing still)
-            EntityPlayer entityRider = (EntityPlayer) riddenByEntity;
-            rotationYaw = prevRotationYaw = entityRider.rotationYaw;
+            rotationYaw = prevRotationYaw = riddenByEntity.rotationYaw;
         }
     }
 
@@ -431,7 +430,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public int getLevel() {
-        return this.dataWatcher.getWatchableObjectInt(LEVELID);
+        return levelcheck;
     }
 
     public int xpBarCap() {

@@ -33,7 +33,7 @@ public class RenderPet extends RenderLiving {
     }
 
     protected void preRenderCallback(EntityLiving pet, float par2) {
-        this.scalePet((BMPetImpl) pet, par2);
+        //this.scalePet((BMPetImpl) pet, par2);
     }
 
     public void renderCow(BMPetImpl pet, double par2, double par4, double par6, float par8, float par9) {

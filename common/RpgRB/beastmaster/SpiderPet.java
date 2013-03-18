@@ -21,8 +21,15 @@ import net.minecraft.world.World;
  */
 public class SpiderPet extends BMPetImpl {
 
+    float petSize = 0.5F;
+
     public SpiderPet(World par1World) {
         super(par1World, 2, null, null);
+    }
+
+    @Override
+    public float getPetSize() {
+        return petSize;
     }
 
     public SpiderPet(World par1World, EntityPlayer owner, ItemStack is) {
@@ -30,13 +37,14 @@ public class SpiderPet extends BMPetImpl {
     }
 
     public double getMountedYOffset() {
-        return (double) this.height * ((float) getPetSize())- getLevel()/100;
+        return (double) this.height * ((float) getPetSize()) - getLevel() / 100;
     }
 
     @Override
     protected void updateAITick() {
         super.updateAITick();
     }
+
     @Override
     public ModelBase getModel() {
         return new ModelSpiderB();
@@ -62,7 +70,18 @@ public class SpiderPet extends BMPetImpl {
     public String getTexture() {
         return "/subaraki/mobs/ModelSpider.png";
     }
-@Override
+
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (getLevel() <= 200) {
+            petSize = 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
+        } else {
+            petSize = 2.0F;
+        }
+    }
+
+    @Override
     public float getBaseWidth() {
         return 0.8F;
     }
@@ -71,6 +90,7 @@ public class SpiderPet extends BMPetImpl {
     protected float getBaseHeight() {
         return 0.45F;
     }
+
     @Override
     public String getDefaultName() {
         return "Spider Pet";
@@ -84,14 +104,5 @@ public class SpiderPet extends BMPetImpl {
     @Override
     public float getMountedSpeed() {
         return 0.7F;
-    }
-
-    @Override
-    public float getPetSize() {
-        if (getLevel() <= 200) {
-            return 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
-        } else {
-            return 2.0F;
-        }
     }
 }

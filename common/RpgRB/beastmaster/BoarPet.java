@@ -17,6 +17,7 @@ import net.minecraft.world.World;
  */
 public class BoarPet extends BMPetImpl {
     boolean checked = false;
+    float petSize = 0.5F;
     public BoarPet(World par1World) {
         this(par1World, null, null);
     }
@@ -27,6 +28,16 @@ public class BoarPet extends BMPetImpl {
         this.getNavigator().setAvoidsWater(false);
         this.getNavigator().setBreakDoors(true);
         this.getNavigator().setSpeed(0.50F);
+    }
+
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (getLevel() <= 200) {
+            petSize =  0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
+        } else {
+            petSize = 2.0F;
+        }
     }
 
     public double getMountedYOffset() {
@@ -55,11 +66,7 @@ public class BoarPet extends BMPetImpl {
 
     @Override
     public float getPetSize() {
-        if (getLevel() <= 200) {
-            return 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
-        } else {
-            return 2.0F;
-        }
+        return petSize;
     }
 
     @Override
@@ -70,11 +77,6 @@ public class BoarPet extends BMPetImpl {
     @Override
     protected float getBaseHeight() {
         return 0.5F;
-    }
-
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
     }
 
     @Override

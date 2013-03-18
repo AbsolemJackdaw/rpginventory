@@ -6,10 +6,8 @@ package RpgRB.beastmaster;
 
 import RpgRB.models.ModelBull;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -18,6 +16,8 @@ import net.minecraft.world.World;
  * @author Home
  */
 public class BullPet extends BMPetImpl {
+
+    float petSize = 0.5F;
 
     public BullPet(World par1World) {
         super(par1World, 3, null, null);
@@ -28,7 +28,7 @@ public class BullPet extends BMPetImpl {
     }
 
     public double getMountedYOffset() {
-        return (double) this.height * ((float) getPetSize())-getLevel()/200;
+        return (double) this.height * ((float) getPetSize()) - getLevel() / 200;
     }
 
     @Override
@@ -67,12 +67,18 @@ public class BullPet extends BMPetImpl {
     }
 
     @Override
-    public float getPetSize() {
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
         if (getLevel() <= 200) {
-            return 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
+            petSize = 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
         } else {
-            return 2.0F;
+            petSize = 2.0F;
         }
+    }
+
+    @Override
+    public float getPetSize() {
+        return petSize;
     }
 
     @Override
