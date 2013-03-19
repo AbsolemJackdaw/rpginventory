@@ -2,12 +2,14 @@ package WWBS.wwbs.wwbs;
 
 import WWBS.wwbs.mod_wwbs;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockBank extends Block {
+public class BlockBank extends BlockContainer {
 
 	public BlockBank(int par1, Material par2Material) {
 		super(par1, par2Material);
@@ -21,5 +23,9 @@ public class BlockBank extends Block {
 	{		
 		mod_wwbs.proxy.openGui(1,par5EntityPlayer);
 		return false;
+	}
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new WwbsTe();
 	}
 }

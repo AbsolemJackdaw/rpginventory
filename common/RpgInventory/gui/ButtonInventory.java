@@ -40,7 +40,6 @@ public class ButtonInventory extends GuiButton {
                 
                 if (this.displayString.equals("Rpg Inventory")) {
                     
-                    System.out.println("called");
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                     DataOutputStream outputStream = new DataOutputStream(bytes);
                     try {

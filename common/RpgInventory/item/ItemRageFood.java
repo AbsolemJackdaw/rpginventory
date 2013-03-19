@@ -1,5 +1,6 @@
 package RpgInventory.item;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -10,7 +11,11 @@ public class ItemRageFood extends ItemFood {
     public ItemRageFood(int par1, int par2, float par3, boolean par4) {
         super(par1, par2, par3, par4);
     }
-
+    @Override
+    public void func_94581_a(IconRegister par1IconRegister) {
+        String texture = getUnlocalizedName().substring(getUnlocalizedName().lastIndexOf(".") + 1);
+        this.iconIndex = par1IconRegister.func_94245_a(texture);
+    }
     @Override
     public void onFoodEaten(ItemStack par1ItemStack, World par2World,
             EntityPlayer p) {
