@@ -1,6 +1,5 @@
 package RpgInventory.weapons.wand;
 
-import RpgInventory.Configuration.RpgConfig;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +12,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import RpgInventory.mod_RpgInventory;
+import RpgInventory.Configuration.RpgConfig;
 import RpgInventory.weapons.ItemRpgWeapon;
 
 public class ItemMageWand extends ItemRpgWeapon{

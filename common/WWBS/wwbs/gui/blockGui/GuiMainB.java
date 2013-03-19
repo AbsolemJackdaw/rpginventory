@@ -16,51 +16,41 @@ import RpgInventory.gui.inventory.RpgContainer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public class GuiMainB extends GuiScreen {
 
 	private float xSize_lo;
 	private float ySize_lo;
-	private int xSize = 0;
-	private int ySize = 0;
+	private int xSize = 176;
+	private int ySize = 90;
 
 	public GuiMainB(EntityPlayer player) {
 		super();
 	}
-	public static String rpg = "Rpg";
-	public static String hi = "Inventory";
+	public static String hi = "World Wide Banking System";
 
-	public void drawScreen(int par1, int par2, float par3) {
-		super.drawScreen(par1, par2, par3);
-		this.xSize_lo = (float) par1;
-		this.ySize_lo = (float) par2;
-	}
-
-	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.func_98187_b("/subaraki/RpgInv.png");
-		int var5 = this.height;
-		int var6 = this.width;
-		int posX = (this.width - xSize) / 2;
-		int posY = (this.height - ySize) / 2;
-		drawTexturedModalRect(posX, posY, 0, 0, xSize, ySize);
-		drawString(fontRenderer, rpg, this.width / 2 + 39, this.height / 2 - 23, 0xffffff);
-		drawString(fontRenderer, hi, this.width / 2 + 39, this.height / 2 - 15, 0xffffff);
-	}
-
-
+	@Override
 	public void initGui() {
-		super.initGui();
+		//		super.initGui();
 		this.buttonList.clear();
 
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
+		this.buttonList.add(new GuiButton(0, posX+15 , posY+30 , 80, 20, "Acces Account"));
+		this.buttonList.add(new GuiButton(0, posX+15 , posY+55 , 80, 20, "Exit Bank"));
 
-		this.buttonList.add(new GuiButton(0, posX + 130, posY + 1, 50, 20, "Back"));
-		if (mod_RpgInventory.hasRogue == true) {
-			this.buttonList.add(new GuiButton(1, posX + 130, posY + 22, 50, 20, "Pet"));
-		}
+	}
+	public void drawScreen(int par1, int par2, float par3) {
+		this.xSize_lo = (float) par1;
+		this.ySize_lo = (float) par2;
 
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		this.mc.renderEngine.func_98187_b("/subaraki/MainGui.png");
+		int posX = (this.width - xSize) / 2;
+		int posY = (this.height - ySize) / 2;
+		drawTexturedModalRect(posX, posY, 0, 0, xSize, ySize);
+		drawTexturedModalRect(posX*2, posY+5, 0, 90, 45, ySize);
+		drawString(fontRenderer, hi, this.width / 2-84, this.height / 2-40, 0xffffff);
+		super.drawScreen(par1, par2, par3);
 	}
 
 	public boolean doesGuiPauseGame() {
@@ -72,7 +62,7 @@ public class GuiMainB extends GuiScreen {
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		if (button.id == 0) 
 		{
-			
+
 		} 
 		else if (button.id == 1) 
 		{
