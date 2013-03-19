@@ -4,6 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import WWBS.wwbs.config.Config;
+import WWBS.wwbs.wwbs.BlockBank;
+import WWBS.wwbs.wwme.BlockME;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PreInit;

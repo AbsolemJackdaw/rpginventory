@@ -1,5 +1,6 @@
-package WWBS.wwbs;
+package WWBS.wwbs.wwme;
 
+import WWBS.wwbs.mod_wwbs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;

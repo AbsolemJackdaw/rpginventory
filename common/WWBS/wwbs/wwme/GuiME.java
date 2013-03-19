@@ -1,4 +1,4 @@
-package WWBS.wwbs.gui.wwbs;
+package WWBS.wwbs.wwme;
 
 import RpgInventory.mod_RpgInventory;
 import cpw.mods.fml.relauncher.Side;
@@ -16,12 +16,12 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
-public class GuiBS extends GuiContainer {
+public class GuiME extends GuiContainer {
 
 	private float xSize_lo;
 	private float ySize_lo;
 
-	public GuiBS(EntityPlayer player) {
+	public GuiME(EntityPlayer player) {
 		super(null); // must be a container TODO
 
 	}
@@ -36,7 +36,7 @@ public class GuiBS extends GuiContainer {
 
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.func_98187_b("/subaraki/RpgInv.png");
+		this.mc.renderEngine.func_98187_b("/subaraki/Bank Gui.png");
 		int var5 = this.height;
 		int var6 = this.width;
 		int posX = (this.width - xSize) / 2;
@@ -44,16 +44,17 @@ public class GuiBS extends GuiContainer {
 		drawTexturedModalRect(posX, posY, 0, 0, xSize, ySize);
 		drawString(fontRenderer, rpg, this.width / 2 + 39, this.height / 2 - 23, 0xffffff);
 		drawString(fontRenderer, hi, this.width / 2 + 39, this.height / 2 - 15, 0xffffff);
+
 	}
-	public void initGui() 
-	{
+
+	public void initGui() {
 		super.initGui();
 		this.buttonList.clear();
 
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
 
-		this.buttonList.add(new GuiButton(0, posX + 130, posY + 1, 50, 20, "button"));
+		this.buttonList.add(new GuiButton(0, posX , posY , 50, 20, "button"));
 	}
 
 	public boolean doesGuiPauseGame() {
@@ -63,8 +64,11 @@ public class GuiBS extends GuiContainer {
 	@Override
 	public void actionPerformed(GuiButton button) {
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-		if (button.id == 0)
+		if (button.id == 0) 
 		{
+
 		} 
 	}
+
 }
+

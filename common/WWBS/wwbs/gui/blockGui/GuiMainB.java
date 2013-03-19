@@ -36,7 +36,7 @@ public class GuiMainB extends GuiScreen {
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
 		this.buttonList.add(new GuiButton(0, posX+15 , posY+30 , 80, 20, "Acces Account"));
-		this.buttonList.add(new GuiButton(0, posX+15 , posY+55 , 80, 20, "Exit Bank"));
+		this.buttonList.add(new GuiButton(1, posX+15 , posY+55 , 80, 20, "Exit Bank"));
 
 	}
 	public void drawScreen(int par1, int par2, float par3) {
@@ -66,7 +66,7 @@ public class GuiMainB extends GuiScreen {
 		} 
 		else if (button.id == 1) 
 		{
-
+			mc.thePlayer.closeScreen();
 		}
 	}
 }
