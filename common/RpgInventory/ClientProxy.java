@@ -1,9 +1,16 @@
 package RpgInventory;
 
+import RpgInventory.Configuration.RpgConfig;
 import RpgInventory.gui.BookGui;
 import RpgInventory.gui.inventory.RpgInv;
 import RpgInventory.playerjewels.RenderPlayerJewels;
+import RpgInventory.weapons.bow.BowRender;
 import RpgInventory.weapons.bow.EntityHellArrow;
+import RpgInventory.weapons.claymore.ClaymoreRenderer;
+import RpgInventory.weapons.hammer.HammerRender;
+import RpgInventory.weapons.staf.StafRender;
+import RpgInventory.weapons.wand.SoulSphereRender;
+import RpgRB.weapons.axe.AxeRender;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -31,6 +38,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.DimensionManager;
 import org.lwjgl.opengl.GL11;
@@ -101,6 +109,35 @@ public class ClientProxy extends CommonProxy {
 //        ForgeHooksClient.unbindTexture();
         //Tell LWJGL that we are done creating our list.
         GL11.glEndList();
+        
+        if (RpgConfig.instance.render3DClaymore == true) {
+            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.claymore.itemID, (IItemRenderer) new ClaymoreRenderer());
+        }
+        if (RpgConfig.instance.render3DHammer == true) {
+            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.hammer.itemID, (IItemRenderer) new HammerRender());
+        }
+        if (RpgConfig.instance.render3DSoulSphere == true) {
+            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.wand.itemID, (IItemRenderer) new SoulSphereRender());
+        }
+        if (RpgConfig.instance.render3DStaff == true) {
+            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.staf.itemID, (IItemRenderer) new StafRender());
+            if (mod_RpgInventory.hasMage) {
+                MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.frostStaff.itemID, (IItemRenderer) new StafRender());
+                MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.fireStaff.itemID, (IItemRenderer) new StafRender());
+                MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.earthStaff.itemID, (IItemRenderer) new StafRender());
+                MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.windStaff.itemID, (IItemRenderer) new StafRender());
+                MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.ultimateStaff.itemID, (IItemRenderer) new StafRender());
+            }
+
+        }
+        if (RpgConfig.instance.render3DBow == true) {
+            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.elfbow.itemID, (IItemRenderer) new BowRender());
+        }
+        if (RpgConfig.instance.render3DAxe == true) {
+            if (mod_RpgInventory.hasRogue) {
+                MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.beastAxe.itemID, (IItemRenderer) new AxeRender());
+            }
+        }
     }
     
     public void registerLate() {

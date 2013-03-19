@@ -625,35 +625,8 @@ public class mod_RpgInventory {
                 }
             }
         }
-
-        if (RpgConfig.instance.render3DClaymore == true) {
-            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.claymore.itemID, (IItemRenderer) new ClaymoreRenderer());
-        }
-        if (RpgConfig.instance.render3DHammer == true) {
-            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.hammer.itemID, (IItemRenderer) new HammerRender());
-        }
-        if (RpgConfig.instance.render3DSoulSphere == true) {
-            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.wand.itemID, (IItemRenderer) new SoulSphereRender());
-        }
-        if (RpgConfig.instance.render3DStaff == true) {
-            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.staf.itemID, (IItemRenderer) new StafRender());
-            if (hasMage) {
-                MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.frostStaff.itemID, (IItemRenderer) new StafRender());
-                MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.fireStaff.itemID, (IItemRenderer) new StafRender());
-                MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.earthStaff.itemID, (IItemRenderer) new StafRender());
-                MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.windStaff.itemID, (IItemRenderer) new StafRender());
-                MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.ultimateStaff.itemID, (IItemRenderer) new StafRender());
-            }
-
-        }
-        if (RpgConfig.instance.render3DBow == true) {
-            MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.elfbow.itemID, (IItemRenderer) new BowRender());
-        }
-        if (RpgConfig.instance.render3DAxe == true) {
-            if (hasRogue) {
-                MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.beastAxe.itemID, (IItemRenderer) new AxeRender());
-            }
-        }
+        //Renders go on client proxy...
+        
 
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
         GameRegistry.registerPlayerTracker(new PlayerTracker());
