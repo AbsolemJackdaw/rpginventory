@@ -4,6 +4,7 @@
  */
 package RpgRB.beastmaster;
 
+import RpgRB.models.ModelBoar;
 import RpgRB.models.ModelBull;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,17 +19,26 @@ import net.minecraft.world.World;
 public class BullPet extends BMPetImpl {
 
     float petSize = 0.5F;
-
+    ModelBull model = new ModelBull();
     public BullPet(World par1World) {
         super(par1World, 3, null, null);
+        this.moveSpeed = 0.38F;
+        //Likes to swim.
+        this.getNavigator().setAvoidsWater(false);
+        this.getNavigator().setCanSwim(true);
+        this.getNavigator().setSpeed(this.moveSpeed);
     }
 
     public BullPet(World par1World, EntityPlayer owner, ItemStack is) {
         super(par1World, 3, owner, is);
+        this.moveSpeed = 0.38F;
+        this.getNavigator().setAvoidsWater(true);
+        this.getNavigator().setCanSwim(true);
+        this.getNavigator().setSpeed(this.moveSpeed);
     }
 
     public double getMountedYOffset() {
-        return (double) this.height * ((float) getPetSize()) - getLevel() / 200;
+        return this.height + (((double)getLevel()) * 1.0D) / 350.0D;
     }
 
     @Override
@@ -43,12 +53,7 @@ public class BullPet extends BMPetImpl {
 
     @Override
     protected float getBaseHeight() {
-        return 0.5F;
-    }
-
-    @Override
-    public int getAttackDamage() {
-        return this.getLevel() <= 100 ? 4 + this.getLevel() / 10 : 8 + this.getLevel() / 20;
+        return 0.7F;
     }
 
     @Override
@@ -60,10 +65,16 @@ public class BullPet extends BMPetImpl {
     public String getDefaultName() {
         return "Bull Pet";
     }
-
+    @Override
+    public int getAttackDamage() {
+        //4 Base Damage
+        //15 Damage at level 200
+        return (4 + MathHelper.floor_double((((double) getLevel()) * /*Fix for math errors*/1.0D) / 18.18D));
+    }
     @Override
     public int getMaxHealth() {
-        return 20 + MathHelper.floor_float(((float) getLevel()) / 2F);
+        //200 HP at level 200
+        return 30 + MathHelper.floor_float(((float) getLevel()) / 1.538F);
     }
 
     @Override
@@ -83,11 +94,19 @@ public class BullPet extends BMPetImpl {
 
     @Override
     public float getMountedSpeed() {
-        return 0.6F;
+        return 0.02F;
+    }
+    @Override
+    public ModelBase getModel() {
+        return model;
     }
 
     @Override
-    public ModelBase getModel() {
-        return new ModelBull();
+    protected float jumpHeight() {
+        return 0.48F;
+    }
+    @Override
+    public int regenDelay() {
+        return 40;
     }
 }

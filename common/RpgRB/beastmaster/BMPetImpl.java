@@ -19,6 +19,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
@@ -34,15 +35,21 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemExpBottle;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.IThrowableEntity;
 
 /**
  *
@@ -56,13 +63,14 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     private int prevTicksExisted = 0;
     private final EntityAIControlledByPlayer aiControlledByPlayer;
     int sprintToggleTimer;
-    int jumpTicks;
+    boolean jumping = false;
     public double speedBonus;
     private boolean checked = false;
     private int xpThrottle = 5;
-    int healthregen = 60;
+    int healthregen = 0;
     int levelcheck = 0;
-    int localLevel = 0;
+    int prevLevel = 0;
+    int jumpTicks;
 
     //CONSTRUCTORS START
     private BMPetImpl(World par1World) {
@@ -133,6 +141,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     public abstract String getTexture();
 
+    protected abstract float jumpHeight();
+
+    public abstract int regenDelay();
+
     @SideOnly(Side.CLIENT)
     public abstract ModelBase getModel();
 
@@ -145,6 +157,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     }
 
     public void setLevel(int Level) {
+        levelcheck = Level;
         this.dataWatcher.updateObject(LEVELID, Level);
     }
 
@@ -179,20 +192,29 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
                 this.setDead();
                 return;
             }
-            this.dataWatcher.updateObject(HP, this.health);
-            if (healthregen-- <= 0) {
-                this.heal(1);
-                this.healthregen = 60;
-            }
-        } else {
-            this.health = this.dataWatcher.getWatchableObjectInt(HP);
         }
-        int prevLevel = this.dataWatcher.getWatchableObjectInt(LEVELID);
+
+        if (healthregen-- <= 0) {
+            this.heal(1);
+            this.healthregen = regenDelay();
+            if (!worldObj.isRemote) {
+                this.dataWatcher.updateObject(HP, this.health);
+            } else {
+                this.health = this.dataWatcher.getWatchableObjectInt(HP);
+            }
+        }
+
+            prevLevel = this.dataWatcher.getWatchableObjectInt(LEVELID);
 
         if (prevLevel != levelcheck) {
+            if (!worldObj.isRemote) {
+                prevLevel = levelcheck;
+                this.dataWatcher.updateObject(LEVELID, levelcheck);
+            }
             levelcheck = prevLevel;
             setSize(getBaseWidth() + ((levelcheck / 200.0F) * (1.0F + getBaseWidth())), getBaseHeight() + ((levelcheck / 200.0F) * (1.0F + getBaseHeight())));
         }
+
         if (sprintToggleTimer > 0) { //used to determine if sprinting should be activated.
             sprintToggleTimer--;
         }
@@ -236,14 +258,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             int j = worldObj.getBlockId(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ));
             float f = 1;
             if (j == Block.ice.blockID) {
-                f = Block.blocksList[j].slipperiness * 0.3F;
-            }
-            //Initiate jumping while ridden via keybind
-            if (((EntityPlayer) riddenByEntity).isJumping) { //hijacking the preset 'jump' input.
-                jump(true); //this method is seen overridden in here
+                f = Block.blocksList[j].slipperiness * 0.5F;
             }
             //This is currently bugged so temporarily disabled.
-            speedBonus = 0F;
+            speedBonus = 1F;
             if (isSprinting() && onGround) { //if sprinting on the ground
                 motionX += riddenByEntity.motionX * speedBonus * f;
                 motionZ += riddenByEntity.motionZ * speedBonus * f;
@@ -254,43 +272,23 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
                 motionX += riddenByEntity.motionX;
                 motionZ += riddenByEntity.motionZ;
             }
-
+            //super.moveEntity(d, d1, d2);
+            setSprinting(entityRider.isSprinting());
+            setSneaking(entityRider.isSneaking());
             if (isSprinting() && inWater || isSprinting() && isInWeb) {
                 setSprinting(false);
             }
             //Autojump
             if (isCollidedHorizontally) {
-
                 jump(false);
+            }
+            //Initiate jumping while ridden via keybind
+            if (((EntityPlayer) riddenByEntity).isJumping) { //hijacking the preset 'jump' input.
+                jump(true); //this method is seen overridden in here
             }
             super.moveEntity(motionX, motionY, motionZ);
         } else {
             super.moveEntity(d, d1, d2);
-        }
-    }
-    /*
-     public void updateRidden() {
-     if (ridingEntity == null) {
-     return;
-     }
-     if (ridingEntity.isDead) {
-     ridingEntity = null;
-     return;
-     }
-     motionX = 0.0D;
-     motionY = 0.0D;
-     motionZ = 0.0D;
-     onUpdate();
-     }
-     */
-
-    public void jump(Boolean flag) { //boolean. true = 2.5-high jump. false = normal jump.
-        if (onGround && jumpTicks == 0) {
-            super.jump();
-            if (flag) {
-                motionY += 0.2; //makes mount jump higher. Do not use big values!
-            }
-            jumpTicks = 10;
         }
     }
 
@@ -299,10 +297,20 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         int j = MathHelper.floor_double(posY);
         int k = MathHelper.floor_double(posZ);
 
-        if (worldObj.getBlockId(i, j, k) == Block.ice.blockID) {
+        if (worldObj.getBlockId(i, j - 1, k) == Block.ice.blockID) {
             return true;
         }
         return false;
+    }
+
+    public void jump(Boolean flag) { //boolean. true = 2.5-high jump. false = normal jump.
+        if (onGround && jumpTicks == 0) {
+            super.jump();
+            if (flag) {
+                motionY += (jumpHeight() / 200) * getLevel(); //makes mount jump higher. Do not use big values!
+            }
+            jumpTicks = 10;
+        }
     }
 
     @Override
@@ -313,12 +321,12 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
                 if (this.dataWatcher.getWatchableObjectInt(HP) < this.getMaxHealth()) {
                     if (Item.itemsList[var2.itemID] instanceof ItemFood) {
                         ItemFood var3 = (ItemFood) Item.itemsList[var2.itemID];
-
-                        if (!par1EntityPlayer.capabilities.isCreativeMode) {
-                            if (--var2.stackSize == 0) {
-                                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
-                            }
+                        //This is confusing, people dont know pet is saddled.
+                        //if (!par1EntityPlayer.capabilities.isCreativeMode) {
+                        if (--var2.stackSize == 0) {
+                            par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
                         }
+                        //}
                         if (!worldObj.isRemote) {
                             this.heal(var3.getHealAmount());
                         }
@@ -328,22 +336,17 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
                 if (!getSaddled() && this.getLevel() >= 50) {
                     if (var2.itemID == Item.saddle.itemID) {
                         this.setSaddled(true);
-                        if (!par1EntityPlayer.capabilities.isCreativeMode) {
-                            --var2.stackSize;
-                        }
+                        //Confusing
+                        //if (!par1EntityPlayer.capabilities.isCreativeMode) {
+                        --var2.stackSize;
+                        //}
                         if (var2.stackSize <= 0) {
                             par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
                         }
                     }
                 }
-                if (par1EntityPlayer.getCurrentEquippedItem().itemID == Item.porkRaw.itemID) {
-                    if (par1EntityPlayer.getCurrentEquippedItem().stackSize <= 1) {
-                        par1EntityPlayer.inventory.setItemStack(null);
-                    } else {
-                        par1EntityPlayer.getCurrentEquippedItem().stackSize -= 1;
-
-                        par1EntityPlayer.inventory.setItemStack(par1EntityPlayer.getCurrentEquippedItem());
-                    }
+                if (par1EntityPlayer.getCurrentEquippedItem() != null && par1EntityPlayer.getCurrentEquippedItem().itemID == mod_RpgInventory.petCandy.itemID) {
+                    addExperienceLevel(1);
                 }
             } else if (this.getSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == par1EntityPlayer)) {
                 par1EntityPlayer.mountEntity(this);
@@ -447,7 +450,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
                 if (amount > var2) {
                     amount = var2;
                 }
-
                 this.experience += (float) amount / (float) this.xpBarCap();
 
                 for (this.experienceTotal += amount; this.experience >= 1.0F; this.experience /= (float) this.xpBarCap()) {
@@ -458,7 +460,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
                 this.dataWatcher.updateObject(TOTALXP, this.experienceTotal);
             }
             if (this.getLevel() >= 200) {
-                this.dataWatcher.updateObject(TOTALXP, 200);
+                this.dataWatcher.updateObject(LEVELID, 200);
             }
         }
     }
@@ -476,6 +478,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             exp = 0;
             this.experience = 0.0F;
             this.experienceTotal = 0;
+        } else {
+            heal(200);
         }
 
         if (numLevels > 0 && exp % 5 == 0 && (float) this.prevTicksExisted < (float) this.ticksExisted - 100.0F) {
@@ -486,6 +490,20 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         if (!worldObj.isRemote) {
             this.setLevel(exp);
         }
+
+    }
+//This is so you can't accidently hurt your pet while riding him.
+
+    public boolean func_85031_j(Entity par1Entity) {
+        try {
+            if (((EntityPlayer) par1Entity).isRiding() && this.getOwnerName().equals(((EntityPlayer) par1Entity).username)) {
+                return true;
+            }
+        } catch (Throwable ex) {
+        }
+
+        return super.func_85031_j(par1Entity);
+
     }
 
     @Override

@@ -66,10 +66,9 @@ public class ClientProxy extends CommonProxy {
     }
 
     public void registerRenderInformation() {
-        MinecraftForgeClient.preloadTexture("/subaraki/RPGinventoryTM.png");
+        TextureIDs.init();
         KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler());
         RenderingRegistry.registerEntityRenderingHandler(EntityHellArrow.class, new RenderArrow());
-        
         
         Sphere sphere = new Sphere();
         //GLU_POINT will render it as dots.
