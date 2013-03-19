@@ -145,9 +145,7 @@ public class CommonTickHandler implements ITickHandler {
 
     @Override
     public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-        if (ModLoader.isModLoaded("Mine Little Pony")) {
-            throw new RuntimeException(new ClassCastException("mod_MineLittleBrowny cannot be cast as Not_Gay"));
-        }
+     
         for (Entry<String, Integer> entry : globalCooldownMap.entrySet()) {
             if (entry.getValue() > 0) {
                 entry.setValue(entry.getValue() - 1);
