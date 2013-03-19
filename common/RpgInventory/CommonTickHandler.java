@@ -1,15 +1,11 @@
 package RpgInventory;
 
-import RpgInventory.gui.inventory.RpgInv;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBow;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -18,8 +14,12 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.ModLoader;
 import net.minecraft.util.DamageSource;
+import RpgInventory.gui.inventory.RpgInv;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.ITickHandler;
+import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class CommonTickHandler implements ITickHandler {
 
