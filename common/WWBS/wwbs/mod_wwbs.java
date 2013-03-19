@@ -3,13 +3,13 @@ package WWBS.wwbs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import RpgInventory.gui.RpgInventoryTab;
-import RpgRB.RpgRBPacketHandler;
 import WWBS.wwbs.config.Config;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -26,12 +26,16 @@ public class mod_wwbs {
 
 	public static Block bank;
 	public static Block me;
-    public static CreativeTabs wwbstab;
+	public static CreativeTabs wwbstab;
 
 	@SidedProxy(serverSide = "WWBS.wwbs.CommonProxy", clientSide = "WWBS.wwbs.ClientProxy")
 	public static CommonProxy proxy;
 
+	@PreInit
+	public void preInit(FMLPreInitializationEvent event) {
 
+		Config.instance.loadConfig(event.getSuggestedConfigurationFile());
+	}
 	@Init
 	public void load(FMLInitializationEvent event) {
 		wwbstab = new InventoryTab(CreativeTabs.getNextID(), "Bank System Tab");
@@ -40,7 +44,7 @@ public class mod_wwbs {
 				.setCreativeTab(wwbstab);
 		me = new BlockME(Config.instance.MEBlock, Material.wood).setHardness(50f).setResistance(150f).setUnlocalizedName("M.E.")
 				.setCreativeTab(wwbstab);
-		
+
 		LanguageRegistry.addName(bank, "wwbs");
 		GameRegistry.registerBlock(bank, "Bank");
 		LanguageRegistry.addName(me, "massiveExchange");
