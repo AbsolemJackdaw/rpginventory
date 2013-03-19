@@ -7,9 +7,11 @@ import net.minecraft.tileentity.TileEntity;
 
 public class WwbsTe extends TileEntity implements IInventory{
 
+	private ItemStack[] moldforgeItemStacks;
 	@Override
 	public int getSizeInventory() {
-		
+        moldforgeItemStacks = new ItemStack[5];
+
 		return 0;
 	}
 
@@ -18,10 +20,22 @@ public class WwbsTe extends TileEntity implements IInventory{
 		return null;
 	}
 
-	@Override
-	public ItemStack decrStackSize(int i, int j) {
-		return null;
-	}
+    @Override
+    public ItemStack decrStackSize(int slot, int amt) {
+        ItemStack stack = getStackInSlot(slot);
+
+        if (stack != null) {
+            if (stack.stackSize <= amt) {
+                setInventorySlotContents(slot, null);
+            } else {
+                stack = stack.splitStack(amt);
+                if (stack.stackSize == 0) {
+                    setInventorySlotContents(slot, null);
+                }
+            }
+        }
+        return stack;
+    }
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int i) {
