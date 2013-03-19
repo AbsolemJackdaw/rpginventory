@@ -7,11 +7,18 @@ import net.minecraft.world.World;
 import RpgInventory.mod_RpgInventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IconRegister;
 
 public class ItemRpg extends Item {
 
     public ItemRpg(int par1) {
         super(par1);
+    }
+
+    @Override
+    public void func_94581_a(IconRegister par1IconRegister) {
+        String texture = getUnlocalizedName().substring(getUnlocalizedName().lastIndexOf(".") + 1);
+        this.iconIndex = par1IconRegister.func_94245_a(texture);
     }
 
     @SideOnly(Side.CLIENT)
