@@ -16,37 +16,49 @@ import net.minecraft.world.World;
  * @author Home
  */
 public class BoarPet extends BMPetImpl {
+
     boolean checked = false;
     float petSize = 0.5F;
+    ModelBoar model = new ModelBoar();
+
     public BoarPet(World par1World) {
         this(par1World, null, null);
+        this.moveSpeed = 0.58F;
+        //Doesn't like water, but can swim.
+        this.getNavigator().setAvoidsWater(true);
+        this.getNavigator().setBreakDoors(true);
+        this.getNavigator().setSpeed(this.moveSpeed);
+        this.getNavigator().setCanSwim(true);
     }
 
     public BoarPet(World par1World, EntityPlayer owner, ItemStack is) {
         super(par1World, 1, owner, is);
-        this.moveSpeed = 0.50F;
-        this.getNavigator().setAvoidsWater(false);
+        this.moveSpeed = 0.58F;
+        this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setBreakDoors(true);
-        this.getNavigator().setSpeed(0.50F);
+        this.getNavigator().setSpeed(this.moveSpeed);
+        this.getNavigator().setCanSwim(true);
     }
 
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
         if (getLevel() <= 200) {
-            petSize =  0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
+            petSize = 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
         } else {
             petSize = 2.0F;
         }
     }
 
     public double getMountedYOffset() {
-        return (double) this.height * ((float) getPetSize())- getLevel()/100;
+        return this.height + getLevel() / 400;
     }
 
     @Override
     public int getAttackDamage() {
-        return this.getLevel() <= 100 ? 6 + this.getLevel() / 10 : 12 + this.getLevel() / 20;
+        //7 Base Damage
+        //30 Damage at level 200
+        return (7 + MathHelper.floor_double((((double) getLevel()) * /*Fix for math errors*/ 1.0D) / 9.52D));
     }
 
     @Override
@@ -61,7 +73,8 @@ public class BoarPet extends BMPetImpl {
 
     @Override
     public int getMaxHealth() {
-        return 15 + MathHelper.floor_float(((float) getLevel()) / 2.5F);
+        //115 Health at level 200
+        return 20 + MathHelper.floor_float(((float) getLevel()) / 2.5F);
     }
 
     @Override
@@ -86,6 +99,16 @@ public class BoarPet extends BMPetImpl {
 
     @Override
     public ModelBase getModel() {
-        return new ModelBoar();
+        return model;
+    }
+
+    @Override
+    protected float jumpHeight() {
+        return 0.7F;
+    }
+
+    @Override
+    public int regenDelay() {
+        return 60;
     }
 }

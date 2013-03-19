@@ -22,9 +22,16 @@ import net.minecraft.world.World;
 public class SpiderPet extends BMPetImpl {
 
     float petSize = 0.5F;
+    ModelSpiderB model = new ModelSpiderB();
 
     public SpiderPet(World par1World) {
         super(par1World, 2, null, null);
+        this.moveSpeed = 0.45F;
+        this.getNavigator().setAvoidsWater(true);
+        this.getNavigator().setAvoidSun(true);
+        this.getNavigator().setSpeed(this.moveSpeed);
+        //Spider Cant Swim
+        this.getNavigator().setCanSwim(false);
     }
 
     @Override
@@ -34,10 +41,17 @@ public class SpiderPet extends BMPetImpl {
 
     public SpiderPet(World par1World, EntityPlayer owner, ItemStack is) {
         super(par1World, 2, owner, is);
+        //These get called for both, server calls this one, client gets the other.
+        this.moveSpeed = 0.45F;
+        this.getNavigator().setAvoidsWater(true);
+        this.getNavigator().setAvoidSun(true);
+        this.getNavigator().setSpeed(this.moveSpeed);
+        //Spider Cant Swim
+        this.getNavigator().setCanSwim(false);
     }
 
     public double getMountedYOffset() {
-        return (double) this.height * ((float) getPetSize()) - getLevel() / 100;
+        return this.height + getLevel() / 400;
     }
 
     @Override
@@ -47,19 +61,24 @@ public class SpiderPet extends BMPetImpl {
 
     @Override
     public ModelBase getModel() {
-        return new ModelSpiderB();
+        return model;
     }
 
     @Override
     public int getAttackDamage() {
-        return this.getLevel() <= 100 ? 5 + this.getLevel() / 10 : 10 + this.getLevel() / 20;
+        //6 Base Damage
+        //25 Damage at level 200
+        return (6 + MathHelper.floor_double((((double) getLevel()) * 1.0D) / (10.5263D)));
     }
 
     @Override
     public boolean attackEntityAsMob(Entity par1Entity) {
         if (super.attackEntityAsMob(par1Entity)) {
             if (par1Entity instanceof EntityLiving) {
-                ((EntityLiving) par1Entity).addPotionEffect(new PotionEffect(Potion.poison.id, 200, 0));
+                int level = getLevel();
+                if (level > 10) {
+                    ((EntityLiving) par1Entity).addPotionEffect(new PotionEffect(Potion.poison.id, 200, level < 50 ? 1 : 2));
+                }
             }
             return true;
         }
@@ -77,6 +96,7 @@ public class SpiderPet extends BMPetImpl {
         if (getLevel() <= 200) {
             petSize = 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
         } else {
+            setLevel(200);
             petSize = 2.0F;
         }
     }
@@ -98,11 +118,21 @@ public class SpiderPet extends BMPetImpl {
 
     @Override
     public int getMaxHealth() {
-        return 18 + MathHelper.floor_float(((float) getLevel()) / 2.2F);
+        //150 health at level 200
+        return 25 + MathHelper.floor_double((((double) getLevel()) * 1.0D) / 1.6D);
     }
 
     @Override
     public float getMountedSpeed() {
-        return 0.7F;
+        return 0.6F;
+    }
+
+    @Override
+    protected float jumpHeight() {
+        return 0.3F;
+    }
+        @Override
+    public int regenDelay() {
+        return 50;
     }
 }

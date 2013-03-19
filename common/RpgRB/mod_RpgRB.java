@@ -1,16 +1,10 @@
 package RpgRB;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.MinecraftForgeClient;
 import RpgInventory.EntityPetXP;
 import RpgInventory.mod_RpgInventory;
-import RpgInventory.Configuration.RpgConfig;
 import RpgRB.beastmaster.BoarPet;
 import RpgRB.beastmaster.BullPet;
 import RpgRB.beastmaster.SpiderPet;
-import RpgRB.weapons.axe.AxeRender;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.SidedProxy;
@@ -19,8 +13,8 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.EnumToolMaterial;
-import net.minecraftforge.common.EnumHelper;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 @Mod(modid = "RPGRB", name = "Rogue and BeastMaster Patch", version = "1.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false,
@@ -52,11 +46,11 @@ public class mod_RpgRB {
 		EntityRegistry.registerGlobalEntityID(SpiderPet.class, "SpiderPet", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(BoarPet.class, "BoarPet", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityTeleportStone.class, "TelePortStone", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(BullPet.class, "BullPet", getNextUniqueID(), this, 100, 2, true);
-		EntityRegistry.registerModEntity(SpiderPet.class, "SpiderPet", getNextUniqueID(), this, 100, 2, true);
-		EntityRegistry.registerModEntity(BoarPet.class, "BoarPet", getNextUniqueID(), this, 100, 2, true);
-		EntityRegistry.registerModEntity(EntityPetXP.class, "PetXP", getNextUniqueID(), this, 100, 2, true);
-		EntityRegistry.registerModEntity(EntityTeleportStone.class, "TelePortStone", getNextUniqueID(), this, 100, 2, true);
+		EntityRegistry.registerModEntity(BullPet.class, "BullPet", getNextUniqueID(), this, 80, 1, true);
+		EntityRegistry.registerModEntity(SpiderPet.class, "SpiderPet", getNextUniqueID(), this, 80, 1, true);
+		EntityRegistry.registerModEntity(BoarPet.class, "BoarPet", getNextUniqueID(), this, 80, 1, true);
+		EntityRegistry.registerModEntity(EntityPetXP.class, "PetXP", getNextUniqueID(), this, 80, 1, true);
+		EntityRegistry.registerModEntity(EntityTeleportStone.class, "TelePortStone", getNextUniqueID(), this, 80, 1, true);
 
 		proxy.registerRendering();
 	}
