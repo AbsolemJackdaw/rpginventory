@@ -763,7 +763,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 			for (Field f : RenderPlayer.class.getDeclaredFields()) {
 				f.setAccessible(true);
 				try {
-					if (f.getName().equals("modelBipedMain") || f.getName().equals("a")) {
+					if (f.getName().equals("modelBipedMain") || f.getName().equals("a")|| f.getName().equals("field_77109_a")) {
 						fieldPlayerModel = f;
 						modfield.setInt(fieldPlayerModel, fieldPlayerModel.getModifiers() & ~Modifier.PRIVATE);
 					}

@@ -164,7 +164,7 @@ public class ClientProxy extends CommonProxy {
 		{
 			if(RpgConfig.instance.render3DSkull)
 			{
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.necro_weapon.itemID, (IItemRenderer) new NecroRenderer());
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.pala_weapon.itemID, (IItemRenderer) new GrandSwordRender());
 			}
 			if(RpgConfig.instance.render3DPride)
 			{
