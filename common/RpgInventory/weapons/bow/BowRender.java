@@ -18,113 +18,122 @@ import net.minecraft.util.Icon;
 
 public class BowRender implements IItemRenderer {
 
-    ModelBow swordmodel;
+	ModelBow swordmodel;
 
-    public BowRender() {
-        swordmodel = new ModelBow();
+	public BowRender() {
+		swordmodel = new ModelBow();
 
-    }
+	}
 
-    @Override
-    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        switch (type) {
-            case EQUIPPED:
-                return true;
-            case ENTITY:
-                return true;
-            case INVENTORY:
-                return true;
-            default:
-                break;
-        }
-        return false;
-    }
+	@Override
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+		switch (type) {
+		case EQUIPPED:
+			return true;
+		case ENTITY:
+			return true;
+		case INVENTORY:
+			return true;
+		default:
+			break;
+		}
+		return false;
+	}
 
-    @Override
-    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-            ItemRendererHelper helper) {
-        return false;
-    }
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
+			ItemRendererHelper helper) {
+		return false;
+	}
 
-    @Override
-    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        Minecraft mc = Minecraft.getMinecraft();
-        switch (type) {
-            case EQUIPPED:
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		switch (type) {
 
-                int k = mod_RpgInventory.elfbow.itemID;
+		case EQUIPPED:
+		{
+			int k = mod_RpgInventory.elfbow.itemID;
 
-                GL11.glPushMatrix();
-                if (((EntityPlayer) data[1]).getCurrentEquippedItem() != null) {
+			GL11.glPushMatrix();
+			Minecraft mc = Minecraft.getMinecraft();
 
-                    switch (k) {
-                        case 23:
-                            mc.renderEngine.func_98187_b("/subaraki/weapons/bow.png");
-                            break;
-                        case 24:
-                            mc.renderEngine.func_98187_b("/subaraki/weapons/bow2.png");
-                            break;
-                        case 25:
-                            mc.renderEngine.func_98187_b("/subaraki/weapons/bow3.png");
-                            break;
-                        default:
-                            mc.renderEngine.func_98187_b("/subaraki/weapons/bow.png");
-                            break;
-                    }
+			if (((EntityPlayer) data[1]).getCurrentEquippedItem() != null) {
 
-                }
+				switch (k) {
+				case 23:
+					mc.renderEngine.func_98187_b("/subaraki/weapons/bow.png");
+					break;
+				case 24:
+					mc.renderEngine.func_98187_b("/subaraki/weapons/bow2.png");
+					break;
+				case 25:
+					mc.renderEngine.func_98187_b("/subaraki/weapons/bow3.png");
+					break;
+				default:
+					mc.renderEngine.func_98187_b("/subaraki/weapons/bow.png");
+					break;
+				}
+
+			}
 
 
-                GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
-                GL11.glRotatef(150F, 1.0f, 0.0f, 0.0f);
-                GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
+			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(150F, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
 
-                if (data[1] != null && data[1] instanceof EntityPlayer) {
-                    if (!((EntityPlayer) data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && !((Minecraft.getMinecraft().currentScreen instanceof GuiInventory || Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative || Minecraft.getMinecraft().currentScreen instanceof RpgGui) && RenderManager.instance.playerViewY == 180.0F))) {
-                        GL11.glTranslatef(0F, -0.45F, -0.7F);
-                    } else {
-                        GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
-                        GL11.glRotatef(-10F, 1.0f, 0.0f, 0.0f);
-                        GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
-                        GL11.glTranslatef(0F, -0.6F, -0.8F);
-                    }
+			if (data[1] != null && data[1] instanceof EntityPlayer) {
+				if (!((EntityPlayer) data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && !((Minecraft.getMinecraft().currentScreen instanceof GuiInventory || Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative || Minecraft.getMinecraft().currentScreen instanceof RpgGui) && RenderManager.instance.playerViewY == 180.0F))) {
+					GL11.glTranslatef(0F, -0.45F, -0.7F);
+				} else {
+					GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
+					GL11.glRotatef(-10F, 1.0f, 0.0f, 0.0f);
+					GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
+					GL11.glTranslatef(0F, -0.6F, -0.8F);
+				}
 
-                } else {
-                    GL11.glTranslatef(0F, -0.45F, -0.7F);
-                }
+			} else {
+				GL11.glTranslatef(0F, -0.45F, -0.7F);
+			}
 
-                swordmodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			swordmodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
-                GL11.glPopMatrix();
-                break;
+			GL11.glPopMatrix();
+		}
+		break;
 
-            case ENTITY:
-                GL11.glPushMatrix();
+		case ENTITY:
+		{
+			GL11.glPushMatrix();
+			Minecraft mc = Minecraft.getMinecraft();
 
-                float scale = 1.5F;
-                GL11.glScalef(scale, scale, scale);
-                mc.renderEngine.func_98187_b("/subaraki/bow.png");
+			float scale = 1.5F;
+			GL11.glScalef(scale, scale, scale);
+			mc.renderEngine.func_98187_b("/subaraki/weapons/bow.png");
 
-                GL11.glRotatef(0f, 1.0f, 0.0f, 0.0f);
-                GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
-                GL11.glRotatef(90F, 0.0f, 0.0f, 1.0f);
+			GL11.glRotatef(0f, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(90F, 0.0f, 0.0f, 1.0f);
 
-                GL11.glTranslatef(0F, -0.4F, 0F);
+			GL11.glTranslatef(0F, -0.4F, 0F);
 
-                swordmodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			swordmodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
-                GL11.glPopMatrix();
+			GL11.glPopMatrix();
 
-                break;
+			break;
+		}
+		case INVENTORY:
+		{
+			Minecraft mc = Minecraft.getMinecraft();
+			//System.out.println("uh...");
+			RenderItem renderItem = new RenderItem();
+			Icon icon = mod_RpgInventory.elfbow.getIcon(item, 0, mc.thePlayer, mc.thePlayer.getItemInUse(), mc.thePlayer.getItemInUseDuration());
+			renderItem.func_94149_a(0, 0, icon, 16, 16);
+			break;
+		}
 
-            case INVENTORY:
-                //System.out.println("uh...");
-                RenderItem renderItem = new RenderItem();
-                Icon icon = mod_RpgInventory.elfbow.getIcon(item, 0, mc.thePlayer, mc.thePlayer.getItemInUse(), mc.thePlayer.getItemInUseDuration());
-                renderItem.func_94149_a(0, 0, icon, 16, 16);
-                break;
-            default:
-                break;
-        }
-    }
+		default:
+			break;
+		}
+	}
 }

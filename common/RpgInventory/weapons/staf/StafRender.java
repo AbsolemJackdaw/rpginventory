@@ -124,54 +124,59 @@ public class StafRender implements IItemRenderer {
 		if( p instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) p;
-			if(player.getCurrentEquippedItem().getItem() instanceof ItemElementalStaff)
+			if(player.getCurrentEquippedItem() != null)
 			{
-				switch(((ItemElementalStaff)player.getCurrentEquippedItem().getItem()).type)
+				if(player.getCurrentEquippedItem().getItem() instanceof ItemElementalStaff)
+
 				{
-				case 1:/*fire*/
-				{
-					Color clr = getColor(2,0,0,3,0,0, (float) this.step/20);
-					this.step++;
-					GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, 0, 0, 0.5f);
+					switch(((ItemElementalStaff)player.getCurrentEquippedItem().getItem()).type)
+					{
+					case 1:/*fire*/
+					{
+						Color clr = getColor(2,0,0,3,0,0, (float) this.step/20);
+						this.step++;
+						GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, 0, 0, 0.5f);
+					}
+					break;
+					case 2:/*ice*/
+					{
+						Color clr = getColor(2,0,0,3,0,0, (float) this.step/20);
+						this.step++;
+						GL11.glColor4f(0.0F, 0.0F, (float)((clr.getRed()*100) / 255)/100, 0.5F);
+					}
+					break;
+					case 3:/*earth*/
+					{
+						Color clr = getColor(2,0,0,3,0,0, (float) this.step/20);
+						this.step++;
+						GL11.glColor4f(0.0F, (float)((clr.getRed()*100) / 255)/100, 0.0F, 0.5F);
+					}
+					break;
+					case 4:/*wind*/
+					{
+						Color clr = getColor(2,0,0,3,0,0, (float) this.step/20);
+						this.step++;
+						GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, (float)((clr.getRed()*100) / 255)/100,(float)((clr.getRed()*100) / 255)/100, 0.5F);
+					}
+					break;
+					case 5:/*ultimate*/
+					{
+						Color clr = getColor(.1,.2,.3,0,0,0, (float) this.step/10);
+						this.step++;
+						GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, (float)((clr.getGreen()*100) / 255)/100, (float)((clr.getBlue()*100) / 255)/100, 0.5F);
+					}
+					break;
+					default:
+					{
+						GL11.glColor4f(0, 0, 0, 1F);
+					}
+					break;
+					}
 				}
-				break;
-				case 2:/*ice*/
-				{
-					Color clr = getColor(2,0,0,3,0,0, (float) this.step/20);
-					this.step++;
-					GL11.glColor4f(0.0F, 0.0F, (float)((clr.getRed()*100) / 255)/100, 0.5F);
-				}
-				break;
-				case 3:/*earth*/
-				{
-					Color clr = getColor(2,0,0,3,0,0, (float) this.step/20);
-					this.step++;
-					GL11.glColor4f(0.0F, (float)((clr.getRed()*100) / 255)/100, 0.0F, 0.5F);
-				}
-				break;
-				case 4:/*wind*/
-				{
-					Color clr = getColor(2,0,0,3,0,0, (float) this.step/20);
-					this.step++;
-					GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, (float)((clr.getRed()*100) / 255)/100,(float)((clr.getRed()*100) / 255)/100, 0.5F);
-				}
-				break;
-				case 5:/*ultimate*/
-				{
-					Color clr = getColor(.1,.2,.3,0,0,0, (float) this.step/10);
-					this.step++;
-					GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, (float)((clr.getGreen()*100) / 255)/100, (float)((clr.getBlue()*100) / 255)/100, 0.5F);
-				}
-				break;
-				default:
-				{
-					GL11.glColor4f(0, 0, 0, 1F);
-				}
-				break;
-				}
+
+				else
+					GL11.glColor4f(0, 0.2f, 0.7f, 1F);
 			}
-			else
-				GL11.glColor4f(0, 0.2f, 0.7f, 1F);
 		}
 
 		if (this.step > 1000) {
