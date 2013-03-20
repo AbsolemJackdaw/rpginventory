@@ -14,6 +14,7 @@ import net.minecraft.item.Item;
 public class ItemRpgWeapon extends Item{
     public ItemRpgWeapon(int par1) {
         super(par1);
+        this.maxStackSize = 1;
     }
 
     @Override

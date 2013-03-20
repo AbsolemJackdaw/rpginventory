@@ -17,6 +17,7 @@ public class ItemRpgSword extends ItemSword {
 
     public ItemRpgSword(int par1, EnumToolMaterial etm) {
         super(par1, etm);
+        this.maxStackSize = 1;
     }
 
     @Override

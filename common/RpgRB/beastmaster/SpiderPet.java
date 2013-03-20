@@ -87,7 +87,7 @@ public class SpiderPet extends BMPetImpl {
 
     @Override
     public String getTexture() {
-        return "/subaraki/mobs/ModelSpider.png";
+        return "/subaraki/mobs/spider.png";
     }
 
     @Override

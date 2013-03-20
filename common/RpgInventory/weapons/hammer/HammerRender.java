@@ -47,51 +47,54 @@ public class HammerRender implements IItemRenderer {
 		{
 		case  EQUIPPED:
 		{		mc = Minecraft.getMinecraft();
-			GL11.glPushMatrix();
+		GL11.glPushMatrix();
 
-			if(((EntityPlayer)data[1]).getFoodStats().getFoodLevel() <4
-					||((EntityPlayer)data[1]).getHealth() <4)
-			{
-				mc.renderEngine.func_98187_b("/subaraki/weapons/RageHammer.png");
+		if(((EntityPlayer)data[1]).getFoodStats().getFoodLevel() <4
+				||((EntityPlayer)data[1]).getHealth() <4)
+		{
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().
+					renderEngine.getTexture("/subaraki/weapons/RageHammer.png"));
+		}
+		else
+		{
 
-			}
-			else
-			{
-				mc.renderEngine.func_98187_b("/subaraki/weapons/Hammer.png");
-			}
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().
+					renderEngine.getTexture("/subaraki/weapons/Hammer.png"));
+			
+		}
 
-			float scale = 1.5F;
-			GL11.glScalef(scale,scale,scale);
+		float scale = 1.5F;
+		GL11.glScalef(scale,scale,scale);
 
-			GL11.glRotatef(-180F, 0f, 0.0f, 1.0f);  
-			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
-			GL11.glRotatef(-50F, 1.0f, 0.0f, 0f);
+		GL11.glRotatef(-180F, 0f, 0.0f, 1.0f);  
+		GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
+		GL11.glRotatef(-50F, 1.0f, 0.0f, 0f);
 
-			boolean isFirstPerson;
+		boolean isFirstPerson;
 
-			if(data[1] != null && data[1] instanceof EntityPlayer)
-			{
-				if(!((EntityPlayer)data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && !((Minecraft.getMinecraft().currentScreen instanceof GuiInventory || Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative || Minecraft.getMinecraft().currentScreen instanceof RpgGui) && RenderManager.instance.playerViewY == 180.0F)))
-				{
-					GL11.glTranslatef(-0.05F, 0.5F, -0.43F);
-				}
-				else
-				{
-					isFirstPerson = true;
-					GL11.glRotatef(20F, 1.0f, 0.0f, 0.0f);
-					GL11.glRotatef(-10F, 0.0f, 1.0f, 0.0f);
-					GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
-					GL11.glTranslatef(-0.1f,0.5f,-0.5F);
-				}
-
-			}
-			else
+		if(data[1] != null && data[1] instanceof EntityPlayer)
+		{
+			if(!((EntityPlayer)data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && !((Minecraft.getMinecraft().currentScreen instanceof GuiInventory || Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative || Minecraft.getMinecraft().currentScreen instanceof RpgGui) && RenderManager.instance.playerViewY == 180.0F)))
 			{
 				GL11.glTranslatef(-0.05F, 0.5F, -0.43F);
 			}
+			else
+			{
+				isFirstPerson = true;
+				GL11.glRotatef(20F, 1.0f, 0.0f, 0.0f);
+				GL11.glRotatef(-10F, 0.0f, 1.0f, 0.0f);
+				GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
+				GL11.glTranslatef(-0.1f,0.5f,-0.5F);
+			}
 
-			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			GL11.glPopMatrix();
+		}
+		else
+		{
+			GL11.glTranslatef(-0.05F, 0.5F, -0.43F);
+		}
+
+		swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+		GL11.glPopMatrix();
 
 
 		}

@@ -84,7 +84,7 @@ public class RenderDagger implements IItemRenderer {
 
 			}
 
-			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
 

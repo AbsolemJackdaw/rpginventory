@@ -233,35 +233,35 @@ public class mod_RpgInventory {
         try {
 
             Class.forName("RpgPlusPlus.mod_RpgPlus");
-            System.out.println("Rpg++ Necromancer and Paladin is installed. Renderers can be Used");
+            FMLLog.info("Rpg++ Necromancer and Paladin is installed. Renderers can be Used", 1);
             hasRpg = true;
         } catch (Throwable e) {
-            System.out.println("Rpg++ Necromancer and Paladin has not been detected. Renderers for Rpg++ Excluded");
+        	FMLLog.info("Rpg++ Necromancer and Paladin has not been detected. Renderers for Rpg++ Excluded");
             hasRpg = false;
         }
         //look for Vanilla Shields
         try {
             Class.forName("RpgShields.mod_VanillaShields");
-            System.out.println("Rpg++ Vanilla Shields is installed. Renderers can be Used");
+            FMLLog.info("Rpg++ Vanilla Shields is installed. Renderers can be Used");
             hasShields = true;
         } catch (Throwable e) {
-            System.out.println("Rpg++ Vanilla Shields has not been detected. Renderers for Vanilla Shields Excluded");
+        	FMLLog.info("Rpg++ Vanilla Shields has not been detected. Renderers for Vanilla Shields Excluded");
             hasShields = false;
         }
         try {
             Class.forName("RpgRB.mod_RpgRB");
-            System.out.println("Rpg++ Rogue and BeastMaster Installed. Renderers can be Used");
+            FMLLog.info("Rpg++ Rogue and BeastMaster Installed. Renderers can be Used");
             hasRogue = true;
         } catch (Throwable e) {
-            System.out.println("Rpg++ Rogue and BeastMaster not detected. Renderers for Vanilla Shields Excluded");
+        	FMLLog.info("Rpg++ Rogue and BeastMaster not detected. Renderers for Vanilla Shields Excluded");
             hasRogue = false;
         }
         try {
             Class.forName("RpgMageSet.mod_RpgMageSet");
-            System.out.println("Rpg++ ArchMage Installed. Renderers can be Used");
+            FMLLog.info("Rpg++ ArchMage Installed. Renderers can be Used");
             hasMage = true;
         } catch (Throwable e) {
-            System.out.println("Rpg++ ArchMage not detected. Renderers Excluded");
+        	FMLLog.info("Rpg++ ArchMage not detected. Renderers Excluded");
             hasMage = false;
         }
 

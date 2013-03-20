@@ -58,7 +58,7 @@ public class BullPet extends BMPetImpl {
 
     @Override
     public String getTexture() {
-        return "/subaraki/mobs/modelBull.png";
+        return "/subaraki/mobs/bull.png";
     }
 
     @Override

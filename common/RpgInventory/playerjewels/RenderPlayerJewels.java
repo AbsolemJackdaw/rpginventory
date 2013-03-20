@@ -514,7 +514,6 @@ public class RenderPlayerJewels extends RenderPlayer {
 					GL11.glScalef(1F, 1F, 1F);
 					GL11.glRotatef(65, 1.0f, 0.0f, 0.0f);
 					GL11.glRotatef(180, 0.0f, 1.0f, 0.0f);
-					//GL11.glRotatef(0, 0.0f, 0.0f, 1.0f);
 					GL11.glTranslatef(-0.35F, -0.25F, 0.65F);
 
 					if (!modelBipedMain.aimedBow) {
