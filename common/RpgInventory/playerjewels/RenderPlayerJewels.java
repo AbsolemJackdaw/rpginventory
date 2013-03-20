@@ -353,6 +353,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleZ * 50, 0.0F, 0.0F, 1.0F);
+				
 				GL11.glScalef(1F, 1F, 1F);
 				GL11.glRotatef(90, 0.0f, 1.0f, 0.0f);
 				GL11.glRotatef(180, 0.0f, 0.0f, 1.0f);
@@ -546,9 +547,9 @@ public class RenderPlayerJewels extends RenderPlayer {
 					}
 				}
 			}
+			GL11.glColor4f(1, 1, 1, 1);
 			GL11.glPopMatrix();
 			GL11.glPopAttrib();
-			GL11.glColor4f(1, 1, 1, 1);
 		}
 	}
 

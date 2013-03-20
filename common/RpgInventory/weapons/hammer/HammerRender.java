@@ -99,6 +99,7 @@ public class HammerRender implements IItemRenderer {
 
 		case  ENTITY:
 		{
+			mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 
 			mc.renderEngine.func_98187_b("/subaraki/weapons/Hammer.png");

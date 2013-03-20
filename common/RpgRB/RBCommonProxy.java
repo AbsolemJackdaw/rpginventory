@@ -4,12 +4,9 @@
  */
 package RpgRB;
 
-/**
- *
- * @author Home
- */
 public class RBCommonProxy {
-    public void registerRendering(){
-        
-    }
+
+	public void registerRendering(){
+
+	}
 }

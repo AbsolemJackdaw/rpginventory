@@ -26,32 +26,9 @@ public class mod_RpgRB {
 
 	@SidedProxy(serverSide = "RpgRB.RBCommonProxy", clientSide = "RpgRB.RBClientProxy")
 	public static RBCommonProxy proxy;
-
-	//	@SidedProxy(serverSide = "RpgPlusPlus.CommonProxyRpgplus", clientSide = "RpgPlusPlus.ClientProxyRpgPlus")
-	//	public static CommonProxyRpgplus proxy;
-
-	// Armor Materials
-
-	private static int uniqueLocalID = 0;
-	public int getNextUniqueID(){
-		return uniqueLocalID++;
-	}
+	
 	@Init
 	public void load(FMLInitializationEvent event) {
-
-		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.daggers,1), new Object [] {" ei","eie","se ", 'i', Item.ingotIron, 'e',Item.spiderEye, 's',Item.stick});
-
-
-		EntityRegistry.registerGlobalEntityID(BullPet.class, "BullPet", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerGlobalEntityID(SpiderPet.class, "SpiderPet", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerGlobalEntityID(BoarPet.class, "BoarPet", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerGlobalEntityID(EntityTeleportStone.class, "TelePortStone", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(BullPet.class, "BullPet", getNextUniqueID(), this, 80, 1, true);
-		EntityRegistry.registerModEntity(SpiderPet.class, "SpiderPet", getNextUniqueID(), this, 80, 1, true);
-		EntityRegistry.registerModEntity(BoarPet.class, "BoarPet", getNextUniqueID(), this, 80, 1, true);
-		EntityRegistry.registerModEntity(EntityPetXP.class, "PetXP", getNextUniqueID(), this, 80, 1, true);
-		EntityRegistry.registerModEntity(EntityTeleportStone.class, "TelePortStone", getNextUniqueID(), this, 80, 1, true);
-
-		proxy.registerRendering();
+		
 	}
 }

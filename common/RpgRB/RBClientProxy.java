@@ -24,13 +24,6 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
  */
 public class RBClientProxy extends RBCommonProxy{
 	public void registerRendering(){
-		MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.daggers.itemID, (IItemRenderer) new RenderDagger());
-
-		RenderingRegistry.registerEntityRenderingHandler(BullPet.class, new RenderPet());
-		RenderingRegistry.registerEntityRenderingHandler(SpiderPet.class, new RenderPet());
-		RenderingRegistry.registerEntityRenderingHandler(BoarPet.class, new RenderPet());
-		RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class, new RenderXPOrb());
-		RenderingRegistry.registerEntityRenderingHandler(EntityTeleportStone.class, new RenderSnowball(Item.feather, 1));
 
 	}
 }

@@ -50,6 +50,13 @@ import RpgInventory.weapons.staf.ItemStaf;
 import RpgInventory.weapons.staf.StafRender;
 import RpgInventory.weapons.wand.ItemMageWand;
 import RpgInventory.weapons.wand.SoulSphereRender;
+import RpgMageSet.weapons.EntityElementalBlock;
+import RpgPlusPlus.minions.EntityMinionS;
+import RpgPlusPlus.minions.EntityMinionZ;
+import RpgRB.EntityTeleportStone;
+import RpgRB.beastmaster.BoarPet;
+import RpgRB.beastmaster.BullPet;
+import RpgRB.beastmaster.SpiderPet;
 import RpgRB.weapons.axe.AxeRender;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -195,7 +202,6 @@ public class mod_RpgInventory {
 	public mod_RpgInventory() {
         instance = this;
     }
-
     public int getUniqueID() {
         return uniqueID++;
     }
@@ -366,6 +372,20 @@ public class mod_RpgInventory {
             LanguageRegistry.addName(pala_weapon, "Paladin's Pride");
             LanguageRegistry.addName(pala_steel, "Paladin's Steel");
             LanguageRegistry.addName(necro_skin, "Necromancer's Cloth");
+            
+        	GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.necro_skin, 1), new Object[]{"BWB", "WLW", "BWB", 'W', Item.spiderEye, 'B', Item.bone, 'L', Item.leather});
+    		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.pala_steel, 1), new Object[]{"GGG", "BIB", "GGG", 'G', Item.ingotGold, 'B', (new ItemStack(Item.potion.itemID, 1, 0)), 'I', Item.ingotIron});
+    		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.necro_shield, 1), new Object[]{"WWW", "WBW", " W ", 'W', mod_RpgInventory.necro_skin, 'B', new ItemStack(Item.skull,1,1)});
+    		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.pala_shield, 1), new Object[]{"WWW", "WBW", " W ", 'W', mod_RpgInventory.pala_steel, 'B', Block.blockSteel});
+    		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.necro_weapon, 1), new Object[]{"WWW", "WBW", "WWW", 'W', Item.bone, 'B', new ItemStack(Item.skull,1,1)});
+    		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.pala_weapon, 1), new Object[]{"S", "S", "G", 'S', mod_RpgInventory.pala_steel, 'G', Item.ingotGold});
+    		EntityRegistry.registerGlobalEntityID(EntityMinionS.class, "skeletonMinion", EntityRegistry.findGlobalUniqueEntityId());
+    		EntityRegistry.registerGlobalEntityID(EntityMinionZ.class, "zombieMinion", EntityRegistry.findGlobalUniqueEntityId());
+    		EntityRegistry.registerModEntity(EntityMinionS.class, "skeletonMinion", getUniqueID(), this, 100, 2, true);
+    		EntityRegistry.registerModEntity(EntityMinionZ.class, "zombieMinion", getUniqueID(), this, 100, 2, true);
+    		LanguageRegistry.instance().addStringLocalization("entity.EntityMinionS.name", "Skeleton Minion");
+    		LanguageRegistry.instance().addStringLocalization("entity.EntityMinionZ.name", "Zombie Minion");
+
 
         }
 
@@ -431,6 +451,7 @@ public class mod_RpgInventory {
             LanguageRegistry.addName(new ItemStack(crystal, 1, 2), "Spider");
             LanguageRegistry.addName(new ItemStack(crystal, 1, 3), "Bull");
 
+    		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.daggers,1), new Object [] {" ei","eie","se ", 'i', Item.ingotIron, 'e',Item.spiderEye, 's',Item.stick});
             GameRegistry.addShapelessRecipe(new ItemStack(whistle), new Object[]{Item.stick, Item.reed, Item.reed});
             GameRegistry.addRecipe(new ItemStack(beastLeather), new Object[]{"LLL", "LVL", "LLL", 'L', Block.leaves, 'V', Item.leather});
             GameRegistry.addRecipe(new ItemStack(rogueLeather), new Object[]{"DSD", "SLS", "DSD", 'S', Item.silk, 'L', Item.leather, 'D', new ItemStack(Item.dyePowder, 1, 5)});
@@ -487,6 +508,8 @@ public class mod_RpgInventory {
             GameRegistry.addRecipe(new ItemStack(archmageLegs), new Object[]{"III", "IBI", "III", 'B', magepants, 'I', Item.goldNugget});
             GameRegistry.addRecipe(new ItemStack(archmageChest), new Object[]{"III", "IBI", "III", 'B', magegown, 'I', Item.goldNugget});
             GameRegistry.addRecipe(new ItemStack(archmageHood), new Object[]{"III", "IBI", "III", 'B', magehood, 'I', Item.goldNugget});
+    		EntityRegistry.registerModEntity(EntityElementalBlock.class, "elementalBlock", getUniqueID(), this, 250, 1, true);
+
 
         }
 
@@ -626,7 +649,19 @@ public class mod_RpgInventory {
             }
         }
         //Renders go on client proxy...
-        
+        if(mod_RpgInventory.hasRogue)
+        {
+        	EntityRegistry.registerGlobalEntityID(BullPet.class, "BullPet", EntityRegistry.findGlobalUniqueEntityId());
+    		EntityRegistry.registerGlobalEntityID(SpiderPet.class, "SpiderPet", EntityRegistry.findGlobalUniqueEntityId());
+    		EntityRegistry.registerGlobalEntityID(BoarPet.class, "BoarPet", EntityRegistry.findGlobalUniqueEntityId());
+    		EntityRegistry.registerGlobalEntityID(EntityTeleportStone.class, "TelePortStone", EntityRegistry.findGlobalUniqueEntityId());
+    		EntityRegistry.registerModEntity(BullPet.class, "BullPet", getUniqueID(), this, 80, 1, true);
+    		EntityRegistry.registerModEntity(SpiderPet.class, "SpiderPet", getUniqueID(), this, 80, 1, true);
+    		EntityRegistry.registerModEntity(BoarPet.class, "BoarPet", getUniqueID(), this, 80, 1, true);
+    		EntityRegistry.registerModEntity(EntityPetXP.class, "PetXP", getUniqueID(), this, 80, 1, true);
+    		EntityRegistry.registerModEntity(EntityTeleportStone.class, "TelePortStone", getUniqueID(), this, 80, 1, true);
+
+        }
 
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
         GameRegistry.registerPlayerTracker(new PlayerTracker());

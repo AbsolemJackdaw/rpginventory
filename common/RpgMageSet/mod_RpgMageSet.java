@@ -30,9 +30,6 @@ public class mod_RpgMageSet {
 	@Init
 	public void load(FMLInitializationEvent event) {
 		//proxy.registerRenderInformation();
-
-		proxy.registerRendering();
-		EntityRegistry.registerModEntity(EntityElementalBlock.class, "elementalBlock", getNextUniqueID(), this, 250, 1, true);
 	}
 }
 
