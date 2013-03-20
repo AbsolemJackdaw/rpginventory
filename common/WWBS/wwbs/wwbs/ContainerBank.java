@@ -1,27 +1,31 @@
 package WWBS.wwbs.wwbs;
 
-import RpgInventory.forge.GoldBlockSlot;
-import RpgInventory.forge.MoldSlot;
-import RpgInventory.forge.SlotFuel;
-import RpgInventory.forge.SlotMineral;
-import RpgInventory.forge.SlotMold;
-import RpgInventory.forge.TEMold;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ContainerBank extends Container{
 
 	private WwbsTe tile;
+    public List itemList = new ArrayList();
+
 	public ContainerBank(InventoryPlayer par1InventoryPlayer, WwbsTe te)
 	{
 		
 		tile = te;
+	
+		for (int g = 0;  g <2; g ++)
+		{
+			
+		}
 		this.addSlotToContainer(new Slot(te, 0, 48, 72));
-		this.addSlotToContainer(new Slot(te, 1, 48, 32)); 
-		this.addSlotToContainer(new Slot(te, 2, 96, 51)); 
-		this.addSlotToContainer(new Slot(te, 3, 96, 32)); 
+		
 		
 		for (int i = 0; i < 3; i++)
 		{
@@ -35,6 +39,39 @@ public class ContainerBank extends Container{
 		{
 			addSlotToContainer(new Slot(par1InventoryPlayer, j, 8 + j * 18, 142 +18));
 		}
+	}
+	
+	 public void scrollTo(float par1)
+	    {
+	        int i = this.itemList.size() / 9 - 5 + 1;
+	        int j = (int)((double)(par1 * (float)i) + 0.5D);
+
+	        if (j < 0)
+	        {
+	            j = 0;
+	        }
+
+	        for (int k = 0; k < 5; ++k)
+	        {
+	            for (int l = 0; l < 9; ++l)
+	            {
+	                int i1 = l + (k + j) * 9;
+
+	                if (i1 >= 0 && i1 < this.itemList.size())
+	                {
+	                    GuiBS.getInventory().setInventorySlotContents(l + k * 9, (ItemStack)this.itemList.get(i1));
+	                }
+	                else
+	                {
+	                	GuiBS.getInventory().setInventorySlotContents(l + k * 9, (ItemStack)null);
+	                }
+	            }
+	        }
+	    }
+
+	public boolean hasMoreThan1PageOfItemsInList()
+	{
+		return this.itemList.size() > 45;
 	}
 	
 	@Override

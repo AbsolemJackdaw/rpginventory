@@ -12,7 +12,7 @@ public class WwbsTe extends TileEntity implements IInventory{
 	private ItemStack[] invSlot;
 	@Override
 	public int getSizeInventory() {
-		invSlot = new ItemStack[500];
+		invSlot = new ItemStack[250];
 
 		return 0;
 	}
