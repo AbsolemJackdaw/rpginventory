@@ -40,7 +40,8 @@ public class RenderDagger implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED:
-		{		mc = Minecraft.getMinecraft();
+		{		
+			mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 			float scale = 0.9F;
 			GL11.glScalef(scale,scale,scale);
@@ -52,7 +53,6 @@ public class RenderDagger implements IItemRenderer {
 			else
 			{
 				mc.renderEngine.bindTexture("/subaraki/weapons/daggerNight.png");
-
 			}
 
 			GL11.glRotatef(-150F, 1.0f, 0.0f, 0.0f);
@@ -70,29 +70,28 @@ public class RenderDagger implements IItemRenderer {
 
 		case  ENTITY:
 		{		mc = Minecraft.getMinecraft();
-			GL11.glPushMatrix();
+		GL11.glPushMatrix();
 
-			float scale = 1.5F;
-			GL11.glScalef(scale,scale,scale);
-			if(((Entity)data[1]).worldObj.getWorldTime() < 12500)
-			{
-				mc.renderEngine.bindTexture("/subaraki/weapons/dagger.png");
-			}
-			else
-			{
-				mc.renderEngine.bindTexture("/subaraki/weapons/daggerNight.png");
+		float scale = 1.5F;
+		GL11.glScalef(scale,scale,scale);
+		if(((Entity)data[1]).worldObj.getWorldTime() < 12500)
+		{
+			mc.renderEngine.bindTexture("/subaraki/weapons/dagger.png");
+		}
+		else
+		{
+			mc.renderEngine.bindTexture("/subaraki/weapons/daggerNight.png");
+		}
 
-			}
+		GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
+		GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
+		GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
 
-			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
-			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
-			GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
+		GL11.glTranslatef(0F, 0F, 0F);
 
-			GL11.glTranslatef(0F, 0F, 0F);
+		daggerModel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
-			daggerModel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-
-			GL11.glPopMatrix();
+		GL11.glPopMatrix();
 		}
 		break;
 

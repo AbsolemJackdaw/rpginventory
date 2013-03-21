@@ -158,7 +158,7 @@ public class ClientProxy extends CommonProxy {
 		}
 		if (RpgConfig.instance.render3DDagger == true) {
 			if (mod_RpgInventory.hasRogue) {
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.daggers.itemID, (IItemRenderer) new AxeRender());
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.daggers.itemID, (IItemRenderer) new RenderDagger());
 			}
 		}
 		if(mod_RpgInventory.hasRpg)
