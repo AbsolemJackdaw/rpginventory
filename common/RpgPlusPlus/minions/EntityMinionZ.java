@@ -45,6 +45,7 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
     public EntityMinionZ(World var1, EntityPlayer player) {
         this(var1);
         this.player = player;
+        this.setSize(1.0f, 1.0f);
         //This makes minions aggressive to aggressive mobs and players, except for their owner.
         //They will not provoke creepers, so they dont blow themselves up.
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, true, false, new CustomMinionEntitySelector(player)));

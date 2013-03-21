@@ -39,6 +39,7 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob, I
     public EntityMinionS(World var1, EntityPlayer player) {
         this(var1);
         this.player = player;
+        this.setSize(1.0f, 1.0f);
         //All attack requests are filtered through this task to ensure it really should attack.
         //The minion will attack all aggressives that get close enough, but will
         //never attack the owner, or other minions of his owner. He will attack other
