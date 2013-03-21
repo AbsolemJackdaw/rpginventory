@@ -26,7 +26,7 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class ItemBeastAxe extends ItemSword {
+public class ItemBeastAxe extends ItemRpgSword {
 
     private List<Class> pettypes = Arrays.asList(new Class[]{EntityPig.class, EntityCow.class, EntitySpider.class, EntityCaveSpider.class});
     private int charmTime;
@@ -41,12 +41,6 @@ public class ItemBeastAxe extends ItemSword {
 
     public String getTextureFile() {
         return "/subaraki/RPGinventoryTM.png";
-    }
-
-    @Override
-    public void updateIcons(IconRegister par1IconRegister) {
-        String texture = getUnlocalizedName().substring(getUnlocalizedName().lastIndexOf(".") + 1);
-        this.iconIndex = par1IconRegister.registerIcon(texture);
     }
 
     public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {

@@ -178,7 +178,8 @@ public class ItemArcherBow extends Item {
         return -1;
     }
 
-    public void func_94581_a(IconRegister par1IconRegister) {
+    @Override
+    public void updateIcons(IconRegister par1IconRegister) {
         this.IconArray = new Icon[ItemNameArray.length];
 
         for (int i = 0; i < this.IconArray.length; ++i) {

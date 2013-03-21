@@ -103,7 +103,7 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.tasks.addTask(2, this.aiSit);
         this.player = this.worldObj.getPlayerEntityByName(this.getOwnerName());
-
+this.setSize(0.7F, 1.7F);
 
     }
 

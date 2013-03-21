@@ -107,7 +107,7 @@ public class ItemRBMats2 extends Item {
     @Override
     public void updateIcons(IconRegister par1IconRegister) {
         String texture = getUnlocalizedName().substring(getUnlocalizedName().lastIndexOf(".") + 1);
-        this.iconIndex = par1IconRegister.registerIcon(texture);
+        this.iconIndex = par1IconRegister.registerIcon("RPGInventoryMod:" + texture);
     }
 
     public String getTextureFile() {

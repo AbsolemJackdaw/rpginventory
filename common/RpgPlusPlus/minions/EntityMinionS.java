@@ -101,6 +101,7 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob, I
         //give minion a bow
         //slot 0 is what is in their hand, 1-4 are armor slots.
         this.setCurrentItemOrArmor(0, new ItemStack(Item.bow));
+        this.setSize(0.7F, 1.7F);
     }
 
     public void Harvest() {
