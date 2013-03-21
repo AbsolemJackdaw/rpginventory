@@ -54,7 +54,7 @@ public class SoulSphereRender implements IItemRenderer {
 
 			GL11.glPushMatrix();
 
-			mc.renderEngine.func_98187_b("/subaraki/weapons/SoulSphere.png");
+			mc.renderEngine.bindTexture("/subaraki/weapons/SoulSphere.png");
 
 			float scale = 0.45F;
 			GL11.glScalef(scale,scale,scale);
@@ -90,7 +90,7 @@ public class SoulSphereRender implements IItemRenderer {
 
 			GL11.glPushMatrix();
 
-			mc.renderEngine.func_98187_b("/subaraki/weapons/SoulSphere.png");
+			mc.renderEngine.bindTexture("/subaraki/weapons/SoulSphere.png");
 
 			float scale = 0.8F;
 			GL11.glScalef(scale,scale,scale);

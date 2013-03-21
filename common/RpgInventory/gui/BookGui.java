@@ -24,7 +24,7 @@ public class BookGui extends GuiScreen
 
 		int var4 = this.mc.renderEngine.getTexture("/subaraki/bookgui.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.func_98187_b("/subaraki/bookgui.png");
+		this.mc.renderEngine.bindTexture("/subaraki/bookgui.png");
 
 		int posX = (this.width - xSizeOfTexture) / 2;
 		int posY = (this.height - ySizeOfTexture) / 2;

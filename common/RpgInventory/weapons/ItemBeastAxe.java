@@ -43,8 +43,10 @@ public class ItemBeastAxe extends ItemSword {
         return "/subaraki/RPGinventoryTM.png";
     }
 
-    public void func_94581_a(IconRegister par1IconRegister) {
-        this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:forestAxe");
+    @Override
+    public void updateIcons(IconRegister par1IconRegister) {
+        String texture = getUnlocalizedName().substring(getUnlocalizedName().lastIndexOf(".") + 1);
+        this.iconIndex = par1IconRegister.registerIcon(texture);
     }
 
     public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {

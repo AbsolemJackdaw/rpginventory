@@ -45,7 +45,7 @@ public class GuiMainME extends GuiScreen {
 		this.ySize_lo = (float) par2;
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.func_98187_b("/subaraki/MainGui.png");
+		this.mc.renderEngine.bindTexture("/subaraki/MainGui.png");
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
 		drawTexturedModalRect(posX, posY, 0, 0, xSize, ySize);

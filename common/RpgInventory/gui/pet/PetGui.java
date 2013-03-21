@@ -80,7 +80,7 @@ public class PetGui extends GuiScreen {
         }
         petType = petCrystal.getItemDamage();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.func_98187_b("/subaraki/petgui.png");
+        this.mc.renderEngine.bindTexture("/subaraki/petgui.png");
 
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
@@ -230,7 +230,7 @@ public class PetGui extends GuiScreen {
         drawDefaultBackground();
         try {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            this.mc.renderEngine.func_98187_b("/subaraki/petgui.png");
+            this.mc.renderEngine.bindTexture("/subaraki/petgui.png");
             int posX = (this.width - xSizeOfTexture) / 2;
             int posY = (this.height - ySizeOfTexture) / 2;
             drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);

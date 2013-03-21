@@ -32,10 +32,10 @@ public class BlockForge extends BlockContainer {
     }
 
     @Override
-    public void func_94332_a(IconRegister par1IconRegister) {
-        this.field_94336_cN = temoldOvenSide = temoldOvenTop = temoldOvenBottom = par1IconRegister.func_94245_a("RPGInventoryMod:ovenSide");
-        temoldOvenFront = par1IconRegister.func_94245_a("RPGInventoryMod:ovenFront");
-        temoldOvenFrontActive = par1IconRegister.func_94245_a("RPGInventoryMod:ovenFrontBurning");
+    public void registerIcons(IconRegister par1IconRegister) {
+        this.blockIcon = temoldOvenSide = temoldOvenTop = temoldOvenBottom = par1IconRegister.registerIcon("RPGInventoryMod:ovenSide");
+        temoldOvenFront = par1IconRegister.registerIcon("RPGInventoryMod:ovenFront");
+        temoldOvenFrontActive = par1IconRegister.registerIcon("RPGInventoryMod:ovenFrontBurning");
     }
     
     private static boolean keepInventory = true;
@@ -120,7 +120,7 @@ public class BlockForge extends BlockContainer {
             if (Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var7]) {
                 var9 = 4;
             }
-            par1World.setBlockAndMetadataWithNotify(par4, par2, par3, this.blockID, var9, 0);
+            par1World.setBlock(par4, par2, par3, this.blockID, var9,0);
         }
     }
 

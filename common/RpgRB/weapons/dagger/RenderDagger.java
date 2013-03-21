@@ -47,11 +47,11 @@ public class RenderDagger implements IItemRenderer {
 
 			if(((Entity)data[1]).worldObj.getWorldTime() < 12500)
 			{
-				mc.renderEngine.func_98187_b("/subaraki/weapons/dagger.png");
+				mc.renderEngine.bindTexture("/subaraki/weapons/dagger.png");
 			}
 			else
 			{
-				mc.renderEngine.func_98187_b("/subaraki/weapons/daggerNight.png");
+				mc.renderEngine.bindTexture("/subaraki/weapons/daggerNight.png");
 
 			}
 
@@ -76,11 +76,11 @@ public class RenderDagger implements IItemRenderer {
 			GL11.glScalef(scale,scale,scale);
 			if(((Entity)data[1]).worldObj.getWorldTime() < 12500)
 			{
-				mc.renderEngine.func_98187_b("/subaraki/weapons/dagger.png");
+				mc.renderEngine.bindTexture("/subaraki/weapons/dagger.png");
 			}
 			else
 			{
-				mc.renderEngine.func_98187_b("/subaraki/weapons/daggerNight.png");
+				mc.renderEngine.bindTexture("/subaraki/weapons/daggerNight.png");
 
 			}
 

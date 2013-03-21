@@ -105,7 +105,7 @@ public class HammerRender implements IItemRenderer {
 			mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 
-			mc.renderEngine.func_98187_b("/subaraki/weapons/Hammer.png");
+			mc.renderEngine.bindTexture("/subaraki/weapons/Hammer.png");
 
 			float scale = 1.8F;
 			GL11.glScalef(scale,scale,scale);

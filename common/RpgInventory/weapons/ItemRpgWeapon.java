@@ -18,8 +18,8 @@ public class ItemRpgWeapon extends Item{
     }
 
     @Override
-    public void func_94581_a(IconRegister par1IconRegister) {
-        String itemName = getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1);
-        this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:" + itemName);
+    public void updateIcons(IconRegister par1IconRegister) {
+        String texture = getUnlocalizedName().substring(getUnlocalizedName().lastIndexOf(".") + 1);
+        this.iconIndex = par1IconRegister.registerIcon(texture);
     }
 }

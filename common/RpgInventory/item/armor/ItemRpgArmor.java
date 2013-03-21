@@ -36,9 +36,9 @@ public class ItemRpgArmor extends Item {
      * gold.
      */
     @Override
-    public void func_94581_a(IconRegister par1IconRegister) {
+    public void updateIcons(IconRegister par1IconRegister) {
         String itemName = getUnlocalizedName().substring(getUnlocalizedName().lastIndexOf(".") + 1);
-        this.iconIndex = par1IconRegister.func_94245_a("RPGInventoryMod:" + itemName);
+        this.iconIndex = par1IconRegister.registerIcon("RPGInventoryMod:" + itemName);
     }
     public int renderJewelIndex;
     private String Name;

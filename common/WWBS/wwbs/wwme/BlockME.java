@@ -13,8 +13,8 @@ public class BlockME extends Block{
 		super(par1, par2Material);
 	}
 	@Override
-	public void func_94332_a(IconRegister par1IconRegister) {
-		this.field_94336_cN = par1IconRegister.func_94245_a("wwbs:M.E.");
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon("wwbs:M.E.");
 	}
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 	{		

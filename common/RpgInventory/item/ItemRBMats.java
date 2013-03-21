@@ -27,8 +27,8 @@ public class ItemRBMats extends Item {
     }
 
     @Override
-    public void func_94581_a(IconRegister par1IconRegister) {
+    public void updateIcons(IconRegister par1IconRegister) {
         String texture = getUnlocalizedName().substring(getUnlocalizedName().lastIndexOf(".") + 1);
-        this.iconIndex = par1IconRegister.func_94245_a(texture);
+        this.iconIndex = par1IconRegister.registerIcon(texture);
     }
 }

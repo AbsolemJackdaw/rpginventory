@@ -65,11 +65,6 @@ public class WwbsTe extends TileEntity implements IInventory{
 	}
 
 	@Override
-	public boolean func_94042_c() {
-		return false;
-	}
-
-	@Override
 	public int getInventoryStackLimit() {
 		return 64;
 	}
@@ -89,10 +84,6 @@ public class WwbsTe extends TileEntity implements IInventory{
 
 	}
 
-	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack) {
-		return false;
-	}
 	@Override
 	public void readFromNBT(NBTTagCompound tagCompound) {
 		super.readFromNBT(tagCompound);
@@ -123,5 +114,17 @@ public class WwbsTe extends TileEntity implements IInventory{
 			}
 		}
 		tagCompound.setTag("Inventory", itemList);
+	}
+
+	@Override
+	public boolean isInvNameLocalized() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

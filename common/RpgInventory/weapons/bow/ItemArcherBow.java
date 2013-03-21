@@ -184,7 +184,7 @@ public class ItemArcherBow extends Item {
         for (int i = 0; i < this.IconArray.length; ++i) {
             String prefix = "RPGInventoryMod:";
             System.out.println("RPGInventoryMod" + ":" + ItemNameArray[i]);
-            this.IconArray[i] = par1IconRegister.func_94245_a(prefix + ItemNameArray[i]);
+            this.IconArray[i] = par1IconRegister.registerIcon(prefix + ItemNameArray[i]);
         }
         this.iconIndex = this.IconArray[0];
     }

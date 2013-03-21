@@ -61,16 +61,16 @@ public class BowRender implements IItemRenderer {
 
 				switch (k) {
 				case 23:
-					mc.renderEngine.func_98187_b("/subaraki/weapons/bow.png");
+					mc.renderEngine.bindTexture("/subaraki/weapons/bow.png");
 					break;
 				case 24:
-					mc.renderEngine.func_98187_b("/subaraki/weapons/bow2.png");
+					mc.renderEngine.bindTexture("/subaraki/weapons/bow2.png");
 					break;
 				case 25:
-					mc.renderEngine.func_98187_b("/subaraki/weapons/bow3.png");
+					mc.renderEngine.bindTexture("/subaraki/weapons/bow3.png");
 					break;
 				default:
-					mc.renderEngine.func_98187_b("/subaraki/weapons/bow.png");
+					mc.renderEngine.bindTexture("/subaraki/weapons/bow.png");
 					break;
 				}
 
@@ -108,7 +108,7 @@ public class BowRender implements IItemRenderer {
 
 			float scale = 1.5F;
 			GL11.glScalef(scale, scale, scale);
-			mc.renderEngine.func_98187_b("/subaraki/weapons/bow.png");
+			mc.renderEngine.bindTexture("/subaraki/weapons/bow.png");
 
 			GL11.glRotatef(0f, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
@@ -128,7 +128,7 @@ public class BowRender implements IItemRenderer {
 			//System.out.println("uh...");
 			RenderItem renderItem = new RenderItem();
 			Icon icon = mod_RpgInventory.elfbow.getIcon(item, 0, mc.thePlayer, mc.thePlayer.getItemInUse(), mc.thePlayer.getItemInUseDuration());
-			renderItem.func_94149_a(0, 0, icon, 16, 16);
+			renderItem.renderIcon(0, 0, icon, 16, 16);
 			break;
 		}
 

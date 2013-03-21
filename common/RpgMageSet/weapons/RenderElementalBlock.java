@@ -51,7 +51,7 @@ public class RenderElementalBlock extends Render
 		GL11.glRotatef((new Random()).nextInt(360), 1, 1, 1);
 		int size = theEntity.size;
 		GL11.glScalef(0.0F + (size * 0.3F), 0.0F + (size * 0.3F), 0.0F + (size * 0.3F));
-		Minecraft.getMinecraft().renderEngine.func_98187_b("/subaraki/weapons/elementum.png");
+		Minecraft.getMinecraft().renderEngine.bindTexture("/subaraki/weapons/elementum.png");
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);

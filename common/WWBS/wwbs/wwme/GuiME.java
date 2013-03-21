@@ -36,7 +36,7 @@ public class GuiME extends GuiContainer {
 
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.func_98187_b("/subaraki/Bank Gui.png");
+		this.mc.renderEngine.bindTexture("/subaraki/Bank Gui.png");
 		int var5 = this.height;
 		int var6 = this.width;
 		int posX = (this.width - xSize) / 2;
