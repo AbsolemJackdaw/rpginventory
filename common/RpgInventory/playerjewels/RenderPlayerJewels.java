@@ -125,6 +125,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 		ItemStack chest = player.inventory.armorItemInSlot(2);
 		ItemStack hoed = player.inventory.armorItemInSlot(3);
 		GL11.glColor4f(1, 1, 1, 1);
+		this.modelBipedMain.heldItemLeft = 0;
 		rpg = mod_RpgInventory.proxy.getInventory(player.username);
 		float var11;
 
@@ -322,6 +323,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 
 		//SHIELD
 		if (shield != null) {
+			this.modelBipedMain.heldItemLeft = 0;
 
 			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 
@@ -347,6 +349,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				dagger.renderDagger(0.0625f);
 				this.modelBipedMain.heldItemLeft = 1;
 				this.setRenderPassModel(dagger);
+				
 			} else if (mod_RpgInventory.hasRogue == true && shield.getItem() == mod_RpgInventory.beastShield) {
 				mc.renderEngine.bindTexture("/subaraki/jewels/lion.png");
 
@@ -495,7 +498,8 @@ public class RenderPlayerJewels extends RenderPlayer {
 					GL11.glScalef(1F, 1F, 1F);
 					GL11.glTranslatef(-0.02F, 0.05F, 0F);
 
-					if (!modelBipedMain.aimedBow) {
+					if (modelBipedMain.aimedBow == false) 
+					{
 						vanillaShield.renderShield(0.0625f);
 					}
 				}
