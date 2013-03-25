@@ -180,6 +180,7 @@ public class TEMold extends TileEntity implements IInventory {
 
     @Override
     public void updateEntity() {
+    	
         boolean var1 = this.goldBurnTime > 0;
         boolean var2 = false;
 
