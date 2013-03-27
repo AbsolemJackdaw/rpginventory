@@ -14,6 +14,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -32,6 +33,12 @@ public class mod_wwbs {
 
 	@SidedProxy(serverSide = "WWBS.wwbs.CommonProxy", clientSide = "WWBS.wwbs.ClientProxy")
 	public static CommonProxy proxy;
+	
+	public static mod_wwbs instance;
+	public mod_wwbs()
+	{
+		instance = this;
+	}
 
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
@@ -47,9 +54,12 @@ public class mod_wwbs {
 		me = new BlockME(Config.instance.MEBlock, Material.wood).setHardness(50f).setResistance(150f).setUnlocalizedName("M.E.")
 				.setCreativeTab(wwbstab);
 
-		LanguageRegistry.addName(bank, "wwbs");
-		GameRegistry.registerBlock(bank, "Bank");
-		LanguageRegistry.addName(me, "massiveExchange");
-		GameRegistry.registerBlock(me, "Massive Exchange");
+		LanguageRegistry.addName(bank, "Bank");
+		GameRegistry.registerBlock(bank, "wwbs");
+		LanguageRegistry.addName(me, "Massive Exchange");
+		GameRegistry.registerBlock(me, "massiveExchange");
+		
+        NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+
 	}
 }

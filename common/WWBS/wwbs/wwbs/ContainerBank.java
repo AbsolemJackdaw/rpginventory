@@ -20,24 +20,27 @@ public class ContainerBank extends Container{
 		
 		tile = te;
 	
-		for (int g = 0;  g <2; g ++)
+		for (int i = 0; i < 6; i++)
 		{
-			
+			for (int k = 0; k < 9; k++)
+			{
+				addSlotToContainer(new Slot(te, k + i * 9 + 9, 8 + k * 18, -30 + i * 18 +18));
+			}
 		}
-		this.addSlotToContainer(new Slot(te, 0, 48, 72));
+//		this.addSlotToContainer(new Slot(te, 0, 48, 72));
 		
 		
 		for (int i = 0; i < 3; i++)
 		{
 			for (int k = 0; k < 9; k++)
 			{
-				addSlotToContainer(new Slot(par1InventoryPlayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18 +18));
+				addSlotToContainer(new Slot(par1InventoryPlayer, k + i * 9 + 9, 8 + k * 18, 92 + i * 18 +18));
 			}
 		}
 
 		for (int j = 0; j < 9; j++)
 		{
-			addSlotToContainer(new Slot(par1InventoryPlayer, j, 8 + j * 18, 142 +18));
+			addSlotToContainer(new Slot(par1InventoryPlayer, j, 8 + j * 18, 150 +18));
 		}
 	}
 	
