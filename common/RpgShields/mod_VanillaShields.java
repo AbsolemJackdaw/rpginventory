@@ -1,20 +1,21 @@
 package RpgShields;
 
-import RpgInventory.mod_RpgInventory;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import RpgInventory.mod_RpgInventory;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "VanillaShields", name = "Vanilla Shields Mod", version = "1.0")
+@Mod(modid = "VanillaShields", name = "Vanilla Shields Mod", version = "1.0", dependencies="required-after:RPGInventoryMod")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class mod_VanillaShields {
     
-    @Mod.PostInit
+	@Init
     public void load(FMLPostInitializationEvent event) {
 
 		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.shieldWood, 1), new Object[]{"WWW", "WBW", " W ", 'W', Block.planks, 'B', Block.wood});

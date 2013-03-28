@@ -1,35 +1,25 @@
 package RpgInventory.playerjewels;
 
-import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED;
-import static net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.MinecraftForgeClient;
 
 import org.lwjgl.opengl.GL11;
 
@@ -51,6 +41,7 @@ import RpgInventory.playerjewels.shields.NecroShield;
 import RpgInventory.playerjewels.shields.NecroSkull;
 import RpgInventory.playerjewels.shields.PalaShield;
 import RpgInventory.playerjewels.shields.VanillaShield;
+import cpw.mods.fml.common.FMLLog;
 
 public class RenderPlayerJewels extends RenderPlayer {
 
@@ -257,7 +248,9 @@ public class RenderPlayerJewels extends RenderPlayer {
 
 			GL11.glScalef(1.125F, 1.125F, 1.125F);
 			GL11.glTranslatef(-0.05F, 0F, -0.04F);
-			if (!modelBipedMain.aimedBow) {
+
+			boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render)
+			{
 				leftglove.renderLeftGlove(0.0625f);
 			}
 
@@ -282,7 +275,8 @@ public class RenderPlayerJewels extends RenderPlayer {
 
 			GL11.glScalef(1.125f, 1.125F, 1.125F);
 			GL11.glTranslatef(0.05F, 0F, 0.05F);
-			if (!modelBipedMain.aimedBow) {
+			if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render)
+			{
 				rightglove.renderRightGlove(0.0625f);
 			}
 
@@ -349,20 +343,20 @@ public class RenderPlayerJewels extends RenderPlayer {
 				dagger.renderDagger(0.0625f);
 				this.modelBipedMain.heldItemLeft = 1;
 				this.setRenderPassModel(dagger);
-				
+
 			} else if (mod_RpgInventory.hasRogue == true && shield.getItem() == mod_RpgInventory.beastShield) {
 				mc.renderEngine.bindTexture("/subaraki/jewels/lion.png");
 
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleZ * 50, 0.0F, 0.0F, 1.0F);
-				
+
 				GL11.glScalef(1F, 1F, 1F);
 				GL11.glRotatef(90, 0.0f, 1.0f, 0.0f);
 				GL11.glRotatef(180, 0.0f, 0.0f, 1.0f);
 				GL11.glRotatef(180, 1.0f, 0.0f, 0.0f);
 				GL11.glTranslatef(-0F, 0.2F, -0.9F);
-				if (!modelBipedMain.aimedBow) {
+				boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render) {
 					lionhead.render(0.0625f);
 				}
 
@@ -376,7 +370,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				GL11.glTranslatef(-0.16F, -0.1F, 0F);
 
-				if (!modelBipedMain.aimedBow) {
+				boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render) {
 					modelShield.renderShield(0.0625f);
 				}
 
@@ -423,7 +417,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glScalef(x, x, x);
 				GL11.glTranslatef(0F, 0.8F, -0.85F);
 
-				if (!modelBipedMain.aimedBow) {
+				boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render) {
 					necroshield.renderShield(0.0625f);
 				}
 
@@ -436,7 +430,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glScalef(1.2F, 1.2F, 1.2F);
 				GL11.glTranslatef(-0.05F, 0F, 0.0F);
 
-				if (!modelBipedMain.aimedBow) {
+				boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render) {
 					palashield.renderShield(0.0625f);
 				}
 
@@ -449,7 +443,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glScalef(1F, 1F, 1F);
 				GL11.glTranslatef(0.018F, -0.1F, 0F);
 
-				if (!modelBipedMain.aimedBow) {
+				boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render) {
 					ironthorn.renderShield(0.0625f);
 				}
 			} else if (mod_RpgInventory.hasShields == true) {
@@ -462,7 +456,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 					GL11.glScalef(1F, 1F, 1F);
 					GL11.glTranslatef(-0.02F, 0.05F, 0F);
 
-					if (!modelBipedMain.aimedBow) {
+					boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render) {
 						vanillaShield.renderShield(0.0625f);
 					}
 				} else if (shield.getItem() == mod_RpgInventory.shieldIron) {
@@ -474,7 +468,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 					GL11.glScalef(1F, 1F, 1F);
 					GL11.glTranslatef(-0.02F, 0.05F, 0F);
 
-					if (!modelBipedMain.aimedBow) {
+					boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render) {
 						vanillaShield.renderShield(0.0625f);
 					}
 				} else if (shield.getItem() == mod_RpgInventory.shieldGold) {
@@ -486,7 +480,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 					GL11.glScalef(1F, 1F, 1F);
 					GL11.glTranslatef(-0.02F, 0.05F, 0F);
 
-					if (!modelBipedMain.aimedBow) {
+					boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render) {
 						vanillaShield.renderShield(0.0625f);
 					}
 				} else if (shield.getItem() == mod_RpgInventory.shieldDiamond) {
@@ -520,7 +514,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 					GL11.glRotatef(180, 0.0f, 1.0f, 0.0f);
 					GL11.glTranslatef(-0.35F, -0.25F, 0.65F);
 
-					if (!modelBipedMain.aimedBow) {
+					boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render) {
 						book.render(0.0625f);
 					}
 					GL11.glPopMatrix();

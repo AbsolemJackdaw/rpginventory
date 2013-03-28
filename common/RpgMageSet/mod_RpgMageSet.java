@@ -1,13 +1,11 @@
 package RpgMageSet;
 
-import RpgMageSet.weapons.EntityElementalBlock;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
-import cpw.mods.fml.common.registry.EntityRegistry;
 
 
 @Mod(modid = "RPGMS", name = "RpgInv Mage Addon", version = "1.0")
