@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.InventoryBasic;
 
 import org.lwjgl.input.Mouse;
@@ -22,16 +23,18 @@ public class GuiBS extends InventoryEffectRenderer {
 
 	private boolean isScrolling = false;
 
-
+	EntityPlayer player;
 	private float xSize_lo;
 	private float ySize_lo;
+	public String hi ;
 
-	public GuiBS(EntityPlayer player) {
-		super(null); // must be a container TODO
-
+	public GuiBS(EntityPlayer player, WwbsTe te) {
+        super(new ContainerBank(player.inventory, te));
+        this.player = player;
+        hi =  "Welcome "+ player.username;
+        inv = player.username +"'s Inventory";
 	}
-	public static String rpg = "Rpg";
-	public static String hi = "Inventory";
+	public static String inv ;
 
 	public void drawScreen(int par1, int par2, float par3) {
 		super.drawScreen(par1, par2, par3);
@@ -65,14 +68,14 @@ public class GuiBS extends InventoryEffectRenderer {
 
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture("/subaraki/RpgInv.png");
-		int var5 = this.height;
-		int var6 = this.width;
+		this.mc.renderEngine.bindTexture("/gui/container.png");
+		int var5 = 222;
+		int var6 = 176;
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
-		drawTexturedModalRect(posX, posY, 0, 0, xSize, ySize);
-		drawString(fontRenderer, rpg, this.width / 2 + 39, this.height / 2 - 23, 0xffffff);
-		drawString(fontRenderer, hi, this.width / 2 + 39, this.height / 2 - 15, 0xffffff);
+		drawTexturedModalRect(posX, posY-30, 0, 0, var6, var5);
+		drawString(fontRenderer, inv, this.width / 2-80, this.height / 2+15, 0xffffff);
+		drawString(fontRenderer, hi, this.width/2-80, this.height / 2-107 , 0xffffff);
 	}
 	public void initGui() 
 	{
@@ -82,7 +85,7 @@ public class GuiBS extends InventoryEffectRenderer {
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
 
-		this.buttonList.add(new GuiButton(0, posX + 130, posY + 1, 50, 20, "button"));
+//		this.buttonList.add(new GuiButton(0, posX + 130, posY + 1, 50, 20, "button"));
 	}
 
 	public boolean doesGuiPauseGame() {
