@@ -42,14 +42,19 @@ public class GuiME extends GuiContainer {
 
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture("/subaraki/BankGui.png");
-		int var5 = this.height;
-		int var6 = this.width;
+		this.mc.renderEngine.bindTexture("/subaraki/me.png");
+		int var5 = 187;
+		int var6 = 222;
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
-		drawTexturedModalRect(posX, posY, 0, 0, xSize, ySize);
-		drawString(fontRenderer, inv, this.width / 2 + 39, this.height / 2 - 23, 0xffffff);
-		drawString(fontRenderer, hi, this.width / 2 + 39, this.height / 2 - 15, 0xffffff);
+		drawTexturedModalRect(posX, posY-25, 0, 0, var5, var6);
+		drawString(fontRenderer, inv, this.width / 2 -75, this.height / 2 +17, 0xffffff);
+		drawString(fontRenderer, "Buy", this.width / 2 -55, this.height / 2 - 30, 0xffffff);
+		drawString(fontRenderer, "Buy", this.width / 2 +5, this.height / 2 - 30, 0xffffff);
+		drawString(fontRenderer, "Buy", this.width / 2 +65, this.height / 2 - 30, 0xffffff);
+		drawString(fontRenderer, "Sell", this.width / 2 -55, this.height / 2 - 90, 0xffffff);
+		drawString(fontRenderer, "Sell", this.width / 2 +5, this.height / 2 - 90, 0xffffff);
+		drawString(fontRenderer, "Sell", this.width / 2 +65, this.height / 2-90, 0xffffff);
 
 	}
 
@@ -60,7 +65,7 @@ public class GuiME extends GuiContainer {
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
 
-		this.buttonList.add(new GuiButton(0, posX , posY , 50, 20, "button"));
+//		this.buttonList.add(new GuiButton(0, posX , posY , 50, 20, "button"));
 	}
 
 	public boolean doesGuiPauseGame() {

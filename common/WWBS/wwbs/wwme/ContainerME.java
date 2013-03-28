@@ -23,11 +23,11 @@ public class ContainerME extends Container{
 		
 		tile = te;
 	
-		for (int i = 0; i <3; i++)
+		for (int i = 0; i <2; i++)
 		{
-			for (int k = 0; k < 2; k++)
+			for (int k = 0; k < 3; k++)
 			{
-				addSlotToContainer(new Slot(te, k + i * 9 + 9, 8 + k * 18, 0 + i * 18 +18));
+				addSlotToContainer(new Slot(te, k + i * 9 + 9, 12 + k * 60, -28 + i * 59 +18));
 			}
 		}
 //		this.addSlotToContainer(new Slot(te, 0, 48, 72));
@@ -37,13 +37,13 @@ public class ContainerME extends Container{
 		{
 			for (int k = 0; k < 9; k++)
 			{
-				addSlotToContainer(new Slot(par1InventoryPlayer, k + i * 9 + 9, 8 + k * 18, 92 + i * 18 +18));
+				addSlotToContainer(new Slot(par1InventoryPlayer, k + i * 9 + 9, 13 + k * 18, 93 + i * 18 +18));
 			}
 		}
 
 		for (int j = 0; j < 9; j++)
 		{
-			addSlotToContainer(new Slot(par1InventoryPlayer, j, 8 + j * 18, 150 +18));
+			addSlotToContainer(new Slot(par1InventoryPlayer, j, 13 + j * 18, 151 +18));
 		}
 	}
 
