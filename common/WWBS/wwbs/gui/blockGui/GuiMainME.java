@@ -13,6 +13,9 @@ import org.lwjgl.opengl.GL12;
 
 import RpgInventory.mod_RpgInventory;
 import RpgInventory.gui.inventory.RpgContainer;
+import WWBS.wwbs.PacketHandler;
+import WWBS.wwbs.mod_wwbs;
+import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -22,9 +25,15 @@ public class GuiMainME extends GuiScreen {
 	private float ySize_lo;
 	private int xSize = 176;
 	private int ySize = 90;
-
+	public int x;
+	public int y;
+	public int z;
+	
 	public GuiMainME(EntityPlayer player) {
 		super();
+		x = PacketHandler.instance.x1;
+ 		y = PacketHandler.instance.y1;
+		z = PacketHandler.instance.z1;
 	}
 	public static String hi = "World Wide Massive Exchanging";
 	public static String hi2 = "System";
@@ -65,7 +74,7 @@ public class GuiMainME extends GuiScreen {
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		if (button.id == 0) 
 		{
-
+	        FMLNetworkHandler.openGui(p, mod_wwbs.instance, 2, p.worldObj, x, y, z);
 		} 
 		else if (button.id == 1) 
 		{

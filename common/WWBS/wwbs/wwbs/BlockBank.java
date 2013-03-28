@@ -30,7 +30,6 @@ public class BlockBank extends BlockContainer {
 	public boolean onBlockActivated(World par1World, int x, int y, int z, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 	{		
 		mod_wwbs.proxy.openGui(1,par5EntityPlayer);
-//        FMLNetworkHandler.openGui(par5EntityPlayer, mod_wwbs.instance, 1, par1World, x, y, z);
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 		ObjectOutput out;
 		DataOutputStream outputStream = new DataOutputStream(bytes);
