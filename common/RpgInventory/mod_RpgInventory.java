@@ -15,8 +15,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
@@ -39,25 +37,12 @@ import RpgInventory.item.armor.ItemRpgPlusPlusArmor;
 import RpgInventory.weapons.ItemBeastAxe;
 import RpgInventory.weapons.ItemGrandSword;
 import RpgInventory.weapons.ItemNecroSkull;
-import RpgInventory.weapons.bow.BowRender;
 import RpgInventory.weapons.bow.EntityHellArrow;
 import RpgInventory.weapons.bow.ItemArcherBow;
-import RpgInventory.weapons.claymore.ClaymoreRenderer;
 import RpgInventory.weapons.claymore.ItemClaymore;
-import RpgInventory.weapons.hammer.HammerRender;
 import RpgInventory.weapons.hammer.ItemHammer;
 import RpgInventory.weapons.staf.ItemStaf;
-import RpgInventory.weapons.staf.StafRender;
 import RpgInventory.weapons.wand.ItemMageWand;
-import RpgInventory.weapons.wand.SoulSphereRender;
-import RpgMageSet.weapons.EntityElementalBlock;
-import RpgPlusPlus.minions.EntityMinionS;
-import RpgPlusPlus.minions.EntityMinionZ;
-import RpgRB.EntityTeleportStone;
-import RpgRB.beastmaster.BoarPet;
-import RpgRB.beastmaster.BullPet;
-import RpgRB.beastmaster.SpiderPet;
-import RpgRB.weapons.axe.AxeRender;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -76,9 +61,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import java.util.logging.Level;
 
-@Mod(modid = "RPGInventoryMod", name = "RPG Inventory Mod", version = "147.70")
+@Mod(modid = "RPGInventoryMod", name = "RPG Inventory Mod", version = "1.5.1 8.4")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false,
 clientPacketHandlerSpec =
 @SidedPacketHandler(channels = {"RpgInv", "RpgRawInv"}, packetHandler = RpgPacketHandler.class),
@@ -196,8 +180,6 @@ public class mod_RpgInventory {
     private static int uniqueID = 0;
     public static Potion decomposePotion;
     public static Potion masochismPotion;
-
-    ;
 
 	public mod_RpgInventory() {
         instance = this;
@@ -379,13 +361,6 @@ public class mod_RpgInventory {
     		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.pala_shield, 1), new Object[]{"WWW", "WBW", " W ", 'W', mod_RpgInventory.pala_steel, 'B', Block.blockSteel});
     		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.necro_weapon, 1), new Object[]{"WWW", "WBW", "WWW", 'W', Item.bone, 'B', new ItemStack(Item.skull,1,1)});
     		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.pala_weapon, 1), new Object[]{"S", "S", "G", 'S', mod_RpgInventory.pala_steel, 'G', Item.ingotGold});
-    		EntityRegistry.registerGlobalEntityID(EntityMinionS.class, "skeletonMinion", EntityRegistry.findGlobalUniqueEntityId());
-    		EntityRegistry.registerGlobalEntityID(EntityMinionZ.class, "zombieMinion", EntityRegistry.findGlobalUniqueEntityId());
-    		EntityRegistry.registerModEntity(EntityMinionS.class, "skeletonMinion", getUniqueID(), this, 100, 2, true);
-    		EntityRegistry.registerModEntity(EntityMinionZ.class, "zombieMinion", getUniqueID(), this, 100, 2, true);
-    		LanguageRegistry.instance().addStringLocalization("entity.EntityMinionS.name", "Skeleton Minion");
-    		LanguageRegistry.instance().addStringLocalization("entity.EntityMinionZ.name", "Zombie Minion");
-
 
         }
 
@@ -508,7 +483,6 @@ public class mod_RpgInventory {
             GameRegistry.addRecipe(new ItemStack(archmageLegs), new Object[]{"III", "IBI", "III", 'B', magepants, 'I', Item.goldNugget});
             GameRegistry.addRecipe(new ItemStack(archmageChest), new Object[]{"III", "IBI", "III", 'B', magegown, 'I', Item.goldNugget});
             GameRegistry.addRecipe(new ItemStack(archmageHood), new Object[]{"III", "IBI", "III", 'B', magehood, 'I', Item.goldNugget});
-    		EntityRegistry.registerModEntity(EntityElementalBlock.class, "elementalBlock", getUniqueID(), this, 250, 1, true);
 
 
         }
@@ -648,20 +622,6 @@ public class mod_RpgInventory {
                 }
             }
         }
-        //Renders go on client proxy...
-        if(mod_RpgInventory.hasRogue)
-        {
-        	EntityRegistry.registerGlobalEntityID(BullPet.class, "BullPet", EntityRegistry.findGlobalUniqueEntityId());
-    		EntityRegistry.registerGlobalEntityID(SpiderPet.class, "SpiderPet", EntityRegistry.findGlobalUniqueEntityId());
-    		EntityRegistry.registerGlobalEntityID(BoarPet.class, "BoarPet", EntityRegistry.findGlobalUniqueEntityId());
-    		EntityRegistry.registerGlobalEntityID(EntityTeleportStone.class, "TelePortStone", EntityRegistry.findGlobalUniqueEntityId());
-    		EntityRegistry.registerModEntity(BullPet.class, "BullPet", getUniqueID(), this, 80, 1, true);
-    		EntityRegistry.registerModEntity(SpiderPet.class, "SpiderPet", getUniqueID(), this, 80, 1, true);
-    		EntityRegistry.registerModEntity(BoarPet.class, "BoarPet", getUniqueID(), this, 80, 1, true);
-    		EntityRegistry.registerModEntity(EntityPetXP.class, "PetXP", getUniqueID(), this, 80, 1, true);
-    		EntityRegistry.registerModEntity(EntityTeleportStone.class, "TelePortStone", getUniqueID(), this, 80, 1, true);
-
-        }
 
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
         GameRegistry.registerPlayerTracker(new PlayerTracker());
@@ -715,28 +675,32 @@ public class mod_RpgInventory {
             }
         }
 
-        for (int pos = 32; pos < Potion.potionTypes.length; pos++) {
-            if (Potion.potionTypes[pos] == null) {
-                if (decomposePotion == null) {
-                    decomposePotion = new DecomposePotion(pos);
-                    Potion.potionTypes[pos] = decomposePotion;
-                } else if (masochismPotion == null) {
-                    masochismPotion = new MasochismPotion(pos);
-                    Potion.potionTypes[pos] = masochismPotion;
-                } else {
-                    break;
-                }
-            }
+        if(hasRpg == true)
+        {
+        	 for (int pos = 32; pos < Potion.potionTypes.length; pos++) {
+                 if (Potion.potionTypes[pos] == null) {
+                     if (decomposePotion == null) {
+                         decomposePotion = new DecomposePotion(pos);
+                         Potion.potionTypes[pos] = decomposePotion;
+                     } else if (masochismPotion == null) {
+                         masochismPotion = new MasochismPotion(pos);
+                         Potion.potionTypes[pos] = masochismPotion;
+                     } else {
+                         break;
+                     }
+                 }
+             }
+             RPGEventHooks.negativeEffects.add(2);
+             RPGEventHooks.negativeEffects.add(4);
+             RPGEventHooks.negativeEffects.add(9);
+             RPGEventHooks.negativeEffects.add(15);
+             RPGEventHooks.negativeEffects.add(17);
+             RPGEventHooks.negativeEffects.add(18);
+             RPGEventHooks.negativeEffects.add(19);
+             RPGEventHooks.negativeEffects.add(20);
+             RPGEventHooks.negativeEffects.add(decomposePotion.id);
         }
-        RPGEventHooks.negativeEffects.add(2);
-        RPGEventHooks.negativeEffects.add(4);
-        RPGEventHooks.negativeEffects.add(9);
-        RPGEventHooks.negativeEffects.add(15);
-        RPGEventHooks.negativeEffects.add(17);
-        RPGEventHooks.negativeEffects.add(18);
-        RPGEventHooks.negativeEffects.add(19);
-        RPGEventHooks.negativeEffects.add(20);
-        RPGEventHooks.negativeEffects.add(decomposePotion.id);
+       
 
     }
 

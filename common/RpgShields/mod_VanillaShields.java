@@ -10,7 +10,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "VanillaShields", name = "Vanilla Shields Mod", version = "1.0", dependencies="required-after:RPGInventoryMod")
+@Mod(modid = "VanillaShields", name = "Vanilla Shields Mod", version = "RpgInv8.4", dependencies="required-after:RPGInventoryMod")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class mod_VanillaShields {
