@@ -96,7 +96,6 @@ public class WwbsTe extends TileEntity implements IInventory{
 				invSlot[slot] = ItemStack.loadItemStackFromNBT(tag);
 			}
 		}
-
 	}
 
 	@Override
