@@ -1,6 +1,7 @@
 package RpgPlusPlus;
 
 import RpgInventory.mod_RpgInventory;
+import RpgInventory.Configuration.RpgConfig;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderZombie;
 import RpgPlusPlus.minions.EntityMinionS;
@@ -18,5 +19,16 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 
 	public void registerRenderInformation() 
 	{
+			if(RpgConfig.instance.render3DSkull)
+			{
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.necro_weapon.itemID, (IItemRenderer) new NecroRenderer());
+			}
+			if(RpgConfig.instance.render3DPride)
+			{
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.pala_weapon.itemID, (IItemRenderer) new GrandSwordRender());
+			}
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityMinionS.class, new RenderBiped(new ModelDeath(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMinionZ.class, new RenderMinionZ());
 	}
 }

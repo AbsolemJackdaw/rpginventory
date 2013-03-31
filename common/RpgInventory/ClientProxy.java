@@ -1,5 +1,36 @@
 package RpgInventory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.particle.EntityHeartFX;
+import net.minecraft.client.particle.EntityLargeExplodeFX;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderArrow;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.DimensionManager;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.glu.GLU;
+import org.lwjgl.util.glu.Sphere;
+
 import RpgInventory.Configuration.RpgConfig;
 import RpgInventory.gui.BookGui;
 import RpgInventory.gui.inventory.RpgInv;
@@ -10,58 +41,11 @@ import RpgInventory.weapons.claymore.ClaymoreRenderer;
 import RpgInventory.weapons.hammer.HammerRender;
 import RpgInventory.weapons.staf.StafRender;
 import RpgInventory.weapons.wand.SoulSphereRender;
-import RpgPlusPlus.minions.EntityMinionS;
-import RpgPlusPlus.minions.EntityMinionZ;
-import RpgPlusPlus.minions.RendersEtc.ModelDeath;
-import RpgPlusPlus.minions.RendersEtc.RenderMinionZ;
-import RpgPlusPlus.weapons.grandsword.GrandSwordRender;
-import RpgPlusPlus.weapons.skull.NecroRenderer;
-import RpgRB.EntityTeleportStone;
-import RpgRB.beastmaster.BoarPet;
-import RpgRB.beastmaster.BullPet;
-import RpgRB.beastmaster.SpiderPet;
-import RpgRB.renders.RenderPet;
-import RpgRB.weapons.axe.AxeRender;
-import RpgRB.weapons.dagger.RenderDagger;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.particle.EntityHeartFX;
-import net.minecraft.client.particle.EntityLargeExplodeFX;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderArrow;
-import net.minecraft.client.renderer.entity.RenderBiped;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderSkeleton;
-import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.client.renderer.entity.RenderXPOrb;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
-import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.DimensionManager;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.glu.GLU;
-import org.lwjgl.util.glu.Sphere;
 
 public class ClientProxy extends CommonProxy {
 	//Testing
@@ -139,53 +123,10 @@ public class ClientProxy extends CommonProxy {
 		}
 		if (RpgConfig.instance.render3DStaff == true) {
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.staf.itemID, (IItemRenderer) new StafRender());
-			if (mod_RpgInventory.hasMage) {
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.frostStaff.itemID, (IItemRenderer) new StafRender());
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.fireStaff.itemID, (IItemRenderer) new StafRender());
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.earthStaff.itemID, (IItemRenderer) new StafRender());
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.windStaff.itemID, (IItemRenderer) new StafRender());
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.ultimateStaff.itemID, (IItemRenderer) new StafRender());
-			}
-
 		}
 		if (RpgConfig.instance.render3DBow == true) {
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.elfbow.itemID, (IItemRenderer) new BowRender());
 		}
-		if (RpgConfig.instance.render3DAxe == true) {
-			if (mod_RpgInventory.hasRogue) {
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.beastAxe.itemID, (IItemRenderer) new AxeRender());
-			}
-		}
-		if (RpgConfig.instance.render3DDagger == true) {
-			if (mod_RpgInventory.hasRogue) {
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.daggers.itemID, (IItemRenderer) new RenderDagger());
-			}
-		}
-		if(mod_RpgInventory.hasRpg)
-		{
-			if(RpgConfig.instance.render3DSkull)
-			{
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.necro_weapon.itemID, (IItemRenderer) new NecroRenderer());
-			}
-			if(RpgConfig.instance.render3DPride)
-			{
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.pala_weapon.itemID, (IItemRenderer) new GrandSwordRender());
-			}
-		}
-		if(mod_RpgInventory.hasRpg)
-		{
-			RenderingRegistry.registerEntityRenderingHandler(EntityMinionS.class, new RenderBiped(new ModelDeath(), 0.5F));
-			RenderingRegistry.registerEntityRenderingHandler(EntityMinionZ.class, new RenderMinionZ());
-		}
-		if(mod_RpgInventory.hasRogue)
-		{
-			RenderingRegistry.registerEntityRenderingHandler(BullPet.class, new RenderPet());
-			RenderingRegistry.registerEntityRenderingHandler(SpiderPet.class, new RenderPet());
-			RenderingRegistry.registerEntityRenderingHandler(BoarPet.class, new RenderPet());
-			RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class, new RenderXPOrb());
-			RenderingRegistry.registerEntityRenderingHandler(EntityTeleportStone.class, new RenderSnowball(Item.feather, 1));
-		}
-
 	}
 
 	public void registerLate() {

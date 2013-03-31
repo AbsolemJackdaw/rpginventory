@@ -53,9 +53,13 @@ public class PacketHandler implements IPacketHandler {
 				y1 = dis.readInt();
 				z1 = dis.readInt();
 				
-//		        FMLNetworkHandler.openGui(p, mod_wwbs.instance, 1, p.worldObj, x, y, z);
-
-
+			}
+			if(guiId == 2)
+			{
+				x1 = dis.readInt();
+				y1 = dis.readInt();
+				z1 = dis.readInt();
+				
 			}
 		} 
 		catch (IOException e) 

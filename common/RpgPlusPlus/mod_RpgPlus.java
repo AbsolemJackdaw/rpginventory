@@ -24,7 +24,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "RPGPlusPlus", name = "Subarakis RPG++ mod", version = "2.0")
+@Mod(modid = "RPGPlusPlus", name = "Subarakis RPG++ mod", version = "RpgInv8.4", dependencies="required-after:RPGInventoryMod")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false,
 clientPacketHandlerSpec =
 @SidedPacketHandler(channels = {"RpgPlusPlus"}, packetHandler = RpgPlusPacketHandler.class),
@@ -36,12 +36,7 @@ public class mod_RpgPlus {
 
 	@SidedProxy(serverSide = "RpgPlusPlus.CommonProxyRpgplus", clientSide = "RpgPlusPlus.ClientProxyRpgPlus")
 	public static CommonProxyRpgplus proxy;
-	// Armor Materials
 
-	private static int uniqueLocalID = 0;
-	public int getNextUniqueID(){
-		return uniqueLocalID++;
-	}
 	@Init
 	public void load(FMLInitializationEvent event) {
 
@@ -50,7 +45,16 @@ public class mod_RpgPlus {
 	@PostInit
 	public void post(FMLPostInitializationEvent evt){
 
-		//will register on integrated server too
+		proxy.registerRenderInformation();
+		
+		EntityRegistry.registerGlobalEntityID(EntityMinionS.class, "skeletonMinion", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerGlobalEntityID(EntityMinionZ.class, "zombieMinion", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(EntityMinionS.class, "skeletonMinion", mod_RpgInventory.instance.getUniqueID(), this, 100, 2, true);
+		EntityRegistry.registerModEntity(EntityMinionZ.class, "zombieMinion", mod_RpgInventory.instance.getUniqueID(), this, 100, 2, true);
+		LanguageRegistry.instance().addStringLocalization("entity.EntityMinionS.name", "Skeleton Minion");
+		LanguageRegistry.instance().addStringLocalization("entity.EntityMinionZ.name", "Zombie Minion");
+
+		
 		TickRegistry.registerTickHandler(new CommonTickHandlerRpgPlus(), Side.SERVER);
 	}
 }
