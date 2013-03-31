@@ -5,10 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
 
-import cpw.mods.fml.common.network.FMLNetworkHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import WWBS.wwbs.mod_wwbs;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -16,6 +12,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import WWBS.wwbs.mod_wwbs;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 
 public class BlockBank extends BlockContainer {
 
@@ -42,7 +41,8 @@ public class BlockBank extends BlockContainer {
 			
 			Packet250CustomPayload packet = new Packet250CustomPayload("wwbsData", bytes.toByteArray());
 			PacketDispatcher.sendPacketToServer(packet);
-			
+			PacketDispatcher.sendPacketToPlayer(packet, (Player)par5EntityPlayer);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import WWBS.wwbs.mod_wwbs;
 import WWBS.wwbs.wwbs.WwbsTe;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 
 public class BlockME extends BlockContainer{
 
@@ -42,6 +43,7 @@ public class BlockME extends BlockContainer{
 			
 			Packet250CustomPayload packet = new Packet250CustomPayload("wwbsData", bytes.toByteArray());
 			PacketDispatcher.sendPacketToServer(packet);
+			PacketDispatcher.sendPacketToPlayer(packet, (Player)par5EntityPlayer);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
