@@ -29,10 +29,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
-/**
- *
- * @author Home
- */
 public class RPGEventHooks {
 
 	public static Map<String, Integer> ArcherRepairTick = new ConcurrentHashMap();

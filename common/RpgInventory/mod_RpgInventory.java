@@ -382,7 +382,7 @@ public class mod_RpgInventory {
 
             rogueLeather = new ItemRBMats(RpgConfig.instance.rogueLeatherID).setUnlocalizedName("r.leather").setCreativeTab(tab);
             beastLeather = new ItemRBMats(RpgConfig.instance.beastLeatherID).setUnlocalizedName("b.leather").setCreativeTab(tab);
-            beastShield = new ItemRpgArmor(RpgConfig.instance.beastShield, 1, 0, "").setUnlocalizedName("shieldBeastMaster").setCreativeTab(tab);
+            beastShield = new ItemRpgArmor(RpgConfig.instance.beastShield, 1, 150, "").setUnlocalizedName("shieldBeastMaster").setCreativeTab(tab);
 
             rogueHood = new BonusArmor(RpgConfig.instance.rogueHoodID, rogueArmor, 4, 0).setUnlocalizedName("rogue1").setCreativeTab(tab);
             rogueChest = new BonusArmor(RpgConfig.instance.rogueChestID, rogueArmor, 4, 1).setUnlocalizedName("rogue2").setCreativeTab(tab);
