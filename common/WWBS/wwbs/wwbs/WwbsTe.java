@@ -1,20 +1,25 @@
 package WWBS.wwbs.wwbs;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class WwbsTe extends TileEntity implements IInventory{
 
-	private ItemStack[] invSlot;
+	private ItemStack[] invSlot = new ItemStack[54];
+
 	@Override
 	public int getSizeInventory() {
-		invSlot = new ItemStack[1];
 
-		return 0;
+		return 54;
 	}
 
 	@Override
@@ -113,6 +118,23 @@ public class WwbsTe extends TileEntity implements IInventory{
 			}
 		}
 		tagCompound.setTag("Inventory", itemList);
+
+		if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+		{
+			//saveMapToFile
+
+			try{
+				ObjectOutputStream oss = new ObjectOutputStream(new FileOutputStream(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0).getChunkSaveLocation().getParent()+"BankAccount.dat"));
+				oss.writeObject(null); // should be the map i don't have yet.
+				oss.flush();
+				oss.close();
+			}
+			catch(Throwable e){
+
+			}
+
+		}
+
 	}
 
 	@Override
