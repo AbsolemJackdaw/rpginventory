@@ -35,6 +35,7 @@ public class mod_wwbs {
 	public static CommonProxy proxy;
 	
 	public static mod_wwbs instance;
+	
 	public mod_wwbs()
 	{
 		instance = this;

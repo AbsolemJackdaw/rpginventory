@@ -1,9 +1,12 @@
 package WWBS.wwbs.wwbs;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
@@ -12,14 +15,13 @@ public class WwbsTe extends TileEntity implements IInventory{
 	private ItemStack[] invSlot;
 	@Override
 	public int getSizeInventory() {
-		invSlot = new ItemStack[1];
-
-		return 0;
+		invSlot = new ItemStack[54];
+		return invSlot.length;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int i) {
-		return null;
+		return invSlot[i];
 	}
 
 	@Override
@@ -52,7 +54,7 @@ public class WwbsTe extends TileEntity implements IInventory{
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-//		invSlot [slot] = stack;
+		//		invSlot [slot] = stack;
 
 		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
 			stack.stackSize = getInventoryStackLimit();
@@ -84,45 +86,57 @@ public class WwbsTe extends TileEntity implements IInventory{
 
 	}
 
-//	@Override
-//	public void readFromNBT(NBTTagCompound tagCompound) {
-//		super.readFromNBT(tagCompound);
-//
-//		//		NBTTagList tagList = tagCompound.getTagList("Inventory");
-//		//		for (int i = 0; i < tagList.tagCount(); i++) {
-//		//			NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
-//		//			byte slot = tag.getByte("Slot");
-//		//			if (slot >= 0 && slot < invSlot.length) {
-//		//				invSlot[slot] = ItemStack.loadItemStackFromNBT(tag);
-//		//			}
-//		//		}
-//
-//	}
+	//	NBTTagCompound tag = entityPlayer.getEntityData();
+	//
+	//	NBTBase modeTag = tag.getTag("MyInteger");
+	//	if (modeTag != null) {
+	//	entityPlayer.addChatMessage("Current int:" + ((NBTTagInt)modeTag).data);
+	//	}
+	//
+	//	tag.setInteger("MyInteger", 150);
 
-	//	@Override
-	//	public void writeToNBT(NBTTagCompound tagCompound) {
-	//		super.writeToNBT(tagCompound);
 
-	//		NBTTagList itemList = new NBTTagList();
-	//		for (int i = 0; i < invSlot.length; i++) {
-	//			ItemStack stack = invSlot[i];
-	//			if (stack != null) {
-	//				NBTTagCompound tag = new NBTTagCompound();
-	//				tag.setByte("Slot", (byte) i);
-	//				stack.writeToNBT(tag);
-	//				itemList.appendTag(tag);
-	//			}
-	//		}
-	//		tagCompound.setTag("Inventory", itemList);
-//}
+	@Override
+	public void readFromNBT(NBTTagCompound tagCompound) {
+		super.readFromNBT(tagCompound);
 
-@Override
-public boolean isInvNameLocalized() {
-	return false;
-}
 
-@Override
-public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-	return false;
-}
+		NBTTagList tagList = tagCompound.getTagList("BankInventory");
+		for (int i = 0; i < tagList.tagCount(); i++) {
+			NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
+	
+			byte slot = tag.getByte("BankVault");
+			if (slot >= 0 && slot < invSlot.length) {
+				invSlot[slot] = ItemStack.loadItemStackFromNBT(tag);
+			}
+		}
+
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound tagCompound) {
+		super.writeToNBT(tagCompound);
+
+
+		NBTTagCompound tag = Minecraft.getMinecraft().thePlayer.getEntityData();
+
+		for (int i = 0; i < invSlot.length; i++) {
+			ItemStack stack = invSlot[i];
+			if (stack != null) {
+				tag.setByte("BankVault", (byte) i);
+				stack.writeToNBT(tag);
+			}
+		}
+		tagCompound.setTag("BankInventory", tag);
+	}
+
+	@Override
+	public boolean isInvNameLocalized() {
+		return false;
+	}
+
+	@Override
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+		return false;
+	}
 }
