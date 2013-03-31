@@ -3,9 +3,11 @@ package RpgInventory.gui.inventory;
 import RpgInventory.IPet;
 import RpgInventory.item.armor.ItemRpgArmor;
 import RpgInventory.mod_RpgInventory;
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -17,6 +19,7 @@ public class RpgContainer extends Container {
         if (inv == null) {
             inv = mod_RpgInventory.proxy.getInventory(player.username);
         }
+        
         if (this.isPlayerNotUsingContainer(player)) {
             this.setPlayerIsPresent(player, true);
         }
@@ -48,6 +51,7 @@ public class RpgContainer extends Container {
                 this.inventory.setInventorySlotContents(6, pet.writePetToItemStack());
                 IPet.playersWithActivePets.remove(player.username);
                 ((EntityLiving) pet).setDead();
+                mod_RpgInventory.proxy.addEntry(((RpgInv) this.inventory).playername, (RpgInv) this.inventory);
             }
         }
     }
@@ -135,5 +139,24 @@ public class RpgContainer extends Container {
 
     public boolean canInteractWith(EntityPlayer var1) {
         return true;
+    }
+
+    @Override
+    public void onCraftMatrixChanged(IInventory par1IInventory) {
+        mod_RpgInventory.proxy.addEntry(((RpgInv) this.inventory).playername, (RpgInv) this.inventory);
+        super.onCraftMatrixChanged(par1IInventory);
+    }
+
+    @Override
+    public void onCraftGuiClosed(EntityPlayer par1EntityPlayer) {
+        mod_RpgInventory.proxy.addEntry(((RpgInv) this.inventory).playername, (RpgInv) this.inventory);
+        super.onCraftGuiClosed(par1EntityPlayer);
+    }
+
+    @Override
+    public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer) {
+        ItemStack rv = super.slotClick(par1, par2, par3, par4EntityPlayer);
+        mod_RpgInventory.proxy.addEntry(((RpgInv) this.inventory).playername, (RpgInv) this.inventory);
+        return rv;
     }
 }

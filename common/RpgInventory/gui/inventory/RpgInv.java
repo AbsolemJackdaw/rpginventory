@@ -132,7 +132,7 @@ public class RpgInv implements IInventory {
      */
     @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
-
+        mod_RpgInventory.proxy.addEntry(playername, this);
         return null;
     }
 
@@ -154,6 +154,7 @@ public class RpgInv implements IInventory {
     @Override
     public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
         this.armorSlots[par1] = par2ItemStack;
+        mod_RpgInventory.proxy.addEntry(playername, this);
     }
 
     @Override
@@ -282,6 +283,7 @@ public class RpgInv implements IInventory {
                 }
             }
         }
+        mod_RpgInventory.proxy.addEntry(playername, this);
     }
 
     @Override
@@ -290,6 +292,7 @@ public class RpgInv implements IInventory {
 
     @Override
     public void closeChest() {
+        mod_RpgInventory.proxy.addEntry(playername, this);
     }
 
 	@Override

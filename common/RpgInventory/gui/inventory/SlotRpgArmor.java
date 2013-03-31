@@ -12,7 +12,7 @@ class SlotRpgArmor extends Slot {
     public int slotIndex;
     public EntityPlayer player;
 
-    SlotRpgArmor(IInventory par2IInventory, int par3, int par4, int par5, EntityPlayer player) {
+    SlotRpgArmor(RpgInv par2IInventory, int par3, int par4, int par5, EntityPlayer player) {
         super(par2IInventory, par3, par4, par5);
         this.player = player;
         slotIndex = par3;
@@ -93,4 +93,11 @@ class SlotRpgArmor extends Slot {
         }
         this.onSlotChanged();
     }
+
+    @Override
+    public void onSlotChanged() {
+        mod_RpgInventory.proxy.addEntry(player.username, (RpgInv)this.inventory);
+        super.onSlotChanged();
+    }
+    
 }
