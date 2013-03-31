@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiBS extends InventoryEffectRenderer {
 
 
-	private static InventoryBasic invGetinv = new InventoryBasic("tmp", true, 45);
+	private static InventoryBasic invGetinv = new InventoryBasic("tmp", true, 54);
 
 	private float currentScroll = 0.0F;
 
@@ -106,40 +106,40 @@ public class GuiBS extends InventoryEffectRenderer {
 		return ((ContainerBank)this.inventorySlots).hasMoreThan1PageOfItemsInList();
 	}
 
-	public void handleMouseInput()
-	{
-		super.handleMouseInput();
-		int i = Mouse.getEventDWheel();
-
-		if (i != 0 && this.needsScrollBars())
-		{
-			int j = ((ContainerBank)this.inventorySlots).itemList.size() / 9 - 5 + 1;
-
-			if (i > 0)
-			{
-				i = 1;
-			}
-
-			if (i < 0)
-			{
-				i = -1;
-			}
-
-			this.currentScroll = (float)((double)this.currentScroll - (double)i / (double)j);
-
-			if (this.currentScroll < 0.0F)
-			{
-				this.currentScroll = 0.0F;
-			}
-
-			if (this.currentScroll > 1.0F)
-			{
-				this.currentScroll = 1.0F;
-			}
-
-			((ContainerBank)this.inventorySlots).scrollTo(this.currentScroll);
-		}
-	}
+//	public void handleMouseInput()
+//	{
+//		super.handleMouseInput();
+//		int i = Mouse.getEventDWheel();
+//
+//		if (i != 0 && this.needsScrollBars())
+//		{
+//			int j = ((ContainerBank)this.inventorySlots).itemList.size() / 9 - 5 + 1;
+//
+//			if (i > 0)
+//			{
+//				i = 1;
+//			}
+//
+//			if (i < 0)
+//			{
+//				i = -1;
+//			}
+//
+//			this.currentScroll = (float)((double)this.currentScroll - (double)i / (double)j);
+//
+//			if (this.currentScroll < 0.0F)
+//			{
+//				this.currentScroll = 0.0F;
+//			}
+//
+//			if (this.currentScroll > 1.0F)
+//			{
+//				this.currentScroll = 1.0F;
+//			}
+//
+//			((ContainerBank)this.inventorySlots).scrollTo(this.currentScroll);
+//		}
+//	}
 	static InventoryBasic getInventory()
 	{
 		return invGetinv;

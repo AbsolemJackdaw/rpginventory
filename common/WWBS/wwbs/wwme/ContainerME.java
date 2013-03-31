@@ -49,7 +49,7 @@ public class ContainerME extends Container{
 
 	public boolean hasMoreThan1PageOfItemsInList()
 	{
-		return this.itemList.size() > 45;
+		return this.itemList.size() > 54;
 	}
 	
 	@Override

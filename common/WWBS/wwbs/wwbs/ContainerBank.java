@@ -20,14 +20,13 @@ public class ContainerBank extends Container{
 		
 		tile = te;
 	
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			for (int k = 0; k < 9; k++)
 			{
 				addSlotToContainer(new Slot(te, k + i * 9 + 9, 8 + k * 18, -30 + i * 18 +18));
 			}
 		}
-//		this.addSlotToContainer(new Slot(te, 0, 48, 72));
 		
 		
 		for (int i = 0; i < 3; i++)
@@ -74,7 +73,7 @@ public class ContainerBank extends Container{
 
 	public boolean hasMoreThan1PageOfItemsInList()
 	{
-		return this.itemList.size() > 45;
+		return this.itemList.size() > 54;
 	}
 	
 	@Override

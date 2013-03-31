@@ -1,5 +1,6 @@
 package WWBS.wwbs.wwbs;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
@@ -57,7 +58,7 @@ public class WwbsTe extends TileEntity implements IInventory{
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		//		invSlot [slot] = stack;
+				invSlot [slot] = stack;
 
 		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
 			stack.stackSize = getInventoryStackLimit();
@@ -118,23 +119,18 @@ public class WwbsTe extends TileEntity implements IInventory{
 			}
 		}
 		tagCompound.setTag("Inventory", itemList);
-
-		if(FMLCommonHandler.instance().getEffectiveSide().isServer())
-		{
-			//saveMapToFile
-
-			try{
-				ObjectOutputStream oss = new ObjectOutputStream(new FileOutputStream(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0).getChunkSaveLocation().getParent()+"BankAccount.dat"));
-				oss.writeObject(null); // should be the map i don't have yet.
-				oss.flush();
-				oss.close();
-			}
-			catch(Throwable e){
-
-			}
-
-		}
-
+//		if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+//		{
+//			try{
+//				ObjectOutputStream oss = new ObjectOutputStream(new FileOutputStream(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0).getChunkSaveLocation().getParent()+File.separator+"BankAccount.dat"));
+//				oss.writeObject(null); // should be the map i don't have yet.
+//				oss.flush();
+//				oss.close();
+//			}
+//			catch(Throwable e){
+//
+//			}
+//		}
 	}
 
 	@Override
