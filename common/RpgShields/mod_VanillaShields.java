@@ -15,7 +15,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class mod_VanillaShields {
     
-	@Init
+	@Mod.PostInit
     public void load(FMLPostInitializationEvent event) {
 
 		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.shieldWood, 1), new Object[]{"WWW", "WBW", " W ", 'W', Block.planks, 'B', Block.wood});
