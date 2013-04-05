@@ -9,10 +9,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-/**
- *
- * @author Home
- */
 public class SlotMineral extends Slot{
 
     public SlotMineral(IInventory par1IInventory, int par2, int par3, int par4) {

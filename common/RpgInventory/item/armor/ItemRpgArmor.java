@@ -117,8 +117,8 @@ public class ItemRpgArmor extends Item {
      */
     public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
         if (stack.itemID == mod_RpgInventory.ringem.itemID) {
-            list.add(StatCollector.translateToLocal("Left: Dispell Debuffs 20s;"));
-            list.add(StatCollector.translateToLocal("Right: Haste;"));
+            list.add(StatCollector.translateToLocal("Left: Dispell Debuffs 20s"));
+            list.add(StatCollector.translateToLocal("Right: Haste"));
         }
 
         if (stack.itemID == mod_RpgInventory.neckem.itemID) {

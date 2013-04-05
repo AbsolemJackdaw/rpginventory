@@ -10,6 +10,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
+import cpw.mods.fml.common.FMLLog;
+
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -23,6 +26,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -38,6 +42,7 @@ public class RPGEventHooks {
 	public static Map<String, Integer> LapisTick = new ConcurrentHashMap();
 	public static List<Integer> negativeEffects = new ArrayList();
 	public static Map<String, Integer> CustomPotionList = new ConcurrentHashMap();
+	Random rand = new Random();
 
 	@ForgeSubscribe
 	public void BreakSpeed(PlayerEvent.BreakSpeed evt) {
@@ -209,8 +214,32 @@ public class RPGEventHooks {
 					}
 					if (neck != null && neck.getItem().equals(mod_RpgInventory.neckem))
 					{
-						p.setAir(decreaseAirSupply(p.getAir()));
-						//TODO waterbreathing. ^ that does not work.
+				        boolean flag = p instanceof EntityPlayer && ((EntityPlayer)p).capabilities.disableDamage;
+
+						if (p.isEntityAlive() && p.isInsideOfMaterial(Material.water) && !flag)
+				        {
+				            p.setAir(decreaseAirSupply(p.getAir()+1));
+
+				            if (p.getAir() == -20)
+				            {
+				                p.setAir(0);
+
+				                for (int i = 0; i < 8; ++i)
+				                {
+				                    float f = this.rand.nextFloat() - this.rand.nextFloat();
+				                    float f1 = this.rand.nextFloat() - this.rand.nextFloat();
+				                    float f2 = this.rand.nextFloat() - this.rand.nextFloat();
+				                    p.worldObj.spawnParticle("bubble", p.posX + (double)f, p.posY + (double)f1, p.posZ + (double)f2, p.motionX, p.motionY, p.motionZ);
+				                }
+				                p.attackEntityFrom(DamageSource.drown, 1);
+				            }
+				            p.extinguish();
+				        }
+				        else
+				        {
+				            p.setAir(300);
+				        }
+						FMLLog.getLogger().info(""+p.getAir());
 					}
 
 					if(ringb != null && ringb.getItem().equals(mod_RpgInventory.ringem)) {
@@ -506,11 +535,11 @@ public class RPGEventHooks {
 			jumpTicks = 0;
 		}
 	}
-	
+
 	protected int decreaseAirSupply(int par1)
-    {
+	{
 		Random rand = new Random();
-        int j = 100;
-        return j > 0 && rand.nextInt(j + 1) > 0 ? par1 : par1 - 1;
-    }
+		int j = 5;
+		return j > 0 && rand.nextInt(j + 1) > 0 ? par1 : par1 - 1;
+	}
 }
