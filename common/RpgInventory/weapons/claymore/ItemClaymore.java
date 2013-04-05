@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
@@ -74,7 +75,7 @@ public class ItemClaymore extends ItemRpgWeapon{
 		if(mob instanceof EntityPlayer)
 		{
 			String name = ((EntityPlayer)mob).username;
-			ItemStack skull = new ItemStack(Item.skull);
+			ItemStack skull = new ItemStack(Item.skull.itemID,1,3);
 
 			if( skull.stackTagCompound == null ) {
 				skull.setTagCompound( new NBTTagCompound() );
@@ -83,13 +84,13 @@ public class ItemClaymore extends ItemRpgWeapon{
 				skull.stackTagCompound.setString( "SkullOwner", name );
 			}
 
-			mob.dropItem(Item.skull.itemID, 1);
+			if(mob.getHealth() < 1)
+			{
+				EntityItem entityitem = new EntityItem(mob.worldObj, mob.posX,mob.posY,mob.posZ, skull);
+				mob.worldObj.spawnEntityInWorld(entityitem);
+			}
 		}
 
 		return false;
-	}
-	public String getTextureFile()
-	{
-		return "/subaraki/RPGinventoryTM.png";
 	}
 }

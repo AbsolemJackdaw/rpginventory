@@ -4,11 +4,12 @@
  */
 package RpgInventory;
 
-import RpgInventory.gui.inventory.RpgInv;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -25,9 +26,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import RpgInventory.gui.inventory.RpgInv;
 
 public class RPGEventHooks {
 
@@ -46,6 +47,8 @@ public class RPGEventHooks {
 				ItemStack ringa = rpginv.getRing1();
 				if (ringa != null && ringa.getItem().equals(mod_RpgInventory.ringem)) {
 					evt.newSpeed = evt.originalSpeed * 2;
+
+					//TODO this should like the potion effect Haste. not speed x)
 				}
 			}
 		} catch (Throwable e) {
@@ -204,8 +207,13 @@ public class RPGEventHooks {
 							p.removePotionEffect(Potion.poison.id);
 						}
 					}
-					if (neck != null && neck.getItem().equals(mod_RpgInventory.neckem)
-							|| ringb != null && ringb.getItem().equals(mod_RpgInventory.ringem)) {
+					if (neck != null && neck.getItem().equals(mod_RpgInventory.neckem))
+					{
+						p.setAir(decreaseAirSupply(p.getAir()));
+						//TODO waterbreathing. ^ that does not work.
+					}
+
+					if(ringb != null && ringb.getItem().equals(mod_RpgInventory.ringem)) {
 						for (Integer id : negativeEffects) {
 							p.removePotionEffect(id);
 						}
@@ -214,15 +222,19 @@ public class RPGEventHooks {
 					float speedboost = p.landMovementFactor;
 					if (neck != null && neck.itemID == mod_RpgInventory.neckgold.itemID) {
 						speedboost += 0.020F;
+						this.goldJump(p,0.01D);
 					}
 					if (ringa != null && ringa.getItem() == mod_RpgInventory.ringgold) {
 						speedboost += 0.020F;
+						this.goldJump(p,0.02D);	
 					}
 					if (ringb != null && ringb.getItem() == mod_RpgInventory.ringgold) {
 						speedboost += 0.020F;
+						this.goldJump(p,0.02D);
 					}
 					if (gloves != null && gloves.getItem() == mod_RpgInventory.glovesbutter) {
 						speedboost += 0.020F;
+						this.goldJump(p,0.01D);
 					}
 					if (rpginv.hasClass(EnumRpgClass.PALADIN)) {
 						speedboost *= 0.75F;
@@ -303,7 +315,7 @@ public class RPGEventHooks {
 					ItemStack ringb = rpginv.getRing2();
 					ItemStack gloves = rpginv.getGloves();
 					if (neck != null && neck.getItem().equals(mod_RpgInventory.necklap)) {
-						damagebonus += 0.1F;
+						damagebonus += 0.3F;
 					}
 					if (ringa != null && ringa.getItem().equals(mod_RpgInventory.ringlap)) {
 						damagebonus += 0.1F;
@@ -312,7 +324,7 @@ public class RPGEventHooks {
 						damagebonus += 0.1F;
 					}
 					if (gloves != null && gloves.getItem().equals(mod_RpgInventory.gloveslap)) {
-						damagebonus += 0.1F;
+						damagebonus += 0.2F;
 					}
 					evt.ammount += MathHelper.floor_float(damagebonus * ((float) evt.ammount));
 				}
@@ -469,4 +481,36 @@ public class RPGEventHooks {
 		}
 
 	}
+
+	public void goldJump(EntityPlayer p, double amount)
+	{
+		float jumpTicks = 0;
+
+		if (p.isJumping)
+		{
+			if (!p.isInWater() && !p.handleLavaMovement())
+			{
+				if (jumpTicks == 0)
+				{
+					p.motionY += amount;
+					jumpTicks = 10;
+				}
+			}
+			else
+			{
+				p.motionY += 0.03999999910593033D;
+			}
+		}
+		else
+		{
+			jumpTicks = 0;
+		}
+	}
+	
+	protected int decreaseAirSupply(int par1)
+    {
+		Random rand = new Random();
+        int j = 100;
+        return j > 0 && rand.nextInt(j + 1) > 0 ? par1 : par1 - 1;
+    }
 }

@@ -324,7 +324,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 			GL11.glPushMatrix();
 			if (mod_RpgInventory.hasRogue == true && shield.getItem() == mod_RpgInventory.daggers) {
 
-				if (player.worldObj.getWorldTime() < 12500) {
+				if (player.worldObj.isDaytime()) {
 					mc.renderEngine.bindTexture("/subaraki/weapons/dagger.png");
 				} else {
 					mc.renderEngine.bindTexture("/subaraki/weapons/daggerNight.png");

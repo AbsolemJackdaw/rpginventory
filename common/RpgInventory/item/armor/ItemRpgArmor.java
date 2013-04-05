@@ -141,7 +141,7 @@ public class ItemRpgArmor extends Item {
 
         if (stack.itemID == mod_RpgInventory.ringlap.itemID || stack.itemID == mod_RpgInventory.gloveslap.itemID
                 || stack.itemID == mod_RpgInventory.necklap.itemID) {
-            list.add(StatCollector.translateToLocal("Strenght/Passive Weapon Healing"));
+            list.add(StatCollector.translateToLocal("Strength/Passive Weapon Healing"));
         }
     }
 
