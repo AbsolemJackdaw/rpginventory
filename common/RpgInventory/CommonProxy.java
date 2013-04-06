@@ -12,75 +12,75 @@ import net.minecraft.world.World;
 
 public class CommonProxy {
 
-    public void spawnParticle(World world, EntityLiving el, Random rng) {
-    }
-    public static final String RPG_DIR = "RPG_Inventories";
+	public void spawnParticle(World world, EntityLiving el, Random rng) {
+	}
+	public static final String RPG_DIR = "RPG_Inventories";
 
-    public int getSphereID() {
-        return 0;
-    }
+	public int getSphereID() {
+		return 0;
+	}
 
-    public void spawnCharmParticle(World world, EntityLiving el, Random rng, boolean success) {
-    }
+	public void spawnCharmParticle(World world, EntityLiving el, Random rng, boolean success) {
+	}
 
-    public void addEntry(String username, RpgInv inv) {
-        if (MinecraftServer.getServer() != null && MinecraftServer.getServer().getConfigurationManager() != null) {
-                EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
-                try {
-                    if (player != null) {
-                        if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
-                            player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
-                        } else {
-                            player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
-                            player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
-                        }
-                    }
-                } catch (Throwable ex) {
-                    ex.printStackTrace();
-                }
-            }
-    }
+	public void addEntry(String username, RpgInv inv) {
+		if (MinecraftServer.getServer() != null && MinecraftServer.getServer().getConfigurationManager() != null) {
+			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
+			try {
+				if (player != null) {
+					if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
+						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
+					} else {
+						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
+						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
+					}
+				}
+			} catch (Throwable ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
 
-    public void registerLate() {
-    }
+	public void registerLate() {
+	}
 
-    public void registerRenderInformation() {
-        // nothing for rendering huh....
-    }
+	public void registerRenderInformation() {
+		// nothing for rendering huh....
+	}
 
-    public void openGUI(EntityPlayer player, int id) {
-    }
+	public void openGUI(EntityPlayer player, int id) {
+	}
 
-    public void openGUI(EntityPlayer player, RpgInv inv) {
-    }
+	public void openGUI(EntityPlayer player, RpgInv inv) {
+	}
 
-    public void playerLevel(EntityPlayer player, int amount) {
-        player.addExperienceLevel(-amount);
-    }
+	public void playerLevel(EntityPlayer player, int amount) {
+		player.addExperienceLevel(-amount);
+	}
 
-    public void consumeItem(EntityPlayer player, int itemID) {
-        player.inventory.consumeInventoryItem(itemID);
-    }
+	public void consumeItem(EntityPlayer player, int itemID) {
+		player.inventory.consumeInventoryItem(itemID);
+	}
 
-    public RpgInv getInventory(String username) {
-        RpgInv inv = new RpgInv(username);
-        if (MinecraftServer.getServer() != null && MinecraftServer.getServer().getConfigurationManager() != null) {
-            EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
-            if (player != null) {
-                if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG) && player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("RpgInv")) {
-                    inv.readFromNBT(player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).getCompoundTag("RpgInv"));
-                } else {
-                    if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
-                        player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
-                    }
-                    player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound()));
-                }
-            }
-        }
-        return inv;
-    }
+	public RpgInv getInventory(String username) {
+		RpgInv inv = new RpgInv(username);
+		if (MinecraftServer.getServer() != null && MinecraftServer.getServer().getConfigurationManager() != null) {
+			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
+			if (player != null) {
+				if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG) && player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("RpgInv")) {
+					inv.readFromNBT(player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).getCompoundTag("RpgInv"));
+				} else {
+					if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
+						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
+					}
+					player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound()));
+				}
+			}
+		}
+		return inv;
+	}
 
-    public void candy(EntityPlayer p) {
-        p.inventory.consumeInventoryItem(mod_RpgInventory.petCandy.itemID);
-    }
+	public void candy(EntityPlayer p) {
+		p.inventory.consumeInventoryItem(mod_RpgInventory.petCandy.itemID);
+	}
 }

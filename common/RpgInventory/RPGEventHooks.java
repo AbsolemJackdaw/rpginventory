@@ -239,7 +239,6 @@ public class RPGEventHooks {
 				        {
 				            p.setAir(300);
 				        }
-						FMLLog.getLogger().info(""+p.getAir());
 					}
 
 					if(ringb != null && ringb.getItem().equals(mod_RpgInventory.ringem)) {
