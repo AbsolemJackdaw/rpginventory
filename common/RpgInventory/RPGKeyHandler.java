@@ -38,10 +38,6 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author rich1051414
- */
 public class RPGKeyHandler extends KeyBindingRegistry.KeyHandler {
 
 	public static Map<Integer, Integer> abilityMap = new HashMap();

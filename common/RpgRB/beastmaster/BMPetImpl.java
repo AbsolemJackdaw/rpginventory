@@ -347,6 +347,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
                 }
                 if (par1EntityPlayer.getCurrentEquippedItem() != null && par1EntityPlayer.getCurrentEquippedItem().itemID == mod_RpgInventory.petCandy.itemID) {
                     addExperienceLevel(1);
+                    par1EntityPlayer.getCurrentEquippedItem().stackSize--;
                 }
             } else if (this.getSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == par1EntityPlayer)) {
                 par1EntityPlayer.mountEntity(this);
