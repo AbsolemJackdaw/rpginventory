@@ -83,7 +83,7 @@ public class ItemMageWand extends ItemRpgWeapon{
 
 				if (RpgConfig.instance.useSpell == true && par2EntityPlayer.inventory.hasItem(Item.lightStoneDust.itemID) && par2EntityPlayer.isSneaking())
 				{
-					if(par3World.getWorldTime() <= 12500)
+					if(par3World.isDaytime())
 					{
 						par3World.setWorldTime(13000);
 						par1ItemStack.damageItem(1, par2EntityPlayer);
@@ -149,12 +149,12 @@ public class ItemMageWand extends ItemRpgWeapon{
 
 						if (var12 == Block.oreIron.blockID || var12 == Block.oreCoal.blockID || var12 == Block.oreDiamond.blockID)
 						{
-							par3World.setBlockMetadataWithNotify(par4, par5, par6,par7, Block.oreGold.blockID);
+							par3World.setBlock(par4, par5, par6, Block.oreGold.blockID);
 							par1ItemStack.damageItem(4, par2EntityPlayer);
 						}
 						if( var12 == Block.oreLapis.blockID)
 						{
-							par3World.setBlockMetadataWithNotify(par4, par5, par6,par7, Block.blockLapis.blockID);
+							par3World.setBlock(par4, par5, par6, Block.blockLapis.blockID);
 							par1ItemStack.damageItem(151, par2EntityPlayer);
 						}
 

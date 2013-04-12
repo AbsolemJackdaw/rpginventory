@@ -45,7 +45,6 @@ public class CommonProxy {
 	}
 
 	public void registerRenderInformation() {
-		// nothing for rendering huh....
 	}
 
 	public void openGUI(EntityPlayer player, int id) {

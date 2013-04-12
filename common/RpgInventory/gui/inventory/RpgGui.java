@@ -23,8 +23,6 @@ public class RpgGui extends GuiContainer {
 
     public RpgGui(EntityPlayer player, RpgInv inv) {
         super(new RpgContainer(player, inv));
-        //		 xSize = 176;
-        //		 ySize = 166;
     }
     public static String rpg = "Rpg";
     public static String hi = "Inventory";
