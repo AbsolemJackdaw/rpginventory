@@ -252,7 +252,7 @@ public class RpgPacketHandler implements IPacketHandler {
                             yy = dis.readInt();
                             zz = dis.readInt();
                         }
-                        System.out.println(self + " " + xx + " " + yy + " " + zz);
+//                        System.out.println(self + " " + xx + " " + yy + " " + zz);
                         ItemStack bow = p.getCurrentEquippedItem();
                         ItemStack top = p.inventory.armorItemInSlot(3);
                         ItemStack middle = p.inventory.armorItemInSlot(2);

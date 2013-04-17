@@ -4,7 +4,6 @@
  */
 package RpgMageSet;
 
-import net.minecraft.potion.Potion;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import RpgInventory.mod_RpgInventory;
@@ -12,10 +11,7 @@ import RpgInventory.Configuration.RpgConfig;
 import RpgInventory.weapons.staf.StafRender;
 import RpgMageSet.weapons.EntityElementalBlock;
 import RpgMageSet.weapons.RenderElementalBlock;
-import RpgRB.EntityTeleportStone;
-import RpgRB.beastmaster.BullPet;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
 
 
 /**
