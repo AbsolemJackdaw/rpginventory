@@ -360,7 +360,7 @@ public class mod_RpgInventory {
         	GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.necro_skin, 1), new Object[]{"BWB", "WLW", "BWB", 'W', Item.spiderEye, 'B', Item.bone, 'L', Item.leather});
     		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.pala_steel, 1), new Object[]{"GGG", "BIB", "GGG", 'G', Item.ingotGold, 'B', (new ItemStack(Item.potion.itemID, 1, 0)), 'I', Item.ingotIron});
     		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.necro_shield, 1), new Object[]{"WWW", "WBW", " W ", 'W', mod_RpgInventory.necro_skin, 'B', new ItemStack(Item.skull,1,1)});
-    		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.pala_shield, 1), new Object[]{"WWW", "WBW", " W ", 'W', mod_RpgInventory.pala_steel, 'B', Block.blockSteel});
+    		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.pala_shield, 1), new Object[]{"WWW", "WBW", " W ", 'W', mod_RpgInventory.pala_steel, 'B', Block.blockIron});
     		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.necro_weapon, 1), new Object[]{"WWW", "WBW", "WWW", 'W', Item.bone, 'B', new ItemStack(Item.skull,1,1)});
     		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.pala_weapon, 1), new Object[]{"S", "S", "G", 'S', mod_RpgInventory.pala_steel, 'G', Item.ingotGold});
 
@@ -433,7 +433,7 @@ public class mod_RpgInventory {
             GameRegistry.addRecipe(new ItemStack(beastLeather), new Object[]{"LLL", "LVL", "LLL", 'L', Block.leaves, 'V', Item.leather});
             GameRegistry.addRecipe(new ItemStack(rogueLeather), new Object[]{"DSD", "SLS", "DSD", 'S', Item.silk, 'L', Item.leather, 'D', new ItemStack(Item.dyePowder, 1, 5)});
             GameRegistry.addRecipe(new ItemStack(beastShield), new Object[]{"III", "IDI", " I ", 'I', beastLeather, 'D', Block.wood});
-            GameRegistry.addRecipe(new ItemStack(beastAxe), new Object[]{" IW", " SI", "S  ", 'S', tangledBrench, 'I', Block.blockSteel, 'W', Block.wood});
+            GameRegistry.addRecipe(new ItemStack(beastAxe), new Object[]{" IW", " SI", "S  ", 'S', tangledBrench, 'I', Block.blockIron, 'W', Block.wood});
             GameRegistry.addShapelessRecipe(new ItemStack(tangledBrench), new Object[]{Item.stick, Item.stick, Item.silk, Item.silk, Item.silk, Item.silk});
 
             recipePatterns = new String[][]{{"XXX", "X X"}, {"X X", "XXX", "XXX"}, {"XXX", "X X", "X X"}, {"X X", "X X"}};
@@ -572,11 +572,11 @@ public class mod_RpgInventory {
         GameRegistry.addRecipe(new ItemStack(wand, 1), new Object[]{"GGG", "GLG", "GGG", 'L', Block.blockLapis, 'G', Item.ingotGold});
         GameRegistry.addRecipe(new ItemStack(staf, 1), new Object[]{" ML", " SM", "S  ", 'M', Item.speckledMelon, 'S', Item.stick, 'L', new ItemStack(Item.dyePowder, 1, 4)});
         GameRegistry.addRecipe(new ItemStack(claymore, 1), new Object[]{" S ", " S ", "LIL", 'I', Item.ingotIron, 'S', Block.stone, 'L', Item.leather});
-        GameRegistry.addRecipe(new ItemStack(hammer, 1), new Object[]{"SSS", "LI ", "LI ", 'I', Item.ingotIron, 'S', Block.blockSteel, 'L', Item.leather});
+        GameRegistry.addRecipe(new ItemStack(hammer, 1), new Object[]{"SSS", "LI ", "LI ", 'I', Item.ingotIron, 'S', Block.blockIron, 'L', Item.leather});
 
         //SHIELDS
         GameRegistry.addRecipe(new ItemStack(archersShield, 1), new Object[]{"WWW", "WBW", " W ", 'W', Item.ingotIron, 'B', Block.wood});
-        GameRegistry.addRecipe(new ItemStack(berserkerShield, 1), new Object[]{"WWW", "WBW", " W ", 'W', Item.ingotIron, 'B', Block.blockSteel});
+        GameRegistry.addRecipe(new ItemStack(berserkerShield, 1), new Object[]{"WWW", "WBW", " W ", 'W', Item.ingotIron, 'B', Block.blockIron});
         GameRegistry.addRecipe(new ItemStack(talisman, 1), new Object[]{"WWW", "WBW", " W ", 'W', new ItemStack(Item.dyePowder, 1, 4), 'B', Block.blockLapis});
 
         //CLOAK

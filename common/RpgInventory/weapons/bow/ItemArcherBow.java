@@ -179,7 +179,7 @@ public class ItemArcherBow extends Item {
     }
 
     @Override
-    public void updateIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IconRegister par1IconRegister) {
         this.IconArray = new Icon[ItemNameArray.length];
 
         for (int i = 0; i < this.IconArray.length; ++i) {
@@ -187,7 +187,7 @@ public class ItemArcherBow extends Item {
             System.out.println("RPGInventoryMod" + ":" + ItemNameArray[i]);
             this.IconArray[i] = par1IconRegister.registerIcon(prefix + ItemNameArray[i]);
         }
-        this.iconIndex = this.IconArray[0];
+        this.itemIcon = this.IconArray[0];
     }
 
     @Override

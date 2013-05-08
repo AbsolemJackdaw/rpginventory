@@ -12,9 +12,9 @@ public class ItemRageFood extends ItemFood {
         super(par1, par2, par3, par4);
     }
     @Override
-    public void updateIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IconRegister par1IconRegister) {
         String texture = getUnlocalizedName().substring(getUnlocalizedName().lastIndexOf(".") + 1);
-        this.iconIndex = par1IconRegister.registerIcon(texture);
+        this.itemIcon = par1IconRegister.registerIcon(texture);
     }
     @Override
     public void onFoodEaten(ItemStack par1ItemStack, World par2World,

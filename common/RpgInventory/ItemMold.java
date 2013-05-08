@@ -11,8 +11,8 @@ public class ItemMold extends Item {
     }
 
     @Override
-    public void updateIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IconRegister par1IconRegister) {
         String itemName = getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1);
-        this.iconIndex = par1IconRegister.registerIcon("RPGInventoryMod:" + itemName);
+        this.itemIcon = par1IconRegister.registerIcon("RPGInventoryMod:" + itemName);
     }
 }
