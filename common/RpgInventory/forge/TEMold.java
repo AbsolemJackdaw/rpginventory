@@ -332,6 +332,7 @@ public class TEMold extends TileEntity implements IInventory {
             if (moldforgeItemStacks[2].stackSize > 1) {
                 --moldforgeItemStacks[2].stackSize;
             } else {
+            	moldforgeItemStacks[2] = null;
             }
             if (moldforgeItemStacks[1].stackSize > 1) {
                 --moldforgeItemStacks[1].stackSize;

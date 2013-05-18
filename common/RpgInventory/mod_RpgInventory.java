@@ -300,7 +300,7 @@ public class mod_RpgInventory {
         tanHide = new ItemRpg(RpgConfig.instance.tanHideID).setUnlocalizedName("t.leather").setCreativeTab(tab);
         magecloth = new ItemRpg(RpgConfig.instance.mageclothID).setUnlocalizedName("m.leather").setCreativeTab(tab);
 
-        wizardBook = new ItemRpg(RpgConfig.instance.wizardBookID).setUnlocalizedName("book").setCreativeTab(tab);
+        wizardBook = new ItemRpg(RpgConfig.instance.wizardBookID).setUnlocalizedName("a.book").setCreativeTab(tab);
 
         hammer = new ItemHammer(RpgConfig.instance.hammerID, stone).setMaxDamage(750).setUnlocalizedName("rageBreaker").setCreativeTab(tab);
         staf = new ItemStaf(RpgConfig.instance.stafID).setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);
