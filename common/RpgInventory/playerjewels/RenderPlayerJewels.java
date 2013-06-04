@@ -163,7 +163,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 						mc.renderEngine.bindTexture("/subaraki/devcapes/CowCape.png");
 					}else if (player.username.equals("4wad")) {
 						mc.renderEngine.bindTexture("/subaraki/devcapes/ModelCape.png");
-					}else if (player.username.equals("Zxapa") || player.username.equals("Spineripper64 ")) {
+					}else if (player.username.equals("Zxapa") || player.username.equals("spineripper64 ")) {
 						mc.renderEngine.bindTexture("/subaraki/devcapes/ConCape.png");
 					} else if (player.username.equals("Artix_all_mighty")) {
 						mc.renderEngine.bindTexture("/subaraki/devcapes/SubCape.png");
