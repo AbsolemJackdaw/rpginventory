@@ -51,6 +51,7 @@ public class ItemCrystal extends ItemRpgArmor {
         return itemname;
     }
 
+    @Override
     public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
         NBTTagCompound tags = stack.getTagCompound();
         int var2 = MathHelper.clamp_int(stack.getItemDamage(), 0, 3);
