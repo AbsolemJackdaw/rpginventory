@@ -1,9 +1,5 @@
 package rpgInventory.weapons.bow;
 
-import rpgInventory.gui.inventory.RpgInv;
-import rpgInventoryInventory.mod_RpgInventory;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +12,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
+import rpgInventory.mod_RpgInventory;
+import rpgInventory.gui.inventory.RpgInv;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemArcherBow extends Item {
 

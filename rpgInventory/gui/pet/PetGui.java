@@ -27,10 +27,10 @@ import org.lwjgl.opengl.GL11;
 import rpgInventory.IPet;
 import rpgInventory.RpgPacketHandler;
 import rpgInventory.gui.inventory.RpgInv;
-import RpgRB.beastmaster.BMPetImpl;
-import RpgRB.beastmaster.BoarPet;
-import RpgRB.beastmaster.BullPet;
-import RpgRB.beastmaster.SpiderPet;
+import rpgRogueBeast.beastmaster.BMPetImpl;
+import rpgRogueBeast.beastmaster.BoarPet;
+import rpgRogueBeast.beastmaster.BullPet;
+import rpgRogueBeast.beastmaster.SpiderPet;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class PetGui extends GuiScreen {

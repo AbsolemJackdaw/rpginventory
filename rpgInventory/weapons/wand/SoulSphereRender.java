@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -55,7 +56,7 @@ public class SoulSphereRender implements IItemRenderer {
 
 			GL11.glPushMatrix();
 
-			mc.renderEngine.bindTexture("/subaraki/weapons/SoulSphere.png");
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
 
 			float scale = 0.45F;
 			GL11.glScalef(scale,scale,scale);
@@ -91,7 +92,7 @@ public class SoulSphereRender implements IItemRenderer {
 
 			GL11.glPushMatrix();
 
-			mc.renderEngine.bindTexture("/subaraki/weapons/SoulSphere.png");
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
 
 			float scale = 0.8F;
 			GL11.glScalef(scale,scale,scale);

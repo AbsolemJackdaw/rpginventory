@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -51,17 +52,11 @@ public class HammerRender implements IItemRenderer {
 		GL11.glPushMatrix();
 
 		if(((EntityPlayer)data[1]).getFoodStats().getFoodLevel() <4
-				||((EntityPlayer)data[1]).getHealth() <4)
-		{
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().
-					renderEngine.getTexture("/subaraki/weapons/RageHammer.png"));
+				||((EntityPlayer)data[1]).func_110143_aJ() <4){
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/RageHammer.png"));
 		}
-		else
-		{
-
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().
-					renderEngine.getTexture("/subaraki/weapons/Hammer.png"));
-			
+		else{
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Hammer.png"));
 		}
 
 		float scale = 1.5F;
@@ -106,7 +101,7 @@ public class HammerRender implements IItemRenderer {
 			mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 
-			mc.renderEngine.bindTexture("/subaraki/weapons/Hammer.png");
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Hammer.png"));
 
 			float scale = 1.8F;
 			GL11.glScalef(scale,scale,scale);

@@ -4,7 +4,7 @@
  */
 package rpgInventory.PotionEffects;
 
-import RpgPlusPlus.minions.IMinion;
+import rpgNecroPaladin.minions.IMinion;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;

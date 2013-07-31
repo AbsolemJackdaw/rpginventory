@@ -3,19 +3,19 @@ package rpgInventory.weapons.bow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.inventory.RpgGui;
-import rpgInventoryInventory.mod_RpgInventory;
-
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.util.Icon;
 
 public class BowRender implements IItemRenderer {
 
@@ -62,16 +62,16 @@ public class BowRender implements IItemRenderer {
 
 				switch (k) {
 				case 23:
-					mc.renderEngine.bindTexture("/subaraki/weapons/bow.png");
+					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
 					break;
 				case 24:
-					mc.renderEngine.bindTexture("/subaraki/weapons/bow2.png");
+					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow2.png"));
 					break;
 				case 25:
-					mc.renderEngine.bindTexture("/subaraki/weapons/bow3.png");
+					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow3.png"));
 					break;
 				default:
-					mc.renderEngine.bindTexture("/subaraki/weapons/bow.png");
+					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
 					break;
 				}
 
@@ -109,7 +109,7 @@ public class BowRender implements IItemRenderer {
 
 			float scale = 1.5F;
 			GL11.glScalef(scale, scale, scale);
-			mc.renderEngine.bindTexture("/subaraki/weapons/bow.png");
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
 
 			GL11.glRotatef(0f, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);

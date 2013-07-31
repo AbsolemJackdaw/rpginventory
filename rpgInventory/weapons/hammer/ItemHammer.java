@@ -2,11 +2,6 @@ package rpgInventory.weapons.hammer;
 
 import java.util.Random;
 
-import rpgInventory.gui.inventory.RpgInv;
-import rpgInventory.weapons.ItemRpgSword;
-import rpgInventoryInventory.EnumRpgClass;
-import rpgInventoryInventory.mod_RpgInventory;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
@@ -14,6 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import rpgInventory.EnumRpgClass;
+import rpgInventory.mod_RpgInventory;
+import rpgInventory.gui.inventory.RpgInv;
+import rpgInventory.weapons.ItemRpgSword;
 
 public class ItemHammer extends ItemRpgSword {
 
@@ -31,15 +30,15 @@ public class ItemHammer extends ItemRpgSword {
         if (rpg.hasClass(EnumRpgClass.BERSERKER)) {
             if (rpg.hasClass(EnumRpgClass.SHIELDEDBERSERKER)) {
                 if (player.getFoodStats().getFoodLevel() < 6
-                        || player.getHealth() < 6) {
+                        || player.func_110143_aJ() < 6) {
                     player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 200, 1));
                 } else if (player.getFoodStats().getFoodLevel() < 3
-                        || player.getHealth() < 3) {
+                        || player.func_110143_aJ() < 3) {
                     player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 200, 2));
                 }
             } else {
                 if (player.getFoodStats().getFoodLevel() < 4
-                        || player.getHealth() < 4) {
+                        || player.func_110143_aJ() < 4) {
 
                     player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 200, 1));
                 }

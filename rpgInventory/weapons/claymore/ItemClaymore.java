@@ -2,11 +2,9 @@ package rpgInventory.weapons.claymore;
 
 import java.util.Random;
 
-import rpgInventory.weapons.ItemRpgWeapon;
-import rpgInventoryInventory.mod_RpgInventory;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
@@ -17,6 +15,8 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import rpgInventory.mod_RpgInventory;
+import rpgInventory.weapons.ItemRpgWeapon;
 
 public class ItemClaymore extends ItemRpgWeapon{
 
@@ -30,7 +30,7 @@ public class ItemClaymore extends ItemRpgWeapon{
 		this.maxStackSize = 1;
 		this.setMaxDamage(mat.getMaxUses());
 		this.setCreativeTab(CreativeTabs.tabCombat);
-		this.weaponDamage = 4 + mat.getDamageVsEntity();
+		this.weaponDamage = (int) (4 + mat.getDamageVsEntity());
 	}
 
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
@@ -68,7 +68,8 @@ public class ItemClaymore extends ItemRpgWeapon{
 		return par1ItemStack;
 	}
 
-	public boolean hitEntity(ItemStack is, EntityLiving mob, EntityLiving player)
+	@Override
+	public boolean hitEntity(ItemStack is, EntityLivingBase mob, EntityLivingBase player)
 	{
 		is.damageItem(1, mob);
 		mob.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)player), 8);
@@ -85,7 +86,7 @@ public class ItemClaymore extends ItemRpgWeapon{
 				skull.stackTagCompound.setString( "SkullOwner", name );
 			}
 
-			if(mob.getHealth() < 1)
+			if(mob.func_110143_aJ() < 1)
 			{
 				EntityItem entityitem = new EntityItem(mob.worldObj, mob.posX,mob.posY,mob.posZ, skull);
 				mob.worldObj.spawnEntityInWorld(entityitem);

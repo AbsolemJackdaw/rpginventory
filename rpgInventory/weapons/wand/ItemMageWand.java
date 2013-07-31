@@ -1,10 +1,8 @@
 package rpgInventory.weapons.wand;
 
-import rpgInventory.Configuration.RpgConfig;
-import rpgInventory.weapons.ItemRpgWeapon;
-import rpgInventoryInventory.mod_RpgInventory;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.item.Item;
@@ -14,6 +12,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import rpgInventory.mod_RpgInventory;
+import rpgInventory.Configuration.RpgConfig;
+import rpgInventory.weapons.ItemRpgWeapon;
 
 public class ItemMageWand extends ItemRpgWeapon{
 
@@ -81,7 +82,7 @@ public class ItemMageWand extends ItemRpgWeapon{
 					&& item2.equals(mod_RpgInventory.magepants)&& item3.equals(mod_RpgInventory.mageboots))
 			{
 
-				if (RpgConfig.instance.useSpell == true && par2EntityPlayer.inventory.hasItem(Item.lightStoneDust.itemID) && par2EntityPlayer.isSneaking())
+				if (RpgConfig.instance.useSpell == true && par2EntityPlayer.inventory.hasItem(Item.glowstone.itemID) && par2EntityPlayer.isSneaking())
 				{
 					if(par3World.isDaytime())
 					{
@@ -165,7 +166,8 @@ public class ItemMageWand extends ItemRpgWeapon{
 		return false;
 	}
 
-	public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
+	@Override
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving)
 	{
 		par1ItemStack.damageItem(1, par2EntityLiving);
 
@@ -202,9 +204,5 @@ public class ItemMageWand extends ItemRpgWeapon{
 
 		return false;
 
-	}
-	public String getTextureFile()
-	{
-		return "/subaraki/RPGinventoryTM.png";
 	}
 }

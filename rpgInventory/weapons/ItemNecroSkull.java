@@ -4,13 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import rpgInventory.gui.inventory.RpgInv;
-import rpgInventoryInventory.EnumRpgClass;
-import rpgInventoryInventory.mod_RpgInventory;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
@@ -22,10 +19,13 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import RpgPlusPlus.RpgPlusPacketHandler;
-import RpgPlusPlus.minions.EntityMinionS;
-import RpgPlusPlus.minions.EntityMinionZ;
-import RpgPlusPlus.minions.IMinion;
+import rpgInventory.EnumRpgClass;
+import rpgInventory.mod_RpgInventory;
+import rpgInventory.gui.inventory.RpgInv;
+import rpgNecroPaladin.RpgPlusPacketHandler;
+import rpgNecroPaladin.minions.EntityMinionS;
+import rpgNecroPaladin.minions.EntityMinionZ;
+import rpgNecroPaladin.minions.IMinion;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
@@ -40,7 +40,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
         this.maxStackSize = 1;
         this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
         this.setCreativeTab(CreativeTabs.tabCombat);
-        this.weaponDamage = 4 + this.toolMaterial.getDamageVsEntity();
+        this.weaponDamage = (int) (4 + this.toolMaterial.getDamageVsEntity());
     }
 
     @Override
@@ -65,7 +65,8 @@ public class ItemNecroSkull extends ItemRpgWeapon {
         return false;
     }
 
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLiving mob, EntityLiving player) {
+    @Override
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase mob, EntityLivingBase player) {
         if ((player instanceof EntityPlayer)) {
             EntityPlayer p = (EntityPlayer) player;
             World world = p.worldObj;

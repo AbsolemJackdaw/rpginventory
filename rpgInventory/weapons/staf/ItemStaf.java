@@ -1,13 +1,13 @@
 package rpgInventory.weapons.staf;
 
-import rpgInventory.weapons.ItemRpgSword;
-import rpgInventoryInventory.mod_RpgInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import rpgInventory.mod_RpgInventory;
+import rpgInventory.weapons.ItemRpgSword;
 
 public class ItemStaf extends ItemRpgSword {
 
@@ -28,10 +28,10 @@ public class ItemStaf extends ItemRpgSword {
                 double var6 = p.worldObj.rand.nextGaussian() * 0.02D;
                 p.worldObj.spawnParticle("heart", p.posX + (double) (p.worldObj.rand.nextFloat() * p.width * 2.0F) - (double) p.width, p.posY + 0.5D + (double) (p.worldObj.rand.nextFloat() * p.height), p.posZ + (double) (p.worldObj.rand.nextFloat() * p.width * 2.0F) - (double) p.width, var2, var4, var6);
                 int heal = (int) time / 50;
-                if (p.getHealth() + heal <= p.getMaxHealth()) {
+                if (p.func_110143_aJ() + heal <= p.func_110138_aP()) {
                     p.heal(heal);
                 } else {
-                    p.setEntityHealth(p.getMaxHealth());
+                    p.setEntityHealth(p.func_110138_aP());
                 }
             }
             if (time > 100) {
@@ -41,10 +41,10 @@ public class ItemStaf extends ItemRpgSword {
                 double var6 = p.worldObj.rand.nextGaussian() * 0.02D;
                 p.worldObj.spawnParticle("heart", p.posX + (double) (p.worldObj.rand.nextFloat() * p.width * 2.0F) - (double) p.width, p.posY + 0.5D + (double) (p.worldObj.rand.nextFloat() * p.height), p.posZ + (double) (p.worldObj.rand.nextFloat() * p.width * 2.0F) - (double) p.width, var2, var4, var6);
                 int heal = (int) time / 30;
-                if (p.getHealth() + heal <= p.getMaxHealth()) {
+                if (p.func_110143_aJ() + heal <= p.func_110138_aP()) {
                     p.heal(heal);
                 } else {
-                    p.setEntityHealth(p.getMaxHealth());
+                    p.setEntityHealth(p.func_110138_aP());
                 }
             }
         }

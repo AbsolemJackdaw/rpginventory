@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.weapons.ItemRpgSword;
-import RpgMageSet.weapons.EntityElementalBlock;
+import rpgMage.weapons.EntityElementalBlock;
 
 public class ItemElementalStaff extends ItemRpgSword {
 

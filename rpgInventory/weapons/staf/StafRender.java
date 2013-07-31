@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -51,9 +52,7 @@ public class StafRender implements IItemRenderer {
 
 		GL11.glPushMatrix();
 
-
-
-		mc.renderEngine.bindTexture("/subaraki/weapons/Staff.png");
+		mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Staff.png"));
 
 		boolean isFirstPerson;
 
@@ -95,7 +94,7 @@ public class StafRender implements IItemRenderer {
 			GL11.glPushMatrix();
 			Minecraft mc = Minecraft.getMinecraft();
 
-			mc.renderEngine.bindTexture("/subaraki/weapons/Staff.png");
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Staff.png"));
 
 			float scale = 1.5F;
 
@@ -118,7 +117,7 @@ public class StafRender implements IItemRenderer {
 	public void blockLoop(Entity p, float repeat , ItemStack item)
 	{
 		Minecraft mc = Minecraft.getMinecraft();
-		mc.renderEngine.bindTexture("/subaraki/weapons/ElementalStaff.png");
+		mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/ElementalStaff.png"));
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);

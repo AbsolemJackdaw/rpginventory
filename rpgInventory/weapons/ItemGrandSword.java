@@ -3,20 +3,13 @@ package rpgInventory.weapons;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.item.ItemSword;
 
 public class ItemGrandSword extends ItemRpgSword {
 
@@ -29,11 +22,12 @@ public class ItemGrandSword extends ItemRpgSword {
         this.maxStackSize = 1;
         this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
         this.setCreativeTab(CreativeTabs.tabCombat);
-        this.weaponDamage = 4 + par2EnumToolMaterial.getDamageVsEntity();
+        this.weaponDamage = (int) (4 + par2EnumToolMaterial.getDamageVsEntity());
     }
 
-    public int func_82803_g() {
-        return this.toolMaterial.getDamageVsEntity();
+    @Override
+    public float func_82803_g() {
+        return (int) this.toolMaterial.getDamageVsEntity();
     }
 
     /**
