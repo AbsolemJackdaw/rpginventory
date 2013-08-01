@@ -1,15 +1,12 @@
 package rpgInventory.forge;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import java.util.Arrays;
-
-import rpgInventory.mod_RpgInventory;
-
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import rpgInventory.mod_RpgInventory;
 
 public class MoldRecipes
 {

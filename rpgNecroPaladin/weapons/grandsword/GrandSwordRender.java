@@ -4,13 +4,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.playerjewels.shields.GrandSword;
-import rpgInventory.weapons.claymore.ModelClaymore;
 
 
 public class GrandSwordRender implements IItemRenderer {

@@ -4,14 +4,12 @@
  */
 package rpgInventory;
 
+import java.util.EnumSet;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import rpgInventory.gui.inventory.RpgInv;
 import rpgInventory.item.armor.BonusArmor;
-import rpgInventory.item.armor.ItemRpgArmor;
-import java.util.EnumSet;
-import java.util.Iterator;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 /**
  *

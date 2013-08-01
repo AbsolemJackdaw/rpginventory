@@ -4,23 +4,13 @@
  */
 package rpgRogueBeast.beastmaster;
 
-import com.google.common.collect.Multimaps;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 
-import rpgInventory.gui.inventory.RpgInv;
-import rpgInventoryInventory.EntityPetXP;
-import rpgInventoryInventory.EnumRpgClass;
-import rpgInventoryInventory.IPet;
-import rpgInventoryInventory.mod_RpgInventory;
-import rpgNecroPaladin.minions.CustomMinionEntitySelector;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
@@ -36,21 +26,23 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemExpBottle;
 import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.IThrowableEntity;
+import rpgInventory.EntityPetXP;
+import rpgInventory.EnumRpgClass;
+import rpgInventory.IPet;
+import rpgInventory.IPet.PetID;
+import rpgInventory.gui.inventory.RpgInv;
+import rpgNecroPaladin.minions.CustomMinionEntitySelector;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  *

@@ -1,14 +1,13 @@
 package rpgInventory;
 
-import rpgInventory.gui.inventory.RpgInv;
-import cpw.mods.fml.common.FMLLog;
 import java.util.Random;
-import net.minecraft.client.Minecraft;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+import rpgInventory.gui.inventory.RpgInv;
 
 public class CommonProxy {
 

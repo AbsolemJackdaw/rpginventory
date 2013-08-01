@@ -1,12 +1,12 @@
 package rpgNecroPaladin.minions.RendersEtc;
 
-import rpgNecroPaladin.minions.EntityMinionZ;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.model.ModelZombieVillager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import rpgNecroPaladin.minions.EntityMinionZ;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

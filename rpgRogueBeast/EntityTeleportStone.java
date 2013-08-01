@@ -1,7 +1,5 @@
 package rpgRogueBeast;
 
-import rpgInventory.gui.inventory.RpgInv;
-import rpgInventoryInventory.mod_RpgInventory;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -11,6 +9,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import rpgInventory.gui.inventory.RpgInv;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

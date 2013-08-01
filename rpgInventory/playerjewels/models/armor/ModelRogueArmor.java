@@ -1,7 +1,5 @@
 package rpgInventory.playerjewels.models.armor;
 
-import javax.rmi.CORBA.Tie;
-
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

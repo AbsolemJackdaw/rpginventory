@@ -2,7 +2,6 @@ package WWBS.wwbs.config;
 
 import java.io.File;
 
-import static rpgInventory.mod_RpgInventory.*;
 import net.minecraftforge.common.Configuration;
 
 /**

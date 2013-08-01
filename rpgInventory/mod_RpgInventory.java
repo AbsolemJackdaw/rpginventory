@@ -7,7 +7,6 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.command.CommandHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
@@ -35,7 +34,6 @@ import rpgInventory.item.ItemRpg;
 import rpgInventory.item.armor.BonusArmor;
 import rpgInventory.item.armor.ItemRpgArmor;
 import rpgInventory.item.armor.ItemRpgPlusPlusArmor;
-import rpgInventory.playerjewels.RenderPlayerJewels;
 import rpgInventory.weapons.ItemBeastAxe;
 import rpgInventory.weapons.ItemGrandSword;
 import rpgInventory.weapons.ItemNecroSkull;

@@ -9,7 +9,6 @@ import org.lwjgl.opengl.GL11;
 
 import WWBS.wwbs.PacketHandler;
 import WWBS.wwbs.mod_wwbs;
-
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 
 public class GuiMainB extends GuiScreen {

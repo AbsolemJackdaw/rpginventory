@@ -7,6 +7,7 @@ package rpgInventory.weapons.staf;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
+
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.mod_RpgInventory;

@@ -1,7 +1,7 @@
 package rpgInventory.gui;
 
-import rpgInventory.mod_RpgInventory;
 import net.minecraft.creativetab.CreativeTabs;
+import rpgInventory.mod_RpgInventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Random;
 
-import rpgInventory.CommonTickHandler;
-import rpgInventory.IPet;
-import rpgInventory.mod_RpgInventory;
-import rpgRogueBeast.beastmaster.BMPetImpl;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -18,6 +13,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
+import rpgInventory.CommonTickHandler;
+import rpgInventory.IPet;
+import rpgInventory.mod_RpgInventory;
+import rpgRogueBeast.beastmaster.BMPetImpl;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 

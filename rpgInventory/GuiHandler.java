@@ -1,15 +1,14 @@
 package rpgInventory;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import rpgInventory.forge.GuiMF;
 import rpgInventory.forge.MoldContainer;
 import rpgInventory.forge.TEMold;
 import rpgInventory.gui.inventory.RpgContainer;
 import rpgInventory.gui.inventory.RpgGui;
 import rpgInventory.gui.inventory.RpgInv;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.IGuiHandler;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
 
 public class GuiHandler implements IGuiHandler {
 

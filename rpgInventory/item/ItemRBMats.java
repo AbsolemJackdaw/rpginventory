@@ -1,13 +1,11 @@
 package rpgInventory.item;
 
-import rpgInventory.mod_RpgInventory;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import rpgInventory.mod_RpgInventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
 
 public class ItemRBMats extends Item {
 

@@ -13,7 +13,6 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import WWBS.wwbs.mod_wwbs;
-import WWBS.wwbs.wwbs.WwbsTe;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 

@@ -4,13 +4,13 @@
  */
 package rpgRogueBeast;
 
+import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.client.renderer.entity.RenderXPOrb;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.MinecraftForgeClient;
+import rpgInventory.EntityPetXP;
 import rpgInventory.Configuration.RpgConfig;
-import rpgInventoryInventory.EntityPetXP;
-import rpgInventoryInventory.mod_RpgInventory;
-import rpgNecroPaladin.minions.EntityMinionS;
-import rpgNecroPaladin.minions.EntityMinionZ;
-import rpgNecroPaladin.minions.RendersEtc.ModelDeath;
-import rpgNecroPaladin.minions.RendersEtc.RenderMinionZ;
 import rpgRogueBeast.beastmaster.BoarPet;
 import rpgRogueBeast.beastmaster.BullPet;
 import rpgRogueBeast.beastmaster.SpiderPet;
@@ -18,13 +18,6 @@ import rpgRogueBeast.renders.RenderPet;
 import rpgRogueBeast.weapons.axe.AxeRender;
 import rpgRogueBeast.weapons.dagger.RenderDagger;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import net.minecraft.client.renderer.entity.RenderBiped;
-import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.client.renderer.entity.RenderXPOrb;
-import net.minecraft.item.Item;
-import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.MinecraftForgeClient;
 
 
 public class RBClientProxy extends RBCommonProxy{

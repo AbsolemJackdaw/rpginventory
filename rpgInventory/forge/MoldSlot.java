@@ -4,10 +4,10 @@
  */
 package rpgInventory.forge;
 
-import rpgInventory.ItemMold;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import rpgInventory.ItemMold;
 
 /**
  *

@@ -1,11 +1,11 @@
 package rpgInventory.forge;
 
-import rpgInventory.mod_RpgInventory;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import rpgInventory.mod_RpgInventory;
 
 class SlotFurnace extends Slot {
 

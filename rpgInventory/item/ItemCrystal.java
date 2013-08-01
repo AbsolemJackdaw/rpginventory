@@ -2,8 +2,6 @@ package rpgInventory.item;
 
 import java.util.List;
 
-import rpgInventory.item.armor.ItemRpgArmor;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,9 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
+import rpgInventory.item.armor.ItemRpgArmor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.Icon;
 
 
 public class ItemCrystal extends ItemRpgArmor {

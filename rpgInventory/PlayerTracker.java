@@ -1,9 +1,7 @@
 package rpgInventory;
 
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.IPlayerTracker;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.ForgeHooks;
+import cpw.mods.fml.common.IPlayerTracker;
 
 /**
  * To catch login/Logouts for readingw/writing the Inventory

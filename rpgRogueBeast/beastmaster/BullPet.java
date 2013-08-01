@@ -4,12 +4,12 @@
  */
 package rpgRogueBeast.beastmaster;
 
-import rpgRogueBeast.models.ModelBull;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import rpgRogueBeast.models.ModelBull;
 
 /**
  *

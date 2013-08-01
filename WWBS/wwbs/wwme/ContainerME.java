@@ -3,15 +3,10 @@ package WWBS.wwbs.wwme;
 import java.util.ArrayList;
 import java.util.List;
 
-import WWBS.wwbs.wwbs.GuiBS;
-import WWBS.wwbs.wwbs.WwbsTe;
-
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 
 public class ContainerME extends Container{
 
