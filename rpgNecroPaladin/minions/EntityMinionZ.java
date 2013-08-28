@@ -48,7 +48,7 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
         this.setSize(1.0f, 1.0f);
         //This makes minions aggressive to aggressive mobs and players, except for their owner.
         //They will not provoke creepers, so they dont blow themselves up.
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, true, false, new CustomMinionEntitySelector(player)));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, true, false, new CustomMinionEntitySelector(player)));
         //they tend to wander off sometimes if they get too excited, but they will snap back to the player if they wander too far.
         if (!MinionRegistry.playerMinions.containsKey(player.username)) {
             MinionRegistry.playerMinions.put(player.username, new ArrayList<IMinion>());
@@ -73,28 +73,28 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
     }
 
     public void Harvest() {
-        this.damageEntity(DamageSource.magic, this.getHealth());
-        if (player.getHealth() + 2 <= player.getMaxHealth()) {
+        this.damageEntity(DamageSource.magic, this.func_110143_aJ());
+        if (player.func_110143_aJ() + 2 <= player.func_110138_aP()) {
             player.heal(2);
         } else {
-            player.setEntityHealth(player.getMaxHealth());
+            player.setEntityHealth(player.func_110138_aP());
         }
     }
 
     public EntityMinionZ(World var1) {
         super(var1);
-        this.texture = "/mob/zombie.png";
-        this.moveSpeed = 0.35F;
+//        this.texture = "/mob/zombie.png";
+//        this.moveSpeed = 0.35F;
         this.Following();
         this.getNavigator().setAvoidsWater(true);
 
         this.setPathToEntity((PathEntity) null);
         this.setAttackTarget((EntityLiving) null);
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIFollowOwner(this, this.moveSpeed, 10.0F, 2.0F));
-        this.tasks.addTask(3, new EntityAIWander(this, this.moveSpeed));
+        this.tasks.addTask(2, new EntityAIFollowOwner(this, 0.32f, 10.0F, 2.0F));
+        this.tasks.addTask(3, new EntityAIWander(this, 0.32f));
         this.tasks.addTask(4, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(5, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
+        this.tasks.addTask(5, new EntityAIAttackOnCollide(this, 0.32f, true));
         //This lets the mobs look around at any living entity mobs, to see if they need to attack it or not. Also makes minions appear curious ;)
         this.tasks.addTask(6, new EntityAIWatchClosest(this, Entity.class, 8.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
@@ -137,12 +137,12 @@ this.setSize(0.7F, 1.7F);
                 ++age;
                 this.setAge(age);
             } else if (age >= 700 + (player.experienceLevel * 30)) {
-                this.attackEntityFrom(DamageSource.outOfWorld, this.getHealth());
+                this.attackEntityFrom(DamageSource.outOfWorld, this.func_110143_aJ());
                 age = 0;
             }
         } else {
             //player logged out, kill his minions.
-            this.attackEntityFrom(DamageSource.outOfWorld, this.getHealth());
+            this.attackEntityFrom(DamageSource.outOfWorld, this.func_110143_aJ());
             this.setAge(0);
         }
 
