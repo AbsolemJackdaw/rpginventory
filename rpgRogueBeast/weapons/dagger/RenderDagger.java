@@ -3,6 +3,7 @@ package rpgRogueBeast.weapons.dagger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -48,11 +49,11 @@ public class RenderDagger implements IItemRenderer {
 
 			if(((Entity)data[1]).worldObj.getWorldTime() < 12500)
 			{
-				mc.renderEngine.bindTexture("/subaraki/weapons/dagger.png");
+				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/dagger.png"));
 			}
 			else
 			{
-				mc.renderEngine.bindTexture("/subaraki/weapons/daggerNight.png");
+				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/daggerNight.png"));
 			}
 
 			GL11.glRotatef(-150F, 1.0f, 0.0f, 0.0f);
@@ -76,11 +77,11 @@ public class RenderDagger implements IItemRenderer {
 		GL11.glScalef(scale,scale,scale);
 		if(((Entity)data[1]).worldObj.getWorldTime() < 12500)
 		{
-			mc.renderEngine.bindTexture("/subaraki/weapons/dagger.png");
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/dagger.png"));
 		}
 		else
 		{
-			mc.renderEngine.bindTexture("/subaraki/weapons/daggerNight.png");
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/daggerNight.png"));
 		}
 
 		GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);

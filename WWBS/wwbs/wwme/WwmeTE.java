@@ -50,7 +50,7 @@ public class WwmeTE extends TileEntity implements IInventory{
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-//		invSlot [slot] = stack;
+		//		invSlot [slot] = stack;
 
 		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
 			stack.stackSize = getInventoryStackLimit();
@@ -82,20 +82,20 @@ public class WwmeTE extends TileEntity implements IInventory{
 
 	}
 
-//	@Override
-//	public void readFromNBT(NBTTagCompound tagCompound) {
-//		super.readFromNBT(tagCompound);
-//
-//		//		NBTTagList tagList = tagCompound.getTagList("Inventory");
-//		//		for (int i = 0; i < tagList.tagCount(); i++) {
-//		//			NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
-//		//			byte slot = tag.getByte("Slot");
-//		//			if (slot >= 0 && slot < invSlot.length) {
-//		//				invSlot[slot] = ItemStack.loadItemStackFromNBT(tag);
-//		//			}
-//		//		}
-//
-//	}
+	//	@Override
+	//	public void readFromNBT(NBTTagCompound tagCompound) {
+	//		super.readFromNBT(tagCompound);
+	//
+	//		//		NBTTagList tagList = tagCompound.getTagList("Inventory");
+	//		//		for (int i = 0; i < tagList.tagCount(); i++) {
+	//		//			NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
+	//		//			byte slot = tag.getByte("Slot");
+	//		//			if (slot >= 0 && slot < invSlot.length) {
+	//		//				invSlot[slot] = ItemStack.loadItemStackFromNBT(tag);
+	//		//			}
+	//		//		}
+	//
+	//	}
 
 	//	@Override
 	//	public void writeToNBT(NBTTagCompound tagCompound) {
@@ -112,15 +112,18 @@ public class WwmeTE extends TileEntity implements IInventory{
 	//			}
 	//		}
 	//		tagCompound.setTag("Inventory", itemList);
-//}
+	//}
 
-@Override
-public boolean isInvNameLocalized() {
-	return false;
-}
+	@Override
+	public boolean isInvNameLocalized() {
+		return false;
+	}
 
-@Override
-public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-	return false;
-}
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 }

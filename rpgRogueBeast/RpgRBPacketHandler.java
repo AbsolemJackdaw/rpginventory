@@ -92,7 +92,7 @@ public class RpgRBPacketHandler implements IPacketHandler {
 						p.worldObj.spawnParticle("largesmoke", p.posX + (double) (this.rand.nextFloat() * p.width * 2.0F) - (double) p.width, p.posY + 0.5D + (double) (this.rand.nextFloat() * p.height), p.posZ + (double) (this.rand.nextFloat() * p.width * 2.0F) - (double) p.width, d0, d1, d2);
 
 					} else {
-						p.sendChatToPlayer("You must wait for energy to replenish, left: " + Math.floor(1 + CommonTickHandler.globalCooldownMap.get(p.username) / 20) + " seconds");
+						p.addChatMessage("You must wait for energy to replenish, left: " + Math.floor(1 + CommonTickHandler.globalCooldownMap.get(p.username) / 20) + " seconds");
 					}
 				}
 				break;

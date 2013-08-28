@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -246,7 +247,7 @@ public class RPGEventHooks {
 						}
 					}
 
-					float speedboost = p.landMovementFactor;
+					float speedboost = p.getAIMoveSpeed();
 					if (neck != null && neck.itemID == mod_RpgInventory.neckgold.itemID) {
 						speedboost += 0.020F;
 						this.goldJump(p,0.01D);
@@ -266,7 +267,8 @@ public class RPGEventHooks {
 					if (rpginv.hasClass(EnumRpgClass.PALADIN)) {
 						speedboost *= 0.75F;
 					}
-					p.get = speedboost;
+					p.setAIMoveSpeed(speedboost);
+					
 					if (ArcherRepairTick.containsKey(p.username)) {
 						if (rpginv.hasClass(EnumRpgClass.ARCHER)) {
 							p.jumpMovementFactor = 0.09F;
@@ -513,7 +515,7 @@ public class RPGEventHooks {
 	{
 		float jumpTicks = 0;
 
-		if (p.isJumping)
+		if (p.getai)//is jumping
 		{
 			if (!p.isInWater() && !p.handleLavaMovement())
 			{

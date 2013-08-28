@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelCow;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -54,4 +55,10 @@ public class RenderPet extends RenderLiving {
     public void doRender(Entity pet, double par2, double par4, double par6, float par8, float par9) {
         this.renderCow((BMPetImpl) pet, par2, par4, par6, par8, par9);
     }
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

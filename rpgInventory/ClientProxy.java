@@ -69,7 +69,7 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	public void registerRenderInformation() {
-		TextureIDs.init();
+//		TextureIDs.init();
 		KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler());
 		RenderingRegistry.registerEntityRenderingHandler(EntityHellArrow.class, new RenderArrow());
 

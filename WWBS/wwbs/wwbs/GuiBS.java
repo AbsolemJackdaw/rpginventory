@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -66,7 +67,7 @@ public class GuiBS extends InventoryEffectRenderer {
 
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture("/gui/container.png");
+		mc.renderEngine.func_110577_a(new ResourceLocation("gui/container.png"));
 		int var5 = 222;
 		int var6 = 176;
 		int posX = (this.width - xSize) / 2;

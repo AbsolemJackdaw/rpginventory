@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.EntityPetXP;
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.Configuration.RpgConfig;
 import rpgRogueBeast.beastmaster.BoarPet;
 import rpgRogueBeast.beastmaster.BullPet;

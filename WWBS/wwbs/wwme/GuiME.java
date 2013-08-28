@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -35,7 +36,7 @@ public class GuiME extends GuiContainer {
 
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture("/subaraki/me.png");
+		mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:me.png"));
 		int var5 = 187;
 		int var6 = 222;
 		int posX = (this.width - xSize) / 2;

@@ -11,6 +11,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
@@ -38,7 +39,7 @@ import net.minecraft.world.World;
 import rpgInventory.EntityPetXP;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.IPet;
-import rpgInventory.IPet.PetID;
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.inventory.RpgInv;
 import rpgNecroPaladin.minions.CustomMinionEntitySelector;
 import cpw.mods.fml.relauncher.Side;
@@ -218,9 +219,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
         if (xps != null && xps.size() > 0) {
             if (--xpThrottle <= 0) {
-                xpThrottle = 5;
-                for (EntityPetXP xp : xps) {
-                    this.giveXP(xp.getXpValue());
+               for (EntityPetXP xp : xps) {
+                  xpThrottle = 5;
+                   this.giveXP(xp.getXpValue());
                     xp.setDead();
                 }
             }
@@ -382,7 +383,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
      //this.dataWatcher.updateObject(HP, Integer.valueOf(this.getHealth()));
      }*/
     @Override
-    public void onKillEntity(EntityLiving par1EntityLiving) {
+    public void onKillEntity(EntityLivingBase par1EntityLiving) {
         super.onKillEntity(par1EntityLiving);
     }
 

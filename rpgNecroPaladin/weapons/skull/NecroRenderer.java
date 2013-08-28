@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -52,7 +53,7 @@ public class NecroRenderer implements IItemRenderer {
 			float scale = 0.5F;
 			GL11.glScalef(scale,scale,scale);
 			
-			mc.renderEngine.bindTexture("/subaraki/weapons/Skull.png");
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Skull.png"));
 
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(5F, 0.0f, 1.0f, 0.0f);
@@ -95,7 +96,7 @@ public class NecroRenderer implements IItemRenderer {
 
 //			float scale = 1.5F;
 //			GL11.glScalef(scale,scale,scale);
-			mc.renderEngine.bindTexture("/subaraki/weapons/Skull.png");
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Skull.png"));
 
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);

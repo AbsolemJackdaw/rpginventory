@@ -23,14 +23,14 @@ public class TextureIDs {
     public static int defaultfontID;
     private static boolean runonce = false;
 
-    public static void init() {
-        RenderEngine engine = Minecraft.getMinecraft().renderEngine;
-        if (!runonce) {
-            runonce = true;
-            texForgeGuiID = engine.getTexture(texForgeGuiName);
-            texRpgInvTMID = engine.getTexture(texRpgInvTMName);
-            texBookGuiID = engine.getTexture(texBookGuiName);
-            defaultfontID = engine.getTexture(defaultfont);
-        }
-    }
+//    public static void init() {
+//        RenderEngine engine = Minecraft.getMinecraft().renderEngine;
+//        if (!runonce) {
+//            runonce = true;
+//            texForgeGuiID = engine.getTexture(texForgeGuiName);
+//            texRpgInvTMID = engine.getTexture(texRpgInvTMName);
+//            texBookGuiID = engine.getTexture(texBookGuiName);
+//            defaultfontID = engine.getTexture(defaultfont);
+//        }
+//    }
 }

@@ -1,6 +1,7 @@
 package rpgRogueBeast;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -9,6 +10,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.inventory.RpgInv;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,7 +22,7 @@ public class EntityTeleportStone extends EntityThrowable
 		super(par1World);
 	}
 
-	public EntityTeleportStone(World par1World, EntityLiving par2EntityLiving)
+	public EntityTeleportStone(World par1World, EntityLivingBase par2EntityLiving)
 	{
 		super(par1World, par2EntityLiving);
 	}

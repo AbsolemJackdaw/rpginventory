@@ -3,6 +3,7 @@ package rpgRogueBeast.weapons.axe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -42,7 +43,7 @@ public class AxeRender implements IItemRenderer {
 
 			float f = 0.8f;
 			GL11.glScalef(f, f, f);
-			mc.renderEngine.bindTexture("/subaraki/weapons/axe.png");
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/axe.png"));
 
 			GL11.glTranslatef(0.2F, 1.35F, 0F);
 
@@ -61,7 +62,7 @@ public class AxeRender implements IItemRenderer {
 
 			float scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
-			mc.renderEngine.bindTexture("/subaraki/weapons/axe.png");
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/axe.png"));
 
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
