@@ -178,10 +178,10 @@ this.setSize(0.7F, 1.7F);
         }
     }
 
-    public int getMaxHealth() {
-        //12 health is reasonable given the sheer number of minions.
-        return 12;
-    }
+//    public int getMaxHealth() {
+//        //12 health is reasonable given the sheer number of minions.
+//        return 12;
+//    }
 
     public boolean isAIEnabled() {
         return true;

@@ -168,10 +168,10 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob, I
 		}
 	}
 
-	public int getMaxHealth() {
-
-		return 12;
-	}
+//	public int getMaxHealth() {
+//
+//		return 12;
+//	}
 
 	public boolean isAIEnabled() {
 		return true;
