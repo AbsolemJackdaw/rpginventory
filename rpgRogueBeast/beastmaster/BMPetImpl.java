@@ -36,11 +36,11 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import rpgInventory.EntityPetXP;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.IPet;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.inventory.RpgInv;
+import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.item.petXp.EntityPetXP;
 import rpgNecroPaladin.minions.CustomMinionEntitySelector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -609,12 +609,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     }
 
 //    @Override
-//    public int getHealth() {
-//        if (worldObj.isRemote) {
-//            return this.dataWatcher.getWatchableObjectInt(HP);
-//        }
-//        return this.health;
-//    }
+    public float getHealth() {
+       return this.func_110143_aJ();
+    }
 
     @Override
     public float getHP() {

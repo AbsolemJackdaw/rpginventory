@@ -8,7 +8,7 @@ import java.util.EnumSet;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import rpgInventory.gui.inventory.RpgInv;
+import rpgInventory.gui.rpginv.RpgInv;
 import rpgInventory.item.armor.BonusArmor;
 
 /**

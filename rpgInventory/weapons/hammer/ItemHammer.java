@@ -11,7 +11,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.inventory.RpgInv;
+import rpgInventory.gui.rpginv.RpgInv;
 import rpgInventory.weapons.ItemRpgSword;
 
 public class ItemHammer extends ItemRpgSword {

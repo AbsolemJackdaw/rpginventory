@@ -21,9 +21,15 @@ import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.Configuration.RpgConfig;
 import rpgInventory.PotionEffects.DecomposePotion;
 import rpgInventory.PotionEffects.MasochismPotion;
-import rpgInventory.forge.BlockForge;
-import rpgInventory.forge.TEMold;
+import rpgInventory.block.BlockForge;
+import rpgInventory.block.te.TEMold;
 import rpgInventory.gui.RpgInventoryTab;
+import rpgInventory.handelers.CommonTickHandler;
+import rpgInventory.handelers.GuiHandler;
+import rpgInventory.handelers.PlayerTracker;
+import rpgInventory.handelers.RPGEventHooks;
+import rpgInventory.handelers.RpgPacketHandler;
+import rpgInventory.handelers.proxy.CommonProxy;
 import rpgInventory.item.ItemCrystal;
 import rpgInventory.item.ItemElementalStaff;
 import rpgInventory.item.ItemMats;
@@ -34,6 +40,7 @@ import rpgInventory.item.ItemRpg;
 import rpgInventory.item.armor.BonusArmor;
 import rpgInventory.item.armor.ItemRpgArmor;
 import rpgInventory.item.armor.ItemRpgPlusPlusArmor;
+import rpgInventory.item.petXp.PetExpPotion;
 import rpgInventory.weapons.ItemBeastAxe;
 import rpgInventory.weapons.ItemGrandSword;
 import rpgInventory.weapons.ItemNecroSkull;
@@ -749,7 +756,7 @@ public class mod_RpgInventory {
 	@ServerStarting
 	public void serverStarting(FMLServerStartingEvent event) {
 		CommandHandler commandManager = (CommandHandler) event.getServer().getCommandManager();
-		commandManager.registerCommand(new rpgInventory.CommandPanel());
-		rpgInventory.CommandPanel.init();
+		commandManager.registerCommand(new rpgInventory.handelers.CommandPanel());
+		rpgInventory.handelers.CommandPanel.init();
 	}
 }

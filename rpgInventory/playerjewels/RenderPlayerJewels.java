@@ -25,8 +25,8 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.inventory.RpgGui;
-import rpgInventory.gui.inventory.RpgInv;
+import rpgInventory.gui.rpginv.RpgGui;
+import rpgInventory.gui.rpginv.RpgInv;
 import rpgInventory.item.armor.BonusArmor;
 import rpgInventory.playerjewels.models.armor.ModelBeastArmor;
 import rpgInventory.playerjewels.models.armor.ModelBerserkerArmor;
@@ -34,14 +34,16 @@ import rpgInventory.playerjewels.models.armor.ModelMageArmor;
 import rpgInventory.playerjewels.models.armor.ModelNecroArmor;
 import rpgInventory.playerjewels.models.armor.ModelRogueArmor;
 import rpgInventory.playerjewels.models.shields.Book;
+import rpgInventory.playerjewels.models.shields.IronThorn;
 import rpgInventory.playerjewels.models.shields.LionHead;
+import rpgInventory.playerjewels.models.shields.ModelShield;
+import rpgInventory.playerjewels.models.shields.NecroShield;
+import rpgInventory.playerjewels.models.shields.PalaShield;
+import rpgInventory.playerjewels.models.shields.VanillaShield;
 import rpgInventory.playerjewels.models.weapons.ModelDaggerL;
-import rpgInventory.playerjewels.shields.IronThorn;
-import rpgInventory.playerjewels.shields.ModelShield;
-import rpgInventory.playerjewels.shields.NecroShield;
-import rpgInventory.playerjewels.shields.NecroSkull;
-import rpgInventory.playerjewels.shields.PalaShield;
-import rpgInventory.playerjewels.shields.VanillaShield;
+import rpgInventory.playerjewels.models.weapons.NecroSkull;
+
+
 
 public class RenderPlayerJewels extends RenderPlayer {
 

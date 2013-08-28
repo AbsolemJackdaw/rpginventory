@@ -8,8 +8,6 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import rpgInventory.playerjewels.shields.GrandSword;
-
 
 public class GrandSwordRender implements IItemRenderer {
 

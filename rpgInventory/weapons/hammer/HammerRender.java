@@ -12,7 +12,7 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import rpgInventory.gui.inventory.RpgGui;
+import rpgInventory.gui.rpginv.RpgGui;
 
 
 public class HammerRender implements IItemRenderer {

@@ -1,7 +1,7 @@
 package rpgRogueBeast;
 
-import rpgInventory.EntityPetXP;
 import rpgInventory.mod_RpgInventory;
+import rpgInventory.item.petXp.EntityPetXP;
 import rpgRogueBeast.beastmaster.BoarPet;
 import rpgRogueBeast.beastmaster.BullPet;
 import rpgRogueBeast.beastmaster.SpiderPet;

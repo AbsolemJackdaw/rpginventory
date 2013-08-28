@@ -15,7 +15,7 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.inventory.RpgGui;
+import rpgInventory.gui.rpginv.RpgGui;
 
 public class BowRender implements IItemRenderer {
 

@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.IPet;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.inventory.RpgInv;
+import rpgInventory.gui.rpginv.RpgInv;
 import rpgRogueBeast.beastmaster.BoarPet;
 import rpgRogueBeast.beastmaster.BullPet;
 import rpgRogueBeast.beastmaster.SpiderPet;

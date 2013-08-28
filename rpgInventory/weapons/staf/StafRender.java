@@ -13,7 +13,7 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 
-import rpgInventory.gui.inventory.RpgGui;
+import rpgInventory.gui.rpginv.RpgGui;
 import rpgInventory.item.ItemElementalStaff;
 
 

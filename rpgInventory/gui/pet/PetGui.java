@@ -25,8 +25,8 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.IPet;
-import rpgInventory.RpgPacketHandler;
-import rpgInventory.gui.inventory.RpgInv;
+import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.handelers.RpgPacketHandler;
 import rpgRogueBeast.beastmaster.BMPetImpl;
 import rpgRogueBeast.beastmaster.BoarPet;
 import rpgRogueBeast.beastmaster.BullPet;
