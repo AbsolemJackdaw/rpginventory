@@ -72,7 +72,7 @@ public class BoarPet extends BMPetImpl {
     }
 
     @Override
-    public int getMaxHealth() {
+    public float getMaxHealth() {
         //115 Health at level 200
         return 20 + MathHelper.floor_float(((float) getLevel()) / 2.5F);
     }

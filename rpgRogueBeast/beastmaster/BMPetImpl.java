@@ -65,6 +65,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     int levelcheck = 0;
     int prevLevel = 0;
     int jumpTicks;
+    protected float moveSpeed;
 
     //CONSTRUCTORS START
     private BMPetImpl(World par1World) {
@@ -114,7 +115,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             }
             this.setOwner(owner.username);
             IPet.playersWithActivePets.put(owner.username, new PetID(this.dimension, this.entityId));
-            this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, true, false, new CustomMinionEntitySelector(owner)));
+            this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, true, false, new CustomMinionEntitySelector(owner)));
         }
         if (!sizeSet) {
             setSize(getBaseWidth(), getBaseHeight());
@@ -172,7 +173,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     @Override
     public void onLivingUpdate() {
         if (!worldObj.isRemote) {
-            EntityPlayer player = (EntityPlayer) getOwner();
+            EntityPlayer player = (EntityPlayer)getOwner();
             if ((player == null || !EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER))) {
                 try {
                     RpgInv inv = mod_RpgInventory.proxy.getInventory(getOwnerName());
@@ -191,11 +192,11 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         if (healthregen-- <= 0) {
             this.heal(1);
             this.healthregen = regenDelay();
-            if (!worldObj.isRemote) {
-                this.dataWatcher.updateObject(HP, this.health);
-            } else {
-                this.health = this.dataWatcher.getWatchableObjectInt(HP);
-            }
+//            if (!worldObj.isRemote) {
+//                this.dataWatcher.updateObject(HP, this.func_110143_aJ());
+//            } else {
+//                this.health = this.dataWatcher.getWatchableObjectInt(HP);
+//            }
         }
 
             prevLevel = this.dataWatcher.getWatchableObjectInt(LEVELID);
@@ -312,7 +313,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         if (!this.isDead()) {
             ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
             if (var2 != null) {
-                if (this.dataWatcher.getWatchableObjectInt(HP) < this.getMaxHealth()) {
+                if (this.func_110143_aJ() < this.func_110138_aP()) {
                     if (Item.itemsList[var2.itemID] instanceof ItemFood) {
                         ItemFood var3 = (ItemFood) Item.itemsList[var2.itemID];
                         //This is confusing, people dont know pet is saddled.
@@ -352,7 +353,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     }
 
     @Override
-    public EntityLiving getOwner() {
+    public EntityLivingBase getOwner() {
         EntityPlayer player;
         if (worldObj.isRemote) {
             player = this.worldObj.getPlayerEntityByName(this.getOwnerName());
@@ -406,12 +407,12 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     @Override
     protected void entityInit() {
         super.entityInit();
-        if (this.health <= 0) {
-            this.health = 1;
+        if (this.func_110143_aJ() <= 0) {
+            this.heal(1);
         }
         this.dataWatcher.addObject(LEVELID, (int) 0);
         this.dataWatcher.addObject(NAME, getDefaultName());
-        this.dataWatcher.addObject(HP, this.health);
+//        this.dataWatcher.addObject(HP, this.health);
         this.dataWatcher.addObject(TOTALXP, (int) 0);
         this.dataWatcher.addObject(NEXTLEVEL, String.valueOf(0.0F));
         this.dataWatcher.addObject(SADDLE, (byte) 0);
@@ -423,8 +424,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     }
     //each pet class returns this value, this just forces them to.
 
-    @Override
-    public abstract int getMaxHealth();
+    public float getMaxHealth(){
+    	return this.func_110138_aP();
+    }
 
     @Override
     public int getLevel() {
@@ -527,8 +529,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         itemstacknbt.setString("PetName", getEntityName());
         itemstacknbt.setString("OwnerName", getOwnerName());
         itemstacknbt.setInteger("PetAttack", getAttackDamage());
-        itemstacknbt.setInteger("PetMaxHealth", getMaxHealth());
-        itemstacknbt.setInteger("PetHealth", this.dataWatcher.getWatchableObjectInt(HP));
+        itemstacknbt.setFloat("PetMaxHealth", getMaxHealth());
+        itemstacknbt.setFloat("PetHealth", func_110143_aJ());
         itemstacknbt.setBoolean("isSaddled", getSaddled());
         ItemStack newIteamstack = new ItemStack(mod_RpgInventory.crystal, 1, getType());
         newIteamstack.setTagCompound(itemstacknbt);
@@ -553,11 +555,11 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-        if (!worldObj.isRemote) {
-            this.dataWatcher.updateObject(HP, this.health);
-        } else {
-            this.health = this.dataWatcher.getWatchableObjectInt(HP);
-        }
+//        if (!worldObj.isRemote) {
+//            this.dataWatcher.updateObject(HP, this.health);
+//        } else {
+//            this.health = this.dataWatcher.getWatchableObjectInt(HP);
+//        }
         super.writeEntityToNBT(par1NBTTagCompound);
         //prevents natural despawning
         par1NBTTagCompound.setBoolean("PersistanceRequired", true);
@@ -606,17 +608,17 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         }
     }
 
-    @Override
-    public int getHealth() {
-        if (worldObj.isRemote) {
-            return this.dataWatcher.getWatchableObjectInt(HP);
-        }
-        return this.health;
-    }
+//    @Override
+//    public int getHealth() {
+//        if (worldObj.isRemote) {
+//            return this.dataWatcher.getWatchableObjectInt(HP);
+//        }
+//        return this.health;
+//    }
 
     @Override
-    public int getHP() {
-        return getHealth();
+    public float getHP() {
+        return this.func_110143_aJ();
     }
 
     public EntityAIControlledByPlayer getAIControlledByPlayer() {

@@ -117,7 +117,7 @@ public class SpiderPet extends BMPetImpl {
     }
 
     @Override
-    public int getMaxHealth() {
+    public float getMaxHealth() {
         //150 health at level 200
         return 25 + MathHelper.floor_double((((double) getLevel()) * 1.0D) / 1.6D);
     }

@@ -19,7 +19,7 @@ public interface IPet {
 
     public final int LEVELID = 20;
     public final int NAME = 21;
-    public final int HP = 22;
+//    public final int HP = 22;
     public final int SADDLE = 23;
     public final int TOTALXP = 24;
     public final int NEXTLEVEL = 25;
@@ -55,7 +55,7 @@ public interface IPet {
      *
      * @return Returns the current health. not max.
      */
-    public int getHP();
+    public float getHP();
 
     /**
      *
