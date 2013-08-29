@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rpgInventory.PotionEffects;
+package rpgInventory.RichTools;
 
 import net.minecraft.potion.Potion;
 

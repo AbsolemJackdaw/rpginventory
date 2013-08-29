@@ -22,7 +22,7 @@ public class ItemStaf extends ItemRpgSword {
 
         if (p.isSneaking()) {
             if (time > 0 && time <= 100) {
-                p.spawnExplosionParticle();
+//                p.spawnExplosionParticle();
                 double var2 = p.worldObj.rand.nextGaussian() * 0.02D;
                 double var4 = p.worldObj.rand.nextGaussian() * 0.02D;
                 double var6 = p.worldObj.rand.nextGaussian() * 0.02D;
@@ -35,7 +35,7 @@ public class ItemStaf extends ItemRpgSword {
                 }
             }
             if (time > 100) {
-                p.spawnExplosionParticle();
+//                p.spawnExplosionParticle();
                 double var2 = p.worldObj.rand.nextGaussian() * 0.02D;
                 double var4 = p.worldObj.rand.nextGaussian() * 0.02D;
                 double var6 = p.worldObj.rand.nextGaussian() * 0.02D;

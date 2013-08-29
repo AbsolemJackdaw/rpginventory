@@ -29,12 +29,13 @@ public class MSClientProxy extends MSCommonProxy{
 		
 		
 		if (RpgConfig.instance.render3DStaff == true) {
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.frostStaff.itemID, (IItemRenderer) new StafRender());
+			MinecraftForgeClient.registerItemRenderer(
+					mod_RpgInventory.frostStaff.itemID,
+					(IItemRenderer) new StafRender());
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.fireStaff.itemID, (IItemRenderer) new StafRender());
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.earthStaff.itemID, (IItemRenderer) new StafRender());
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.windStaff.itemID, (IItemRenderer) new StafRender());
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.ultimateStaff.itemID, (IItemRenderer) new StafRender());
-
 		}
 	}
 }

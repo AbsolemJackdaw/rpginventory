@@ -192,9 +192,6 @@ public class ClientProxy extends CommonProxy {
 		}
 
 		return inv;
-
-
-
 	}
 
 	public void addEntry(String username, RpgInv inv) {

@@ -21,17 +21,18 @@ serverPacketHandlerSpec =
 public class mod_RpgMageSet {
 
 
-	@SidedProxy(serverSide = "RpgMageSet.MSCommonProxy", clientSide = "RpgMageSet.MSClientProxy")
+	@SidedProxy(serverSide = "rpgMage.MSCommonProxy", clientSide = "rpgMage.MSClientProxy")
 	public static MSCommonProxy proxy;
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		proxy.registerRendering();
-		
+
+
 		EntityRegistry.registerGlobalEntityID(EntityElementalBlock.class, "Elemental", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityElementalBlock.class, "Elemental", mod_RpgInventory.instance.getUniqueID(), this, 250, 1, true);
 		LanguageRegistry.instance().addStringLocalization("entity.EntityElementalBlock.name", "MageElemental");
 
+		proxy.registerRendering();
 	}
 }
 

@@ -21,7 +21,7 @@ serverPacketHandlerSpec =
 @SidedPacketHandler(channels = {"RpgRBPacket"}, packetHandler = RpgRBPacketHandler.class))
 public class mod_RpgRB {
 
-	@SidedProxy(serverSide = "RpgRB.RBCommonProxy", clientSide = "RpgRB.RBClientProxy")
+	@SidedProxy(serverSide = "rpgRogueBeast.RBCommonProxy", clientSide = "rpgRogueBeast.RBClientProxy")
 	public static RBCommonProxy proxy;
 	
 	@Init

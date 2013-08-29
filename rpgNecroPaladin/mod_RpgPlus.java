@@ -26,7 +26,7 @@ public class mod_RpgPlus {
 
 
 
-	@SidedProxy(serverSide = "RpgPlusPlus.CommonProxyRpgplus", clientSide = "RpgPlusPlus.ClientProxyRpgPlus")
+	@SidedProxy(serverSide = "rpgNecroPaladin.CommonProxyRpgplus", clientSide = "rpgNecroPaladin.ClientProxyRpgPlus")
 	public static CommonProxyRpgplus proxy;
 
 	@Init

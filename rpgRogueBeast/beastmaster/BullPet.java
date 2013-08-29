@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import rpgRogueBeast.models.ModelBull;
 
@@ -56,8 +57,8 @@ public class BullPet extends BMPetImpl {
     }
 
     @Override
-    public String getTexture() {
-        return "/subaraki/mobs/bull.png";
+    public ResourceLocation getTexture() {
+        return new ResourceLocation("subaraki:mobs/bull.png");
     }
 
     @Override

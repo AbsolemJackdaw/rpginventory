@@ -35,6 +35,7 @@ import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.IPet;
@@ -134,7 +135,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
     protected abstract float getBaseHeight();
 
-    public abstract String getTexture();
+    public abstract ResourceLocation getTexture();
 
     protected abstract float jumpHeight();
 
@@ -278,7 +279,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
                 jump(false);
             }
             //Initiate jumping while ridden via keybind
-            if (((EntityPlayer) riddenByEntity).isJumping) { //hijacking the preset 'jump' input.
+            if (((EntityPlayer) riddenByEntity).isAirBorne) { //hijacking the preset 'jump' input.
                 jump(true); //this method is seen overridden in here
             }
             super.moveEntity(motionX, motionY, motionZ);

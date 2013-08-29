@@ -45,7 +45,7 @@ public class ItemRpgPlusPlusArmor extends ItemRpgArmor {
 			{
 				player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,20, 1));
 			}
-			player.carryoverDamage = -60;	
+//			player. = -60;	
 
 		}
 		else
@@ -56,12 +56,12 @@ public class ItemRpgPlusPlusArmor extends ItemRpgArmor {
 					&& slot3 != null && slot3.getItem() == mod_RpgInventory.palaHelm)
 			{
 				player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,20, 1));
-				player.carryoverDamage = -55;	
+//				player.carryoverDamage = -55;	
 			}
 		}
 		if(shield != null && shield.getItem() == mod_RpgInventory.necro_shield)
 		{
-			player.carryoverDamage = -55;	
+//			player.carryoverDamage = -55;	
 		}
 	}
 }

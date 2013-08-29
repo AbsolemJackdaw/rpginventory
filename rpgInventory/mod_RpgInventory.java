@@ -19,8 +19,8 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.Configuration.RpgConfig;
-import rpgInventory.PotionEffects.DecomposePotion;
-import rpgInventory.PotionEffects.MasochismPotion;
+import rpgInventory.RichTools.DecomposePotion;
+import rpgInventory.RichTools.MasochismPotion;
 import rpgInventory.block.BlockForge;
 import rpgInventory.block.te.TEMold;
 import rpgInventory.gui.RpgInventoryTab;
@@ -78,7 +78,7 @@ serverPacketHandlerSpec =
 public class mod_RpgInventory {
 
 	public static mod_RpgInventory instance;
-	@SidedProxy(serverSide = "rpgInventory.CommonProxy", clientSide = "rpgInventory.ClientProxy")
+	@SidedProxy(serverSide = "rpgInventory.handelers.proxy.CommonProxy", clientSide = "rpgInventory.handelers.proxy.ClientProxy")
 	public static CommonProxy proxy;
 	public static Item neckgold;
 	public static Item neckdia;
@@ -221,7 +221,7 @@ public class mod_RpgInventory {
 
 		try {
 
-			Class.forName("RpgPlusPlus.mod_RpgPlus");
+			Class.forName("rpgNecroPaladin.mod_RpgPlus");
 			FMLLog.info("Rpg++ Necromancer and Paladin is installed. Renderers can be Used", 1);
 			hasRpg = true;
 		} catch (Throwable e) {
@@ -238,7 +238,7 @@ public class mod_RpgInventory {
 			hasShields = false;
 		}
 		try {
-			Class.forName("RpgRB.mod_RpgRB");
+			Class.forName("rpgRogueBeast.mod_RpgRB");
 			FMLLog.info("Rpg++ Rogue and BeastMaster Installed. Renderers can be Used");
 			hasRogue = true;
 		} catch (Throwable e) {
@@ -246,7 +246,7 @@ public class mod_RpgInventory {
 			hasRogue = false;
 		}
 		try {
-			Class.forName("RpgMageSet.mod_RpgMageSet");
+			Class.forName("rpgMage.mod_RpgMageSet");
 			FMLLog.info("Rpg++ ArchMage Installed. Renderers can be Used");
 			hasMage = true;
 		} catch (Throwable e) {

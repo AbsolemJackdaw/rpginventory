@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import rpgRogueBeast.models.ModelBoar;
 
@@ -62,8 +63,8 @@ public class BoarPet extends BMPetImpl {
     }
 
     @Override
-    public String getTexture() {
-        return "/subaraki/mobs/boar.png";
+    public ResourceLocation getTexture() {
+        return new ResourceLocation("subaraki:mobs/boar.png");
     }
 
     @Override

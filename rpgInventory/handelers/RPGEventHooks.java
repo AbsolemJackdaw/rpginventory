@@ -519,8 +519,7 @@ public class RPGEventHooks {
 	{
 		float jumpTicks = 0;
 
-		fix that !
-		if (p.isSneaking())//is jumping
+		if (p.isAirBorne)//is jumping
 		{
 			if (!p.isInWater() && !p.handleLavaMovement())
 			{
