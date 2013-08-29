@@ -21,6 +21,5 @@ public class mod_VanillaShields {
 		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.shieldIron, 1), new Object[]{"WWW", "WWW", " W ", 'W', Item.ingotIron, });
 		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.shieldGold, 1), new Object[]{"WWW", "WWW", " W ", 'W', Item.ingotGold});
 		GameRegistry.addRecipe(new ItemStack(mod_RpgInventory.shieldDiamond, 1), new Object[]{"WWW", "WBW", " W ", 'W', Item.diamond, 'B', Block.blockDiamond});
-
     }
 }

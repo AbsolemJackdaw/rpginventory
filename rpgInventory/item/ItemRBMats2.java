@@ -89,9 +89,7 @@ public class ItemRBMats2 extends Item {
                                     world.spawnEntityInWorld(bull);
                                     break;
                             }
-
                             rpginv.setInventorySlotContents(6, stack);
-
                         }
                     }
                 } catch (Throwable ex) {
@@ -106,9 +104,5 @@ public class ItemRBMats2 extends Item {
     public void registerIcons(IconRegister par1IconRegister) {
         String itemName = getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1);
         this.itemIcon = par1IconRegister.registerIcon("rpginventorymod:" + itemName);
-    }
-
-    public String getTextureFile() {
-        return "/subaraki/RPGinventoryTM.png";
     }
 }
