@@ -23,7 +23,7 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntityElementalBlock extends EntityThrowable implements IEntityAdditionalSpawnData {
 
-	private EntityLiving shootingEntity;
+	private EntityLivingBase shootingEntity;
 	public String owner;
 
 	private int xTile = -1;
@@ -57,7 +57,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 		this.type = type;
 		this.noClip = true;
 		this.owner = e.getEntityName();
-		this.shootingEntity = (EntityLiving) e;
+		this.shootingEntity =  e;
 
 	}
 
