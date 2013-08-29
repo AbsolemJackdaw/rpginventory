@@ -24,10 +24,6 @@ public class BonusArmor extends ItemArmor{
         this.itemIcon = par1IconRegister.registerIcon("rpginventorymod:" + itemName);
     }
 
-    public String getTextureFile() {
-        return "/subaraki/RPGinventoryTM.png";
-    }
-
     @Override
     public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
     		String type) {

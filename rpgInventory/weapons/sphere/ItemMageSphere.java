@@ -1,4 +1,4 @@
-package rpgInventory.weapons.wand;
+package rpgInventory.weapons.sphere;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,9 +15,9 @@ import rpgInventory.mod_RpgInventory;
 import rpgInventory.Configuration.RpgConfig;
 import rpgInventory.weapons.ItemRpgWeapon;
 
-public class ItemMageWand extends ItemRpgWeapon{
+public class ItemMageSphere extends ItemRpgWeapon{
 
-	public ItemMageWand(int par1) {
+	public ItemMageSphere(int par1) {
 		super(par1);
 	}
 

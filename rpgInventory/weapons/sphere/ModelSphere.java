@@ -1,4 +1,4 @@
-package rpgInventory.weapons.wand;
+package rpgInventory.weapons.sphere;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

@@ -1,4 +1,4 @@
-package rpgInventory.weapons.wand;
+package rpgInventory.weapons.sphere;
 
 import java.util.Random;
 
@@ -34,6 +34,7 @@ public class SoulSphereRender implements IItemRenderer {
 		switch(type)
 		{
 		case EQUIPPED: return true;
+		case EQUIPPED_FIRST_PERSON: return true;
 		case ENTITY : return true;
 		default: break;
 		}	
@@ -46,21 +47,20 @@ public class SoulSphereRender implements IItemRenderer {
 		return false;
 	}
 
+	float turn = 0;
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+
+
 		switch(type)
 		{
 		case  EQUIPPED:
-		{	Minecraft mc = Minecraft.getMinecraft();
-
+		{	
+			Minecraft mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
-
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
-
 			float scale = 0.45F;
 			GL11.glScalef(scale,scale,scale);
-
-			
 
 			if(data[1] != null && data[1] instanceof EntityPlayer)
 			{
@@ -72,22 +72,38 @@ public class SoulSphereRender implements IItemRenderer {
 				{
 					GL11.glTranslatef(0.5F, 1F, -0.2F);
 				}
-
 			}
 			else
 			{
 				GL11.glTranslatef(0.5F, 1F, -0.2F);
 			}
 
-			blockLoop((Entity)data[1],30);
-
+			turn +=0.01f;
+			swordmodel.render((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
 			GL11.glPopMatrix();
 		}
 		break;
+		case  EQUIPPED_FIRST_PERSON:
+		{	
+			Minecraft mc = Minecraft.getMinecraft();
+			GL11.glPushMatrix();
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
+			float scale = 0.45F;
+			GL11.glScalef(scale,scale,scale);
 
+			GL11.glTranslatef(0.8F, 1.2F, -0.2F);
+
+
+			turn +=0.01f;
+			swordmodel.render((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+
+			GL11.glPopMatrix();
+		}
+		break;
 		case ENTITY:
-		{	Minecraft mc = Minecraft.getMinecraft();
+		{	
+			Minecraft mc = Minecraft.getMinecraft();
 
 			GL11.glPushMatrix();
 
@@ -102,14 +118,14 @@ public class SoulSphereRender implements IItemRenderer {
 
 			GL11.glTranslatef(0F, 1.2F, 0.0F);
 
-			blockLoop((Entity)data[1],30);
-
+			turn +=0.01f;
+			swordmodel.render((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
 			GL11.glPopMatrix();
 
 		}
 		break;
-		
+
 		default: break;
 		}
 	}
@@ -121,27 +137,27 @@ public class SoulSphereRender implements IItemRenderer {
 			swordmodel.render(p, var1, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 		}
 	}
-	
-	  public byte getMiniItemCountForItemStack(ItemStack stack)
-	    {
-	        byte var24;
-	        int var19 = stack.stackSize;
-	        if (var19 < 2)
-	        {
-	            var24 = 1;
-	        }
-	        else if (var19 < 16)
-	        {
-	            var24 = 2;
-	        }
-	        else if (var19 < 32)
-	        {
-	            var24 = 3;
-	        }
-	        else
-	        {
-	            var24 = 4;
-	        }
-	        return var24;
-	    }
+
+	public byte getMiniItemCountForItemStack(ItemStack stack)
+	{
+		byte var24;
+		int var19 = stack.stackSize;
+		if (var19 < 2)
+		{
+			var24 = 1;
+		}
+		else if (var19 < 16)
+		{
+			var24 = 2;
+		}
+		else if (var19 < 32)
+		{
+			var24 = 3;
+		}
+		else
+		{
+			var24 = 4;
+		}
+		return var24;
+	}
 }

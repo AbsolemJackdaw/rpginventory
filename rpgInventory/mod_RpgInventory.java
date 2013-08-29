@@ -48,8 +48,8 @@ import rpgInventory.weapons.bow.EntityHellArrow;
 import rpgInventory.weapons.bow.ItemArcherBow;
 import rpgInventory.weapons.claymore.ItemClaymore;
 import rpgInventory.weapons.hammer.ItemHammer;
+import rpgInventory.weapons.sphere.ItemMageSphere;
 import rpgInventory.weapons.staf.ItemStaf;
-import rpgInventory.weapons.wand.ItemMageWand;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -298,7 +298,7 @@ public class mod_RpgInventory {
 		berserkerBoots = new BonusArmor(RpgConfig.instance.berserkerBootsID, armoury, 4, 3).setUnlocalizedName("berserk4").setCreativeTab(tab);
 
 		claymore = new ItemClaymore(RpgConfig.instance.claymoreID, clay).setFull3D().setMaxDamage(1024).setUnlocalizedName("claymore").setCreativeTab(tab);
-		wand = new ItemMageWand(RpgConfig.instance.wandID).setFull3D().setMaxDamage(400).setUnlocalizedName("soulsphere").setCreativeTab(tab);
+		wand = new ItemMageSphere(RpgConfig.instance.wandID).setFull3D().setMaxDamage(400).setUnlocalizedName("soulsphere").setCreativeTab(tab);
 		elfbow = new ItemArcherBow(RpgConfig.instance.elfbowID).setFull3D().setMaxDamage(350).setUnlocalizedName("elmBow").setCreativeTab(tab);
 
 		animalskin = new ItemRpg(RpgConfig.instance.animalskinID).setUnlocalizedName("a.leather").setCreativeTab(tab);
