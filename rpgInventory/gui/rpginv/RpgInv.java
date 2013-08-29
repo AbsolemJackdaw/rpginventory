@@ -253,9 +253,9 @@ public class RpgInv implements IInventory {
             if (armorSlots[var3] != null) {
                 NBTTagCompound compoundSlot = new NBTTagCompound();
                 compoundSlot.setByte("SlotNum", (byte) var3);
-                if (var3 == 6) {
-                    System.out.println("writing...");
-                }
+//                if (var3 == 6) {
+//                    System.out.println("writing...");
+//                }
                 armorSlots[var3].writeToNBT(compoundSlot);
                 var2.appendTag(compoundSlot);
             }
