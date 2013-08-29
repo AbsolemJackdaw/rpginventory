@@ -191,8 +191,6 @@ public class CommonTickHandler implements ITickHandler {
         if (countdown < 0) {
             countdown = 20;
         }
-
-
     }
 
     public void dropJewels(EntityPlayer player) {

@@ -30,9 +30,11 @@ import rpgInventory.handelers.PlayerTracker;
 import rpgInventory.handelers.RPGEventHooks;
 import rpgInventory.handelers.RpgPacketHandler;
 import rpgInventory.handelers.proxy.CommonProxy;
+import rpgInventory.item.ItemCandy;
 import rpgInventory.item.ItemCrystal;
 import rpgInventory.item.ItemElementalStaff;
 import rpgInventory.item.ItemMats;
+import rpgInventory.item.ItemMold;
 import rpgInventory.item.ItemRBMats;
 import rpgInventory.item.ItemRBMats2;
 import rpgInventory.item.ItemRageFood;
@@ -305,7 +307,7 @@ public class mod_RpgInventory {
 		tanHide = new ItemRpg(RpgConfig.instance.tanHideID).setUnlocalizedName("t.leather").setCreativeTab(tab);
 		magecloth = new ItemRpg(RpgConfig.instance.mageclothID).setUnlocalizedName("m.leather").setCreativeTab(tab);
 
-		wizardBook = new ItemRpg(RpgConfig.instance.wizardBookID).setUnlocalizedName("a.book").setCreativeTab(tab);
+		wizardBook = new ItemRpg(RpgConfig.instance.wizardBookID).setUnlocalizedName("a.book_normal").setCreativeTab(tab);
 
 		hammer = new ItemHammer(RpgConfig.instance.hammerID, stone).setMaxDamage(750).setUnlocalizedName("rageBreaker").setCreativeTab(tab);
 		staf = new ItemStaf(RpgConfig.instance.stafID).setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);

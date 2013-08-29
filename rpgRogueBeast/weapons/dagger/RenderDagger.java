@@ -8,7 +8,7 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import rpgInventory.playerjewels.models.weapons.ModelDaggerR;
+import rpgInventory.renderer.models.weapons.ModelDaggerR;
 
 
 public class RenderDagger implements IItemRenderer {

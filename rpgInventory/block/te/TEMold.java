@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import rpgInventory.ItemMold;
+import rpgInventory.item.ItemMold;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TEMold extends TileEntity implements IInventory {

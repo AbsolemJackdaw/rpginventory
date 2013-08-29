@@ -32,7 +32,7 @@ import rpgInventory.gui.BookGui;
 import rpgInventory.gui.rpginv.RpgInv;
 import rpgInventory.handelers.ClientTickHandler;
 import rpgInventory.handelers.RPGKeyHandler;
-import rpgInventory.playerjewels.RenderPlayerJewels;
+import rpgInventory.renderer.RenderPlayerJewels;
 import rpgInventory.weapons.bow.BowRender;
 import rpgInventory.weapons.bow.EntityHellArrow;
 import rpgInventory.weapons.claymore.ClaymoreRenderer;
