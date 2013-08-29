@@ -32,7 +32,7 @@ public class ItemCrystal extends ItemRpgArmor {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon("RPGInventoryMod:petCrystal");
+        this.itemIcon = par1IconRegister.registerIcon("rpginventorymod:petCrystal");
     }
 
     @Override
