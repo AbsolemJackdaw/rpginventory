@@ -69,7 +69,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "RPGInventoryMod", name = "RPG Inventory Mod", version = "1.5.1 8.4")
+@Mod(modid = "rpginventorymod", name = "RPG Inventory Mod", version = "1.5.1 8.4")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false,
 clientPacketHandlerSpec =
 @SidedPacketHandler(channels = {"RpgInv", "RpgRawInv"}, packetHandler = RpgPacketHandler.class),

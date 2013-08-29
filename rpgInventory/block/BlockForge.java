@@ -30,9 +30,9 @@ public class BlockForge extends BlockContainer {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = temoldOvenSide = temoldOvenTop = temoldOvenBottom = par1IconRegister.registerIcon("RPGInventoryMod:ovenSide");
-        temoldOvenFront = par1IconRegister.registerIcon("RPGInventoryMod:ovenFront");
-        temoldOvenFrontActive = par1IconRegister.registerIcon("RPGInventoryMod:ovenFrontBurning");
+        this.blockIcon = temoldOvenSide = temoldOvenTop = temoldOvenBottom = par1IconRegister.registerIcon("rpginventorymod:ovenSide");
+        temoldOvenFront = par1IconRegister.registerIcon("rpginventorymod:ovenFront");
+        temoldOvenFrontActive = par1IconRegister.registerIcon("rpginventorymod:ovenFrontBurning");
     }
     
     private static boolean keepInventory = true;

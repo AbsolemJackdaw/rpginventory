@@ -38,7 +38,7 @@ public class ItemRpgArmor extends Item {
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
         String itemName = getUnlocalizedName().substring(getUnlocalizedName().lastIndexOf(".") + 1);
-        this.itemIcon = par1IconRegister.registerIcon("RPGInventoryMod:" + itemName);
+        this.itemIcon = par1IconRegister.registerIcon("rpginventorymod:" + itemName);
     }
     public int renderJewelIndex;
     private String Name;
