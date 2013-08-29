@@ -79,8 +79,10 @@ public class SoulSphereRender implements IItemRenderer {
 			}
 
 			turn +=0.01f;
-			swordmodel.render((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			swordmodel.renderFloatingShpere((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			swordmodel.renderFloatingShpere((Entity)data[1], -(turn)+100, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
+			swordmodel.render((Entity)data[1], 0, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			GL11.glPopMatrix();
 		}
 		break;
@@ -96,7 +98,10 @@ public class SoulSphereRender implements IItemRenderer {
 
 
 			turn +=0.01f;
-			swordmodel.render((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			swordmodel.renderFloatingShpere((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			swordmodel.renderFloatingShpere((Entity)data[1], -(turn)+100, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+
+			swordmodel.render((Entity)data[1], 0, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
 			GL11.glPopMatrix();
 		}
@@ -119,7 +124,10 @@ public class SoulSphereRender implements IItemRenderer {
 			GL11.glTranslatef(0F, 1.2F, 0.0F);
 
 			turn +=0.01f;
-			swordmodel.render((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			swordmodel.renderFloatingShpere((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			swordmodel.renderFloatingShpere((Entity)data[1], -(turn)+100, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+
+			swordmodel.render((Entity)data[1], 0, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
 			GL11.glPopMatrix();
 
