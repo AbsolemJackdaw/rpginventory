@@ -28,9 +28,6 @@ public class GuiMF extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, (ySize - 96) + 2, 0xffffff);
 		fontRenderer.drawString("Mold Forge", 5, (ySize - 180), 0xffffff);
-
-		
-
 	}
 
 	/**

@@ -66,8 +66,8 @@ public class ItemCrystal extends ItemRpgArmor {
             }
             if (tags.hasKey("PetHealth") && tags.hasKey("PetHealth")) {
                 list.add(StatCollector.translateToLocal("HP : "
-                        + String.valueOf(tags.getInteger("PetHealth") + "/"
-                        + String.valueOf(tags.getInteger("PetMaxHealth")))));
+                        + String.valueOf(tags.getFloat("PetHealth") + "/"
+                        + String.valueOf(tags.getFloat("PetMaxHealth")))));
             }
             if (tags.hasKey("PetLevel")) {
                 if (tags.getInteger("PetLevel") >= 50) {

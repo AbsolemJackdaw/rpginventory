@@ -24,7 +24,7 @@ public class BookGui extends GuiScreen
 		drawDefaultBackground();
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:bookgui.png"));
+		this.mc.renderEngine.func_110577_a(new ResourceLocation("rpginventorymod:textures/gui/bookgui.png"));
 //		this.mc.renderEngine.bindTexture("/subaraki/bookgui.png");
 
 		int posX = (this.width - xSizeOfTexture) / 2;
