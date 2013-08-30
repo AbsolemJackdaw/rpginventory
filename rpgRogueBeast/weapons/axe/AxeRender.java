@@ -21,6 +21,7 @@ public class AxeRender implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED: return true;
+		case  EQUIPPED_FIRST_PERSON: return true;
 		case ENTITY: return true;
 		default: break;
 		}
@@ -38,24 +39,33 @@ public class AxeRender implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED:
-		{Minecraft mc = Minecraft.getMinecraft();
+		{
+			Minecraft mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
-
 			float f = 0.8f;
 			GL11.glScalef(f, f, f);
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/axe.png"));
-
 			GL11.glTranslatef(0.2F, 1.35F, 0F);
-
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(140F, 1.0f, 0.0f, 0.0f);
-
 			axe.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-
 			GL11.glPopMatrix();
 		}
 		break;
-
+		case  EQUIPPED_FIRST_PERSON:
+		{
+			Minecraft mc = Minecraft.getMinecraft();
+			GL11.glPushMatrix();
+			float f = 0.8f;
+			GL11.glScalef(f, f, f);
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/axe.png"));
+			GL11.glTranslatef(0.2F, 1.35F, 0F);
+			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(140F, 1.0f, 0.0f, 0.0f);
+			axe.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			GL11.glPopMatrix();
+		}
+		break;
 		case  ENTITY:
 		{Minecraft mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();

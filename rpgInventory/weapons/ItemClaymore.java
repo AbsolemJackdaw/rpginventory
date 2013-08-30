@@ -1,4 +1,4 @@
-package rpgInventory.weapons.claymore;
+package rpgInventory.weapons;
 
 import java.util.Random;
 
@@ -15,7 +15,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.weapons.ItemRpgWeapon;
 
 public class ItemClaymore extends ItemRpgWeapon{
 

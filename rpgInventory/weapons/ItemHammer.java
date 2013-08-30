@@ -1,4 +1,4 @@
-package rpgInventory.weapons.hammer;
+package rpgInventory.weapons;
 
 import java.util.Random;
 
@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.RpgInv;
-import rpgInventory.weapons.ItemRpgSword;
 
 public class ItemHammer extends ItemRpgSword {
 

@@ -86,6 +86,7 @@ public class SoulSphereRender implements IItemRenderer {
 			GL11.glPopMatrix();
 		}
 		break;
+		
 		case  EQUIPPED_FIRST_PERSON:
 		{	
 			Minecraft mc = Minecraft.getMinecraft();

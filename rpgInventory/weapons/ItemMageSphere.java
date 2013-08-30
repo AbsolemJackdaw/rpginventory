@@ -1,4 +1,4 @@
-package rpgInventory.weapons.sphere;
+package rpgInventory.weapons;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,7 +13,6 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.Configuration.RpgConfig;
-import rpgInventory.weapons.ItemRpgWeapon;
 
 public class ItemMageSphere extends ItemRpgWeapon{
 

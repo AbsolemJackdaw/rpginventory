@@ -21,6 +21,7 @@ public class GrandSwordRender implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED: return true;
+		case  EQUIPPED_FIRST_PERSON: return true;
 		case ENTITY: return true;
 		default: break;
 		}
@@ -52,7 +53,18 @@ public class GrandSwordRender implements IItemRenderer {
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			GL11.glPopMatrix();
 			break;
-
+		case  EQUIPPED_FIRST_PERSON:
+			GL11.glPushMatrix();
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/pride.png"));
+			scale = 1.5F;
+			GL11.glScalef(scale,scale,scale);
+			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(-140F, 0.0f, 0.0f, 1.0f);
+			GL11.glTranslatef(-0.47F, -0.225F, 0F);
+			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			GL11.glPopMatrix();
+			break;
 		case  ENTITY:
 			GL11.glPushMatrix();
 			scale = 1.8F;

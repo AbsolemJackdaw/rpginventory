@@ -24,6 +24,7 @@ public class RenderDagger implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED: return true;
+		case EQUIPPED_FIRST_PERSON: return true;
 		case ENTITY: return true;
 		default: break;
 		}
@@ -68,7 +69,34 @@ public class RenderDagger implements IItemRenderer {
 
 		}
 		break;
+		case  EQUIPPED_FIRST_PERSON:
+		{		
+			mc = Minecraft.getMinecraft();
+			GL11.glPushMatrix();
+			float scale = 0.9F;
+			GL11.glScalef(scale,scale,scale);
 
+			if(((Entity)data[1]).worldObj.getWorldTime() < 12500)
+			{
+				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/dagger.png"));
+			}
+			else
+			{
+				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/daggerNight.png"));
+			}
+
+			GL11.glRotatef(-150F, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(-100F, 0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(160F, 0.0f, 0.0f, 1.0f);
+
+			GL11.glTranslatef(0.2F, -0.2F, -0.45F);
+
+			daggerModel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+
+			GL11.glPopMatrix();
+
+		}
+		break;
 		case  ENTITY:
 		{		mc = Minecraft.getMinecraft();
 		GL11.glPushMatrix();

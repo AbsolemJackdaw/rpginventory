@@ -21,6 +21,7 @@ public class ClaymoreRenderer implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED: return true;
+		case  EQUIPPED_FIRST_PERSON: return true;
 		case ENTITY: return true;
 		default: break;
 		}
@@ -56,7 +57,25 @@ public class ClaymoreRenderer implements IItemRenderer {
 			GL11.glPopMatrix();
 		}
 		break;
+		case  EQUIPPED_FIRST_PERSON:
+		{
+			Minecraft mc = Minecraft.getMinecraft();
 
+			GL11.glPushMatrix();
+
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Sword.png"));
+
+			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(-5F, 0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(-150F, 0.0f, 0.0f, 1.0f);
+
+			GL11.glTranslatef(-0.8F, 0.6F, -0.1F);
+
+			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+
+			GL11.glPopMatrix();
+		}
+		break;
 		case  ENTITY:
 		{
 			Minecraft mc = Minecraft.getMinecraft();
