@@ -4,7 +4,6 @@
  */
 package rpgInventory;
 
-import net.minecraft.client.Minecraft;
 
 /**
  *

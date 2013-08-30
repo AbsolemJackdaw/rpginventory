@@ -6,8 +6,6 @@ package rpgInventory.item.petXp;
 
 import java.util.List;
 
-import rpgInventory.IPet;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
@@ -15,6 +13,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import rpgInventory.IPet;
 
 /**
  *

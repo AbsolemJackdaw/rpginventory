@@ -32,7 +32,6 @@ import net.minecraft.util.Vec3;
 import org.lwjgl.input.Keyboard;
 
 import rpgInventory.mod_RpgInventory;
-
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
