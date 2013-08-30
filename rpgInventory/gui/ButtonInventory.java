@@ -47,7 +47,7 @@ public class ButtonInventory extends GuiButton {
                         outputStream.writeInt(1);
                         Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
                         PacketDispatcher.sendPacketToServer(packet);
-                        System.out.println("Packet send");
+                        //System.out.println("Packet send");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
