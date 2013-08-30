@@ -1,11 +1,14 @@
 package rpgRogueBeast;
 
+import net.minecraft.creativetab.CreativeTabs;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.item.petXp.EntityPetXP;
+import rpgNecroPaladin.PlusTab;
 import rpgRogueBeast.beastmaster.BoarPet;
 import rpgRogueBeast.beastmaster.BullPet;
 import rpgRogueBeast.beastmaster.SpiderPet;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -24,8 +27,36 @@ public class mod_RpgRB {
 	@SidedProxy(serverSide = "rpgRogueBeast.RBCommonProxy", clientSide = "rpgRogueBeast.RBClientProxy")
 	public static RBCommonProxy proxy;
 	
-	@Init
+	public static CreativeTabs tab;
+
+	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		tab = new RBTab(CreativeTabs.getNextID(), "RBTab");
+
+		mod_RpgInventory.daggers.setCreativeTab(tab);
+		mod_RpgInventory.beastAxe.setCreativeTab(tab);
+
+		mod_RpgInventory.rogueLeather.setCreativeTab(tab);
+		mod_RpgInventory.beastShield.setCreativeTab(tab);
+		mod_RpgInventory.beastLeather.setCreativeTab(tab);
+
+		mod_RpgInventory.rogueHood.setCreativeTab(tab);
+		mod_RpgInventory.rogueChest.setCreativeTab(tab);
+		mod_RpgInventory.rogueLegs.setCreativeTab(tab);
+		mod_RpgInventory.rogueBoots.setCreativeTab(tab);
+		
+		mod_RpgInventory.beastHood.setCreativeTab(tab);
+		mod_RpgInventory.beastChest.setCreativeTab(tab);
+		mod_RpgInventory.beastLegs.setCreativeTab(tab);
+		mod_RpgInventory.beastBoots.setCreativeTab(tab);
+
+		mod_RpgInventory.petCandy.setCreativeTab(tab);
+		mod_RpgInventory.tangledBrench.setCreativeTab(tab);
+		mod_RpgInventory.PetXPBottle.setCreativeTab(tab);
+		
+		mod_RpgInventory.crystal.setCreativeTab(tab);
+		
+		mod_RpgInventory.whistle.setCreativeTab(tab);
 		
 		proxy.registerRendering();
 		

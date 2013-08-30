@@ -107,12 +107,12 @@ public class PetGui extends GuiScreen {
 			petAtk = 4;
 		}
 		try {
-			currentHP = (short) tags.getInteger("PetHealth");
+			currentHP =  (short) tags.getFloat("PetHealth");
 		} catch (NullPointerException ex) {
 			currentHP = 18;
 		}
 		try {
-			totalHP = (short) tags.getInteger("PetMaxHealth");
+			totalHP = (short) tags.getFloat("PetMaxHealth");
 		} catch (NullPointerException ex) {
 			totalHP = 18;
 		}

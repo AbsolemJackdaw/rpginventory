@@ -1,11 +1,11 @@
 package rpgNecroPaladin;
 
+import net.minecraft.creativetab.CreativeTabs;
 import rpgInventory.mod_RpgInventory;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
-import cpw.mods.fml.common.Mod.PostInit;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -29,12 +29,33 @@ public class mod_RpgPlus {
 	@SidedProxy(serverSide = "rpgNecroPaladin.CommonProxyRpgplus", clientSide = "rpgNecroPaladin.ClientProxyRpgPlus")
 	public static CommonProxyRpgplus proxy;
 
-	@Init
+	public static CreativeTabs tab;
+
+	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		tab = new PlusTab(CreativeTabs.getNextID(), "++Tab");
+
+		mod_RpgInventory.necroHood.setCreativeTab(tab);
+		mod_RpgInventory.necroChestplate.setCreativeTab(tab);
+		mod_RpgInventory.necroLeggings.setCreativeTab(tab);
+		mod_RpgInventory.necroBoots.setCreativeTab(tab);
+
+		mod_RpgInventory.palaHelm.setCreativeTab(tab);
+		mod_RpgInventory.palaChest.setCreativeTab(tab);
+		mod_RpgInventory.palaLeggings.setCreativeTab(tab);
+		mod_RpgInventory.palaBoots.setCreativeTab(tab);
+
+		mod_RpgInventory.necro_shield.setCreativeTab(tab);
+		mod_RpgInventory.necro_weapon.setCreativeTab(tab);
+		mod_RpgInventory.pala_shield.setCreativeTab(tab);
+		mod_RpgInventory.pala_weapon.setCreativeTab(tab);
+		mod_RpgInventory.necro_skin.setCreativeTab(tab);
+		mod_RpgInventory.pala_steel.setCreativeTab(tab);
 
 
 	}
-	@PostInit
+	
+	@EventHandler
 	public void post(FMLPostInitializationEvent evt){
 
 		proxy.registerRenderInformation();

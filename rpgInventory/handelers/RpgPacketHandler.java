@@ -110,9 +110,9 @@ public class RpgPacketHandler implements IPacketHandler {
                         nbtCrystal.setInteger("PetLevel", PetLevel);
                         nbtPet.setInteger("XpLevel", PetLevel);
                         short currentHP = dis.readShort();
-                        nbtCrystal.setInteger("PetHealth", currentHP);
+                        nbtCrystal.setFloat("PetHealth", currentHP);
                         nbtPet.setShort("Health", currentHP);
-                        nbtCrystal.setInteger("PetMaxHealth", dis.readShort());
+                        nbtCrystal.setFloat("PetMaxHealth", dis.readShort());
                         nbtCrystal.setInteger("PetAttack", dis.readShort());
                         
                         nbtCrystal.setCompoundTag("RPGPetInfo", nbtPet);

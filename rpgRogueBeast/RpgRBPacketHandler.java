@@ -27,20 +27,7 @@ public class RpgRBPacketHandler implements IPacketHandler {
 	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player player) {
 		handleRandom(packet, player);
-		EntityPlayer p = (EntityPlayer) player;
-		World world = p.worldObj;
-		int x = (int) p.posX;
-		int y = (int) p.posY;
-		int z = (int) p.posZ;
-		ObjectInputStream dis;
-		try {
-			dis = new ObjectInputStream(new ByteArrayInputStream(packet.data));
-			String newName = dis.readUTF();
-			setPetName(p, newName);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("nameRecievingFailed");
-		}
+		
 	}
 	private void handleRandom(Packet250CustomPayload packet, Player player) {
 
@@ -96,6 +83,16 @@ public class RpgRBPacketHandler implements IPacketHandler {
 					}
 				}
 				break;
+				default:
+					
+					try {
+						String newName = dis.readUTF();
+						setPetName(p, newName);
+					} catch (IOException e) {
+						e.printStackTrace();
+						System.out.println("nameRecievingFailed");
+					}
+					break;
 			}
 		}
 		catch(Throwable e)

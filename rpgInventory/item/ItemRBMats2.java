@@ -49,7 +49,7 @@ public class ItemRBMats2 extends Item {
                                     try {
                                         Boar.setName(stack.stackTagCompound.getString("PetName"));
                                         Boar.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
-                                        Boar.setEntityHealth(stack.stackTagCompound.getInteger("PetHealth"));
+                                        Boar.setEntityHealth(stack.stackTagCompound.getFloat("PetHealth"));
                                         if (Boar.getHealth() <= 0) {
                                             Boar.setEntityHealth(1);
                                         }
@@ -65,7 +65,7 @@ public class ItemRBMats2 extends Item {
                                     try {
                                         spider.setName(stack.stackTagCompound.getString("PetName"));
                                         spider.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
-                                        spider.setEntityHealth(stack.stackTagCompound.getInteger("PetHealth"));
+                                        spider.setEntityHealth(stack.stackTagCompound.getFloat("PetHealth"));
                                         if (spider.getHealth() <= 0) {
                                             spider.setEntityHealth(1);
                                         }
@@ -80,7 +80,7 @@ public class ItemRBMats2 extends Item {
                                     try {
                                         bull.setName(stack.stackTagCompound.getString("PetName"));
                                         bull.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
-                                        bull.setEntityHealth(stack.stackTagCompound.getInteger("PetHealth"));
+                                        bull.setEntityHealth(stack.stackTagCompound.getFloat("PetHealth"));
                                         if (bull.getHealth() <= 0) {
                                             bull.setEntityHealth(1);
                                         }

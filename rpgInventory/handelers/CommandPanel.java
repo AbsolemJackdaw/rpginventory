@@ -242,7 +242,7 @@ public class CommandPanel extends CommandBase {
 								EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(sender.getCommandSenderName());
 								NBTTagCompound nbt = player.getCurrentEquippedItem().getTagCompound();
 								if (nbt.hasKey("RPGPetInfo")) {
-									nbt.setInteger("PetPrevHealth", nbt.getInteger("PetHealth"));
+									nbt.setFloat("PetPrevHealth", nbt.getFloat("PetHealth"));
 									player.getCurrentEquippedItem().setTagCompound(nbt);
 								} else {
 									((EntityPlayer)sender).addChatMessage("Sorry Master, I am afraid this crystal is empty...");
