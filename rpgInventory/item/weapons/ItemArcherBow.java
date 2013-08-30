@@ -1,4 +1,4 @@
-package rpgInventory.weapons;
+package rpgInventory.item.weapons;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;

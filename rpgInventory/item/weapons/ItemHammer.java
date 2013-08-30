@@ -1,4 +1,4 @@
-package rpgInventory.weapons;
+package rpgInventory.item.weapons;
 
 import java.util.Random;
 
@@ -42,16 +42,11 @@ public class ItemHammer extends ItemRpgSword {
                     player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 200, 1));
                 }
             }
-
         }
         par1ItemStack.damageItem(1, player);
         if(par1ItemStack.getItemDamage() > par1ItemStack.getMaxDamage()){
             par1ItemStack = null;
         }
         return par1ItemStack;
-    }
-
-    public String getTextureFile() {
-        return "/subaraki/RPGinventoryTM.png";
     }
 }

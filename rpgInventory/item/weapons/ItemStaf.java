@@ -1,4 +1,4 @@
-package rpgInventory.weapons;
+package rpgInventory.item.weapons;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;

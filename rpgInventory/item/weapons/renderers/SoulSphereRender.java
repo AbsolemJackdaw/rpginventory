@@ -1,4 +1,4 @@
-package rpgInventory.weapons.sphere;
+package rpgInventory.item.weapons.renderers;
 
 import java.util.Random;
 
@@ -15,16 +15,17 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.gui.rpginv.RpgGui;
+import rpgInventory.item.weapons.models.ModelSoulSphere;
 
 
 public class SoulSphereRender implements IItemRenderer {
 
-	ModelSphere swordmodel;
+	ModelSoulSphere swordmodel;
 	public float hoverStart;
 	Random random = new Random();
 	public SoulSphereRender()
 	{
-		swordmodel = new ModelSphere();
+		swordmodel = new ModelSoulSphere();
 		this.hoverStart = (float)(Math.random() * Math.PI * 2.0D);
 
 	}

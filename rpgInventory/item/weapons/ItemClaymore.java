@@ -1,4 +1,4 @@
-package rpgInventory.weapons;
+package rpgInventory.item.weapons;
 
 import java.util.Random;
 

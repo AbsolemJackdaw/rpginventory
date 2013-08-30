@@ -8,7 +8,7 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.Configuration.RpgConfig;
-import rpgInventory.weapons.staf.StafRender;
+import rpgInventory.item.weapons.renderers.StafRender;
 import rpgMage.weapons.EntityElementalBlock;
 import rpgMage.weapons.RenderElementalBlock;
 import cpw.mods.fml.client.registry.RenderingRegistry;

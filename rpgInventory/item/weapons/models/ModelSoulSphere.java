@@ -1,11 +1,11 @@
-package rpgInventory.weapons.sphere;
+package rpgInventory.item.weapons.models;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelSphere extends ModelBase
+public class ModelSoulSphere extends ModelBase
 {
 	//fields
 	ModelRenderer circel1a;
@@ -41,7 +41,7 @@ public class ModelSphere extends ModelBase
 	ModelRenderer FloatingSphere2;
 	ModelRenderer FloatingSphere3;
 
-	public ModelSphere()
+	public ModelSoulSphere()
 	{
 		textureWidth = 64;
 		textureHeight = 32;

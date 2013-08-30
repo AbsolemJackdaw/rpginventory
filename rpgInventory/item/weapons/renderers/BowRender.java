@@ -1,4 +1,4 @@
-package rpgInventory.weapons.bow;
+package rpgInventory.item.weapons.renderers;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
@@ -16,7 +16,8 @@ import org.lwjgl.opengl.GL11;
 
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.RpgGui;
-import rpgInventory.weapons.ItemArcherBow;
+import rpgInventory.item.weapons.ItemArcherBow;
+import rpgInventory.item.weapons.models.ModelBow;
 
 public class BowRender implements IItemRenderer {
 

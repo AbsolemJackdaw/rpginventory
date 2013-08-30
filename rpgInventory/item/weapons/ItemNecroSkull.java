@@ -1,4 +1,4 @@
-package rpgInventory.weapons;
+package rpgInventory.item.weapons;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

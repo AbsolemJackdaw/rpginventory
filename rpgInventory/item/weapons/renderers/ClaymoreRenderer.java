@@ -1,4 +1,4 @@
-package rpgInventory.weapons.claymore;
+package rpgInventory.item.weapons.renderers;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -7,6 +7,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
+
+import rpgInventory.item.weapons.models.ModelClaymore;
 
 public class ClaymoreRenderer implements IItemRenderer {
 

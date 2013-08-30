@@ -1,4 +1,4 @@
-package rpgInventory.weapons.hammer;
+package rpgInventory.item.weapons.renderers;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
@@ -13,6 +13,7 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.gui.rpginv.RpgGui;
+import rpgInventory.item.weapons.models.ModelHammer;
 
 
 public class HammerRender implements IItemRenderer {

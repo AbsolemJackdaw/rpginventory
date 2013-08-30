@@ -2,20 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rpgInventory.weapons;
+package rpgInventory.item.weapons;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.Item;
 
 /**
  *
  * @author Richard Smith <rich1051414@gmail.com>
  */
-public class ItemRpgSword extends ItemSword {
-
-    public ItemRpgSword(int par1, EnumToolMaterial etm) {
-        super(par1, etm);
+public class ItemRpgWeapon extends Item{
+    public ItemRpgWeapon(int par1) {
+        super(par1);
         this.maxStackSize = 1;
     }
 

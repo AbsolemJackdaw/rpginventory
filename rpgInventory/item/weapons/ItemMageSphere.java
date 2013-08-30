@@ -1,4 +1,4 @@
-package rpgInventory.weapons;
+package rpgInventory.item.weapons;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;

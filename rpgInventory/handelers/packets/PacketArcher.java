@@ -9,8 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
+import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.handelers.CommonTickHandler;
-import rpgInventory.weapons.bow.EntityHellArrow;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketArcher {

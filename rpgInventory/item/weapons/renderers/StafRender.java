@@ -1,4 +1,4 @@
-package rpgInventory.weapons.staf;
+package rpgInventory.item.weapons.renderers;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
@@ -15,6 +15,7 @@ import org.lwjgl.util.Color;
 
 import rpgInventory.gui.rpginv.RpgGui;
 import rpgInventory.item.ItemElementalStaff;
+import rpgInventory.item.weapons.models.ModelStaf;
 
 
 public class StafRender implements IItemRenderer {
