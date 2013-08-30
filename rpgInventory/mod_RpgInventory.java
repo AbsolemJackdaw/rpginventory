@@ -28,7 +28,7 @@ import rpgInventory.handelers.CommonTickHandler;
 import rpgInventory.handelers.GuiHandler;
 import rpgInventory.handelers.PlayerTracker;
 import rpgInventory.handelers.RPGEventHooks;
-import rpgInventory.handelers.RpgPacketHandler;
+import rpgInventory.handelers.packets.RpgPacketHandler;
 import rpgInventory.handelers.proxy.CommonProxy;
 import rpgInventory.item.ItemCandy;
 import rpgInventory.item.ItemCrystal;

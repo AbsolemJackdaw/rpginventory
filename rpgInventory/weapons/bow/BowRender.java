@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.RpgGui;
+import rpgInventory.weapons.ItemArcherBow;
 
 public class BowRender implements IItemRenderer {
 
@@ -51,44 +52,33 @@ public class BowRender implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		int usingItem = ((ItemArcherBow)item.getItem()).usingItem;
+
 		switch (type) {
 
 		case EQUIPPED:
 		{
-			int k = mod_RpgInventory.elfbow.itemID;
 			GL11.glPushMatrix();
 			Minecraft mc = Minecraft.getMinecraft();
 			if (((EntityPlayer) data[1]).getCurrentEquippedItem() != null) {
-				switch (k) {
-				case 23:
+				if(usingItem < 5)
 					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
-					break;
-				case 24:
+				else if(usingItem >= 5 && usingItem < 25)
 					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow2.png"));
-					break;
-				case 25:
+				else if(usingItem >= 25)
 					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow3.png"));
-					break;
-				default:
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
-					break;
-				}
+//				else
+//					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
 			}
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(150F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
 			if (data[1] != null && data[1] instanceof EntityPlayer) {
 				if (!((EntityPlayer) data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && !((Minecraft.getMinecraft().currentScreen instanceof GuiInventory || Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative || Minecraft.getMinecraft().currentScreen instanceof RpgGui) && RenderManager.instance.playerViewY == 180.0F))) {
-					GL11.glTranslatef(0F, -0.45F, -0.7F);
-				} else {
-					GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
-					GL11.glRotatef(-10F, 1.0f, 0.0f, 0.0f);
-					GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
-					GL11.glTranslatef(0F, -0.6F, -0.8F);
+					GL11.glTranslatef(0F, 0.65F, -0.7F);
+					GL11.glRotatef(180, 0, 0, 01);
 				}
-			} else {
-				GL11.glTranslatef(0F, -0.45F, -0.7F);
-			}
+			} 
 			swordmodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			GL11.glPopMatrix();
 		}
@@ -96,24 +86,17 @@ public class BowRender implements IItemRenderer {
 
 		case EQUIPPED_FIRST_PERSON:
 		{
-			int k = mod_RpgInventory.elfbow.itemID;
 			GL11.glPushMatrix();
 			Minecraft mc = Minecraft.getMinecraft();
 			if (((EntityPlayer) data[1]).getCurrentEquippedItem() != null) {
-				switch (k) {
-				case 23:
+				if(usingItem < 5)
 					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
-					break;
-				case 24:
+				else if(usingItem >= 5 && usingItem < 25)
 					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow2.png"));
-					break;
-				case 25:
+				else if(usingItem >= 25 )
 					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow3.png"));
-					break;
-				default:
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
-					break;
-				}
+//				else
+//					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
 			}
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(150F, 1.0f, 0.0f, 0.0f);
@@ -134,7 +117,7 @@ public class BowRender implements IItemRenderer {
 			GL11.glPopMatrix();
 		}
 		break;
-		
+
 		case ENTITY:
 		{
 			GL11.glPushMatrix();
@@ -156,14 +139,14 @@ public class BowRender implements IItemRenderer {
 
 			break;
 		}
-//		case INVENTORY:
-//		{
-//			Minecraft mc = Minecraft.getMinecraft();
-//			RenderItem renderItem = new RenderItem();
-//			Icon icon = mod_RpgInventory.elfbow.getIcon(item, 0, mc.thePlayer, mc.thePlayer.getItemInUse(), mc.thePlayer.getItemInUseDuration());
-//			renderItem.renderIcon(0, 0, icon, 16, 16);
-//			break;
-//		}
+		//		case INVENTORY:
+		//		{
+		//			Minecraft mc = Minecraft.getMinecraft();
+		//			RenderItem renderItem = new RenderItem();
+		//			Icon icon = mod_RpgInventory.elfbow.getIcon(item, 0, mc.thePlayer, mc.thePlayer.getItemInUse(), mc.thePlayer.getItemInUseDuration());
+		//			renderItem.renderIcon(0, 0, icon, 16, 16);
+		//			break;
+		//		}
 
 		default:
 			break;

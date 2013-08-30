@@ -20,6 +20,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemArcherBow extends Item {
 
     public static final String[] ItemNameArray = new String[]{"elmBow", "elmBow2", "elmBow3", "elmBow4"};
+    
+    public int usingItem = 0;
     @SideOnly(Side.CLIENT)
     private Icon[] IconArray;
 
@@ -42,6 +44,7 @@ public class ItemArcherBow extends Item {
     @Override
     public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count) {
         player.setItemInUse(stack, count);
+		usingItem++;
     }
 
     /**
@@ -50,6 +53,7 @@ public class ItemArcherBow extends Item {
      */
     public void onPlayerStoppedUsing(ItemStack stack, World par2World, EntityPlayer player, int par4) {
         super.onPlayerStoppedUsing(stack, par2World, player, par4);
+        usingItem =0;
         RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
 
         ItemStack shield = rpg.getJewelInSlot(1);
