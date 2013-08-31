@@ -760,6 +760,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 	//		//Do No Player Model rendering, let the vanilla render do this.
 	//	}
 
+	int countdown = 100;
 	@Override
 	public void doRender(Entity par1EntityPlayer, double par2, double par4, double par6, float par8, float par9) {
 		Field fieldPlayerModel = null;
@@ -797,6 +798,11 @@ public class RenderPlayerJewels extends RenderPlayer {
 			this.modelBipedMain = (ModelBiped) privatebiped;
 		} catch (Throwable ex) {
 			ex.printStackTrace();
+		}
+		countdown--;
+		if(countdown == 0){
+			FMLLog.getLogger().info("" + defaultPlayerRender);
+			countdown =100;
 		}
 		super.doRender((EntityPlayer) par1EntityPlayer, par2, par4, par6, par8, par9);
 	}
