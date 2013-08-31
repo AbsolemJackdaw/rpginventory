@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import rpgInventory.item.weapons.models.ModelClaymore;
 
-public class ClaymoreRenderer implements IItemRenderer {
+public class ClaymoreRenderer extends RpgItemRenderer {
 
 	ModelClaymore swordmodel;
 
@@ -18,89 +18,61 @@ public class ClaymoreRenderer implements IItemRenderer {
 	{
 		swordmodel = new ModelClaymore();
 	}
-	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		switch(type)
-		{
-		case  EQUIPPED: return true;
-		case  EQUIPPED_FIRST_PERSON: return true;
-		case ENTITY: return true;
-		default: break;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-			ItemRendererHelper helper) {
-		return false;
-	}
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		switch(type){
 
 		case  EQUIPPED:
-		{
-			Minecraft mc = Minecraft.getMinecraft();
-
 			GL11.glPushMatrix();
-
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Sword.png"));
-
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(-5F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(-150F, 0.0f, 0.0f, 1.0f);
-
 			GL11.glTranslatef(-0.8F, 0.6F, -0.1F);
-
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-
 			GL11.glPopMatrix();
-		}
 		break;
+		
 		case  EQUIPPED_FIRST_PERSON:
-		{
-			Minecraft mc = Minecraft.getMinecraft();
-
 			GL11.glPushMatrix();
-
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Sword.png"));
-
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(-5F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(-150F, 0.0f, 0.0f, 1.0f);
-
-			GL11.glTranslatef(-0.8F, 0.6F, -0.1F);
-
+			GL11.glTranslatef(-0.8F, 0.9F, -0.1F);
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-
 			GL11.glPopMatrix();
-		}
 		break;
+		
 		case  ENTITY:
-		{
-			Minecraft mc = Minecraft.getMinecraft();
-
 			GL11.glPushMatrix();
-
-			float scale = 1.5F;
+			scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Sword.png"));
-
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(45F, 0.0f, 0.0f, 1.0f);
-
 			GL11.glTranslatef( -0.2F, 1F, 0F);
-
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-
 			GL11.glPopMatrix();
-		}
 		break;
+		
+		case INVENTORY:
+			GL11.glPushMatrix();
+			scale = 0.7F;
+			GL11.glScalef(scale,scale,scale);
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Sword.png"));
 
-		default: break;
+			GL11.glRotatef(200F, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(-80F, 0.0f, 1.0f, 0.0f);
+			GL11.glTranslatef(0.0F, 1.2F, 0F);
+			swordmodel.render(0.0625F);
+			GL11.glPopMatrix();
+			break;
+			
+		default: 
+			break;
 		}
 	}
 

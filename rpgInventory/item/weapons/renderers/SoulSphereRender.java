@@ -14,11 +14,14 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import rpgInventory.EnumRpgClass;
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.RpgGui;
+import rpgInventory.gui.rpginv.RpgInv;
 import rpgInventory.item.weapons.models.ModelSoulSphere;
 
 
-public class SoulSphereRender implements IItemRenderer {
+public class SoulSphereRender extends RpgItemRenderer {
 
 	ModelSoulSphere swordmodel;
 	public float hoverStart;
@@ -27,25 +30,6 @@ public class SoulSphereRender implements IItemRenderer {
 	{
 		swordmodel = new ModelSoulSphere();
 		this.hoverStart = (float)(Math.random() * Math.PI * 2.0D);
-
-	}
-
-	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		switch(type)
-		{
-		case EQUIPPED: return true;
-		case EQUIPPED_FIRST_PERSON: return true;
-		case ENTITY : return true;
-		default: break;
-		}	
-		return false;
-	}
-
-	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-			ItemRendererHelper helper) {
-		return false;
 	}
 
 	float turn = 0;
@@ -56,118 +40,74 @@ public class SoulSphereRender implements IItemRenderer {
 		switch(type)
 		{
 		case  EQUIPPED:
-		{	
-			Minecraft mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
-			float scale = 0.45F;
+			scale = 0.45F;
 			GL11.glScalef(scale,scale,scale);
-
-			if(data[1] != null && data[1] instanceof EntityPlayer)
-			{
-				if(!((EntityPlayer)data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && !((Minecraft.getMinecraft().currentScreen instanceof GuiInventory || Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative || Minecraft.getMinecraft().currentScreen instanceof RpgGui) && RenderManager.instance.playerViewY == 180.0F)))
-				{
-					GL11.glTranslatef(0.7F, 1.6F, -0.2F);
-				}
-				else
-				{
-					GL11.glTranslatef(0.5F, 1F, -0.2F);
-				}
-			}
-			else
-			{
-				GL11.glTranslatef(0.5F, 1F, -0.2F);
-			}
-
+			GL11.glTranslatef(1.2F, 1F, -0.2F);
 			turn +=0.01f;
-			swordmodel.renderFloatingShpere((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			swordmodel.renderFloatingShpere((Entity)data[1], -(turn)+100, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-
+			if(data[1] != null && data [1] instanceof EntityPlayer){
+				EntityPlayer p = (EntityPlayer)data[1];
+				RpgInv inv = mod_RpgInventory.proxy.getInventory(p.username);
+				inv.classSets = EnumRpgClass.getPlayerClasses(p);
+				if (inv.hasClass(EnumRpgClass.MAGE) || inv.hasClass(EnumRpgClass.ARCHMAGE)) {
+					swordmodel.renderFloatingShpere((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+					swordmodel.renderFloatingShpere((Entity)data[1], -(turn)+100, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+					swordmodel.renderFloatingShpere((Entity)data[1], -(turn)/2, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+				}
+			}
 			swordmodel.render((Entity)data[1], 0, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			GL11.glPopMatrix();
-		}
-		break;
-		
+			break;
+
 		case  EQUIPPED_FIRST_PERSON:
-		{	
-			Minecraft mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
-			float scale = 0.45F;
+			scale = 0.45F;
 			GL11.glScalef(scale,scale,scale);
-
 			GL11.glTranslatef(0.8F, 1.2F, -0.2F);
-
-
 			turn +=0.01f;
-			swordmodel.renderFloatingShpere((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			swordmodel.renderFloatingShpere((Entity)data[1], -(turn)+100, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-
+			if(data[1] != null && data [1] instanceof EntityPlayer){
+				EntityPlayer p = (EntityPlayer)data[1];
+				RpgInv inv = mod_RpgInventory.proxy.getInventory(p.username);
+				inv.classSets = EnumRpgClass.getPlayerClasses(p);
+				if (inv.hasClass(EnumRpgClass.MAGE) || inv.hasClass(EnumRpgClass.ARCHMAGE)) {
+					swordmodel.renderFloatingShpere((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+					swordmodel.renderFloatingShpere((Entity)data[1], -(turn)+100, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+					swordmodel.renderFloatingShpere((Entity)data[1], -(turn)/2, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+				}
+			}
 			swordmodel.render((Entity)data[1], 0, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-
 			GL11.glPopMatrix();
-		}
-		break;
+			break;
+			
 		case ENTITY:
-		{	
-			Minecraft mc = Minecraft.getMinecraft();
-
 			GL11.glPushMatrix();
-
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
-
 			float scale = 0.8F;
 			GL11.glScalef(scale,scale,scale);
-
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
-
-			GL11.glTranslatef(0F, 1.2F, 0.0F);
-
+			GL11.glTranslatef(0F, 0.3F, 0.0F);
 			turn +=0.01f;
-			swordmodel.renderFloatingShpere((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			swordmodel.renderFloatingShpere((Entity)data[1], -(turn)+100, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-
 			swordmodel.render((Entity)data[1], 0, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-
 			GL11.glPopMatrix();
+			break;
 
-		}
-		break;
+		case INVENTORY:
+			mc = Minecraft.getMinecraft();
+			GL11.glPushMatrix();
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
+			scale = 1.9F;
+			GL11.glScalef(scale,scale,scale);
+			GL11.glTranslatef(0.0F, 0.2F, 0F);
+			swordmodel.render(0.0625F);
+			GL11.glPopMatrix();
+			break;
 
-		default: break;
+		default: 
+			break;
 		}
-	}
-
-	public void blockLoop(Entity p, float repeat)
-	{
-		for(float var1 =0f; var1 <repeat; var1+= 0.1F)
-		{
-			swordmodel.render(p, var1, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-		}
-	}
-
-	public byte getMiniItemCountForItemStack(ItemStack stack)
-	{
-		byte var24;
-		int var19 = stack.stackSize;
-		if (var19 < 2)
-		{
-			var24 = 1;
-		}
-		else if (var19 < 16)
-		{
-			var24 = 2;
-		}
-		else if (var19 < 32)
-		{
-			var24 = 3;
-		}
-		else
-		{
-			var24 = 4;
-		}
-		return var24;
 	}
 }

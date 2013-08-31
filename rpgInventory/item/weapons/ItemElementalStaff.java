@@ -1,4 +1,4 @@
-package rpgInventory.item;
+package rpgInventory.item.weapons;
 
 import java.util.List;
 
@@ -13,7 +13,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.item.weapons.ItemRpgSword;
 import rpgMage.weapons.EntityElementalBlock;
 
 public class ItemElementalStaff extends ItemRpgSword {

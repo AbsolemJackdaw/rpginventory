@@ -14,11 +14,11 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 
 import rpgInventory.gui.rpginv.RpgGui;
-import rpgInventory.item.ItemElementalStaff;
+import rpgInventory.item.weapons.ItemElementalStaff;
 import rpgInventory.item.weapons.models.ModelStaf;
 
 
-public class StafRender implements IItemRenderer {
+public class StafRender extends RpgItemRenderer {
 
 	ModelStaf swordmodel;
 	public int step;
@@ -28,152 +28,77 @@ public class StafRender implements IItemRenderer {
 	{
 		swordmodel = new ModelStaf();
 	}
-	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		switch(type)
-		{
-		case  EQUIPPED: return true;
-		case  EQUIPPED_FIRST_PERSON: return true;
-		case ENTITY: return true;
-		default: break;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-			ItemRendererHelper helper) {
-		return false;
-	}
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		switch(type)
 		{
 		case  EQUIPPED:
-		{	
-			Minecraft mc = Minecraft.getMinecraft();
 
 			GL11.glPushMatrix();
-
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Staff.png"));
-
-			boolean isFirstPerson;
-
-			if(data[1] != null && data[1] instanceof EntityPlayer)
-			{
-				if(!((EntityPlayer)data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && !((Minecraft.getMinecraft().currentScreen instanceof GuiInventory || Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative|| Minecraft.getMinecraft().currentScreen instanceof RpgGui) && RenderManager.instance.playerViewY == 180.0F)))
-				{
-					float scale = 0.8F;
-					GL11.glTranslatef(0.3F, 0.8F, 0.05F);
-					GL11.glRotatef(-90f, 1.0f, 0.0f, 0.0f);
-					GL11.glRotatef(-130f, 0.0f, 1.0f, 0.0f);
-					GL11.glRotatef(90F, 0.0f, 0.0f, 1.0f);
-					GL11.glScalef(scale,scale,scale);
-				}
-				else
-				{
-					isFirstPerson = true;
-					float scale = 0.8F;
-					GL11.glScalef(scale,scale,scale);
-					GL11.glRotatef(180F, 1.0f, 0.0f, 0.0f);
-					GL11.glRotatef(-80F, 0.0f, 1.0f, 0.0f);
-					GL11.glRotatef(-7F, 0.0f, 0.0f, 1.0f);
-					GL11.glTranslatef(0.3F, -0.2F, -0.4F);
-				}
-			}
-			else
-			{
-				GL11.glTranslatef(0.35F, -0.5F, -0.2F);
-			}
+			scale = 0.8F;
+			GL11.glTranslatef(0.3F, 0.8F, 0.05F);
+			GL11.glRotatef(-90f, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(-130f, 0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(90F, 0.0f, 0.0f, 1.0f);
+			GL11.glScalef(scale,scale,scale);
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			blockLoop((Entity)data[1],15, item);
 			GL11.glPopMatrix();
-		}
-		break;
+			break;
 
 		case  EQUIPPED_FIRST_PERSON:
-		{	
-			Minecraft mc = Minecraft.getMinecraft();
-
 			GL11.glPushMatrix();
-
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Staff.png"));
-
-			boolean isFirstPerson;
-
-			if(data[1] != null && data[1] instanceof EntityPlayer)
-			{
-				if(!((EntityPlayer)data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && !((Minecraft.getMinecraft().currentScreen instanceof GuiInventory || Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative|| Minecraft.getMinecraft().currentScreen instanceof RpgGui) && RenderManager.instance.playerViewY == 180.0F)))
-				{
-					float scale = 0.8F;
-					GL11.glTranslatef(0.3F, 0.8F, 0.05F);
-					GL11.glRotatef(-90f, 1.0f, 0.0f, 0.0f);
-					GL11.glRotatef(-130f, 0.0f, 1.0f, 0.0f);
-					GL11.glRotatef(90F, 0.0f, 0.0f, 1.0f);
-					GL11.glScalef(scale,scale,scale);
-				}
-				else
-				{
-					isFirstPerson = true;
-					float scale = 0.8F;
-					GL11.glScalef(scale,scale,scale);
-					GL11.glRotatef(180F, 1.0f, 0.0f, 0.0f);
-					GL11.glRotatef(-80F, 0.0f, 1.0f, 0.0f);
-					GL11.glRotatef(-7F, 0.0f, 0.0f, 1.0f);
-					GL11.glTranslatef(0.3F, -0.2F, -0.4F);
-				}
-			}
-			else
-			{
-				GL11.glTranslatef(0.35F, -0.5F, -0.2F);
-			}
+			scale = 0.8F;
+			GL11.glScalef(scale,scale,scale);
+			GL11.glRotatef(180F, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(-80F, 0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(-7F, 0.0f, 0.0f, 1.0f);
+			GL11.glTranslatef(0.3F, -0.2F, -0.4F);
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			blockLoop((Entity)data[1],15, item);
 			GL11.glPopMatrix();
-		}
-		break;
+			break;
 
 		case  ENTITY:
-		{
-
 			GL11.glPushMatrix();
-			Minecraft mc = Minecraft.getMinecraft();
-
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Staff.png"));
-
-			float scale = 1.5F;
-
+			scale = 1.5F;
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
-
 			GL11.glTranslatef( 0.2F, 0F, 0F);
 			swordmodel.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			blockLoop((Entity)data[1],0, item);
+			GL11.glPopMatrix();
+			break;
 
+		case INVENTORY:
+			mc = Minecraft.getMinecraft();
+			GL11.glPushMatrix();
+			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Staff.png"));
+			scale = 1F;
+			GL11.glScalef(scale,scale-0.2f,scale);
+			GL11.glRotatef(200F, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(-10F, 0.0f, 1.0f, 0.0f);
+			GL11.glTranslatef(0.0F, 0.1F, 0F);
+			swordmodel.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			blockLoop(null,0, item);
 
 			GL11.glPopMatrix();
-		}
-		break;
-
-		default: break;
+			break;
+		default:
+			break;
 		}
 	}
+
+
 	public void blockLoop(Entity p, float repeat , ItemStack item)
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 		mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/ElementalStaff.png"));
-		//		GL11.glEnable(GL11.GL_BLEND);
-		//		GL11.glDisable(GL11.GL_LIGHTING);
-		//		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		//		if( p instanceof EntityPlayer)
-		//		{
-		//			EntityPlayer player = (EntityPlayer) p;
-		//			if(player.getCurrentEquippedItem() != null)
-		//			{
-		//				if(player.getCurrentEquippedItem().getItem() instanceof ItemElementalStaff)
-		//				{
 		if(item != null){
 			if(item.getItem() instanceof ItemElementalStaff ){
 
@@ -221,7 +146,6 @@ public class StafRender implements IItemRenderer {
 				break;
 				}
 			}
-
 			else
 				GL11.glColor4f(0, 0.2f, 0.7f, 1F);
 		}
@@ -235,9 +159,9 @@ public class StafRender implements IItemRenderer {
 			swordmodel.sphere(p, var1 + rotate, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 		}
 	}
+
 	public Color getColor(double d, double e, double f,
-			int phase1, int phase2, int phase3, float i)
-	{
+			int phase1, int phase2, int phase3, float i){
 		int center = 128;
 		int width = 127;
 

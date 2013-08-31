@@ -238,13 +238,17 @@ public class ModelSoulSphere extends ModelBase
 		FloatingSphere3.setTextureSize(64, 32);
 		FloatingSphere3.mirror = true;
 		setRotation(FloatingSphere3, 0F, 0F, 0F);
-		
+
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		render(f5);	
+	}
+
+	public void render(float f5){
 		circel1a.render(f5);
 		circel1b.render(f5);
 		circel1c.render(f5);
@@ -275,10 +279,12 @@ public class ModelSoulSphere extends ModelBase
 		Shape22.render(f5);
 		Shape23.render(f5);
 	}
-	
 	public void renderFloatingShpere(Entity entity, float f, float f1, float f2, float f3, float f4, float f5){
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		renderSPheres(f5);
+	}
+	public void renderSPheres(float f5){
 		FloatingSphere1.render(f5);
 		FloatingSphere2.render(f5);
 		FloatingSphere3.render(f5);
@@ -295,17 +301,17 @@ public class ModelSoulSphere extends ModelBase
 	{
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
 
-			this.FloatingSphere1.rotateAngleY = (MathHelper.sin(f)*1F)+3.6f;
-			this.FloatingSphere2.rotateAngleY = (MathHelper.sin(f)*2F)+6.5f;
-			this.FloatingSphere3.rotateAngleY = (MathHelper.sin(f)*3F)+4.5f;
-		
-			this.FloatingSphere1.rotateAngleX = (MathHelper.sin(f)*6F)+4.1f;
-			this.FloatingSphere2.rotateAngleX = (MathHelper.sin(f)*4F)+4.7f;
-			this.FloatingSphere3.rotateAngleX = (MathHelper.sin(f)*5F)+3.25f;
-			
-			this.FloatingSphere1.rotateAngleZ = (MathHelper.sin(f)*4F)+5.5f;
-			this.FloatingSphere2.rotateAngleZ = (MathHelper.sin(f)*5F)+7;
-			this.FloatingSphere3.rotateAngleZ = (MathHelper.sin(f)*6F)+2;
+		this.FloatingSphere1.rotateAngleY = (MathHelper.sin(f)*1F)+3.6f;
+		this.FloatingSphere2.rotateAngleY = (MathHelper.sin(f)*2F)+6.5f;
+		this.FloatingSphere3.rotateAngleY = (MathHelper.sin(f)*3F)+4.5f;
+
+		this.FloatingSphere1.rotateAngleX = (MathHelper.sin(f)*6F)+4.1f;
+		this.FloatingSphere2.rotateAngleX = (MathHelper.sin(f)*4F)+4.7f;
+		this.FloatingSphere3.rotateAngleX = (MathHelper.sin(f)*5F)+3.25f;
+
+		this.FloatingSphere1.rotateAngleZ = (MathHelper.sin(f)*4F)+5.5f;
+		this.FloatingSphere2.rotateAngleZ = (MathHelper.sin(f)*5F)+7;
+		this.FloatingSphere3.rotateAngleZ = (MathHelper.sin(f)*6F)+2;
 	}
 
 }
