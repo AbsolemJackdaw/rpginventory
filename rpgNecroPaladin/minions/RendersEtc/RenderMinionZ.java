@@ -1,11 +1,14 @@
 package rpgNecroPaladin.minions.RendersEtc;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.model.ModelZombieVillager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import rpgNecroPaladin.minions.EntityMinionZ;
 import cpw.mods.fml.relauncher.Side;
@@ -99,5 +102,15 @@ public class RenderMinionZ extends RenderBiped
     public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
         this.func_82426_a((EntityMinionZ)par1Entity, par2, par4, par6, par8, par9);
+    }
+    
+    protected void func_82438_a(float par2)
+    {  
+            GL11.glScalef(0.8F, 0.8F, 0.8F);
+    }
+    @Override
+    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+    {
+        this.func_82438_a( par2);
     }
 }

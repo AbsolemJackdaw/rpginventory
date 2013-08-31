@@ -3,6 +3,8 @@ package rpgNecroPaladin.minions.RendersEtc;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -35,7 +37,16 @@ public class RenderMinionS extends RenderBiped
     {
         return this.func_110860_a((EntityMinionS)par1EntityLiving);
     }
-
+    
+    protected void func_82438_a(float par2)
+    {  
+            GL11.glScalef(0.8F, 0.8F, 0.8F);
+    }
+    @Override
+    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+    {
+        this.func_82438_a( par2);
+    }
 
     protected ResourceLocation func_110775_a(Entity par1Entity)
     {
