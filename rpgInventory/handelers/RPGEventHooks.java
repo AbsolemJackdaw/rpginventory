@@ -99,10 +99,10 @@ public class RPGEventHooks {
      }
 	 */
 	
-	@ForgeSubscribe
-	public void PlayerRender(RenderPlayerEvent.Specials evt ){
-		
-	}
+//	@ForgeSubscribe
+//	public void PlayerRender(RenderPlayerEvent.Specials evt ){
+//		
+//	}
 
 	@ForgeSubscribe
 	public void PlayerUpdate(PlayerEvent.LivingUpdateEvent evt) {
