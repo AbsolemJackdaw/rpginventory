@@ -42,7 +42,7 @@ public class RenderDagger extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			float scale = 0.6F;
 			GL11.glScalef(scale,scale,scale);
-			if(((Entity)data[1]).worldObj.isDaytime())
+			if((Entity)data[1]!= null && ((Entity)data[1]).worldObj.isDaytime())
 				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/dagger.png"));
 			else
 				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/daggerNight.png"));

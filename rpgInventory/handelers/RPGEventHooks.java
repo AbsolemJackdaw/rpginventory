@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
+import cpw.mods.fml.common.FMLLog;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -99,19 +101,19 @@ public class RPGEventHooks {
 	public void PlayerUpdate(PlayerEvent.LivingUpdateEvent evt) {
 		try {
 			if (evt.entityLiving instanceof EntityPlayer) {
-				mod_RpgInventory.proxy.getInventory(((EntityPlayer) evt.entityLiving).username).onInventoryChanged();
+				mod_RpgInventory.proxy.getInventory(((EntityPlayer)evt.entityLiving).username).onInventoryChanged();
 			}
 		} catch (Throwable ex) {
 		}
-		
+
 		try {
 			if (evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer p = (EntityPlayer) evt.entityLiving;
 				if (p != null) {
-//					if (p.func_110143_aJ() >= p.func_110138_aP()) {
-//						p.setEntityHealth(p.func_110138_aP());
-//					}
-					
+					//					if (p.func_110143_aJ() >= p.func_110138_aP()) {
+					//						p.setEntityHealth(p.func_110138_aP());
+					//					}
+
 					if (p.getActivePotionEffects() != null && p.getActivePotionEffects().size() > 0) {
 						PotionEffect decompose = p.getActivePotionEffect(mod_RpgInventory.decomposePotion);
 						PotionEffect machicism = p.getActivePotionEffect(mod_RpgInventory.masochismPotion);
@@ -141,8 +143,10 @@ public class RPGEventHooks {
 							}
 						}
 					}
+
 					RpgInv rpginv = mod_RpgInventory.proxy.getInventory(p.username);
 					rpginv.classSets = EnumRpgClass.getPlayerClasses(p);
+
 					ItemStack neck = rpginv.getNecklace();
 					ItemStack ringa = rpginv.getRing1();
 					ItemStack ringb = rpginv.getRing2();
@@ -186,12 +190,8 @@ public class RPGEventHooks {
 							{p.curePotionEffects(new ItemStack(Item.bucketMilk, 1));}
 						}
 						if (weapon.itemID == mod_RpgInventory.hammer.itemID) {
-//							FMLLog.getLogger().info(""+EnumRpgClass.getPlayerClasses(p));
-//							FMLLog.getLogger().info(""+rpginv.classSets);
 
 							if (rpginv.hasClass(EnumRpgClass.SHIELDEDBERSERKER)) {
-//								FMLLog.getLogger().info("berserker with shield");
-
 								if ((p.getFoodStats().getFoodLevel() < 4 || p.func_110143_aJ() < 4)) {
 									Map tmp = EnchantmentHelper.getEnchantments(weapon);
 									tmp.put(Enchantment.knockback.effectId, 3);
@@ -214,7 +214,6 @@ public class RPGEventHooks {
 					}
 
 					if (rpginv.hasClass(EnumRpgClass.NECRO)) {
-//						FMLLog.getLogger().info(" :D ");
 						if (p.getActivePotionEffect(Potion.regeneration) != null) {
 							p.addPotionEffect(new PotionEffect(mod_RpgInventory.decomposePotion.id, p.getActivePotionEffect(Potion.regeneration).getDuration() * 2, p.getActivePotionEffect(Potion.regeneration).getAmplifier()));
 							p.removePotionEffect(Potion.regeneration.id);
@@ -226,31 +225,31 @@ public class RPGEventHooks {
 					}
 					if (neck != null && neck.getItem().equals(mod_RpgInventory.neckem))
 					{
-				        boolean flag = p instanceof EntityPlayer && ((EntityPlayer)p).capabilities.disableDamage;
+						boolean flag = p instanceof EntityPlayer && ((EntityPlayer)p).capabilities.disableDamage;
 
 						if (p.isEntityAlive() && p.isInsideOfMaterial(Material.water) && !flag)
-				        {
-				            p.setAir(decreaseAirSupply(p.getAir()+1));
+						{
+							p.setAir(decreaseAirSupply(p.getAir()+1));
 
-				            if (p.getAir() == -20)
-				            {
-				                p.setAir(0);
+							if (p.getAir() == -20)
+							{
+								p.setAir(0);
 
-				                for (int i = 0; i < 8; ++i)
-				                {
-				                    float f = this.rand.nextFloat() - this.rand.nextFloat();
-				                    float f1 = this.rand.nextFloat() - this.rand.nextFloat();
-				                    float f2 = this.rand.nextFloat() - this.rand.nextFloat();
-				                    p.worldObj.spawnParticle("bubble", p.posX + (double)f, p.posY + (double)f1, p.posZ + (double)f2, p.motionX, p.motionY, p.motionZ);
-				                }
-				                p.attackEntityFrom(DamageSource.drown, 1);
-				            }
-				            p.extinguish();
-				        }
-				        else
-				        {
-				            p.setAir(300);
-				        }
+								for (int i = 0; i < 8; ++i)
+								{
+									float f = this.rand.nextFloat() - this.rand.nextFloat();
+									float f1 = this.rand.nextFloat() - this.rand.nextFloat();
+									float f2 = this.rand.nextFloat() - this.rand.nextFloat();
+									p.worldObj.spawnParticle("bubble", p.posX + (double)f, p.posY + (double)f1, p.posZ + (double)f2, p.motionX, p.motionY, p.motionZ);
+								}
+								p.attackEntityFrom(DamageSource.drown, 1);
+							}
+							p.extinguish();
+						}
+						else
+						{
+							p.setAir(300);
+						}
 					}
 
 					if(ringb != null && ringb.getItem().equals(mod_RpgInventory.ringem)) {
@@ -280,7 +279,7 @@ public class RPGEventHooks {
 						speedboost *= 0.75F;
 					}
 					p.setAIMoveSpeed(speedboost);
-					
+
 					if (ArcherRepairTick.containsKey(p.username)) {
 						if (rpginv.hasClass(EnumRpgClass.ARCHER)) {
 							p.jumpMovementFactor = 0.09F;
@@ -305,8 +304,8 @@ public class RPGEventHooks {
 				}
 			}
 		} catch (Throwable ex) {
+			FMLLog.getLogger().info("Failed to update Player !! rpgEventHooks");
 		}
-
 	}
 
 	@ForgeSubscribe

@@ -15,6 +15,7 @@ import net.minecraft.util.StatCollector;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.RpgInv;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -148,27 +149,23 @@ public class ItemRpgArmor extends Item {
     @Override
     public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving) {
         RpgInv rpg = mod_RpgInventory.proxy.getInventory(((EntityPlayer) par3EntityLiving).username);
+        rpg.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer) par3EntityLiving);
 
         if (((EntityPlayer) par3EntityLiving).getCurrentEquippedItem().getItem() == mod_RpgInventory.daggers) {
-            if (rpg.hasClass(EnumRpgClass.ROGUE)) {
-                par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 40, 0));
-                if (((EntityPlayer) par3EntityLiving).worldObj.getWorldTime() > 12500) {
-                    par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 12);
-                }
-
-            } else if (rpg.hasClass(EnumRpgClass.NINJA)) {
+        	if (rpg.hasClass(EnumRpgClass.NINJA)) {
                 par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 80, 1));
-
-
-            }
-            if (((EntityPlayer) par3EntityLiving).worldObj.getWorldTime() > 12500) {
-                par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 12);
+            }else if (rpg.hasClass(EnumRpgClass.ROGUE)) {
+                par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 40, 0));
+                if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
+                    par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 10);
+                }
+            } 
+            if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
+                par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 10);
             } else {
                 par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 6);
             }
-
         }
-
         return false;
     }
 

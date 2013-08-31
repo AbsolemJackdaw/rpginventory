@@ -44,19 +44,19 @@ public class RpgPacketHandler implements IPacketHandler {
 	}
 
 	private void handleRawInventory(Packet250CustomPayload packet, EntityPlayer p) {
-		try {
-			NBTTagCompound nbt = CompressedStreamTools.decompress(packet.data);
-			RpgInv inv = new RpgInv(nbt.getString("username"));
-			NBTTagList list = nbt.getTagList("items");
-			for (int i = 0; i < inv.armorSlots.length; i++) {
-				NBTTagCompound tc = (NBTTagCompound) list.tagAt(i);
-				if (tc != null) {
-					inv.armorSlots[i] = ItemStack.loadItemStackFromNBT(tc);
-				}
-			}
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+//		try {
+//			NBTTagCompound nbt = CompressedStreamTools.decompress(packet.data);
+//			RpgInv inv = new RpgInv(nbt.getString("username"));
+//			NBTTagList list = nbt.getTagList("items");
+//			for (int i = 0; i < inv.armorSlots.length; i++) {
+//				NBTTagCompound tc = (NBTTagCompound) list.tagAt(i);
+//				if (tc != null) {
+//					inv.armorSlots[i] = ItemStack.loadItemStackFromNBT(tc);
+//				}
+//			}
+//		} catch (IOException ex) {
+//			ex.printStackTrace();
+//		}
 	}
 
 	private void handleRandom(Packet250CustomPayload packet, Player player) {

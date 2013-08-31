@@ -24,6 +24,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.common.FMLLog;
+
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.RpgGui;
 import rpgInventory.gui.rpginv.RpgInv;
@@ -51,6 +53,7 @@ import rpgInventory.renderer.models.weapons.NecroSkull;
 public class RenderPlayerJewels extends RenderPlayer {
 
 	public static Map<Class<? extends Entity>, Render> defaultPlayerRender = new HashMap();
+
 	public static RenderPlayerJewels instance;
 	private ModelBiped modelBipedMain;
 	private ModelShield modelShield;
@@ -346,8 +349,8 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glRotatef(50F, 0.0f, 0.0f, 1.0f);
 
 				dagger.renderDagger(0.0625f);
-					this.modelBipedMain.heldItemLeft = 1;
-				this.setRenderPassModel(dagger);
+				this.modelBipedMain.heldItemLeft = 1;
+				//this.setRenderPassModel(dagger);
 
 			} else if (mod_RpgInventory.hasRogue == true && shield.getItem() == mod_RpgInventory.beastShield) {
 				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/lion.png"));
