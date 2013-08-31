@@ -7,9 +7,10 @@ import net.minecraftforge.client.IItemRenderer;
 public abstract class RpgItemRenderer implements IItemRenderer{
 
 	
-	Minecraft mc = Minecraft.getMinecraft();
+	public static final Minecraft mc = Minecraft.getMinecraft();
 
-	float scale = 1f;
+	public float scale = 1f;
+	
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return true;

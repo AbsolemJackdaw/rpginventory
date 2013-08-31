@@ -7,24 +7,14 @@ package rpgNecroPaladin.packets;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.List;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.RpgInv;
-import rpgInventory.handelers.CommonTickHandler;
-import rpgNecroPaladin.minions.EntityMinionS;
-import rpgNecroPaladin.minions.EntityMinionZ;
-import rpgNecroPaladin.minions.IMinion;
-import rpgNecroPaladin.minions.MinionRegistry;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 

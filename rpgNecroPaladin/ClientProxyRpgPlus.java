@@ -1,13 +1,11 @@
 package rpgNecroPaladin;
 
-import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.Configuration.RpgConfig;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
-import rpgNecroPaladin.minions.RendersEtc.ModelDeath;
 import rpgNecroPaladin.minions.RendersEtc.RenderMinionS;
 import rpgNecroPaladin.minions.RendersEtc.RenderMinionZ;
 import rpgNecroPaladin.weapons.grandsword.GrandSwordRender;

@@ -1,19 +1,13 @@
 package rpgInventory.item.weapons.renderers;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 
-import rpgInventory.gui.rpginv.RpgGui;
 import rpgInventory.item.weapons.ItemElementalStaff;
 import rpgInventory.item.weapons.models.ModelStaf;
 
@@ -76,7 +70,6 @@ public class StafRender extends RpgItemRenderer {
 			break;
 
 		case INVENTORY:
-			mc = Minecraft.getMinecraft();
 			GL11.glPushMatrix();
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Staff.png"));
 			scale = 1F;
