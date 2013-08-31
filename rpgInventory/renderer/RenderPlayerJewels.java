@@ -799,11 +799,6 @@ public class RenderPlayerJewels extends RenderPlayer {
 		} catch (Throwable ex) {
 			ex.printStackTrace();
 		}
-		countdown--;
-		if(countdown == 0){
-			FMLLog.getLogger().info("" + defaultPlayerRender);
-			countdown =100;
-		}
 		super.doRender((EntityPlayer) par1EntityPlayer, par2, par4, par6, par8, par9);
 	}
 }

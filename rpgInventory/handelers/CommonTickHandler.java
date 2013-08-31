@@ -182,9 +182,7 @@ public class CommonTickHandler implements ITickHandler {
 						list.appendTag(tc);
 					}					
 					nbt.setTag("items", list);
-					
-					FMLLog.getLogger().info(""+ nbt);
-					
+										
 					Packet250CustomPayload packet = new Packet250CustomPayload("RpgRawInv", CompressedStreamTools.compress(nbt));
 					PacketDispatcher.sendPacketToAllPlayers(packet);
 				} catch (Throwable ex) {
