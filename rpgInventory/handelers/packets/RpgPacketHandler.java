@@ -48,8 +48,10 @@ public class RpgPacketHandler implements IPacketHandler {
 			NBTTagCompound nbt = CompressedStreamTools.decompress(packet.data);
 			RpgInv inv = new RpgInv(nbt.getString("username"));
 			NBTTagList list = nbt.getTagList("items");
+			
+			FMLLog.getLogger().info(""+nbt.getString("username"));
+
 			for (int i = 0; i < inv.armorSlots.length; i++) {
-				FMLLog.getLogger().info("" + i);
 				NBTTagCompound tc = (NBTTagCompound) list.tagAt(i);
 				if (tc != null) {
 					inv.armorSlots[i] = ItemStack.loadItemStackFromNBT(tc);
