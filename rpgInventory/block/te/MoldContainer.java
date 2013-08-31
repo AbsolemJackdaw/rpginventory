@@ -107,7 +107,8 @@ public class MoldContainer extends Container
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotnumber)
 	{
-		ItemStack itemstack = null;
+		super.transferStackInSlot(player, slotnumber);
+		/*ItemStack itemstack = null;
 		Slot slot = (Slot)inventorySlots.get(slotnumber);
 
 		if (slot != null && slot.getHasStack())
@@ -182,8 +183,8 @@ public class MoldContainer extends Container
 			}
 
 			slot.onPickupFromSlot(player, itemstack);
-		}
+		}*/
 
-		return itemstack;
+		return null;
 	}
 }

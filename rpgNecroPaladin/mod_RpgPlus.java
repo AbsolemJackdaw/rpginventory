@@ -4,6 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import rpgInventory.mod_RpgInventory;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
+import rpgNecroPaladin.packets.RpgPlusPacketHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -62,8 +63,8 @@ public class mod_RpgPlus {
 		
 		EntityRegistry.registerGlobalEntityID(EntityMinionS.class, "skeletonMinion", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityMinionZ.class, "zombieMinion", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(EntityMinionS.class, "skeletonMinion", mod_RpgInventory.instance.getUniqueID(), this, 100, 2, true);
-		EntityRegistry.registerModEntity(EntityMinionZ.class, "zombieMinion", mod_RpgInventory.instance.getUniqueID(), this, 100, 2, true);
+//		EntityRegistry.registerModEntity(EntityMinionS.class, "skeletonMinion", mod_RpgInventory.instance.getUniqueID(), this, 100, 2, true);
+//		EntityRegistry.registerModEntity(EntityMinionZ.class, "zombieMinion", mod_RpgInventory.instance.getUniqueID(), this, 100, 2, true);
 		LanguageRegistry.instance().addStringLocalization("entity.EntityMinionS.name", "Skeleton Minion");
 		LanguageRegistry.instance().addStringLocalization("entity.EntityMinionZ.name", "Zombie Minion");
 

@@ -8,6 +8,7 @@ import rpgInventory.Configuration.RpgConfig;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
 import rpgNecroPaladin.minions.RendersEtc.ModelDeath;
+import rpgNecroPaladin.minions.RendersEtc.RenderMinionS;
 import rpgNecroPaladin.minions.RendersEtc.RenderMinionZ;
 import rpgNecroPaladin.weapons.grandsword.GrandSwordRender;
 import rpgNecroPaladin.weapons.skull.NecroRenderer;
@@ -27,7 +28,7 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.pala_weapon.itemID, (IItemRenderer) new GrandSwordRender());
 			}
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityMinionS.class, new RenderBiped(new ModelDeath(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMinionS.class,new RenderMinionS());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinionZ.class, new RenderMinionZ());
 	}
 }

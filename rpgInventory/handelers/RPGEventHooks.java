@@ -216,6 +216,7 @@ public class RPGEventHooks {
 					}
 
 					if (rpginv.hasClass(EnumRpgClass.NECRO)) {
+//						FMLLog.getLogger().info(" :D ");
 						if (p.getActivePotionEffect(Potion.regeneration) != null) {
 							p.addPotionEffect(new PotionEffect(mod_RpgInventory.decomposePotion.id, p.getActivePotionEffect(Potion.regeneration).getDuration() * 2, p.getActivePotionEffect(Potion.regeneration).getAmplifier()));
 							p.removePotionEffect(Potion.regeneration.id);

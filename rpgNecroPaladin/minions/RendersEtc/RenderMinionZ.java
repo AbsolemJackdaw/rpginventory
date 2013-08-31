@@ -6,6 +6,7 @@ import net.minecraft.client.model.ModelZombieVillager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
 import rpgNecroPaladin.minions.EntityMinionZ;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -28,6 +29,12 @@ public class RenderMinionZ extends RenderBiped
         this.field_82432_p = new ModelZombieVillager();
     }
 
+    @Override
+    protected ResourceLocation func_110775_a(Entity par1Entity)
+    {
+        return new ResourceLocation("textures/entity/zombie/zombie.png");
+    }
+    
     protected void func_82421_b()
     {
         this.field_82423_g = new ModelZombie(1.0F, true);
@@ -38,6 +45,7 @@ public class RenderMinionZ extends RenderBiped
         this.field_82433_n = new ModelZombieVillager(0.5F, 0.0F, true);
     }
 
+    
     protected int func_82429_a(EntityMinionZ par1EntityMinionZ, int par2, float par3)
     {
         this.func_82427_a(par1EntityMinionZ);
