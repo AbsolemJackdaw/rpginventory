@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
-import cpw.mods.fml.common.FMLLog;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -29,6 +27,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -38,6 +37,7 @@ import rpgInventory.IPet;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.RpgInv;
 import rpgInventory.item.petXp.EntityPetXP;
+import cpw.mods.fml.common.FMLLog;
 
 public class RPGEventHooks {
 
@@ -49,6 +49,8 @@ public class RPGEventHooks {
 	public static Map<String, Integer> CustomPotionList = new ConcurrentHashMap();
 	Random rand = new Random();
 
+	
+	
 	@ForgeSubscribe
 	public void BreakSpeed(PlayerEvent.BreakSpeed evt) {
 		try {
@@ -96,6 +98,11 @@ public class RPGEventHooks {
 
      }
 	 */
+	
+	@ForgeSubscribe
+	public void PlayerRender(RenderPlayerEvent.Specials evt ){
+		
+	}
 
 	@ForgeSubscribe
 	public void PlayerUpdate(PlayerEvent.LivingUpdateEvent evt) {
