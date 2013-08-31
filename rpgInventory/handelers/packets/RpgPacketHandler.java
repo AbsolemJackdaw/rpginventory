@@ -61,7 +61,6 @@ public class RpgPacketHandler implements IPacketHandler {
 
 	private void handleRandom(Packet250CustomPayload packet, Player player) {
 
-
 		EntityPlayer p = (EntityPlayer) player;
 		World world = p.worldObj;
 		int x = (int) p.posX;
@@ -93,7 +92,7 @@ public class RpgPacketHandler implements IPacketHandler {
 			case MAGE2:
 				new PacketMageVortex(dis, world, p, player);
 				break;
-			case 8:
+			case 8: // i think this is the book gui
 				if (!world.isRemote) {
 					FMLNetworkHandler.openGui(p, mod_RpgInventory.instance, 2, world, x, y, z);
 				}
@@ -111,7 +110,6 @@ public class RpgPacketHandler implements IPacketHandler {
 			case 13:
 				//mod_RpgInventory.proxy.candy(p);
 				FMLLog.getLogger().info("[SEVERE] RpgInventory Send Unused packet !! 13");
-
 				break;
 			default:
 				FMLLog.getLogger().info("[SEVERE] RpgInventory Send Unused packet !! UnDesignated");

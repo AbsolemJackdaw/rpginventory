@@ -6,6 +6,8 @@ package rpgInventory;
 
 import java.util.EnumSet;
 
+import cpw.mods.fml.common.FMLLog;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import rpgInventory.gui.rpginv.RpgInv;

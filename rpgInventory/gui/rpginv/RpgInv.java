@@ -17,7 +17,7 @@ public class RpgInv implements IInventory {
 
     public ItemStack[] armorSlots = new ItemStack[7];
     public String playername;
-    private EnumSet<EnumRpgClass> classSets;
+    public EnumSet<EnumRpgClass> classSets;
 
     public RpgInv(String username) {
         playername = username;
@@ -180,7 +180,8 @@ public class RpgInv implements IInventory {
     public void onInventoryChanged() {
         try {
             EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(playername);
-            classSets = EnumRpgClass.getPlayerClasses(player);
+            //classSets = EnumRpgClass.getPlayerClasses(player);
+            //TODO is done ! moved that line ^ to eventhooks so it gets updated properly.
             boolean addtoticks[] = new boolean[3];
             if (hasClass(EnumRpgClass.SHIELDEDARCHER)) {
                 if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() != null) {

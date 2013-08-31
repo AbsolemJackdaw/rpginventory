@@ -346,7 +346,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glRotatef(50F, 0.0f, 0.0f, 1.0f);
 
 				dagger.renderDagger(0.0625f);
-				this.modelBipedMain.heldItemLeft = 1;
+					this.modelBipedMain.heldItemLeft = 1;
 				this.setRenderPassModel(dagger);
 
 			} else if (mod_RpgInventory.hasRogue == true && shield.getItem() == mod_RpgInventory.beastShield) {
@@ -752,10 +752,10 @@ public class RenderPlayerJewels extends RenderPlayer {
 		return -1;
 	}
 
-//	@Override
-//	protected void renderModel(AbstractClientPlayer par1EntityLiving, float par2, float par3, float par4, float par5, float par6, float par7) {
-//		//Do No Player Model rendering, let the vanilla render do this.
-//	}
+	//	@Override
+	//	protected void renderModel(AbstractClientPlayer par1EntityLiving, float par2, float par3, float par4, float par5, float par6, float par7) {
+	//		//Do No Player Model rendering, let the vanilla render do this.
+	//	}
 
 	@Override
 	public void doRender(Entity par1EntityPlayer, double par2, double par4, double par6, float par8, float par9) {

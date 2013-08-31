@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
+import cpw.mods.fml.common.FMLLog;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -103,13 +105,15 @@ public class RPGEventHooks {
 			}
 		} catch (Throwable ex) {
 		}
+		
 		try {
 			if (evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer p = (EntityPlayer) evt.entityLiving;
 				if (p != null) {
-					if (p.func_110143_aJ() >= p.func_110138_aP()) {
-						p.setEntityHealth(p.func_110138_aP());
-					}
+//					if (p.func_110143_aJ() >= p.func_110138_aP()) {
+//						p.setEntityHealth(p.func_110138_aP());
+//					}
+					
 					if (p.getActivePotionEffects() != null && p.getActivePotionEffects().size() > 0) {
 						PotionEffect decompose = p.getActivePotionEffect(mod_RpgInventory.decomposePotion);
 						PotionEffect machicism = p.getActivePotionEffect(mod_RpgInventory.masochismPotion);
@@ -140,6 +144,7 @@ public class RPGEventHooks {
 						}
 					}
 					RpgInv rpginv = mod_RpgInventory.proxy.getInventory(p.username);
+					rpginv.classSets = EnumRpgClass.getPlayerClasses(p);
 					ItemStack neck = rpginv.getNecklace();
 					ItemStack ringa = rpginv.getRing1();
 					ItemStack ringb = rpginv.getRing2();
@@ -183,7 +188,12 @@ public class RPGEventHooks {
 							{p.curePotionEffects(new ItemStack(Item.bucketMilk, 1));}
 						}
 						if (weapon.itemID == mod_RpgInventory.hammer.itemID) {
+//							FMLLog.getLogger().info(""+EnumRpgClass.getPlayerClasses(p));
+//							FMLLog.getLogger().info(""+rpginv.classSets);
+
 							if (rpginv.hasClass(EnumRpgClass.SHIELDEDBERSERKER)) {
+//								FMLLog.getLogger().info("berserker with shield");
+
 								if ((p.getFoodStats().getFoodLevel() < 4 || p.func_110143_aJ() < 4)) {
 									Map tmp = EnchantmentHelper.getEnchantments(weapon);
 									tmp.put(Enchantment.knockback.effectId, 3);
