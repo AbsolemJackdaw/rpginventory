@@ -115,16 +115,10 @@ public class RpgConfig {
     public int petxppotion;
 
     //Initially set to defaults
-    public boolean render3DClaymore = true;
-    public boolean render3DHammer = true;
-    public boolean render3DSoulSphere = true;
-    public boolean render3DStaff = true;
-    public boolean render3DBow = true;
+    public boolean render3D = true;
+
+    
     public boolean useSpell = true;
-    public boolean render3DAxe = true;
-    public boolean render3DSkull = true;
-    public boolean render3DPride = true;
-    public boolean render3DDagger = true;
 
     public boolean DefaultRotation = true;
 
@@ -143,15 +137,7 @@ public class RpgConfig {
     private void loadSettings(Configuration config){
         config.addCustomCategoryComment("Rendering", "Set these settings to false to disable fancy item rendering.");
 
-        render3DClaymore = config.get("Rendering", "Render_Claymore", true).getBoolean(true);
-        render3DHammer = config.get("Rendering", "Render_Hammer", true).getBoolean(true);
-        render3DSoulSphere = config.get("Rendering", "Render_SoulSphere", true).getBoolean(true);
-        render3DStaff = config.get("Rendering", "Render_Staff", true).getBoolean(true);
-        render3DBow = config.get("Rendering", "Render_Bow", true).getBoolean(true);
-        render3DAxe = config.get("Rendering", "Render_Axe", true).getBoolean(true);
-        render3DSkull = config.get("Rendering", "Render_Skull", true).getBoolean(true);
-        render3DPride = config.get("Rendering", "Render_Paladin's Pride", true).getBoolean(true);
-        render3DDagger = config.get("Rendering", "Render_Dagger", true).getBoolean(true);
+        render3D = config.get("Rendering", "Render 3D Items", true).getBoolean(true);
 
         config.addCustomCategoryComment("Rotation", "Set to false for alternative PetGui Pet Rotation if default fails.");
         DefaultRotation = config.get("Rotation", "Default Rotation", true).getBoolean(true);

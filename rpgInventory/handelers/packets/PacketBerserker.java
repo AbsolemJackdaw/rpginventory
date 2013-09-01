@@ -52,7 +52,15 @@ public class PacketBerserker {
 						item1.damageItem(3, p);
 					}
 				}
-				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - 4.0F, p.posY - 4.0F, p.posZ - 4.0F, p.posX + 4.0F, p.posY + 4.0F, p.posZ + 4.0F);
+				
+				float range = 4.0f;
+				if (!mod_RpgInventory.developers.contains(p.username.toLowerCase()))
+					range = 4.0f;
+				else
+					range= 10f;
+					
+					AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - range, p.posY - range, p.posZ - range, p.posX + range, p.posY + range, p.posZ + range);
+
 				List<EntityLiving> entl = p.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
 				if (entl != null && entl.size() > 0) {
 					for (EntityLiving el : entl) {
@@ -60,9 +68,16 @@ public class PacketBerserker {
 							try {
 								double xdir = el.posX - p.posX;
 								double zdir = el.posZ - p.posZ;
-								el.motionX = xdir * 1.5F;
-								el.motionY = 1.5F;
-								el.motionZ = zdir * 1.5F;
+
+								if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+									el.motionX = xdir * 1.5F;
+									el.motionY = 1.5F;
+									el.motionZ = zdir * 1.5F;
+								}else{
+									el.motionX = xdir * 3F;
+									el.motionY = 3F;
+									el.motionZ = zdir * 3F;
+								}
 							} catch (Throwable ex) {
 							}
 							el.attackEntityFrom(DamageSource.causePlayerDamage(p), 10);

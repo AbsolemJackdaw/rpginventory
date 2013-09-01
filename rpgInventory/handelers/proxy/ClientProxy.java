@@ -33,12 +33,17 @@ import rpgInventory.gui.BookGui;
 import rpgInventory.gui.rpginv.RpgInv;
 import rpgInventory.handelers.ClientTickHandler;
 import rpgInventory.handelers.RPGKeyHandler;
+import rpgInventory.item.armor.shieldRenderer.ArcherShield;
+import rpgInventory.item.armor.shieldRenderer.BerserkerShield;
+import rpgInventory.item.armor.shieldRenderer.VanillaShield;
 import rpgInventory.item.weapons.renderers.BowRender;
 import rpgInventory.item.weapons.renderers.ClaymoreRenderer;
 import rpgInventory.item.weapons.renderers.HammerRender;
 import rpgInventory.item.weapons.renderers.SoulSphereRender;
 import rpgInventory.item.weapons.renderers.StafRender;
 import rpgInventory.renderer.RenderPlayerJewels;
+import rpgInventory.renderer.models.shields.IronThorn;
+import rpgInventory.renderer.models.shields.ModelShield;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -108,21 +113,35 @@ public class ClientProxy extends CommonProxy {
 		//Tell LWJGL that we are done creating our list.
 		GL11.glEndList();
 
-		if (RpgConfig.instance.render3DClaymore == true) {
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.claymore.itemID, (IItemRenderer) new ClaymoreRenderer());
-		}
-		if (RpgConfig.instance.render3DHammer == true) {
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.hammer.itemID, (IItemRenderer) new HammerRender());
-		}
-		if (RpgConfig.instance.render3DSoulSphere == true) {
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.wand.itemID, (IItemRenderer) new SoulSphereRender());
-		}
-		if (RpgConfig.instance.render3DStaff == true) {
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.staf.itemID, (IItemRenderer) new StafRender());
-		}
-		if (RpgConfig.instance.render3DBow == true) {
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.elfbow.itemID, (IItemRenderer) new BowRender());
-		}
+		if (RpgConfig.instance.render3D == true) {
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.claymore.itemID, 
+					(IItemRenderer) new ClaymoreRenderer());
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.hammer.itemID, 
+					(IItemRenderer) new HammerRender());
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.wand.itemID, 
+					(IItemRenderer) new SoulSphereRender());	
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.staf.itemID, 
+					(IItemRenderer) new StafRender());
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.elfbow.itemID, 
+					(IItemRenderer) new BowRender());
+			
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.berserkerShield.itemID, 
+					(IItemRenderer) new BerserkerShield(new IronThorn(), "subaraki:jewels/IronThorn.png"));
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.archersShield.itemID, 
+					(IItemRenderer) new ArcherShield(new ModelShield(), "subaraki:jewels/Shield1.png"));
+			
+			if(mod_RpgInventory.hasShields){
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldDiamond.itemID, 
+						(IItemRenderer) new VanillaShield(new rpgInventory.renderer.models.shields.VanillaShield(), "subaraki:jewels/ShieldDiamond.png"));
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldGold.itemID, 
+						(IItemRenderer) new VanillaShield(new rpgInventory.renderer.models.shields.VanillaShield(), "subaraki:jewels/ShieldGold.png"));
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldIron.itemID, 
+						(IItemRenderer) new VanillaShield(new rpgInventory.renderer.models.shields.VanillaShield(), "subaraki:jewels/ShieldIron.png"));
+				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldWood.itemID, 
+						(IItemRenderer) new VanillaShield(new rpgInventory.renderer.models.shields.VanillaShield(), "subaraki:jewels/ShieldWood.png"));
+		
+			}
+		}		
 	}
 
 	public void registerLate() {
