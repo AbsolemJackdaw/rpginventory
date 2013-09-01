@@ -18,11 +18,9 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
-import rpgInventory.Configuration.RpgConfig;
-import rpgInventory.RichTools.potions.DecomposePotion;
-import rpgInventory.RichTools.potions.MasochismPotion;
 import rpgInventory.block.BlockForge;
 import rpgInventory.block.te.TEMold;
+import rpgInventory.config.RpgConfig;
 import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.gui.RpgInventoryTab;
 import rpgInventory.handelers.CommonTickHandler;
@@ -39,10 +37,10 @@ import rpgInventory.item.ItemRBMats;
 import rpgInventory.item.ItemRBMats2;
 import rpgInventory.item.ItemRageFood;
 import rpgInventory.item.ItemRpg;
+import rpgInventory.item.PetExpPotion;
 import rpgInventory.item.armor.BonusArmor;
 import rpgInventory.item.armor.ItemRpgArmor;
 import rpgInventory.item.armor.ItemRpgPlusPlusArmor;
-import rpgInventory.item.petXp.PetExpPotion;
 import rpgInventory.item.weapons.ItemArcherBow;
 import rpgInventory.item.weapons.ItemBeastAxe;
 import rpgInventory.item.weapons.ItemClaymore;
@@ -52,6 +50,8 @@ import rpgInventory.item.weapons.ItemHammer;
 import rpgInventory.item.weapons.ItemMageSphere;
 import rpgInventory.item.weapons.ItemNecroSkull;
 import rpgInventory.item.weapons.ItemStaf;
+import rpgInventory.richUtil.potions.DecomposePotion;
+import rpgInventory.richUtil.potions.MasochismPotion;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -230,7 +230,7 @@ public class mod_RpgInventory {
 		}
 		//look for Vanilla Shields
 		try {
-			Class.forName("RpgShields.mod_VanillaShields");
+			Class.forName("rpgVanillaShields.mod_VanillaShields");
 			FMLLog.info("Rpg++ Vanilla Shields is installed. Renderers can be Used");
 			hasShields = true;
 		} catch (Throwable e) {

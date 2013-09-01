@@ -3,18 +3,18 @@ package rpgNecroPaladin;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.Configuration.RpgConfig;
-import rpgInventory.item.armor.shieldRenderer.BerserkerShield;
-import rpgInventory.item.armor.shieldRenderer.NecroShieldRenderer;
-import rpgInventory.renderer.models.shields.IronThorn;
-import rpgInventory.renderer.models.shields.NecroShield;
-import rpgInventory.renderer.models.shields.PalaShield;
+import rpgInventory.config.RpgConfig;
+import rpgInventory.models.shields.IronThorn;
+import rpgInventory.models.shields.NecroShield;
+import rpgInventory.models.shields.PalaShield;
+import rpgInventory.renderer.items.shields.BerserkerShield;
+import rpgInventory.renderer.items.shields.NecroShieldRenderer;
+import rpgInventory.renderer.items.weapons.GrandSwordRender;
+import rpgInventory.renderer.items.weapons.NecroRenderer;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
 import rpgNecroPaladin.minions.RendersEtc.RenderMinionS;
 import rpgNecroPaladin.minions.RendersEtc.RenderMinionZ;
-import rpgNecroPaladin.weapons.grandsword.GrandSwordRender;
-import rpgNecroPaladin.weapons.skull.NecroRenderer;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxyRpgPlus extends CommonProxyRpgplus {

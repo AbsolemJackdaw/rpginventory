@@ -14,6 +14,8 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 
+import rpgInventory.entity.EntityElementalBlock;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

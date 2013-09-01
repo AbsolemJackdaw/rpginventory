@@ -35,8 +35,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.IPet;
 import rpgInventory.mod_RpgInventory;
+import rpgInventory.entity.EntityPetXP;
 import rpgInventory.gui.rpginv.RpgInv;
-import rpgInventory.item.petXp.EntityPetXP;
 import cpw.mods.fml.common.FMLLog;
 
 public class RPGEventHooks {

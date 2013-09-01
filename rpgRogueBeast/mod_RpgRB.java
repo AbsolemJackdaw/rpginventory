@@ -2,10 +2,10 @@ package rpgRogueBeast;
 
 import net.minecraft.creativetab.CreativeTabs;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.item.petXp.EntityPetXP;
-import rpgRogueBeast.beastmaster.BoarPet;
-import rpgRogueBeast.beastmaster.BullPet;
-import rpgRogueBeast.beastmaster.SpiderPet;
+import rpgInventory.entity.EntityPetXP;
+import rpgRogueBeast.entity.BoarPet;
+import rpgRogueBeast.entity.BullPet;
+import rpgRogueBeast.entity.SpiderPet;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;

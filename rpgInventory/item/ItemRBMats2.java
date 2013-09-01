@@ -10,9 +10,9 @@ import rpgInventory.EnumRpgClass;
 import rpgInventory.IPet;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.RpgInv;
-import rpgRogueBeast.beastmaster.BoarPet;
-import rpgRogueBeast.beastmaster.BullPet;
-import rpgRogueBeast.beastmaster.SpiderPet;
+import rpgRogueBeast.entity.BoarPet;
+import rpgRogueBeast.entity.BullPet;
+import rpgRogueBeast.entity.SpiderPet;
 
 public class ItemRBMats2 extends Item {
 

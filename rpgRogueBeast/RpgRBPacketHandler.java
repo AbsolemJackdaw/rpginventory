@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import rpgInventory.IPet;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handelers.CommonTickHandler;
-import rpgRogueBeast.beastmaster.BMPetImpl;
+import rpgRogueBeast.entity.BMPetImpl;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 

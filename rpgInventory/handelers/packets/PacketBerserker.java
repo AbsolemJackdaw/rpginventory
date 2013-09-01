@@ -57,7 +57,7 @@ public class PacketBerserker {
 				if (!mod_RpgInventory.developers.contains(p.username.toLowerCase()))
 					range = 4.0f;
 				else
-					range= 10f;
+					range= 8.0f;
 					
 					AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - range, p.posY - range, p.posZ - range, p.posX + range, p.posY + range, p.posZ + range);
 

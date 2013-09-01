@@ -22,7 +22,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.RichTools.Targetting;
+import rpgInventory.richUtil.Targetting;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 

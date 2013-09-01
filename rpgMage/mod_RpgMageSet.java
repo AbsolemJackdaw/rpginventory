@@ -2,7 +2,7 @@ package rpgMage;
 
 import net.minecraft.creativetab.CreativeTabs;
 import rpgInventory.mod_RpgInventory;
-import rpgMage.weapons.EntityElementalBlock;
+import rpgInventory.entity.EntityElementalBlock;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;

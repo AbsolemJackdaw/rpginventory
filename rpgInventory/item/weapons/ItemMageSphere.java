@@ -12,7 +12,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.Configuration.RpgConfig;
+import rpgInventory.config.RpgConfig;
 
 public class ItemMageSphere extends ItemRpgWeapon{
 

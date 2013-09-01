@@ -13,7 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
-import rpgMage.weapons.EntityElementalBlock;
+import rpgInventory.entity.EntityElementalBlock;
 
 public class ItemElementalStaff extends ItemRpgSword {
 
