@@ -4,12 +4,12 @@
  */
 package rpgInventory.item;
 
-import rpgInventory.entity.EntityPetXPBottle;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemExpBottle;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import rpgInventory.entity.EntityPetXPBottle;
 
 /**
  *

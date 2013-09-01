@@ -6,8 +6,6 @@ import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.entity.EntityElementalBlock;
 import rpgInventory.models.shields.Book;
-import rpgInventory.models.shields.IronThorn;
-import rpgInventory.renderer.items.shields.BerserkerShield;
 import rpgInventory.renderer.items.shields.BookRenderer;
 import rpgInventory.renderer.items.weapons.StafRender;
 import rpgMage.weapons.RenderElementalBlock;

@@ -1,4 +1,4 @@
-package rpgRogueBeast;
+package rpgRogueBeast.entity;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

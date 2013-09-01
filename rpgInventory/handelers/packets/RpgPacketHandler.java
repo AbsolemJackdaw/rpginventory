@@ -49,7 +49,7 @@ public class RpgPacketHandler implements IPacketHandler {
 			RpgInv inv = new RpgInv(nbt.getString("username"));
 			NBTTagList list = nbt.getTagList("items");
 			
-			FMLLog.getLogger().info(""+nbt.getString("username"));
+//			FMLLog.getLogger().info(""+nbt.getString("username"));
 
 			for (int i = 0; i < inv.armorSlots.length; i++) {
 				NBTTagCompound tc = (NBTTagCompound) list.tagAt(i);
@@ -121,7 +121,6 @@ public class RpgPacketHandler implements IPacketHandler {
 			dis.close();
 		} catch (IOException e) {
 			System.out.println("failed");
-
 			e.printStackTrace();
 		}
 	}

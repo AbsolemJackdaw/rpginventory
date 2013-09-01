@@ -1,4 +1,4 @@
-package rpgNecroPaladin.minions.RendersEtc;
+package rpgNecroPaladin.minions.root;
 
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;

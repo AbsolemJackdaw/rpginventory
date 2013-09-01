@@ -4,7 +4,6 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.NecroShield;
 import rpgInventory.models.shields.PalaShield;
 import rpgInventory.renderer.items.shields.BerserkerShield;
@@ -13,8 +12,8 @@ import rpgInventory.renderer.items.weapons.GrandSwordRender;
 import rpgInventory.renderer.items.weapons.NecroRenderer;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
-import rpgNecroPaladin.minions.RendersEtc.RenderMinionS;
-import rpgNecroPaladin.minions.RendersEtc.RenderMinionZ;
+import rpgNecroPaladin.minions.root.RenderMinionS;
+import rpgNecroPaladin.minions.root.RenderMinionZ;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxyRpgPlus extends CommonProxyRpgplus {

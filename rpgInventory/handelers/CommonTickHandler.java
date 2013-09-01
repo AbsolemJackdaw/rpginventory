@@ -18,7 +18,6 @@ import net.minecraft.util.DamageSource;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.RpgInv;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;

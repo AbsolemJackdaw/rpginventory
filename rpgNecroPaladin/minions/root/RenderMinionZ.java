@@ -1,4 +1,4 @@
-package rpgNecroPaladin.minions.RendersEtc;
+package rpgNecroPaladin.minions.root;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelZombie;

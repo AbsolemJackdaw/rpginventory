@@ -24,8 +24,6 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.FMLLog;
-
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.RpgGui;
 import rpgInventory.gui.rpginv.RpgInv;
@@ -151,7 +149,9 @@ public class RenderPlayerJewels extends RenderPlayer {
 					 */
 					if (player.username.equals("TheCodyMaverick")) {
 						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/ACCape.png"));
-					} else if (player.username.equals("Unjustice")) {
+					}else if (player.username.equals("ClaireBearKitty ")) {
+						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/ponyCape.png"));
+					}else if (player.username.equals("Unjustice")) {
 						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/UnCape.png"));
 					} else if (player.username.equals("NyhmsQuest")) {
 						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/NymCape.png"));
@@ -175,8 +175,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/ConCape.png"));
 					} else if (player.username.equals("Artix_all_mighty")) {
 						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/SubCape.png"));
-					} else // if none of the names match, it should return a grey cape texture.
-					{
+					} else{ // if none of the names match, it should return a grey cape texture.
 						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:capes/GreyCape.png"));
 					}
 				} else if (cloak.getItem() == mod_RpgInventory.cloakYellow) {
