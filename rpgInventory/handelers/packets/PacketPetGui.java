@@ -2,13 +2,12 @@ package rpgInventory.handelers.packets;
 
 import java.io.DataInputStream;
 
-import cpw.mods.fml.common.FMLLog;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.RpgInv;
+import cpw.mods.fml.common.FMLLog;
 
 public class PacketPetGui {
 

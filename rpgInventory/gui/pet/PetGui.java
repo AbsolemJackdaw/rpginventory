@@ -31,7 +31,6 @@ import rpgRogueBeast.entity.BoarPet;
 import rpgRogueBeast.entity.BullPet;
 import rpgRogueBeast.entity.SpiderPet;
 import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
 
 public class PetGui extends GuiScreen {
 
