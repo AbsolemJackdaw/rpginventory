@@ -19,6 +19,9 @@ public class PacketNecroSpecial {
         } catch (Throwable ex) {
             ex.printStackTrace();
         }
+		
+		inv.classSets = EnumRpgClass.getPlayerClasses(p);
+
         if (weapon.getItem().equals(mod_RpgInventory.necro_weapon) && inv.hasClass(EnumRpgClass.NECRO)) {
             if (MinionRegistry.playerMinions.containsKey(p.username)) {
                 List<IMinion> list = MinionRegistry.playerMinions.get(p.username);

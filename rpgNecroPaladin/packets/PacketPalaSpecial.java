@@ -23,6 +23,8 @@ public class PacketPalaSpecial {
 			ex.printStackTrace();
 		}
 		inv.onInventoryChanged();
+		inv.classSets = EnumRpgClass.getPlayerClasses(p);
+
 		if (!mod_RpgInventory.developers.contains(p.username.toLowerCase()) || weapon == null) {
 			if (!inv.hasClass(EnumRpgClass.PALADIN)) {
 				return;

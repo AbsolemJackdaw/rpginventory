@@ -3,7 +3,6 @@ package rpgInventory.gui.pet;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutput;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,6 +31,7 @@ import rpgRogueBeast.entity.BoarPet;
 import rpgRogueBeast.entity.BullPet;
 import rpgRogueBeast.entity.SpiderPet;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 
 public class PetGui extends GuiScreen {
 
@@ -170,7 +170,7 @@ public class PetGui extends GuiScreen {
 		}
 		if (guibutton.id == 3) {
 			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-			ObjectOutput out;
+//			ObjectOutput out;
 			DataOutputStream outputStream = new DataOutputStream(bytes);
 			try {
 				outputStream.writeInt(RpgPacketHandler.OPENRPGINV);
@@ -274,10 +274,11 @@ public class PetGui extends GuiScreen {
 	}
 
 	public void sendChanges() {
+			
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(bos);
 		try {
-			dos.writeInt(RpgPacketHandler.PETGUI);
+			dos.writeInt(15);
 			dos.writeUTF(new String(PetName.getBytes("UTF-8"), "UTF-8"));
 			dos.writeShort(PetLevel);
 			dos.writeShort(currentHP);
@@ -287,8 +288,8 @@ public class PetGui extends GuiScreen {
 			dos.writeShort(petLevelsAdded);
 			dos.writeShort(petcandyConsumed);
 
-			PacketDispatcher.sendPacketToServer(new Packet250CustomPayload("RpgInv", bos.toByteArray()));
-		} catch (Throwable ex) {
+			PacketDispatcher.sendPacketToServer(new Packet250CustomPayload("RpgRBPacket", bos.toByteArray()));
+			} catch (Throwable ex) {
 			ex.printStackTrace();
 		}
 	}

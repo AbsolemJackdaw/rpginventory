@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.util.Random;
 
+import rpgInventory.handelers.packets.PacketPetGui;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -19,7 +21,6 @@ public class RpgRBPacketHandler implements IPacketHandler {
 	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player player) {
 		handleRandom(packet, player);
-
 	}
 	private void handleRandom(Packet250CustomPayload packet, Player player) {
 
@@ -35,8 +36,10 @@ public class RpgRBPacketHandler implements IPacketHandler {
 			case 14:
 				new PacketTeleport(world, p, dis, rand);
 				break;
+			case 15:
+				new PacketPetGui(dis, p);
+				break;
 			default:
-				new PacketName(dis, p);
 				break;
 			}
 		}catch(Throwable e){

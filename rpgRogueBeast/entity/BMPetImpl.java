@@ -619,6 +619,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         return this.func_110143_aJ();
     }
 
+    
     public EntityAIControlledByPlayer getAIControlledByPlayer() {
         return this.aiControlledByPlayer;
     }

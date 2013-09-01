@@ -26,6 +26,8 @@ public class ItemHammer extends ItemRpgSword {
 
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
         RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
+		rpg.classSets = EnumRpgClass.getPlayerClasses(player);
+
         if (rpg.hasClass(EnumRpgClass.BERSERKER)) {
             if (rpg.hasClass(EnumRpgClass.SHIELDEDBERSERKER)) {
                 if (player.getFoodStats().getFoodLevel() < 6

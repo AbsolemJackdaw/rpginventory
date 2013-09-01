@@ -49,6 +49,8 @@ public class RPGEventHooks {
 	Random rand = new Random();
 
 	
+	float vanillaReduction = 0f;
+	
 	
 	@ForgeSubscribe
 	public void BreakSpeed(PlayerEvent.BreakSpeed evt) {
@@ -82,6 +84,7 @@ public class RPGEventHooks {
 			if (evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) evt.entityLiving;
 				RpgInv rpginv = mod_RpgInventory.proxy.getInventory(player.username);
+//				rpginv.classSets = EnumRpgClass.getPlayerClasses();
 				if (rpginv.hasClass(EnumRpgClass.BERSERKER)) {
 					//newExplosion(entitytoexplode,x,y,z,power,setfire,breakblocks);
 					player.worldObj.newExplosion((Entity) player, player.posX, player.posY, player.posZ, 20, false, false);
@@ -316,12 +319,15 @@ public class RPGEventHooks {
 
 	@ForgeSubscribe
 	public void PlayerDamage(LivingHurtEvent evt) {
+		FMLLog.getLogger().info("before: "+ evt.ammount);
+
 		try {
 			Entity damager = evt.source.getSourceOfDamage();
 			if (damager != null) {
 				if (damager instanceof EntityPlayer) {
 					float damagebonus = 0.0F;
 					RpgInv rpginv = mod_RpgInventory.proxy.getInventory(((EntityPlayer) damager).username);
+					rpginv.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer) damager);
 					ItemStack weapon = ((EntityPlayer) damager).getCurrentEquippedItem();
 					if (weapon != null) {
 						if (weapon.itemID == mod_RpgInventory.hammer.itemID) {
@@ -382,18 +388,27 @@ public class RPGEventHooks {
 				float damageReduction = 0.0F;
 				EntityPlayer player = (EntityPlayer) evt.entityLiving;
 				RpgInv rpginv = mod_RpgInventory.proxy.getInventory(player.username);
+				rpginv.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer) evt.entityLiving);
+
 				ItemStack shield = rpginv.getShield();
 				if (shield != null) {
+					
 					if (rpginv.hasClass(EnumRpgClass.WOOD)) {
-						damageReduction = 0.15f;
+						vanillaReduction += 0.27f;
 					} else if (rpginv.hasClass(EnumRpgClass.IRON)) {
-						damageReduction = 0.20f;
+						vanillaReduction += 0.4f;
 					} else if (rpginv.hasClass(EnumRpgClass.GOLD)) {
-						damageReduction = 0.25f;
+						vanillaReduction += 0.7f;
 					} else if (rpginv.hasClass(EnumRpgClass.DIAMOND)) {
-						damageReduction = 0.30f;
+						vanillaReduction += 1.50f;
 					}
-					evt.ammount -= MathHelper.floor_float(((float) evt.ammount) * damageReduction);
+					if(vanillaReduction > 1f){
+						damageReduction = 1f + (vanillaReduction - 1f);
+						vanillaReduction= 0;
+					}
+					evt.ammount -= damageReduction;//MathHelper.floor_float(((float) evt.ammount) * damageReduction);
+					
+					FMLLog.getLogger().info("after: "+ evt.ammount);
 					damageItem(shield, rpginv, player, 1, 1);
 				}
 			}
@@ -403,6 +418,7 @@ public class RPGEventHooks {
 			if (evt.entityLiving != null && evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) evt.entityLiving;
 				RpgInv inv = mod_RpgInventory.proxy.getInventory(player.username);
+				inv.classSets = EnumRpgClass.getPlayerClasses(player);
 				ItemStack var3 = player.inventory.armorItemInSlot(3);
 				ItemStack var2 = player.inventory.armorItemInSlot(2);
 				ItemStack var1 = player.inventory.armorItemInSlot(1);
