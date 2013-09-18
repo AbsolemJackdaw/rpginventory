@@ -141,7 +141,7 @@ public class RpgInv implements IInventory {
      * called upon player's death. Will drop Jewels in the world
      */
     public void dropJewels(EntityPlayer player) {
-        RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
+        RpgInv rpg = readFromNBT(player.getEntityData());//mod_RpgInventory.proxy.getInventory(player.username);
 
         int var1;
         for (var1 = 0; var1 < rpg.armorSlots.length; ++var1) {
@@ -271,7 +271,7 @@ public class RpgInv implements IInventory {
      * the correct items.
      */
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
-        System.out.println("read from NBT");
+//        System.out.println("read from NBT");
         NBTTagList var2 = par1NBTTagCompound.getTagList("Slot");
         armorSlots = new ItemStack[getSizeInventory()];
         for (int var3 = 0; var3 < var2.tagCount(); ++var3) {

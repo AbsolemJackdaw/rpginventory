@@ -1,5 +1,6 @@
 package rpgInventory;
 
+import cpw.mods.fml.common.FMLLog;
 import rpgInventory.gui.rpginv.RpgInv;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -44,7 +45,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
 
-		compound.setString("test", "testString");
+//		compound.setString("test", "testString");
 
 		NBTTagList var2 = new NBTTagList();
 		if(player != null){
@@ -57,14 +58,15 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 					var2.appendTag(compoundSlot);
 				}
 			}
-			compound.setTag("Slot", var2);
+			compound.setTag("RpgInventorySlot", var2);
 		}
+		FMLLog.getLogger().info("Inventory saved " + var2 );
 	}
 
 	@Override
 	public void loadNBTData(NBTTagCompound compound) {
 		
-		NBTTagList var2 = compound.getTagList("Slot");
+		NBTTagList var2 = compound.getTagList("RpgInventorySlot");
 		
 		if(player != null){
 			RpgInv inv = new RpgInv(player.username);
@@ -81,6 +83,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 				}
 			}
 		}
+		FMLLog.getLogger().info("Rpg Inventory loaded " + var2 );
 	}
 
 	@Override

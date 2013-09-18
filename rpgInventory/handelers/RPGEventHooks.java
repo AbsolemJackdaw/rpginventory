@@ -28,10 +28,12 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import rpgInventory.EnumRpgClass;
+import rpgInventory.ExtendedPlayer;
 import rpgInventory.IPet;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.entity.EntityPetXP;
@@ -48,10 +50,23 @@ public class RPGEventHooks {
 	public static Map<String, Integer> CustomPotionList = new ConcurrentHashMap();
 	Random rand = new Random();
 
-	
+
 	float vanillaReduction = 0f;
-	
-	
+
+	@ForgeSubscribe
+	public void onEntityConstructing(EntityConstructing event)
+	{
+		/*
+		 *Be sure to check if the entity being constructed is the correct type
+		 *for the extended properties you're about to add!
+		 *The null check may not be necessary - I only use it to make sure
+		 *properties are only registered once per entity
+		 */
+		if (event.entity instanceof EntityPlayer && ExtendedPlayer.get((EntityPlayer) event.entity) == null)
+			// This is how extended properties are registered using our convenient method from earlier
+			ExtendedPlayer.register((EntityPlayer) event.entity);
+	}
+
 	@ForgeSubscribe
 	public void BreakSpeed(PlayerEvent.BreakSpeed evt) {
 		try {
@@ -84,7 +99,7 @@ public class RPGEventHooks {
 			if (evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) evt.entityLiving;
 				RpgInv rpginv = mod_RpgInventory.proxy.getInventory(player.username);
-//				rpginv.classSets = EnumRpgClass.getPlayerClasses();
+				//				rpginv.classSets = EnumRpgClass.getPlayerClasses();
 				if (rpginv.hasClass(EnumRpgClass.BERSERKER)) {
 					//newExplosion(entitytoexplode,x,y,z,power,setfire,breakblocks);
 					player.worldObj.newExplosion((Entity) player, player.posX, player.posY, player.posZ, 20, false, false);
@@ -100,11 +115,11 @@ public class RPGEventHooks {
 
      }
 	 */
-	
-//	@ForgeSubscribe
-//	public void PlayerRender(RenderPlayerEvent.Specials evt ){
-//		
-//	}
+
+	//	@ForgeSubscribe
+	//	public void PlayerRender(RenderPlayerEvent.Specials evt ){
+	//		
+	//	}
 
 	@ForgeSubscribe
 	public void PlayerUpdate(PlayerEvent.LivingUpdateEvent evt) {
@@ -392,7 +407,7 @@ public class RPGEventHooks {
 
 				ItemStack shield = rpginv.getShield();
 				if (shield != null) {
-					
+
 					if (rpginv.hasClass(EnumRpgClass.WOOD)) {
 						vanillaReduction += 0.27f;
 					} else if (rpginv.hasClass(EnumRpgClass.IRON)) {
@@ -407,7 +422,7 @@ public class RPGEventHooks {
 						vanillaReduction= 0;
 					}
 					evt.ammount -= damageReduction;//MathHelper.floor_float(((float) evt.ammount) * damageReduction);
-					
+
 					//FMLLog.getLogger().info("after: "+ evt.ammount);
 					damageItem(shield, rpginv, player, 1, 1);
 				}
