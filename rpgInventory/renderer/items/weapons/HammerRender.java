@@ -12,7 +12,6 @@ import rpgInventory.models.weapons.ModelHammer;
 
 public class HammerRender extends RpgItemRenderer{
 
-
 	ModelHammer swordmodel;
 	double pulse = 0f;
 
@@ -32,8 +31,8 @@ public class HammerRender extends RpgItemRenderer{
 			GL11.glPushMatrix();
 			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Hammer.png"));
 
-			if(((EntityPlayer)data[1]).getFoodStats().getFoodLevel() <4
-					||((EntityPlayer)data[1]).func_110143_aJ() <4){
+			if((Entity)data[1]instanceof EntityPlayer && ((EntityPlayer)data[1]).getFoodStats().getFoodLevel() <4
+					||(Entity)data[1]instanceof EntityPlayer &&((EntityPlayer)data[1]).func_110143_aJ() <4){
 				pulse+=0.01;
 				GL11.glColor3f(1f, (float)Math.sin(pulse), (float)Math.sin(pulse));
 			}

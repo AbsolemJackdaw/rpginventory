@@ -55,14 +55,14 @@ public class RenderPlayerJewels extends RenderPlayer {
 	public static RenderPlayerJewels instance;
 	private ModelBiped modelBipedMain;
 	private ModelShield modelShield;
-	private IronThorn ironthorn;
+	private IronThorn modelIronThorn;
 	private NecroShield necroshield;
 	private PalaShield palashield;
 	private VanillaShield vanillaShield;
-	private static NecroSkull skull;
+	private NecroSkull modelNecromancerSkull;
 	private GloveRight rightglove;
 	private GloveLeft leftglove;
-	private ModelNecklace necklace;
+	private ModelNecklace modelNecklace;
 	private ModelDaggerL dagger;
 	private LionHead lionhead;
 	private Book book;
@@ -76,13 +76,13 @@ public class RenderPlayerJewels extends RenderPlayer {
 	public ModelRogueArmor rogueArmorChest;
 	public ModelBerserkerArmor berserkArmor;
 	public ModelBerserkerArmor berserkarmorChest;
-	public ItemStack col;
+	public ItemStack necklace;
 	public ItemStack shield;
 	public ItemStack cloak;
-	public ItemStack want;
+	public ItemStack gloves;
 	public int rotation = 0;
 	private Minecraft mc;
-	RpgInv rpg;
+	RpgInv rpgInventory;
 
 	public RenderPlayerJewels(ModelBase model) {// the name of this class sounds so wrong ... ._.
 
@@ -92,8 +92,8 @@ public class RenderPlayerJewels extends RenderPlayer {
 		this.modelShield = new ModelShield();
 		this.rightglove = new GloveRight();
 		this.leftglove = new GloveLeft();
-		this.necklace = new ModelNecklace();
-		this.ironthorn = new IronThorn();
+		this.modelNecklace = new ModelNecklace();
+		this.modelIronThorn = new IronThorn();
 		this.necroshield = new NecroShield();
 		this.palashield = new PalaShield();
 		this.vanillaShield = new VanillaShield();
@@ -101,7 +101,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 		this.lionhead = new LionHead();
 		this.book = new Book();
 		if (mod_RpgInventory.hasRpg) {
-			this.skull = new NecroSkull();
+			this.modelNecromancerSkull = new NecroSkull();
 		}
 		mc = Minecraft.getMinecraft();
 
@@ -123,15 +123,15 @@ public class RenderPlayerJewels extends RenderPlayer {
 		ItemStack hoed = player.inventory.armorItemInSlot(3);
 		GL11.glColor4f(1, 1, 1, 1);
 		this.modelBipedMain.heldItemLeft = 0;
-		rpg = mod_RpgInventory.proxy.getInventory(player.username);
+		rpgInventory = mod_RpgInventory.proxy.getInventory(player.username);
 		float var11;
 
 		//INSERT CODE HERE
-		if (rpg != null) {
-			col = rpg.getNecklace();
-			shield = rpg.getShield();
-			cloak = rpg.getCloak();
-			want = rpg.getGloves();
+		if (rpgInventory != null) {
+			necklace = rpgInventory.getNecklace();
+			shield = rpgInventory.getShield();
+			cloak = rpgInventory.getCloak();
+			gloves = rpgInventory.getGloves();
 		}
 
 		if (cloak != null && !player.getHideCape()) {
@@ -234,15 +234,15 @@ public class RenderPlayerJewels extends RenderPlayer {
 		float scale = 55f;
 
 		// GLOVES
-		if (want != null) {
+		if (gloves != null) {
 			GL11.glPushMatrix();
-			if (want.getItem() == mod_RpgInventory.glovesbutter) {
+			if (gloves.getItem() == mod_RpgInventory.glovesbutter) {
 				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/Glove.png"));
-			} else if (want.getItem() == mod_RpgInventory.glovesdia) {
+			} else if (gloves.getItem() == mod_RpgInventory.glovesdia) {
 				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/GloveDia.png"));
-			} else if (want.getItem() == mod_RpgInventory.glovesem) {
+			} else if (gloves.getItem() == mod_RpgInventory.glovesem) {
 				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/GloveEm.png"));
-			} else if (want.getItem() == mod_RpgInventory.gloveslap) {
+			} else if (gloves.getItem() == mod_RpgInventory.gloveslap) {
 				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/GloveLap.png"));
 			}
 
@@ -264,13 +264,13 @@ public class RenderPlayerJewels extends RenderPlayer {
 			GL11.glPopMatrix();
 
 			GL11.glPushMatrix();
-			if (want.getItem() == mod_RpgInventory.glovesbutter) {
+			if (gloves.getItem() == mod_RpgInventory.glovesbutter) {
 				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/Glove.png"));
-			} else if (want.getItem() == mod_RpgInventory.glovesdia) {
+			} else if (gloves.getItem() == mod_RpgInventory.glovesdia) {
 				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/GloveDia.png"));
-			} else if (want.getItem() == mod_RpgInventory.glovesem) {
+			} else if (gloves.getItem() == mod_RpgInventory.glovesem) {
 				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/GloveEm.png"));
-			} else if (want.getItem() == mod_RpgInventory.gloveslap) {
+			} else if (gloves.getItem() == mod_RpgInventory.gloveslap) {
 				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/GloveLap.png"));
 			}
 			GL11.glRotatef(this.modelBipedMain.bipedRightArm.rotateAngleX * scale, 1.0F, 0.0F, 0.0F);
@@ -291,18 +291,18 @@ public class RenderPlayerJewels extends RenderPlayer {
 
 		}
 
-		if (col != null) {
-			if (col.getItem() == mod_RpgInventory.neckdia || col.getItem() == mod_RpgInventory.neckgold
-					|| col.getItem() == mod_RpgInventory.necklap || col.getItem() == mod_RpgInventory.neckem) {
+		if (necklace != null) {
+			if (necklace.getItem() == mod_RpgInventory.neckdia || necklace.getItem() == mod_RpgInventory.neckgold
+					|| necklace.getItem() == mod_RpgInventory.necklap || necklace.getItem() == mod_RpgInventory.neckem) {
 				GL11.glPushMatrix();
 
-				if (col.getItem() == mod_RpgInventory.neckdia) {
+				if (necklace.getItem() == mod_RpgInventory.neckdia) {
 					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/NeckDia.png"));
-				} else if (col.getItem() == mod_RpgInventory.neckem) {
+				} else if (necklace.getItem() == mod_RpgInventory.neckem) {
 					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/NeckEm.png"));
-				} else if (col.getItem() == mod_RpgInventory.neckgold) {
+				} else if (necklace.getItem() == mod_RpgInventory.neckgold) {
 					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/NeckGold.png"));
-				} else if (col.getItem() == mod_RpgInventory.necklap) {
+				} else if (necklace.getItem() == mod_RpgInventory.necklap) {
 					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/NeckLap.png"));
 				}
 				GL11.glRotatef(this.modelBipedMain.bipedBody.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
@@ -316,7 +316,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 					GL11.glTranslatef(0F, 0F, 0.01F);
 				}
 				GL11.glScalef(1F, 1F, 1F);
-				necklace.renderNecklace(0.0625f);
+				modelNecklace.renderNecklace(0.0625f);
 
 				GL11.glPopMatrix();
 			}
@@ -451,7 +451,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glTranslatef(0.018F, -0.1F, 0F);
 
 				boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render) {
-					ironthorn.renderShield(0.0625f);
+					modelIronThorn.renderShield(0.0625f);
 				}
 			} else if (mod_RpgInventory.hasShields == true) {
 				if (shield.getItem() == mod_RpgInventory.shieldWood) {

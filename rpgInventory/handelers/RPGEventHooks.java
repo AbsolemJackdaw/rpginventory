@@ -319,7 +319,7 @@ public class RPGEventHooks {
 
 	@ForgeSubscribe
 	public void PlayerDamage(LivingHurtEvent evt) {
-		FMLLog.getLogger().info("before: "+ evt.ammount);
+		//FMLLog.getLogger().info("before: "+ evt.ammount);
 
 		try {
 			Entity damager = evt.source.getSourceOfDamage();
@@ -408,7 +408,7 @@ public class RPGEventHooks {
 					}
 					evt.ammount -= damageReduction;//MathHelper.floor_float(((float) evt.ammount) * damageReduction);
 					
-					FMLLog.getLogger().info("after: "+ evt.ammount);
+					//FMLLog.getLogger().info("after: "+ evt.ammount);
 					damageItem(shield, rpginv, player, 1, 1);
 				}
 			}

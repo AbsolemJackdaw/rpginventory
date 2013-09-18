@@ -41,7 +41,7 @@ public abstract class RpgItemRenderer implements IItemRenderer{
 		
 		GL11.glPushMatrix();
 
-		if(item.hasEffect()){
+		if(item.hasEffect(item.getItemDamage())){
 			GL11.glDepthFunc(GL11.GL_EQUAL);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			texturemanager.func_110577_a(new ResourceLocation("textures/misc/enchanted_item_glint.png"));

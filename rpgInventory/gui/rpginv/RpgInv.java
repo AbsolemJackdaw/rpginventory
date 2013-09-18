@@ -271,7 +271,7 @@ public class RpgInv implements IInventory {
      * the correct items.
      */
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
-        //System.out.println("read from NBT");
+        System.out.println("read from NBT");
         NBTTagList var2 = par1NBTTagCompound.getTagList("Slot");
         armorSlots = new ItemStack[getSizeInventory()];
         for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
