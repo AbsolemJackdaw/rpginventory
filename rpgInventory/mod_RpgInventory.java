@@ -111,8 +111,6 @@ public class mod_RpgInventory {
 	/*====molds====*/
 	colmold, ringmold, wantmold;
 
-
-
 	public static Block forgeBlock;
 
 	//Die bitches.
@@ -146,25 +144,25 @@ public class mod_RpgInventory {
 	EnumArmorMaterial beastMaster = EnumHelper.addArmorMaterial("beast", 20, new int[]{4, 5, 4, 3}, 5);
 	EnumToolMaterial clay = EnumHelper.addToolMaterial("claymore", 0, 750, 5F, 6, 0);
 	EnumToolMaterial stone = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 5F, 4, 0);
-	public static EnumToolMaterial BeastAxeMaterial = EnumHelper.addToolMaterial("BeastAxe", 4, 1280, 6.0F, 3, 22);
+	EnumToolMaterial BeastAxeMaterial = EnumHelper.addToolMaterial("BeastAxe", 4, 1280, 6.0F, 3, 22);
 	public EnumToolMaterial NecroToolMaterial;
 	public EnumToolMaterial PalaToolMaterial;
 	public static CreativeTabs tab;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-
 		RpgConfig.instance.loadConfig(event.getSuggestedConfigurationFile());
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		// NOTHING BEFORE THE GOD DAMN TAB !
+		// NOTHING BEFORE THE GOD DAMN TAB ! 
+		//any items that need to be in it, put in it BEFORE the tab exists will not be in
 		tab = new RpgInventoryTab(CreativeTabs.getNextID(), "RpgTab");
 
 
+		//enabling items for "plugins"
 		try {
-
 			Class.forName("rpgNecroPaladin.mod_RpgPlus");
 			FMLLog.info("Rpg++ Necromancer and Paladin is installed. Renderers can be Used", 1);
 			hasRpg = true;
