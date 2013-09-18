@@ -80,111 +80,55 @@ public class mod_RpgInventory {
 	public static mod_RpgInventory instance;
 	@SidedProxy(serverSide = "rpgInventory.handelers.proxy.CommonProxy", clientSide = "rpgInventory.handelers.proxy.ClientProxy")
 	public static CommonProxy proxy;
-	public static Item neckgold;
-	public static Item neckdia;
-	public static Item neckem;
-	public static Item necklap;
-	public static Item glovesbutter;
-	public static Item glovesdia;
-	public static Item glovesem;
-	public static Item gloveslap;
-	public static Item ringgold;
-	public static Item ringdia;
-	public static Item ringem;
-	public static Item ringlap;
-	public static Item archersShield;
-	public static Item berserkerShield;
-	public static Item talisman;
-	public static Item pala_shield;
-	public static Item necro_shield;
-	public static Item shieldWood;
-	public static Item shieldIron;
-	public static Item shieldGold;
-	public static Item shieldDiamond;
-	public static Item cloak;
-	public static Item cloakI;
-	public static Item cloakSub;
-	public static Item cloakRed;
-	public static Item cloakYellow;
-	public static Item cloakGreen;
-	public static Item cloakBlue;
-	public static Item elfbow;
-	public static Item claymore;
-	public static Item hammer;
-	public static Item wand;
-	public static Item staf;
-	public static Item rageSeed;
-	public static Item magehood;
-	public static Item magegown;
-	public static Item magepants;
-	public static Item mageboots;
-	public static Item archerhood;
-	public static Item archerchest;
-	public static Item archerpants;
-	public static Item archerboots;
-	public static Item berserkerHood;
-	public static Item berserkerChest;
-	public static Item berserkerLegs;
-	public static Item berserkerBoots;
-	public static Item beastHood;
-	public static Item beastChest;
-	public static Item beastLegs;
-	public static Item beastBoots;
-	public static Item rogueHood;
-	public static Item rogueChest;
-	public static Item rogueLegs;
-	public static Item rogueBoots;
-	public static Item necroHood;
-	public static Item necroChestplate;
-	public static Item necroLeggings;
-	public static Item necroBoots;
-	public static Item palaHelm;
-	public static Item palaChest;
-	public static Item palaLeggings;
-	public static Item palaBoots;
-	public static Item pala_weapon;
-	public static Item animalskin;
-	public static Item tanHide;
-	public static Item magecloth;
-	public static Item wizardBook;
-	public static Item colmold;
-	public static Item ringmold;
-	public static Item wantmold;
-	public static Item necro_weapon;
-	public static Item necro_skin;
-	public static Item pala_steel;
-	public static Item daggers;
-	public static Item crystal;
-	public static Item rogueLeather;
-	public static Item beastLeather;
-	public static Item whistle;
-	public static Item fireStaff;
-	public static Item frostStaff;
-	public static Item archBook;
-	public static Item beastShield;
-	public static Item earthStaff;
-	public static Item windStaff;
-	public static Item ultimateStaff;
-	public static Item beastAxe;
-	public static Item archMageLeather;
-	public static Item archmageHood;
-	public static Item archmageChest;
-	public static Item archmageLegs;
-	public static Item archMageBoots;
-	public static Item petCandy;
-	public static Item tangledBrench;
-	public static Item PetXPBottle;
+
+	public static Item 
+	/*====jewels====*/
+	neckgold,neckdia, neckem, necklap, 
+	glovesbutter, glovesdia, glovesem, gloveslap, 
+	ringgold, ringdia, ringem, ringlap,
+	/*====shields====*/
+	archerShield, berserkerShield, talisman, pala_shield, necro_shield,
+	archBook, beastShield, 
+	shieldWood, shieldIron, shieldGold, shieldDiamond, 
+	/*====cloaks====*/
+	cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen, cloakBlue, 
+	/*====weapons====*/
+	elfbow, claymore, hammer, wand, staf, pala_weapon,necro_weapon, daggers,
+	fireStaff, frostStaff, earthStaff, windStaff, ultimateStaff,beastAxe,
+	/*====extra items====*/
+	rageSeed,wizardBook, crystal, whistle,petCandy, tangledBrench, PetXPBottle,
+	/*====armor====*/
+	magehood, magegown, magepants, mageboots,
+	archerhood, archerchest, archerpants, archerboots,
+	berserkerHood, berserkerChest, berserkerLegs, berserkerBoots,
+	beastHood, beastChest, beastLegs, beastBoots,
+	rogueHood, rogueChest, rogueLegs, rogueBoots,
+	necroHood, necroChestplate, necroLeggings, necroBoots,
+	palaHelm, palaChest, palaLeggings, palaBoots,
+	archmageHood, archmageChest, archmageLegs, archMageBoots,
+	/*====leathers/skins====*/
+	animalskin, tanHide, magecloth, rogueLeather, beastLeather,necro_skin, pala_steel,archMageLeather,
+	/*====molds====*/
+	colmold, ringmold, wantmold;
+
+
+
 	public static Block forgeBlock;
+
 	//Die bitches.
 	public static List<String> developers = new ArrayList<String>();
 	public static List<Integer> rpvInvIDs = new ArrayList();
+
 	private String[][] recipePatterns;
 	private Object[][] recipeItems;
+
 	public static boolean hasRpg;
 	public static boolean hasShields;
 	public static boolean hasRogue;
 	public static boolean hasMage;
+
 	private static int uniqueID = 0;
+
 	public static Potion decomposePotion;
 	public static Potion masochismPotion;
 
@@ -275,7 +219,7 @@ public class mod_RpgInventory {
 		glovesem = new ItemRpgArmor(RpgConfig.instance.glovesemID, 3, -1, "").setUnlocalizedName("gloveEm").setCreativeTab(tab);
 		gloveslap = new ItemRpgArmor(RpgConfig.instance.gloveslapID, 3, -1, "").setUnlocalizedName("gloveEm").setCreativeTab(tab);
 
-		archersShield = new ItemRpgArmor(RpgConfig.instance.archersShieldID, 1, 200, "").setUnlocalizedName("shieldArcher").setCreativeTab(tab);
+		archerShield = new ItemRpgArmor(RpgConfig.instance.archersShieldID, 1, 200, "").setUnlocalizedName("shieldArcher").setCreativeTab(tab);
 		berserkerShield = new ItemRpgArmor(RpgConfig.instance.berserkerShieldID, 1, 350, "").setUnlocalizedName("shieldBerserker").setCreativeTab(tab);
 		talisman = new ItemRpgArmor(RpgConfig.instance.talismanID, 1, 200, "").setUnlocalizedName("shieldMage").setCreativeTab(tab);
 
@@ -525,7 +469,7 @@ public class mod_RpgInventory {
 		LanguageRegistry.addName(ringem, "Buffed Ring");
 		LanguageRegistry.addName(ringlap, "Strength Ring");
 
-		LanguageRegistry.addName(archersShield, "Small Archer Shield");
+		LanguageRegistry.addName(archerShield, "Small Archer Shield");
 		LanguageRegistry.addName(berserkerShield, "Berserker's Iron Thorn");
 		LanguageRegistry.addName(talisman, "Wizard's Talisman");
 
@@ -579,7 +523,7 @@ public class mod_RpgInventory {
 		GameRegistry.addRecipe(new ItemStack(hammer, 1), new Object[]{"SSS", "LI ", "LI ", 'I', Item.ingotIron, 'S', Block.blockIron, 'L', Item.leather});
 
 		//SHIELDS
-		GameRegistry.addRecipe(new ItemStack(archersShield, 1), new Object[]{"WWW", "WBW", " W ", 'W', Item.ingotIron, 'B', Block.wood});
+		GameRegistry.addRecipe(new ItemStack(archerShield, 1), new Object[]{"WWW", "WBW", " W ", 'W', Item.ingotIron, 'B', Block.wood});
 		GameRegistry.addRecipe(new ItemStack(berserkerShield, 1), new Object[]{"WWW", "WBW", " W ", 'W', Item.ingotIron, 'B', Block.blockIron});
 		GameRegistry.addRecipe(new ItemStack(talisman, 1), new Object[]{"WWW", "WBW", " W ", 'W', new ItemStack(Item.dyePowder, 1, 4), 'B', Block.blockLapis});
 
