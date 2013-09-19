@@ -1,4 +1,4 @@
-package rpgInventory.handelers.proxy;
+package rpgInventory.handlers.proxy;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -21,6 +21,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
@@ -30,9 +31,11 @@ import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.gui.BookGui;
-import rpgInventory.gui.rpginv.RpgInv;
-import rpgInventory.handelers.ClientTickHandler;
-import rpgInventory.handelers.RPGKeyHandler;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.ClientTickHandler;
+import rpgInventory.handlers.RPGEventHooks;
+import rpgInventory.handlers.RPGKeyHandler;
+import rpgInventory.handlers.RenderPlayerHandler;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.ModelShield;
 import rpgInventory.renderer.RenderPlayerJewels;
@@ -127,7 +130,7 @@ public class ClientProxy extends CommonProxy {
 			
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.berserkerShield.itemID, 
 					(IItemRenderer) new BerserkerShield(new IronThorn(), "subaraki:jewels/IronThorn.png"));
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.archersShield.itemID, 
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.archerShield.itemID, 
 					(IItemRenderer) new ArcherShield(new ModelShield(), "subaraki:jewels/Shield1.png"));
 			
 			if(mod_RpgInventory.hasShields){
@@ -147,19 +150,19 @@ public class ClientProxy extends CommonProxy {
 	public void registerLate() {
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 
-		RenderPlayerJewels renderballs = new RenderPlayerJewels(new ModelBiped());
+//		RenderPlayerJewels renderballs = new RenderPlayerJewels(new ModelBiped());
 		//Ok guys. This is a workaround for other mods the hook the player render(smart moving)
 		//Basically we want to learn the currently bound renderers, and use them to
 		//render the player, and then render our items.
-		Map<Class<? extends Entity>, Render> map = RenderManager.instance.entityRenderMap;
-		for (Entry<Class<? extends Entity>, Render> entry : map.entrySet()) {
-			if (EntityPlayer.class.isAssignableFrom(entry.getKey())) {
-				Class clazz = entry.getValue().getClass();
-				RenderPlayerJewels.defaultPlayerRender.put(entry.getKey(), entry.getValue());
-				RenderingRegistry.registerEntityRenderingHandler(entry.getKey(), renderballs);
-			}
-		}
-		RenderingRegistry.instance().loadEntityRenderers(RenderManager.instance.entityRenderMap);
+//		Map<Class<? extends Entity>, Render> map = RenderManager.instance.entityRenderMap;
+//		for (Entry<Class<? extends Entity>, Render> entry : map.entrySet()) {
+//			if (EntityPlayer.class.isAssignableFrom(entry.getKey())) {
+//				Class clazz = entry.getValue().getClass();
+//				RenderPlayerJewels.defaultPlayerRender.put(entry.getKey(), entry.getValue());
+//				RenderingRegistry.registerEntityRenderingHandler(entry.getKey(), renderballs);
+//			}
+//		}
+//		RenderingRegistry.instance().loadEntityRenderers(RenderManager.instance.entityRenderMap);
 	}
 
 	public void openGUI(EntityPlayer p1, int id) {
@@ -177,73 +180,73 @@ public class ClientProxy extends CommonProxy {
 		}
 	}
 
-	public void openGUI(EntityPlayer p1, RpgInv inv) {
+	public void openGUI(EntityPlayer p1, PlayerRpgInventory inv) {
 		Minecraft.getMinecraft().displayGuiScreen(new rpgInventory.gui.pet.PetGui(p1, inv));
 	}
 
-	public RpgInv getInventory(String username) {
-		RpgInv inv = new RpgInv(username);
-		if (MinecraftServer.getServer() != null && MinecraftServer.getServer().getConfigurationManager() != null) {
-			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
-			if (player != null) {
-				if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG) && player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("RpgInv")) {
-					inv.readFromNBT(player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).getCompoundTag("RpgInv"));
-				} else {
-					if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
-						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
-					}
-					player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound()));
-				}
-			}
-		}
-		else{
-			EntityPlayer player = Minecraft.getMinecraft().theWorld.getPlayerEntityByName(username);
-			if (player != null) {
-				if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG) && player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("RpgInv")) {
-					inv.readFromNBT(player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).getCompoundTag("RpgInv"));
-				} else {
-					if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
-						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
-					}
-					player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
-				}
-			}
-		}
-
-		return inv;
-	}
-
-	public void addEntry(String username, RpgInv inv) {
-
-		if (MinecraftServer.getServer() != null && MinecraftServer.getServer().getConfigurationManager() != null) {
-			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
-			try {
-				if (player != null) {
-					if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
-						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
-					} else {
-						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
-						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
-					}
-				}
-			} catch (Throwable ex) {
-				ex.printStackTrace();
-			}
-		}
-		else {
-			EntityPlayer player = Minecraft.getMinecraft().theWorld.getPlayerEntityByName(username);
-			if (player != null) {
-				try {
-					if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
-						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
-					} else {
-						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
-						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
-					}
-				} catch (Throwable ex1) {
-					ex1.printStackTrace();
-				}
-			}
-		}
-	}
+//	public RpgInv getInventory(String username) {
+//		RpgInv inv = new RpgInv(username);
+//		if (MinecraftServer.getServer() != null && MinecraftServer.getServer().getConfigurationManager() != null) {
+//			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
+//			if (player != null) {
+//				if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG) && player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("RpgInv")) {
+//					inv.readFromNBT(player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).getCompoundTag("RpgInv"));
+//				} else {
+//					if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
+//						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
+//					}
+//					player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound()));
+//				}
+//			}
+//		}
+//		else{
+//			EntityPlayer player = Minecraft.getMinecraft().theWorld.getPlayerEntityByName(username);
+//			if (player != null) {
+//				if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG) && player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("RpgInv")) {
+//					inv.readFromNBT(player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).getCompoundTag("RpgInv"));
+//				} else {
+//					if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
+//						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
+//					}
+//					player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
+//				}
+//			}
+//		}
+//
+//		return inv;
+//	}
+//
+//	public void addEntry(String username, RpgInv inv) {
+//
+//		if (MinecraftServer.getServer() != null && MinecraftServer.getServer().getConfigurationManager() != null) {
+//			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
+//			try {
+//				if (player != null) {
+//					if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
+//						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
+//					} else {
+//						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
+//						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
+//					}
+//				}
+//			} catch (Throwable ex) {
+//				ex.printStackTrace();
+//			}
+//		}
+//		else {
+//			EntityPlayer player = Minecraft.getMinecraft().theWorld.getPlayerEntityByName(username);
+//			if (player != null) {
+//				try {
+//					if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
+//						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
+//					} else {
+//						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
+//						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
+//					}
+//				} catch (Throwable ex1) {
+//					ex1.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 }

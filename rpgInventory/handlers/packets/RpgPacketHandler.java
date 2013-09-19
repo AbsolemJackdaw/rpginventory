@@ -1,4 +1,4 @@
-package rpgInventory.handelers.packets;
+package rpgInventory.handlers.packets;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -14,7 +14,7 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
@@ -30,6 +30,7 @@ public class RpgPacketHandler implements IPacketHandler {
 	public static final int ARCHER = 5;
 	public static final int MAGE2 = 7;
 	public static final int CRYSTAL = 11;
+	public static final int INVENTORY = 15;
 
 	private Random rand = new Random(5);
 
@@ -37,7 +38,7 @@ public class RpgPacketHandler implements IPacketHandler {
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 
 		if (packet.channel.equals("RpgInv")) {
-			handleRandom(packet, player);
+			handlePackets(packet, player);
 		} else if (packet.channel.equals("RpgRawInv")) {
 			handleRawInventory(packet, (EntityPlayer) player);
 		}
@@ -46,10 +47,8 @@ public class RpgPacketHandler implements IPacketHandler {
 	private void handleRawInventory(Packet250CustomPayload packet, EntityPlayer p) {
 		try {
 			NBTTagCompound nbt = CompressedStreamTools.decompress(packet.data);
-			RpgInv inv = new RpgInv(nbt.getString("username"));
+			PlayerRpgInventory inv = new PlayerRpgInventory(p/*nbt.getString("username")*/);
 			NBTTagList list = nbt.getTagList("items");
-			
-//			FMLLog.getLogger().info(""+nbt.getString("username"));
 
 			for (int i = 0; i < inv.armorSlots.length; i++) {
 				NBTTagCompound tc = (NBTTagCompound) list.tagAt(i);
@@ -57,12 +56,13 @@ public class RpgPacketHandler implements IPacketHandler {
 					inv.armorSlots[i] = ItemStack.loadItemStackFromNBT(tc);
 				}
 			}
+
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
 
-	private void handleRandom(Packet250CustomPayload packet, Player player) {
+	private void handlePackets(Packet250CustomPayload packet, Player player) {
 
 		EntityPlayer p = (EntityPlayer) player;
 		World world = p.worldObj;
@@ -71,8 +71,8 @@ public class RpgPacketHandler implements IPacketHandler {
 		int z = (int) p.posZ;
 
 		DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
-		//System.out.println("Packet was send and recieved.");
 		try {
+		
 			int guiId = dis.readInt();
 			switch (guiId) {
 			case OPENRPGINV:
@@ -100,22 +100,15 @@ public class RpgPacketHandler implements IPacketHandler {
 					FMLNetworkHandler.openGui(p, mod_RpgInventory.instance, 2, world, x, y, z);
 				}
 				break;
-				//case 9 used for Paladin
-			case 10:
-				FMLLog.getLogger().info("[SEVERE] RpgInventory Send Unused packet !! 10");
-				break;
 			case CRYSTAL:
 				new PacketCrystal(dis, p);
 				break;
-			case 12:
-				FMLLog.getLogger().info("[SEVERE] RpgInventory Send Unused packet !! 12");
-				break;
-			case 13:
-				//mod_RpgInventory.proxy.candy(p);
-				FMLLog.getLogger().info("[SEVERE] RpgInventory Send Unused packet !! 13");
+			case INVENTORY:
+				FMLLog.getLogger().info("[RPG INVENTORY] Recieved inventory packet");
+
 				break;
 			default:
-				FMLLog.getLogger().info("[SEVERE] RpgInventory Send Unused packet !! UnDesignated");
+				FMLLog.getLogger().info("[SEVERE] RpgInventory Send Unused packet !!");
 				break;
 			}
 			dis.close();

@@ -8,8 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.IPet;
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgRogueBeast.entity.BoarPet;
 import rpgRogueBeast.entity.BullPet;
 import rpgRogueBeast.entity.SpiderPet;
@@ -24,8 +23,9 @@ public class ItemRBMats2 extends Item {
         if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER)) {
             if (!world.isRemote && player.ridingEntity == null) {
                 try {
-                    RpgInv rpginv = mod_RpgInventory.proxy.getInventory(player.username);
-                    ItemStack stack = rpginv.getCrystal();
+					PlayerRpgInventory inv = PlayerRpgInventory.get(player);
+
+            		ItemStack stack = inv.getCrystal();
                     if (stack != null) {
                         //Pet is in the world.
                         if (IPet.playersWithActivePets.containsKey(player.username)) {
@@ -33,7 +33,7 @@ public class ItemRBMats2 extends Item {
                             IPet.playersWithActivePets.remove(player.username);
                             if (e != null && !((EntityLiving) e).isDead) {
                                 stack = ((IPet) e).writePetToItemStack();
-                                rpginv.setInventorySlotContents(6, stack);
+                                inv.setInventorySlotContents(6, stack);
                                 ((EntityLiving) e).setDead();
                                 System.out.println("Put Away");
                                 return whistle;
@@ -89,7 +89,7 @@ public class ItemRBMats2 extends Item {
                                     world.spawnEntityInWorld(bull);
                                     break;
                             }
-                            rpginv.setInventorySlotContents(6, stack);
+                            inv.setInventorySlotContents(6, stack);
                         }
                     }
                 } catch (Throwable ex) {

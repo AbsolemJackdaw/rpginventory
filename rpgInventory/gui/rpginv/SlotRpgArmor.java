@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
+import rpgInventory.handlers.packets.PacketInventory;
 import rpgInventory.item.armor.ItemRpgArmor;
 
 class SlotRpgArmor extends Slot {
@@ -11,7 +12,7 @@ class SlotRpgArmor extends Slot {
     public int slotIndex;
     public EntityPlayer player;
 
-    SlotRpgArmor(RpgInv par2IInventory, int par3, int par4, int par5, EntityPlayer player) {
+    SlotRpgArmor(PlayerRpgInventory par2IInventory, int par3, int par4, int par5, EntityPlayer player) {
         super(par2IInventory, par3, par4, par5);
         this.player = player;
         slotIndex = par3;
@@ -95,7 +96,8 @@ class SlotRpgArmor extends Slot {
 
     @Override
     public void onSlotChanged() {
-        mod_RpgInventory.proxy.addEntry(player.username, (RpgInv)this.inventory);
+		PacketInventory.sendPacket(player, (PlayerRpgInventory) this.inventory);
+
         super.onSlotChanged();
     }
     

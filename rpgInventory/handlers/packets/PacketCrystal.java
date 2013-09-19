@@ -1,4 +1,4 @@
-package rpgInventory.handelers.packets;
+package rpgInventory.handlers.packets;
 
 import java.io.DataInputStream;
 import java.io.IOException;

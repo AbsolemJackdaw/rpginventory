@@ -1,3 +1,4 @@
+package rpgInventory.handlers.proxy;
 //package rpgInventory.handelers.proxy;
 //
 //import java.util.Scanner;

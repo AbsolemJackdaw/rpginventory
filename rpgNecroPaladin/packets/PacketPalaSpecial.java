@@ -10,13 +10,13 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
-import rpgInventory.handelers.CommonTickHandler;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.CommonTickHandler;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketPalaSpecial {
 
-	public PacketPalaSpecial(Player player, EntityPlayer p, DataInputStream dis, ItemStack weapon, RpgInv inv){
+	public PacketPalaSpecial(Player player, EntityPlayer p, DataInputStream dis, ItemStack weapon, PlayerRpgInventory inv){
 		try {
 			dis.close();
 		} catch (Throwable ex) {

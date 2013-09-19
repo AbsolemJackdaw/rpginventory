@@ -1,4 +1,4 @@
-package rpgInventory.handelers;
+package rpgInventory.handlers;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -16,7 +16,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
@@ -68,7 +68,8 @@ public class CommonTickHandler implements ITickHandler {
 						RPGEventHooks.DiamondTick.remove(username);
 						continue;
 					}
-					RpgInv rpginv = mod_RpgInventory.proxy.getInventory(username);
+					
+					PlayerRpgInventory rpginv = PlayerRpgInventory.get(player);
 					if (rpginv == null) {
 						continue;
 					}
@@ -170,7 +171,8 @@ public class CommonTickHandler implements ITickHandler {
 					NBTTagCompound nbt = new NBTTagCompound();
 					nbt.setString("username", player.username);
 					NBTTagList list = new NBTTagList("items");
-					RpgInv inv = mod_RpgInventory.proxy.getInventory(player.username);
+					
+					PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 					for (int i = 0; i < inv.armorSlots.length; i++) {
 						//This is safe, an empty NBTTag just just returns a null ItemStack
 						//when processed, however appending a null compound tag explodes.
@@ -199,7 +201,7 @@ public class CommonTickHandler implements ITickHandler {
 	public void dropJewels(EntityPlayer player) {
 		if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
 			if (player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") == false) {
-				RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
+				PlayerRpgInventory rpg = PlayerRpgInventory.get(player);
 				int var1;
 				player.inventory.dropAllItems();
 				for (var1 = 0; var1 < rpg.armorSlots.length; ++var1) {

@@ -22,8 +22,8 @@ public class RpgGui extends GuiContainer {
     private float xSize_lo;
     private float ySize_lo;
 
-    public RpgGui(EntityPlayer player, RpgInv inv) {
-        super(new RpgContainer(player, inv));
+    public RpgGui(EntityPlayer player, PlayerRpgInventory inv) {
+        super(new PlayerRpgContainer(player, inv));
     }
     public static String rpg = "Rpg";
     public static String hi = "Inventory";
@@ -100,7 +100,7 @@ public class RpgGui extends GuiContainer {
     @Override
     public void actionPerformed(GuiButton button) {
         EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-        RpgContainer container = (RpgContainer) this.inventorySlots;
+        PlayerRpgContainer container = (PlayerRpgContainer) this.inventorySlots;
         if (button.id == 0) {
             mod_RpgInventory.proxy.openGUI(p, 1);
         } else if (button.id == 1) {

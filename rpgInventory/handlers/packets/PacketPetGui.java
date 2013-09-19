@@ -1,4 +1,4 @@
-package rpgInventory.handelers.packets;
+package rpgInventory.handlers.packets;
 
 import java.io.DataInputStream;
 
@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.common.FMLLog;
 
 public class PacketPetGui {
@@ -26,14 +26,14 @@ public class PacketPetGui {
 			short hpmax = dis.readShort();
 			short atk = dis.readShort();
 			int playerLevelsLost = dis.readShort();
-			
+
 			FMLLog.getLogger().info(""+ petname + " "+ PetLevel + " "+currentHP + " "+hpmax+ " "+atk+" "+playerLevelsLost);
 			//currently unused
 			int petLevelsAdded = dis.readShort();
 			int petcandyConsumed = dis.readShort();
-			
-			
-			RpgInv inv = mod_RpgInventory.proxy.getInventory(p.username);
+
+
+			PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 			ItemStack crystal = inv.getCrystal();
 			NBTTagCompound nbtCrystal = (NBTTagCompound)crystal.getTagCompound().copy();
 			NBTTagCompound nbtPet = (NBTTagCompound)nbtCrystal.getCompoundTag("RPGPetInfo").copy();
@@ -53,13 +53,13 @@ public class PacketPetGui {
 			nbtCrystal.setInteger("PetAttack", atk);
 
 			nbtCrystal.setCompoundTag("RPGPetInfo", nbtPet);
-			
+
 			p.addExperienceLevel(-playerLevelsLost);
 			ItemStack newcrystal = new ItemStack(mod_RpgInventory.crystal, 1, crystal.getItemDamage());
 			newcrystal.setTagCompound(nbtCrystal);
 			newcrystal.setItemName(petname);
 			inv.setInventorySlotContents(6, newcrystal);
-			mod_RpgInventory.proxy.addEntry(p.username, inv);
+			PacketInventory.sendPacket(p, inv);
 		} catch (Throwable ex) {
 		}
 	}

@@ -1,4 +1,4 @@
-package rpgInventory.handelers.packets;
+package rpgInventory.handlers.packets;
 
 import java.io.DataInputStream;
 import java.util.List;
@@ -13,7 +13,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.handelers.CommonTickHandler;
+import rpgInventory.handlers.CommonTickHandler;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketMageVortex {

@@ -1,4 +1,4 @@
-package rpgInventory.handelers.proxy;
+package rpgInventory.handlers.proxy;
 
 import java.util.Random;
 
@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 
 public class CommonProxy {
 
@@ -47,7 +47,7 @@ public class CommonProxy {
 	public void openGUI(EntityPlayer player, int id) {
 	}
 
-	public void openGUI(EntityPlayer player, RpgInv inv) {
+	public void openGUI(EntityPlayer player, PlayerRpgInventory inv) {
 	}
 
 	public void playerLevel(EntityPlayer player, int amount) {

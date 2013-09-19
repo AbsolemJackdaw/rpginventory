@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 
 public class ItemRpgPlusPlusArmor extends ItemRpgArmor {
 
@@ -23,15 +23,14 @@ public class ItemRpgPlusPlusArmor extends ItemRpgArmor {
 	@Override
 	public void armorEffects(ItemStack is, EntityPlayer player)
 	{
-		RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
-
+		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 		ItemStack slot0 = player.inventory.armorItemInSlot(0);
 		ItemStack slot1 = player.inventory.armorItemInSlot(1);
 		ItemStack slot2 = player.inventory.armorItemInSlot(2);
 		ItemStack slot3 = player.inventory.armorItemInSlot(3);
 
 
-		ItemStack shield = rpg.getJewelInSlot(1);
+		ItemStack shield = inv.getJewelInSlot(1);
 
 		/**
 		 *Checks for the full Paladin Armor

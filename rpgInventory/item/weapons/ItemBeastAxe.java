@@ -16,6 +16,7 @@ import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.DamageSource;
@@ -33,8 +34,8 @@ public class ItemBeastAxe extends ItemRpgSword {
     private int particleTime;
     private Random rng = new Random(1051414);
 
-    public ItemBeastAxe(int par1) {
-        super(par1, mod_RpgInventory.BeastAxeMaterial);
+    public ItemBeastAxe(int par1, EnumToolMaterial mat) {
+        super(par1, mat);
         this.maxStackSize = 1;
         this.setMaxDamage(1500);
     }

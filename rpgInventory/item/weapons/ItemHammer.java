@@ -10,8 +10,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 
 public class ItemHammer extends ItemRpgSword {
 
@@ -25,11 +24,12 @@ public class ItemHammer extends ItemRpgSword {
     }
 
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
-        RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
-		rpg.classSets = EnumRpgClass.getPlayerClasses(player);
+		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 
-        if (rpg.hasClass(EnumRpgClass.BERSERKER)) {
-            if (rpg.hasClass(EnumRpgClass.SHIELDEDBERSERKER)) {
+		inv.classSets = EnumRpgClass.getPlayerClasses(player);
+
+        if (inv.hasClass(EnumRpgClass.BERSERKER)) {
+            if (inv.hasClass(EnumRpgClass.SHIELDEDBERSERKER)) {
                 if (player.getFoodStats().getFoodLevel() < 6
                         || player.func_110143_aJ() < 6) {
                     player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 200, 1));

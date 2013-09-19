@@ -13,8 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import rpgInventory.EnumRpgClass;
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
@@ -36,7 +35,8 @@ public class RpgPlusPacketHandler implements IPacketHandler {
 			ex.printStackTrace();
 		}
 		ItemStack weapon = p.getCurrentEquippedItem();
-		RpgInv inv = mod_RpgInventory.proxy.getInventory(p.username);
+		PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+
 		inv.classSets = EnumRpgClass.getPlayerClasses(p);
 
 		if (inv != null) {

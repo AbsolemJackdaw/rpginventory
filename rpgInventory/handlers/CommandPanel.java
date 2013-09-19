@@ -1,4 +1,4 @@
-package rpgInventory.handelers;
+package rpgInventory.handlers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -159,7 +159,7 @@ public class CommandPanel extends CommandBase {
 		sets.get("berserker").add(new ItemStack(mod_RpgInventory.berserkerBoots));
 
 		sets.get("archer").add(new ItemStack(mod_RpgInventory.elfbow));
-		sets.get("archer").add(new ItemStack(mod_RpgInventory.archersShield));
+		sets.get("archer").add(new ItemStack(mod_RpgInventory.archerShield));
 		sets.get("archer").add(new ItemStack(mod_RpgInventory.archerhood));
 		sets.get("archer").add(new ItemStack(mod_RpgInventory.archerchest));
 		sets.get("archer").add(new ItemStack(mod_RpgInventory.archerpants));

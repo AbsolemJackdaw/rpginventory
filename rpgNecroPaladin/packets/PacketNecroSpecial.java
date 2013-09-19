@@ -7,13 +7,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgNecroPaladin.minions.IMinion;
 import rpgNecroPaladin.minions.MinionRegistry;
 
 public class PacketNecroSpecial {
 
-	public PacketNecroSpecial(ItemStack weapon, DataInputStream dis, RpgInv inv, EntityPlayer p){
+	public PacketNecroSpecial(ItemStack weapon, DataInputStream dis, PlayerRpgInventory inv, EntityPlayer p){
 		try {
             dis.close();
         } catch (Throwable ex) {

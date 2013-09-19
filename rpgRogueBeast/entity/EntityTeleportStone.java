@@ -10,7 +10,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -43,9 +43,9 @@ public class EntityTeleportStone extends EntityThrowable
 
 			if (this.getThrower() != null)
 			{
-				RpgInv rpg = mod_RpgInventory.proxy.getInventory(((EntityPlayer)getThrower()).username);
+				PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer) getThrower());
 
-				if(rpg.getShield() != null && rpg.getShield().getItem() == mod_RpgInventory.daggers)
+				if(inv.getShield() != null && inv.getShield().getItem() == mod_RpgInventory.daggers)
 				{
 					if(par1MovingObjectPosition.entityHit instanceof EntityPlayer)
 					{

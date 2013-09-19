@@ -41,7 +41,7 @@ import rpgInventory.EnumRpgClass;
 import rpgInventory.IPet;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.entity.EntityPetXP;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgNecroPaladin.minions.CustomMinionEntitySelector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -177,8 +177,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             EntityPlayer player = (EntityPlayer)getOwner();
             if ((player == null || !EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER))) {
                 try {
-                    RpgInv inv = mod_RpgInventory.proxy.getInventory(getOwnerName());
-                    inv.setInventorySlotContents(6, writePetToItemStack());
+					PlayerRpgInventory inv = PlayerRpgInventory.get(player);
+
+            		inv.setInventorySlotContents(6, writePetToItemStack());
                 } catch (Throwable ex) {
                 }
                 this.setDead();
@@ -392,9 +393,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     @Override
     public void setDead() {
         if (IPet.playersWithActivePets.containsKey(this.getOwnerName())) {
-            RpgInv rpginv = mod_RpgInventory.proxy.getInventory(getOwnerName());
-            ItemStack itemizedPet = writePetToItemStack(new ItemStack(mod_RpgInventory.crystal));
-            rpginv.setInventorySlotContents(6, itemizedPet);
+			PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer) getOwner());
+
+    		ItemStack itemizedPet = writePetToItemStack(new ItemStack(mod_RpgInventory.crystal));
+            inv.setInventorySlotContents(6, itemizedPet);
             IPet.playersWithActivePets.remove(this.getOwnerName());
         }
         super.setDead();

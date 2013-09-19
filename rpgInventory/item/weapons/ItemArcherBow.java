@@ -13,7 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -54,9 +54,8 @@ public class ItemArcherBow extends Item {
     public void onPlayerStoppedUsing(ItemStack stack, World par2World, EntityPlayer player, int par4) {
         super.onPlayerStoppedUsing(stack, par2World, player, par4);
         usingItem =0;
-        RpgInv rpg = mod_RpgInventory.proxy.getInventory(player.username);
-
-        ItemStack shield = rpg.getJewelInSlot(1);
+		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
+        ItemStack shield = inv.getJewelInSlot(1);
 
         int j = this.getMaxItemUseDuration(stack) - par4;
         ArrowLooseEvent event = new ArrowLooseEvent(player, stack, j);
@@ -81,7 +80,7 @@ public class ItemArcherBow extends Item {
 
             if (item.equals(mod_RpgInventory.archerhood) && item1.equals(mod_RpgInventory.archerchest)
                     && item2.equals(mod_RpgInventory.archerpants) && item3.equals(mod_RpgInventory.archerboots)) {
-                boolean flag = (shield != null && shield.itemID == mod_RpgInventory.archersShield.itemID) || player.capabilities.isCreativeMode;
+                boolean flag = (shield != null && shield.itemID == mod_RpgInventory.archerShield.itemID) || player.capabilities.isCreativeMode;
                 if (player.inventory.hasItem(Item.arrow.itemID) || flag) {
 
                     float f = (float) j / 20.0F;

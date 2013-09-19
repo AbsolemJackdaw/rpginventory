@@ -21,7 +21,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
 import rpgNecroPaladin.minions.IMinion;
@@ -44,7 +44,8 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer p, Entity entity) {
-		RpgInv inv = mod_RpgInventory.proxy.getInventory(p.username);
+		PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+
 		ItemStack weapon = p.getCurrentEquippedItem();
 
 		inv.classSets = EnumRpgClass.getPlayerClasses(p);
@@ -74,7 +75,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 			World world = p.worldObj;
 			if (!world.isRemote) {
 				ItemStack weapon = p.getCurrentEquippedItem();
-				RpgInv inv = mod_RpgInventory.proxy.getInventory(p.username);
+				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
 				inv.classSets = EnumRpgClass.getPlayerClasses(p);
 

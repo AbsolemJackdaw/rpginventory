@@ -7,14 +7,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgNecroPaladin.CommonTickHandlerRpgPlus;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
 
 public class PacketSpawnMinion {
 
-	public PacketSpawnMinion(ItemStack weapon, DataInputStream dis, RpgInv inv, EntityPlayer p){
+	public PacketSpawnMinion(ItemStack weapon, DataInputStream dis, PlayerRpgInventory inv, EntityPlayer p){
 		try {
 			dis.close();
 		} catch (Throwable ex) {

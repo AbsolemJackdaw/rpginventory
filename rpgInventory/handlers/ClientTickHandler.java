@@ -1,4 +1,4 @@
-package rpgInventory.handelers;
+package rpgInventory.handlers;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

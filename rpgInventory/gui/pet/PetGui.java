@@ -24,8 +24,8 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.IPet;
-import rpgInventory.gui.rpginv.RpgInv;
-import rpgInventory.handelers.packets.RpgPacketHandler;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.packets.RpgPacketHandler;
 import rpgRogueBeast.entity.BMPetImpl;
 import rpgRogueBeast.entity.BoarPet;
 import rpgRogueBeast.entity.BullPet;
@@ -39,9 +39,9 @@ public class PetGui extends GuiScreen {
 
 	EntityPlayer p;
 	ItemStack petCrystal;
-	RpgInv inv;
+	PlayerRpgInventory inv;
 
-	public PetGui(EntityPlayer p1, RpgInv inv) {
+	public PetGui(EntityPlayer p1, PlayerRpgInventory inv) {
 		p = p1;
 		this.inv = inv;
 	}

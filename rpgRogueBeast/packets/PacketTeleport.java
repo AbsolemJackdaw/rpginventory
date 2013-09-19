@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.handelers.CommonTickHandler;
+import rpgInventory.handlers.CommonTickHandler;
 import rpgRogueBeast.entity.EntityTeleportStone;
 
 public class PacketTeleport {

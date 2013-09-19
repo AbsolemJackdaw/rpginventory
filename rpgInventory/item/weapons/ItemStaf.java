@@ -11,8 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 
 public class ItemStaf extends ItemRpgSword {
 
@@ -73,7 +72,8 @@ public class ItemStaf extends ItemRpgSword {
 	}
 
 	public ItemStack onItemRightClick(ItemStack is, World par2World, EntityPlayer p) {
-		RpgInv inv = mod_RpgInventory.proxy.getInventory(p.username);
+		PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+
 		inv.classSets = EnumRpgClass.getPlayerClasses(p);
 		if (inv.hasClass(EnumRpgClass.MAGE) || inv.hasClass(EnumRpgClass.ARCHMAGE)) {
 			p.setItemInUse(is, this.getMaxItemUseDuration(is));

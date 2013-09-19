@@ -23,12 +23,13 @@ import rpgInventory.block.te.TEMold;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.gui.RpgInventoryTab;
-import rpgInventory.handelers.CommonTickHandler;
-import rpgInventory.handelers.GuiHandler;
-import rpgInventory.handelers.PlayerTracker;
-import rpgInventory.handelers.RPGEventHooks;
-import rpgInventory.handelers.packets.RpgPacketHandler;
-import rpgInventory.handelers.proxy.CommonProxy;
+import rpgInventory.handlers.CommonTickHandler;
+import rpgInventory.handlers.GuiHandler;
+import rpgInventory.handlers.PlayerTracker;
+import rpgInventory.handlers.RPGEventHooks;
+import rpgInventory.handlers.RenderPlayerHandler;
+import rpgInventory.handlers.packets.RpgPacketHandler;
+import rpgInventory.handlers.proxy.CommonProxy;
 import rpgInventory.item.ItemCandy;
 import rpgInventory.item.ItemCrystal;
 import rpgInventory.item.ItemMats;
@@ -70,7 +71,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = "rpginventorymod", name = "RPG Inventory Mod", version = "1.5.1 8.4")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false,
+@NetworkMod(clientSideRequired = true, serverSideRequired = true,
 clientPacketHandlerSpec =
 @SidedPacketHandler(channels = {"RpgInv", "RpgRawInv"}, packetHandler = RpgPacketHandler.class),
 serverPacketHandlerSpec =
@@ -78,7 +79,7 @@ serverPacketHandlerSpec =
 public class mod_RpgInventory {
 
 	public static mod_RpgInventory instance;
-	@SidedProxy(serverSide = "rpgInventory.handelers.proxy.CommonProxy", clientSide = "rpgInventory.handelers.proxy.ClientProxy")
+	@SidedProxy(serverSide = "rpgInventory.handlers.proxy.CommonProxy", clientSide = "rpgInventory.handlers.proxy.ClientProxy")
 	public static CommonProxy proxy;
 
 	public static Item 
@@ -327,7 +328,7 @@ public class mod_RpgInventory {
 		if (hasRogue == true) {
 
 			daggers = new ItemRpgArmor(RpgConfig.instance.daggersID, 1, 800, "").setUnlocalizedName("dagger");
-			beastAxe = new ItemBeastAxe(RpgConfig.instance.beastAxe).setFull3D().setUnlocalizedName("forestAxe");
+			beastAxe = new ItemBeastAxe(RpgConfig.instance.beastAxe, BeastAxeMaterial).setFull3D().setUnlocalizedName("forestAxe");
 
 			rogueLeather = new ItemRBMats(RpgConfig.instance.rogueLeatherID).setUnlocalizedName("r.leather");
 			beastLeather = new ItemRBMats(RpgConfig.instance.beastLeatherID).setUnlocalizedName("b.leather");
@@ -576,6 +577,7 @@ public class mod_RpgInventory {
 		TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
 		MinecraftForge.EVENT_BUS.register(new RPGEventHooks());
 		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow", getUniqueID(), this, 250, 1, true);
+		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
 
 
 		//hack to increase the number of potion types allowed
@@ -697,7 +699,7 @@ public class mod_RpgInventory {
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event) {
 		CommandHandler commandManager = (CommandHandler) event.getServer().getCommandManager();
-		commandManager.registerCommand(new rpgInventory.handelers.CommandPanel());
-		rpgInventory.handelers.CommandPanel.init();
+		commandManager.registerCommand(new rpgInventory.handlers.CommandPanel());
+		rpgInventory.handlers.CommandPanel.init();
 	}
 }

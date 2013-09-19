@@ -25,8 +25,8 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.mod_RpgInventory;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.gui.rpginv.RpgGui;
-import rpgInventory.gui.rpginv.RpgInv;
 import rpgInventory.item.armor.BonusArmor;
 import rpgInventory.models.armor.ModelBeastArmor;
 import rpgInventory.models.armor.ModelBerserkerArmor;
@@ -82,7 +82,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 	public ItemStack gloves;
 	public int rotation = 0;
 	private Minecraft mc;
-	RpgInv rpgInventory;
+	PlayerRpgInventory rpgInventory;
 
 	public RenderPlayerJewels(ModelBase model) {// the name of this class sounds so wrong ... ._.
 
@@ -120,10 +120,10 @@ public class RenderPlayerJewels extends RenderPlayer {
 
 	protected void renderSpecialsRpg(EntityPlayer player, float par2) {
 		ItemStack chest = player.inventory.armorItemInSlot(2);
-		ItemStack hoed = player.inventory.armorItemInSlot(3);
+//		ItemStack helmet = player.inventory.armorItemInSlot(3);
 		GL11.glColor4f(1, 1, 1, 1);
 		this.modelBipedMain.heldItemLeft = 0;
-		rpgInventory = mod_RpgInventory.proxy.getInventory(player.username);
+		rpgInventory = PlayerRpgInventory.get(player);
 		float var11;
 
 		//INSERT CODE HERE
@@ -367,7 +367,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 					lionhead.render(0.0625f);
 				}
 
-			} else if (shield.getItem() == mod_RpgInventory.archersShield) {
+			} else if (shield.getItem() == mod_RpgInventory.archerShield) {
 
 				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/Shield1.png"));
 

@@ -8,7 +8,7 @@ import java.util.EnumSet;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.BonusArmor;
 
 /**
@@ -132,13 +132,13 @@ public enum EnumRpgClass {
                     }
                 }
             }
-            RpgInv inv = mod_RpgInventory.proxy.getInventory(p.username);
-            //This means character has a class enum
+			PlayerRpgInventory inv = PlayerRpgInventory.get(p); 
+			//This means character has a class enum
             if (inv != null) {
                 ItemStack shield = inv.getShield();
                 if (shield != null) {
                     if (classenum != null) {
-                        if (shield.getItem().equals(mod_RpgInventory.archersShield) && classenum == ARCHER) {
+                        if (shield.getItem().equals(mod_RpgInventory.archerShield) && classenum == ARCHER) {
                             shieldenum = SHIELDEDARCHER;
                         } else if (shield.getItem().equals(mod_RpgInventory.talisman) && classenum == MAGE) {
                             shieldenum = SHIELDEDMAGE;

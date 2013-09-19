@@ -14,7 +14,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -147,13 +147,16 @@ public class ItemRpgArmor extends Item {
 
     @Override
     public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving) {
-        RpgInv rpg = mod_RpgInventory.proxy.getInventory(((EntityPlayer) par3EntityLiving).username);
-        rpg.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer) par3EntityLiving);
+       
+		PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer) par3EntityLiving);
+
+    	//RpgInv inv = mod_RpgInventory.proxy.getInventory(((EntityPlayer) par3EntityLiving).username);
+        inv.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer) par3EntityLiving);
 
         if (((EntityPlayer) par3EntityLiving).getCurrentEquippedItem().getItem() == mod_RpgInventory.daggers) {
-        	if (rpg.hasClass(EnumRpgClass.NINJA)) {
+        	if (inv.hasClass(EnumRpgClass.NINJA)) {
                 par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 80, 1));
-            }else if (rpg.hasClass(EnumRpgClass.ROGUE)) {
+            }else if (inv.hasClass(EnumRpgClass.ROGUE)) {
                 par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 40, 0));
                 if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
                     par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 10);

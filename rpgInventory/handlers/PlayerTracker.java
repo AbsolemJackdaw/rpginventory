@@ -1,7 +1,5 @@
-package rpgInventory.handelers;
+package rpgInventory.handlers;
 
-import rpgInventory.ExtendedPlayer;
-import rpgInventory.gui.rpginv.RpgInv;
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.IPlayerTracker;
 

@@ -10,8 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.EnumRpgClass;
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.RpgInv;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.models.weapons.ModelSoulSphere;
 
 
@@ -42,7 +41,8 @@ public class SoulSphereRender extends RpgItemRenderer {
 			turn +=0.01f;
 			if(data[1] != null && data [1] instanceof EntityPlayer){
 				EntityPlayer p = (EntityPlayer)data[1];
-				RpgInv inv = mod_RpgInventory.proxy.getInventory(p.username);
+				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+
 				inv.classSets = EnumRpgClass.getPlayerClasses(p);
 				if (inv.hasClass(EnumRpgClass.MAGE) || inv.hasClass(EnumRpgClass.ARCHMAGE)) {
 					swordmodel.renderFloatingShpere((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
@@ -63,7 +63,8 @@ public class SoulSphereRender extends RpgItemRenderer {
 			turn +=0.01f;
 			if(data[1] != null && data [1] instanceof EntityPlayer){
 				EntityPlayer p = (EntityPlayer)data[1];
-				RpgInv inv = mod_RpgInventory.proxy.getInventory(p.username);
+				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+
 				inv.classSets = EnumRpgClass.getPlayerClasses(p);
 				if (inv.hasClass(EnumRpgClass.MAGE) || inv.hasClass(EnumRpgClass.ARCHMAGE)) {
 					swordmodel.renderFloatingShpere((Entity)data[1], turn, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
