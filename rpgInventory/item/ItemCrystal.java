@@ -19,7 +19,7 @@ public class ItemCrystal extends ItemRpgArmor {
     public static final String[] pets = new String[]{"Empty Crystal", "Boar", "Spider", "Bull"};
 
     public ItemCrystal(int id, int armorType, int maxDamage, String name) {
-        super(id, armorType, maxDamage, name);
+        super(id, armorType, maxDamage, name, "");
         this.setHasSubtypes(true);
         //Max stack size MUST be 1!
         this.maxStackSize = 1;

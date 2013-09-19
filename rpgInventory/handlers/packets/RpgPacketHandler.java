@@ -104,7 +104,7 @@ public class RpgPacketHandler implements IPacketHandler {
 				new PacketCrystal(dis, p);
 				break;
 			case INVENTORY:
-				FMLLog.getLogger().info("[RPG INVENTORY] Recieved inventory packet");
+//				FMLLog.getLogger().info("[RPG INVENTORY] Recieved inventory packet");
 				PlayerRpgInventory.get(p).setInventorySlotContents(0, packet.readItemStack(dis));
 				PlayerRpgInventory.get(p).setInventorySlotContents(1, packet.readItemStack(dis));
 				PlayerRpgInventory.get(p).setInventorySlotContents(2, packet.readItemStack(dis));

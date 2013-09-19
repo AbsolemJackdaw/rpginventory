@@ -10,9 +10,9 @@ import rpgInventory.gui.rpginv.PlayerRpgInventory;
 
 public class ItemRpgPlusPlusArmor extends ItemRpgArmor {
 
-	public ItemRpgPlusPlusArmor(int par1, int par4, int maxDamage, String name)
+	public ItemRpgPlusPlusArmor(int par1, int par4, int maxDamage, String name, String loc)
 	{
-		super(par1, par4, maxDamage, name);
+		super(par1, par4, maxDamage, name, loc);
 		this.armorType = par4;
 		this.maxStackSize = 1;
 		this.setCreativeTab(CreativeTabs.tabCombat);

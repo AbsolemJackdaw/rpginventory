@@ -27,6 +27,7 @@ import rpgInventory.handlers.CommonTickHandler;
 import rpgInventory.handlers.GuiHandler;
 import rpgInventory.handlers.PlayerTracker;
 import rpgInventory.handlers.RPGEventHooks;
+import rpgInventory.handlers.RenderPlayerHandler;
 import rpgInventory.handlers.packets.RpgPacketHandler;
 import rpgInventory.handlers.proxy.CommonProxy;
 import rpgInventory.item.ItemCandy;
@@ -212,10 +213,10 @@ public class mod_RpgInventory {
 		ringem = new ItemRpgArmor(RpgConfig.instance.ringemID, 4, -1, "", "").setUnlocalizedName("ringEm").setCreativeTab(tab);
 		ringlap = new ItemRpgArmor(RpgConfig.instance.ringlapID, 4, -1, "", "").setUnlocalizedName("ringLap").setCreativeTab(tab);
 
-		glovesbutter = new ItemRpgArmor(RpgConfig.instance.glovesbutterID, 3, -1, "", "").setUnlocalizedName("gloveGold").setCreativeTab(tab);
-		glovesdia = new ItemRpgArmor(RpgConfig.instance.glovesdiaID, 3, -1, "", "").setUnlocalizedName("gloveDia").setCreativeTab(tab);
-		glovesem = new ItemRpgArmor(RpgConfig.instance.glovesemID, 3, -1, "", "").setUnlocalizedName("gloveEm").setCreativeTab(tab);
-		gloveslap = new ItemRpgArmor(RpgConfig.instance.gloveslapID, 3, -1, "", "").setUnlocalizedName("gloveEm").setCreativeTab(tab);
+		glovesbutter = new ItemRpgArmor(RpgConfig.instance.glovesbutterID, 3, -1, "", "subaraki:jewels/Glove.png").setUnlocalizedName("gloveGold").setCreativeTab(tab);
+		glovesdia = new ItemRpgArmor(RpgConfig.instance.glovesdiaID, 3, -1, "", "subaraki:jewels/GloveDia.png").setUnlocalizedName("gloveDia").setCreativeTab(tab);
+		glovesem = new ItemRpgArmor(RpgConfig.instance.glovesemID, 3, -1, "", "subaraki:jewels/GloveEm.png").setUnlocalizedName("gloveEm").setCreativeTab(tab);
+		gloveslap = new ItemRpgArmor(RpgConfig.instance.gloveslapID, 3, -1, "", "subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap").setCreativeTab(tab);
 
 		archerShield = new ItemRpgArmor(RpgConfig.instance.archersShieldID, 1, 200, "", "").setUnlocalizedName("shieldArcher").setCreativeTab(tab);
 		berserkerShield = new ItemRpgArmor(RpgConfig.instance.berserkerShieldID, 1, 350, "", "").setUnlocalizedName("shieldBerserker").setCreativeTab(tab);
@@ -280,10 +281,10 @@ public class mod_RpgInventory {
 			palaLeggings = new BonusArmor(RpgConfig.instance.palaLeggingsID, paladin, 4, 2).setUnlocalizedName("paladin3");
 			palaBoots = new BonusArmor(RpgConfig.instance.palaBootsID, paladin, 4, 3).setUnlocalizedName("paladin4");
 
-			necro_shield = new ItemRpgPlusPlusArmor(RpgConfig.instance.necro_shieldID, 1, 250, "necro").setUnlocalizedName("shieldNecro");
+			necro_shield = new ItemRpgPlusPlusArmor(RpgConfig.instance.necro_shieldID, 1, 250, "necro","").setUnlocalizedName("shieldNecro");
 			necro_weapon = new ItemNecroSkull(RpgConfig.instance.necro_weaponID, NecroToolMaterial).setFull3D().setUnlocalizedName("Skull");
 
-			pala_shield = new ItemRpgPlusPlusArmor(RpgConfig.instance.pala_shieldID, 1, 450, "pala").setUnlocalizedName("shieldPaladin");
+			pala_shield = new ItemRpgPlusPlusArmor(RpgConfig.instance.pala_shieldID, 1, 450, "pala","").setUnlocalizedName("shieldPaladin");
 			pala_weapon = new ItemGrandSword(RpgConfig.instance.pala_weaponID, PalaToolMaterial).setFull3D().setUnlocalizedName("paladinPride");
 
 			necro_skin = new ItemMats(RpgConfig.instance.necro_skinID).setUnlocalizedName("n.leather");
@@ -577,6 +578,7 @@ public class mod_RpgInventory {
 		MinecraftForge.EVENT_BUS.register(new RPGEventHooks());
 		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow", getUniqueID(), this, 250, 1, true);
 
+		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
 
 		//hack to increase the number of potion types allowed
 
