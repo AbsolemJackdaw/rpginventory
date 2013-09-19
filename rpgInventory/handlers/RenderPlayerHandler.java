@@ -27,9 +27,8 @@ public class RenderPlayerHandler {
 		EntityPlayer player = evt.entityPlayer;
 		
 		ItemStack stack = PlayerRpgInventory.get(player).getGloves();
-//		FMLLog.getLogger().info(""+ PlayerRpgInventory.get(player).getGloves());
 		if(stack != null){
-			FMLLog.getLogger().info(" rendering ");
+			
 		}
 		GL11.glPushMatrix();
 		mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/Glove.png"));

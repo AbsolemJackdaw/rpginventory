@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
@@ -36,20 +37,21 @@ public class ItemRpgArmor extends Item {
      * gold.
      */
     @Override
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IconRegister par1IconRegister ) {
         String itemName = getUnlocalizedName().substring(getUnlocalizedName().lastIndexOf(".") + 1);
         this.itemIcon = par1IconRegister.registerIcon("rpginventorymod:" + itemName);
     }
     public int renderJewelIndex;
     private String Name;
 
-    public ItemRpgArmor(int par1, int par4, int maxDamage, String name) {
+    public ItemRpgArmor(int par1, int par4, int maxDamage, String name, String resourcelocation) {
         super(par1);
         this.armorType = par4;
         this.maxStackSize = 1;
         this.setCreativeTab(CreativeTabs.tabCombat);
         this.setMaxDamage(maxDamage);
         Name = name;
+        TEXTURE = new ResourceLocation(resourcelocation);
     }
 
     @SideOnly(Side.CLIENT)
@@ -174,5 +176,11 @@ public class ItemRpgArmor extends Item {
     @Override
     public String toString() {
         return Name;
+    }
+    
+    private ResourceLocation TEXTURE;
+    
+    public ResourceLocation getTexture(){
+    	return TEXTURE;
     }
 }
