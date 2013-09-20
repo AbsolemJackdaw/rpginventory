@@ -7,7 +7,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelShield extends ModelBase
+public class ModelShield extends MainShield
 {
 	//fields
 	ModelRenderer Shape1;
@@ -86,6 +86,17 @@ public class ModelShield extends ModelBase
 		Shape10.setTextureSize(64, 32);
 		Shape10.mirror = true;
 		setRotation(Shape10, 0F, 0F, 0F);
+		
+		 parts.add(Shape1);
+	      parts.add(Shape2);
+	      parts.add(Shape3);
+	      parts.add(Shape4);
+	      parts.add(Shape5);
+	      parts.add(Shape6);
+	      parts.add(Shape7);
+	      parts.add(Shape8);
+	      parts.add(Shape9);
+	      parts.add(Shape10);
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)

@@ -1,10 +1,11 @@
 package rpgInventory.models.weapons;
 
+import rpgInventory.models.shields.MainShield;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class NecroSkull extends ModelBase
+public class NecroSkull extends MainShield
 {
   //fields
     ModelRenderer Shape2;

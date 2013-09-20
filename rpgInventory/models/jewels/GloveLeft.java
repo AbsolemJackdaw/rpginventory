@@ -11,6 +11,9 @@
 
 package rpgInventory.models.jewels;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -26,15 +29,18 @@ public class GloveLeft extends ModelBase
 	ModelRenderer Shape5;
 	ModelRenderer Shape6;
 	ModelRenderer Shape7;
-	ModelRenderer Shape8;
+	public ModelRenderer Shape8;
 	ModelRenderer Shape9;
 	ModelRenderer Shape10;
 	ModelRenderer Shape11;
 	ModelRenderer Shape12;
 	ModelRenderer Shape13;
+	
+	public ArrayList<ModelRenderer> parts = new ArrayList<ModelRenderer>();
 
 	public GloveLeft()
 	{
+		
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -116,6 +122,22 @@ public class GloveLeft extends ModelBase
 		Shape13.setTextureSize(64, 32);
 		Shape13.mirror = true;
 		setRotation(Shape13, 0F, 0F, 0F);
+		
+		
+		parts.add(Shape1);
+		parts.add(Shape2);
+		parts.add(Shape3);
+		parts.add(Shape4);
+		parts.add(Shape5);
+		parts.add(Shape6);
+		parts.add(Shape7);
+		parts.add(Shape8);
+		parts.add(Shape9);
+		parts.add(Shape10);
+		parts.add(Shape11);
+		parts.add(Shape12);
+		parts.add(Shape13);
+
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)

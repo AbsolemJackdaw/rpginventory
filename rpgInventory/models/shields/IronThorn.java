@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class IronThorn extends ModelBase
+public class IronThorn extends MainShield
 {
   //fields
     ModelRenderer Shape1;
@@ -517,6 +517,79 @@ public class IronThorn extends ModelBase
       Shape72.setTextureSize(64, 48);
       Shape72.mirror = true;
       setRotation(Shape72, 0F, 0F, 0F);
+      
+      parts.add(Shape1);
+      parts.add(Shape2);
+      parts.add(Shape3);
+      parts.add(Shape4);
+      parts.add(Shape5);
+      parts.add(Shape6);
+      parts.add(Shape7);
+      parts.add(Shape8);
+      parts.add(Shape9);
+      parts.add(Shape10);
+      parts.add(Shape11);
+      parts.add(Shape12);
+      parts.add(Shape13);
+      parts.add(Shape14);
+      parts.add(Shape15);
+      parts.add(Shape16);
+      parts.add(Shape17);
+      parts.add(Shape18);
+      parts.add(Shape19);
+      parts.add(Shape20);
+      parts.add(Shape21);
+      parts.add(Shape22);
+      parts.add(Shape23);
+      parts.add(Shape24);
+      parts.add(Shape25);
+      parts.add(Shape26);
+      parts.add(Shape27);
+      parts.add(Shape28);
+      parts.add(Shape29);
+      parts.add(Shape30);
+      parts.add(Shape31);
+      parts.add(Shape32);
+      parts.add(Shape33);
+      parts.add(Shape34);
+      parts.add(Shape35);
+      parts.add(Shape36);
+      parts.add(Shape37);
+      parts.add(Shape38);
+      parts.add(Shape39);
+      parts.add(Shape40);
+      parts.add(Shape41);
+      parts.add(Shape42);
+      parts.add(Shape43);
+      parts.add(Shape44);
+      parts.add(Shape45);
+      parts.add(Shape46);
+      parts.add(Shape47);
+      parts.add(Shape48);
+      parts.add(Shape49);
+      parts.add(Shape50);
+      parts.add(Shape59);
+      parts.add(Shape51);
+      parts.add(Shape52);
+      parts.add(Shape53);
+      parts.add(Shape54);
+      parts.add(Shape55);
+      parts.add(Shape56);
+      parts.add(Shape57);
+      parts.add(Shape58);
+      parts.add(Shape60);
+      parts.add(Shape61);
+      parts.add(Shape62);
+      parts.add(Shape63);
+      parts.add(Shape64);
+      parts.add(Shape65);
+      parts.add(Shape66);
+      parts.add(Shape67);
+      parts.add(Shape68);
+      parts.add(Shape69);
+      parts.add(Shape70);
+      parts.add(Shape71);
+      parts.add(Shape72);
   }
   
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
@@ -684,5 +757,4 @@ public class IronThorn extends ModelBase
 	    Shape71.render(f5);
 	    Shape72.render(f5);
   }
-
 }

@@ -329,6 +329,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 
 			GL11.glPushMatrix();
+			
 			if (mod_RpgInventory.hasRogue == true && shield.getItem() == mod_RpgInventory.daggers) {
 
 				if (player.worldObj.isDaytime()) {
@@ -364,7 +365,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glRotatef(180, 1.0f, 0.0f, 0.0f);
 				GL11.glTranslatef(-0F, 0.2F, -0.9F);
 				boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render) {
-					lionhead.render(0.0625f);
+//					lionhead.render(0.0625f);
 				}
 
 			} else if (shield.getItem() == mod_RpgInventory.archerShield) {
@@ -522,7 +523,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 					GL11.glTranslatef(-0.35F, -0.25F, 0.65F);
 
 					boolean render = true; if(player.getCurrentEquippedItem() != null && player.getItemInUseCount() > 2 && player.getCurrentEquippedItem().getItemUseAction().toString().equals("bow")){render = false;}if(render) {
-						book.render(0.0625f);
+//						book.render(0.0625f);
 					}
 					GL11.glPopMatrix();
 					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/magemantle.png"));

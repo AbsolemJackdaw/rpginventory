@@ -8,6 +8,7 @@ import rpgInventory.models.shields.NecroShield;
 import rpgInventory.models.shields.PalaShield;
 import rpgInventory.renderer.items.shields.BerserkerShield;
 import rpgInventory.renderer.items.shields.NecroShieldRenderer;
+import rpgInventory.renderer.items.shields.VanillaShield;
 import rpgInventory.renderer.items.weapons.GrandSwordRender;
 import rpgInventory.renderer.items.weapons.NecroRenderer;
 import rpgNecroPaladin.minions.EntityMinionS;
@@ -31,7 +32,7 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 						(IItemRenderer) new NecroShieldRenderer(new NecroShield(), "subaraki:jewels/NecroShield.png"));
 				
 				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.pala_shield.itemID, 
-						(IItemRenderer) new BerserkerShield(new PalaShield(), "subaraki:jewels/PaladinShield.png"));
+						(IItemRenderer) new VanillaShield(new PalaShield(), "subaraki:jewels/PaladinShield.png"));
 			}
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinionS.class,new RenderMinionS());

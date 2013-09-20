@@ -41,6 +41,7 @@ public class LionHeadRenderer extends ShieldRenderer{
 	@Override
 	public void renderInventory() {
 		GL11.glScalef(1f,1f,1f);
-		GL11.glTranslatef(-0.25f, -0.05f, 0f);
+		GL11.glTranslatef(0.2f, -0.4f, 0f);
+		GL11.glRotatef(180, 0, 1, 0);
 	}
 }

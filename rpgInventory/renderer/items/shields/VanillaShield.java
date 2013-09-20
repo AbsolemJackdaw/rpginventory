@@ -19,7 +19,7 @@ public class VanillaShield extends ShieldRenderer{
 	public void renderEquipped() {
 		GL11.glRotatef(-50, 0, 1, 0);
 		GL11.glRotatef(-50, 1, 0, 0);
-		GL11.glTranslatef(-0.5f, -0.8f, -0.5f);
+		GL11.glTranslatef(-0.7f, -0.5f, -0.9f);
 		GL11.glScalef(1.15F,1.15f,1.15F);
 	}
 
@@ -33,7 +33,6 @@ public class VanillaShield extends ShieldRenderer{
 	public void renderEquippedFP() {
 		GL11.glTranslatef(0f, -1.2f, -0.6f);
 		GL11.glScalef(1.F,1.f,1.F);
-//		GL11.glRotatef(180, 0, 1, 0);
 	}
 
 	@Override

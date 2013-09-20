@@ -93,9 +93,9 @@ public class ClientProxy extends CommonProxy {
 		//GLU_SMOOTH will try to smoothly apply lighting
 		//GLU_FLAT will have a solid brightness per face, and will not shade.
 		//GLU_NONE will be completely solid, and probably will have no depth to it's appearance.        
-		sphere.setNormals(GLU.GLU_FLAT);
+		sphere.setNormals(GLU.GLU_SMOOTH);
 		//GLU_INSIDE will render as if you are inside the sphere, making it appear inside out.(Similar to how ender portals are rendered)
-		sphere.setOrientation(GLU.GLU_OUTSIDE);
+		sphere.setOrientation(GLU.GLU_INSIDE);
 
 		sphere.setTextureFlag(true);
 		//Simple 1x1 red texture to serve as the spheres skin, the only pixel in this image is red.
@@ -105,14 +105,9 @@ public class ClientProxy extends CommonProxy {
 		GL11.glNewList(sphereID, GL11.GL_COMPILE);
 		//Offset the sphere by it's radius so it will be centered
 		GL11.glTranslatef((float) 0.50F, (float) 0.50F, (float) 0.50F);
-		//Call our string that we mapped to our texture
-		//        ForgeHooksClient.bindTexture("/subaraki/jewels/talisman.png", 0);
-		//The drawing the sphere is automattically doing is getting added to our list. Careful, the last 2 variables 
-		//control the detail, but have a massive impact on performance. 32x32 is a good balance on my machine.
-		//GLU.
+
 		sphere.draw(0.5F, 12, 24);
 		//Drawing done, unbind our texture
-		//        ForgeHooksClient.unbindTexture();
 		//Tell LWJGL that we are done creating our list.
 		GL11.glEndList();
 

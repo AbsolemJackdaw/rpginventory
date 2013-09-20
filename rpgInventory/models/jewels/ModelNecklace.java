@@ -1,5 +1,7 @@
 package rpgInventory.models.jewels;
 
+import java.util.ArrayList;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -17,6 +19,9 @@ public class ModelNecklace extends ModelBase
 	ModelRenderer Shape8;
 	ModelRenderer Shape9;
 
+	public ArrayList<ModelRenderer> parts = new ArrayList<ModelRenderer>();
+
+	
 	public ModelNecklace()
 	{
 		textureWidth = 64;
@@ -76,6 +81,16 @@ public class ModelNecklace extends ModelBase
 		Shape9.setTextureSize(64, 32);
 		Shape9.mirror = true;
 		setRotation(Shape9, 0F, 0F, 0F);
+		
+		parts.add(Shape1);
+		parts.add(Shape2);
+		parts.add(Shape3);
+		parts.add(Shape4);
+		parts.add(Shape5);
+		parts.add(Shape6);
+		parts.add(Shape7);
+		parts.add(Shape8);
+		parts.add(Shape9);
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
