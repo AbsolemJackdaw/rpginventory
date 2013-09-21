@@ -34,7 +34,7 @@ public class RenderMinionZ extends RenderBiped
     }
 
     @Override
-    protected ResourceLocation func_110775_a(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
         return new ResourceLocation("textures/entity/zombie/zombie.png");
     }

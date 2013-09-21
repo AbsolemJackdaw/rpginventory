@@ -90,7 +90,7 @@ public class RPGEventHooks {
 			if ((!evt.entityLiving.worldObj.isRemote) && evt.entityLiving != null && evt.source != null && evt.source.getSourceOfDamage() != null && evt.source.getSourceOfDamage() instanceof IPet) {
 				EntityLivingBase corpse = evt.entityLiving;
 				EntityLivingBase murderer = (EntityLiving)evt.source.getSourceOfDamage();
-				int totalXP = corpse.field_110158_av;
+				int totalXP = (int)corpse.getMaxHealth(); // replaced getTotalExp by health. better then nothing
 				while (totalXP > 0) {
 					int partialXP = EntityXPOrb.getXPSplit(totalXP);
 					totalXP -= partialXP;
@@ -136,8 +136,8 @@ public class RPGEventHooks {
 			if (evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer p = (EntityPlayer) evt.entityLiving;
 				if (p != null) {
-					//					if (p.func_110143_aJ() >= p.func_110138_aP()) {
-					//						p.setEntityHealth(p.func_110138_aP());
+					//					if (p.getHealth() >= p.getMaxHealth()) {
+					//						p.setEntityHealth(p.getMaxHealth());
 					//					}
 
 					if (p.getActivePotionEffects() != null && p.getActivePotionEffects().size() > 0) {
@@ -207,7 +207,7 @@ public class RPGEventHooks {
 						if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.SHIELDEDARCHMAGE) || mod_RpgInventory.developers.contains(p.username.toLowerCase()))
 						{
 							if (weapon.getItem().equals(mod_RpgInventory.fireStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
-							{if (p.isBurning()) {if (p.func_110143_aJ() < 6) {p.setEntityHealth(6);} p.extinguish();}}
+							{if (p.isBurning()) {if (p.getHealth() < 6) {p.setHealth(6);} p.extinguish();}}
 							if (weapon.getItem().equals(mod_RpgInventory.windStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
 							{p.fallDistance = 0;}
 							if (weapon.getItem().equals(mod_RpgInventory.frostStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
@@ -218,7 +218,7 @@ public class RPGEventHooks {
 						if (weapon.itemID == mod_RpgInventory.hammer.itemID) {
 
 							if (inv.hasClass(EnumRpgClass.SHIELDEDBERSERKER)) {
-								if ((p.getFoodStats().getFoodLevel() < 4 || p.func_110143_aJ() < 4)) {
+								if ((p.getFoodStats().getFoodLevel() < 4 || p.getHealth() < 4)) {
 									Map tmp = EnchantmentHelper.getEnchantments(weapon);
 									tmp.put(Enchantment.knockback.effectId, 3);
 									EnchantmentHelper.setEnchantments(tmp, weapon);
@@ -363,7 +363,7 @@ public class RPGEventHooks {
 							evt.ammount += 3;
 						}
 						if (evt.entityLiving.isEntityUndead()) {
-							if (((EntityPlayer) damager).func_110143_aJ() < ((EntityPlayer) damager).func_110138_aP()) {
+							if (((EntityPlayer) damager).getHealth() < ((EntityPlayer) damager).getMaxHealth()) {
 								((EntityPlayer) damager).heal(1);
 							}
 							evt.ammount += 3;

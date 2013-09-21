@@ -41,10 +41,10 @@ public class ItemStaf extends ItemRpgSword {
 				double var6 = p.worldObj.rand.nextGaussian() * 0.02D;
 				p.worldObj.spawnParticle("heart", p.posX + (double) (p.worldObj.rand.nextFloat() * p.width * 2.0F) - (double) p.width, p.posY + 0.5D + (double) (p.worldObj.rand.nextFloat() * p.height), p.posZ + (double) (p.worldObj.rand.nextFloat() * p.width * 2.0F) - (double) p.width, var2, var4, var6);
 				int heal = (int) time / 50;
-				if (p.func_110143_aJ() + heal <= p.func_110138_aP()) {
+				if (p.getHealth() + heal <= p.getMaxHealth()) {
 					p.heal(heal);
 				} else {
-					p.setEntityHealth(p.func_110138_aP());
+					p.setHealth(p.getMaxHealth());
 				}
 			}
 			if (time > 100) {
@@ -54,10 +54,10 @@ public class ItemStaf extends ItemRpgSword {
 				double var6 = p.worldObj.rand.nextGaussian() * 0.02D;
 				p.worldObj.spawnParticle("heart", p.posX + (double) (p.worldObj.rand.nextFloat() * p.width * 2.0F) - (double) p.width, p.posY + 0.5D + (double) (p.worldObj.rand.nextFloat() * p.height), p.posZ + (double) (p.worldObj.rand.nextFloat() * p.width * 2.0F) - (double) p.width, var2, var4, var6);
 				int heal = (int) time / 30;
-				if (p.func_110143_aJ() + heal <= p.func_110138_aP()) {
+				if (p.getHealth() + heal <= p.getMaxHealth()) {
 					p.heal(heal);
 				} else {
-					p.setEntityHealth(p.func_110138_aP());
+					p.setHealth(p.getMaxHealth());
 				}
 			}
 		}

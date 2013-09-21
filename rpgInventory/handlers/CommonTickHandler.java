@@ -87,7 +87,7 @@ public class CommonTickHandler implements ITickHandler {
 						delay -= 10;
 					}
 					RPGEventHooks.DiamondTick.put(player.username, delay);
-					if (player.func_110143_aJ() < player.func_110138_aP()) {
+					if (player.getHealth() < player.getMaxHealth()) {
 						player.heal(1);
 					}
 				}
@@ -108,7 +108,7 @@ public class CommonTickHandler implements ITickHandler {
 						if (player.getCurrentEquippedItem().getItem().equals(mod_RpgInventory.staf)) {
 							if (player.isUsingItem()) {
 								RPGEventHooks.HealerTick.put(player.username, 30);
-								if (player.func_110143_aJ() < player.func_110138_aP()) {
+								if (player.getHealth() < player.getMaxHealth()) {
 									//while staf is being used, regen the healer
 									player.heal(1);
 								}
@@ -127,7 +127,7 @@ public class CommonTickHandler implements ITickHandler {
 				if (decompose != null) {
 					if (RPGEventHooks.CustomPotionList.get(username) - 20 > decompose.getDuration()) {
 						RPGEventHooks.CustomPotionList.put(username, decompose.getDuration());
-						if (p.func_110143_aJ() > 1) {
+						if (p.getHealth() > 1) {
 							p.attackEntityFrom(DamageSource.generic, 1);
 						}
 					}
@@ -135,7 +135,7 @@ public class CommonTickHandler implements ITickHandler {
 				if (machicism != null) {
 					if (RPGEventHooks.CustomPotionList.get(username) - 20 > machicism.getDuration()) {
 						RPGEventHooks.CustomPotionList.put(username, machicism.getDuration());
-						if (p.func_110143_aJ() < p.func_110138_aP()) {
+						if (p.getHealth() < p.getMaxHealth()) {
 							//while staf is being used, regen the healer
 							p.heal(1);
 						}
@@ -161,7 +161,7 @@ public class CommonTickHandler implements ITickHandler {
 		
 		List<EntityPlayer> players = MinecraftServer.getServerConfigurationManager(MinecraftServer.getServer()).playerEntityList;
 		for (EntityPlayer player : players) {
-			if (player.func_110143_aJ() <= 0 || player.isDead) {
+			if (player.getHealth() <= 0 || player.isDead) {
 				if (!player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
 					dropJewels(player);
 				}

@@ -195,7 +195,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
             this.heal(1);
             this.healthregen = regenDelay();
 //            if (!worldObj.isRemote) {
-//                this.dataWatcher.updateObject(HP, this.func_110143_aJ());
+//                this.dataWatcher.updateObject(HP, this.getHealth());
 //            } else {
 //                this.health = this.dataWatcher.getWatchableObjectInt(HP);
 //            }
@@ -315,7 +315,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         if (!this.isDead()) {
             ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
             if (var2 != null) {
-                if (this.func_110143_aJ() < this.func_110138_aP()) {
+                if (this.getHealth() < this.getMaxHealth()) {
                     if (Item.itemsList[var2.itemID] instanceof ItemFood) {
                         ItemFood var3 = (ItemFood) Item.itemsList[var2.itemID];
                         //This is confusing, people dont know pet is saddled.
@@ -410,7 +410,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     @Override
     protected void entityInit() {
         super.entityInit();
-        if (this.func_110143_aJ() <= 0) {
+        if (this.getHealth() <= 0) {
             this.heal(1);
         }
         this.dataWatcher.addObject(LEVELID, (int) 0);
@@ -427,9 +427,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     }
     //each pet class returns this value, this just forces them to.
 
-    public float getMaxHealth(){
-    	return this.func_110138_aP();
-    }
+//    public float getMaxHealth(){
+//    	return this.getMaxHealth();
+//    }
 
     @Override
     public int getLevel() {
@@ -494,7 +494,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     }
 //This is so you can't accidently hurt your pet while riding him.
 
-    public boolean func_85031_j(Entity par1Entity) {
+    public boolean hitByEntity(Entity par1Entity) {
         try {
             if (((EntityPlayer) par1Entity).isRiding() && this.getOwnerName().equals(((EntityPlayer) par1Entity).username)) {
                 return true;
@@ -502,7 +502,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         } catch (Throwable ex) {
         }
 
-        return super.func_85031_j(par1Entity);
+        return super.hitByEntity(par1Entity);
+//        return super.func_85031_j(par1Entity);
 
     }
 
@@ -533,7 +534,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         itemstacknbt.setString("OwnerName", getOwnerName());
         itemstacknbt.setInteger("PetAttack", getAttackDamage());
         itemstacknbt.setFloat("PetMaxHealth", getMaxHealth());
-        itemstacknbt.setFloat("PetHealth", func_110143_aJ());
+        itemstacknbt.setFloat("PetHealth", getHealth());
         itemstacknbt.setBoolean("isSaddled", getSaddled());
         ItemStack newIteamstack = new ItemStack(mod_RpgInventory.crystal, 1, getType());
         newIteamstack.setTagCompound(itemstacknbt);
@@ -612,13 +613,13 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
     }
 
 //    @Override
-    public float getHealth() {
-       return this.func_110143_aJ();
-    }
+//    public float getHealth() {
+//       return this.getHealth();
+//    }
 
     @Override
     public float getHP() {
-        return this.func_110143_aJ();
+        return this.getHealth();
     }
 
     

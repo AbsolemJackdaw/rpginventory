@@ -32,7 +32,7 @@ public class HammerRender extends RpgItemRenderer{
 			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Hammer.png"));
 
 			if((Entity)data[1]instanceof EntityPlayer && ((EntityPlayer)data[1]).getFoodStats().getFoodLevel() <4
-					||(Entity)data[1]instanceof EntityPlayer &&((EntityPlayer)data[1]).func_110143_aJ() <4){
+					||(Entity)data[1]instanceof EntityPlayer &&((EntityPlayer)data[1]).getHealth() <4){
 				pulse+=0.01;
 				GL11.glColor3f(1f, (float)Math.sin(pulse), (float)Math.sin(pulse));
 			}
@@ -52,7 +52,7 @@ public class HammerRender extends RpgItemRenderer{
 			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Hammer.png"));
 
 			if(((EntityPlayer)data[1]).getFoodStats().getFoodLevel() <4
-					||((EntityPlayer)data[1]).func_110143_aJ() <4){
+					||((EntityPlayer)data[1]).getHealth() <4){
 				pulse+=0.01;
 				GL11.glColor3f(1f, (float)Math.sin(pulse), (float)Math.sin(pulse));
 			}

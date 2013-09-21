@@ -71,11 +71,11 @@ public class BullPet extends BMPetImpl {
         //15 Damage at level 200
         return (4 + MathHelper.floor_double((((double) getLevel()) * /*Fix for math errors*/1.0D) / 18.18D));
     }
-    @Override
-    public float getMaxHealth() {
-        //200 HP at level 200
-        return 30 + MathHelper.floor_float(((float) getLevel()) / 1.538F);
-    }
+//    @Override TODO
+//    public float getMaxHealth() {
+//        //200 HP at level 200
+//        return 30 + MathHelper.floor_float(((float) getLevel()) / 1.538F);
+//    }
 
     @Override
     public void onLivingUpdate() {

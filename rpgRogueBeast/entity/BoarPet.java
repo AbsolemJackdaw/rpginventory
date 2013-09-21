@@ -72,12 +72,13 @@ public class BoarPet extends BMPetImpl {
         return "Boar Pet";
     }
 
-    @Override
-    public float getMaxHealth() {
+//    @Override
+    //TODO !!
+    public float setMaxHealth() {
         //115 Health at level 200
         return 20 + MathHelper.floor_float(((float) getLevel()) / 2.5F);
     }
-
+    
     @Override
     public float getPetSize() {
         return petSize;

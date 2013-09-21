@@ -73,11 +73,11 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
     }
 
     public void Harvest() {
-        this.damageEntity(DamageSource.magic, this.func_110143_aJ());
-        if (player.func_110143_aJ() + 2 <= player.func_110138_aP()) {
+        this.damageEntity(DamageSource.magic, this.getHealth());
+        if (player.getHealth() + 2 <= player.getMaxHealth()) {
             player.heal(2);
         } else {
-            player.setEntityHealth(player.func_110138_aP());
+            player.setHealth(player.getMaxHealth());
         }
     }
 
@@ -137,12 +137,12 @@ this.setSize(0.7F, 1.7F);
                 ++age;
                 this.setAge(age);
             } else if (age >= 700 + (player.experienceLevel * 30)) {
-                this.attackEntityFrom(DamageSource.outOfWorld, this.func_110143_aJ());
+                this.attackEntityFrom(DamageSource.outOfWorld, this.getHealth());
                 age = 0;
             }
         } else {
             //player logged out, kill his minions.
-            this.attackEntityFrom(DamageSource.outOfWorld, this.func_110143_aJ());
+            this.attackEntityFrom(DamageSource.outOfWorld, this.getHealth());
             this.setAge(0);
         }
 

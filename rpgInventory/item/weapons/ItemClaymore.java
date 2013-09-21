@@ -84,7 +84,7 @@ public class ItemClaymore extends ItemRpgWeapon{
 				skull.stackTagCompound.setString( "SkullOwner", name );
 			}
 
-			if(mob.func_110143_aJ() < 1)
+			if(mob.getHealth() < 1)
 			{
 				EntityItem entityitem = new EntityItem(mob.worldObj, mob.posX,mob.posY,mob.posZ, skull);
 				mob.worldObj.spawnEntityInWorld(entityitem);

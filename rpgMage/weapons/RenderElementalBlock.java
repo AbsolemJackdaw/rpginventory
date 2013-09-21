@@ -121,8 +121,13 @@ public class RenderElementalBlock extends Render
 	}
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		// TODO Auto-generated method stub
 		return new ResourceLocation("subaraki:weapons/elementum.png");
 	}
+//	@Override
+//	protected ResourceLocation func_110775_a(Entity entity) {
+//		return new ResourceLocation("subaraki:weapons/elementum.png");
+//	}
 }
 

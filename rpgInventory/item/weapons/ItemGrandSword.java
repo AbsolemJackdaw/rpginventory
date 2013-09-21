@@ -48,17 +48,17 @@ public class ItemGrandSword extends Item {
         if (par2EntityLiving instanceof EntityZombie || par2EntityLiving instanceof EntitySkeleton || par2EntityLiving instanceof EntityPigZombie) {
             par2EntityLiving.attackEntityFrom(DamageSource.inFire, 8);
             par2EntityLiving.setFire(80);
-            if (player.func_110143_aJ() + 4 <= player.func_110138_aP()) {
+            if (player.getHealth() + 4 <= player.getMaxHealth()) {
                 player.heal(4);
             } else {
-                player.setEntityHealth(player.func_110138_aP());
+                player.setHealth(player.getMaxHealth());
             }
 
         } else {
-            if (player.func_110143_aJ() + 2 <= player.func_110138_aP()) {
+            if (player.getHealth() + 2 <= player.getMaxHealth()) {
                 player.heal(2);
             } else {
-                player.setEntityHealth(player.func_110138_aP());
+                player.setHealth(player.getMaxHealth());
             }
         }
         return true;
