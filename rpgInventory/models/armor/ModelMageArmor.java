@@ -41,29 +41,17 @@ public class ModelMageArmor extends ModelBiped
 	ModelRenderer rightleg;
 	ModelRenderer leftleg;
 
-	public ModelMageArmor(float par1, float par2, int par3, int par4)
-	{
+	@Deprecated
+	public ModelMageArmor(float par1, float par2, int par3, int par4) {
+		this(par1);
+	}
+
+	public ModelMageArmor(float par1) {
+
+		super(par1, 0, 65,64);
 
 		textureWidth = 65;
 		textureHeight = 64;
-		this.bipedCloak = new ModelRenderer(this, 0, 0);
-		this.bipedEars = new ModelRenderer(this, 24, 0);
-		this.bipedHead = new ModelRenderer(this, 0, 0);
-		this.bipedHead.setRotationPoint(0.0F, 0.0F + par2, 0.0F);
-		this.bipedHeadwear = new ModelRenderer(this, 32, 0);
-		this.bipedHeadwear.setRotationPoint(0.0F, 0.0F + par2, 0.0F);
-		this.bipedBody = new ModelRenderer(this, 16, 16);
-		this.bipedBody.setRotationPoint(0.0F, 0.0F + par2, 0.0F);
-		this.bipedRightArm = new ModelRenderer(this, 40, 16);
-		this.bipedRightArm.setRotationPoint(-5.0F, 2.0F + par2, 0.0F);
-		this.bipedLeftArm = new ModelRenderer(this, 40, 16);
-		this.bipedLeftArm.mirror = true;
-		this.bipedLeftArm.setRotationPoint(5.0F, 2.0F + par2, 0.0F);
-		this.bipedRightLeg = new ModelRenderer(this, 0, 16);
-		this.bipedRightLeg.setRotationPoint(-1.9F, 12.0F + par2, 0.0F);
-		this.bipedLeftLeg = new ModelRenderer(this, 0, 16);
-		this.bipedLeftLeg.mirror = true;
-		this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F + par2, 0.0F);
 		Shape1 = new ModelRenderer(this, 0, 51);
 		Shape1.addBox(-2F, -8F, -6F, 4, 1, 12);
 		Shape1.setRotationPoint(0F, 0F, 0F);

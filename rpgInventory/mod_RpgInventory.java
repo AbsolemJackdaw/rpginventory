@@ -137,12 +137,14 @@ public class mod_RpgInventory {
 	public int getUniqueID() {
 		return uniqueID++;
 	}
-	EnumArmorMaterial robes = EnumHelper.addArmorMaterial("magerobes", 20, new int[]{2, 2, 2, 1}, 5);
-	EnumArmorMaterial hides = EnumHelper.addArmorMaterial("hides", 20, new int[]{2, 3, 2, 2}, 5);
-	EnumArmorMaterial archMage = EnumHelper.addArmorMaterial("archmagerobes", 20, new int[]{4, 4, 4, 2}, 5);
-	EnumArmorMaterial armoury = EnumHelper.addArmorMaterial("armoury", 20, new int[]{2, 4, 3, 2}, 5);
-	EnumArmorMaterial rogueArmor = EnumHelper.addArmorMaterial("rogue", 20, new int[]{3, 5, 4, 3}, 5);
-	EnumArmorMaterial beastMaster = EnumHelper.addArmorMaterial("beast", 20, new int[]{4, 5, 4, 3}, 5);
+	public  final EnumArmorMaterial mage = EnumHelper.addArmorMaterial("mage", 20, new int[]{2, 2, 2, 1}, 5);
+	public  final EnumArmorMaterial archer = EnumHelper.addArmorMaterial("archer", 20, new int[]{2, 3, 2, 2}, 5);
+	public  final EnumArmorMaterial archMage = EnumHelper.addArmorMaterial("archmage", 20, new int[]{4, 4, 4, 2}, 5);
+	public  final EnumArmorMaterial berserker = EnumHelper.addArmorMaterial("berserker", 20, new int[]{2, 4, 3, 2}, 5);
+	public  final EnumArmorMaterial rogueArmor = EnumHelper.addArmorMaterial("rogue", 20, new int[]{3, 5, 4, 3}, 5);
+	public  final EnumArmorMaterial beastMaster = EnumHelper.addArmorMaterial("beastmaster", 20, new int[]{4, 5, 4, 3}, 5);
+	public  final EnumArmorMaterial necroArmor = EnumHelper.addArmorMaterial("necromancer", 20, new int[]{2, 5, 1, 1}, 5);	// use of Souls
+	public  final EnumArmorMaterial paladin = EnumHelper.addArmorMaterial("paladin", 20, new int[]{4, 7, 2, 1}, 5);	// use of Steel
 	EnumToolMaterial clay = EnumHelper.addToolMaterial("claymore", 0, 750, 5F, 6, 0);
 	EnumToolMaterial stone = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 5F, 4, 0);
 	EnumToolMaterial BeastAxeMaterial = EnumHelper.addToolMaterial("BeastAxe", 4, 1280, 6.0F, 3, 22);
@@ -225,20 +227,20 @@ public class mod_RpgInventory {
 		cloak = new ItemRpgArmor(RpgConfig.instance.cloakID, 2, -1, "","").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
 		cloakI = new ItemRpgArmor(RpgConfig.instance.cloakIID, 2, -1, "","").setFull3D().setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
 
-		magehood = new BonusArmor(RpgConfig.instance.magehoodID, robes, 4, 0).setUnlocalizedName("mage1").setCreativeTab(tab);
-		magegown = new BonusArmor(RpgConfig.instance.magegownID, robes, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);
-		magepants = new BonusArmor(RpgConfig.instance.magepantsID, robes, 4, 2).setUnlocalizedName("mage3").setCreativeTab(tab);
-		mageboots = new BonusArmor(RpgConfig.instance.magebootsID, robes, 4, 3).setUnlocalizedName("mage4").setCreativeTab(tab);
+		magehood = new BonusArmor(RpgConfig.instance.magehoodID, mage, 4, 0).setUnlocalizedName("mage1").setCreativeTab(tab);
+		magegown = new BonusArmor(RpgConfig.instance.magegownID, mage, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);
+		magepants = new BonusArmor(RpgConfig.instance.magepantsID, mage, 4, 2).setUnlocalizedName("mage3").setCreativeTab(tab);
+		mageboots = new BonusArmor(RpgConfig.instance.magebootsID, mage, 4, 3).setUnlocalizedName("mage4").setCreativeTab(tab);
 
-		archerhood = new BonusArmor(RpgConfig.instance.archerhoodID, hides, 4, 0).setUnlocalizedName("archer1").setCreativeTab(tab);
-		archerchest = new BonusArmor(RpgConfig.instance.archerchestID, hides, 4, 1).setUnlocalizedName("archer2").setCreativeTab(tab);
-		archerpants = new BonusArmor(RpgConfig.instance.archerpantsID, hides, 4, 2).setUnlocalizedName("archer3").setCreativeTab(tab);
-		archerboots = new BonusArmor(RpgConfig.instance.archerbootsID, hides, 4, 3).setUnlocalizedName("archer4").setCreativeTab(tab);
+		archerhood = new BonusArmor(RpgConfig.instance.archerhoodID, archer, 4, 0).setUnlocalizedName("archer1").setCreativeTab(tab);
+		archerchest = new BonusArmor(RpgConfig.instance.archerchestID, archer, 4, 1).setUnlocalizedName("archer2").setCreativeTab(tab);
+		archerpants = new BonusArmor(RpgConfig.instance.archerpantsID, archer, 4, 2).setUnlocalizedName("archer3").setCreativeTab(tab);
+		archerboots = new BonusArmor(RpgConfig.instance.archerbootsID, archer, 4, 3).setUnlocalizedName("archer4").setCreativeTab(tab);
 
-		berserkerHood = new BonusArmor(RpgConfig.instance.berserkerHoodID, armoury, 4, 0).setUnlocalizedName("berserk1").setCreativeTab(tab);
-		berserkerChest = new BonusArmor(RpgConfig.instance.berserkerChestID, armoury, 4, 1).setUnlocalizedName("berserk2").setCreativeTab(tab);
-		berserkerLegs = new BonusArmor(RpgConfig.instance.berserkerLegsID, armoury, 4, 2).setUnlocalizedName("berserk3").setCreativeTab(tab);
-		berserkerBoots = new BonusArmor(RpgConfig.instance.berserkerBootsID, armoury, 4, 3).setUnlocalizedName("berserk4").setCreativeTab(tab);
+		berserkerHood = new BonusArmor(RpgConfig.instance.berserkerHoodID, berserker, 4, 0).setUnlocalizedName("berserk1").setCreativeTab(tab);
+		berserkerChest = new BonusArmor(RpgConfig.instance.berserkerChestID, berserker, 4, 1).setUnlocalizedName("berserk2").setCreativeTab(tab);
+		berserkerLegs = new BonusArmor(RpgConfig.instance.berserkerLegsID, berserker, 4, 2).setUnlocalizedName("berserk3").setCreativeTab(tab);
+		berserkerBoots = new BonusArmor(RpgConfig.instance.berserkerBootsID, berserker, 4, 3).setUnlocalizedName("berserk4").setCreativeTab(tab);
 
 		claymore = new ItemClaymore(RpgConfig.instance.claymoreID, clay).setFull3D().setMaxDamage(1024).setUnlocalizedName("claymore").setCreativeTab(tab);
 		wand = new ItemMageSphere(RpgConfig.instance.wandID).setFull3D().setMaxDamage(400).setUnlocalizedName("soulsphere").setCreativeTab(tab);
@@ -266,8 +268,7 @@ public class mod_RpgInventory {
 		wantmold = new ItemMold(RpgConfig.instance.wantmoldID).setUnlocalizedName("moldGlove").setCreativeTab(tab);
 
 		if (hasRpg == true) {
-			EnumArmorMaterial necroArmor = EnumHelper.addArmorMaterial("necro_material", 20, new int[]{2, 5, 1, 1}, 5);	// use of Souls
-			EnumArmorMaterial paladin = EnumHelper.addArmorMaterial("pala_material", 20, new int[]{4, 7, 2, 1}, 5);	// use of Steel
+			
 			NecroToolMaterial = EnumHelper.addToolMaterial("souls", 0, 1024, 5F, 1, 0);
 			PalaToolMaterial = EnumHelper.addToolMaterial("steel", 0, 1024, 5F, 1, 0);
 

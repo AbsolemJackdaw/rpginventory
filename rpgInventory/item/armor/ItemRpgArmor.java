@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,6 +19,7 @@ import net.minecraft.util.StatCollector;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.models.armor.ModelBeastArmor;
 import rpgInventory.models.shields.Book;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.LionHead;
@@ -27,6 +29,8 @@ import rpgInventory.models.shields.NecroShield;
 import rpgInventory.models.shields.PalaShield;
 import rpgInventory.models.shields.VanillaShield;
 import rpgInventory.models.weapons.NecroSkull;
+import rpgInventory.renderer.items.shields.BerserkerShield;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -73,7 +77,7 @@ public class ItemRpgArmor extends Item {
 	private LionHead lion = new LionHead();
 	private Book book = new Book();
 	private VanillaShield van = new VanillaShield();
-	
+
 	public MainShield getShieldModel(){
 		if(this.equals(mod_RpgInventory.berserkerShield))
 			return it;
@@ -90,7 +94,7 @@ public class ItemRpgArmor extends Item {
 		if(this.equals(mod_RpgInventory.shieldDiamond)||this.equals(mod_RpgInventory.shieldGold)
 				||this.equals(mod_RpgInventory.shieldIron)||this.equals(mod_RpgInventory.shieldWood))
 			return van;
-		
+
 		return new MainShield();
 	}
 
@@ -131,96 +135,96 @@ public class ItemRpgArmor extends Item {
 	 * 4-7 healing, 8-11 damage and weapon healing, 12-15 emerald effects, 16-19
 	 * shield n cloak
 	 */
-	 public void effectSwitch(int id, EntityPlayer player, ItemStack is) {
-	 }
+	public void effectSwitch(int id, EntityPlayer player, ItemStack is) {
+	}
 
 	/**
 	 * an effect that simulates drinking from a milk bucket, but only for
 	 * debuffs.
 	 */
-	 public void getMilkEffect(ItemStack itemstack, int time, EntityPlayer player) {
-	 }
+	public void getMilkEffect(ItemStack itemstack, int time, EntityPlayer player) {
+	}
 
-	 public void healWeapon(EntityPlayer player, int chances) {
-	 }
+	public void healWeapon(EntityPlayer player, int chances) {
+	}
 
-	 /**
-	  * Returns the 'max damage' factor array for the armor, each piece of armor
-	  * have a durability factor (that gets multiplied by armor material factor)
-	  */
-	 int[] getMaxDamageArray() {
-		 return maxDamageArray;
-	 }
+	/**
+	 * Returns the 'max damage' factor array for the armor, each piece of armor
+	 * have a durability factor (that gets multiplied by armor material factor)
+	 */
+	int[] getMaxDamageArray() {
+		return maxDamageArray;
+	}
 
 
-	 /**
-	  * allows items to add custom lines of information to the mouseover
-	  * description
-	  */
-	 public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
-		 if (stack.itemID == mod_RpgInventory.ringem.itemID) {
-			 list.add(StatCollector.translateToLocal("Left: Dispell Debuffs 20s"));
-			 list.add(StatCollector.translateToLocal("Right: Haste"));
-		 }
+	/**
+	 * allows items to add custom lines of information to the mouseover
+	 * description
+	 */
+	public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
+		if (stack.itemID == mod_RpgInventory.ringem.itemID) {
+			list.add(StatCollector.translateToLocal("Left: Dispell Debuffs 20s"));
+			list.add(StatCollector.translateToLocal("Right: Haste"));
+		}
 
-		 if (stack.itemID == mod_RpgInventory.neckem.itemID) {
-			 list.add(StatCollector.translateToLocal("Water Breathing"));
-		 }
+		if (stack.itemID == mod_RpgInventory.neckem.itemID) {
+			list.add(StatCollector.translateToLocal("Water Breathing"));
+		}
 
-		 if (stack.itemID == mod_RpgInventory.glovesem.itemID) {
-			 list.add(StatCollector.translateToLocal("Resistance"));
-		 }
+		if (stack.itemID == mod_RpgInventory.glovesem.itemID) {
+			list.add(StatCollector.translateToLocal("Resistance"));
+		}
 
-		 if (stack.itemID == mod_RpgInventory.ringdia.itemID || stack.itemID == mod_RpgInventory.glovesdia.itemID
-				 || stack.itemID == mod_RpgInventory.neckdia.itemID) {
-			 list.add(StatCollector.translateToLocal("Healing"));
-		 }
+		if (stack.itemID == mod_RpgInventory.ringdia.itemID || stack.itemID == mod_RpgInventory.glovesdia.itemID
+				|| stack.itemID == mod_RpgInventory.neckdia.itemID) {
+			list.add(StatCollector.translateToLocal("Healing"));
+		}
 
-		 if (stack.itemID == mod_RpgInventory.ringgold.itemID || stack.itemID == mod_RpgInventory.glovesbutter.itemID
-				 || stack.itemID == mod_RpgInventory.neckgold.itemID) {
-			 list.add(StatCollector.translateToLocal("Jump/Speed"));
-		 }
+		if (stack.itemID == mod_RpgInventory.ringgold.itemID || stack.itemID == mod_RpgInventory.glovesbutter.itemID
+				|| stack.itemID == mod_RpgInventory.neckgold.itemID) {
+			list.add(StatCollector.translateToLocal("Jump/Speed"));
+		}
 
-		 if (stack.itemID == mod_RpgInventory.ringlap.itemID || stack.itemID == mod_RpgInventory.gloveslap.itemID
-				 || stack.itemID == mod_RpgInventory.necklap.itemID) {
-			 list.add(StatCollector.translateToLocal("Strength/Passive Weapon Healing"));
-		 }
-	 }
+		if (stack.itemID == mod_RpgInventory.ringlap.itemID || stack.itemID == mod_RpgInventory.gloveslap.itemID
+				|| stack.itemID == mod_RpgInventory.necklap.itemID) {
+			list.add(StatCollector.translateToLocal("Strength/Passive Weapon Healing"));
+		}
+	}
 
-	 @Override
-	 public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving) {
+	@Override
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving) {
 
-		 PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer) par3EntityLiving);
+		PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer) par3EntityLiving);
 
-		 //RpgInv inv = mod_RpgInventory.proxy.getInventory(((EntityPlayer) par3EntityLiving).username);
-		 inv.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer) par3EntityLiving);
+		//RpgInv inv = mod_RpgInventory.proxy.getInventory(((EntityPlayer) par3EntityLiving).username);
+		inv.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer) par3EntityLiving);
 
-		 if (((EntityPlayer) par3EntityLiving).getCurrentEquippedItem().getItem() == mod_RpgInventory.daggers) {
-			 if (inv.hasClass(EnumRpgClass.NINJA)) {
-				 par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 80, 1));
-			 }else if (inv.hasClass(EnumRpgClass.ROGUE)) {
-				 par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 40, 0));
-				 if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
-					 par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 10);
-				 }
-			 } 
-			 if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
-				 par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 10);
-			 } else {
-				 par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 6);
-			 }
-		 }
-		 return false;
-	 }
+		if (((EntityPlayer) par3EntityLiving).getCurrentEquippedItem().getItem() == mod_RpgInventory.daggers) {
+			if (inv.hasClass(EnumRpgClass.NINJA)) {
+				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 80, 1));
+			}else if (inv.hasClass(EnumRpgClass.ROGUE)) {
+				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 40, 0));
+				if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
+					par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 10);
+				}
+			} 
+			if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
+				par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 10);
+			} else {
+				par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 6);
+			}
+		}
+		return false;
+	}
 
-	 @Override
-	 public String toString() {
-		 return Name;
-	 }
+	@Override
+	public String toString() {
+		return Name;
+	}
 
-	 private ResourceLocation TEXTURE;
+	private ResourceLocation TEXTURE;
 
-	 public ResourceLocation getTexture(){
-		 return TEXTURE;
-	 }
+	public ResourceLocation getTexture(){
+		return TEXTURE;
+	}
 }

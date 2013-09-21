@@ -163,11 +163,11 @@ public class ClientProxy extends CommonProxy {
 	public void openGUI(EntityPlayer p1, int id) {
 		switch (id) {
 		case 1:
-			if (Minecraft.getMinecraft().playerController.isInCreativeMode()) {
-				Minecraft.getMinecraft().displayGuiScreen(new GuiContainerCreative(p1));
-			} else {
-				Minecraft.getMinecraft().displayGuiScreen(new GuiInventory(p1));
-			}
+//			if (Minecraft.getMinecraft().playerController.isInCreativeMode()) {
+//				Minecraft.getMinecraft().displayGuiScreen(new GuiContainerCreative(p1));
+//			} else {
+//				Minecraft.getMinecraft().displayGuiScreen(new GuiInventory(p1));
+//			}
 			break;
 		case 2:
 			Minecraft.getMinecraft().displayGuiScreen(new BookGui(p1));
@@ -178,70 +178,4 @@ public class ClientProxy extends CommonProxy {
 	public void openGUI(EntityPlayer p1, PlayerRpgInventory inv) {
 		Minecraft.getMinecraft().displayGuiScreen(new rpgInventory.gui.pet.PetGui(p1, inv));
 	}
-
-//	public RpgInv getInventory(String username) {
-//		RpgInv inv = new RpgInv(username);
-//		if (MinecraftServer.getServer() != null && MinecraftServer.getServer().getConfigurationManager() != null) {
-//			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
-//			if (player != null) {
-//				if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG) && player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("RpgInv")) {
-//					inv.readFromNBT(player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).getCompoundTag("RpgInv"));
-//				} else {
-//					if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
-//						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
-//					}
-//					player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound()));
-//				}
-//			}
-//		}
-//		else{
-//			EntityPlayer player = Minecraft.getMinecraft().theWorld.getPlayerEntityByName(username);
-//			if (player != null) {
-//				if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG) && player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("RpgInv")) {
-//					inv.readFromNBT(player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).getCompoundTag("RpgInv"));
-//				} else {
-//					if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
-//						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
-//					}
-//					player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
-//				}
-//			}
-//		}
-//
-//		return inv;
-//	}
-//
-//	public void addEntry(String username, RpgInv inv) {
-//
-//		if (MinecraftServer.getServer() != null && MinecraftServer.getServer().getConfigurationManager() != null) {
-//			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
-//			try {
-//				if (player != null) {
-//					if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
-//						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
-//					} else {
-//						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
-//						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
-//					}
-//				}
-//			} catch (Throwable ex) {
-//				ex.printStackTrace();
-//			}
-//		}
-//		else {
-//			EntityPlayer player = Minecraft.getMinecraft().theWorld.getPlayerEntityByName(username);
-//			if (player != null) {
-//				try {
-//					if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
-//						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
-//					} else {
-//						player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG));
-//						player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setCompoundTag("RpgInv", inv.writeToNBT(new NBTTagCompound("RpgInv")));
-//					}
-//				} catch (Throwable ex1) {
-//					ex1.printStackTrace();
-//				}
-//			}
-//		}
-//	}
 }

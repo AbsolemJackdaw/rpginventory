@@ -6,14 +6,16 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.common.FMLLog;
 
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
@@ -31,50 +33,20 @@ public class RenderPlayerHandler {
 	private GloveLeft leftglove = new GloveLeft();
 	private ModelNecklace necklace = new ModelNecklace();
 
-	
+
 	public ModelBeastArmor beastarmor = new ModelBeastArmor(0.5F, 0.0F, 64, 32);
 	public ModelBeastArmor beastarmorChest = new ModelBeastArmor(1.2F, 0.0F, 64, 32);
-	
+
 	Minecraft mc= Minecraft.getMinecraft();
 	ModelBiped main ;
-
+	ModelBiped armor;
 
 	@ForgeSubscribe
 	public void PlayerRender(RenderPlayerEvent.SetArmorModel evt ){
-		
+
 		EntityPlayer player = evt.entityPlayer;
 		main = evt.renderer.modelBipedMain;
-//		beastarmor.showBeastHelmet(evt.slot == 3);
-//		beastarmor.showBeastSpaulders(evt.slot == 2);
-//
-//		ModelBiped armor = null;
-//		beastarmorChest.showBeastSpaulders(evt.slot == 2);
-//		beastarmorChest.showBeastHelmet(evt.slot == 3);
-//		
-//		/*===== RENDERING ARMOR=====*/
-////		mc.renderEngine.func_110577_a(new ResourceLocation("armor:beast_3.png"));
-////		beastarmor.render(player, 0, 0, 0, 0, 0, 0.0625f);
-//		armor = evt.slot== 3 ? beastarmorChest : beastarmor;
-//		
-//		evt.renderer.setRenderPassModel(armor);
-//		if(evt.slot == 3){
-//			if(evt.stack != null){
-//				if(evt.stack.getItem() == mod_RpgInventory.beastHood){
-//					mc.renderEngine.func_110577_a(new ResourceLocation("armor:beast_3.png"));
-//				}
-//			}
-//		}
-//		if(evt.slot == 2){
-//			if(evt.stack != null){
-//				if(evt.stack.getItem() == mod_RpgInventory.beastChest){
-//					mc.renderEngine.func_110577_a(new ResourceLocation("armor:beast_3.png"));
-//				}
-//			}
-//		}
-//		armor.render(player, 0, 0, 0, 0, 0, 0.0625f);
 
-
-		
 		/*===== RENDERING GLOVES=====*/
 		ItemStack gloves = PlayerRpgInventory.get(player).getGloves();
 		if(gloves != null){

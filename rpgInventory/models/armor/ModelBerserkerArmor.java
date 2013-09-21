@@ -20,8 +20,16 @@ public class ModelBerserkerArmor extends ModelBiped
 	ModelRenderer Shape10;
 	ModelRenderer Shape11;
 
+	@Deprecated
 	public ModelBerserkerArmor(float par1, float par2, int par3, int par4)
 	{
+		this(par1);
+	}
+	
+	public ModelBerserkerArmor(float par1)
+	{
+		super(par1, 0, 65, 64);
+		
 		textureWidth = 65;
 		textureHeight = 64;
 
