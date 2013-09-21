@@ -1,5 +1,7 @@
 package rpgInventory.handlers;
 
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.packets.PacketInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.IPlayerTracker;
 
@@ -12,7 +14,7 @@ public class PlayerTracker implements IPlayerTracker {
 
     @Override
     public void onPlayerLogin(EntityPlayer player) {
-    	    	
+    	    	PacketInventory.sendPacket(player, PlayerRpgInventory.get(player));
     }
 
     @Override

@@ -1,23 +1,13 @@
 package rpgInventory.handlers.proxy;
 
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.client.particle.EntityLargeExplodeFX;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderArrow;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -33,12 +23,10 @@ import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.gui.BookGui;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.ClientTickHandler;
-import rpgInventory.handlers.RPGEventHooks;
 import rpgInventory.handlers.RPGKeyHandler;
 import rpgInventory.handlers.RenderPlayerHandler;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.ModelShield;
-import rpgInventory.renderer.RenderPlayerJewels;
 import rpgInventory.renderer.items.shields.ArcherShield;
 import rpgInventory.renderer.items.shields.BerserkerShield;
 import rpgInventory.renderer.items.shields.VanillaShield;
@@ -51,6 +39,7 @@ import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy {
 	//Testing
@@ -61,7 +50,13 @@ public class ClientProxy extends CommonProxy {
 	public int getSphereID() {
 		return sphereID;
 	}
+	
+	@SideOnly(Side.CLIENT)
+	public static void renderHandler() {
 
+		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
+	}
+	
 	public void spawnParticle(World world, EntityLiving el, Random rng) {
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityHeartFX efx = new EntityHeartFX(world, el.posX, el.posY + 0.5F + rng.nextFloat(), el.posZ, rng.nextFloat(), rng.nextFloat() + 0.4F, rng.nextFloat());
@@ -80,7 +75,9 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	public void registerRenderInformation() {
-//		TextureIDs.init();
+		//		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
+
+		//		TextureIDs.init();
 		KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler());
 		RenderingRegistry.registerEntityRenderingHandler(EntityHellArrow.class, new RenderArrow());
 
@@ -122,12 +119,12 @@ public class ClientProxy extends CommonProxy {
 					(IItemRenderer) new StafRender());
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.elfbow.itemID, 
 					(IItemRenderer) new BowRender());
-			
+
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.berserkerShield.itemID, 
 					(IItemRenderer) new BerserkerShield(new IronThorn(), "subaraki:jewels/IronThorn.png"));
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.archerShield.itemID, 
 					(IItemRenderer) new ArcherShield(new ModelShield(), "subaraki:jewels/Shield1.png"));
-			
+
 			if(mod_RpgInventory.hasShields){
 				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldDiamond.itemID, 
 						(IItemRenderer) new VanillaShield(new rpgInventory.models.shields.VanillaShield(), "subaraki:jewels/ShieldDiamond.png"));
@@ -137,7 +134,7 @@ public class ClientProxy extends CommonProxy {
 						(IItemRenderer) new VanillaShield(new rpgInventory.models.shields.VanillaShield(), "subaraki:jewels/ShieldIron.png"));
 				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldWood.itemID, 
 						(IItemRenderer) new VanillaShield(new rpgInventory.models.shields.VanillaShield(), "subaraki:jewels/ShieldWood.png"));
-		
+
 			}
 		}		
 	}
@@ -145,29 +142,29 @@ public class ClientProxy extends CommonProxy {
 	public void registerLate() {
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 
-//		RenderPlayerJewels renderballs = new RenderPlayerJewels(new ModelBiped());
+		//		RenderPlayerJewels renderballs = new RenderPlayerJewels(new ModelBiped());
 		//Ok guys. This is a workaround for other mods the hook the player render(smart moving)
 		//Basically we want to learn the currently bound renderers, and use them to
 		//render the player, and then render our items.
-//		Map<Class<? extends Entity>, Render> map = RenderManager.instance.entityRenderMap;
-//		for (Entry<Class<? extends Entity>, Render> entry : map.entrySet()) {
-//			if (EntityPlayer.class.isAssignableFrom(entry.getKey())) {
-//				Class clazz = entry.getValue().getClass();
-//				RenderPlayerJewels.defaultPlayerRender.put(entry.getKey(), entry.getValue());
-//				RenderingRegistry.registerEntityRenderingHandler(entry.getKey(), renderballs);
-//			}
-//		}
-//		RenderingRegistry.instance().loadEntityRenderers(RenderManager.instance.entityRenderMap);
+		//		Map<Class<? extends Entity>, Render> map = RenderManager.instance.entityRenderMap;
+		//		for (Entry<Class<? extends Entity>, Render> entry : map.entrySet()) {
+		//			if (EntityPlayer.class.isAssignableFrom(entry.getKey())) {
+		//				Class clazz = entry.getValue().getClass();
+		//				RenderPlayerJewels.defaultPlayerRender.put(entry.getKey(), entry.getValue());
+		//				RenderingRegistry.registerEntityRenderingHandler(entry.getKey(), renderballs);
+		//			}
+		//		}
+		//		RenderingRegistry.instance().loadEntityRenderers(RenderManager.instance.entityRenderMap);
 	}
 
 	public void openGUI(EntityPlayer p1, int id) {
 		switch (id) {
 		case 1:
-//			if (Minecraft.getMinecraft().playerController.isInCreativeMode()) {
-//				Minecraft.getMinecraft().displayGuiScreen(new GuiContainerCreative(p1));
-//			} else {
-//				Minecraft.getMinecraft().displayGuiScreen(new GuiInventory(p1));
-//			}
+			//			if (Minecraft.getMinecraft().playerController.isInCreativeMode()) {
+			//				Minecraft.getMinecraft().displayGuiScreen(new GuiContainerCreative(p1));
+			//			} else {
+			//				Minecraft.getMinecraft().displayGuiScreen(new GuiInventory(p1));
+			//			}
 			break;
 		case 2:
 			Minecraft.getMinecraft().displayGuiScreen(new BookGui(p1));

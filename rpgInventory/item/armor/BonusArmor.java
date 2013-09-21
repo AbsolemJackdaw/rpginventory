@@ -15,6 +15,7 @@ import rpgInventory.models.armor.ModelBeastArmor;
 import rpgInventory.models.armor.ModelBerserkerArmor;
 import rpgInventory.models.armor.ModelMageArmor;
 import rpgInventory.models.armor.ModelNecroArmor;
+import rpgInventory.models.armor.ModelPaladinArmor;
 import rpgInventory.models.armor.ModelRogueArmor;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
@@ -141,8 +142,11 @@ public class BonusArmor extends ItemArmor{
 					else if(mat.equals(mod_RpgInventory.instance.rogueArmor))
 						var7 = new ModelRogueArmor(1.0f);
 					
+					else if (mat.equals(mod_RpgInventory.instance.paladin))
+						var7 = new ModelPaladinArmor(1.0f, entityLiving);
+					
 					/*Archers dont have custom armor*/
-					else if(mat.equals(mod_RpgInventory.instance.archer)|| mat.equals(mod_RpgInventory.instance.paladin))
+					else if(mat.equals(mod_RpgInventory.instance.archer))
 						var7 = null;// null will enable default armor rendering
 
 					else{
@@ -166,8 +170,11 @@ public class BonusArmor extends ItemArmor{
 					else if(mat.equals(mod_RpgInventory.instance.rogueArmor))
 						var7 = new ModelRogueArmor(0.5f);
 					
+					else if (mat.equals(mod_RpgInventory.instance.paladin))
+						var7 = new ModelPaladinArmor(0.5f, entityLiving);
+					
 					/*Archers dont have custom armor*/
-					else if(mat.equals(mod_RpgInventory.instance.archer) || mat.equals(mod_RpgInventory.instance.paladin))
+					else if(mat.equals(mod_RpgInventory.instance.archer))
 						var7 = null;// null will enable default armor rendering
 					
 					else{

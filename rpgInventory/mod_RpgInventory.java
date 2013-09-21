@@ -29,6 +29,7 @@ import rpgInventory.handlers.PlayerTracker;
 import rpgInventory.handlers.RPGEventHooks;
 import rpgInventory.handlers.RenderPlayerHandler;
 import rpgInventory.handlers.packets.RpgPacketHandler;
+import rpgInventory.handlers.proxy.ClientProxy;
 import rpgInventory.handlers.proxy.CommonProxy;
 import rpgInventory.item.ItemCandy;
 import rpgInventory.item.ItemCrystal;
@@ -69,6 +70,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+
 
 @Mod(modid = "rpginventorymod", name = "RPG Inventory Mod", version = "1.5.1 8.4")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true,
@@ -268,7 +272,7 @@ public class mod_RpgInventory {
 		wantmold = new ItemMold(RpgConfig.instance.wantmoldID).setUnlocalizedName("moldGlove").setCreativeTab(tab);
 
 		if (hasRpg == true) {
-			
+
 			NecroToolMaterial = EnumHelper.addToolMaterial("souls", 0, 1024, 5F, 1, 0);
 			PalaToolMaterial = EnumHelper.addToolMaterial("steel", 0, 1024, 5F, 1, 0);
 
@@ -578,8 +582,10 @@ public class mod_RpgInventory {
 		TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
 		MinecraftForge.EVENT_BUS.register(new RPGEventHooks());
 		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow", getUniqueID(), this, 250, 1, true);
+		
 
-		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
+		ClientProxy.renderHandler();
+		
 
 		//hack to increase the number of potion types allowed
 
@@ -702,5 +708,10 @@ public class mod_RpgInventory {
 		CommandHandler commandManager = (CommandHandler) event.getServer().getCommandManager();
 		commandManager.registerCommand(new rpgInventory.handlers.CommandPanel());
 		rpgInventory.handlers.CommandPanel.init();
+	}
+	
+	@SideOnly(Side.CLIENT)
+	private void registerClientEvents(){
+		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
 	}
 }

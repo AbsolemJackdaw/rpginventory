@@ -9,19 +9,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.FMLLog;
-
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.gui.rpginv.RpgGui;
 import rpgInventory.item.armor.ItemRpgArmor;
-import rpgInventory.models.armor.ModelBeastArmor;
 import rpgInventory.models.jewels.GloveLeft;
 import rpgInventory.models.jewels.GloveRight;
 import rpgInventory.models.jewels.ModelNecklace;
@@ -33,13 +29,8 @@ public class RenderPlayerHandler {
 	private GloveLeft leftglove = new GloveLeft();
 	private ModelNecklace necklace = new ModelNecklace();
 
-
-	public ModelBeastArmor beastarmor = new ModelBeastArmor(0.5F, 0.0F, 64, 32);
-	public ModelBeastArmor beastarmorChest = new ModelBeastArmor(1.2F, 0.0F, 64, 32);
-
 	Minecraft mc= Minecraft.getMinecraft();
 	ModelBiped main ;
-	ModelBiped armor;
 
 	@ForgeSubscribe
 	public void PlayerRender(RenderPlayerEvent.SetArmorModel evt ){
@@ -80,10 +71,6 @@ public class RenderPlayerHandler {
 			renderShield((ItemRpgArmor)shield.getItem());
 		}
 	}
-
-
-
-
 
 
 	private void renderShield(ItemRpgArmor armor){
