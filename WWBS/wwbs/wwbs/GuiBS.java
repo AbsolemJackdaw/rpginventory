@@ -67,7 +67,7 @@ public class GuiBS extends InventoryEffectRenderer {
 
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.func_110577_a(new ResourceLocation("gui/container.png"));
+		mc.renderEngine.bindTexture(new ResourceLocation("gui/container.png"));
 		int var5 = 222;
 		int var6 = 176;
 		int posX = (this.width - xSize) / 2;

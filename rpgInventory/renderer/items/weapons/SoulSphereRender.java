@@ -34,7 +34,7 @@ public class SoulSphereRender extends RpgItemRenderer {
 		{
 		case  EQUIPPED:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
 			scale = 0.45F;
 			GL11.glScalef(scale,scale,scale);
 			GL11.glTranslatef(1.2F, 1F, -0.2F);
@@ -56,7 +56,7 @@ public class SoulSphereRender extends RpgItemRenderer {
 
 		case  EQUIPPED_FIRST_PERSON:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
 			scale = 0.45F;
 			GL11.glScalef(scale,scale,scale);
 			GL11.glTranslatef(0.8F, 1.2F, -0.2F);
@@ -78,7 +78,7 @@ public class SoulSphereRender extends RpgItemRenderer {
 			
 		case ENTITY:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
 			float scale = 0.8F;
 			GL11.glScalef(scale,scale,scale);
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
@@ -92,7 +92,7 @@ public class SoulSphereRender extends RpgItemRenderer {
 
 		case INVENTORY:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/SoulSphere.png"));
 			scale = 1.9F;
 			GL11.glScalef(scale,scale,scale);
 			GL11.glTranslatef(0.0F, 0.2F, 0F);

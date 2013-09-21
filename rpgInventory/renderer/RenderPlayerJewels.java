@@ -148,46 +148,46 @@ public class RenderPlayerJewels extends RenderPlayer {
 					 * Dev Capes
 					 */
 					if (player.username.equals("TheCodyMaverick")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/ACCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/ACCape.png"));
 					}else if (player.username.equals("ClaireBearKitty ")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/ponyCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/ponyCape.png"));
 					}else if (player.username.equals("Unjustice")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/UnCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/UnCape.png"));
 					} else if (player.username.equals("NyhmsQuest")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/NymCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/NymCape.png"));
 					} else if (player.username.equals("Joebuz")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/BuzCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/BuzCape.png"));
 					} else if (player.username.equals("superv20")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/MRSCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/MRSCape.png"));
 					} else if (player.username.equals("VIruS_Ex")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/PreCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/PreCape.png"));
 					} else if (player.username.equals("AbrarSyed")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/AbrCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/AbrCape.png"));
 					} else if (player.username.equals("rich1051414")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/TarCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/TarCape.png"));
 					} else if (player.username.equals("LegendaryKoala")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/CoaCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/CoaCape.png"));
 					} else if (player.username.equals("TheCowTheory")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/CowCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/CowCape.png"));
 					}else if (player.username.equals("4wad")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/ModelCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/ModelCape.png"));
 					}else if (player.username.equals("Zxapa") || player.username.equals("spineripper64 ")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/ConCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/ConCape.png"));
 					} else if (player.username.equals("Artix_all_mighty")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/SubCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/SubCape.png"));
 					} else{ // if none of the names match, it should return a grey cape texture.
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:capes/GreyCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:capes/GreyCape.png"));
 					}
 				} else if (cloak.getItem() == mod_RpgInventory.cloakYellow) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:capes/GoldCape.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:capes/GoldCape.png"));
 				} else if (cloak.getItem() == mod_RpgInventory.cloakRed) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:capes/RedCape.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:capes/RedCape.png"));
 				} else if (cloak.getItem() == mod_RpgInventory.cloakGreen) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:capes/GreenCape.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:capes/GreenCape.png"));
 				} else if (cloak.getItem() == mod_RpgInventory.cloakBlue) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:capes/SkyCape.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:capes/SkyCape.png"));
 				} else if (cloak.getItem() == mod_RpgInventory.cloakSub) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:capes/BlaCape.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:capes/BlaCape.png"));
 				}
 
 
@@ -237,13 +237,13 @@ public class RenderPlayerJewels extends RenderPlayer {
 		if (gloves != null) {
 			GL11.glPushMatrix();
 			if (gloves.getItem() == mod_RpgInventory.glovesbutter) {
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/Glove.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/Glove.png"));
 			} else if (gloves.getItem() == mod_RpgInventory.glovesdia) {
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/GloveDia.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/GloveDia.png"));
 			} else if (gloves.getItem() == mod_RpgInventory.glovesem) {
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/GloveEm.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/GloveEm.png"));
 			} else if (gloves.getItem() == mod_RpgInventory.gloveslap) {
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/GloveLap.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/GloveLap.png"));
 			}
 
 			GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
@@ -265,13 +265,13 @@ public class RenderPlayerJewels extends RenderPlayer {
 
 			GL11.glPushMatrix();
 			if (gloves.getItem() == mod_RpgInventory.glovesbutter) {
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/Glove.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/Glove.png"));
 			} else if (gloves.getItem() == mod_RpgInventory.glovesdia) {
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/GloveDia.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/GloveDia.png"));
 			} else if (gloves.getItem() == mod_RpgInventory.glovesem) {
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/GloveEm.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/GloveEm.png"));
 			} else if (gloves.getItem() == mod_RpgInventory.gloveslap) {
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/GloveLap.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/GloveLap.png"));
 			}
 			GL11.glRotatef(this.modelBipedMain.bipedRightArm.rotateAngleX * scale, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(this.modelBipedMain.bipedRightArm.rotateAngleY * scale, 0.0F, 1.0F, 0.0F);
@@ -297,13 +297,13 @@ public class RenderPlayerJewels extends RenderPlayer {
 				GL11.glPushMatrix();
 
 				if (necklace.getItem() == mod_RpgInventory.neckdia) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/NeckDia.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/NeckDia.png"));
 				} else if (necklace.getItem() == mod_RpgInventory.neckem) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/NeckEm.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/NeckEm.png"));
 				} else if (necklace.getItem() == mod_RpgInventory.neckgold) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/NeckGold.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/NeckGold.png"));
 				} else if (necklace.getItem() == mod_RpgInventory.necklap) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/NeckLap.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/NeckLap.png"));
 				}
 				GL11.glRotatef(this.modelBipedMain.bipedBody.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedBody.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -333,9 +333,9 @@ public class RenderPlayerJewels extends RenderPlayer {
 			if (mod_RpgInventory.hasRogue == true && shield.getItem() == mod_RpgInventory.daggers) {
 
 				if (player.worldObj.isDaytime()) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/dagger.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/dagger.png"));
 				} else {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/daggerNight.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/daggerNight.png"));
 				}
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -353,7 +353,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				//this.setRenderPassModel(dagger);
 
 			} else if (mod_RpgInventory.hasRogue == true && shield.getItem() == mod_RpgInventory.beastShield) {
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/lion.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/lion.png"));
 
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -370,7 +370,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 
 			} else if (shield.getItem() == mod_RpgInventory.archerShield) {
 
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/Shield1.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/Shield1.png"));
 
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -387,7 +387,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				if (rotation == 360) {
 					rotation = 0;
 				}
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/talisman.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/talisman.png"));
 
 				GL11.glScalef(3F, 3F, 3F);
 				GL11.glTranslatef(-0.5F, -0.4F, -0.5F);
@@ -413,7 +413,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				}
 			} // bypass import for mod_RpgPlus
 			else if (mod_RpgInventory.hasRpg && shield.getItem() == mod_RpgInventory.necro_shield) {
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/NecroShield.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/NecroShield.png"));
 
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -430,7 +430,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				}
 
 			} else if (mod_RpgInventory.hasRpg && shield.getItem() == mod_RpgInventory.pala_shield) {
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/PaladinShield.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/PaladinShield.png"));
 
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -443,7 +443,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				}
 
 			} else if (shield.getItem() == mod_RpgInventory.berserkerShield) {
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/IronThorn.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/IronThorn.png"));
 
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -456,7 +456,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 				}
 			} else if (mod_RpgInventory.hasShields == true) {
 				if (shield.getItem() == mod_RpgInventory.shieldWood) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/ShieldWood.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/ShieldWood.png"));
 
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -468,7 +468,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 						vanillaShield.renderShield(0.0625f);
 					}
 				} else if (shield.getItem() == mod_RpgInventory.shieldIron) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/ShieldIron.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/ShieldIron.png"));
 
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -480,7 +480,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 						vanillaShield.renderShield(0.0625f);
 					}
 				} else if (shield.getItem() == mod_RpgInventory.shieldGold) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/ShieldGold.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/ShieldGold.png"));
 
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -492,7 +492,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 						vanillaShield.renderShield(0.0625f);
 					}
 				} else if (shield.getItem() == mod_RpgInventory.shieldDiamond) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/ShieldDiamond.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/ShieldDiamond.png"));
 
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -512,7 +512,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 					if (rotation == 360) {
 						rotation = 0;
 					}
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/book.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/book.png"));
 					GL11.glPushMatrix();
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleX * 50, 1.0F, 0.0F, 0.0F);
 					GL11.glRotatef(this.modelBipedMain.bipedLeftArm.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
@@ -526,7 +526,7 @@ public class RenderPlayerJewels extends RenderPlayer {
 //						book.render(0.0625f);
 					}
 					GL11.glPopMatrix();
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/magemantle.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/magemantle.png"));
 
 					GL11.glScalef(3F, 3F, 3F);
 					GL11.glTranslatef(-0.5F, -0.4F, -0.5F);
@@ -587,63 +587,63 @@ public class RenderPlayerJewels extends RenderPlayer {
 				//BeastMaster
 				if (var6.itemID == mod_RpgInventory.beastHood.itemID) {
 					//here we can load our custom texture file
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:beast_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:beast_3.png"));
 					//here we can turn on this rendering for this armor
 					this.beastarmor.showBeastHelmet(true);
 				} else if (var6.itemID == mod_RpgInventory.beastChest.itemID) {
 					//here we can load our custom texture file
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:beast_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:beast_3.png"));
 					//here we can turn on this rendering for this armor
 					this.beastarmor.showBeastSpaulders(true);
 				}
 				//Mage
 				else if (var6.itemID == mod_RpgInventory.magehood.itemID) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:mage_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:mage_3.png"));
 					this.mageArmor.showMageHat(true);
 				} else if (var6.itemID == mod_RpgInventory.magegown.itemID) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:mage_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:mage_3.png"));
 					this.mageArmor.showMageChest(true);
 					this.mageArmor.showMageArms(true);
 				} else if (var6.itemID == mod_RpgInventory.mageboots.itemID) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:mage_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:mage_3.png"));
 					this.mageArmor.showMageFeet(true);
 				}
 				//ArchMage
 				else if (var6.itemID == mod_RpgInventory.archmageHood.itemID) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:archMage_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:archMage_3.png"));
 					this.mageArmor.showMageHat(true);
 				} else if (var6.itemID == mod_RpgInventory.archmageChest.itemID) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:archMage_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:archMage_3.png"));
 					this.mageArmor.showMageChest(true);
 					this.mageArmor.showMageArms(true);
 				} else if (var6.itemID == mod_RpgInventory.archMageBoots.itemID) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:archMage_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:archMage_3.png"));
 					this.mageArmor.showMageFeet(true);
 				}
 				//Necro
 				else if (var6.itemID == mod_RpgInventory.necroChestplate.itemID) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:necro_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:necro_3.png"));
 					this.necroArmor.showTie(true);
 					this.necroArmor.showGrasps(true);
 				} else if (var6.itemID == mod_RpgInventory.necroBoots.itemID) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:necro_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:necro_3.png"));
 					this.necroArmor.showBoots(true);
 				}
 				// Rogue
 				else if (var6.itemID == mod_RpgInventory.rogueLegs.itemID) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:rogue_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:rogue_3.png"));
 					this.rogueArmor.showKnee(true);
 
 				} else if (var6.itemID == mod_RpgInventory.rogueBoots.itemID) {
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:rogue_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:rogue_3.png"));
 					this.rogueArmor.showBoots(true);
 				}
 				//Berserk
 				else if (var6.itemID == mod_RpgInventory.berserkerHood.itemID){
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:berserk_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:berserk_3.png"));
 					this.berserkArmor.showHorns(true);
 				}else if (var6.itemID == mod_RpgInventory.berserkerChest.itemID){
-					mc.renderEngine.func_110577_a(new ResourceLocation("armor:berserk_3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("armor:berserk_3.png"));
 					this.berserkArmor.showSpaulders(true);
 
 				}else{

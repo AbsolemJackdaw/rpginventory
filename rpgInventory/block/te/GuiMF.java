@@ -37,7 +37,7 @@ public class GuiMF extends GuiContainer {
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
 
-		mc.renderEngine.func_110577_a(new ResourceLocation("rpginventorymod:textures/gui/Forge.png"));
+		mc.renderEngine.bindTexture(new ResourceLocation("rpginventorymod:textures/gui/Forge.png"));
 		drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
 
 		if (forgeInventory.isBurning()) {
@@ -54,7 +54,7 @@ public class GuiMF extends GuiContainer {
 				float x = 1 * ratio;
 				float y = 6 * ratio;
 
-				mc.renderEngine.func_110577_a(new ResourceLocation("rpginventorymod:textures/gui/RPGinventoryTM.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("rpginventorymod:textures/gui/RPGinventoryTM.png"));
 		        GL11.glEnable(GL11.GL_BLEND);
 		        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		        GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.85F);

@@ -41,14 +41,14 @@ public class RenderPlayerHandler {
 		/*===== RENDERING GLOVES=====*/
 		ItemStack gloves = PlayerRpgInventory.get(player).getGloves();
 		if(gloves != null){
-			mc.renderEngine.func_110577_a(((ItemRpgArmor)gloves.getItem()).getTexture());
+			mc.renderEngine.bindTexture(((ItemRpgArmor)gloves.getItem()).getTexture());
 			renderGloves();
 		}	
 
 		/*===== RENDERING GLOVES=====*/
 		ItemStack necklace = PlayerRpgInventory.get(player).getNecklace();
 		if(necklace != null){
-			mc.renderEngine.func_110577_a(((ItemRpgArmor)necklace.getItem()).getTexture());
+			mc.renderEngine.bindTexture(((ItemRpgArmor)necklace.getItem()).getTexture());
 			renderNecklace(evt.entityPlayer);
 		}
 
@@ -61,7 +61,7 @@ public class RenderPlayerHandler {
 		/*===== RENDERING GLOVES=====*/
 		ItemStack shield = PlayerRpgInventory.get(player).getShield();
 		if(shield != null){
-			mc.renderEngine.func_110577_a(((ItemRpgArmor)shield.getItem()).getTexture());
+			mc.renderEngine.bindTexture(((ItemRpgArmor)shield.getItem()).getTexture());
 			if(shield.getItem().equals(mod_RpgInventory.archBook)){
 				renderMantle(player, 1);
 			}
@@ -98,9 +98,9 @@ public class RenderPlayerHandler {
 			rotation = 0;
 		}
 		if( id == 1)
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/magemantle.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/magemantle.png"));
 		else
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:jewels/talisman.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:jewels/talisman.png"));
 
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		GL11.glPushMatrix();
@@ -196,38 +196,38 @@ public class RenderPlayerHandler {
 					 * Dev Capes
 					 */
 					if (player.username.equals("TheCodyMaverick")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/ACCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/ACCape.png"));
 					}else if (player.username.equals("ClaireBearKitty ")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/ponyCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/ponyCape.png"));
 					}else if (player.username.equals("Unjustice")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/UnCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/UnCape.png"));
 					} else if (player.username.equals("NyhmsQuest")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/NymCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/NymCape.png"));
 					} else if (player.username.equals("Joebuz")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/BuzCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/BuzCape.png"));
 					} else if (player.username.equals("superv20")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/MRSCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/MRSCape.png"));
 					} else if (player.username.equals("VIruS_Ex")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/PreCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/PreCape.png"));
 					} else if (player.username.equals("AbrarSyed")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/AbrCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/AbrCape.png"));
 					} else if (player.username.equals("rich1051414")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/TarCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/TarCape.png"));
 					} else if (player.username.equals("LegendaryKoala")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/CoaCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/CoaCape.png"));
 					} else if (player.username.equals("TheCowTheory")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/CowCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/CowCape.png"));
 					}else if (player.username.equals("4wad")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/ModelCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/ModelCape.png"));
 					}else if (player.username.equals("Zxapa") || player.username.equals("spineripper64 ")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/ConCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/ConCape.png"));
 					} else if (player.username.equals("Artix_all_mighty")) {
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:devcapes/SubCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/SubCape.png"));
 					} else{ // if none of the names match, it should return a grey cape texture.
-						mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:capes/GreyCape.png"));
+						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:capes/GreyCape.png"));
 					}
 				} else  {
-					mc.renderEngine.func_110577_a(((ItemRpgArmor)cloak.getItem()).getTexture());
+					mc.renderEngine.bindTexture(((ItemRpgArmor)cloak.getItem()).getTexture());
 				}
 
 				GL11.glTranslatef(0.0F, 0.0F, 0.125F);

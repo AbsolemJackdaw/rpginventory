@@ -29,13 +29,13 @@ public class BowRender extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			if ((Entity) data[1] instanceof EntityPlayer && ((EntityPlayer) data[1]).getCurrentEquippedItem() != null) {
 				if(usingItem < 5)
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/bow.png"));
 				else if(usingItem >= 5 && usingItem < 25)
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow2.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/bow2.png"));
 				else if(usingItem >= 25)
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/bow3.png"));
 			}else{
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/bow.png"));
 
 			}
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
@@ -50,11 +50,11 @@ public class BowRender extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			if (((EntityPlayer) data[1]).getCurrentEquippedItem() != null) {
 				if(usingItem < 5)
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/bow.png"));
 				else if(usingItem >= 5 && usingItem < 25)
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow2.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/bow2.png"));
 				else if(usingItem >= 25 )
-					mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow3.png"));
+					mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/bow3.png"));
 			}
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(140F, 1.0f, 0.0f, 0.0f);
@@ -67,7 +67,7 @@ public class BowRender extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			scale = 1.5F;
 			GL11.glScalef(scale, scale, scale);
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/bow.png"));
 			GL11.glRotatef(0f, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(90F, 0.0f, 0.0f, 1.0f);
@@ -77,7 +77,7 @@ public class BowRender extends RpgItemRenderer {
 			break;
 		case INVENTORY:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/bow.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/bow.png"));
 			scale = 1F;
 			GL11.glScalef(scale,scale,scale);
 			GL11.glRotatef(200F, 1.0f, 0.0f, 0.0f);

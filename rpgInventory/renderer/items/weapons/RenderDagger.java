@@ -25,9 +25,9 @@ public class RenderDagger extends RpgItemRenderer {
 			scale = 0.9F;
 			GL11.glScalef(scale,scale,scale);
 			if(((Entity)data[1]).worldObj.isDaytime())
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/dagger.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/dagger.png"));
 			else
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/daggerNight.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/daggerNight.png"));
 			GL11.glRotatef(-150F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(-100F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(160F, 0.0f, 0.0f, 1.0f);
@@ -41,9 +41,9 @@ public class RenderDagger extends RpgItemRenderer {
 			float scale = 0.6F;
 			GL11.glScalef(scale,scale,scale);
 			if((Entity)data[1]!= null && ((Entity)data[1]).worldObj.isDaytime())
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/dagger.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/dagger.png"));
 			else
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/daggerNight.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/daggerNight.png"));
 			GL11.glRotatef(180F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(-70F, 0.0f, 0.0f, 1.0f);
@@ -57,9 +57,9 @@ public class RenderDagger extends RpgItemRenderer {
 			scale = 1F;
 			GL11.glScalef(scale,scale,scale);
 			if(((Entity)data[1]).worldObj.isDaytime())
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/dagger.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/dagger.png"));
 			else
-				mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/daggerNight.png"));
+				mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/daggerNight.png"));
 
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
@@ -71,7 +71,7 @@ public class RenderDagger extends RpgItemRenderer {
 
 		case INVENTORY:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/dagger.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/dagger.png"));
 			scale = 0.8F;
 			GL11.glScalef(scale,scale,scale);
 			GL11.glRotatef(160F, 1.0f, 0.0f, 0.0f);

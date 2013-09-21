@@ -23,7 +23,7 @@ public class GrandSwordRender extends RpgItemRenderer{
 		switch(type){
 		case  EQUIPPED:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/pride.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/pride.png"));
 			scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
@@ -36,7 +36,7 @@ public class GrandSwordRender extends RpgItemRenderer{
 			
 		case  EQUIPPED_FIRST_PERSON:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/pride.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/pride.png"));
 			scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
@@ -51,7 +51,7 @@ public class GrandSwordRender extends RpgItemRenderer{
 			GL11.glPushMatrix();
 			scale = 1.8F;
 			GL11.glScalef(scale,scale,scale);
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/pride.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/pride.png"));
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
@@ -62,7 +62,7 @@ public class GrandSwordRender extends RpgItemRenderer{
 			
 		case INVENTORY:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/pride.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/pride.png"));
 			scale = 1.2f;
 			GL11.glScalef(scale,scale,scale);
 			GL11.glRotatef(200F, 1.0f, 0.0f, 0.0f);

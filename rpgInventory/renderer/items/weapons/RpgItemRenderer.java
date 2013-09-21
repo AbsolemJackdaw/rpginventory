@@ -13,7 +13,7 @@ public abstract class RpgItemRenderer implements IItemRenderer{
 	
 	public static final Minecraft mc = Minecraft.getMinecraft();
 
-	TextureManager texturemanager = this.mc.func_110434_K();
+	TextureManager texturemanager = this.mc.renderEngine;
 
 	public float scale = 1f;
 	
@@ -44,7 +44,7 @@ public abstract class RpgItemRenderer implements IItemRenderer{
 		if(item.hasEffect(item.getItemDamage())){
 			GL11.glDepthFunc(GL11.GL_EQUAL);
 			GL11.glDisable(GL11.GL_LIGHTING);
-			texturemanager.func_110577_a(new ResourceLocation("textures/misc/enchanted_item_glint.png"));
+			texturemanager.bindTexture(new ResourceLocation("textures/misc/enchanted_item_glint.png"));
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
 			float f7 = 0.76F;

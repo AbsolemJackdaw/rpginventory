@@ -29,7 +29,7 @@ public class HammerRender extends RpgItemRenderer{
 		switch(type){
 		case  EQUIPPED:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Hammer.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Hammer.png"));
 
 			if((Entity)data[1]instanceof EntityPlayer && ((EntityPlayer)data[1]).getFoodStats().getFoodLevel() <4
 					||(Entity)data[1]instanceof EntityPlayer &&((EntityPlayer)data[1]).func_110143_aJ() <4){
@@ -49,7 +49,7 @@ public class HammerRender extends RpgItemRenderer{
 		case  EQUIPPED_FIRST_PERSON:	
 			GL11.glPushMatrix();
 
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Hammer.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Hammer.png"));
 
 			if(((EntityPlayer)data[1]).getFoodStats().getFoodLevel() <4
 					||((EntityPlayer)data[1]).func_110143_aJ() <4){
@@ -71,7 +71,7 @@ public class HammerRender extends RpgItemRenderer{
 
 		case  ENTITY:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Hammer.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Hammer.png"));
 			scale = 1.8F;
 			GL11.glScalef(scale,scale,scale);
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
@@ -84,7 +84,7 @@ public class HammerRender extends RpgItemRenderer{
 
 		case INVENTORY:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Hammer.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Hammer.png"));
 			scale = 1.4F;
 			GL11.glScalef(scale,scale,scale);
 			GL11.glRotatef(200F, 1.0f, 0.0f, 0.0f);

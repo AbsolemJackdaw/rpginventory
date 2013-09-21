@@ -23,7 +23,7 @@ public class ClaymoreRenderer extends RpgItemRenderer {
 
 		case  EQUIPPED:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Sword.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Sword.png"));
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(-5F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(-150F, 0.0f, 0.0f, 1.0f);
@@ -34,7 +34,7 @@ public class ClaymoreRenderer extends RpgItemRenderer {
 		
 		case  EQUIPPED_FIRST_PERSON:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Sword.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Sword.png"));
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(-5F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(-150F, 0.0f, 0.0f, 1.0f);
@@ -47,7 +47,7 @@ public class ClaymoreRenderer extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			scale = 1.5F;
 			GL11.glScalef(scale,scale,scale);
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Sword.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Sword.png"));
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(45F, 0.0f, 0.0f, 1.0f);
@@ -60,7 +60,7 @@ public class ClaymoreRenderer extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			scale = 0.7F;
 			GL11.glScalef(scale,scale,scale);
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Sword.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Sword.png"));
 
 			GL11.glRotatef(200F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(-80F, 0.0f, 1.0f, 0.0f);

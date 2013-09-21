@@ -30,7 +30,7 @@ public class StafRender extends RpgItemRenderer {
 		case  EQUIPPED:
 
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Staff.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Staff.png"));
 			scale = 0.8F;
 			GL11.glTranslatef(0.3F, 0.8F, 0.05F);
 			GL11.glRotatef(-90f, 1.0f, 0.0f, 0.0f);
@@ -44,7 +44,7 @@ public class StafRender extends RpgItemRenderer {
 
 		case  EQUIPPED_FIRST_PERSON:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Staff.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Staff.png"));
 			scale = 0.8F;
 			GL11.glScalef(scale,scale,scale);
 			GL11.glRotatef(180F, 1.0f, 0.0f, 0.0f);
@@ -58,7 +58,7 @@ public class StafRender extends RpgItemRenderer {
 
 		case  ENTITY:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Staff.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Staff.png"));
 			scale = 1.5F;
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
@@ -71,7 +71,7 @@ public class StafRender extends RpgItemRenderer {
 
 		case INVENTORY:
 			GL11.glPushMatrix();
-			mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/Staff.png"));
+			mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/Staff.png"));
 			scale = 1F;
 			GL11.glScalef(scale,scale-0.2f,scale);
 			GL11.glRotatef(200F, 1.0f, 0.0f, 0.0f);
@@ -91,7 +91,7 @@ public class StafRender extends RpgItemRenderer {
 	public void blockLoop(Entity p, float repeat , ItemStack item)
 	{
 		Minecraft mc = Minecraft.getMinecraft();
-		mc.renderEngine.func_110577_a(new ResourceLocation("subaraki:weapons/ElementalStaff.png"));
+		mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/ElementalStaff.png"));
 		if(item != null){
 			if(item.getItem() instanceof ItemElementalStaff ){
 
