@@ -74,10 +74,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 
-@Mod(modid = "rpginventorymod", name = "RPG Inventory Mod", version = "1.5.1 8.4")
+@Mod(modid = "rpginventorymod", name = "RPG Inventory Mod", version = "1.6.4")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true,
 clientPacketHandlerSpec =
-@SidedPacketHandler(channels = {"RpgInv", "RpgRawInv"}, packetHandler = RpgPacketHandler.class),
+@SidedPacketHandler(channels = {"RpgInv"}, packetHandler = RpgPacketHandler.class),
 serverPacketHandlerSpec =
 @SidedPacketHandler(channels = {"RpgInv"}, packetHandler = RpgPacketHandler.class))
 public class mod_RpgInventory {
@@ -259,7 +259,7 @@ public class mod_RpgInventory {
 		hammer = new ItemHammer(RpgConfig.instance.hammerID, stone).setMaxDamage(750).setUnlocalizedName("rageBreaker").setCreativeTab(tab);
 		staf = new ItemStaf(RpgConfig.instance.stafID).setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);
 
-		rageSeed = new ItemRageFood(RpgConfig.instance.rageSeedID, 0, 0f, false).setAlwaysEdible().setUnlocalizedName("r.seeds").setMaxStackSize(8).setCreativeTab(tab);
+		rageSeed = new ItemRageFood(RpgConfig.instance.rageSeedID, 0, 0f, false).setAlwaysEdible().setUnlocalizedName("r.seeds_melon").setMaxStackSize(8).setCreativeTab(tab);
 
 		cloakRed = new ItemRpgArmor(RpgConfig.instance.cloakRedID, 2, -1, "","subaraki:capes/RedCape.png").setFull3D().setUnlocalizedName("r.capeGrey").setCreativeTab(tab);
 		cloakYellow = new ItemRpgArmor(RpgConfig.instance.cloakYellowID, 2, -1, "","subaraki:capes/GoldCape.png").setFull3D().setUnlocalizedName("y.capeGrey").setCreativeTab(tab);

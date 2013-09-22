@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.util.List;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -61,9 +62,9 @@ public class PacketBerserker {
 					
 					AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - range, p.posY - range, p.posZ - range, p.posX + range, p.posY + range, p.posZ + range);
 
-				List<EntityLiving> entl = p.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
+				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, pool);
 				if (entl != null && entl.size() > 0) {
-					for (EntityLiving el : entl) {
+					for (EntityLivingBase el : entl) {
 						if (el != null && el != player) {
 							try {
 								double xdir = el.posX - p.posX;

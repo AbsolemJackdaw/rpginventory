@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -21,15 +22,16 @@ public class PacketMageVortex {
 	public PacketMageVortex(DataInputStream dis, World world, EntityPlayer p, Player player){
 		if (!world.isRemote) {
 			ItemStack wand = p.getCurrentEquippedItem();
-			ItemStack var311 = p.inventory.armorItemInSlot(3);
-			ItemStack var211 = p.inventory.armorItemInSlot(2);
-			ItemStack var111 = p.inventory.armorItemInSlot(1);
-			ItemStack var011 = p.inventory.armorItemInSlot(0);
+			ItemStack hat = p.inventory.armorItemInSlot(3);
+			ItemStack chest = p.inventory.armorItemInSlot(2);
+			ItemStack legs = p.inventory.armorItemInSlot(1);
+			ItemStack boots = p.inventory.armorItemInSlot(0);
+			
 			if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
-				if (wand == null || var311 == null || var211 == null || var111 == null || var011 == null) {
+				if (wand == null || hat == null || chest == null || legs == null || boots == null) {
 					return;
 				}
-				if (wand.getItem() != mod_RpgInventory.wand || var311.getItem() != mod_RpgInventory.magehood || var211.getItem() != mod_RpgInventory.magegown || var111.getItem() != mod_RpgInventory.magepants || var011.getItem() != mod_RpgInventory.mageboots) {
+				if (wand.getItem() != mod_RpgInventory.wand || hat.getItem() != mod_RpgInventory.magehood || chest.getItem() != mod_RpgInventory.magegown || legs.getItem() != mod_RpgInventory.magepants || boots.getItem() != mod_RpgInventory.mageboots) {
 					return;
 				}
 			}
@@ -52,7 +54,7 @@ public class PacketMageVortex {
 					}
 				}
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - 20.0F, p.posY - 20.0F, p.posZ - 20.0F, p.posX + 20.0F, p.posY + 20.0F, p.posZ + 20.0F);
-				List<EntityLiving> entl = p.worldObj.getEntitiesWithinAABBExcludingEntity(p, pool);//p.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
+				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABBExcludingEntity(p, pool);//p.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
 
 				if (entl != null && entl.size() > 0) {
 					for (Entity el : entl) {
@@ -69,7 +71,6 @@ public class PacketMageVortex {
 									Vec3 posPlayer = Vec3.createVectorHelper(el.posX, el.posY, el.posZ);
 									Vec3 posEntity = Vec3.createVectorHelper(p.posX, p.posY, p.posZ);
 									Vec3 posFinal = posPlayer.myVec3LocalPool.getVecFromPool(posEntity.xCoord - posPlayer.xCoord, posEntity.yCoord - posPlayer.yCoord, posEntity.zCoord - posPlayer.zCoord).normalize();
-									//System.out.println(posFinal);
 									el.setVelocity(posFinal.xCoord * 4, posFinal.yCoord * 4, posFinal.zCoord * 4);
 									el.attackEntityFrom(DamageSource.causePlayerDamage(p), 1);
 								} catch (Throwable ex) {

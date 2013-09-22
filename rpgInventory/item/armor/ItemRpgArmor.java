@@ -163,31 +163,47 @@ public class ItemRpgArmor extends Item {
 	 */
 	public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
 		if (stack.itemID == mod_RpgInventory.ringem.itemID) {
-			list.add(StatCollector.translateToLocal("Left: Dispell Debuffs 20s"));
-			list.add(StatCollector.translateToLocal("Right: Haste"));
+			list.add(StatCollector.translateToLocal("Left: Dispell Negative Effects"));
+			list.add(StatCollector.translateToLocal("Right: Increased Mining Speed x4"));
 		}
 
 		if (stack.itemID == mod_RpgInventory.neckem.itemID) {
 			list.add(StatCollector.translateToLocal("Water Breathing"));
+			list.add(StatCollector.translateToLocal("Holding breath under water lasts twice as long"));
 		}
 
 		if (stack.itemID == mod_RpgInventory.glovesem.itemID) {
 			list.add(StatCollector.translateToLocal("Resistance"));
+			list.add(StatCollector.translateToLocal("Reduces damage taken by 20%"));
 		}
 
 		if (stack.itemID == mod_RpgInventory.ringdia.itemID || stack.itemID == mod_RpgInventory.glovesdia.itemID
 				|| stack.itemID == mod_RpgInventory.neckdia.itemID) {
 			list.add(StatCollector.translateToLocal("Healing"));
+			list.add(StatCollector.translateToLocal("+15% Heal Speed"));
 		}
 
 		if (stack.itemID == mod_RpgInventory.ringgold.itemID || stack.itemID == mod_RpgInventory.glovesbutter.itemID
 				|| stack.itemID == mod_RpgInventory.neckgold.itemID) {
-			list.add(StatCollector.translateToLocal("Jump/Speed"));
+			list.add(StatCollector.translateToLocal("Speed + 12.5%"));
+			if (stack.itemID == mod_RpgInventory.ringgold.itemID){
+				list.add(StatCollector.translateToLocal("Jump +0.5 Block height"));
+			}else{
+				list.add(StatCollector.translateToLocal("Jump +0.25 Block height"));
+			}
 		}
 
 		if (stack.itemID == mod_RpgInventory.ringlap.itemID || stack.itemID == mod_RpgInventory.gloveslap.itemID
 				|| stack.itemID == mod_RpgInventory.necklap.itemID) {
-			list.add(StatCollector.translateToLocal("Strength/Passive Weapon Healing"));
+			list.add(StatCollector.translateToLocal("Strength"));
+			if (stack.itemID == mod_RpgInventory.ringlap.itemID){
+				list.add(StatCollector.translateToLocal("+0.5"));
+			}if (stack.itemID == mod_RpgInventory.gloveslap.itemID){
+				list.add(StatCollector.translateToLocal("+1"));
+			}if (stack.itemID == mod_RpgInventory.necklap.itemID){
+				list.add(StatCollector.translateToLocal("+1.5"));
+			}
+			list.add(StatCollector.translateToLocal("-1 Damage on Held Weapon Every 20 Seconds"));
 		}
 	}
 

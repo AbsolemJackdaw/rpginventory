@@ -63,7 +63,7 @@ public class ButtonInventory extends GuiButton {
 
     @Override
     public void func_82251_b(int par1, int par2) {
-        System.out.println("woot");
+//        System.out.println("woot");
         super.func_82251_b(par1, par2);
     }
 

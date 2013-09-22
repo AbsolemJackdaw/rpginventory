@@ -270,7 +270,7 @@ public class CommandPanel extends CommandBase {
 
 						if (args[1].matches("get"))
 						{
-							System.out.println(args);
+//							System.out.println(args);
 							int id = 1;
 							int count = 1;
 							int meta = 0;

@@ -6,8 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
-import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
@@ -104,16 +102,31 @@ public class BonusArmor extends ItemArmor{
 		return null;
 	}
 
+	
+	private static final ModelBeastArmor armorBeastChest = new ModelBeastArmor(1.0f);
+	private static final ModelBeastArmor armorBeast = new ModelBeastArmor(0.5f);
+	
+	private static final ModelBerserkerArmor armorBerserkChest = new ModelBerserkerArmor(1.0f);
+	private static final ModelBerserkerArmor armorBerserk = new ModelBerserkerArmor(0.5f);
+	
+	private static final ModelNecroArmor armorNecroChest = new ModelNecroArmor(1.0f);
+	private static final ModelNecroArmor armorNecro = new ModelNecroArmor(0.5f);
+	
+	private static final ModelRogueArmor armorRogueChest = new ModelRogueArmor(1.0f);
+	private static final ModelRogueArmor armorRogue = new ModelRogueArmor(0.5f);
+	
+	private static ModelPaladinArmor armorPaladinChest; 
+	private static ModelPaladinArmor armorPaladin;
+	
+	boolean done = false;
 	@Override @SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int par2 /*armor slot*/)
 	{
-
-		/* TODO
-		 * this works. you basicly reset the armor model.
-		 * walking around works
-		 * crouching, riding etc doesnt. easy remedy for that : bip.crouch = player.crouch
-		 * same goes for holding items, and other actions
-		 * */ 
+		if(!done){
+		armorPaladinChest = new ModelPaladinArmor(1.0f, entityLiving);
+		armorPaladin = new ModelPaladinArmor(0.5f, entityLiving);
+		done = true;
+		}
 		
 		ModelBiped var7 = null; 
 		// no float means it has the exact same size as the player. good for testing
@@ -128,22 +141,22 @@ public class BonusArmor extends ItemArmor{
 				if(type == 1 || type == 3){
 
 					if(mat.equals(mod_RpgInventory.instance.beastMaster))
-						var7 = new ModelBeastArmor(1.0f);
+						var7 = armorBeastChest;
 
 					else if(mat.equals(mod_RpgInventory.instance.berserker))
-						var7 = new ModelBerserkerArmor(1.0f);
+						var7 = armorBerserkChest;
 
 					else if(mat.equals(mod_RpgInventory.instance.mage) ||mat.equals(mod_RpgInventory.instance.archMage))
 							var7 = new ModelMageArmor(1.0f);
 					
 					else if(mat.equals(mod_RpgInventory.instance.necroArmor))
-						var7 = new ModelNecroArmor(1.0f);
+						var7 = armorNecroChest;
 					
 					else if(mat.equals(mod_RpgInventory.instance.rogueArmor))
-						var7 = new ModelRogueArmor(1.0f);
+						var7 = armorRogueChest;
 					
 					else if (mat.equals(mod_RpgInventory.instance.paladin))
-						var7 = new ModelPaladinArmor(1.0f, entityLiving);
+						var7 = armorPaladinChest;
 					
 					/*Archers dont have custom armor*/
 					else if(mat.equals(mod_RpgInventory.instance.archer))

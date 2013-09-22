@@ -20,13 +20,13 @@ public class PacketName {
 			setPetName(p, newName);
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("nameRecievingFailed");
+//			System.out.println("nameRecievingFailed");
 		}
 	}
 	
 	public void setPetName(EntityPlayer p, String newName) {
 		try {
-			System.out.println(newName);
+//			System.out.println(newName);
     		ItemStack petCrystal = PlayerRpgInventory.get(p).getCrystal();
     		BMPetImpl thePet = null;
 			if (IPet.playersWithActivePets.containsKey(p.username)) {

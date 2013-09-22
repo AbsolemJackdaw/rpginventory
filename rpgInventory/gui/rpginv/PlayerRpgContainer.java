@@ -113,7 +113,7 @@ public class PlayerRpgContainer extends Container {
 						this.slotClick(5, 0, 0, player);
 					}
 				case mod_RpgInventory.ITEMTYPE.CRYSTAL:
-					System.out.println(tmp1.getItemDamage());
+//					System.out.println(tmp1.getItemDamage());
 					if (((SlotRpgArmor) this.getSlot(6)).getStack() != null) {
 						return null;
 					}

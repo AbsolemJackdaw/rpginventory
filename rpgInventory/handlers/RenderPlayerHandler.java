@@ -75,7 +75,7 @@ public class RenderPlayerHandler {
 
 	private void renderShield(ItemRpgArmor armor){
 		GL11.glPushMatrix();
-
+		
 		for(int i =0; i< armor.getShieldModel().parts.size(); i++){
 			armor.getShieldModel().parts.get(i).rotateAngleX= main.bipedLeftArm.rotateAngleX;
 			armor.getShieldModel().parts.get(i).rotateAngleY= main.bipedLeftArm.rotateAngleY;

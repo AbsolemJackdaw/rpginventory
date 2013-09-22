@@ -15,10 +15,10 @@ public class PacketPetGui {
 	public PacketPetGui(DataInputStream dis, EntityPlayer p){
 		try {
 
-			if(p.worldObj.isRemote)
-				System.out.println("Packet petgui C Recieved!");
-			else
-				System.out.println("Packet petgui S Recieved!");
+//			if(p.worldObj.isRemote)
+//				System.out.println("Packet petgui C Recieved!");
+//			else
+//				System.out.println("Packet petgui S Recieved!");
 
 			String petname = dis.readUTF();
 			short PetLevel = dis.readShort();
@@ -27,7 +27,7 @@ public class PacketPetGui {
 			short atk = dis.readShort();
 			int playerLevelsLost = dis.readShort();
 
-			FMLLog.getLogger().info(""+ petname + " "+ PetLevel + " "+currentHP + " "+hpmax+ " "+atk+" "+playerLevelsLost);
+//			FMLLog.getLogger().info(""+ petname + " "+ PetLevel + " "+currentHP + " "+hpmax+ " "+atk+" "+playerLevelsLost);
 			//currently unused
 			int petLevelsAdded = dis.readShort();
 			int petcandyConsumed = dis.readShort();

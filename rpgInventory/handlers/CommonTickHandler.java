@@ -6,35 +6,31 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBow;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.PacketInventory;
-import rpgInventory.handlers.packets.RpgPacketHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
-import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class CommonTickHandler implements ITickHandler {
-	
+
 	/**Used to count down 1 second and send a package to every player on the server 
 	 * with info about the player's inventory*/
 	private static int countdown = 20;
 	public static Map<String, Integer> globalCooldownMap = new ConcurrentHashMap();
 
+	private final int lapisTimer = 20*20;
+	private int countDownLapis = lapisTimer;
+
+	
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) {
 
@@ -74,7 +70,7 @@ public class CommonTickHandler implements ITickHandler {
 						RPGEventHooks.DiamondTick.remove(username);
 						continue;
 					}
-					
+
 					PlayerRpgInventory rpginv = PlayerRpgInventory.get(player);
 					if (rpginv == null) {
 						continue;
@@ -125,6 +121,50 @@ public class CommonTickHandler implements ITickHandler {
 			} catch (Throwable ex) {
 			}
 		}
+
+		for (String username : RPGEventHooks.LapisTick.keySet()) {
+			try {
+				if (RPGEventHooks.LapisTick.get(username) > 0) {
+					RPGEventHooks.LapisTick.put(username, RPGEventHooks.LapisTick.get(username) - 1);
+				} else {
+					EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
+					if (player == null) {
+						RPGEventHooks.LapisTick.remove(username);
+						continue;
+					}
+					PlayerRpgInventory rpginv = PlayerRpgInventory.get(player);
+					if (rpginv == null) {
+						continue;
+					}
+					int heal = 0;
+					if (rpginv.getNecklace() != null && rpginv.getNecklace().getItem().equals(mod_RpgInventory.necklap)) {
+						heal++;
+					}
+					if (rpginv.getGloves() != null && rpginv.getGloves().getItem().equals(mod_RpgInventory.gloveslap)) {
+						heal++;
+					}
+					if (rpginv.getRing1() != null && rpginv.getRing1().getItem().equals(mod_RpgInventory.ringlap)) {
+						heal++;
+					}
+					if (rpginv.getRing2() != null && rpginv.getRing2().getItem().equals(mod_RpgInventory.ringlap)) {
+						heal++;
+					}
+					if (player.getCurrentEquippedItem() != null) {
+						ItemStack stack = player.getCurrentEquippedItem();
+						countDownLapis--;
+						if(stack.isItemDamaged() && stack.stackSize == 1 && stack.getMaxStackSize() == 1){
+							if(stack.getItemDamage() <= stack.getMaxDamage())
+								if(countDownLapis <= 0){
+									stack.setItemDamage(stack.getItemDamage() - heal );
+									countDownLapis = lapisTimer;
+								}
+						}
+					}
+				}
+			} catch (Throwable ex) {
+			}
+		}
+
 		for (String username : RPGEventHooks.CustomPotionList.keySet()) {
 			try {
 				EntityPlayer p = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
@@ -164,7 +204,7 @@ public class CommonTickHandler implements ITickHandler {
 				entry.setValue(0);
 			}
 		}
-		
+
 		List<EntityPlayer> players = MinecraftServer.getServerConfigurationManager(MinecraftServer.getServer()).playerEntityList;
 		for (EntityPlayer player : players) {
 			if (player.getHealth() <= 0 || player.isDead) {
@@ -173,7 +213,7 @@ public class CommonTickHandler implements ITickHandler {
 				}
 			}
 			if (countdown == 0) {
-//				
+				//				
 				PacketInventory.sendServerPacket(player);
 			}
 		}

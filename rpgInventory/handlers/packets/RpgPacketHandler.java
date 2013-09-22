@@ -28,35 +28,14 @@ public class RpgPacketHandler implements IPacketHandler {
 	public static final int MAGE2 = 7;
 	public static final int CRYSTAL = 11;
 	public static final int INVENTORY = 15;
-
-	private Random rand = new Random(5);
-
+	public static final int SMP_INVENTORY_SYNC = 20;
+	
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 
 		if (packet.channel.equals("RpgInv")) {
 			handlePackets(packet, player);
-		} else if (packet.channel.equals("RpgRawInv")) {
-			handleRawInventory(packet, (EntityPlayer) player);
 		}
-	}
-
-	private void handleRawInventory(Packet250CustomPayload packet, EntityPlayer p) {
-		//		try {
-		//			NBTTagCompound nbt = CompressedStreamTools.decompress(packet.data);
-		//			PlayerRpgInventory inv = new PlayerRpgInventory(p/*nbt.getString("username")*/);
-		//			NBTTagList list = nbt.getTagList("items");
-		//
-		//			for (int i = 0; i < inv.armorSlots.length; i++) {
-		//				NBTTagCompound tc = (NBTTagCompound) list.tagAt(i);
-		//				if (tc != null) {
-		//					inv.armorSlots[i] = ItemStack.loadItemStackFromNBT(tc);
-		//				}
-		//			}
-		//
-		//		} catch (IOException ex) {
-		//			ex.printStackTrace();
-		//		}
 	}
 
 	private void handlePackets(Packet250CustomPayload packet, Player player) {
@@ -92,11 +71,6 @@ public class RpgPacketHandler implements IPacketHandler {
 			case MAGE2:
 				new PacketMageVortex(dis, world, p, player);
 				break;
-			case 8: // i think this is the book gui
-				if (!world.isRemote) {
-					FMLNetworkHandler.openGui(p, mod_RpgInventory.instance, 2, world, x, y, z);
-				}
-				break;
 			case CRYSTAL:
 				new PacketCrystal(dis, p);
 				break;
@@ -108,11 +82,8 @@ public class RpgPacketHandler implements IPacketHandler {
 				PlayerRpgInventory.get(p).setInventorySlotContents(4, packet.readItemStack(dis));
 				PlayerRpgInventory.get(p).setInventorySlotContents(5, packet.readItemStack(dis));
 				PlayerRpgInventory.get(p).setInventorySlotContents(6, packet.readItemStack(dis));
-
 				break;
-
-			case 20:
-
+			case SMP_INVENTORY_SYNC:
 				String otherPlayerName = dis.readUTF();
 				EntityPlayer other = world.getPlayerEntityByName(otherPlayerName);
 				PlayerRpgInventory.get(other).setInventorySlotContents(0, packet.readItemStack(dis));
@@ -122,15 +93,14 @@ public class RpgPacketHandler implements IPacketHandler {
 				PlayerRpgInventory.get(other).setInventorySlotContents(4, packet.readItemStack(dis));
 				PlayerRpgInventory.get(other).setInventorySlotContents(5, packet.readItemStack(dis));
 				PlayerRpgInventory.get(other).setInventorySlotContents(6, packet.readItemStack(dis));
-
 				break;
+				
 			default:
-				FMLLog.getLogger().info("[SEVERE] RpgInventory Send Unused packet !!");
+				FMLLog.getLogger().info("[SEVERE] RpgInventory Send Unused packet !! Packet ID " + guiId + ". Please report to mod author.");
 				break;
 			}
 			dis.close();
 		} catch (IOException e) {
-			System.out.println("failed");
 			e.printStackTrace();
 		}
 	}

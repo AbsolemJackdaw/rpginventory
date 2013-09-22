@@ -35,7 +35,7 @@ public class ItemRBMats2 extends Item {
                                 stack = ((IPet) e).writePetToItemStack();
                                 inv.setInventorySlotContents(6, stack);
                                 ((EntityLiving) e).setDead();
-                                System.out.println("Put Away");
+//                                System.out.println("Put Away");
                                 return whistle;
                             }
                             //pet is not in the world

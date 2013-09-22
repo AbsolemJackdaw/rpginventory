@@ -16,6 +16,7 @@ import rpgInventory.mod_RpgInventory;
 public class PacketCrystal {
 
 	public PacketCrystal(DataInputStream dis, EntityPlayer p){
+		
 		int entityid;
 		try {
 			entityid = dis.readInt();
@@ -41,7 +42,6 @@ public class PacketCrystal {
 				}
 			}
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}

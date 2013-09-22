@@ -47,7 +47,7 @@ public class PacketInventory {
 
 		ByteArrayDataOutput out = ByteStreams.newDataOutput();
 		try {
-			out.writeInt(20);
+			out.writeInt(RpgPacketHandler.SMP_INVENTORY_SYNC);
 			out.writeUTF(player.username);
 			Packet.writeItemStack(inv.armorSlots[0], out);
 			Packet.writeItemStack(inv.armorSlots[1], out);
