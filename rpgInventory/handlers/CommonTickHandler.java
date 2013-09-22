@@ -6,17 +6,23 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBow;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.packets.PacketInventory;
+import rpgInventory.handlers.packets.RpgPacketHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
@@ -167,28 +173,8 @@ public class CommonTickHandler implements ITickHandler {
 				}
 			}
 			if (countdown == 0) {
-				try {
-					NBTTagCompound nbt = new NBTTagCompound();
-					nbt.setString("username", player.username);
-					NBTTagList list = new NBTTagList("items");
-					
-					PlayerRpgInventory inv = PlayerRpgInventory.get(player);
-					for (int i = 0; i < inv.armorSlots.length; i++) {
-						//This is safe, an empty NBTTag just just returns a null ItemStack
-						//when processed, however appending a null compound tag explodes.
-						NBTTagCompound tc = new NBTTagCompound();
-						if (inv.armorSlots[i] != null) {
-							tc = inv.armorSlots[i].writeToNBT(tc);
-						}
-						list.appendTag(tc);
-					}					
-					nbt.setTag("items", list);
-										
-					Packet250CustomPayload packet = new Packet250CustomPayload("RpgRawInv", CompressedStreamTools.compress(nbt));
-					PacketDispatcher.sendPacketToAllPlayers(packet);
-				} catch (Throwable ex) {
-					ex.printStackTrace();
-				}
+//				
+				PacketInventory.sendServerPacket(player);
 			}
 		}
 

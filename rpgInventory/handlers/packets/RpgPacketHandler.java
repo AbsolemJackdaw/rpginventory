@@ -6,13 +6,10 @@ import java.io.IOException;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.common.FMLLog;
@@ -45,21 +42,21 @@ public class RpgPacketHandler implements IPacketHandler {
 	}
 
 	private void handleRawInventory(Packet250CustomPayload packet, EntityPlayer p) {
-		try {
-			NBTTagCompound nbt = CompressedStreamTools.decompress(packet.data);
-			PlayerRpgInventory inv = new PlayerRpgInventory(p/*nbt.getString("username")*/);
-			NBTTagList list = nbt.getTagList("items");
-
-			for (int i = 0; i < inv.armorSlots.length; i++) {
-				NBTTagCompound tc = (NBTTagCompound) list.tagAt(i);
-				if (tc != null) {
-					inv.armorSlots[i] = ItemStack.loadItemStackFromNBT(tc);
-				}
-			}
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		//		try {
+		//			NBTTagCompound nbt = CompressedStreamTools.decompress(packet.data);
+		//			PlayerRpgInventory inv = new PlayerRpgInventory(p/*nbt.getString("username")*/);
+		//			NBTTagList list = nbt.getTagList("items");
+		//
+		//			for (int i = 0; i < inv.armorSlots.length; i++) {
+		//				NBTTagCompound tc = (NBTTagCompound) list.tagAt(i);
+		//				if (tc != null) {
+		//					inv.armorSlots[i] = ItemStack.loadItemStackFromNBT(tc);
+		//				}
+		//			}
+		//
+		//		} catch (IOException ex) {
+		//			ex.printStackTrace();
+		//		}
 	}
 
 	private void handlePackets(Packet250CustomPayload packet, Player player) {
@@ -72,7 +69,7 @@ public class RpgPacketHandler implements IPacketHandler {
 
 		DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
 		try {
-		
+
 			int guiId = dis.readInt();
 			switch (guiId) {
 			case OPENRPGINV:
@@ -104,7 +101,6 @@ public class RpgPacketHandler implements IPacketHandler {
 				new PacketCrystal(dis, p);
 				break;
 			case INVENTORY:
-//				FMLLog.getLogger().info("[RPG INVENTORY] Recieved inventory packet");
 				PlayerRpgInventory.get(p).setInventorySlotContents(0, packet.readItemStack(dis));
 				PlayerRpgInventory.get(p).setInventorySlotContents(1, packet.readItemStack(dis));
 				PlayerRpgInventory.get(p).setInventorySlotContents(2, packet.readItemStack(dis));
@@ -112,6 +108,20 @@ public class RpgPacketHandler implements IPacketHandler {
 				PlayerRpgInventory.get(p).setInventorySlotContents(4, packet.readItemStack(dis));
 				PlayerRpgInventory.get(p).setInventorySlotContents(5, packet.readItemStack(dis));
 				PlayerRpgInventory.get(p).setInventorySlotContents(6, packet.readItemStack(dis));
+
+				break;
+
+			case 20:
+
+				String otherPlayerName = dis.readUTF();
+				EntityPlayer other = world.getPlayerEntityByName(otherPlayerName);
+				PlayerRpgInventory.get(other).setInventorySlotContents(0, packet.readItemStack(dis));
+				PlayerRpgInventory.get(other).setInventorySlotContents(1, packet.readItemStack(dis));
+				PlayerRpgInventory.get(other).setInventorySlotContents(2, packet.readItemStack(dis));
+				PlayerRpgInventory.get(other).setInventorySlotContents(3, packet.readItemStack(dis));
+				PlayerRpgInventory.get(other).setInventorySlotContents(4, packet.readItemStack(dis));
+				PlayerRpgInventory.get(other).setInventorySlotContents(5, packet.readItemStack(dis));
+				PlayerRpgInventory.get(other).setInventorySlotContents(6, packet.readItemStack(dis));
 
 				break;
 			default:

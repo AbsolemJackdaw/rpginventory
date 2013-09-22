@@ -503,7 +503,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
         }
 
         return super.hitByEntity(par1Entity);
-//        return super.func_85031_j(par1Entity);
 
     }
 
