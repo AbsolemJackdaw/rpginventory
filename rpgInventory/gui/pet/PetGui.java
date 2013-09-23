@@ -23,6 +23,8 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import WWBS.wwbs.PacketHandler;
+
 import rpgInventory.IPet;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.RpgPacketHandler;
@@ -67,6 +69,11 @@ public class PetGui extends GuiScreen {
 	RenderLiving ren;
 	EntityLiving fake;
 
+	private static final int SUBMIT_BUTTON = 1;
+	private static final int CLOSE_BUTTON = 2;
+	private static final int BACK_BUTTON = 3;
+	private static final int IMBUE_BUTTON = 4;
+
 	public void initGui() {
 		petCrystal = this.inv.getCrystal();
 		if (IPet.playersWithActivePets.containsKey(p.username)) {
@@ -84,12 +91,11 @@ public class PetGui extends GuiScreen {
 		int posX = (this.width - xSizeOfTexture) / 2;
 		int posY = (this.height - ySizeOfTexture) / 2;
 		buttonList.clear();
-		buttonList.add(new GuiButton(1, posX + 70, posY + 36, 40, 20, "Submit"));
-		buttonList.add(new GuiButton(4, posX + 182, posY + 120, 40, 20, "Imbue"));
-		buttonList.add(new GuiButton(3, posX + 182, posY + 22, 30, 20, "Back"));
-		buttonList.add(new GuiButton(2, posX + 182, posY, 30, 20, "Close"));
+		buttonList.add(new GuiButton(SUBMIT_BUTTON, posX + 70, posY + 36, 40, 20, "Submit"));
+		buttonList.add(new GuiButton(CLOSE_BUTTON, posX + 182, posY, 30, 20, "Close"));
+		buttonList.add(new GuiButton(BACK_BUTTON, posX + 182, posY + 22, 30, 20, "Back"));
+		buttonList.add(new GuiButton(IMBUE_BUTTON, posX + 182, posY + 120, 40, 20, "Imbue"));
 
-		levelInfo = "";
 
 		NBTTagCompound tags = petCrystal.getTagCompound();
 		if (tags == null) {
@@ -151,6 +157,10 @@ public class PetGui extends GuiScreen {
 		textfield.setText(PetName);
 		textfield.setMaxStringLength(32);
 		playerLevel = (short) Minecraft.getMinecraft().thePlayer.experienceLevel;
+		
+		levelInfo = "Imbue to next level : " + ((PetLevel/2)+1) + " Player Levels";
+
+		
 		clazz = petType == 1 ? BoarPet.class : petType == 2 ? SpiderPet.class : BullPet.class;
 		ren = (RenderLiving) RenderManager.instance.getEntityClassRenderObject(clazz);
 		try {
@@ -161,40 +171,41 @@ public class PetGui extends GuiScreen {
 	}
 
 	protected void actionPerformed(GuiButton guibutton) {
-		if (guibutton.id == 1) {
+		if (guibutton.id == SUBMIT_BUTTON) {
 			PetName = textfield.getText();
 		}
-		if (guibutton.id == 2) {
+		if (guibutton.id == CLOSE_BUTTON) {
 			this.mc.thePlayer.closeScreen();
 		}
-		if (guibutton.id == 3) {
+		if (guibutton.id == BACK_BUTTON) {
+			this.mc.thePlayer.closeScreen();
+			
 			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-//			ObjectOutput out;
 			DataOutputStream outputStream = new DataOutputStream(bytes);
 			try {
 				outputStream.writeInt(RpgPacketHandler.OPENRPGINV);
 				Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
 				PacketDispatcher.sendPacketToServer(packet);
-				//System.out.println("Packet send");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		if (guibutton.id == 4) {
-			levelInfo = "";
+		if (guibutton.id == IMBUE_BUTTON) {
+//			levelInfo = "Imbue to next level : " + (PetLevel/2) + " Player Levels";
 			if (playerLevel < PetLevel / 2 + 1 && PetLevel < 200) {
 				levelInfo = "You need " + (MathHelper.floor_float(PetLevel / 2) + 1) + " levels to level your pet.";
-				//levelInfo2 = "to level your pet.";
 			} else if (PetLevel >= 200) {
 				PetLevel = 200;
 				levelInfo = "Pet has reached maximum level.";
-				//            } else if (mc.thePlayer.inventory.hasItem(mod_RpgInventory.petCandy.itemID)) {
-				//                petcandyConsumed++;
-				//                levelInfo = "Consumed " + petcandyConsumed + " Rare PetCandy and added " + petcandyConsumed + " pet level";
+				
 			} else if (playerLevel >= PetLevel / 2 + 1) {
-				levelInfo = "Added 1 pet Level. Cost: " + (MathHelper.floor_float(PetLevel / 2.0F) + 1) + " player levels;";
+				
 				//So first levelup is not free;
 				playerLevel -= MathHelper.floor_float(PetLevel / 2.0F) + 1;
+				
+				levelInfo = "Added 1 pet Level. Cost: " + (MathHelper.floor_float(PetLevel / 2.0F) + 1) + 
+						" player levels. "+	"Your current level : "+ playerLevel;
+				
 				PetLevel += 1;
 				currentHP = totalHP = (short) (petType == 1 ? 15 + MathHelper.floor_float(((float) PetLevel) / 2.5F)
 						: petType == 2 ? 18 + MathHelper.floor_float(((float) PetLevel) / 2.2F)
@@ -277,7 +288,7 @@ public class PetGui extends GuiScreen {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(bos);
 		try {
-			dos.writeInt(15);
+			dos.writeInt(RpgPacketHandler.PETGUI);
 			dos.writeUTF(new String(PetName.getBytes("UTF-8"), "UTF-8"));
 			dos.writeShort(PetLevel);
 			dos.writeShort(currentHP);

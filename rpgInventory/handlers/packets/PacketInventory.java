@@ -36,7 +36,7 @@ public class PacketInventory {
 					(Player)player);
 
 		} catch (Exception ex) {
-			ex.printStackTrace();
+//			ex.printStackTrace();
 		}
 	}
 

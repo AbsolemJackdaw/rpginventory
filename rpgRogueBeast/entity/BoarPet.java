@@ -5,6 +5,7 @@
 package rpgRogueBeast.entity;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -21,6 +22,9 @@ public class BoarPet extends BMPetImpl {
     boolean checked = false;
     float petSize = 0.5F;
     ModelBoar model = new ModelBoar();
+    
+    ResourceLocation normal = new ResourceLocation("subaraki:mobs/boar.png");
+	ResourceLocation saddled = new ResourceLocation("subaraki:mobs/boar_saddled.png");
 
     public BoarPet(World par1World) {
         this(par1World, null, null);
@@ -64,7 +68,7 @@ public class BoarPet extends BMPetImpl {
 
     @Override
     public ResourceLocation getTexture() {
-        return new ResourceLocation("subaraki:mobs/boar.png");
+        return dataWatcher.getWatchableObjectByte(SADDLE) == 0 ? normal : saddled;
     }
 
     @Override
@@ -74,11 +78,22 @@ public class BoarPet extends BMPetImpl {
 
 //    @Override
     //TODO !!
-    public float setMaxHealth() {
-        //115 Health at level 200
-        return 20 + MathHelper.floor_float(((float) getLevel()) / 2.5F);
-    }
-    
+//    public float setMaxHealth() {
+//        //115 Health at level 200
+//        return 20 + MathHelper.floor_float(((float) getLevel()) / 2.5F);
+//    }
+    @Override
+	public void onUpdate() {
+		super.onUpdate();
+		if(previousLevel < getLevel()){
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(
+					20D + MathHelper.floor_double(((double) getLevel()) / 2.5D));
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(
+					(double)getLevel()/600D);
+			
+			previousLevel = getLevel();
+		}
+	}
     @Override
     public float getPetSize() {
         return petSize;

@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelCow;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -15,10 +16,6 @@ import org.lwjgl.opengl.GL11;
 import rpgRogueBeast.entity.BMPetImpl;
 
 
-/**
- *
- * @author Richard Smith <rich1051414@gmail.com>
- */
 public class RenderPet extends RenderLiving {
 
     public RenderPet() {
@@ -30,8 +27,9 @@ public class RenderPet extends RenderLiving {
         GL11.glScalef(var3, var3, var3);
 
     }
-
-    protected void preRenderCallback(EntityLiving pet, float par2) {
+    
+    @Override
+    protected void preRenderCallback(EntityLivingBase pet, float par2) {
         this.scalePet((BMPetImpl) pet, par2);
     }
 
@@ -47,11 +45,13 @@ public class RenderPet extends RenderLiving {
 
     }
 
+    @Override
     public void doRenderLiving(EntityLiving pet, double par2, double par4, double par6, float par8, float par9) {
         this.renderCow((BMPetImpl) pet, par2, par4, par6, par8, par9);
 
     }
 
+    @Override
     public void doRender(Entity pet, double par2, double par4, double par6, float par8, float par9) {
         this.renderCow((BMPetImpl) pet, par2, par4, par6, par8, par9);
     }

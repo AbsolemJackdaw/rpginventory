@@ -3,6 +3,8 @@ package rpgInventory.handlers.proxy;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.client.particle.EntityLargeExplodeFX;
 import net.minecraft.client.renderer.entity.RenderArrow;
@@ -50,13 +52,13 @@ public class ClientProxy extends CommonProxy {
 	public int getSphereID() {
 		return sphereID;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public static void renderHandler() {
 
 		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
 	}
-	
+
 	public void spawnParticle(World world, EntityLiving el, Random rng) {
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityHeartFX efx = new EntityHeartFX(world, el.posX, el.posY + 0.5F + rng.nextFloat(), el.posZ, rng.nextFloat(), rng.nextFloat() + 0.4F, rng.nextFloat());
@@ -160,11 +162,12 @@ public class ClientProxy extends CommonProxy {
 	public void openGUI(EntityPlayer p1, int id) {
 		switch (id) {
 		case 1:
-			//			if (Minecraft.getMinecraft().playerController.isInCreativeMode()) {
-			//				Minecraft.getMinecraft().displayGuiScreen(new GuiContainerCreative(p1));
-			//			} else {
-			//				Minecraft.getMinecraft().displayGuiScreen(new GuiInventory(p1));
-			//			}
+			//back button in rpg inventory
+			if (Minecraft.getMinecraft().playerController.isInCreativeMode()) {
+				Minecraft.getMinecraft().displayGuiScreen(new GuiContainerCreative(p1));
+			} else {
+				Minecraft.getMinecraft().displayGuiScreen(new GuiInventory(p1));
+			}
 			break;
 		case 2:
 			Minecraft.getMinecraft().displayGuiScreen(new BookGui(p1));

@@ -216,6 +216,9 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 	@Override
 	public void onInventoryChanged() {
 		try {
+			
+			PacketInventory.sendPacket(player, this);
+			
 			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(playername);
 			//classSets = EnumRpgClass.getPlayerClasses(player);
 			//TODO is done ! moved that line ^ to eventhooks so it gets updated properly.

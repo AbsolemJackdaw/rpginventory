@@ -5,6 +5,7 @@
 package rpgRogueBeast.entity;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -18,6 +19,11 @@ import rpgRogueBeast.entity.models.ModelBull;
  */
 public class BullPet extends BMPetImpl {
 
+	
+	ResourceLocation normal = new ResourceLocation("subaraki:mobs/bull.png");
+	ResourceLocation saddled = new ResourceLocation("subaraki:mobs/bull_saddled.png");
+
+	
     float petSize = 0.5F;
     ModelBull model = new ModelBull();
     public BullPet(World par1World) {
@@ -58,7 +64,7 @@ public class BullPet extends BMPetImpl {
 
     @Override
     public ResourceLocation getTexture() {
-        return new ResourceLocation("subaraki:mobs/bull.png");
+        return dataWatcher.getWatchableObjectByte(SADDLE) == 0 ? normal : saddled;
     }
 
     @Override
@@ -78,12 +84,31 @@ public class BullPet extends BMPetImpl {
 //    }
 
     @Override
+	public void onUpdate() {
+		super.onUpdate();
+		if(previousLevel < getLevel()){
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(
+					30D + MathHelper.floor_double(((float) getLevel()) / 1.538D));
+			
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(
+					0.05D+(double)getLevel()/500D);
+			
+			previousLevel = getLevel();
+		}
+	}
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
         if (getLevel() <= 200) {
             petSize = 0.5F + ((((float) getLevel()) / 200.0F) * 1.5F);
         } else {
             petSize = 2.0F;
+        }
+        
+        if(dataWatcher.getWatchableObjectInt(LEVELID) == 200){
+//            this.worldObj.spawnParticle("flame", this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
+          this.worldObj.spawnParticle("flame", this.posX+3, this.posY+2d,this.posZ, 0.0D, 0.0D, 0.0D);
+
         }
     }
 

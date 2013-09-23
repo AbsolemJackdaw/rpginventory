@@ -35,6 +35,7 @@ public class PacketPetGui {
 
 			PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 			ItemStack crystal = inv.getCrystal();
+			
 			NBTTagCompound nbtCrystal = (NBTTagCompound)crystal.getTagCompound().copy();
 			NBTTagCompound nbtPet = (NBTTagCompound)nbtCrystal.getCompoundTag("RPGPetInfo").copy();
 

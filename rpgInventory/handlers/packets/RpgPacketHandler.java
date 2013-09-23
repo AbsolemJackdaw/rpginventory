@@ -52,9 +52,7 @@ public class RpgPacketHandler implements IPacketHandler {
 			int guiId = dis.readInt();
 			switch (guiId) {
 			case OPENRPGINV:
-				if (!world.isRemote) {
 					FMLNetworkHandler.openGui(p, mod_RpgInventory.instance, 1, world, x, y, z);
-				}
 				break;
 			case PETGUI:
 				new PacketPetGui(dis, p);

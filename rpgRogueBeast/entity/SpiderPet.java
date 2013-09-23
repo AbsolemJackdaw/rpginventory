@@ -4,9 +4,11 @@
  */
 package rpgRogueBeast.entity;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -24,6 +26,9 @@ public class SpiderPet extends BMPetImpl {
 
 	float petSize = 0.5F;
 	ModelSpiderB model = new ModelSpiderB();
+
+	ResourceLocation normal = new ResourceLocation("subaraki:mobs/spider.png");
+	ResourceLocation saddled = new ResourceLocation("subaraki:mobs/spider_saddled.png");
 
 	public SpiderPet(World par1World) {
 		super(par1World, 2, null, null);
@@ -88,7 +93,7 @@ public class SpiderPet extends BMPetImpl {
 
 	@Override
 	public ResourceLocation getTexture() {
-		return new ResourceLocation("subaraki:mobs/spider.png");
+		return dataWatcher.getWatchableObjectByte(SADDLE) == 0 ? normal : saddled;
 	}
 
 	@Override
@@ -117,11 +122,28 @@ public class SpiderPet extends BMPetImpl {
 		return "Spider Pet";
 	}
 
-//	@Override TODO
-//	public float getMaxHealth() {
-//		//150 health at level 200
-//		return 25 + MathHelper.floor_double((((double) getLevel()) * 1.0D) / 1.6D);
-//	}
+	//	@Override TODO
+	//	public float getMaxHealth() {
+	//		//150 health at level 200
+	//		return 25 + MathHelper.floor_double((((double) getLevel()) * 1.0D) / 1.6D);
+	//	}
+
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+		if(previousLevel < getLevel()){
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(
+					25D + MathHelper.floor_double((((double) getLevel()) * 1.0D) / 1.6D));
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(
+					0.1D+(double)getLevel()/400D);
+			
+			
+
+			previousLevel = getLevel();
+		}
+
+		
+	}
 
 	@Override
 	public float getMountedSpeed() {

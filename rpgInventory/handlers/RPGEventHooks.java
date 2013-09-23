@@ -86,13 +86,16 @@ public class RPGEventHooks {
 		/*====PET EXP====*/
 		try {
 			if ((!evt.entityLiving.worldObj.isRemote) && evt.entityLiving != null && evt.source != null && evt.source.getSourceOfDamage() != null && evt.source.getSourceOfDamage() instanceof IPet) {
-				EntityLivingBase corpse = evt.entityLiving;
-				EntityLivingBase murderer = (EntityLiving)evt.source.getSourceOfDamage();
-				int totalXP = (int)corpse.getMaxHealth(); // replaced getTotalExp by health. better then nothing
-				while (totalXP > 0) {
-					int partialXP = EntityXPOrb.getXPSplit(totalXP);
-					totalXP -= partialXP;
-					corpse.worldObj.spawnEntityInWorld(new EntityPetXP(murderer.worldObj, corpse.posX, corpse.posY, corpse.posZ, partialXP));
+				if(evt.entityLiving instanceof EntityLiving){
+					EntityLiving corpse = (EntityLiving)evt.entityLiving;
+					EntityLivingBase murderer = (EntityLiving)evt.source.getSourceOfDamage();
+					int totalXP = corpse.experienceValue; 
+
+					while (totalXP > 0) {
+						int partialXP = EntityXPOrb.getXPSplit(totalXP);
+						totalXP -= partialXP;
+						corpse.worldObj.spawnEntityInWorld(new EntityPetXP(murderer.worldObj, corpse.posX, corpse.posY, corpse.posZ, partialXP));
+					}
 				}
 			}
 			if (evt.entityLiving instanceof EntityPlayer) {
@@ -304,7 +307,7 @@ public class RPGEventHooks {
 					/*==== SPEED BOOST GOLD JEWELS ==== */					
 					double speedboost = 0;
 					int goldenItems = 0;
-					
+
 					if (neck != null && neck.itemID == mod_RpgInventory.neckgold.itemID) {
 						speedboost += 0.01250F;
 						this.goldJump(p,0.01D);
@@ -328,10 +331,10 @@ public class RPGEventHooks {
 					if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.PALADIN)) {
 						speedboost *= 0.75F;// slows down
 					}
-					
+
 					p.motionX *= speedboost+1.0D;
 					p.motionZ *= speedboost+1.0D;
-					
+
 					/*==== Something about the archer .__. ==== */
 					if (ArcherRepairTick.containsKey(p.username)) {
 						if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.ARCHER)) {
@@ -428,9 +431,9 @@ public class RPGEventHooks {
 					if (gloves != null && gloves.getItem().equals(mod_RpgInventory.gloveslap)) {
 						damagebonus += 0.2F;
 					}
-//					FMLLog.getLogger().info("1 " + evt.ammount);
+					//					FMLLog.getLogger().info("1 " + evt.ammount);
 					evt.ammount += MathHelper.floor_float(damagebonus * ((float) evt.ammount));
-//					FMLLog.getLogger().info("2 " + evt.ammount);
+					//					FMLLog.getLogger().info("2 " + evt.ammount);
 				}
 			}
 		} catch (Throwable e) {
@@ -558,9 +561,9 @@ public class RPGEventHooks {
 			}
 		} catch (Throwable e) {
 		}
-		
+
 		try {
-			
+
 			PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer)evt.entityLiving);
 			inv.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer)evt.entityLiving);
 
@@ -568,11 +571,11 @@ public class RPGEventHooks {
 			ItemStack ringa = inv.getRing1();
 			ItemStack ringb = inv.getRing2();
 			ItemStack gloves = inv.getGloves();
-			
+
 			/*==== NEGATE FALLDAMAGE GOLD JEWELS ==== */					
 			double speedboost = 0;
 			int goldenItems = 0;
-			
+
 			if (neck != null && neck.getItem() == mod_RpgInventory.neckgold) {
 				goldenItems +=1;
 			}
@@ -585,17 +588,17 @@ public class RPGEventHooks {
 			if (gloves != null && gloves.getItem() == mod_RpgInventory.glovesbutter) {
 				goldenItems +=1;
 			}
-			
+
 			if( goldenItems == 4 && evt.source.equals(DamageSource.fall)){
-//				FMLLog.getLogger().info("" + evt.ammount);
+				//				FMLLog.getLogger().info("" + evt.ammount);
 				if(evt.ammount < 3){
 					evt.setCanceled(true);
 				}else{
 					evt.ammount -=2;
 				}
-				
+
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

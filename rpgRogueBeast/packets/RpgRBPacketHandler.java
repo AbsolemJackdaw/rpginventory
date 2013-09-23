@@ -9,6 +9,7 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
 import rpgInventory.handlers.packets.PacketPetGui;
+import rpgInventory.handlers.packets.RpgPacketHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -35,7 +36,7 @@ public class RpgRBPacketHandler implements IPacketHandler {
 			case 14:
 				new PacketTeleport(world, p, dis, rand);
 				break;
-			case 15:
+			case RpgPacketHandler.PETGUI:
 				new PacketPetGui(dis, p);
 				break;
 			default:
