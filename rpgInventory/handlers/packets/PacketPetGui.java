@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgRogueBeast.mod_RpgRB;
 import cpw.mods.fml.common.FMLLog;
 
 public class PacketPetGui {
@@ -56,7 +57,7 @@ public class PacketPetGui {
 			nbtCrystal.setCompoundTag("RPGPetInfo", nbtPet);
 
 			p.addExperienceLevel(-playerLevelsLost);
-			ItemStack newcrystal = new ItemStack(mod_RpgInventory.crystal, 1, crystal.getItemDamage());
+			ItemStack newcrystal = new ItemStack(mod_RpgRB.crystal, 1, crystal.getItemDamage());
 			newcrystal.setTagCompound(nbtCrystal);
 			newcrystal.setItemName(petname);
 			inv.setInventorySlotContents(6, newcrystal);

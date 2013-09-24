@@ -26,9 +26,9 @@ import rpgInventory.gui.BookGui;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.ClientTickHandler;
 import rpgInventory.handlers.RPGKeyHandler;
-import rpgInventory.handlers.RenderPlayerHandler;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.ModelShield;
+import rpgInventory.renderer.RenderRpgPlayer;
 import rpgInventory.renderer.items.shields.ArcherShield;
 import rpgInventory.renderer.items.shields.BerserkerShield;
 import rpgInventory.renderer.items.shields.VanillaShield;
@@ -56,7 +56,7 @@ public class ClientProxy extends CommonProxy {
 	@SideOnly(Side.CLIENT)
 	public static void renderHandler() {
 
-		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
+		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
 	}
 
 	public void spawnParticle(World world, EntityLiving el, Random rng) {

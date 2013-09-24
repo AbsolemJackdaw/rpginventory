@@ -5,7 +5,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.packets.PacketInventory;
-import rpgInventory.item.armor.ItemRpgArmor;
+import rpgInventory.item.armor.ItemRpgInvArmor;
 
 class SlotRpgArmor extends Slot {
 
@@ -32,8 +32,8 @@ class SlotRpgArmor extends Slot {
         if (par1ItemStack == null) {
             return true;
         }
-        if ((par1ItemStack.getItem() instanceof ItemRpgArmor)) {
-            ItemRpgArmor tmp = (ItemRpgArmor) par1ItemStack.getItem();
+        if ((par1ItemStack.getItem() instanceof ItemRpgInvArmor)) {
+            ItemRpgInvArmor tmp = (ItemRpgInvArmor) par1ItemStack.getItem();
             switch (slotIndex) {
                 case 0:
                     if (tmp.armorType == mod_RpgInventory.ITEMTYPE.NECKLACE) {

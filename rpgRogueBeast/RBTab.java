@@ -14,7 +14,7 @@ public class RBTab extends CreativeTabs {
 	@SideOnly(Side.CLIENT)
 	public int getTabIconItemIndex()
 	{
-		return mod_RpgInventory.beastAxe.itemID;
+		return mod_RpgRB.beastAxe.itemID;
 	}
 
 	public String getTranslatedTabLabel()

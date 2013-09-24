@@ -25,12 +25,12 @@ import org.lwjgl.opengl.GL11;
 
 import WWBS.wwbs.PacketHandler;
 
-import rpgInventory.IPet;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.RpgPacketHandler;
 import rpgRogueBeast.entity.BMPetImpl;
 import rpgRogueBeast.entity.BoarPet;
 import rpgRogueBeast.entity.BullPet;
+import rpgRogueBeast.entity.IPet;
 import rpgRogueBeast.entity.SpiderPet;
 import cpw.mods.fml.common.network.PacketDispatcher;
 

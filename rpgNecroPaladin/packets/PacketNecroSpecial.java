@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgNecroPaladin.mod_RpgPlus;
 import rpgNecroPaladin.minions.IMinion;
 import rpgNecroPaladin.minions.MinionRegistry;
 
@@ -22,7 +23,7 @@ public class PacketNecroSpecial {
 		
 		inv.classSets = EnumRpgClass.getPlayerClasses(p);
 
-        if (weapon.getItem().equals(mod_RpgInventory.necro_weapon) && inv.hasClass(EnumRpgClass.NECRO)) {
+        if (weapon.getItem().equals(mod_RpgPlus.necro_weapon) && inv.hasClass(EnumRpgClass.NECRO)) {
             if (MinionRegistry.playerMinions.containsKey(p.username)) {
                 List<IMinion> list = MinionRegistry.playerMinions.get(p.username);
                 for (IMinion minion : list) {

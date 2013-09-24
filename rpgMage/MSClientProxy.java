@@ -4,7 +4,6 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.entity.EntityElementalBlock;
 import rpgInventory.models.shields.Book;
 import rpgInventory.renderer.items.shields.BookRenderer;
 import rpgInventory.renderer.items.weapons.StafRender;

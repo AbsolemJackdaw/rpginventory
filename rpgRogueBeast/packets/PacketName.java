@@ -7,9 +7,9 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import rpgInventory.IPet;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgRogueBeast.entity.BMPetImpl;
+import rpgRogueBeast.entity.IPet;
 
 public class PacketName {
 

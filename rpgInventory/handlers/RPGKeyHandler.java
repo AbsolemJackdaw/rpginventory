@@ -7,18 +7,12 @@ package rpgInventory.handlers;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutput;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -28,136 +22,24 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
-
-import org.lwjgl.input.Keyboard;
-
 import rpgInventory.mod_RpgInventory;
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
+import rpgInventory.handlers.packets.RpgPacketHandler;
+import rpgInventory.utils.AbstractKeyHandler;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
-public class RPGKeyHandler extends KeyBindingRegistry.KeyHandler {
+public class RPGKeyHandler extends AbstractKeyHandler {
 
 	public static Map<Integer, Integer> abilityMap = new HashMap();
 
 	public RPGKeyHandler() {
-		super(new KeyBinding[]{new KeyBinding("RPG Inventory Key", Keyboard.KEY_END), new KeyBinding("RPG Special Ability", Keyboard.KEY_F)}, new boolean[]{false, false});
-		abilityMap.put(mod_RpgInventory.staf.itemID, 3);
-		abilityMap.put(mod_RpgInventory.hammer.itemID, 4);
-		abilityMap.put(mod_RpgInventory.elfbow.itemID, 5);
-		abilityMap.put(mod_RpgInventory.wand.itemID, 7);
+		super();
+		abilityMap.put(mod_RpgInventory.staf.itemID, RpgPacketHandler.MAGE1);
+		abilityMap.put(mod_RpgInventory.hammer.itemID, RpgPacketHandler.BERSERKER);
+		abilityMap.put(mod_RpgInventory.elfbow.itemID, RpgPacketHandler.ARCHER);
+		abilityMap.put(mod_RpgInventory.wand.itemID, RpgPacketHandler.MAGE2);
 		// abilityMap.put(mod_RpgInventory.daggers.itemID, 14);
 		// 14 used in another packet !
-
-	}
-
-	@Override
-	public void keyDown(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd, boolean isRepeat) {
-		//
-	}
-
-	@Override
-	public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd) {
-		if (!tickEnd) {
-			return;
-		}
-		try {
-			Minecraft mc = Minecraft.getMinecraft();
-			GuiScreen guiscreen = mc.currentScreen;
-			if (kb.keyDescription.equals("RPG Special Ability")) {
-				ItemStack item = mc.thePlayer.getCurrentEquippedItem();
-				if (guiscreen == null && !(item == null)) {
-					//If theres item in hand, and not in any gui.
-					//STOP DELETING THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-					try {
-						if (item.getItem().equals(mod_RpgInventory.necro_weapon)) {
-							ByteArrayOutputStream bt = new ByteArrayOutputStream();
-							DataOutputStream out = new DataOutputStream(bt);
-							try {
-								out.writeInt(6);
-								Packet250CustomPayload packet = new Packet250CustomPayload("RpgPlusPlus", bt.toByteArray());
-								PacketDispatcher.sendPacketToServer(packet);
-							} catch (IOException ex) {
-								Logger.getLogger(RPGKeyHandler.class.getName()).log(Level.SEVERE, null, ex);
-							}
-						}
-					} catch (Throwable e) {
-					}
-					try {
-						if (item.getItem().equals(mod_RpgInventory.pala_weapon)) {
-							ByteArrayOutputStream bt = new ByteArrayOutputStream();
-							DataOutputStream out = new DataOutputStream(bt);
-							try {
-								out.writeInt(9);
-								Packet250CustomPayload packet = new Packet250CustomPayload("RpgPlusPlus", bt.toByteArray());
-								PacketDispatcher.sendPacketToServer(packet);
-							} catch (IOException ex) {
-								Logger.getLogger(RPGKeyHandler.class.getName()).log(Level.SEVERE, null, ex);
-							}
-						}
-					} catch (Throwable e) {
-					}
-					try {
-						if (item.getItem().equals(mod_RpgInventory.daggers)) {
-							ByteArrayOutputStream bt = new ByteArrayOutputStream();
-							DataOutputStream out = new DataOutputStream(bt);
-							try {
-								out.writeInt(14);
-								Packet250CustomPayload packet = new Packet250CustomPayload("RpgRBPacket", bt.toByteArray());
-								PacketDispatcher.sendPacketToServer(packet);
-							} catch (IOException ex) {
-								Logger.getLogger(RPGKeyHandler.class.getName()).log(Level.SEVERE, null, ex);
-							}
-						}
-					} catch (Throwable e) {
-					}
-					if (abilityMap.containsKey(item.getItem().itemID)) {
-
-						int i = abilityMap.get(item.getItem().itemID);
-						ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-						DataOutputStream outputStream = new DataOutputStream(bytes);
-						try {
-							outputStream.writeInt(i);
-							if (item.getItem().itemID == mod_RpgInventory.elfbow.itemID) {
-								EntityLiving target = isTargetingEntity(mc.thePlayer, 40);
-								if (target != null) {
-									outputStream.writeBoolean(false);
-									outputStream.writeInt((int) Math.floor(target.posX));
-									outputStream.writeInt((int) Math.floor(target.posY));
-									outputStream.writeInt((int) Math.floor(target.posZ));
-								} else {
-									outputStream.writeBoolean(true);
-								}
-							}
-							Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
-							PacketDispatcher.sendPacketToServer(packet);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			} else if (kb.keyDescription.equals("RPG Inventory Key")) {
-				if (guiscreen instanceof GuiInventory || guiscreen instanceof GuiContainerCreative) {
-					int i = 1;
-					ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-					ObjectOutput out;
-					DataOutputStream outputStream = new DataOutputStream(bytes);
-					try {
-						outputStream.writeInt(i);
-						Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
-						PacketDispatcher.sendPacketToServer(packet);
-						//System.out.println("Packet send");
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					//System.out.println("opened rpg gui");
-				}
-			}
-		} catch (Throwable e) {
-		}
-
-
-
 	}
 
 	public EntityLiving isTargetingEntity(EntityPlayer player, float distance) {
@@ -214,12 +96,36 @@ public class RPGKeyHandler extends KeyBindingRegistry.KeyHandler {
 	}
 
 	@Override
-	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.CLIENT);
+	protected void specialAbility(EnumSet<TickType> types, KeyBinding kb,
+			boolean tickEnd, ItemStack item) {
+		if (abilityMap.containsKey(item.getItem().itemID)) {
+
+			int i = abilityMap.get(item.getItem().itemID);
+			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+			DataOutputStream outputStream = new DataOutputStream(bytes);
+			try {
+				outputStream.writeInt(i);
+				if (item.getItem().itemID == mod_RpgInventory.elfbow.itemID) {
+					EntityLiving target = isTargetingEntity(Minecraft.getMinecraft().thePlayer, 40);
+					if (target != null) {
+						outputStream.writeBoolean(false);
+						outputStream.writeInt((int) Math.floor(target.posX));
+						outputStream.writeInt((int) Math.floor(target.posY));
+						outputStream.writeInt((int) Math.floor(target.posZ));
+					} else {
+						outputStream.writeBoolean(true);
+					}
+				}
+				Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
+				PacketDispatcher.sendPacketToServer(packet);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}		
 	}
 
-	@Override
-	public String getLabel() {
-		return "RPG Inventory Key";
-	}
+	//	@Override
+	//	public String getLabel() {
+	//		return "RPG Inventory Key";
+	//	}
 }

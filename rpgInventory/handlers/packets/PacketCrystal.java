@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import rpgInventory.mod_RpgInventory;
+import rpgRogueBeast.mod_RpgRB;
 
 public class PacketCrystal {
 
@@ -27,15 +28,15 @@ public class PacketCrystal {
 				Entity e = p.worldObj.getEntityByID(entityid);
 				if (e != null) {
 					if (e instanceof EntityPig) {
-						ItemStack is = new ItemStack(mod_RpgInventory.crystal, 1, 1);
+						ItemStack is = new ItemStack(mod_RpgRB.crystal, 1, 1);
 						e.entityDropItem(is, 0.5F);
 						e.setDead();
 					} else if (e instanceof EntitySpider || e instanceof EntityCaveSpider) {
-						ItemStack is = new ItemStack(mod_RpgInventory.crystal, 1, 2);
+						ItemStack is = new ItemStack(mod_RpgRB.crystal, 1, 2);
 						e.entityDropItem(is, 0.5F);
 						e.setDead();
 					} else if (e instanceof EntityCow) {
-						ItemStack is = new ItemStack(mod_RpgInventory.crystal, 1, 3);
+						ItemStack is = new ItemStack(mod_RpgRB.crystal, 1, 3);
 						e.entityDropItem(is, 0.5F);
 						e.setDead();
 					}

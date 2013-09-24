@@ -14,7 +14,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIBeg;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -34,19 +33,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
-import rpgInventory.IPet;
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.entity.EntityPetXP;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgNecroPaladin.minions.CustomMinionEntitySelector;
+import rpgRogueBeast.mod_RpgRB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -351,7 +346,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 						}
 					}
 				}
-				if (par1EntityPlayer.getCurrentEquippedItem() != null && par1EntityPlayer.getCurrentEquippedItem().itemID == mod_RpgInventory.petCandy.itemID) {
+				if (par1EntityPlayer.getCurrentEquippedItem() != null && par1EntityPlayer.getCurrentEquippedItem().itemID == mod_RpgRB.petCandy.itemID) {
 					addExperienceLevel(1);
 					par1EntityPlayer.getCurrentEquippedItem().stackSize--;
 				}
@@ -404,7 +399,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		if (IPet.playersWithActivePets.containsKey(this.getOwnerName())) {
 			PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer) getOwner());
 
-			ItemStack itemizedPet = writePetToItemStack(new ItemStack(mod_RpgInventory.crystal));
+			ItemStack itemizedPet = writePetToItemStack(new ItemStack(mod_RpgRB.crystal));
 			inv.setInventorySlotContents(6, itemizedPet);
 			IPet.playersWithActivePets.remove(this.getOwnerName());
 		}
@@ -544,7 +539,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		itemstacknbt.setFloat("PetMaxHealth", getMaxHealth());
 		itemstacknbt.setFloat("PetHealth", getHealth());
 		itemstacknbt.setBoolean("isSaddled", getSaddled());
-		ItemStack newIteamstack = new ItemStack(mod_RpgInventory.crystal, 1, getType());
+		ItemStack newIteamstack = new ItemStack(mod_RpgRB.crystal, 1, getType());
 		newIteamstack.setTagCompound(itemstacknbt);
 		newIteamstack.setItemName(getEntityName());
 		return newIteamstack;

@@ -6,10 +6,10 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import rpgInventory.IPet;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.packets.PacketInventory;
-import rpgInventory.item.armor.ItemRpgArmor;
+import rpgInventory.item.armor.ItemRpgInvArmor;
+import rpgRogueBeast.entity.IPet;
 
 public class PlayerRpgContainer extends Container {
 
@@ -52,11 +52,7 @@ public class PlayerRpgContainer extends Container {
 				this.inventory.setInventorySlotContents(6, pet.writePetToItemStack());
 				IPet.playersWithActivePets.remove(player.username);
 				((EntityLiving) pet).setDead();
-				//                ExtendedPlayer props = ExtendedPlayer.get(player);
-				//                props.addEntry((PlayerRpgInventory) this.inventory);
 				PacketInventory.sendPacket(player, inv);
-
-				//                mod_RpgInventory.proxy.addEntry(((RpgInv) this.inventory).playername, (RpgInv) this.inventory);
 			}
 		}
 	}
@@ -70,8 +66,8 @@ public class PlayerRpgContainer extends Container {
 		//Shift clicked the players inventory
 		if (slotnumber - 7 >= 0) {
 			ItemStack tmp1 = player.inventory.getStackInSlot(slotnumber - 7);
-			if (tmp1 != null && tmp1.getItem() instanceof ItemRpgArmor) {
-				ItemRpgArmor tmp = (ItemRpgArmor) tmp1.getItem();
+			if (tmp1 != null && tmp1.getItem() instanceof ItemRpgInvArmor) {
+				ItemRpgInvArmor tmp = (ItemRpgInvArmor) tmp1.getItem();
 				switch (tmp.armorType) {
 				case mod_RpgInventory.ITEMTYPE.NECKLACE:
 					if (((SlotRpgArmor) this.getSlot(0)).getStack() != null) {
@@ -124,7 +120,6 @@ public class PlayerRpgContainer extends Container {
 					player.inventory.setItemStack(player.inventory.getStackInSlot(slotnumber - 7));
 					player.inventory.setInventorySlotContents(slotnumber - 7, null);
 					this.slotClick(6, 0, 0, player);
-
 				}
 			}
 		} //Shift clicked the rpgarmor inventory
@@ -148,23 +143,18 @@ public class PlayerRpgContainer extends Container {
 
 	@Override
 	public void onCraftMatrixChanged(IInventory par1IInventory) {
-		//    	 ExtendedPlayer props = ExtendedPlayer.get(((RpgInv)this.inventory));
-		//         props.addEntry((RpgInv) this.inventory);
 		super.onCraftMatrixChanged(par1IInventory);
 	}
 
 	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
-		//        mod_RpgInventory.proxy.addEntry(((RpgInv) this.inventory).playername, (RpgInv) this.inventory);
 		PacketInventory.sendPacket(par1EntityPlayer, this.inventory);
-
 		super.onContainerClosed(par1EntityPlayer);
 	}
 
 	@Override
 	public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer) {
 		ItemStack rv = super.slotClick(par1, par2, par3, par4EntityPlayer);
-//		ExtendedPlayer props = ExtendedPlayer.get(par4EntityPlayer);
 		PacketInventory.sendPacket(par4EntityPlayer, this.inventory);
 		return rv;
 	}

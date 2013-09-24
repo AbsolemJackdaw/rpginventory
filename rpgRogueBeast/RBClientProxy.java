@@ -11,16 +11,16 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.entity.EntityPetXP;
-import rpgInventory.models.shields.LionHead;
-import rpgInventory.renderer.items.shields.LionHeadRenderer;
-import rpgInventory.renderer.items.weapons.AxeRender;
-import rpgInventory.renderer.items.weapons.RenderDagger;
 import rpgRogueBeast.entity.BoarPet;
 import rpgRogueBeast.entity.BullPet;
+import rpgRogueBeast.entity.EntityPetXP;
 import rpgRogueBeast.entity.EntityTeleportStone;
 import rpgRogueBeast.entity.SpiderPet;
 import rpgRogueBeast.entity.renderers.RenderPet;
+import rpgRogueBeast.models.LionHead;
+import rpgRogueBeast.render.AxeRender;
+import rpgRogueBeast.render.LionHeadRenderer;
+import rpgRogueBeast.render.RenderDagger;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 
@@ -29,12 +29,12 @@ public class RBClientProxy extends RBCommonProxy{
 	public void registerRendering(){
 		if (RpgConfig.instance.render3D == true) {
 			if (mod_RpgInventory.hasRogue) {
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.beastAxe.itemID,
+				MinecraftForgeClient.registerItemRenderer(mod_RpgRB.beastAxe.itemID,
 						(IItemRenderer) new AxeRender());
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.daggers.itemID,
+				MinecraftForgeClient.registerItemRenderer(mod_RpgRB.daggers.itemID,
 						(IItemRenderer) new RenderDagger());
 
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.beastShield.itemID, 
+				MinecraftForgeClient.registerItemRenderer(mod_RpgRB.beastShield.itemID, 
 						(IItemRenderer) new LionHeadRenderer(new LionHead(), "subaraki:jewels/lion.png"));		
 			}
 		}

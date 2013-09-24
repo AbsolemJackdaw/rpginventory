@@ -9,6 +9,7 @@ import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgNecroPaladin.CommonTickHandlerRpgPlus;
+import rpgNecroPaladin.mod_RpgPlus;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
 
@@ -22,7 +23,7 @@ public class PacketSpawnMinion {
 		}
 		inv.classSets = EnumRpgClass.getPlayerClasses(p);
 
-		if (weapon.getItem().equals(mod_RpgInventory.necro_weapon) && inv.hasClass(EnumRpgClass.NECRO)) {
+		if (weapon.getItem().equals(mod_RpgPlus.necro_weapon) && inv.hasClass(EnumRpgClass.NECRO)) {
 			if (!CommonTickHandlerRpgPlus.rpgPluscooldownMap.containsKey(p.username)) {
 				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(p.username, 0);
 			}

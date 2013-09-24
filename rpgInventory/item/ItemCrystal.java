@@ -9,12 +9,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
-import rpgInventory.item.armor.ItemRpgArmor;
+import rpgInventory.item.armor.ItemRpgInvArmor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 
-public class ItemCrystal extends ItemRpgArmor {
+public class ItemCrystal extends ItemRpgInvArmor {
 
     public static final String[] pets = new String[]{"Empty Crystal", "Boar", "Spider", "Bull"};
 

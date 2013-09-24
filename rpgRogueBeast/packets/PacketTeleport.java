@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.CommonTickHandler;
 import rpgRogueBeast.entity.EntityTeleportStone;
@@ -15,15 +16,9 @@ public class PacketTeleport {
 	public PacketTeleport(World world, EntityPlayer p, DataInputStream dis, Random rand){
 		if (!world.isRemote) {
 			ItemStack dagger = p.getCurrentEquippedItem();
-			ItemStack var311 = p.inventory.armorItemInSlot(3);
-			ItemStack var211 = p.inventory.armorItemInSlot(2);
-			ItemStack var111 = p.inventory.armorItemInSlot(1);
-			ItemStack var011 = p.inventory.armorItemInSlot(0);
+
 			if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
-				if (dagger == null || var311 == null || var211 == null || var111 == null || var011 == null) {
-					return;
-				}
-				if (dagger.getItem() != mod_RpgInventory.daggers || var311.getItem() != mod_RpgInventory.rogueHood || var211.getItem() != mod_RpgInventory.rogueChest || var111.getItem() != mod_RpgInventory.rogueLegs || var011.getItem() != mod_RpgInventory.rogueBoots) {
+				if(!EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.ROGUE)){
 					return;
 				}
 			}

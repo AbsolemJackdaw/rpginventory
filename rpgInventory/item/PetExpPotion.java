@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemExpBottle;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import rpgInventory.entity.EntityPetXPBottle;
+import rpgRogueBeast.entity.EntityPetXPBottle;
 
 /**
  *

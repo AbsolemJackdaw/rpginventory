@@ -15,14 +15,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import rpgInventory.IPet;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.item.ItemMats;
 import rpgInventory.item.ItemMold;
 import rpgInventory.item.ItemRpg;
-import rpgInventory.item.armor.BonusArmor;
-import rpgInventory.item.armor.ItemRpgArmor;
-import rpgInventory.item.armor.ItemRpgPlusPlusArmor;
+import rpgInventory.item.armor.ItemClassArmor;
+import rpgInventory.item.armor.ItemRpgInvArmor;
+import rpgNecroPaladin.mod_RpgPlus;
+import rpgNecroPaladin.items.ItemRpgInvArmorPlus;
+import rpgRogueBeast.mod_RpgRB;
+import rpgRogueBeast.entity.IPet;
 
 public class CommandPanel extends CommandBase {
 
@@ -54,14 +56,14 @@ public class CommandPanel extends CommandBase {
 
 		for (Item item : Item.itemsList) {
 			if (item != null) {
-				if (item instanceof ItemRpgArmor || item instanceof ItemRpgPlusPlusArmor) {
+				if (item instanceof ItemRpgInvArmor || item instanceof ItemRpgInvArmorPlus) {
 					sets.get("jewels").add(new ItemStack(item));
 				}
 			}
 			if (item instanceof ItemRpg || item instanceof ItemMats || item instanceof ItemMold) {
 				sets.get("mats").add(new ItemStack(item, item.getItemStackLimit()));
 			}
-			if (item instanceof BonusArmor) {
+			if (item instanceof ItemClassArmor) {
 				sets.get("armor").add(new ItemStack(item, item.getItemStackLimit()));
 			}
 		}
@@ -80,22 +82,22 @@ public class CommandPanel extends CommandBase {
 		sets.get("weapons").add(new ItemStack(mod_RpgInventory.elfbow));
 		if(mod_RpgInventory.hasRpg)
 		{
-			sets.get("weapons").add(new ItemStack(mod_RpgInventory.necro_weapon));
-			sets.get("weapons").add(new ItemStack(mod_RpgInventory.pala_weapon));
+			sets.get("weapons").add(new ItemStack(mod_RpgPlus.necro_weapon));
+			sets.get("weapons").add(new ItemStack(mod_RpgPlus.pala_weapon));
 
-			sets.get("necro").add(new ItemStack(mod_RpgInventory.necro_weapon));
-			sets.get("necro").add(new ItemStack(mod_RpgInventory.necro_shield));
-			sets.get("necro").add(new ItemStack(mod_RpgInventory.necroHood));
-			sets.get("necro").add(new ItemStack(mod_RpgInventory.necroChestplate));
-			sets.get("necro").add(new ItemStack(mod_RpgInventory.necroLeggings));
-			sets.get("necro").add(new ItemStack(mod_RpgInventory.necroBoots));
+			sets.get("necro").add(new ItemStack(mod_RpgPlus.necro_weapon));
+			sets.get("necro").add(new ItemStack(mod_RpgPlus.necro_shield));
+			sets.get("necro").add(new ItemStack(mod_RpgPlus.necroHood));
+			sets.get("necro").add(new ItemStack(mod_RpgPlus.necroChestplate));
+			sets.get("necro").add(new ItemStack(mod_RpgPlus.necroLeggings));
+			sets.get("necro").add(new ItemStack(mod_RpgPlus.necroBoots));
 
-			sets.get("paladin").add(new ItemStack(mod_RpgInventory.pala_weapon));
-			sets.get("paladin").add(new ItemStack(mod_RpgInventory.pala_shield));
-			sets.get("paladin").add(new ItemStack(mod_RpgInventory.palaHelm));
-			sets.get("paladin").add(new ItemStack(mod_RpgInventory.palaChest));
-			sets.get("paladin").add(new ItemStack(mod_RpgInventory.palaLeggings));
-			sets.get("paladin").add(new ItemStack(mod_RpgInventory.palaBoots));
+			sets.get("paladin").add(new ItemStack(mod_RpgPlus.pala_weapon));
+			sets.get("paladin").add(new ItemStack(mod_RpgPlus.pala_shield));
+			sets.get("paladin").add(new ItemStack(mod_RpgPlus.palaHelm));
+			sets.get("paladin").add(new ItemStack(mod_RpgPlus.palaChest));
+			sets.get("paladin").add(new ItemStack(mod_RpgPlus.palaLeggings));
+			sets.get("paladin").add(new ItemStack(mod_RpgPlus.palaBoots));
 		}
 		if(mod_RpgInventory.hasMage)
 		{
@@ -113,25 +115,25 @@ public class CommandPanel extends CommandBase {
 		}
 		if(mod_RpgInventory.hasRogue)
 		{
-			sets.get("beast").add(new ItemStack(mod_RpgInventory.beastShield));
-			sets.get("beast").add(new ItemStack(mod_RpgInventory.beastAxe));
-			sets.get("beast").add(new ItemStack(mod_RpgInventory.beastBoots));
-			sets.get("beast").add(new ItemStack(mod_RpgInventory.beastLegs));
-			sets.get("beast").add(new ItemStack(mod_RpgInventory.beastChest));
-			sets.get("beast").add(new ItemStack(mod_RpgInventory.beastHood));
+			sets.get("beast").add(new ItemStack(mod_RpgRB.beastShield));
+			sets.get("beast").add(new ItemStack(mod_RpgRB.beastAxe));
+			sets.get("beast").add(new ItemStack(mod_RpgRB.beastBoots));
+			sets.get("beast").add(new ItemStack(mod_RpgRB.beastLegs));
+			sets.get("beast").add(new ItemStack(mod_RpgRB.beastChest));
+			sets.get("beast").add(new ItemStack(mod_RpgRB.beastHood));
 
-			sets.get("beast").add(new ItemStack(mod_RpgInventory.crystal, 1, 1));
-			sets.get("beast").add(new ItemStack(mod_RpgInventory.crystal, 1, 2));
-			sets.get("beast").add(new ItemStack(mod_RpgInventory.crystal, 1, 3));
-			sets.get("beast").add(new ItemStack(mod_RpgInventory.whistle));
-			sets.get("beast").add(new ItemStack(mod_RpgInventory.petCandy));
+			sets.get("beast").add(new ItemStack(mod_RpgRB.crystal, 1, 1));
+			sets.get("beast").add(new ItemStack(mod_RpgRB.crystal, 1, 2));
+			sets.get("beast").add(new ItemStack(mod_RpgRB.crystal, 1, 3));
+			sets.get("beast").add(new ItemStack(mod_RpgRB.whistle));
+			sets.get("beast").add(new ItemStack(mod_RpgRB.petCandy));
 
-			sets.get("rogue").add(new ItemStack(mod_RpgInventory.rogueBoots));
-			sets.get("rogue").add(new ItemStack(mod_RpgInventory.rogueLegs));
-			sets.get("rogue").add(new ItemStack(mod_RpgInventory.rogueChest));
-			sets.get("rogue").add(new ItemStack(mod_RpgInventory.rogueHood));
-			sets.get("rogue").add(new ItemStack(mod_RpgInventory.daggers));
-			sets.get("rogue").add(new ItemStack(mod_RpgInventory.daggers));
+			sets.get("rogue").add(new ItemStack(mod_RpgRB.rogueBoots));
+			sets.get("rogue").add(new ItemStack(mod_RpgRB.rogueLegs));
+			sets.get("rogue").add(new ItemStack(mod_RpgRB.rogueChest));
+			sets.get("rogue").add(new ItemStack(mod_RpgRB.rogueHood));
+			sets.get("rogue").add(new ItemStack(mod_RpgRB.daggers));
+			sets.get("rogue").add(new ItemStack(mod_RpgRB.daggers));
 		}
 		if(mod_RpgInventory.hasShields)
 		{

@@ -48,7 +48,7 @@ public class CommonProxy {
 		player.inventory.consumeInventoryItem(itemID);
 	}
 
-	public void candy(EntityPlayer p) {
-		p.inventory.consumeInventoryItem(mod_RpgInventory.petCandy.itemID);
-	}
+//	public void candy(EntityPlayer p) {
+//		p.inventory.consumeInventoryItem(mod_RpgInventory.petCandy.itemID);
+//	}
 }

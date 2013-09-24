@@ -14,6 +14,7 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
@@ -43,6 +44,7 @@ public class RpgPlusPacketHandler implements IPacketHandler {
 			switch (weaponID) {
 
 			case WEAPONIDS.SKULLRCLICK:
+				FMLLog.info("info");
 				new PacketSpawnMinion(weapon, dis, inv, p);
 				break;
 			case WEAPONIDS.NECROSPECIAL:

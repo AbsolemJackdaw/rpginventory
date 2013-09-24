@@ -11,6 +11,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgRogueBeast.mod_RpgRB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -45,7 +46,7 @@ public class EntityTeleportStone extends EntityThrowable
 			{
 				PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer) getThrower());
 
-				if(inv.getShield() != null && inv.getShield().getItem() == mod_RpgInventory.daggers)
+				if(inv.getShield() != null && inv.getShield().getItem() == mod_RpgRB.daggers)
 				{
 					if(par1MovingObjectPosition.entityHit instanceof EntityPlayer)
 					{

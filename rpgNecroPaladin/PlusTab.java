@@ -14,7 +14,7 @@ public class PlusTab extends CreativeTabs {
 	@SideOnly(Side.CLIENT)
 	public int getTabIconItemIndex()
 	{
-		return mod_RpgInventory.necro_weapon.itemID;
+		return mod_RpgPlus.necro_weapon.itemID;
 	}
 
 	public String getTranslatedTabLabel()

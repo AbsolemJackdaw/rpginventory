@@ -33,10 +33,10 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import rpgInventory.EnumRpgClass;
-import rpgInventory.IPet;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.entity.EntityPetXP;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgRogueBeast.entity.EntityPetXP;
+import rpgRogueBeast.entity.IPet;
 import cpw.mods.fml.common.FMLLog;
 
 public class RPGEventHooks {
@@ -74,7 +74,6 @@ public class RPGEventHooks {
 				ItemStack ringa = inv.getRing1();
 				if (ringa != null && ringa.getItem().equals(mod_RpgInventory.ringem)) {
 					evt.newSpeed = evt.originalSpeed * 4;
-					//TODO this should like the potion effect Haste. not speed x)
 				}
 			}
 		} catch (Throwable e) {
@@ -166,7 +165,6 @@ public class RPGEventHooks {
 					ItemStack gloves = inv.getGloves();
 
 					/*====LAPIS WEAPON HEALING====*/ 
-					//doesnt work TODO
 					boolean armorheal = false;
 					if (neck != null && neck.getItem().equals(mod_RpgInventory.necklap)) {
 						armorheal = true;
@@ -383,7 +381,8 @@ public class RPGEventHooks {
 							if (EnumRpgClass.getPlayerClasses((EntityPlayer) damager).contains(EnumRpgClass.BERSERKER)) {
 								evt.ammount += 4;
 							}
-						} else if (weapon.itemID == mod_RpgInventory.pala_weapon.itemID) {
+						} 
+						else if (weapon.itemID == mod_RpgInventory.pala_weapon.itemID) {
 							if (EnumRpgClass.getPlayerClasses((EntityPlayer) damager).contains(EnumRpgClass.PALADIN)) {
 								evt.ammount += 3;
 							}
@@ -600,7 +599,6 @@ public class RPGEventHooks {
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 
 	}
