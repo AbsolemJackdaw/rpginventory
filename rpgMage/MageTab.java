@@ -1,7 +1,6 @@
 package rpgMage;
 
 import net.minecraft.creativetab.CreativeTabs;
-import rpgInventory.mod_RpgInventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -14,7 +13,7 @@ public class MageTab extends CreativeTabs {
 	@SideOnly(Side.CLIENT)
 	public int getTabIconItemIndex()
 	{
-		return mod_RpgInventory.archmageHood.itemID;
+		return mod_RpgMageSet.archmageHood.itemID;
 	}
 
 	public String getTranslatedTabLabel()

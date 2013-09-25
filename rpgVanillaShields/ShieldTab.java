@@ -1,7 +1,6 @@
 package rpgVanillaShields;
 
 import net.minecraft.creativetab.CreativeTabs;
-import rpgInventory.mod_RpgInventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -14,7 +13,7 @@ public class ShieldTab extends CreativeTabs {
 	@SideOnly(Side.CLIENT)
 	public int getTabIconItemIndex()
 	{
-		return mod_RpgInventory.shieldDiamond.itemID;
+		return mod_VanillaShields.shieldDiamond.itemID;
 	}
 
 	public String getTranslatedTabLabel()

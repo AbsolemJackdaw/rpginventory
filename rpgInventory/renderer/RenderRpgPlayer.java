@@ -58,9 +58,9 @@ public class RenderRpgPlayer {
 			rendercape(player, cloak, evt.partialTick);
 		}
 
-		/*===== RENDERING GLOVES=====*/
+		/*===== RENDERING SHIELDS=====*/
 		ItemStack shield = PlayerRpgInventory.get(player).getShield();
-		if(shield != null){
+		if(shield != null ){
 			mc.renderEngine.bindTexture(((ItemRpgInvArmor)shield.getItem()).getTexture());
 			if(shield.getItem().equals(mod_RpgInventory.archBook)){
 				renderMantle(player, 1);

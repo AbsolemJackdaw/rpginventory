@@ -43,7 +43,6 @@ import rpgInventory.item.weapons.ItemStaf;
 import rpgInventory.renderer.RenderRpgPlayer;
 import rpgInventory.richUtil.potions.DecomposePotion;
 import rpgInventory.richUtil.potions.MasochismPotion;
-import rpgMage.weapons.ItemElementalStaff;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -83,22 +82,18 @@ public class mod_RpgInventory {
 	ringgold, ringdia, ringem, ringlap,
 	/*====shields====*/
 	archerShield, berserkerShield, talisman,
-	archBook,
-	shieldWood, shieldIron, shieldGold, shieldDiamond, 
 	/*====cloaks====*/
 	cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen, cloakBlue, 
 	/*====weapons====*/
 	elfbow, claymore, hammer, wand, staf,
-	fireStaff, frostStaff, earthStaff, windStaff, ultimateStaff,
 	/*====extra items====*/
 	rageSeed,wizardBook, 
 	/*====armor====*/
 	magehood, magegown, magepants, mageboots,
 	archerhood, archerchest, archerpants, archerboots,
 	berserkerHood, berserkerChest, berserkerLegs, berserkerBoots,
-	archmageHood, archmageChest, archmageLegs, archMageBoots,
 	/*====leathers/skins====*/
-	animalskin, tanHide, magecloth, archMageLeather,
+	animalskin, tanHide, magecloth, 
 	/*====molds====*/
 	colmold, ringmold, wantmold;
 
@@ -129,7 +124,6 @@ public class mod_RpgInventory {
 	}
 	public  final EnumArmorMaterial mage = EnumHelper.addArmorMaterial("mage", 20, new int[]{2, 2, 2, 1}, 5);
 	public  final EnumArmorMaterial archer = EnumHelper.addArmorMaterial("archer", 20, new int[]{2, 3, 2, 2}, 5);
-	public  final EnumArmorMaterial archMage = EnumHelper.addArmorMaterial("archmage", 20, new int[]{4, 4, 4, 2}, 5);
 	public  final EnumArmorMaterial berserker = EnumHelper.addArmorMaterial("berserker", 20, new int[]{2, 4, 3, 2}, 5);
 	
 	EnumToolMaterial clay = EnumHelper.addToolMaterial("claymore", 0, 750, 5F, 6, 0);
@@ -149,44 +143,35 @@ public class mod_RpgInventory {
 		tab = new RpgInventoryTab(CreativeTabs.getNextID(), "RpgTab");
 
 
-		//enabling items for "plugins"
 		try {
 			Class.forName("rpgNecroPaladin.mod_RpgPlus");
-//			FMLLog.info("Rpg++ Necromancer and Paladin is installed. Renderers can be Used", 1);
 			hasRpg = true;
 		} catch (Throwable e) {
-//			FMLLog.info("Rpg++ Necromancer and Paladin has not been detected. Renderers for Rpg++ Excluded");
 			hasRpg = false;
 		}
-		//look for Vanilla Shields
 		try {
 			Class.forName("rpgVanillaShields.mod_VanillaShields");
-			FMLLog.info("Rpg++ Vanilla Shields is installed. Renderers can be Used");
 			hasShields = true;
 		} catch (Throwable e) {
-			FMLLog.info("Rpg++ Vanilla Shields has not been detected. Renderers for Vanilla Shields Excluded");
 			hasShields = false;
 		}
 		try {
 			Class.forName("rpgRogueBeast.mod_RpgRB");
-			FMLLog.info("Rpg++ Rogue and BeastMaster Installed. Renderers can be Used");
 			hasRogue = true;
 		} catch (Throwable e) {
-			FMLLog.info("Rpg++ Rogue and BeastMaster not detected. Renderers for Vanilla Shields Excluded");
 			hasRogue = false;
 		}
 		try {
 			Class.forName("rpgMage.mod_RpgMageSet");
-			FMLLog.info("Rpg++ ArchMage Installed. Renderers can be Used");
 			hasMage = true;
 		} catch (Throwable e) {
-			FMLLog.info("Rpg++ ArchMage not detected. Renderers Excluded");
 			hasMage = false;
 		}
 
 		developers.add("unjustice");
 		developers.add("artix_all_mighty");
 		developers.add("rich1051414");
+		developers.add("darkhax");
 
 		forgeBlock = new BlockForge(RpgConfig.instance.forgeblockID, Material.rock).setHardness(5f).setUnlocalizedName("MoldForge").setCreativeTab(tab);
 
@@ -252,62 +237,14 @@ public class mod_RpgInventory {
 		ringmold = new ItemMold(RpgConfig.instance.ringmoldID).setUnlocalizedName("moldRing").setCreativeTab(tab);
 		wantmold = new ItemMold(RpgConfig.instance.wantmoldID).setUnlocalizedName("moldGlove").setCreativeTab(tab);
 
-		if (hasRpg == true) {
-
-			
+		if (hasRpg == true) {	
 		}
 
 		if (hasShields == true) {
-			shieldWood = new ItemRpgInvArmor(RpgConfig.instance.shieldWoodID, 1, 50, "wood","subaraki:jewels/ShieldWood.png").setUnlocalizedName("shieldWood");
-			shieldIron = new ItemRpgInvArmor(RpgConfig.instance.shieldIronID, 1, 125, "iron","subaraki:jewels/ShieldIron.png").setUnlocalizedName("shieldIron");
-			shieldGold = new ItemRpgInvArmor(RpgConfig.instance.shieldGoldID, 1, 250, "gold","subaraki:jewels/ShieldGold.png").setUnlocalizedName("shieldGold");
-			shieldDiamond = new ItemRpgInvArmor(RpgConfig.instance.shieldDiamondID, 1, 500, "diamond","subaraki:jewels/ShieldDiamond.png").setUnlocalizedName("shieldDiamond");
-
-			LanguageRegistry.addName(shieldWood, "Wooden Shield");
-			LanguageRegistry.addName(shieldIron, "Iron Shield");
-			LanguageRegistry.addName(shieldGold, "Golden Shield");
-			LanguageRegistry.addName(shieldDiamond, "Diamond Shield");
 		}
-		if (hasRogue == true) {
-
-			
+		if (hasRogue == true) {			
 		}
 		if (hasMage == true) {
-			fireStaff = new ItemElementalStaff(RpgConfig.instance.fireStaff, 1, 150).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffFire");
-			frostStaff = new ItemElementalStaff(RpgConfig.instance.frostStaff, 2, 150).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffIce");
-			earthStaff = new ItemElementalStaff(RpgConfig.instance.staffEarth, 3, 150).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffEarth");
-			windStaff = new ItemElementalStaff(RpgConfig.instance.staffWind, 4, 500).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffWind");
-			ultimateStaff = new ItemElementalStaff(RpgConfig.instance.staffUltimate, 5, 300).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffElemental");
-			archBook = new ItemRpgInvArmor(RpgConfig.instance.archBook, 1, 300, "", "subaraki:jewels/book.png").setUnlocalizedName("archTome");
-
-			archmageHood = new ItemClassArmor(RpgConfig.instance.archmageHood, archMage, 4, 0).setUnlocalizedName("archMage1");
-			archmageChest = new ItemClassArmor(RpgConfig.instance.archmageChest, archMage, 4, 1).setUnlocalizedName("archMage2");
-			archmageLegs = new ItemClassArmor(RpgConfig.instance.archmageLegs, archMage, 4, 2).setUnlocalizedName("archMage3");
-			archMageBoots = new ItemClassArmor(RpgConfig.instance.archmageBoots, archMage, 4, 3).setUnlocalizedName("archMage4");
-
-			LanguageRegistry.addName(fireStaff, "Fire Staff");
-			LanguageRegistry.addName(frostStaff, "Frost Staff");
-			LanguageRegistry.addName(earthStaff, "Earth Staff");
-			LanguageRegistry.addName(windStaff, "Wind Staff");
-			LanguageRegistry.addName(ultimateStaff, "Ultimate Staff");
-			LanguageRegistry.addName(archBook, "ArchMage Book");
-			LanguageRegistry.addName(archmageHood, "Arch Mage Hat");
-			LanguageRegistry.addName(archmageChest, "Arch Mage Gown");
-			LanguageRegistry.addName(archmageLegs, "Arch Mage Leggings");
-			LanguageRegistry.addName(archMageBoots, "Arch Mage Boots");
-
-			GameRegistry.addShapelessRecipe(new ItemStack(ultimateStaff), new Object[]{windStaff, earthStaff, frostStaff, fireStaff, Item.netherStar});
-			GameRegistry.addRecipe(new ItemStack(windStaff), new Object[]{"III", "DSD", "III", 'I', Item.feather, 'D', Item.diamond, 'S', staf});
-			GameRegistry.addRecipe(new ItemStack(frostStaff), new Object[]{"III", "DSD", "III", 'I', Block.ice, 'D', Item.diamond, 'S', staf});
-			GameRegistry.addRecipe(new ItemStack(earthStaff), new Object[]{"III", "DSD", "III", 'I', Block.grass, 'D', Item.diamond, 'S', staf});
-			GameRegistry.addRecipe(new ItemStack(fireStaff), new Object[]{"III", "DSD", "III", 'I', Item.blazePowder, 'D', Item.diamond, 'S', staf});
-			GameRegistry.addRecipe(new ItemStack(archBook), new Object[]{"III", "IBI", " I ", 'I', new ItemStack(Item.dyePowder, 1, 4), 'B', Item.book});
-			GameRegistry.addRecipe(new ItemStack(archMageBoots), new Object[]{"III", "IBI", "III", 'B', mageboots, 'I', Item.goldNugget});
-			GameRegistry.addRecipe(new ItemStack(archmageLegs), new Object[]{"III", "IBI", "III", 'B', magepants, 'I', Item.goldNugget});
-			GameRegistry.addRecipe(new ItemStack(archmageChest), new Object[]{"III", "IBI", "III", 'B', magegown, 'I', Item.goldNugget});
-			GameRegistry.addRecipe(new ItemStack(archmageHood), new Object[]{"III", "IBI", "III", 'B', magehood, 'I', Item.goldNugget});
-
-
 		}
 
 		proxy.registerRenderInformation();

@@ -24,6 +24,7 @@ import rpgRogueBeast.items.ItemRBMats2;
 import rpgRogueBeast.items.ItemRpgInvArmorRB;
 import rpgRogueBeast.items.PetExpPotion;
 import rpgRogueBeast.packets.RpgRBPacketHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -64,6 +65,10 @@ public class mod_RpgRB {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		
+		FMLLog.info("Rpg++ Rogue and BeastMaster Installed. Renderers can be Used");
+
+		
 		tab = new RBTab(CreativeTabs.getNextID(), "RBTab");
 
 		daggers = new ItemRpgInvArmorRB(RpgConfig.instance.daggersID, 1, 800, "", "").setUnlocalizedName("dagger");

@@ -50,18 +50,7 @@ public class ItemClassArmor extends AbstractArmor{
 		if (itemstack.itemID == mod_RpgInventory.berserkerLegs.itemID) {
 			return "armor:berserk_2.png";
 		}
-		//Rpg Rogue Beastmaster
-		if (mod_RpgInventory.hasRogue) {
 
-		}
-		if (mod_RpgInventory.hasMage) {
-			if (itemstack.itemID == mod_RpgInventory.archmageHood.itemID || itemstack.itemID == mod_RpgInventory.archmageChest.itemID || itemstack.itemID == mod_RpgInventory.archMageBoots.itemID) {
-				return "armor:archMage_1.png";
-			}
-			if (itemstack.itemID == mod_RpgInventory.archmageLegs.itemID) {
-				return "armor:archMage_2.png";
-			}
-		}
 		return null;
 	}
 
@@ -88,7 +77,7 @@ public class ItemClassArmor extends AbstractArmor{
 					if(mat.equals(mod_RpgInventory.instance.berserker))
 						armorModel = armorBerserkChest;
 
-					else if(mat.equals(mod_RpgInventory.instance.mage) ||mat.equals(mod_RpgInventory.instance.archMage))
+					else if(mat.equals(mod_RpgInventory.instance.mage))
 						armorModel = armorMageChest;
 
 
@@ -104,8 +93,7 @@ public class ItemClassArmor extends AbstractArmor{
 					if(mat.equals(mod_RpgInventory.instance.berserker))
 						armorModel = armorBerserk;
 
-					else if(mat.equals(mod_RpgInventory.instance.mage) || 
-							mat.equals(mod_RpgInventory.instance.archMage))
+					else if(mat.equals(mod_RpgInventory.instance.mage))
 						armorModel = armorMage;
 
 					/*Archers dont have custom armor*/

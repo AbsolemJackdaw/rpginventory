@@ -21,10 +21,12 @@ import rpgInventory.item.ItemMold;
 import rpgInventory.item.ItemRpg;
 import rpgInventory.item.armor.ItemClassArmor;
 import rpgInventory.item.armor.ItemRpgInvArmor;
+import rpgMage.mod_RpgMageSet;
 import rpgNecroPaladin.mod_RpgPlus;
 import rpgNecroPaladin.items.ItemRpgInvArmorPlus;
 import rpgRogueBeast.mod_RpgRB;
 import rpgRogueBeast.entity.IPet;
+import rpgVanillaShields.mod_VanillaShields;
 
 public class CommandPanel extends CommandBase {
 
@@ -101,17 +103,17 @@ public class CommandPanel extends CommandBase {
 		}
 		if(mod_RpgInventory.hasMage)
 		{
-			sets.get("archmage").add(new ItemStack(mod_RpgInventory.archBook));
-			sets.get("archmage").add(new ItemStack(mod_RpgInventory.archMageBoots));
-			sets.get("archmage").add(new ItemStack(mod_RpgInventory.archmageChest));
-			sets.get("archmage").add(new ItemStack(mod_RpgInventory.archmageHood));
-			sets.get("archmage").add(new ItemStack(mod_RpgInventory.archmageLegs));
+			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.archBook));
+			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.archMageBoots));
+			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.archmageChest));
+			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.archmageHood));
+			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.archmageLegs));
 
-			sets.get("archmage").add(new ItemStack(mod_RpgInventory.fireStaff));
-			sets.get("archmage").add(new ItemStack(mod_RpgInventory.frostStaff));
-			sets.get("archmage").add(new ItemStack(mod_RpgInventory.earthStaff));
-			sets.get("archmage").add(new ItemStack(mod_RpgInventory.windStaff));
-			sets.get("archmage").add(new ItemStack(mod_RpgInventory.ultimateStaff));
+			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.fireStaff));
+			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.frostStaff));
+			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.earthStaff));
+			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.windStaff));
+			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.ultimateStaff));
 		}
 		if(mod_RpgInventory.hasRogue)
 		{
@@ -137,10 +139,10 @@ public class CommandPanel extends CommandBase {
 		}
 		if(mod_RpgInventory.hasShields)
 		{
-			sets.get("vanillashields").add(new ItemStack(mod_RpgInventory.shieldWood));
-			sets.get("vanillashields").add(new ItemStack(mod_RpgInventory.shieldGold));
-			sets.get("vanillashields").add(new ItemStack(mod_RpgInventory.shieldIron));
-			sets.get("vanillashields").add(new ItemStack(mod_RpgInventory.shieldDiamond));
+			sets.get("vanillashields").add(new ItemStack(mod_VanillaShields.shieldWood));
+			sets.get("vanillashields").add(new ItemStack(mod_VanillaShields.shieldGold));
+			sets.get("vanillashields").add(new ItemStack(mod_VanillaShields.shieldIron));
+			sets.get("vanillashields").add(new ItemStack(mod_VanillaShields.shieldDiamond));
 
 		}
 

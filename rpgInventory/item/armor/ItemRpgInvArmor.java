@@ -10,11 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.models.shields.Book;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.MainShield;
 import rpgInventory.models.shields.ModelShield;
-import rpgVanillaShields.VanillaShield;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -55,22 +53,12 @@ public class ItemRpgInvArmor extends Item {
 
 	private IronThorn it = new IronThorn();
 	private ModelShield arch = new ModelShield();
-	
-	private VanillaShield shield = new VanillaShield();
-	private Book book = new Book();
-	private VanillaShield van = new VanillaShield();
 
 	public MainShield getShieldModel(){
 		if(this.equals(mod_RpgInventory.berserkerShield))
 			return it;
 		if(this.equals(mod_RpgInventory.archerShield))
 			return arch;
-		if(this.equals(mod_RpgInventory.archBook))
-			return book;
-		if(this.equals(mod_RpgInventory.shieldDiamond)||this.equals(mod_RpgInventory.shieldGold)
-				||this.equals(mod_RpgInventory.shieldIron)||this.equals(mod_RpgInventory.shieldWood))
-			return van;
-
 		return new MainShield();
 	}
 

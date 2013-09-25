@@ -36,7 +36,6 @@ import rpgInventory.renderer.items.weapons.ClaymoreRenderer;
 import rpgInventory.renderer.items.weapons.HammerRender;
 import rpgInventory.renderer.items.weapons.SoulSphereRender;
 import rpgInventory.renderer.items.weapons.StafRender;
-import rpgVanillaShields.VanillaShield;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -126,18 +125,6 @@ public class ClientProxy extends CommonProxy {
 					(IItemRenderer) new BerserkerShield(new IronThorn(), "subaraki:jewels/IronThorn.png"));
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.archerShield.itemID, 
 					(IItemRenderer) new ArcherShield(new ModelShield(), "subaraki:jewels/Shield1.png"));
-
-			if(mod_RpgInventory.hasShields){
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldDiamond.itemID, 
-						(IItemRenderer) new VanillaShield(new rpgVanillaShields.VanillaShield(), "subaraki:jewels/ShieldDiamond.png"));
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldGold.itemID, 
-						(IItemRenderer) new VanillaShield(new rpgVanillaShields.VanillaShield(), "subaraki:jewels/ShieldGold.png"));
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldIron.itemID, 
-						(IItemRenderer) new VanillaShield(new rpgVanillaShields.VanillaShield(), "subaraki:jewels/ShieldIron.png"));
-				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldWood.itemID, 
-						(IItemRenderer) new VanillaShield(new rpgVanillaShields.VanillaShield(), "subaraki:jewels/ShieldWood.png"));
-
-			}
 		}		
 	}
 
