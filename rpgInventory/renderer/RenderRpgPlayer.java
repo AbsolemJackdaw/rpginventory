@@ -21,7 +21,7 @@ import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.jewels.GloveLeft;
 import rpgInventory.models.jewels.GloveRight;
 import rpgInventory.models.jewels.ModelNecklace;
-import rpgInventory.models.shields.VanillaShield;
+import rpgVanillaShields.VanillaShield;
 
 public class RenderRpgPlayer {
 

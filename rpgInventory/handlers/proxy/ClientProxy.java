@@ -31,12 +31,12 @@ import rpgInventory.models.shields.ModelShield;
 import rpgInventory.renderer.RenderRpgPlayer;
 import rpgInventory.renderer.items.shields.ArcherShield;
 import rpgInventory.renderer.items.shields.BerserkerShield;
-import rpgInventory.renderer.items.shields.VanillaShield;
 import rpgInventory.renderer.items.weapons.BowRender;
 import rpgInventory.renderer.items.weapons.ClaymoreRenderer;
 import rpgInventory.renderer.items.weapons.HammerRender;
 import rpgInventory.renderer.items.weapons.SoulSphereRender;
 import rpgInventory.renderer.items.weapons.StafRender;
+import rpgVanillaShields.VanillaShield;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -129,13 +129,13 @@ public class ClientProxy extends CommonProxy {
 
 			if(mod_RpgInventory.hasShields){
 				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldDiamond.itemID, 
-						(IItemRenderer) new VanillaShield(new rpgInventory.models.shields.VanillaShield(), "subaraki:jewels/ShieldDiamond.png"));
+						(IItemRenderer) new VanillaShield(new rpgVanillaShields.VanillaShield(), "subaraki:jewels/ShieldDiamond.png"));
 				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldGold.itemID, 
-						(IItemRenderer) new VanillaShield(new rpgInventory.models.shields.VanillaShield(), "subaraki:jewels/ShieldGold.png"));
+						(IItemRenderer) new VanillaShield(new rpgVanillaShields.VanillaShield(), "subaraki:jewels/ShieldGold.png"));
 				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldIron.itemID, 
-						(IItemRenderer) new VanillaShield(new rpgInventory.models.shields.VanillaShield(), "subaraki:jewels/ShieldIron.png"));
+						(IItemRenderer) new VanillaShield(new rpgVanillaShields.VanillaShield(), "subaraki:jewels/ShieldIron.png"));
 				MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.shieldWood.itemID, 
-						(IItemRenderer) new VanillaShield(new rpgInventory.models.shields.VanillaShield(), "subaraki:jewels/ShieldWood.png"));
+						(IItemRenderer) new VanillaShield(new rpgVanillaShields.VanillaShield(), "subaraki:jewels/ShieldWood.png"));
 
 			}
 		}		

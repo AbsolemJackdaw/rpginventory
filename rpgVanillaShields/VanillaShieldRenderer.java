@@ -1,12 +1,14 @@
-package rpgInventory.renderer.items.shields;
+package rpgVanillaShields;
 
 import net.minecraft.client.model.ModelBase;
 
 import org.lwjgl.opengl.GL11;
 
-public class VanillaShield extends ShieldRenderer{
+import rpgInventory.renderer.items.shields.ShieldRenderer;
 
-	public VanillaShield(ModelBase model, String texture) {
+public class VanillaShieldRenderer extends ShieldRenderer{
+
+	public VanillaShieldRenderer(ModelBase model, String texture) {
 		super(model, texture);
 	}
 

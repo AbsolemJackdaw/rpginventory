@@ -1,10 +1,9 @@
-package rpgRogueBeast;
+package rpgRogueBeast.items;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import rpgInventory.mod_RpgInventory;
 import rpgInventory.item.ItemMats;
+import rpgRogueBeast.mod_RpgRB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

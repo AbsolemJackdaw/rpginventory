@@ -8,8 +8,8 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 
-import rpgInventory.item.weapons.ItemElementalStaff;
 import rpgInventory.models.weapons.ModelStaf;
+import rpgMage.weapons.ItemElementalStaff;
 
 
 public class StafRender extends RpgItemRenderer {

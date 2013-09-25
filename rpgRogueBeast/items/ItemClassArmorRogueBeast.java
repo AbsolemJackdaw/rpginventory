@@ -1,23 +1,14 @@
-package rpgRogueBeast;
-
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+package rpgRogueBeast.items;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.handlers.RPGKeyHandler;
 import rpgInventory.models.armor.ModelRogueArmor;
 import rpgInventory.utils.AbstractArmor;
+import rpgRogueBeast.mod_RpgRB;
 import rpgRogueBeast.models.ModelBeastArmor;
-import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class ItemClassArmorRogueBeast extends AbstractArmor{
 

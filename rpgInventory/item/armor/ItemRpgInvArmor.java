@@ -4,24 +4,17 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.models.shields.Book;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.MainShield;
 import rpgInventory.models.shields.ModelShield;
-import rpgInventory.models.shields.VanillaShield;
-import rpgRogueBeast.models.LionHead;
+import rpgVanillaShields.VanillaShield;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -64,7 +57,6 @@ public class ItemRpgInvArmor extends Item {
 	private ModelShield arch = new ModelShield();
 	
 	private VanillaShield shield = new VanillaShield();
-	private LionHead lion = new LionHead();
 	private Book book = new Book();
 	private VanillaShield van = new VanillaShield();
 
@@ -73,8 +65,6 @@ public class ItemRpgInvArmor extends Item {
 			return it;
 		if(this.equals(mod_RpgInventory.archerShield))
 			return arch;
-		if(this.equals(mod_RpgInventory.beastShield))
-			return lion;
 		if(this.equals(mod_RpgInventory.archBook))
 			return book;
 		if(this.equals(mod_RpgInventory.shieldDiamond)||this.equals(mod_RpgInventory.shieldGold)
@@ -189,33 +179,7 @@ public class ItemRpgInvArmor extends Item {
 			list.add(StatCollector.translateToLocal("-1 Damage on Held Weapon Every 20 Seconds"));
 		}
 	}
-
-	@Override
-	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving) {
-
-		PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer) par3EntityLiving);
-
-		//RpgInv inv = mod_RpgInventory.proxy.getInventory(((EntityPlayer) par3EntityLiving).username);
-		inv.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer) par3EntityLiving);
-
-		if (((EntityPlayer) par3EntityLiving).getCurrentEquippedItem().getItem() == mod_RpgInventory.daggers) {
-			if (inv.hasClass(EnumRpgClass.NINJA)) {
-				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 80, 1));
-			}else if (inv.hasClass(EnumRpgClass.ROGUE)) {
-				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 40, 0));
-				if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
-					par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 10);
-				}
-			} 
-			if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
-				par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 10);
-			} else {
-				par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 6);
-			}
-		}
-		return false;
-	}
-
+	
 	@Override
 	public String toString() {
 		return Name;

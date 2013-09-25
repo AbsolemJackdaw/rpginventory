@@ -1,4 +1,4 @@
-package rpgInventory.item.weapons;
+package rpgRogueBeast.items;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -23,6 +23,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
+import rpgInventory.item.weapons.ItemRpgSword;
 import rpgInventory.richUtil.Targetting;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;

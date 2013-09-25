@@ -1,4 +1,4 @@
-package rpgRogueBeast;
+package rpgRogueBeast.items;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
