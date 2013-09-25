@@ -49,7 +49,6 @@ public class RPGEventHooks {
 	public static Map<String, Integer> CustomPotionList = new ConcurrentHashMap();
 	Random rand = new Random();
 
-
 	float vanillaReduction = 0f;
 
 	@ForgeSubscribe
@@ -68,6 +67,7 @@ public class RPGEventHooks {
 
 	@ForgeSubscribe
 	public void BreakSpeed(PlayerEvent.BreakSpeed evt) {
+		/*Increases Block-breaking speed while wearing emerald ring (right slot)*/
 		try {
 			if (evt.entityPlayer != null) {
 				PlayerRpgInventory inv = PlayerRpgInventory.get(evt.entityPlayer);
@@ -187,7 +187,8 @@ public class RPGEventHooks {
 					}
 
 					/*====ARCHER EFFECTS====*/
-					//doesnt work TODO
+					//doesnt work TODO 
+					// needs to be checked if actually works or not TODO
 					float jumpboost = p.jumpMovementFactor;
 					if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.ARCHER)) {
 						jumpboost *= 4.0F;
@@ -199,32 +200,33 @@ public class RPGEventHooks {
 						p.fallDistance = 0;
 					}
 
-					/*==== ARCHMAGE EFFECTS ====*/
+					
 					ItemStack weapon = p.getCurrentEquippedItem();
 					if (weapon != null) {
-						if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.SHIELDEDARCHMAGE) || mod_RpgInventory.developers.contains(p.username.toLowerCase()))
-						{
-							if (weapon.getItem().equals(mod_RpgInventory.fireStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
-							{
-								if (p.isBurning()) {
-									if (p.getHealth() < 6) {
-										p.setHealth(6);
-									} p.extinguish();
-								}
-							}
-							if (weapon.getItem().equals(mod_RpgInventory.windStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
-							{
-								p.fallDistance = 0; // negates fall damage
-							}
-							if (weapon.getItem().equals(mod_RpgInventory.frostStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
-							{
-								if (p.getAir() < 20)p.setAir(20); // you can not drown !
-							}
-							if (weapon.getItem().equals(mod_RpgInventory.earthStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
-							{
-								p.curePotionEffects(new ItemStack(Item.bucketMilk, 1)); // cure all negative potion effects
-							}
-						}
+//						/*==== ARCHMAGE EFFECTS ====*/
+//						if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.SHIELDEDARCHMAGE) || mod_RpgInventory.developers.contains(p.username.toLowerCase()))
+//						{
+//							if (weapon.getItem().equals(mod_RpgInventory.fireStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
+//							{
+//								if (p.isBurning()) {
+//									if (p.getHealth() < 6) {
+//										p.setHealth(6);
+//									} p.extinguish();
+//								}
+//							}
+//							if (weapon.getItem().equals(mod_RpgInventory.windStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
+//							{
+//								p.fallDistance = 0; // negates fall damage
+//							}
+//							if (weapon.getItem().equals(mod_RpgInventory.frostStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
+//							{
+//								if (p.getAir() < 20)p.setAir(20); // you can not drown !
+//							}
+//							if (weapon.getItem().equals(mod_RpgInventory.earthStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
+//							{
+//								p.curePotionEffects(new ItemStack(Item.bucketMilk, 1)); // cure all negative potion effects
+//							}
+//						}
 
 						/*BERSEKRER KNOCKBACK*/
 						//sets Berserker weapon with knockback if the apropiate classes match
@@ -382,11 +384,11 @@ public class RPGEventHooks {
 								evt.ammount += 4;
 							}
 						} 
-						else if (weapon.itemID == mod_RpgInventory.pala_weapon.itemID) {
-							if (EnumRpgClass.getPlayerClasses((EntityPlayer) damager).contains(EnumRpgClass.PALADIN)) {
-								evt.ammount += 3;
-							}
-						}
+//						else if (weapon.itemID == mod_RpgInventory.pala_weapon.itemID) {
+//							if (EnumRpgClass.getPlayerClasses((EntityPlayer) damager).contains(EnumRpgClass.PALADIN)) {
+//								evt.ammount += 3;
+//							}
+//						}
 					}
 					if (EnumRpgClass.getPlayerClasses((EntityPlayer) damager).contains(EnumRpgClass.PALADIN)) {
 						if (damager.worldObj.isDaytime()) {

@@ -6,13 +6,16 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.EnumHelper;
+import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
+import rpgInventory.renderer.RenderRpgPlayer;
 import rpgMage.weapons.ItemElementalStaff;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
@@ -102,6 +105,9 @@ public class mod_RpgMageSet {
 		LanguageRegistry.instance().addStringLocalization("entity.EntityElementalBlock.name", "MageElemental");
 
 		proxy.registerRendering();
+		
+		MinecraftForge.EVENT_BUS.register(new MageEvents());
+
 	}
 }
 
