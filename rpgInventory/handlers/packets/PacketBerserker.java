@@ -3,7 +3,6 @@ package rpgInventory.handlers.packets;
 import java.io.DataInputStream;
 import java.util.List;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

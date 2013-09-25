@@ -6,7 +6,6 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import rpgInventory.EnumRpgClass;
-import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgNecroPaladin.mod_RpgPlus;
 import rpgNecroPaladin.minions.IMinion;

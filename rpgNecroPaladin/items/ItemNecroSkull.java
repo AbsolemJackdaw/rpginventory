@@ -21,7 +21,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.packets.RpgPacketHandler;
 import rpgInventory.item.weapons.ItemRpgWeapon;
 import rpgNecroPaladin.mod_RpgPlus;
 import rpgNecroPaladin.minions.EntityMinionS;

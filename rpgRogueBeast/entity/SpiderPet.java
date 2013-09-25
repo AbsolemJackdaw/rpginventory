@@ -4,7 +4,6 @@
  */
 package rpgRogueBeast.entity;
 
-import cpw.mods.fml.common.FMLLog;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;

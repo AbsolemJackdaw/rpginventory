@@ -5,10 +5,8 @@ import java.io.DataInputStream;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgRogueBeast.mod_RpgRB;
-import cpw.mods.fml.common.FMLLog;
 
 public class PacketPetGui {
 

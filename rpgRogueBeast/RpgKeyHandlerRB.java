@@ -10,12 +10,10 @@ import java.util.logging.Logger;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import cpw.mods.fml.common.TickType;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.RPGKeyHandler;
 import rpgInventory.utils.AbstractKeyHandler;
-import rpgRogueBeast.packets.RpgRBPacketHandler;
+import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class RpgKeyHandlerRB extends AbstractKeyHandler {
 

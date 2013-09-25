@@ -11,7 +11,6 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import rpgInventory.mod_RpgInventory;
 import rpgRogueBeast.mod_RpgRB;
 
 public class PacketCrystal {

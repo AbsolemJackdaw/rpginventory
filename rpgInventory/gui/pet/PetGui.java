@@ -23,8 +23,6 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import WWBS.wwbs.PacketHandler;
-
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.RpgPacketHandler;
 import rpgRogueBeast.entity.BMPetImpl;

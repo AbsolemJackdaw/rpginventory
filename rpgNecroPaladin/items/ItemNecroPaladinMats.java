@@ -1,7 +1,6 @@
 package rpgNecroPaladin.items;
 
 import net.minecraft.item.ItemStack;
-import rpgInventory.mod_RpgInventory;
 import rpgInventory.item.ItemMats;
 import rpgNecroPaladin.mod_RpgPlus;
 import cpw.mods.fml.relauncher.Side;

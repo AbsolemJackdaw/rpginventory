@@ -1,12 +1,6 @@
 package rpgNecroPaladin.items;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.shields.MainShield;
 import rpgNecroPaladin.mod_RpgPlus;

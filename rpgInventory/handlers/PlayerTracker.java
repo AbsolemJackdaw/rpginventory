@@ -1,7 +1,6 @@
 package rpgInventory.handlers;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.WorldServer;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.PacketInventory;
 import cpw.mods.fml.common.IPlayerTracker;

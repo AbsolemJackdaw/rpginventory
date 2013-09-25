@@ -8,7 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.EnumHelper;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.item.ItemMats;
 import rpgNecroPaladin.items.BonusArmorPlus;
 import rpgNecroPaladin.items.ItemGrandSword;
 import rpgNecroPaladin.items.ItemNecroPaladinMats;

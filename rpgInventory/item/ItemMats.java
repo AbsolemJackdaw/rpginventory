@@ -2,10 +2,6 @@ package rpgInventory.item;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import rpgInventory.mod_RpgInventory;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMats extends Item {
 

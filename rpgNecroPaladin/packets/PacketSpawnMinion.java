@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import rpgInventory.EnumRpgClass;
-import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgNecroPaladin.CommonTickHandlerRpgPlus;
 import rpgNecroPaladin.mod_RpgPlus;

@@ -9,10 +9,7 @@ import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.models.armor.ModelBerserkerArmor;
 import rpgInventory.models.armor.ModelMageArmor;
-import rpgInventory.models.armor.ModelRogueArmor;
 import rpgInventory.utils.AbstractArmor;
-import rpgMage.MageTab;
-import rpgRogueBeast.models.ModelBeastArmor;
 import cpw.mods.fml.common.FMLLog;
 
 public class ItemClassArmor extends AbstractArmor{
