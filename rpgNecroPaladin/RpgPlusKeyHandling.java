@@ -17,7 +17,7 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class RpgPlusKeyHandling extends AbstractKeyHandler{
 
-	public RpgPlusKeyHandling(KeyBinding[] keyBindings, boolean[] repeatings) {
+	public RpgPlusKeyHandling() {
 		super();
 	}
 

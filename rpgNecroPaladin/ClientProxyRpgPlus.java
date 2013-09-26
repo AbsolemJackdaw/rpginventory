@@ -3,6 +3,7 @@ package rpgNecroPaladin;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
+import rpgInventory.handlers.RPGKeyHandler;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
 import rpgNecroPaladin.models.NecroShield;
@@ -13,6 +14,7 @@ import rpgNecroPaladin.render.NecroShieldRenderer;
 import rpgNecroPaladin.render.PalaRenderer;
 import rpgNecroPaladin.render.RenderMinionS;
 import rpgNecroPaladin.render.RenderMinionZ;
+import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxyRpgPlus extends CommonProxyRpgplus {
@@ -35,5 +37,8 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinionS.class,new RenderMinionS());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinionZ.class, new RenderMinionZ());
+		
+		KeyBindingRegistry.registerKeyBinding(new RpgPlusKeyHandling());
+
 	}
 }
