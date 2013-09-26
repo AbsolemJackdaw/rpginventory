@@ -13,6 +13,16 @@ public class ItemMageShield extends ItemRpgInvArmor {
 	}
 
 	private Book book = new Book();
+	
+	@Override
+	public String boundArmorClass() {
+		return mod_RpgMageSet.CLASSARCHMAGE;
+	}
+	
+	@Override
+	public String shieldClass() {
+		return mod_RpgMageSet.CLASSARCHMAGESHIELD;
+	}
 
 	@Override
 	public MainShield getShieldModel() {

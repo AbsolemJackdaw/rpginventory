@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import rpgInventory.EnumRpgClass;
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.shields.MainShield;
@@ -20,7 +20,29 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 		super(par1, par4, maxDamage, name, resourcelocation);
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public String boundArmorClass() {
+		
+		if(this.equals(mod_RpgRB.beastShield)){
+			return mod_RpgRB.CLASSBEASTMASTER;
+		}
+		if(this.equals(mod_RpgRB.daggers)){
+			return mod_RpgRB.CLASSROGUE;
+		}
+		return super.boundArmorClass();
+	}
 
+	@Override
+	public String shieldClass() {
+		if(this.equals(mod_RpgRB.beastShield)){
+			return mod_RpgRB.CLASSBEASTMASTERSHIELDED;
+		}
+		if(this.equals(mod_RpgRB.daggers)){
+			return mod_RpgRB.CLASSROGUESHIELDED;
+		}		return super.shieldClass();
+	}
+	
 	private LionHead lion = new LionHead();
 
 	@Override
@@ -36,12 +58,11 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 		PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer) par3EntityLiving);
 
 		//RpgInv inv = mod_RpgInventory.proxy.getInventory(((EntityPlayer) par3EntityLiving).username);
-		inv.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer) par3EntityLiving);
 
 		if (((EntityPlayer) par3EntityLiving).getCurrentEquippedItem().getItem() == mod_RpgRB.daggers) {
-			if (inv.hasClass(EnumRpgClass.NINJA)) {
+			if (mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSROGUESHIELDED)) {
 				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 80, 1));
-			}else if (inv.hasClass(EnumRpgClass.ROGUE)) {
+			}else if (mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSROGUE)) {
 				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 40, 0));
 				if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
 					par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 10);

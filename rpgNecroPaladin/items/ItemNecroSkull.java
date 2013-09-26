@@ -19,7 +19,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import rpgInventory.EnumRpgClass;
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.weapons.ItemRpgWeapon;
 import rpgNecroPaladin.mod_RpgPlus;
@@ -51,9 +51,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 
 		ItemStack weapon = p.getCurrentEquippedItem();
 
-		inv.classSets = EnumRpgClass.getPlayerClasses(p);
-
-		if (inv.hasClass(EnumRpgClass.NECRO)) {
+		if (mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO)) {
 			if (entity instanceof IMinion) {
 				if (weapon.getItemDamage() + 2 >= weapon.getMaxDamage()) {
 					//Trigger item break stuff
@@ -80,13 +78,8 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 				ItemStack weapon = p.getCurrentEquippedItem();
 				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
-				inv.classSets = EnumRpgClass.getPlayerClasses(p);
-
 				if (weapon != null) {
-					//                	FMLLog.getLogger().info("" + inv.classSets);
-
-					if (weapon.getItem().equals(mod_RpgPlus.necro_weapon) && inv.hasClass(EnumRpgClass.NECRO)) {
-						//                    	FMLLog.getLogger().info("necro2");
+					if (weapon.getItem().equals(mod_RpgPlus.necro_weapon) && mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO)) {
 
 						if (weapon.getItemDamage() + 2 >= weapon.getMaxDamage()) {
 							//Trigger item break stuff

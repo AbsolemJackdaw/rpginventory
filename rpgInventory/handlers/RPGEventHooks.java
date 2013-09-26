@@ -21,7 +21,6 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -32,9 +31,9 @@ import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgRogueBeast.entity.EntityPetXP;
 import rpgRogueBeast.entity.IPet;
 import cpw.mods.fml.common.FMLLog;
@@ -101,7 +100,7 @@ public class RPGEventHooks {
 				EntityPlayer player = (EntityPlayer) evt.entityLiving;
 
 				PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer) evt.entityLiving);
-				if (EnumRpgClass.getPlayerClasses((EntityPlayer)evt.entityLiving).contains(EnumRpgClass.BERSERKER)) {
+				if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSBERSERKER)) {
 					player.worldObj.newExplosion((Entity) player, player.posX, player.posY, player.posZ, 20, false, false);
 				}
 			}
@@ -157,7 +156,6 @@ public class RPGEventHooks {
 
 
 					PlayerRpgInventory inv = PlayerRpgInventory.get(p);
-					inv.classSets = EnumRpgClass.getPlayerClasses(p);
 
 					ItemStack neck = inv.getNecklace();
 					ItemStack ringa = inv.getRing1();
@@ -190,13 +188,13 @@ public class RPGEventHooks {
 					//doesnt work TODO 
 					// needs to be checked if actually works or not TODO
 					float jumpboost = p.jumpMovementFactor;
-					if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.ARCHER)) {
+					if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSARCHER)) {
 						jumpboost *= 4.0F;
 					}
 					p.jumpMovementFactor = jumpboost;
 
 					/*====MAGE FALLDAMAGE NEGATION====*/
-					if(EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.SHIELDEDMAGE)){
+					if(mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSMAGESHIELD)){
 						p.fallDistance = 0;
 					}
 
@@ -231,7 +229,7 @@ public class RPGEventHooks {
 						/*BERSEKRER KNOCKBACK*/
 						//sets Berserker weapon with knockback if the apropiate classes match
 						if (weapon.itemID == mod_RpgInventory.hammer.itemID) {
-							if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.SHIELDEDBERSERKER)) {
+							if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSBERSERKERSHIELD)) {
 								if ((p.getFoodStats().getFoodLevel() < 4 || p.getHealth() < 4)) {
 									Map tmp = EnchantmentHelper.getEnchantments(weapon);
 									tmp.put(Enchantment.knockback.effectId, 3);
@@ -241,7 +239,7 @@ public class RPGEventHooks {
 									tmp.put(Enchantment.knockback.effectId, 2);
 									EnchantmentHelper.setEnchantments(tmp, weapon);
 								}
-							} else if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.BERSERKER)) {
+							} else if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSBERSERKER)) {
 								Map tmp = EnchantmentHelper.getEnchantments(weapon);
 								tmp.put(Enchantment.knockback.effectId, 1);
 								EnchantmentHelper.setEnchantments(tmp, weapon);
@@ -250,18 +248,6 @@ public class RPGEventHooks {
 								tmp.remove(Enchantment.knockback.effectId);
 								EnchantmentHelper.setEnchantments(tmp, weapon);
 							}
-						}
-					}
-
-					/*something for necromancers*/
-					if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.NECRO)) {
-						if (p.getActivePotionEffect(Potion.regeneration) != null) {
-							p.addPotionEffect(new PotionEffect(mod_RpgInventory.decomposePotion.id, p.getActivePotionEffect(Potion.regeneration).getDuration() * 2, p.getActivePotionEffect(Potion.regeneration).getAmplifier()));
-							p.removePotionEffect(Potion.regeneration.id);
-						}
-						if (p.getActivePotionEffect(Potion.poison) != null) {
-							p.addPotionEffect(new PotionEffect(mod_RpgInventory.masochismPotion.id, p.getActivePotionEffect(Potion.poison).getDuration() / 2, p.getActivePotionEffect(Potion.poison).getAmplifier()));
-							p.removePotionEffect(Potion.poison.id);
 						}
 					}
 
@@ -328,29 +314,30 @@ public class RPGEventHooks {
 						this.goldJump(p,0.01D);
 						goldenItems +=1;
 					}
-					if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.PALADIN)) {
-						speedboost *= 0.75F;// slows down
-					}
+					
 
 					p.motionX *= speedboost+1.0D;
 					p.motionZ *= speedboost+1.0D;
 
 					/*==== Something about the archer .__. ==== */
 					if (ArcherRepairTick.containsKey(p.username)) {
-						if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.ARCHER)) {
+						if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSARCHER)) {
 							p.jumpMovementFactor = 0.09F;
 						} else {
 							ArcherRepairTick.remove(p.username);
 							p.jumpMovementFactor = 0.02F;
 						}
-					} else if (ArcherRepairTick.containsKey(p.username)) {
-						if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.SHIELDEDMAGE)) {
-							p.fallDistance = 0;
-							evt.entityLiving.fireResistance = 200;
-						} else {
-							evt.entityLiving.fireResistance = 0;
-						}
-					}
+					} 
+					
+					/**can't remember anything of this being added. looks fishy too.*/
+//					else if (ArcherRepairTick.containsKey(p.username)) {
+//						if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.SHIELDEDMAGE)) {
+//							p.fallDistance = 0;
+//							evt.entityLiving.fireResistance = 200;
+//						} else {
+//							evt.entityLiving.fireResistance = 0;
+//						}
+//					}
 
 					/*==== Invisibility Cloak==== */
 					ItemStack cloak = inv.getCloak();
@@ -376,11 +363,10 @@ public class RPGEventHooks {
 				if (damager instanceof EntityPlayer) {
 					float damagebonus = 0.0F;
 					PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer) damager);
-					inv.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer) damager);
 					ItemStack weapon = ((EntityPlayer) damager).getCurrentEquippedItem();
 					if (weapon != null) {
 						if (weapon.itemID == mod_RpgInventory.hammer.itemID) {
-							if (EnumRpgClass.getPlayerClasses((EntityPlayer) damager).contains(EnumRpgClass.BERSERKER)) {
+							if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSBERSERKER)) {
 								evt.ammount += 4;
 							}
 						} 
@@ -390,27 +376,9 @@ public class RPGEventHooks {
 //							}
 //						}
 					}
-					if (EnumRpgClass.getPlayerClasses((EntityPlayer) damager).contains(EnumRpgClass.PALADIN)) {
-						if (damager.worldObj.isDaytime()) {
-							evt.ammount += 3;
-						}
-						//paladin heals himself when hitting undead
-						if (evt.entityLiving.isEntityUndead()) {
-							if (((EntityPlayer) damager).getHealth() < ((EntityPlayer) damager).getMaxHealth()) {
-								((EntityPlayer) damager).heal(1);
-							}
-							evt.ammount += 3;
-							evt.entityLiving.setFire(4);
-						}
-					}
-					if (EnumRpgClass.getPlayerClasses((EntityPlayer) damager).contains(EnumRpgClass.NECRO)) {
-						if (!damager.worldObj.isDaytime()) {
-							evt.ammount += 3;
-						}
-					}
-					if (EnumRpgClass.getPlayerClasses((EntityPlayer) damager).contains(EnumRpgClass.BERSERKER)) {
+					if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSBERSERKER)) {
 						// hit harder with both hands 'free'
-						if (!EnumRpgClass.getPlayerClasses((EntityPlayer) damager).contains(EnumRpgClass.SHIELDEDBERSERKER)) { 
+						if (!mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSBERSERKERSHIELD)) { 
 							evt.ammount += 2;
 						}
 					}
@@ -440,24 +408,20 @@ public class RPGEventHooks {
 		} catch (Throwable e) {
 		}
 		try {
-			/*DAMAGING AND REDUCING DAMAGE / VANILLA SHIELDS*/
+			/*DAMAGING AND REDUCING DAMAGE FOR SHIELDS*/
 			if (evt.entityLiving != null && evt.entityLiving instanceof EntityPlayer) {
 				float damageReduction = 0.0F;
 				EntityPlayer player = (EntityPlayer) evt.entityLiving;
 				PlayerRpgInventory inv = PlayerRpgInventory.get(player);
-				inv.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer) evt.entityLiving);
 
 				ItemStack shield = inv.getShield();
 				if (shield != null) {
-					if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.WOOD)) {
-						vanillaReduction += 0.27f;
-					} else if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.IRON)) {
-						vanillaReduction += 0.4f;
-					} else if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.GOLD)) {
-						vanillaReduction += 0.7f;
-					} else if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.DIAMOND)) {
-						vanillaReduction += 1.50f;
+					
+					if( ((ItemRpgInvArmor)inv.getShield().getItem()).boundArmorClass().
+							equals(mod_RpgInventory.playerClass)){
+						vanillaReduction += 0.6f;
 					}
+					
 					if(vanillaReduction > 1f){
 						damageReduction = 1f + (vanillaReduction - 1f);
 						vanillaReduction= 0;
@@ -473,7 +437,6 @@ public class RPGEventHooks {
 			if (evt.entityLiving != null && evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) evt.entityLiving;
 				PlayerRpgInventory inv = PlayerRpgInventory.get(player);
-				inv.classSets = EnumRpgClass.getPlayerClasses(player);
 				if (inv.getGloves() != null && inv.getGloves().getItem() == mod_RpgInventory.glovesem) {
 					if (((float) evt.ammount * 0.2F) < 1) {
 						evt.ammount -= 1;
@@ -484,7 +447,7 @@ public class RPGEventHooks {
 				if (inv != null) {
 					ItemStack shield = inv.getShield();
 					if (shield != null) {
-						if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.SHIELDEDMAGE)) {
+						if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSMAGESHIELD)) {
 							float damageReduction = 0.20F;
 							EntityLiving damagedealer = null;
 							if (evt.source.isMagicDamage()) {
@@ -511,7 +474,7 @@ public class RPGEventHooks {
 							evt.ammount -= MathHelper.floor_float(((float) evt.ammount) * damageReduction);
 							damageItem(shield, inv, player, 1, 1);
 
-						} else if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.SHIELDEDARCHER)) {
+						} else if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSARCHERSHIELD)) {
 							float damageReduction = 0.25F;
 							EntityLiving damagedealer = null;
 							if (evt.source.getSourceOfDamage() != null) {
@@ -548,7 +511,7 @@ public class RPGEventHooks {
 							}
 							damageItem(shield, inv, player, 1, 1);
 						}
-					} else if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.SHIELDEDBERSERKER)) {
+					} else if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSBERSERKERSHIELD)) {
 						float damageReduction = 0.50F;
 						evt.ammount -= MathHelper.floor_float(((float) evt.ammount) * damageReduction);
 						if (evt.ammount > 1) {
@@ -566,7 +529,6 @@ public class RPGEventHooks {
 		try {
 
 			PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer)evt.entityLiving);
-			inv.classSets = EnumRpgClass.getPlayerClasses((EntityPlayer)evt.entityLiving);
 
 			ItemStack neck = inv.getNecklace();
 			ItemStack ringa = inv.getRing1();
@@ -606,7 +568,9 @@ public class RPGEventHooks {
 	}
 
 	public void damageItem(ItemStack item, PlayerRpgInventory inv, EntityPlayer p, int slot, int amount) {
-		if (mod_RpgInventory.developers.contains(p.username.toLowerCase())) return;
+		if (mod_RpgInventory.developers.contains(p.username.toLowerCase())){
+			return;
+		}
 		try {
 			if (item.getItemDamage() + amount >= item.getMaxDamage()) {
 				//Trigger item break stuff
@@ -617,7 +581,6 @@ public class RPGEventHooks {
 			inv.setInventorySlotContents(slot, item);
 		} catch (Throwable e) {
 		}
-
 	}
 
 	public void goldJump(EntityPlayer p, double amount)

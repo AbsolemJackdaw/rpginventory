@@ -19,8 +19,8 @@ import rpgInventory.mod_RpgInventory;
 import rpgInventory.item.ItemMats;
 import rpgInventory.item.ItemMold;
 import rpgInventory.item.ItemRpg;
-import rpgInventory.item.armor.ItemClassArmor;
 import rpgInventory.item.armor.ItemRpgInvArmor;
+import rpgInventory.utils.AbstractArmor;
 import rpgMage.mod_RpgMageSet;
 import rpgNecroPaladin.mod_RpgPlus;
 import rpgNecroPaladin.items.ItemRpgInvArmorPlus;
@@ -65,7 +65,7 @@ public class CommandPanel extends CommandBase {
 			if (item instanceof ItemRpg || item instanceof ItemMats || item instanceof ItemMold) {
 				sets.get("mats").add(new ItemStack(item, item.getItemStackLimit()));
 			}
-			if (item instanceof ItemClassArmor) {
+			if (item instanceof AbstractArmor) {
 				sets.get("armor").add(new ItemStack(item, item.getItemStackLimit()));
 			}
 		}

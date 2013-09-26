@@ -5,7 +5,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import cpw.mods.fml.common.FMLLog;
 
@@ -21,7 +20,7 @@ public class MageEvents {
 				ItemStack weapon = p.getCurrentEquippedItem();
 				if (weapon != null) {
 					/*==== ARCHMAGE EFFECTS ====*/
-					if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.SHIELDEDARCHMAGE) || mod_RpgInventory.developers.contains(p.username.toLowerCase()))
+					if (mod_RpgInventory.playerClass.contains(mod_RpgMageSet.CLASSARCHMAGESHIELD) || mod_RpgInventory.developers.contains(p.username.toLowerCase()))
 					{
 						if (weapon.getItem().equals(mod_RpgMageSet.fireStaff) || weapon.getItem().equals(mod_RpgMageSet.ultimateStaff)) 
 						{

@@ -5,7 +5,7 @@ import java.io.DataInputStream;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import rpgInventory.EnumRpgClass;
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgNecroPaladin.CommonTickHandlerRpgPlus;
 import rpgNecroPaladin.mod_RpgPlus;
@@ -20,9 +20,9 @@ public class PacketSpawnMinion {
 		} catch (Throwable ex) {
 			ex.printStackTrace();
 		}
-		inv.classSets = EnumRpgClass.getPlayerClasses(p);
 
-		if (weapon.getItem().equals(mod_RpgPlus.necro_weapon) && inv.hasClass(EnumRpgClass.NECRO)) {
+		if (weapon.getItem().equals(mod_RpgPlus.necro_weapon) &&
+				mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO)) {
 			if (!CommonTickHandlerRpgPlus.rpgPluscooldownMap.containsKey(p.username)) {
 				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(p.username, 0);
 			}
@@ -41,7 +41,7 @@ public class PacketSpawnMinion {
 					weapon.damageItem(2, p);
 				}
 				World world = p.worldObj;
-				if (inv.hasClass(EnumRpgClass.SHIELDEDNECRO)) {
+				if (mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECROSHIELD)) {
 					if (!world.isRemote) {
 						EntityMinionS var4 = new EntityMinionS(world, p);
 						if (var4 != null) {

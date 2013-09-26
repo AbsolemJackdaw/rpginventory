@@ -2,6 +2,7 @@ package rpgInventory.handlers.packets;
 
 import java.io.DataInputStream;
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +12,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.CommonTickHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketBerserker {
@@ -24,6 +26,7 @@ public class PacketBerserker {
 			ItemStack var11 = p.inventory.armorItemInSlot(1);
 			ItemStack var01 = p.inventory.armorItemInSlot(0);
 
+			
 			if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
 				if (item1 == null || var31 == null || var21 == null || var11 == null || var01 == null) {
 					return;
@@ -52,15 +55,16 @@ public class PacketBerserker {
 						item1.damageItem(3, p);
 					}
 				}
-				
+
 				float range = 4.0f;
 				if (!mod_RpgInventory.developers.contains(p.username.toLowerCase()))
 					range = 4.0f;
 				else
 					range= 8.0f;
-					
-					AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - range, p.posY - range, p.posZ - range, p.posX + range, p.posY + range, p.posZ + range);
 
+				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - range, p.posY - range, p.posZ - range, p.posX + range, p.posY + range, p.posZ + range);
+
+				
 				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, pool);
 				if (entl != null && entl.size() > 0) {
 					for (EntityLivingBase el : entl) {
@@ -68,6 +72,8 @@ public class PacketBerserker {
 							try {
 								double xdir = el.posX - p.posX;
 								double zdir = el.posZ - p.posZ;
+								
+								p.worldObj.spawnParticle("flame", el.posX, el.posY, el.posZ, 0,1,0);
 
 								if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
 									el.motionX = xdir * 1.5F;

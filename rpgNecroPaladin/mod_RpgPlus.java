@@ -7,11 +7,13 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.EnumHelper;
+import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.config.RpgConfig;
-import rpgNecroPaladin.items.BonusArmorPlus;
 import rpgNecroPaladin.items.ItemGrandSword;
+import rpgNecroPaladin.items.ItemNecroArmor;
 import rpgNecroPaladin.items.ItemNecroPaladinMats;
 import rpgNecroPaladin.items.ItemNecroSkull;
+import rpgNecroPaladin.items.ItemPaladinArmor;
 import rpgNecroPaladin.items.ItemRpgInvArmorPlus;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
@@ -36,7 +38,15 @@ clientPacketHandlerSpec =
 @SidedPacketHandler(channels = {"RpgPlusPlus"}, packetHandler = RpgPlusPacketHandler.class),
 serverPacketHandlerSpec =
 @SidedPacketHandler(channels = {"RpgPlusPlus"}, packetHandler = RpgPlusPacketHandler.class))
+
 public class mod_RpgPlus {
+	
+	
+	public static String CLASSNECRO = "necro";
+	public static String CLASSNECROSHIELD = "shieldedNecro";
+	public static String CLASSPALADIN = "paladin";
+	public static String CLASSPALADINSHIELD = "shieldedPaladin";
+	
 	private String[][] recipePatterns;
 	private Object[][] recipeItems;
 
@@ -69,15 +79,15 @@ public class mod_RpgPlus {
 
 		tab = new PlusTab(CreativeTabs.getNextID(), "++Tab");
 
-		necroHood = new BonusArmorPlus(RpgConfig.instance.necroHoodID, necroArmor, 4, 0).setUnlocalizedName("necro1");
-		necroChestplate = new BonusArmorPlus(RpgConfig.instance.necroChestplateID, necroArmor, 4, 1).setUnlocalizedName("necro2");
-		necroLeggings = new BonusArmorPlus(RpgConfig.instance.necroLeggingsID, necroArmor, 4, 2).setUnlocalizedName("necro3");
-		necroBoots = new BonusArmorPlus(RpgConfig.instance.necroBootsID, necroArmor, 4, 3).setUnlocalizedName("necro4");
+		necroHood = new ItemNecroArmor(RpgConfig.instance.necroHoodID, necroArmor, 4, 0).setUnlocalizedName("necro1");
+		necroChestplate = new ItemNecroArmor(RpgConfig.instance.necroChestplateID, necroArmor, 4, 1).setUnlocalizedName("necro2");
+		necroLeggings = new ItemNecroArmor(RpgConfig.instance.necroLeggingsID, necroArmor, 4, 2).setUnlocalizedName("necro3");
+		necroBoots = new ItemNecroArmor(RpgConfig.instance.necroBootsID, necroArmor, 4, 3).setUnlocalizedName("necro4");
 
-		palaHelm = new BonusArmorPlus(RpgConfig.instance.palaHelmID, paladin, 4, 0).setUnlocalizedName("paladin1");
-		palaChest = new BonusArmorPlus(RpgConfig.instance.palaChestID, paladin, 4, 1).setUnlocalizedName("paladin2");
-		palaLeggings = new BonusArmorPlus(RpgConfig.instance.palaLeggingsID, paladin, 4, 2).setUnlocalizedName("paladin3");
-		palaBoots = new BonusArmorPlus(RpgConfig.instance.palaBootsID, paladin, 4, 3).setUnlocalizedName("paladin4");
+		palaHelm = new ItemPaladinArmor(RpgConfig.instance.palaHelmID, paladin, 4, 0).setUnlocalizedName("paladin1");
+		palaChest = new ItemPaladinArmor(RpgConfig.instance.palaChestID, paladin, 4, 1).setUnlocalizedName("paladin2");
+		palaLeggings = new ItemPaladinArmor(RpgConfig.instance.palaLeggingsID, paladin, 4, 2).setUnlocalizedName("paladin3");
+		palaBoots = new ItemPaladinArmor(RpgConfig.instance.palaBootsID, paladin, 4, 3).setUnlocalizedName("paladin4");
 
 		necro_shield = new ItemRpgInvArmorPlus(RpgConfig.instance.necro_shieldID, 1, 250, "necro","subaraki:jewels/NecroShield.png").setUnlocalizedName("shieldNecro");
 		necro_weapon = new ItemNecroSkull(RpgConfig.instance.necro_weaponID, NecroToolMaterial).setFull3D().setUnlocalizedName("Skull");
@@ -140,6 +150,9 @@ public class mod_RpgPlus {
 		pala_weapon.setCreativeTab(tab);
 		necro_skin.setCreativeTab(tab);
 		pala_steel.setCreativeTab(tab);
+		
+		MinecraftForge.EVENT_BUS.register(new NecroPaladinEvents());
+
 
 	}
 	

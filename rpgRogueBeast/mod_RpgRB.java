@@ -18,9 +18,10 @@ import rpgRogueBeast.entity.EntityPetXP;
 import rpgRogueBeast.entity.EntityTeleportStone;
 import rpgRogueBeast.entity.SpiderPet;
 import rpgRogueBeast.items.ItemBeastAxe;
-import rpgRogueBeast.items.ItemClassArmorRogueBeast;
+import rpgRogueBeast.items.ItemBeastMasterArmor;
 import rpgRogueBeast.items.ItemRBMats;
 import rpgRogueBeast.items.ItemRBMats2;
+import rpgRogueBeast.items.ItemRogueArmor;
 import rpgRogueBeast.items.ItemRpgInvArmorRB;
 import rpgRogueBeast.items.PetExpPotion;
 import rpgRogueBeast.packets.RpgRBPacketHandler;
@@ -47,6 +48,12 @@ public class mod_RpgRB {
 	public static RBCommonProxy proxy;
 	public static CreativeTabs tab;
 
+	public static String CLASSBEASTMASTER = "beastMaster";
+	public static String CLASSBEASTMASTERSHIELDED = "shieldedBeastMaster";
+
+	public static String CLASSROGUE = "rogue";
+	public static String CLASSROGUESHIELDED = "Ninja";
+
 	private String[][] recipePatterns;
 	private Object[][] recipeItems;
 
@@ -65,10 +72,10 @@ public class mod_RpgRB {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		
+
 		FMLLog.info("Rpg++ Rogue and BeastMaster Installed. Renderers can be Used");
 
-		
+
 		tab = new RBTab(CreativeTabs.getNextID(), "RBTab");
 
 		daggers = new ItemRpgInvArmorRB(RpgConfig.instance.daggersID, 1, 800, "", "").setUnlocalizedName("dagger");
@@ -78,15 +85,15 @@ public class mod_RpgRB {
 		beastLeather = new ItemRBMats(RpgConfig.instance.beastLeatherID).setUnlocalizedName("b.leather");
 		beastShield = new ItemRpgInvArmorRB(RpgConfig.instance.beastShield, 1, 150, "", "subaraki:jewels/lion.png").setUnlocalizedName("shieldBeastMaster");
 
-		rogueHood = new ItemClassArmorRogueBeast(RpgConfig.instance.rogueHoodID, rogueArmor, 4, 0).setUnlocalizedName("rogue1");
-		rogueChest = new ItemClassArmorRogueBeast(RpgConfig.instance.rogueChestID, rogueArmor, 4, 1).setUnlocalizedName("rogue2");
-		rogueLegs = new ItemClassArmorRogueBeast(RpgConfig.instance.rogueLegsID, rogueArmor, 4, 2).setUnlocalizedName("rogue3");
-		rogueBoots = new ItemClassArmorRogueBeast(RpgConfig.instance.rogueBootsID, rogueArmor, 4, 3).setUnlocalizedName("rogue4");
+		rogueHood = new ItemRogueArmor(RpgConfig.instance.rogueHoodID, rogueArmor, 4, 0).setUnlocalizedName("rogue1");
+		rogueChest = new ItemRogueArmor(RpgConfig.instance.rogueChestID, rogueArmor, 4, 1).setUnlocalizedName("rogue2");
+		rogueLegs = new ItemRogueArmor(RpgConfig.instance.rogueLegsID, rogueArmor, 4, 2).setUnlocalizedName("rogue3");
+		rogueBoots = new ItemRogueArmor(RpgConfig.instance.rogueBootsID, rogueArmor, 4, 3).setUnlocalizedName("rogue4");
 
-		beastHood = new ItemClassArmorRogueBeast(RpgConfig.instance.beastHoodID, beastMaster, 4, 0).setUnlocalizedName("beast1");
-		beastChest = new ItemClassArmorRogueBeast(RpgConfig.instance.beastChestID, beastMaster, 4, 1).setUnlocalizedName("beast2");
-		beastLegs = new ItemClassArmorRogueBeast(RpgConfig.instance.beastLegsID, beastMaster, 4, 2).setUnlocalizedName("beast3");
-		beastBoots = new ItemClassArmorRogueBeast(RpgConfig.instance.beastBootsID, beastMaster, 4, 3).setUnlocalizedName("beast4");
+		beastHood = new ItemBeastMasterArmor(RpgConfig.instance.beastHoodID, beastMaster, 4, 0).setUnlocalizedName("beast1");
+		beastChest = new ItemBeastMasterArmor(RpgConfig.instance.beastChestID, beastMaster, 4, 1).setUnlocalizedName("beast2");
+		beastLegs = new ItemBeastMasterArmor(RpgConfig.instance.beastLegsID, beastMaster, 4, 2).setUnlocalizedName("beast3");
+		beastBoots = new ItemBeastMasterArmor(RpgConfig.instance.beastBootsID, beastMaster, 4, 3).setUnlocalizedName("beast4");
 
 		whistle = new ItemRBMats2(RpgConfig.instance.whistleID).setUnlocalizedName("whistle");
 
@@ -178,6 +185,7 @@ public class mod_RpgRB {
 		EntityRegistry.registerModEntity(BoarPet.class, "BoarPet", mod_RpgInventory.instance.getUniqueID(), this, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityPetXP.class, "PetXP", mod_RpgInventory.instance.getUniqueID(), this, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityTeleportStone.class, "TelePortStone", mod_RpgInventory.instance.getUniqueID(), this, 80, 1, true);
+
 
 	}
 }

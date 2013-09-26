@@ -10,7 +10,7 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import rpgInventory.EnumRpgClass;
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 
 public class ItemStaf extends ItemRpgSword {
@@ -74,8 +74,9 @@ public class ItemStaf extends ItemRpgSword {
 	public ItemStack onItemRightClick(ItemStack is, World par2World, EntityPlayer p) {
 		PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
-		inv.classSets = EnumRpgClass.getPlayerClasses(p);
-		if (inv.hasClass(EnumRpgClass.MAGE) || inv.hasClass(EnumRpgClass.ARCHMAGE)) {
+//exception for archmage : this should be evaded any time, but I don't have a choice here.
+		if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSMAGE) ||
+				mod_RpgInventory.playerClass.contains("archMage")) {
 			p.setItemInUse(is, this.getMaxItemUseDuration(is));
 		}
 		return is;

@@ -38,7 +38,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import rpgInventory.EnumRpgClass;
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgNecroPaladin.minions.CustomMinionEntitySelector;
 import rpgRogueBeast.mod_RpgRB;
@@ -178,7 +178,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	public void onLivingUpdate() {
 		if (!worldObj.isRemote) {
 			EntityPlayer player = (EntityPlayer)getOwner();
-			if ((player == null || !EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER))) {
+			if ((player == null || !mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSBEASTMASTER))) {
 				try {
 					PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 

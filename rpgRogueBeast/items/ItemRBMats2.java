@@ -6,8 +6,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import rpgInventory.EnumRpgClass;
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgRogueBeast.mod_RpgRB;
 import rpgRogueBeast.entity.BoarPet;
 import rpgRogueBeast.entity.BullPet;
 import rpgRogueBeast.entity.IPet;
@@ -20,7 +21,7 @@ public class ItemRBMats2 extends Item {
     }
 
     public ItemStack onItemRightClick(ItemStack whistle, World world, EntityPlayer player) {
-        if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER)) {
+        if (mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSBEASTMASTER)) {
             if (!world.isRemote && player.ridingEntity == null) {
                 try {
 					PlayerRpgInventory inv = PlayerRpgInventory.get(player);

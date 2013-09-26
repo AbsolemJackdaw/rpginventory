@@ -11,10 +11,10 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.item.weapons.ItemRpgSword;
 import rpgMage.EntityElementalBlock;
+import rpgMage.mod_RpgMageSet;
 
 public class ItemElementalStaff extends ItemRpgSword {
 
@@ -125,7 +125,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 	}
 
 	public ItemStack onItemRightClick(ItemStack is, World par2World, EntityPlayer p) {
-		if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.SHIELDEDARCHMAGE) || mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+		if (mod_RpgInventory.playerClass.contains(mod_RpgMageSet.CLASSARCHMAGESHIELD)  || mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
 			if (p.isUsingItem()) {
 				p.stopUsingItem();
 			} else {

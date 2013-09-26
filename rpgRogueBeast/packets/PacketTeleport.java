@@ -6,9 +6,9 @@ import java.util.Random;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.CommonTickHandler;
+import rpgRogueBeast.mod_RpgRB;
 import rpgRogueBeast.entity.EntityTeleportStone;
 
 public class PacketTeleport {
@@ -18,7 +18,7 @@ public class PacketTeleport {
 			ItemStack dagger = p.getCurrentEquippedItem();
 
 			if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
-				if(!EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.ROGUE)){
+				if(!mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSROGUE)){
 					return;
 				}
 			}

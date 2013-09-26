@@ -9,6 +9,7 @@ import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.client.particle.EntityLargeExplodeFX;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
@@ -58,7 +59,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
 	}
 
-	public void spawnParticle(World world, EntityLiving el, Random rng) {
+	public void spawnParticle(World world, EntityLivingBase el, Random rng) {
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityHeartFX efx = new EntityHeartFX(world, el.posX, el.posY + 0.5F + rng.nextFloat(), el.posZ, rng.nextFloat(), rng.nextFloat() + 0.4F, rng.nextFloat());
 		mc.effectRenderer.addEffect(efx);

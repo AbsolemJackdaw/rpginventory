@@ -8,10 +8,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
-import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.CommonTickHandler;
+import rpgNecroPaladin.mod_RpgPlus;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketPalaSpecial {
@@ -23,10 +23,9 @@ public class PacketPalaSpecial {
 			ex.printStackTrace();
 		}
 		inv.onInventoryChanged();
-		inv.classSets = EnumRpgClass.getPlayerClasses(p);
 
 		if (!mod_RpgInventory.developers.contains(p.username.toLowerCase()) || weapon == null) {
-			if (!inv.hasClass(EnumRpgClass.PALADIN)) {
+			if (!mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSPALADIN)) {
 				return;
 			}
 		}

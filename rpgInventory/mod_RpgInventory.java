@@ -33,7 +33,9 @@ import rpgInventory.handlers.proxy.CommonProxy;
 import rpgInventory.item.ItemMold;
 import rpgInventory.item.ItemRageFood;
 import rpgInventory.item.ItemRpg;
-import rpgInventory.item.armor.ItemClassArmor;
+import rpgInventory.item.armor.ItemArcherArmor;
+import rpgInventory.item.armor.ItemBerserkerArmor;
+import rpgInventory.item.armor.ItemMageArmor;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.item.weapons.ItemArcherBow;
 import rpgInventory.item.weapons.ItemClaymore;
@@ -71,6 +73,21 @@ serverPacketHandlerSpec =
 @SidedPacketHandler(channels = {"RpgInv"}, packetHandler = RpgPacketHandler.class))
 public class mod_RpgInventory {
 
+	public static String CLASSARCHER = "archer";
+	public static String CLASSBERSERKER = "berserker";
+	public static String CLASSMAGE = "basicMage";
+	
+	public static String CLASSARCHERSHIELD = "shieldedArcher";
+	public static String CLASSBERSERKERSHIELD = "shieldedBerserker";
+	public static String CLASSMAGESHIELD = "shieldedBasicMage";
+	
+//	public static String ShieldedArcher = CLASSARCHER+CLASSARCHERSHIELD;
+//	public static String ShieldedBerserker = CLASSBERSERKER+CLASSBERSERKERSHIELD;
+//	public static String ShieldedMage = CLASSMAGE+CLASSMAGESHIELD;
+
+	
+	public static String playerClass = "none";
+	
 	public static mod_RpgInventory instance;
 	@SidedProxy(serverSide = "rpgInventory.handlers.proxy.CommonProxy", clientSide = "rpgInventory.handlers.proxy.ClientProxy")
 	public static CommonProxy proxy;
@@ -197,20 +214,20 @@ public class mod_RpgInventory {
 		cloak = new ItemRpgInvArmor(RpgConfig.instance.cloakID, 2, -1, "","").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
 		cloakI = new ItemRpgInvArmor(RpgConfig.instance.cloakIID, 2, -1, "","").setFull3D().setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
 
-		magehood = new ItemClassArmor(RpgConfig.instance.magehoodID, mage, 4, 0).setUnlocalizedName("mage1").setCreativeTab(tab);
-		magegown = new ItemClassArmor(RpgConfig.instance.magegownID, mage, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);
-		magepants = new ItemClassArmor(RpgConfig.instance.magepantsID, mage, 4, 2).setUnlocalizedName("mage3").setCreativeTab(tab);
-		mageboots = new ItemClassArmor(RpgConfig.instance.magebootsID, mage, 4, 3).setUnlocalizedName("mage4").setCreativeTab(tab);
+		magehood = new ItemMageArmor(RpgConfig.instance.magehoodID, mage, 4, 0).setUnlocalizedName("mage1").setCreativeTab(tab);
+		magegown = new ItemMageArmor(RpgConfig.instance.magegownID, mage, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);
+		magepants = new ItemMageArmor(RpgConfig.instance.magepantsID, mage, 4, 2).setUnlocalizedName("mage3").setCreativeTab(tab);
+		mageboots = new ItemMageArmor(RpgConfig.instance.magebootsID, mage, 4, 3).setUnlocalizedName("mage4").setCreativeTab(tab);
 
-		archerhood = new ItemClassArmor(RpgConfig.instance.archerhoodID, archer, 4, 0).setUnlocalizedName("archer1").setCreativeTab(tab);
-		archerchest = new ItemClassArmor(RpgConfig.instance.archerchestID, archer, 4, 1).setUnlocalizedName("archer2").setCreativeTab(tab);
-		archerpants = new ItemClassArmor(RpgConfig.instance.archerpantsID, archer, 4, 2).setUnlocalizedName("archer3").setCreativeTab(tab);
-		archerboots = new ItemClassArmor(RpgConfig.instance.archerbootsID, archer, 4, 3).setUnlocalizedName("archer4").setCreativeTab(tab);
+		archerhood = new ItemArcherArmor(RpgConfig.instance.archerhoodID, archer, 4, 0).setUnlocalizedName("archer1").setCreativeTab(tab);
+		archerchest = new ItemArcherArmor(RpgConfig.instance.archerchestID, archer, 4, 1).setUnlocalizedName("archer2").setCreativeTab(tab);
+		archerpants = new ItemArcherArmor(RpgConfig.instance.archerpantsID, archer, 4, 2).setUnlocalizedName("archer3").setCreativeTab(tab);
+		archerboots = new ItemArcherArmor(RpgConfig.instance.archerbootsID, archer, 4, 3).setUnlocalizedName("archer4").setCreativeTab(tab);
 
-		berserkerHood = new ItemClassArmor(RpgConfig.instance.berserkerHoodID, berserker, 4, 0).setUnlocalizedName("berserk1").setCreativeTab(tab);
-		berserkerChest = new ItemClassArmor(RpgConfig.instance.berserkerChestID, berserker, 4, 1).setUnlocalizedName("berserk2").setCreativeTab(tab);
-		berserkerLegs = new ItemClassArmor(RpgConfig.instance.berserkerLegsID, berserker, 4, 2).setUnlocalizedName("berserk3").setCreativeTab(tab);
-		berserkerBoots = new ItemClassArmor(RpgConfig.instance.berserkerBootsID, berserker, 4, 3).setUnlocalizedName("berserk4").setCreativeTab(tab);
+		berserkerHood = new ItemBerserkerArmor(RpgConfig.instance.berserkerHoodID, berserker, 4, 0).setUnlocalizedName("berserk1").setCreativeTab(tab);
+		berserkerChest = new ItemBerserkerArmor(RpgConfig.instance.berserkerChestID, berserker, 4, 1).setUnlocalizedName("berserk2").setCreativeTab(tab);
+		berserkerLegs = new ItemBerserkerArmor(RpgConfig.instance.berserkerLegsID, berserker, 4, 2).setUnlocalizedName("berserk3").setCreativeTab(tab);
+		berserkerBoots = new ItemBerserkerArmor(RpgConfig.instance.berserkerBootsID, berserker, 4, 3).setUnlocalizedName("berserk4").setCreativeTab(tab);
 
 		claymore = new ItemClaymore(RpgConfig.instance.claymoreID, clay).setFull3D().setMaxDamage(1024).setUnlocalizedName("claymore").setCreativeTab(tab);
 		wand = new ItemMageSphere(RpgConfig.instance.wandID).setFull3D().setMaxDamage(400).setUnlocalizedName("soulsphere").setCreativeTab(tab);
@@ -367,9 +384,6 @@ public class mod_RpgInventory {
 				GameRegistry.addRecipe(new ItemStack(var5), new Object[]{this.recipePatterns[var4], 'X', var3});
 			}
 		}
-		if (hasRpg == true) {
-			
-		}
 
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
@@ -507,5 +521,9 @@ public class mod_RpgInventory {
 	@SideOnly(Side.CLIENT)
 	private void registerClientEvents(){
 		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
+	}
+	
+	public String playerClass(){
+		return playerClass;
 	}
 }

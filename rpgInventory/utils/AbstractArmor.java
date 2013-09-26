@@ -15,10 +15,43 @@ public abstract class AbstractArmor extends ItemArmor {
 	public final EnumArmorMaterial mat;
 	public ModelBiped armorModel; 
 
+	public static final int BOOTS = 36;
+	public static final int LEGS = 37;
+	public static final int CHEST = 38;
+	public static final int HELM = 39;
+
 	public AbstractArmor(int par1, EnumArmorMaterial enumArmorMaterial,
 			int par3, int par4) {
 		super(par1, enumArmorMaterial, par3, par4);
 		mat = enumArmorMaterial;
+	}
+	
+	/**returns the name of the class from this full set of armor*/
+	public abstract String armorClassName();
+	
+	public boolean fullEquiped(EntityPlayer player, EnumArmorMaterial material){
+		if(player != null && 
+				player.inventory != null && 
+				material != null &&
+				player.inventory.getStackInSlot(HELM) != null &&
+				(player.inventory.getStackInSlot(HELM).getItem()) instanceof ItemArmor && 
+				((ItemArmor) player.inventory.getStackInSlot(HELM).getItem()).getArmorMaterial() == material &&
+
+				player.inventory.getStackInSlot(CHEST) != null && 
+				(player.inventory.getStackInSlot(CHEST).getItem()) instanceof ItemArmor &&
+				((ItemArmor) player.inventory.getStackInSlot(CHEST).getItem()).getArmorMaterial() == material &&
+
+				player.inventory.getStackInSlot(LEGS) != null &&
+				(player.inventory.getStackInSlot(LEGS).getItem()) instanceof ItemArmor && 
+				((ItemArmor) player.inventory.getStackInSlot(38).getItem()).getArmorMaterial() == material&&
+
+				player.inventory.getStackInSlot(BOOTS) != null &&
+				(player.inventory.getStackInSlot(BOOTS).getItem()) instanceof ItemArmor && 
+				((ItemArmor) player.inventory.getStackInSlot(BOOTS).getItem()).getArmorMaterial() == material)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	@Override

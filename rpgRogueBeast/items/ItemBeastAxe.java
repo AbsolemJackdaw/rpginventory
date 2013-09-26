@@ -21,10 +21,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.item.weapons.ItemRpgSword;
 import rpgInventory.richUtil.Targetting;
+import rpgRogueBeast.mod_RpgRB;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
@@ -65,7 +65,7 @@ public class ItemBeastAxe extends ItemRpgSword {
     }
     @Override
     public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count) {
-        if (EnumRpgClass.getPlayerClasses(player).contains(EnumRpgClass.BEASTMASTER)) {
+        if (mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSBEASTMASTER)) {
             World world = player != null ? player.worldObj : null;
             if (world!= null && world.isRemote && FMLCommonHandler.instance().getEffectiveSide().isClient()) {
                 Minecraft mc = Minecraft.getMinecraft();

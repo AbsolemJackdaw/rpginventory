@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.config.RpgConfig;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -26,6 +27,12 @@ public class mod_VanillaShields {
 	
 	public static CreativeTabs tab;
 	
+	
+	public static String WOODENSHIELD = "shieldedWood";
+	public static String IRONSHIELD = "shieldedIron";
+	public static String GOLDENSHIELD = "shieldedGolden";
+	public static String DIAMONDSHIELD = "shieldedDiamond";
+
 	public static Item
 	shieldWood, shieldIron, shieldGold, shieldDiamond;
 
@@ -56,5 +63,8 @@ public class mod_VanillaShields {
 		GameRegistry.addRecipe(new ItemStack(shieldDiamond, 1), new Object[]{"WWW", "WBW", " W ", 'W', Item.diamond, 'B', Block.blockDiamond});
 		
 		proxy.registerRenderers();
+		
+		MinecraftForge.EVENT_BUS.register(new VanillaEvents());
+
     }
 }

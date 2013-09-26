@@ -1,7 +1,5 @@
 package rpgInventory.gui.rpginv;
 
-import java.util.EnumSet;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -12,7 +10,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import rpgInventory.EnumRpgClass;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.RPGEventHooks;
 import rpgInventory.handlers.packets.PacketInventory;
@@ -22,7 +19,8 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 
 	public ItemStack[] armorSlots = new ItemStack[7];
 	public String playername;
-	public EnumSet<EnumRpgClass> classSets;
+//	public EnumSet<EnumRpgClass> classSets;
+//	public LinkedList classSets;
 	private EntityPlayer player;
 	
 	public final static String EXT_PROP_NAME = "RpgInventory";
@@ -32,7 +30,7 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 	public PlayerRpgInventory(EntityPlayer p) {
 		playername = p.username;
 		player = p;
-		classSets = EnumSet.noneOf(EnumRpgClass.class);
+//		classSets = new LinkedList();//EnumSet.noneOf(EnumRpgClass.class);
 	}
 
 	/*=====SAVING ENTITY DATA =====*/
@@ -61,8 +59,11 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 	}
 	
 	/*=====INVENTORY=====*/
-	public boolean hasClass(EnumRpgClass rpgenum) {
-		if (classSets.contains(rpgenum)) {
+	public boolean hasClass(String rpgenum) {
+//		if (EnumRpgClass.getPlayerClasses(player).contains(rpgenum)) {
+//			return true;
+//		}
+		if(rpgenum.equals(mod_RpgInventory.playerClass)){
 			return true;
 		}
 		return false;
@@ -223,13 +224,13 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 			//classSets = EnumRpgClass.getPlayerClasses(player);
 			//TODO is done ! moved that line ^ to eventhooks so it gets updated properly.
 			boolean addtoticks[] = new boolean[3];
-			if (hasClass(EnumRpgClass.SHIELDEDARCHER)) {
+			if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSARCHERSHIELD)) {
 				if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() != null) {
 					if (player.inventory.getCurrentItem().getItem().equals(mod_RpgInventory.elfbow) || player.inventory.getCurrentItem().getItem() instanceof ItemBow) {
 						addtoticks[0] = true;
 					}
 				}
-			} else if (hasClass(EnumRpgClass.SHIELDEDMAGE)) {
+			} else if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSMAGESHIELD)) {
 				if (player.getCurrentEquippedItem() != null) {
 					if (player.getCurrentEquippedItem().getItem().equals(mod_RpgInventory.staf)) {
 						addtoticks[1] = true;

@@ -92,32 +92,13 @@ public class ItemRpgInvArmor extends Item {
 	}
 
 	/**
-	 * gets the desired effect for jewelry of a certain kind. 0-3 speed boost
-	 * 4-7 healing, 8-11 damage and weapon healing, 12-15 emerald effects, 16-19
-	 * shield n cloak
-	 */
-	public void effectSwitch(int id, EntityPlayer player, ItemStack is) {
-	}
-
-	/**
-	 * an effect that simulates drinking from a milk bucket, but only for
-	 * debuffs.
-	 */
-	public void getMilkEffect(ItemStack itemstack, int time, EntityPlayer player) {
-	}
-
-	public void healWeapon(EntityPlayer player, int chances) {
-	}
-
-	/**
 	 * Returns the 'max damage' factor array for the armor, each piece of armor
 	 * have a durability factor (that gets multiplied by armor material factor)
 	 */
 	int[] getMaxDamageArray() {
 		return maxDamageArray;
 	}
-
-
+	
 	/**
 	 * allows items to add custom lines of information to the mouseover
 	 * description
@@ -175,7 +156,33 @@ public class ItemRpgInvArmor extends Item {
 
 	private ResourceLocation TEXTURE;
 
+	/**Gets the String initially set in the item constructor and turns it into a use-able resource-location*/
 	public ResourceLocation getTexture(){
 		return TEXTURE;
+	}
+	
+	/**Used to upgrade the player's class to 'playerClass' + 'shieldedClass'
+	 * Only works if the shield finds the matching class with boundArmorClass()*/
+	public String shieldClass(){
+		if(this.equals(mod_RpgInventory.berserkerShield))
+			return mod_RpgInventory.CLASSBERSERKERSHIELD;
+		if(this.equals(mod_RpgInventory.archerShield))
+			return mod_RpgInventory.CLASSARCHERSHIELD;
+		if(this.equals(mod_RpgInventory.talisman))
+			return mod_RpgInventory.CLASSMAGESHIELD;	
+		return "none";
+	}
+	
+	/**'Bounds' the shield to an armor class. this should be overridden in child mods !
+	 * If the string is left/set to "none", it will not check for class armor and can be used by anyone
+	 * (like Vanilla Shields)*/
+	public String boundArmorClass(){
+		if(this.equals(mod_RpgInventory.berserkerShield))
+			return mod_RpgInventory.CLASSBERSERKER;
+		if(this.equals(mod_RpgInventory.archerShield))
+			return mod_RpgInventory.CLASSARCHER;
+		if(this.equals(mod_RpgInventory.talisman))
+			return mod_RpgInventory.CLASSMAGE;	
+		return "none";
 	}
 }

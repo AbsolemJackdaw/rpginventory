@@ -37,7 +37,7 @@ public class RenderRpgPlayer {
 
 		EntityPlayer player = evt.entityPlayer;
 		main = evt.renderer.modelBipedMain;
-
+		
 		/*===== RENDERING GLOVES=====*/
 		ItemStack gloves = PlayerRpgInventory.get(player).getGloves();
 		if(gloves != null){
@@ -62,7 +62,11 @@ public class RenderRpgPlayer {
 		ItemStack shield = PlayerRpgInventory.get(player).getShield();
 		if(shield != null ){
 			mc.renderEngine.bindTexture(((ItemRpgInvArmor)shield.getItem()).getTexture());
-			if(shield.getItem().equals(mod_RpgInventory.archBook)){
+			
+			//this is an exception towards all other rendering.
+			//I do not have a hook for it yet, but I hope I soon will.
+			
+			if(mod_RpgInventory.playerClass.contains("shieldedArchMage")){
 				renderMantle(player, 1);
 			}
 			if(shield.getItem().equals(mod_RpgInventory.talisman)){
@@ -75,7 +79,7 @@ public class RenderRpgPlayer {
 
 	private void renderShield(ItemRpgInvArmor armor){
 		GL11.glPushMatrix();
-		
+
 		for(int i =0; i< armor.getShieldModel().parts.size(); i++){
 			armor.getShieldModel().parts.get(i).rotateAngleX= main.bipedLeftArm.rotateAngleX;
 			armor.getShieldModel().parts.get(i).rotateAngleY= main.bipedLeftArm.rotateAngleY;

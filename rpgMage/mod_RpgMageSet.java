@@ -9,13 +9,11 @@ import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.renderer.RenderRpgPlayer;
 import rpgMage.weapons.ItemElementalStaff;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
@@ -33,6 +31,9 @@ serverPacketHandlerSpec =
 public class mod_RpgMageSet {
 
 
+	public static String CLASSARCHMAGE = "archMage";
+	public static String CLASSARCHMAGESHIELD = "shieldedArchMage";
+	
 	@SidedProxy(serverSide = "rpgMage.MSCommonProxy", clientSide = "rpgMage.MSClientProxy")
 	public static MSCommonProxy proxy;
 

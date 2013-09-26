@@ -3,6 +3,7 @@ package rpgInventory.handlers.proxy;
 import java.util.Random;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
@@ -21,7 +22,7 @@ public class CommonProxy {
 		
 	}
 	
-	public void spawnCharmParticle(World world, EntityLiving el, Random rng, boolean success) {
+	public void spawnCharmParticle(World world, EntityLivingBase p, Random rng, boolean success) {
 	}
 
 

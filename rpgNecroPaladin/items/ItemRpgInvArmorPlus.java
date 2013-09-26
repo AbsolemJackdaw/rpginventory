@@ -6,6 +6,7 @@ import rpgInventory.models.shields.MainShield;
 import rpgNecroPaladin.mod_RpgPlus;
 import rpgNecroPaladin.models.NecroShield;
 import rpgNecroPaladin.models.PalaShield;
+import rpgRogueBeast.mod_RpgRB;
 
 public class ItemRpgInvArmorPlus extends ItemRpgInvArmor {
 
@@ -17,6 +18,28 @@ public class ItemRpgInvArmorPlus extends ItemRpgInvArmor {
 		this.setCreativeTab(CreativeTabs.tabCombat);
 	}
 	
+	@Override
+	public String boundArmorClass() {
+		
+		if(this.equals(mod_RpgPlus.necro_shield)){
+			return mod_RpgPlus.CLASSNECRO;
+		}
+		if(this.equals(mod_RpgPlus.pala_shield)){
+			return mod_RpgPlus.CLASSPALADIN;
+		}
+		return super.boundArmorClass();
+	}
+
+	@Override
+	public String shieldClass() {
+		if(this.equals(mod_RpgPlus.necro_shield)){
+			return mod_RpgPlus.CLASSNECROSHIELD;
+		}
+		if(this.equals(mod_RpgPlus.pala_shield)){
+			return mod_RpgPlus.CLASSPALADINSHIELD;
+		}		
+		return super.shieldClass();
+	}
 	
 	private NecroShield nec = new NecroShield();
 	private PalaShield pala = new PalaShield();

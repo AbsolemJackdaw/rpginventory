@@ -12,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import rpgInventory.EnumRpgClass;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.IPacketHandler;
@@ -38,8 +37,6 @@ public class RpgPlusPacketHandler implements IPacketHandler {
 		ItemStack weapon = p.getCurrentEquippedItem();
 		PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
-		inv.classSets = EnumRpgClass.getPlayerClasses(p);
-
 		if (inv != null) {
 			switch (weaponID) {
 
@@ -50,8 +47,8 @@ public class RpgPlusPacketHandler implements IPacketHandler {
 			case WEAPONIDS.NECROSPECIAL:
 				new PacketNecroSpecial(weapon, dis, inv, p);
 				break;
-
 			case WEAPONIDS.PALADINSPECIAL:
+				new PacketPalaSpecial(player, p, dis, weapon, inv);
 				break;
 			default:
 				break;
