@@ -13,37 +13,38 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.RPGEventHooks;
 import rpgInventory.handlers.packets.PacketInventory;
+import rpgInventory.item.armor.ItemRpgInvArmor;
 import cpw.mods.fml.common.FMLLog;
 
 public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties {
 
 	public ItemStack[] armorSlots = new ItemStack[7];
 	public String playername;
-//	public EnumSet<EnumRpgClass> classSets;
-//	public LinkedList classSets;
+	//	public EnumSet<EnumRpgClass> classSets;
+	//	public LinkedList classSets;
 	private EntityPlayer player;
-	
+
 	public final static String EXT_PROP_NAME = "RpgInventory";
-	
+
 	private static final String tagName = "RpgInventory";
 
 	public PlayerRpgInventory(EntityPlayer p) {
 		playername = p.username;
 		player = p;
-//		classSets = new LinkedList();//EnumSet.noneOf(EnumRpgClass.class);
+		//		classSets = new LinkedList();//EnumSet.noneOf(EnumRpgClass.class);
 	}
 
 	/*=====SAVING ENTITY DATA =====*/
-	
+
 	public static final void register(EntityPlayer player){
 		player.registerExtendedProperties(EXT_PROP_NAME, new PlayerRpgInventory(player));
 		FMLLog.getLogger().info("Player properties registered" );
 	}
-	
+
 	public static final PlayerRpgInventory get(EntityPlayer p){
 		return (PlayerRpgInventory) p.getExtendedProperties(EXT_PROP_NAME);
 	}
-	
+
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
 		writeToNBT(compound);
@@ -57,12 +58,12 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 	@Override
 	public void init(Entity entity, World world) {		
 	}
-	
+
 	/*=====INVENTORY=====*/
 	public boolean hasClass(String rpgenum) {
-//		if (EnumRpgClass.getPlayerClasses(player).contains(rpgenum)) {
-//			return true;
-//		}
+		//		if (EnumRpgClass.getPlayerClasses(player).contains(rpgenum)) {
+		//			return true;
+		//		}
 		if(rpgenum.equals(mod_RpgInventory.playerClass)){
 			return true;
 		}
@@ -217,9 +218,9 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 	@Override
 	public void onInventoryChanged() {
 		try {
-			
+
 			PacketInventory.sendPacket(player, this);
-			
+
 			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(playername);
 			//classSets = EnumRpgClass.getPlayerClasses(player);
 			//TODO is done ! moved that line ^ to eventhooks so it gets updated properly.
@@ -361,9 +362,9 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 
 	@Override
 	public void closeChest() {
-//		ExtendedPlayer props = ExtendedPlayer.get(player);
-//		props.addEntry(this);
-		
+		//		ExtendedPlayer props = ExtendedPlayer.get(player);
+		//		props.addEntry(this);
+
 		PacketInventory.sendPacket(player, this);
 
 	}
@@ -375,6 +376,51 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		if ((itemstack.getItem() instanceof ItemRpgInvArmor)) {
+			ItemRpgInvArmor tmp = (ItemRpgInvArmor) itemstack.getItem();
+			switch (i) {
+			case 0:
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.NECKLACE) {
+					return true;
+				}
+				return false;
+			case 1:
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.SHIELD) {
+					return true;
+				}
+				return false;
+			case 2:
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CLOAK) {
+					return true;
+				}
+				return false;
+			case 3:
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.GLOVES) {
+					return true;
+				}
+				return false;
+			case 4:
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING) {
+					return true;
+				}
+				return false;
+			case 5:
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING) {
+					return true;
+				}
+				return false;
+			case 6:
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CRYSTAL) {
+					if (itemstack.getItemDamage() > 0) {
+						return true;
+					}
+				}
+				return false;
+			default:
+				//	                    System.out.println("Unknown RPG Inventory type:" + slotIndex);
+				return false;
+			}
+		}
 		return false;
 	}
 }

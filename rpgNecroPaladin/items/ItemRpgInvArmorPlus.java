@@ -13,9 +13,6 @@ public class ItemRpgInvArmorPlus extends ItemRpgInvArmor {
 	public ItemRpgInvArmorPlus(int par1, int par4, int maxDamage, String name, String loc)
 	{
 		super(par1, par4, maxDamage, name, loc);
-		this.armorType = par4;
-		this.maxStackSize = 1;
-		this.setCreativeTab(CreativeTabs.tabCombat);
 	}
 	
 	@Override

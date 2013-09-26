@@ -37,11 +37,10 @@ public class ItemMageARmor extends AbstractArmor{
 
 		int type = ((ItemArmor)stack.getItem()).armorType;
 		if(type == 1 || type == 3){
+			armorModel = this.armorMageChest;
 
 		}else{
-			if(mat.equals(mod_RpgMageSet.archMage)){
-				armorModel = this.armorMage;
-			}
+			armorModel = this.armorMage;
 		}
 
 	}

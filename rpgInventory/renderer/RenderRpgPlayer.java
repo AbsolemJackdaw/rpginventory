@@ -45,14 +45,14 @@ public class RenderRpgPlayer {
 			renderGloves();
 		}	
 
-		/*===== RENDERING GLOVES=====*/
+		/*===== RENDERING NECKLACE=====*/
 		ItemStack necklace = PlayerRpgInventory.get(player).getNecklace();
 		if(necklace != null){
 			mc.renderEngine.bindTexture(((ItemRpgInvArmor)necklace.getItem()).getTexture());
 			renderNecklace(evt.entityPlayer);
 		}
 
-		/*===== RENDERING GLOVES=====*/
+		/*===== RENDERING CLOAK=====*/
 		ItemStack cloak = PlayerRpgInventory.get(player).getCloak();
 		if(cloak != null){
 			rendercape(player, cloak, evt.partialTick);

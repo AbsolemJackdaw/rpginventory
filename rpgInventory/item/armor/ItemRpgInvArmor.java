@@ -9,10 +9,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.MainShield;
 import rpgInventory.models.shields.ModelShield;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -28,26 +31,25 @@ public class ItemRpgInvArmor extends Item {
 	 */
 	public int armorType;
 
-	/**
-	 * Used on RenderPlayer to select the correspondent armor to be rendered on
-	 * the player: 0 is cloth, 1 is chain, 2 is iron, 3 is diamond and 4 is
-	 * gold.
-	 */
 	@Override
 	public void registerIcons(IconRegister par1IconRegister ) {
 		String itemName = getUnlocalizedName().substring(getUnlocalizedName().lastIndexOf(".") + 1);
 		this.itemIcon = par1IconRegister.registerIcon("rpginventorymod:" + itemName);
 	}
-	public int renderJewelIndex;
-	private String Name;
 
+	/**second string : name, isn't used. 
+	 * @params
+	 * ItemID
+	 * ArmorType (aka shield,gloves, cloak, ... )
+	 * the maximum damage this item can take. only used for shields
+	 * name is unused
+	 * location for texture*/
 	public ItemRpgInvArmor(int par1, int par4, int maxDamage, String name, String resourcelocation) {
 		super(par1);
 		this.armorType = par4;
 		this.maxStackSize = 1;
 		this.setCreativeTab(CreativeTabs.tabCombat);
 		this.setMaxDamage(maxDamage);
-		Name = name;
 		TEXTURE = new ResourceLocation(resourcelocation);
 	}
 
@@ -98,7 +100,7 @@ public class ItemRpgInvArmor extends Item {
 	int[] getMaxDamageArray() {
 		return maxDamageArray;
 	}
-	
+
 	/**
 	 * allows items to add custom lines of information to the mouseover
 	 * description
@@ -148,11 +150,6 @@ public class ItemRpgInvArmor extends Item {
 			list.add(StatCollector.translateToLocal("-1 Damage on Held Weapon Every 20 Seconds"));
 		}
 	}
-	
-	@Override
-	public String toString() {
-		return Name;
-	}
 
 	private ResourceLocation TEXTURE;
 
@@ -160,7 +157,7 @@ public class ItemRpgInvArmor extends Item {
 	public ResourceLocation getTexture(){
 		return TEXTURE;
 	}
-	
+
 	/**Used to upgrade the player's class to 'playerClass' + 'shieldedClass'
 	 * Only works if the shield finds the matching class with boundArmorClass()*/
 	public String shieldClass(){
@@ -172,7 +169,25 @@ public class ItemRpgInvArmor extends Item {
 			return mod_RpgInventory.CLASSMAGESHIELD;	
 		return "none";
 	}
-	
+
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
+			EntityPlayer par3EntityPlayer) {
+
+		PlayerRpgInventory inv = PlayerRpgInventory.get(par3EntityPlayer);
+
+		for(int i = 0; i < inv.getSizeInventory(); i++){	
+			if(inv.getStackInSlot(i) == null){
+				if(inv.isItemValidForSlot(i, par1ItemStack)){
+					inv.setInventorySlotContents(i, par1ItemStack);
+					par3EntityPlayer.destroyCurrentEquippedItem();
+				}
+			}
+		}
+
+		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
+	}
 	/**'Bounds' the shield to an armor class. this should be overridden in child mods !
 	 * If the string is left/set to "none", it will not check for class armor and can be used by anyone
 	 * (like Vanilla Shields)*/
