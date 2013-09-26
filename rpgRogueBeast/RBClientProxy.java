@@ -18,9 +18,11 @@ import rpgRogueBeast.entity.EntityTeleportStone;
 import rpgRogueBeast.entity.SpiderPet;
 import rpgRogueBeast.entity.renderers.RenderPet;
 import rpgRogueBeast.models.LionHead;
+import rpgRogueBeast.packets.RpgRBPacketHandler;
 import rpgRogueBeast.render.AxeRender;
 import rpgRogueBeast.render.LionHeadRenderer;
 import rpgRogueBeast.render.RenderDagger;
+import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 
@@ -44,5 +46,7 @@ public class RBClientProxy extends RBCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(BoarPet.class, new RenderPet());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class, new RenderXPOrb());
 		RenderingRegistry.registerEntityRenderingHandler(EntityTeleportStone.class, new RenderSnowball(Item.feather, 1));
+		
+		KeyBindingRegistry.registerKeyBinding(new RpgKeyHandlerRB());
 	}
 }
