@@ -43,7 +43,8 @@ public class PlayerRpgContainer extends Container {
 				this.addSlotToContainer(new Slot(player.inventory, (var5 + (var4 + 1) * 9), 8 + var5 * 18, 84 + var4 * 18));
 			}
 		}
-		inventory = inv;	
+		inventory = inv;
+		//Put away pet when gui is opened. This is a nerf and a fix for lag induced duping.
 	}
 
 	public boolean doesGuiPauseGame() {
