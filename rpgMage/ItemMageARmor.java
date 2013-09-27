@@ -5,7 +5,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import rpgInventory.models.armor.ModelMageArmor;
 import rpgInventory.utils.AbstractArmor;
 
 public class ItemMageARmor extends AbstractArmor{
@@ -28,19 +27,16 @@ public class ItemMageARmor extends AbstractArmor{
 		return super.getArmorTexture(itemstack, entity, slot, type);
 	}
 
-	private static final ModelMageArmor armorMageChest = new ModelMageArmor(1.0f);
-	private static final ModelMageArmor armorMage = new ModelMageArmor(0.5f);
-
 	@Override
 	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
 			int armorSlot) {
 
 		int type = ((ItemArmor)stack.getItem()).armorType;
 		if(type == 1 || type == 3){
-			armorModel = this.armorMageChest;
+			armorModel = mod_RpgMageSet.proxy.getArmorModel(0);
 
 		}else{
-			armorModel = this.armorMage;
+			armorModel = mod_RpgMageSet.proxy.getArmorModel(1);
 		}
 
 	}

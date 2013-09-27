@@ -64,9 +64,9 @@ public class EntityPetXP extends EntityXPOrb {
 
             if (var11 > 0.0D) {
                 var11 *= var11;
-                this.motionX += var3 / var9 * var11 * 0.1D;
+                this.motionX += var3 / var9 * var11 * 0.4D;
                 this.motionY += var5 / var9 * var11 * 0.1D;
-                this.motionZ += var7 / var9 * var11 * 0.1D;
+                this.motionZ += var7 / var9 * var11 * 0.4D;
             }
         }
 
@@ -100,7 +100,7 @@ public class EntityPetXP extends EntityXPOrb {
 
     public IPet getClosestPet(World world, double par1, double par3, double par5) {
         double oldDistance = -1.0D;
-        double searchdistance = 10;
+        double searchdistance = 20;
         IPet var11 = null;
         List<IPet> pets = world.getEntitiesWithinAABB(IPet.class, boundingBox.expand(14, 14, 14));
         for (IPet thisPet : pets) {

@@ -21,7 +21,6 @@ import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.jewels.GloveLeft;
 import rpgInventory.models.jewels.GloveRight;
 import rpgInventory.models.jewels.ModelNecklace;
-import rpgVanillaShields.VanillaShield;
 
 public class RenderRpgPlayer {
 
@@ -37,7 +36,7 @@ public class RenderRpgPlayer {
 
 		EntityPlayer player = evt.entityPlayer;
 		main = evt.renderer.modelBipedMain;
-		
+
 		/*===== RENDERING GLOVES=====*/
 		ItemStack gloves = PlayerRpgInventory.get(player).getGloves();
 		if(gloves != null){
@@ -62,10 +61,10 @@ public class RenderRpgPlayer {
 		ItemStack shield = PlayerRpgInventory.get(player).getShield();
 		if(shield != null ){
 			mc.renderEngine.bindTexture(((ItemRpgInvArmor)shield.getItem()).getTexture());
-			
+
 			//this is an exception towards all other rendering.
 			//I do not have a hook for it yet, but I hope I soon will.
-			
+
 			if(mod_RpgInventory.playerClass.contains("shieldedArchMage")){
 				renderMantle(player, 1);
 			}
@@ -88,9 +87,14 @@ public class RenderRpgPlayer {
 			armor.getShieldModel().parts.get(i).rotationPointY= main.bipedLeftArm.rotationPointY;
 			armor.getShieldModel().parts.get(i).rotationPointZ= main.bipedLeftArm.rotationPointZ;
 		}
-		if(armor.getShieldModel() instanceof VanillaShield){ 
-			armor.getShieldModel().parts.get(64-1).rotateAngleZ = main.bipedLeftArm.rotateAngleZ + 0.356f;
+		try {
+			if(armor.shieldClass().contains("vanilla")){ 
+				armor.getShieldModel().parts.get(64-1).rotateAngleZ = main.bipedLeftArm.rotateAngleZ + 0.356f;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
+
 		armor.getShieldModel().renderShield(0.0625f);	
 		GL11.glPopMatrix();
 	}

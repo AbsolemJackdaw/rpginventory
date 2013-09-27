@@ -28,10 +28,10 @@ public class mod_VanillaShields {
 	public static CreativeTabs tab;
 	
 	
-	public static String WOODENSHIELD = "shieldedWood";
-	public static String IRONSHIELD = "shieldedIron";
-	public static String GOLDENSHIELD = "shieldedGolden";
-	public static String DIAMONDSHIELD = "shieldedDiamond";
+	public static String WOODENSHIELD = "vanillaWood";
+	public static String IRONSHIELD = "vanillaIron";
+	public static String GOLDENSHIELD = "vanillaGolden";
+	public static String DIAMONDSHIELD = "vanillaDiamond";
 
 	public static Item
 	shieldWood, shieldIron, shieldGold, shieldDiamond;

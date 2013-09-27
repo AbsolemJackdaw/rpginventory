@@ -5,7 +5,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import rpgInventory.models.armor.ModelRogueArmor;
 import rpgInventory.utils.AbstractArmor;
 import rpgRogueBeast.mod_RpgRB;
 
@@ -35,8 +34,6 @@ public class ItemRogueArmor extends AbstractArmor{
 	}
 
 
-	private static final ModelRogueArmor armorRogueChest = new ModelRogueArmor(1.0f);
-	private static final ModelRogueArmor armorRogue = new ModelRogueArmor(0.5f);
 	
 	@Override
 	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
@@ -48,9 +45,9 @@ public class ItemRogueArmor extends AbstractArmor{
 				int type = ((ItemArmor)stack.getItem()).armorType;
 
 				if(type == 1 || type == 3){
-						armorModel = armorRogueChest;
+						armorModel = mod_RpgRB.proxy.getArmorModel(0);
 				}else{
-						armorModel = armorRogue;
+					armorModel = mod_RpgRB.proxy.getArmorModel(1);
 				}
 			}
 		}

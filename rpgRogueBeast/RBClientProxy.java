@@ -4,13 +4,16 @@
  */
 package rpgRogueBeast;
 
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.entity.RenderXPOrb;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
+import rpgInventory.models.armor.ModelRogueArmor;
 import rpgRogueBeast.entity.BoarPet;
 import rpgRogueBeast.entity.BullPet;
 import rpgRogueBeast.entity.EntityPetXP;
@@ -18,7 +21,7 @@ import rpgRogueBeast.entity.EntityTeleportStone;
 import rpgRogueBeast.entity.SpiderPet;
 import rpgRogueBeast.entity.renderers.RenderPet;
 import rpgRogueBeast.models.LionHead;
-import rpgRogueBeast.packets.RpgRBPacketHandler;
+import rpgRogueBeast.models.ModelBeastArmor;
 import rpgRogueBeast.render.AxeRender;
 import rpgRogueBeast.render.LionHeadRenderer;
 import rpgRogueBeast.render.RenderDagger;
@@ -48,5 +51,29 @@ public class RBClientProxy extends RBCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EntityTeleportStone.class, new RenderSnowball(Item.feather, 1));
 		
 		KeyBindingRegistry.registerKeyBinding(new RpgKeyHandlerRB());
+		
+		MinecraftForge.EVENT_BUS.register(new SoundManager());
+	}
+	
+	private static final ModelRogueArmor armorRogueChest = new ModelRogueArmor(1.0f);
+	private static final ModelRogueArmor armorRogue = new ModelRogueArmor(0.5f);
+	private static final ModelBeastArmor armorBeastChest = new ModelBeastArmor(1.0f);
+	private static final ModelBeastArmor armorBeast = new ModelBeastArmor(0.5f);
+	
+	@Override
+	public ModelBiped getArmorModel(int id){
+		switch (id) {
+		case 0:
+			return armorRogueChest;
+		case 1:
+			return armorRogue;
+		case 2:
+			return armorBeastChest;
+		case 3:
+			return armorBeast;
+		default:
+			break;
+		}
+		return null;
 	}
 }

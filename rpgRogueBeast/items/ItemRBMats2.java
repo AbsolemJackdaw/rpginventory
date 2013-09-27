@@ -41,6 +41,8 @@ public class ItemRBMats2 extends Item {
                             }
                             //pet is not in the world
                         } else {
+                        	world.playSoundAtEntity(player, "subaraki:petWhistle", 1f,1f);
+                        	
                             switch (stack.getItemDamage()) {
                                 case 1:
 

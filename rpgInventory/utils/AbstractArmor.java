@@ -28,31 +28,6 @@ public abstract class AbstractArmor extends ItemArmor {
 	
 	/**returns the name of the class from this full set of armor*/
 	public abstract String armorClassName();
-	
-	public boolean fullEquiped(EntityPlayer player, EnumArmorMaterial material){
-		if(player != null && 
-				player.inventory != null && 
-				material != null &&
-				player.inventory.getStackInSlot(HELM) != null &&
-				(player.inventory.getStackInSlot(HELM).getItem()) instanceof ItemArmor && 
-				((ItemArmor) player.inventory.getStackInSlot(HELM).getItem()).getArmorMaterial() == material &&
-
-				player.inventory.getStackInSlot(CHEST) != null && 
-				(player.inventory.getStackInSlot(CHEST).getItem()) instanceof ItemArmor &&
-				((ItemArmor) player.inventory.getStackInSlot(CHEST).getItem()).getArmorMaterial() == material &&
-
-				player.inventory.getStackInSlot(LEGS) != null &&
-				(player.inventory.getStackInSlot(LEGS).getItem()) instanceof ItemArmor && 
-				((ItemArmor) player.inventory.getStackInSlot(38).getItem()).getArmorMaterial() == material&&
-
-				player.inventory.getStackInSlot(BOOTS) != null &&
-				(player.inventory.getStackInSlot(BOOTS).getItem()) instanceof ItemArmor && 
-				((ItemArmor) player.inventory.getStackInSlot(BOOTS).getItem()).getArmorMaterial() == material)
-		{
-			return true;
-		}
-		return false;
-	}
 
 	@Override
 	public void registerIcons(IconRegister par1IconRegister) {
@@ -61,6 +36,7 @@ public abstract class AbstractArmor extends ItemArmor {
 	}
 
 	/**Called to set the 3D armor model. set models here, not in getArmorModel(...) !*/
+	@SideOnly(Side.CLIENT)
 	protected abstract void get3DArmorModel(EntityLivingBase elb, ItemStack stack, int armorSlot);
 
 	@Override

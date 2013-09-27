@@ -1,11 +1,14 @@
 package rpgNecroPaladin;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.handlers.RPGKeyHandler;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
+import rpgNecroPaladin.models.ModelNecroArmor;
+import rpgNecroPaladin.models.ModelPaladinArmor;
 import rpgNecroPaladin.models.NecroShield;
 import rpgNecroPaladin.models.PalaShield;
 import rpgNecroPaladin.render.GrandSwordRender;
@@ -40,5 +43,28 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 		
 		KeyBindingRegistry.registerKeyBinding(new RpgPlusKeyHandling());
 
+	}
+	
+	private static final ModelNecroArmor armorNecroChest = new ModelNecroArmor(1.0f);
+	private static final ModelNecroArmor armorNecro = new ModelNecroArmor(0.5f);
+	
+	private static ModelPaladinArmor armorPaladinChest = new ModelPaladinArmor(1.0f, Minecraft.getMinecraft().thePlayer); 
+	private static ModelPaladinArmor armorPaladin = new ModelPaladinArmor(0.5f, Minecraft.getMinecraft().thePlayer); 
+	
+	@Override
+	public ModelBiped getArmorModel(int id){
+		switch (id) {
+		case 0:
+			return armorNecroChest;
+		case 1:
+			return armorNecro;
+		case 2:
+			return armorPaladinChest;
+		case 3:
+			return armorPaladin;
+		default:
+			break;
+		}
+		return null;
 	}
 }

@@ -7,7 +7,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import rpgInventory.utils.AbstractArmor;
 import rpgNecroPaladin.mod_RpgPlus;
-import rpgNecroPaladin.models.ModelNecroArmor;
 
 public class ItemNecroArmor extends AbstractArmor {
 
@@ -39,8 +38,7 @@ public class ItemNecroArmor extends AbstractArmor {
 
 	
 
-	private static final ModelNecroArmor armorNecroChest = new ModelNecroArmor(1.0f);
-	private static final ModelNecroArmor armorNecro = new ModelNecroArmor(0.5f);
+	
 
 
 	@Override
@@ -53,9 +51,9 @@ public class ItemNecroArmor extends AbstractArmor {
 				int type = ((ItemArmor)stack.getItem()).armorType;
 
 				if(type == 1 || type == 3){
-						armorModel = armorNecroChest;
+						armorModel = mod_RpgPlus.proxy.getArmorModel(0);
 				}else{
-						armorModel = armorNecro;
+						armorModel = mod_RpgPlus.proxy.getArmorModel(1);
 				}
 			}		
 	}

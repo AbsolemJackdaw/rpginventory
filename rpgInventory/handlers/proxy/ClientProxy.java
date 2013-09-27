@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.client.particle.EntityLargeExplodeFX;
 import net.minecraft.client.renderer.entity.RenderArrow;
@@ -27,6 +28,8 @@ import rpgInventory.gui.BookGui;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.ClientTickHandler;
 import rpgInventory.handlers.RPGKeyHandler;
+import rpgInventory.models.armor.ModelBerserkerArmor;
+import rpgInventory.models.armor.ModelMageArmor;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.ModelShield;
 import rpgInventory.renderer.RenderRpgPlayer;
@@ -163,6 +166,29 @@ public class ClientProxy extends CommonProxy {
 		}
 	}
 
+	private static final ModelMageArmor armorMageChest = new ModelMageArmor(1.0f);
+	private static final ModelMageArmor armorMage = new ModelMageArmor(0.5f);
+	private static final ModelBerserkerArmor armorBerserkChest = new ModelBerserkerArmor(1.0f);
+	private static final ModelBerserkerArmor armorBerserk = new ModelBerserkerArmor(0.5f);
+	
+	@Override
+	public ModelBiped getArmorModel(int id){
+		switch (id) {
+		case 0:
+			return armorMage;
+		case 1:
+			return armorMageChest;
+		case 2:
+			return armorBerserk;
+		case 3:
+			return armorBerserkChest;
+		default:
+			break;
+		}
+		return armorMage;
+	}
+
+	
 	public void openGUI(EntityPlayer p1, PlayerRpgInventory inv) {
 		Minecraft.getMinecraft().displayGuiScreen(new rpgInventory.gui.pet.PetGui(p1, inv));
 	}

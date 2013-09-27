@@ -6,7 +6,6 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.models.armor.ModelMageArmor;
 import rpgInventory.utils.AbstractArmor;
 
 public class ItemMageArmor extends AbstractArmor {
@@ -33,9 +32,6 @@ public class ItemMageArmor extends AbstractArmor {
 		return mod_RpgInventory.CLASSMAGE;
 	}
 
-	private static final ModelMageArmor armorMageChest = new ModelMageArmor(1.0f);
-	private static final ModelMageArmor armorMage = new ModelMageArmor(0.5f);
-
 	@Override
 	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
 			int armorSlot) {
@@ -45,9 +41,9 @@ public class ItemMageArmor extends AbstractArmor {
 				int type = ((ItemArmor)stack.getItem()).armorType;
 
 				if(type == 1 || type == 3){
-					armorModel = armorMageChest;
+					armorModel = mod_RpgInventory.proxy.getArmorModel(1);
 				}else{
-					armorModel = armorMage;
+					armorModel = mod_RpgInventory.proxy.getArmorModel(0);
 				}
 			} 
 		}

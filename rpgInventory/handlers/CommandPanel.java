@@ -21,12 +21,7 @@ import rpgInventory.item.ItemMold;
 import rpgInventory.item.ItemRpg;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.utils.AbstractArmor;
-import rpgMage.mod_RpgMageSet;
-import rpgNecroPaladin.mod_RpgPlus;
-import rpgNecroPaladin.items.ItemRpgInvArmorPlus;
-import rpgRogueBeast.mod_RpgRB;
-import rpgRogueBeast.entity.IPet;
-import rpgVanillaShields.mod_VanillaShields;
+
 
 public class CommandPanel extends CommandBase {
 
@@ -58,7 +53,7 @@ public class CommandPanel extends CommandBase {
 
 		for (Item item : Item.itemsList) {
 			if (item != null) {
-				if (item instanceof ItemRpgInvArmor || item instanceof ItemRpgInvArmorPlus) {
+				if (item instanceof ItemRpgInvArmor) {
 					sets.get("jewels").add(new ItemStack(item));
 				}
 			}
@@ -82,69 +77,90 @@ public class CommandPanel extends CommandBase {
 		sets.get("weapons").add(new ItemStack(mod_RpgInventory.staf));
 		sets.get("weapons").add(new ItemStack(mod_RpgInventory.wand));
 		sets.get("weapons").add(new ItemStack(mod_RpgInventory.elfbow));
-		if(mod_RpgInventory.hasRpg)
-		{
-			sets.get("weapons").add(new ItemStack(mod_RpgPlus.necro_weapon));
-			sets.get("weapons").add(new ItemStack(mod_RpgPlus.pala_weapon));
 
-			sets.get("necro").add(new ItemStack(mod_RpgPlus.necro_weapon));
-			sets.get("necro").add(new ItemStack(mod_RpgPlus.necro_shield));
-			sets.get("necro").add(new ItemStack(mod_RpgPlus.necroHood));
-			sets.get("necro").add(new ItemStack(mod_RpgPlus.necroChestplate));
-			sets.get("necro").add(new ItemStack(mod_RpgPlus.necroLeggings));
-			sets.get("necro").add(new ItemStack(mod_RpgPlus.necroBoots));
-
-			sets.get("paladin").add(new ItemStack(mod_RpgPlus.pala_weapon));
-			sets.get("paladin").add(new ItemStack(mod_RpgPlus.pala_shield));
-			sets.get("paladin").add(new ItemStack(mod_RpgPlus.palaHelm));
-			sets.get("paladin").add(new ItemStack(mod_RpgPlus.palaChest));
-			sets.get("paladin").add(new ItemStack(mod_RpgPlus.palaLeggings));
-			sets.get("paladin").add(new ItemStack(mod_RpgPlus.palaBoots));
-		}
-		if(mod_RpgInventory.hasMage)
-		{
-			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.archBook));
-			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.archMageBoots));
-			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.archmageChest));
-			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.archmageHood));
-			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.archmageLegs));
-
-			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.fireStaff));
-			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.frostStaff));
-			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.earthStaff));
-			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.windStaff));
-			sets.get("archmage").add(new ItemStack(mod_RpgMageSet.ultimateStaff));
-		}
-		if(mod_RpgInventory.hasRogue)
-		{
-			sets.get("beast").add(new ItemStack(mod_RpgRB.beastShield));
-			sets.get("beast").add(new ItemStack(mod_RpgRB.beastAxe));
-			sets.get("beast").add(new ItemStack(mod_RpgRB.beastBoots));
-			sets.get("beast").add(new ItemStack(mod_RpgRB.beastLegs));
-			sets.get("beast").add(new ItemStack(mod_RpgRB.beastChest));
-			sets.get("beast").add(new ItemStack(mod_RpgRB.beastHood));
-
-			sets.get("beast").add(new ItemStack(mod_RpgRB.crystal, 1, 1));
-			sets.get("beast").add(new ItemStack(mod_RpgRB.crystal, 1, 2));
-			sets.get("beast").add(new ItemStack(mod_RpgRB.crystal, 1, 3));
-			sets.get("beast").add(new ItemStack(mod_RpgRB.whistle));
-			sets.get("beast").add(new ItemStack(mod_RpgRB.petCandy));
-
-			sets.get("rogue").add(new ItemStack(mod_RpgRB.rogueBoots));
-			sets.get("rogue").add(new ItemStack(mod_RpgRB.rogueLegs));
-			sets.get("rogue").add(new ItemStack(mod_RpgRB.rogueChest));
-			sets.get("rogue").add(new ItemStack(mod_RpgRB.rogueHood));
-			sets.get("rogue").add(new ItemStack(mod_RpgRB.daggers));
-			sets.get("rogue").add(new ItemStack(mod_RpgRB.daggers));
-		}
-		if(mod_RpgInventory.hasShields)
-		{
-			sets.get("vanillashields").add(new ItemStack(mod_VanillaShields.shieldWood));
-			sets.get("vanillashields").add(new ItemStack(mod_VanillaShields.shieldGold));
-			sets.get("vanillashields").add(new ItemStack(mod_VanillaShields.shieldIron));
-			sets.get("vanillashields").add(new ItemStack(mod_VanillaShields.shieldDiamond));
-
-		}
+//		if(mod_RpgInventory.hasRpg)
+//		{
+//			try {
+//				sets.get("weapons").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.necro_weapon));
+//				sets.get("weapons").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.pala_weapon));
+//
+//				sets.get("necro").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.necro_weapon));
+//				sets.get("necro").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.necro_shield));
+//				sets.get("necro").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.necroHood));
+//				sets.get("necro").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.necroChestplate));
+//				sets.get("necro").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.necroLeggings));
+//				sets.get("necro").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.necroBoots));
+//
+//				sets.get("paladin").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.pala_weapon));
+//				sets.get("paladin").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.pala_shield));
+//				sets.get("paladin").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.palaHelm));
+//				sets.get("paladin").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.palaChest));
+//				sets.get("paladin").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.palaLeggings));
+//				sets.get("paladin").add(new ItemStack(rpgNecroPaladin.mod_RpgPlus.palaBoots));
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			}
+//
+//		}
+//		if(mod_RpgInventory.hasMage)
+//		{
+//			try {
+//				sets.get("archmage").add(new ItemStack(rpgMage.mod_RpgMageSet.archBook));
+//				sets.get("archmage").add(new ItemStack(rpgMage.mod_RpgMageSet.archMageBoots));
+//				sets.get("archmage").add(new ItemStack(rpgMage.mod_RpgMageSet.archmageChest));
+//				sets.get("archmage").add(new ItemStack(rpgMage.mod_RpgMageSet.archmageHood));
+//				sets.get("archmage").add(new ItemStack(rpgMage.mod_RpgMageSet.archmageLegs));
+//
+//				sets.get("archmage").add(new ItemStack(rpgMage.mod_RpgMageSet.fireStaff));
+//				sets.get("archmage").add(new ItemStack(rpgMage.mod_RpgMageSet.frostStaff));
+//				sets.get("archmage").add(new ItemStack(rpgMage.mod_RpgMageSet.earthStaff));
+//				sets.get("archmage").add(new ItemStack(rpgMage.mod_RpgMageSet.windStaff));
+//				sets.get("archmage").add(new ItemStack(rpgMage.mod_RpgMageSet.ultimateStaff));
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			}
+//
+//		}
+//		if(mod_RpgInventory.hasRogue)
+//		{
+//			try {
+//				sets.get("beast").add(new ItemStack(rpgRogueBeast.mod_RpgRB.beastShield));
+//				sets.get("beast").add(new ItemStack(rpgRogueBeast.mod_RpgRB.beastAxe));
+//				sets.get("beast").add(new ItemStack(rpgRogueBeast.mod_RpgRB.beastBoots));
+//				sets.get("beast").add(new ItemStack(rpgRogueBeast.mod_RpgRB.beastLegs));
+//				sets.get("beast").add(new ItemStack(rpgRogueBeast.mod_RpgRB.beastChest));
+//				sets.get("beast").add(new ItemStack(rpgRogueBeast.mod_RpgRB.beastHood));
+//
+//				sets.get("beast").add(new ItemStack(rpgRogueBeast.mod_RpgRB.crystal, 1, 1));
+//				sets.get("beast").add(new ItemStack(rpgRogueBeast.mod_RpgRB.crystal, 1, 2));
+//				sets.get("beast").add(new ItemStack(rpgRogueBeast.mod_RpgRB.crystal, 1, 3));
+//				sets.get("beast").add(new ItemStack(rpgRogueBeast.mod_RpgRB.whistle));
+//				sets.get("beast").add(new ItemStack(rpgRogueBeast.mod_RpgRB.petCandy));
+//
+//				sets.get("rogue").add(new ItemStack(rpgRogueBeast.mod_RpgRB.rogueBoots));
+//				sets.get("rogue").add(new ItemStack(rpgRogueBeast.mod_RpgRB.rogueLegs));
+//				sets.get("rogue").add(new ItemStack(rpgRogueBeast.mod_RpgRB.rogueChest));
+//				sets.get("rogue").add(new ItemStack(rpgRogueBeast.mod_RpgRB.rogueHood));
+//				sets.get("rogue").add(new ItemStack(rpgRogueBeast.mod_RpgRB.daggers));
+//				sets.get("rogue").add(new ItemStack(rpgRogueBeast.mod_RpgRB.daggers));
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			}
+//
+//		}
+//		if(mod_RpgInventory.hasShields)
+//		{
+//			try {
+//				sets.get("vanillashields").add(new ItemStack(rpgVanillaShields.mod_VanillaShields.shieldWood));
+//				sets.get("vanillashields").add(new ItemStack(rpgVanillaShields.mod_VanillaShields.shieldGold));
+//				sets.get("vanillashields").add(new ItemStack(rpgVanillaShields.mod_VanillaShields.shieldIron));
+//				sets.get("vanillashields").add(new ItemStack(rpgVanillaShields.mod_VanillaShields.shieldDiamond));
+//
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			}
+//
+//		}
 
 		sets.get("mage").add(new ItemStack(mod_RpgInventory.staf));
 		sets.get("mage").add(new ItemStack(mod_RpgInventory.wand));
@@ -253,28 +269,28 @@ public class CommandPanel extends CommandBase {
 								}
 							}
 						}
-						if (args[1].matches("activepet")){
-							if (args[2].matches("level")){
-								EntityPlayer player = (EntityPlayer)sender;
-								if(IPet.playersWithActivePets.containsKey(player.username)){
-									IPet.playersWithActivePets.get(player.username).getPet().addExperienceLevel(Integer.valueOf(args[3]));
-								}
-							}else if(args[2].matches("name")){
-								EntityPlayer player = (EntityPlayer)sender;
-								if(IPet.playersWithActivePets.containsKey(player.username)){
-									IPet.playersWithActivePets.get(player.username).getPet().setName(args[3]);
-								}
-							}else if(args[2].matches("saddled")){
-								EntityPlayer player = (EntityPlayer)sender;
-								if(IPet.playersWithActivePets.containsKey(player.username)){
-									IPet.playersWithActivePets.get(player.username).getPet().setSaddled(Boolean.valueOf(args[3]));
-								}
-							}
-						}
+						//						if (args[1].matches("activepet")){
+						//							if (args[2].matches("level")){
+						//								EntityPlayer player = (EntityPlayer)sender;
+						//								if(rpgRogueBeast.entity.IPet.playersWithActivePets.containsKey(player.username)){
+						//									rpgRogueBeast.entity.IPet.playersWithActivePets.get(player.username).getPet().addExperienceLevel(Integer.valueOf(args[3]));
+						//								}
+						//							}else if(args[2].matches("name")){
+						//								EntityPlayer player = (EntityPlayer)sender;
+						//								if(rpgRogueBeast.entity.IPet.playersWithActivePets.containsKey(player.username)){
+						//									rpgRogueBeast.entity.IPet.playersWithActivePets.get(player.username).getPet().setName(args[3]);
+						//								}
+						//							}else if(args[2].matches("saddled")){
+						//								EntityPlayer player = (EntityPlayer)sender;
+						//								if(rpgRogueBeast.entity.IPet.playersWithActivePets.containsKey(player.username)){
+						//									rpgRogueBeast.entity.IPet.playersWithActivePets.get(player.username).getPet().setSaddled(Boolean.valueOf(args[3]));
+						//								}
+						//							}
+						//						}
 
 						if (args[1].matches("get"))
 						{
-//							System.out.println(args);
+							//							System.out.println(args);
 							int id = 1;
 							int count = 1;
 							int meta = 0;

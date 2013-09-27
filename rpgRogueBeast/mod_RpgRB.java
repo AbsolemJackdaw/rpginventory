@@ -7,6 +7,7 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.EnumHelper;
+import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.mod_RpgInventory.ITEMTYPE;
 import rpgInventory.config.RpgConfig;
@@ -186,6 +187,6 @@ public class mod_RpgRB {
 		EntityRegistry.registerModEntity(EntityPetXP.class, "PetXP", mod_RpgInventory.instance.getUniqueID(), this, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityTeleportStone.class, "TelePortStone", mod_RpgInventory.instance.getUniqueID(), this, 80, 1, true);
 
-
+		MinecraftForge.EVENT_BUS.register(new BeastMasterEvent());
 	}
 }

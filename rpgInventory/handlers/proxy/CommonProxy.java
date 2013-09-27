@@ -2,6 +2,7 @@ package rpgInventory.handlers.proxy;
 
 import java.util.Random;
 
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +22,11 @@ public class CommonProxy {
 	public static void renderHandler() {
 		
 	}
+	
+	public ModelBiped getArmorModel(int id){
+		return null;
+	}
+
 	
 	public void spawnCharmParticle(World world, EntityLivingBase p, Random rng, boolean success) {
 	}

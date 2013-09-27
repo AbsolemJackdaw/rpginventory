@@ -1,12 +1,10 @@
 package rpgNecroPaladin.items;
 
-import net.minecraft.creativetab.CreativeTabs;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.shields.MainShield;
 import rpgNecroPaladin.mod_RpgPlus;
 import rpgNecroPaladin.models.NecroShield;
 import rpgNecroPaladin.models.PalaShield;
-import rpgRogueBeast.mod_RpgRB;
 
 public class ItemRpgInvArmorPlus extends ItemRpgInvArmor {
 

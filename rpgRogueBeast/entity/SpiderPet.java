@@ -31,10 +31,10 @@ public class SpiderPet extends BMPetImpl {
 
 	public SpiderPet(World par1World) {
 		super(par1World, 2, null, null);
-		this.moveSpeed = 0.45F;
+//		this.moveSpeed = 0.45F;
 		this.getNavigator().setAvoidsWater(true);
 		this.getNavigator().setAvoidSun(true);
-		this.getNavigator().setSpeed(this.moveSpeed);
+//		this.getNavigator().setSpeed(this.moveSpeed);
 		//Spider Cant Swim
 		this.getNavigator().setCanSwim(false);
 	}
@@ -47,10 +47,10 @@ public class SpiderPet extends BMPetImpl {
 	public SpiderPet(World par1World, EntityPlayer owner, ItemStack is) {
 		super(par1World, 2, owner, is);
 		//These get called for both, server calls this one, client gets the other.
-		this.moveSpeed = 0.45F;
+//		this.moveSpeed = 0.45F;
 		this.getNavigator().setAvoidsWater(true);
 		this.getNavigator().setAvoidSun(true);
-		this.getNavigator().setSpeed(this.moveSpeed);
+//		this.getNavigator().setSpeed(this.moveSpeed);
 		//Spider Cant Swim
 		this.getNavigator().setCanSwim(false);
 	}
@@ -135,13 +135,8 @@ public class SpiderPet extends BMPetImpl {
 					25D + MathHelper.floor_double((((double) getLevel()) * 1.0D) / 1.6D));
 			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(
 					0.1D+(double)getLevel()/400D);
-			
-			
-
 			previousLevel = getLevel();
 		}
-
-		
 	}
 
 	@Override

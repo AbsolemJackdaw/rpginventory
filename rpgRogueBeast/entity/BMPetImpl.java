@@ -10,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -27,6 +26,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -40,7 +40,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgNecroPaladin.minions.CustomMinionEntitySelector;
 import rpgRogueBeast.mod_RpgRB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -75,9 +74,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		this.tasks.addTask(2, this.aiSit);
 		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
 		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0D, true));
-		this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
+		this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 5.0F, 2.0F));
 		this.tasks.addTask(6, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
+		this.tasks.addTask(8, new EntityAITempt(this, 0.5D, mod_RpgRB.whistle.itemID, false));
 		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityLivingBase.class, 8.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
@@ -86,17 +86,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
 		this.tasks.addTask(1, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.34F));
 
-		//This allows the pets to stand and look at the player if they have food.
-		for (Item item : Item.itemsList) {
-			if (item instanceof ItemFood) {
-				//This pet, speed, item, get startled by movement.
-				this.tasks.addTask(8, new EntityAITempt(this, 0.5D, item.itemID, false));
-			}
-		}
-		this.targetTasks.addTask(1, new EntityAIOwnerHurtTarget(this));
-		this.targetTasks.addTask(2, new EntityAIOwnerHurtByTarget(this));
-		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-		//this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, IMob.class, 16.0F, 0, true));
+		this.targetTasks.addTask(2, 
+				new EntityAINearestAttackableTarget(this, IMob.class, 0, true));
 	}
 
 	public BMPetImpl(World par1World, int mobType, EntityPlayer owner, ItemStack is) {
@@ -119,7 +110,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			}
 			this.setOwner(owner.username);
 			IPet.playersWithActivePets.put(owner.username, new PetID(this.dimension, this.entityId));
-			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, true, false, new CustomMinionEntitySelector(owner)));
 		}
 		if (!sizeSet) {
 			setSize(getBaseWidth(), getBaseHeight());
@@ -562,11 +552,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-		//        if (!worldObj.isRemote) {
-		//            this.dataWatcher.updateObject(HP, this.health);
-		//        } else {
-		//            this.health = this.dataWatcher.getWatchableObjectInt(HP);
-		//        }
+
 		super.writeEntityToNBT(par1NBTTagCompound);
 		//prevents natural despawning
 		par1NBTTagCompound.setBoolean("PersistanceRequired", true);
@@ -602,7 +588,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	}
 
 	public boolean getSaddled() {
-		//false if set to 0, true otherwise
 		return (this.dataWatcher.getWatchableObjectByte(SADDLE)) != 0;
 	}
 
@@ -615,20 +600,11 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		}
 	}
 
-	//    @Override
-	//    public float getHealth() {
-	//       return this.getHealth();
-	//    }
-
 	@Override
 	public float getHP() {
 		return this.getHealth();
 	}
 
-
-	//    public EntityAIControlledByPlayer getAIControlledByPlayer() {
-	//        return this.aiControlledByPlayer;
-	//    }
 
 	@Override
 	public int getType() {
@@ -696,6 +672,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.22499999403953552D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.22499999403953552D);
+
 	}
 
 }

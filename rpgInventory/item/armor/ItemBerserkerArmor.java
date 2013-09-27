@@ -5,7 +5,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.models.armor.ModelBerserkerArmor;
 import rpgInventory.utils.AbstractArmor;
 
 public class ItemBerserkerArmor extends AbstractArmor{
@@ -31,12 +30,6 @@ public class ItemBerserkerArmor extends AbstractArmor{
 		return null;
 	}
 
-
-
-	private static final ModelBerserkerArmor armorBerserkChest = new ModelBerserkerArmor(1.0f);
-	private static final ModelBerserkerArmor armorBerserk = new ModelBerserkerArmor(0.5f);
-
-
 	@Override
 	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
 			int armorSlot) {
@@ -46,10 +39,10 @@ public class ItemBerserkerArmor extends AbstractArmor{
 				int type = ((AbstractArmor)stack.getItem()).armorType;
 
 				if(type == 1 || type == 3){
-					armorModel = armorBerserkChest;
+					armorModel = mod_RpgInventory.proxy.getArmorModel(3);
 
 				}else{
-					armorModel = armorBerserk;
+					armorModel = mod_RpgInventory.proxy.getArmorModel(2);
 				}
 			}		
 	}

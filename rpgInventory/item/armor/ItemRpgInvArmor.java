@@ -15,7 +15,6 @@ import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.MainShield;
 import rpgInventory.models.shields.ModelShield;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -182,6 +181,7 @@ public class ItemRpgInvArmor extends Item {
 				if(inv.isItemValidForSlot(i, par1ItemStack)){
 					inv.setInventorySlotContents(i, par1ItemStack);
 					par3EntityPlayer.destroyCurrentEquippedItem();
+					break;
 				}
 			}
 		}

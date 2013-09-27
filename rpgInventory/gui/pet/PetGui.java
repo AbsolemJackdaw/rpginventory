@@ -30,6 +30,7 @@ import rpgRogueBeast.entity.BoarPet;
 import rpgRogueBeast.entity.BullPet;
 import rpgRogueBeast.entity.IPet;
 import rpgRogueBeast.entity.SpiderPet;
+import rpgRogueBeast.packets.RpgRBPacketHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class PetGui extends GuiScreen {
@@ -286,7 +287,7 @@ public class PetGui extends GuiScreen {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(bos);
 		try {
-			dos.writeInt(RpgPacketHandler.PETGUI);
+			dos.writeInt(RpgRBPacketHandler.PETGUI);
 			dos.writeUTF(new String(PetName.getBytes("UTF-8"), "UTF-8"));
 			dos.writeShort(PetLevel);
 			dos.writeShort(currentHP);

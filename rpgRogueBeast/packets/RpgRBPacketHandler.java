@@ -8,8 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
-import rpgInventory.handlers.packets.PacketPetGui;
-import rpgInventory.handlers.packets.RpgPacketHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -17,6 +15,9 @@ import cpw.mods.fml.common.network.Player;
 public class RpgRBPacketHandler implements IPacketHandler {
 	private Random rand = new Random(5);
 
+	public static final int PETGUI = 2;
+	public static final int CRYSTAL = 11;
+	
 	@Override
 	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player player) {
@@ -36,9 +37,13 @@ public class RpgRBPacketHandler implements IPacketHandler {
 			case 14:
 				new PacketTeleport(world, p, dis, rand);
 				break;
-			case RpgPacketHandler.PETGUI:
+			case PETGUI:
 				new PacketPetGui(dis, p);
 				break;
+			case CRYSTAL:
+				new PacketCrystal(dis, p);
+				break;
+				
 			default:
 				break;
 			}

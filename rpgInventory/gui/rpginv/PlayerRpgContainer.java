@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.packets.PacketInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
-import rpgRogueBeast.entity.IPet;
 
 public class PlayerRpgContainer extends Container {
 
@@ -44,17 +43,7 @@ public class PlayerRpgContainer extends Container {
 				this.addSlotToContainer(new Slot(player.inventory, (var5 + (var4 + 1) * 9), 8 + var5 * 18, 84 + var4 * 18));
 			}
 		}
-		inventory = inv;
-		//Put away pet when gui is opened. This is a nerf and a fix for lag induced duping.
-		if (IPet.playersWithActivePets.containsKey(player.username)) {
-			IPet pet = IPet.playersWithActivePets.get(player.username).getPet();
-			if (pet != null && !((EntityLiving) pet).isDead) {
-				this.inventory.setInventorySlotContents(6, pet.writePetToItemStack());
-				IPet.playersWithActivePets.remove(player.username);
-				((EntityLiving) pet).setDead();
-				PacketInventory.sendPacket(player, inv);
-			}
-		}
+		inventory = inv;	
 	}
 
 	public boolean doesGuiPauseGame() {
@@ -109,7 +98,7 @@ public class PlayerRpgContainer extends Container {
 						this.slotClick(5, 0, 0, player);
 					}
 				case mod_RpgInventory.ITEMTYPE.CRYSTAL:
-//					System.out.println(tmp1.getItemDamage());
+					//					System.out.println(tmp1.getItemDamage());
 					if (((SlotRpgArmor) this.getSlot(6)).getStack() != null) {
 						return null;
 					}

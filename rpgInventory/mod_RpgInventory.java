@@ -214,7 +214,13 @@ public class mod_RpgInventory {
 		cloak = new ItemRpgInvArmor(RpgConfig.instance.cloakID, 2, -1, "","").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
 		cloakI = new ItemRpgInvArmor(RpgConfig.instance.cloakIID, 2, -1, "","").setFull3D().setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
 
-		magehood = new ItemMageArmor(RpgConfig.instance.magehoodID, mage, 4, 0).setUnlocalizedName("mage1").setCreativeTab(tab);
+		magehood = 
+				new ItemMageArmor
+				(RpgConfig.instance.magehoodID,
+						mage, 4, 0)
+		.setUnlocalizedName("mage1")
+		.setCreativeTab(tab);
+		
 		magegown = new ItemMageArmor(RpgConfig.instance.magegownID, mage, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);
 		magepants = new ItemMageArmor(RpgConfig.instance.magepantsID, mage, 4, 2).setUnlocalizedName("mage3").setCreativeTab(tab);
 		mageboots = new ItemMageArmor(RpgConfig.instance.magebootsID, mage, 4, 3).setUnlocalizedName("mage4").setCreativeTab(tab);

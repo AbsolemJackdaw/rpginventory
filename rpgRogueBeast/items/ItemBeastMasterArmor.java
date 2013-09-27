@@ -7,7 +7,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import rpgInventory.utils.AbstractArmor;
 import rpgRogueBeast.mod_RpgRB;
-import rpgRogueBeast.models.ModelBeastArmor;
 
 public class ItemBeastMasterArmor extends AbstractArmor{
 
@@ -30,9 +29,6 @@ public class ItemBeastMasterArmor extends AbstractArmor{
 		return super.getArmorTexture(itemstack, entity, slot, type);
 	}
 
-	private static final ModelBeastArmor armorBeastChest = new ModelBeastArmor(1.0f);
-	private static final ModelBeastArmor armorBeast = new ModelBeastArmor(0.5f);
-
 	@Override
 	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
 			int armorSlot) {
@@ -43,9 +39,9 @@ public class ItemBeastMasterArmor extends AbstractArmor{
 
 				if(type == 1 || type == 3){
 
-						armorModel = armorBeastChest;
+					armorModel = mod_RpgRB.proxy.getArmorModel(2);
 				}else{
-						armorModel = armorBeast;
+					armorModel = mod_RpgRB.proxy.getArmorModel(3);
 				}
 			}
 		}

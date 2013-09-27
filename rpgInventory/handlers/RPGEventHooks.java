@@ -34,8 +34,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
-import rpgRogueBeast.entity.EntityPetXP;
-import rpgRogueBeast.entity.IPet;
 import cpw.mods.fml.common.FMLLog;
 
 public class RPGEventHooks {
@@ -83,19 +81,7 @@ public class RPGEventHooks {
 	public void DeathEvent(LivingDeathEvent evt) {
 		/*====PET EXP====*/
 		try {
-			if ((!evt.entityLiving.worldObj.isRemote) && evt.entityLiving != null && evt.source != null && evt.source.getSourceOfDamage() != null && evt.source.getSourceOfDamage() instanceof IPet) {
-				if(evt.entityLiving instanceof EntityLiving){
-					EntityLiving corpse = (EntityLiving)evt.entityLiving;
-					EntityLivingBase murderer = (EntityLiving)evt.source.getSourceOfDamage();
-					int totalXP = corpse.experienceValue; 
-
-					while (totalXP > 0) {
-						int partialXP = EntityXPOrb.getXPSplit(totalXP);
-						totalXP -= partialXP;
-						corpse.worldObj.spawnEntityInWorld(new EntityPetXP(murderer.worldObj, corpse.posX, corpse.posY, corpse.posZ, partialXP));
-					}
-				}
-			}
+			
 			if (evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) evt.entityLiving;
 
@@ -186,7 +172,7 @@ public class RPGEventHooks {
 
 					/*====ARCHER EFFECTS====*/
 					//doesnt work TODO 
-					// needs to be checked if actually works or not TODO
+					// needs to be checked if actually works or not
 					float jumpboost = p.jumpMovementFactor;
 					if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSARCHER)) {
 						jumpboost *= 4.0F;

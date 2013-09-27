@@ -1,4 +1,4 @@
-package rpgInventory.renderer.items.weapons;
+package rpgMage;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -9,15 +9,17 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 
 import rpgInventory.models.weapons.ModelStaf;
+import rpgInventory.renderer.items.weapons.RpgItemRenderer;
+import rpgMage.weapons.ItemElementalStaff;
 
 
-public class StafRender extends RpgItemRenderer {
+public class StaffRenderer extends RpgItemRenderer {
 
 	ModelStaf swordmodel;
 	public int step;
 	float rotate = 0 ;
 
-	public StafRender()
+	public StaffRenderer()
 	{
 		swordmodel = new ModelStaf();
 	}
@@ -91,15 +93,66 @@ public class StafRender extends RpgItemRenderer {
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 		mc.renderEngine.bindTexture(new ResourceLocation("subaraki:weapons/ElementalStaff.png"));
+		if(item != null){
+			try {
+				if(item.getItem() instanceof ItemElementalStaff ){
 
-		GL11.glColor4f(0, 0.2f, 0.7f, 1F);
+					switch(((ItemElementalStaff)item.getItem()).type)
+					{
+					case 1:/*fire*/
+					{
+						Color clr = getColor(2,0,0,3,0,0, (float) this.step/50);
+						this.step++;
+						GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, 0, 0, 0.5f);
+					}
+					break;
+					case 2:/*ice*/
+					{
+						Color clr = getColor(2,0,0,3,0,0, (float) this.step/50);
+						this.step++;
+						GL11.glColor4f(0.0F, 0.0F, (float)((clr.getRed()*100) / 255)/100, 0.5F);
+					}
+					break;
+					case 3:/*earth*/
+					{
+						Color clr = getColor(2,0,0,3,0,0, (float) this.step/50);
+						this.step++;
+						GL11.glColor4f(0.0F, (float)((clr.getRed()*100) / 255)/100, 0.0F, 0.5F);
+					}
+					break;
+					case 4:/*wind*/
+					{
+						Color clr = getColor(2,0,0,3,0,0, (float) this.step/50);
+						this.step++;
+						GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, (float)((clr.getRed()*100) / 255)/100,(float)((clr.getRed()*100) / 255)/100, 0.5F);
+					}
+					break;
+					case 5:/*ultimate*/
+					{
+						Color clr = getColor(.1,.2,.3,0,0,0, (float) this.step/10);
+						this.step++;
+						GL11.glColor4f((float)((clr.getRed()*100) / 255)/100, (float)((clr.getGreen()*100) / 255)/100, (float)((clr.getBlue()*100) / 255)/100, 0.5F);
+					}
+					break;
+					default:
+					{
+						GL11.glColor4f(0, 0, 0, 1F);
+					}
+					break;
+					}
+				}
+				else
+					GL11.glColor4f(0, 0.2f, 0.7f, 1F);
+			} catch (Exception e) {
+			}
+		}
 
 		if (this.step > 1000) {
 			this.step = 0;
 		}
 		rotate += 0.001f;
 		GL11.glScalef(2F , 2F, 2F );
-		GL11.glTranslatef(0.0F, 0.355F , -0.015F);
+        GL11.glTranslatef(0.0F, 0.355F , -0.015F);
 		for(float var1 =0f; var1 < 0.5f; var1+= 0.1F)
 		{
 			swordmodel.sphere(p, var1 + rotate, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);

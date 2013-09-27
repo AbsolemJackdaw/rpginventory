@@ -19,12 +19,10 @@ public class RpgPacketHandler implements IPacketHandler {
 
 
 	public static final int OPENRPGINV = 1;
-	public static final int PETGUI = 2;
 	public static final int MAGE1 = 3;
 	public static final int BERSERKER = 4;
 	public static final int ARCHER = 5;
 	public static final int MAGE2 = 7;
-	public static final int CRYSTAL = 11;
 	public static final int INVENTORY = 15;
 	public static final int SMP_INVENTORY_SYNC = 20;
 	
@@ -52,9 +50,7 @@ public class RpgPacketHandler implements IPacketHandler {
 			case OPENRPGINV:
 					FMLNetworkHandler.openGui(p, mod_RpgInventory.instance, 1, world, x, y, z);
 				break;
-			case PETGUI:
-				new PacketPetGui(dis, p);
-				break;
+
 			case MAGE1:
 				new PacketMageHeal(dis, p, player, world);
 				break;
@@ -67,9 +63,7 @@ public class RpgPacketHandler implements IPacketHandler {
 			case MAGE2:
 				new PacketMageVortex(dis, world, p, player);
 				break;
-			case CRYSTAL:
-				new PacketCrystal(dis, p);
-				break;
+			
 			case INVENTORY:
 				PlayerRpgInventory.get(p).setInventorySlotContents(0, packet.readItemStack(dis));
 				PlayerRpgInventory.get(p).setInventorySlotContents(1, packet.readItemStack(dis));

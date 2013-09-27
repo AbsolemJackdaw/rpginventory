@@ -32,7 +32,6 @@ public class BoarPet extends BMPetImpl {
         //Doesn't like water, but can swim.
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setBreakDoors(true);
-        this.getNavigator().setSpeed(this.moveSpeed);
         this.getNavigator().setCanSwim(true);
     }
 
