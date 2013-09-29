@@ -12,7 +12,7 @@ public class BookRenderer extends ShieldRenderer{
 
 	@Override
 	public void renderEntity() {
-		GL11.glTranslatef(0f,0,0.2f);
+		GL11.glTranslatef(-0.9f,0f,0.6f);
 		GL11.glRotatef(-90, 1, 0, 0);
 		GL11.glScalef(1.5F,1.5f,1.5F);
 
@@ -23,7 +23,7 @@ public class BookRenderer extends ShieldRenderer{
 		GL11.glRotatef(-50, 0, 1, 0);
 		GL11.glRotatef(-50, 1, 0, 0);
 
-		GL11.glTranslatef(0, -0.2f, -0.7f);
+		GL11.glTranslatef(-1.2f, -0.2f, -1f);
 		GL11.glScalef(2F,2f,2F);
 	}
 
@@ -35,17 +35,18 @@ public class BookRenderer extends ShieldRenderer{
 
 	@Override
 	public void renderEquippedFP() {
-		GL11.glTranslatef(0f, -1.5f, -0.6f);
+		GL11.glTranslatef(0f, -1.5f, -1f);
 		GL11.glScalef(1F,1.5f,1F);
-		GL11.glRotatef(90, 0, 1, 0);
+		GL11.glRotatef(-50, 0, 1, 0);
 	}
 
 	@Override
 	public void renderInventory() {
-		GL11.glRotatef(-90, 1,0,0);
-		float scale = 1.8f;
+		GL11.glRotatef(90, 0,1,0);
+		GL11.glRotatef(90, 1, 0, 0);
+		float scale = 3f;
 		GL11.glScalef(scale,scale,scale);
 
-		GL11.glTranslatef(0.05f,-0.2f,0.1f);
+		GL11.glTranslatef(-0.6f,-0.4f,-0f);
 	}
 }

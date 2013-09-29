@@ -9,6 +9,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgRogueBeast.mod_RpgRB;
 import cpw.mods.fml.relauncher.Side;
@@ -50,7 +51,7 @@ public class EntityTeleportStone extends EntityThrowable
 					if(par1MovingObjectPosition.entityHit instanceof EntityPlayer)
 					{
 						EntityPlayer player = (EntityPlayer) par1MovingObjectPosition.entityHit;
-						player.addPotionEffect(new PotionEffect(Potion.blindness.id, 5*20 ,2));
+						player.addPotionEffect(new PotionEffect(Potion.blindness.id, mod_RpgInventory.donators.contains(player.username) ? 5*20 : 3*20 ,2));
 					}
 				}
 			}

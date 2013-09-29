@@ -55,8 +55,8 @@ public class PacketMageHeal {
 					for (EntityLiving el : entl) {
 						if (el != null) {
 							double dist = ((EntityPlayer) player).getDistanceSqToEntity(el);
-							double potstrength = 1.0D - Math.sqrt(dist) / 4.0D;
-							Potion.heal.affectEntity((EntityLiving) player, el, 2, potstrength);
+							double potstrength = 1.0D - Math.sqrt(dist) / (mod_RpgInventory.donators.contains(p.username) ? 6.0D : 4.0D);
+							Potion.heal.affectEntity((EntityLiving) player, el, (mod_RpgInventory.donators.contains(p.username) ? 4 : 2), potstrength);
 						}
 					}
 				}

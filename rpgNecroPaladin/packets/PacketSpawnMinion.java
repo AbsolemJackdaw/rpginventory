@@ -28,7 +28,7 @@ public class PacketSpawnMinion {
 			}
 			if (CommonTickHandlerRpgPlus.rpgPluscooldownMap.get(p.username) <= 0) {
 				//2 second cooldown
-				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(p.username, 20 * 2);
+				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(p.username, 20 * (mod_RpgInventory.donators.contains(p.username)? 1 : 2));
 				//System.out.println("SpawnMob");
 				//Allow staff/hammer to perform one last aoe then break the weapon if its damaged enough.
 				if (weapon.getItemDamage() + 2 >= weapon.getMaxDamage()) {

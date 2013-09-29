@@ -26,7 +26,6 @@ public class ItemElementalStaff extends ItemRpgSword {
 		super(par1, EnumToolMaterial.WOOD);
 		this.type = type;
 		this.maxUse = maxUse;
-
 	}
 
 	/**
@@ -125,7 +124,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 	}
 
 	public ItemStack onItemRightClick(ItemStack is, World par2World, EntityPlayer p) {
-		if (mod_RpgInventory.playerClass.contains(mod_RpgMageSet.CLASSARCHMAGESHIELD)  || mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+		if (mod_RpgInventory.playerClass.contains(mod_RpgMageSet.CLASSARCHMAGE)  || mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
 			if (p.isUsingItem()) {
 				p.stopUsingItem();
 			} else {
@@ -137,9 +136,5 @@ public class ItemElementalStaff extends ItemRpgSword {
 
 	public int getStrenght(EntityPlayer p) {
 		return p.experienceLevel == 0 ? 1 : (int) p.experienceLevel;
-	}
-
-	public String getTextureFile() {
-		return "/subaraki/RPGinventoryTM.png";
 	}
 }

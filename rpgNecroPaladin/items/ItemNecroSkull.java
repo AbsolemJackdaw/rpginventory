@@ -60,7 +60,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 					p.renderBrokenItemStack(weapon);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
-					weapon.damageItem(2, p);
+					weapon.damageItem(mod_RpgInventory.donators.contains(p.username) ? 1 : 2, p);
 				}
 				((EntityLiving) entity).heal(3);
 				return true;
@@ -118,10 +118,12 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 							pigzombie.setPosition(mob.posX, mob.posY, mob.posZ);
 							mob.setDead();
 							world.spawnEntityInWorld(pigzombie);
+							// necromancers can not make pig zombies angry !
+							
 						} else {
 							if (!(mob instanceof IMinion)) {
-								mob.attackEntityFrom(DamageSource.wither, 6);
-								mob.addPotionEffect(new PotionEffect(Potion.wither.id, 80, 1));
+								mob.attackEntityFrom(DamageSource.wither, mod_RpgInventory.donators.contains(p.username) ? 6 : 4);
+								mob.addPotionEffect(new PotionEffect(Potion.wither.id, mod_RpgInventory.donators.contains(p.username) ? 60 : 40, 1));
 							} else {
 								mob.heal(3);
 							}

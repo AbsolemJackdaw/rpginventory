@@ -26,7 +26,7 @@ public class PacketTeleport {
 				CommonTickHandler.globalCooldownMap.put(p.username, 0);
 			}
 			if (CommonTickHandler.globalCooldownMap.get(p.username) <= 0) {
-				CommonTickHandler.globalCooldownMap.put(p.username, 5 * 20);
+				CommonTickHandler.globalCooldownMap.put(p.username, (mod_RpgInventory.donators.contains(p.username) ? 3 : 5) * 20);
 				if (dagger.getItemDamage() + 3 >= dagger.getMaxDamage()) {
 					dagger.damageItem(dagger.getMaxDamage() - dagger.getItemDamage(), p);
 					p.renderBrokenItemStack(dagger);

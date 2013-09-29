@@ -15,6 +15,7 @@ import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.MainShield;
 import rpgInventory.models.shields.ModelShield;
+import rpgInventory.models.shields.bookMage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -52,14 +53,18 @@ public class ItemRpgInvArmor extends Item {
 		TEXTURE = new ResourceLocation(resourcelocation);
 	}
 
+	
 	private IronThorn it = new IronThorn();
 	private ModelShield arch = new ModelShield();
-
+	private bookMage book = new bookMage();
+	
 	public MainShield getShieldModel(){
 		if(this.equals(mod_RpgInventory.berserkerShield))
 			return it;
 		if(this.equals(mod_RpgInventory.archerShield))
 			return arch;
+		if(this.equals(mod_RpgInventory.talisman))
+			return book;
 		return new MainShield();
 	}
 
@@ -129,11 +134,11 @@ public class ItemRpgInvArmor extends Item {
 		if (stack.itemID == mod_RpgInventory.ringgold.itemID || stack.itemID == mod_RpgInventory.glovesbutter.itemID
 				|| stack.itemID == mod_RpgInventory.neckgold.itemID) {
 			list.add(StatCollector.translateToLocal("Speed + 12.5%"));
-			if (stack.itemID == mod_RpgInventory.ringgold.itemID){
-				list.add(StatCollector.translateToLocal("Jump +0.5 Block height"));
-			}else{
-				list.add(StatCollector.translateToLocal("Jump +0.25 Block height"));
-			}
+//			if (stack.itemID == mod_RpgInventory.ringgold.itemID){
+//				list.add(StatCollector.translateToLocal("Jump +0.5 Block height"));
+//			}else{
+//				list.add(StatCollector.translateToLocal("Jump +0.25 Block height"));
+//			}
 		}
 
 		if (stack.itemID == mod_RpgInventory.ringlap.itemID || stack.itemID == mod_RpgInventory.gloveslap.itemID
@@ -181,7 +186,7 @@ public class ItemRpgInvArmor extends Item {
 				if(inv.isItemValidForSlot(i, par1ItemStack)){
 					inv.setInventorySlotContents(i, par1ItemStack);
 					par3EntityPlayer.destroyCurrentEquippedItem();
-					break;
+					break;// break, or rightclicking a ring will set both ring slots.
 				}
 			}
 		}

@@ -70,7 +70,7 @@ public class ItemClaymore extends ItemRpgWeapon{
 	public boolean hitEntity(ItemStack is, EntityLivingBase mob, EntityLivingBase player)
 	{
 		is.damageItem(1, mob);
-		mob.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)player), 8);
+		mob.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)player), 7);
 
 		if(mob instanceof EntityPlayer)
 		{
@@ -78,7 +78,7 @@ public class ItemClaymore extends ItemRpgWeapon{
 			ItemStack skull = new ItemStack(Item.skull.itemID,1,3);
 
 			if( skull.stackTagCompound == null ) {
-				skull.setTagCompound( new NBTTagCompound() );
+				skull.setTagCompound( new NBTTagCompound());
 			}
 			if( !skull.stackTagCompound.hasKey( "SkullOwner" ) ) {
 				skull.stackTagCompound.setString( "SkullOwner", name );

@@ -18,19 +18,13 @@ public class CommonProxy {
 	public int getSphereID() {
 		return 0;
 	}
-	
-	public static void renderHandler() {
-		
+
+	public static void renderHandler() {	
 	}
-	
+
 	public ModelBiped getArmorModel(int id){
 		return null;
 	}
-
-	
-	public void spawnCharmParticle(World world, EntityLivingBase p, Random rng, boolean success) {
-	}
-
 
 	public void registerLate() {
 	}
@@ -51,8 +45,12 @@ public class CommonProxy {
 	public void consumeItem(EntityPlayer player, int itemID) {
 		player.inventory.consumeInventoryItem(itemID);
 	}
+	
+	public void spawnCharmParticle(World world, EntityLivingBase p, Random rng, 
+			boolean success) {
+	}
 
-//	public void candy(EntityPlayer p) {
-//		p.inventory.consumeInventoryItem(mod_RpgInventory.petCandy.itemID);
-//	}
+	public void spawnParticle(World world, EntityLivingBase el, Random rng) {
+
+	}
 }

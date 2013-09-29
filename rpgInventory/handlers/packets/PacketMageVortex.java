@@ -50,11 +50,12 @@ public class PacketMageVortex {
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
 					if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
-						wand.damageItem(3, p);
+						wand.damageItem( mod_RpgInventory.donators.contains(p.username) ? 1 : 3, p);
 					}
 				}
-				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - 20.0F, p.posY - 20.0F, p.posZ - 20.0F, p.posX + 20.0F, p.posY + 20.0F, p.posZ + 20.0F);
-				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABBExcludingEntity(p, pool);//p.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
+				float f = mod_RpgInventory.donators.contains(p.username) ? 20.0f : 10.0f;
+				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - f, p.posY - f, p.posZ - f, p.posX + f, p.posY + f, p.posZ + f);
+				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABBExcludingEntity(p, pool);
 
 				if (entl != null && entl.size() > 0) {
 					for (Entity el : entl) {
@@ -72,7 +73,7 @@ public class PacketMageVortex {
 									Vec3 posEntity = Vec3.createVectorHelper(p.posX, p.posY, p.posZ);
 									Vec3 posFinal = posPlayer.myVec3LocalPool.getVecFromPool(posEntity.xCoord - posPlayer.xCoord, posEntity.yCoord - posPlayer.yCoord, posEntity.zCoord - posPlayer.zCoord).normalize();
 									el.setVelocity(posFinal.xCoord * 4, posFinal.yCoord * 4, posFinal.zCoord * 4);
-									el.attackEntityFrom(DamageSource.causePlayerDamage(p), 1);
+									el.attackEntityFrom(DamageSource.causePlayerDamage(p), (mod_RpgInventory.donators.contains(p.username) ? 3 : 1));
 								} catch (Throwable ex) {
 								}
 							}

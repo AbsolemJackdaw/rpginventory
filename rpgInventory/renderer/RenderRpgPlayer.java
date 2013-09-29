@@ -1,6 +1,10 @@
 package rpgInventory.renderer;
 
+import java.util.ArrayList;
+import java.util.Map.Entry;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.model.ModelBiped;
@@ -14,6 +18,9 @@ import net.minecraftforge.event.ForgeSubscribe;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.common.FMLLog;
+
+import rpgInventory.CapeRenderer;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.gui.rpginv.RpgGui;
@@ -21,6 +28,7 @@ import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.jewels.GloveLeft;
 import rpgInventory.models.jewels.GloveRight;
 import rpgInventory.models.jewels.ModelNecklace;
+import rpgVanillaShields.ItemRpgInvShields;
 
 public class RenderRpgPlayer {
 
@@ -32,10 +40,35 @@ public class RenderRpgPlayer {
 	ModelBiped main ;
 
 	@ForgeSubscribe
+	public void PlayerPrerenderer(RenderPlayerEvent.Post evt){
+		/*===== RENDERING SHIELDS=====*/
+		ItemStack shield = PlayerRpgInventory.get(evt.entityPlayer).getShield();
+		if(shield != null ){
+			//this is an exception towards all other rendering.
+			//I do not have a hook for it yet, but I hope I soon will.
+			if(shield.getItem() instanceof ItemRpgInvArmor){
+				if(((ItemRpgInvArmor)shield.getItem()).shieldClass().toLowerCase().contains("archmage")){
+					renderMantle(evt.entityPlayer, 1);
+				}
+				if(shield.getItem().equals(mod_RpgInventory.talisman)){
+					renderMantle(evt.entityPlayer, 0);
+				}
+			}
+
+		}
+	}
+
+	@ForgeSubscribe
 	public void PlayerRender(RenderPlayerEvent.SetArmorModel evt ){
 
 		EntityPlayer player = evt.entityPlayer;
 		main = evt.renderer.modelBipedMain;
+
+		/*===== RENDERING CLOAK=====*/
+		ItemStack cloak = PlayerRpgInventory.get(player).getCloak();
+		if(cloak != null){
+			rendercape(player, cloak, evt.partialRenderTick);
+		}
 
 		/*===== RENDERING GLOVES=====*/
 		ItemStack gloves = PlayerRpgInventory.get(player).getGloves();
@@ -51,28 +84,27 @@ public class RenderRpgPlayer {
 			renderNecklace(evt.entityPlayer);
 		}
 
-		/*===== RENDERING CLOAK=====*/
-		ItemStack cloak = PlayerRpgInventory.get(player).getCloak();
-		if(cloak != null){
-			rendercape(player, cloak, evt.partialTick);
-		}
-
 		/*===== RENDERING SHIELDS=====*/
 		ItemStack shield = PlayerRpgInventory.get(player).getShield();
 		if(shield != null ){
 			mc.renderEngine.bindTexture(((ItemRpgInvArmor)shield.getItem()).getTexture());
 
-			//this is an exception towards all other rendering.
-			//I do not have a hook for it yet, but I hope I soon will.
+			// this enables alpha blending if the texture is transparent.
+			//			GL11.glEnable(GL11.GL_BLEND);
+			//			GL11.glDisable(GL11.GL_LIGHTING);
+			//			GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11. GL_ONE_MINUS_SRC_ALPHA);
 
-			if(mod_RpgInventory.playerClass.contains("shieldedArchMage")){
-				renderMantle(player, 1);
-			}
-			if(shield.getItem().equals(mod_RpgInventory.talisman)){
-				renderMantle(player, 0);
-			}
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glEnable(GL11.GL_ALPHA_TEST);
+			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
+
+			//			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.2F);
 			renderShield((ItemRpgInvArmor)shield.getItem());
 		}
+
 	}
 
 
@@ -101,7 +133,7 @@ public class RenderRpgPlayer {
 
 	float rotation =0;
 	private void renderMantle(EntityPlayer player, int id){
-		rotation+=0.5f;
+		rotation+=1f;
 		if (rotation ==360) {
 			rotation = 0;
 		}
@@ -113,7 +145,7 @@ public class RenderRpgPlayer {
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		GL11.glPushMatrix();
 		GL11.glScalef(3F, 3F, 3F);
-		GL11.glTranslatef(-0.5F, -0.4F, -0.5F);
+		GL11.glTranslatef(-0.5F, -0.65F, -0.5F);
 		if (player == Minecraft.getMinecraft().thePlayer) {
 			if (!((Minecraft.getMinecraft().currentScreen instanceof GuiInventory
 					|| Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative
@@ -134,7 +166,7 @@ public class RenderRpgPlayer {
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
-			GL11.glRotatef(rotation, 0F, 1F, 0F);
+			GL11.glRotatef(rotation, 1F, 1F, 1F);
 			GL11.glCallList(mod_RpgInventory.proxy.getSphereID());
 		}
 		GL11.glColor4f(1, 1, 1, 1);
@@ -199,44 +231,16 @@ public class RenderRpgPlayer {
 					|| cloak.getItem() == mod_RpgInventory.cloakSub) {
 				GL11.glPushMatrix();
 
-				if (cloak.getItem() == mod_RpgInventory.cloak) {
-					/**
-					 * Dev Capes
-					 */
-					if (player.username.equals("TheCodyMaverick")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/ACCape.png"));
-					}else if (player.username.equals("ClaireBearKitty ")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/ponyCape.png"));
-					}else if (player.username.equals("Unjustice")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/UnCape.png"));
-					} else if (player.username.equals("NyhmsQuest")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/NymCape.png"));
-					} else if (player.username.equals("Joebuz")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/BuzCape.png"));
-					} else if (player.username.equals("superv20")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/MRSCape.png"));
-					} else if (player.username.equals("VIruS_Ex")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/PreCape.png"));
-					} else if (player.username.equals("AbrarSyed")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/AbrCape.png"));
-					} else if (player.username.equals("rich1051414")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/TarCape.png"));
-					} else if (player.username.equals("LegendaryKoala")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/CoaCape.png"));
-					} else if (player.username.equals("TheCowTheory")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/CowCape.png"));
-					}else if (player.username.equals("4wad")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/ModelCape.png"));
-					}else if (player.username.equals("Zxapa") || player.username.equals("spineripper64 ")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/ConCape.png"));
-					} else if (player.username.equals("Artix_all_mighty")) {
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:devcapes/SubCape.png"));
-					} else{ // if none of the names match, it should return a grey cape texture.
-						mc.renderEngine.bindTexture(new ResourceLocation("subaraki:capes/GreyCape.png"));
-					}
-				} else  {
-					mc.renderEngine.bindTexture(((ItemRpgInvArmor)cloak.getItem()).getTexture());
-				}
+				mc.renderEngine.bindTexture(((ItemRpgInvArmor)cloak.getItem()).getTexture());
+
+				/**
+				 * Dev Capes
+				 */
+				if(CapeRenderer.capes != null){
+					if (CapeRenderer.playersWithCapes.contains(player.username)){
+						mc.renderEngine.bindTexture(CapeRenderer.getLocationCape(player.username));//new ResourceLocation("subaraki/playerCapes/"+player.username+".png"));
+					}					
+				} 
 
 				GL11.glTranslatef(0.0F, 0.0F, 0.125F);
 				double var22 = player.field_71091_bM + (player.field_71094_bP - player.field_71091_bM) * (double) partialTick - (player.prevPosX + (player.posX - player.prevPosX) * (double) partialTick);

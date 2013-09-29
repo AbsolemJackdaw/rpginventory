@@ -5,7 +5,7 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.models.armor.ModelMageArmor;
-import rpgInventory.models.shields.Book;
+import rpgInventory.models.shields.bookMage;
 import rpgInventory.renderer.items.shields.BookRenderer;
 import rpgMage.weapons.RenderElementalBlock;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -26,7 +26,7 @@ public class MSClientProxy extends MSCommonProxy{
 			MinecraftForgeClient.registerItemRenderer(mod_RpgMageSet.ultimateStaff.itemID, (IItemRenderer) new StaffRenderer());
 			
 			MinecraftForgeClient.registerItemRenderer(mod_RpgMageSet.archBook.itemID, 
-					(IItemRenderer) new BookRenderer(new Book(), "subaraki:jewels/book.png"));
+					(IItemRenderer) new BookRenderer(new bookMage(), "subaraki:jewels/archMageShield.png"));
 		}
 	}
 	

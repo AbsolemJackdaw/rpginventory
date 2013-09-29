@@ -15,20 +15,23 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import rpgInventory.mod_RpgInventory;
@@ -81,7 +84,7 @@ public class RPGEventHooks {
 	public void DeathEvent(LivingDeathEvent evt) {
 		/*====PET EXP====*/
 		try {
-			
+
 			if (evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) evt.entityLiving;
 
@@ -175,7 +178,7 @@ public class RPGEventHooks {
 					// needs to be checked if actually works or not
 					float jumpboost = p.jumpMovementFactor;
 					if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSARCHER)) {
-						jumpboost *= 4.0F;
+						jumpboost *= mod_RpgInventory.donators.contains(p.username) ? 3.0f : 2.0F;
 					}
 					p.jumpMovementFactor = jumpboost;
 
@@ -184,33 +187,9 @@ public class RPGEventHooks {
 						p.fallDistance = 0;
 					}
 
-					
+
 					ItemStack weapon = p.getCurrentEquippedItem();
 					if (weapon != null) {
-//						/*==== ARCHMAGE EFFECTS ====*/
-//						if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.SHIELDEDARCHMAGE) || mod_RpgInventory.developers.contains(p.username.toLowerCase()))
-//						{
-//							if (weapon.getItem().equals(mod_RpgInventory.fireStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
-//							{
-//								if (p.isBurning()) {
-//									if (p.getHealth() < 6) {
-//										p.setHealth(6);
-//									} p.extinguish();
-//								}
-//							}
-//							if (weapon.getItem().equals(mod_RpgInventory.windStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
-//							{
-//								p.fallDistance = 0; // negates fall damage
-//							}
-//							if (weapon.getItem().equals(mod_RpgInventory.frostStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
-//							{
-//								if (p.getAir() < 20)p.setAir(20); // you can not drown !
-//							}
-//							if (weapon.getItem().equals(mod_RpgInventory.earthStaff) || weapon.getItem().equals(mod_RpgInventory.ultimateStaff)) 
-//							{
-//								p.curePotionEffects(new ItemStack(Item.bucketMilk, 1)); // cure all negative potion effects
-//							}
-//						}
 
 						/*BERSEKRER KNOCKBACK*/
 						//sets Berserker weapon with knockback if the apropiate classes match
@@ -277,33 +256,30 @@ public class RPGEventHooks {
 					}
 
 					/*==== SPEED BOOST GOLD JEWELS ==== */					
-					double speedboost = 0;
+					float speedboost = 0;
 					int goldenItems = 0;
 
 					if (neck != null && neck.itemID == mod_RpgInventory.neckgold.itemID) {
-						speedboost += 0.01250F;
-						this.goldJump(p,0.01D);
+						speedboost +=  mod_RpgInventory.donators.contains(p.username) ? 0.02f: 0.0125f;
 						goldenItems +=1;
 					}
 					if (ringa != null && ringa.getItem() == mod_RpgInventory.ringgold) {
-						speedboost += 0.01250F;
-						this.goldJump(p,0.02D);	
+						speedboost += mod_RpgInventory.donators.contains(p.username) ?  0.02f: 0.0125f;
 						goldenItems +=1;
 					}
 					if (ringb != null && ringb.getItem() == mod_RpgInventory.ringgold) {
-						speedboost += 0.01250F;
-						this.goldJump(p,0.02D);
+						speedboost += mod_RpgInventory.donators.contains(p.username) ?  0.02f: 0.0125f;
 						goldenItems +=1;
 					}
 					if (gloves != null && gloves.getItem() == mod_RpgInventory.glovesbutter) {
-						speedboost += 0.01250F;
-						this.goldJump(p,0.01D);
+						speedboost += mod_RpgInventory.donators.contains(p.username) ?  0.02f: 0.0125f;
 						goldenItems +=1;
 					}
-					
+					p.capabilities.setPlayerWalkSpeed(0.1f + speedboost);
 
-					p.motionX *= speedboost+1.0D;
-					p.motionZ *= speedboost+1.0D;
+					//					if(p.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() !=
+					//							p.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + (double)speedboost){
+					//						
 
 					/*==== Something about the archer .__. ==== */
 					if (ArcherRepairTick.containsKey(p.username)) {
@@ -314,16 +290,6 @@ public class RPGEventHooks {
 							p.jumpMovementFactor = 0.02F;
 						}
 					} 
-					
-					/**can't remember anything of this being added. looks fishy too.*/
-//					else if (ArcherRepairTick.containsKey(p.username)) {
-//						if (EnumRpgClass.getPlayerClasses(p).contains(EnumRpgClass.SHIELDEDMAGE)) {
-//							p.fallDistance = 0;
-//							evt.entityLiving.fireResistance = 200;
-//						} else {
-//							evt.entityLiving.fireResistance = 0;
-//						}
-//					}
 
 					/*==== Invisibility Cloak==== */
 					ItemStack cloak = inv.getCloak();
@@ -356,11 +322,6 @@ public class RPGEventHooks {
 								evt.ammount += 4;
 							}
 						} 
-//						else if (weapon.itemID == mod_RpgInventory.pala_weapon.itemID) {
-//							if (EnumRpgClass.getPlayerClasses((EntityPlayer) damager).contains(EnumRpgClass.PALADIN)) {
-//								evt.ammount += 3;
-//							}
-//						}
 					}
 					if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSBERSERKER)) {
 						// hit harder with both hands 'free'
@@ -378,10 +339,10 @@ public class RPGEventHooks {
 						damagebonus += 0.3F;
 					}
 					if (ringa != null && ringa.getItem().equals(mod_RpgInventory.ringlap)) {
-						damagebonus += 0.1F;
+						damagebonus += mod_RpgInventory.donators.contains(((EntityPlayer)damager).username) ? 0.2f : 0.1F;
 					}
 					if (ringb != null && ringb.getItem().equals(mod_RpgInventory.ringlap)) {
-						damagebonus += 0.1F;
+						damagebonus += mod_RpgInventory.donators.contains(((EntityPlayer)damager).username) ? 0.2f : 0.1F;
 					}
 					if (gloves != null && gloves.getItem().equals(mod_RpgInventory.gloveslap)) {
 						damagebonus += 0.2F;
@@ -402,12 +363,12 @@ public class RPGEventHooks {
 
 				ItemStack shield = inv.getShield();
 				if (shield != null) {
-					
+
 					if( ((ItemRpgInvArmor)inv.getShield().getItem()).boundArmorClass().
 							equals(mod_RpgInventory.playerClass)){
 						vanillaReduction += 0.6f;
 					}
-					
+
 					if(vanillaReduction > 1f){
 						damageReduction = 1f + (vanillaReduction - 1f);
 						vanillaReduction= 0;
@@ -427,7 +388,7 @@ public class RPGEventHooks {
 					if (((float) evt.ammount * 0.2F) < 1) {
 						evt.ammount -= 1;
 					} else {
-						evt.ammount -= MathHelper.floor_float((float) evt.ammount * 0.2F);
+						evt.ammount -= MathHelper.floor_float((float) evt.ammount * (mod_RpgInventory.donators.contains(player.username) ? 0.3f : 0.2F));
 					}
 				}
 				if (inv != null) {
@@ -521,36 +482,34 @@ public class RPGEventHooks {
 			ItemStack ringb = inv.getRing2();
 			ItemStack gloves = inv.getGloves();
 
-			/*==== NEGATE FALLDAMAGE GOLD JEWELS ==== */					
-			double speedboost = 0;
-			int goldenItems = 0;
-
-			if (neck != null && neck.getItem() == mod_RpgInventory.neckgold) {
-				goldenItems +=1;
-			}
-			if (ringa != null && ringa.getItem() == mod_RpgInventory.ringgold) {
-				goldenItems +=1;
-			}
-			if (ringb != null && ringb.getItem() == mod_RpgInventory.ringgold) {
-				goldenItems +=1;
-			}
-			if (gloves != null && gloves.getItem() == mod_RpgInventory.glovesbutter) {
-				goldenItems +=1;
-			}
-
-			if( goldenItems == 4 && evt.source.equals(DamageSource.fall)){
-				//				FMLLog.getLogger().info("" + evt.ammount);
-				if(evt.ammount < 3){
-					evt.setCanceled(true);
-				}else{
-					evt.ammount -=2;
-				}
-
-			}
+			//			/*==== NEGATE FALLDAMAGE GOLD JEWELS ==== */					
+			//			double speedboost = 0;
+			//			int goldenItems = 0;
+			//
+			//			if (neck != null && neck.getItem() == mod_RpgInventory.neckgold) {
+			//				goldenItems +=1;
+			//			}
+			//			if (ringa != null && ringa.getItem() == mod_RpgInventory.ringgold) {
+			//				goldenItems +=1;
+			//			}
+			//			if (ringb != null && ringb.getItem() == mod_RpgInventory.ringgold) {
+			//				goldenItems +=1;
+			//			}
+			//			if (gloves != null && gloves.getItem() == mod_RpgInventory.glovesbutter) {
+			//				goldenItems +=1;
+			//			}
+			//
+			//			if( goldenItems == 4 && evt.source.equals(DamageSource.fall)){
+			//				//				FMLLog.getLogger().info("" + evt.ammount);
+			//				if(evt.ammount < 3){
+			//					evt.setCanceled(true);
+			//				}else{
+			//					evt.ammount -=2;
+			//				}
+			//			}
 
 		} catch (Exception e) {
 		}
-
 	}
 
 	public void damageItem(ItemStack item, PlayerRpgInventory inv, EntityPlayer p, int slot, int amount) {
@@ -569,30 +528,30 @@ public class RPGEventHooks {
 		}
 	}
 
-	public void goldJump(EntityPlayer p, double amount)
-	{
-		float jumpTicks = 0;
-
-		if (p.isAirBorne)//is jumping
-		{
-			if (!p.isInWater() && !p.handleLavaMovement())
-			{
-				if (jumpTicks == 0)
-				{
-					p.motionY += amount;
-					jumpTicks = 10;
-				}
-			}
-			else
-			{
-				p.motionY += 0.03999999910593033D;
-			}
-		}
-		else
-		{
-			jumpTicks = 0;
-		}
-	}
+	//	public void goldJump(EntityPlayer p, double amount)
+	//	{
+	//		float jumpTicks = 0;
+	//
+	//		if (p.isAirBorne)//is jumping
+	//		{
+	//			if (!p.isInWater() && !p.handleLavaMovement())
+	//			{
+	//				if (jumpTicks == 0)
+	//				{
+	//					p.motionY += amount;
+	//					jumpTicks = 10;
+	//				}
+	//			}
+	//			else
+	//			{
+	//				p.motionY += 0.03999999910593033D;
+	//			}
+	//		}
+	//		else
+	//		{
+	//			jumpTicks = 0;
+	//		}
+	//	}
 
 	protected int decreaseAirSupply(int par1)
 	{

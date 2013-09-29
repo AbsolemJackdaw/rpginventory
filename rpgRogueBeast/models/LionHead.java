@@ -5,14 +5,13 @@
 // - ZeuX
 
 
-
-
-
-
 package rpgRogueBeast.models;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+
+import org.lwjgl.opengl.GL11;
+
 import rpgInventory.models.shields.MainShield;
 
 public class LionHead extends MainShield
@@ -462,6 +461,7 @@ public class LionHead extends MainShield
 
 	public void renderShield(float f5)
 	{
+				
 		Shape1.render(f5);
 		Shape2.render(f5);
 		Shape3.render(f5);

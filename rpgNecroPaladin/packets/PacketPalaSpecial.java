@@ -34,7 +34,7 @@ public class PacketPalaSpecial {
 			CommonTickHandler.globalCooldownMap.put(p.username, 0);
 		}
 		if (CommonTickHandler.globalCooldownMap.get(p.username) <= 0) {
-			CommonTickHandler.globalCooldownMap.put(p.username, 5 * 20);
+			CommonTickHandler.globalCooldownMap.put(p.username, (mod_RpgInventory.donators.contains(p.username) ? 5 : 7 )* 20);
 			//System.out.println("Healing time!");
 			//Allow staff/hammer to perform one last aoe then break the weapon if its damaged enough.
 			if (weapon.getItemDamage() + 3 >= weapon.getMaxDamage()) {
@@ -56,7 +56,7 @@ public class PacketPalaSpecial {
 					if (el != null) {
 						double dist = ((EntityPlayer) player).getDistanceSqToEntity(el);
 						double potstrength = 1.0D - Math.sqrt(dist) / 4.0D;
-						Potion.heal.affectEntity((EntityLiving) player, el, 2, potstrength * 2);
+						Potion.heal.affectEntity((EntityLiving) player, el, (mod_RpgInventory.donators.contains(p.username) ? 5 : 2), potstrength * 2);
 					}
 				}
 			}

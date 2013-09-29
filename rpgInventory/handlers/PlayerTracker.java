@@ -25,10 +25,11 @@ public class PlayerTracker implements IPlayerTracker {
 	// noone cares about this....
 	@Override
 	public void onPlayerChangedDimension(EntityPlayer player) {
-		//Allow the pet to follow the player to other worlds(Dimensions).
+		PacketInventory.sendPacket(player, PlayerRpgInventory.get(player));
 	}
 
 	@Override
 	public void onPlayerRespawn(EntityPlayer player) {
+		PacketInventory.sendPacket(player, PlayerRpgInventory.get(player));
 	}
 }

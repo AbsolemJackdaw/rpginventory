@@ -1,12 +1,25 @@
 package rpgInventory;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.renderer.IImageBuffer;
+import net.minecraft.client.renderer.ImageBufferDownload;
+import net.minecraft.client.renderer.ThreadDownloadImageData;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureObject;
 import net.minecraft.command.CommandHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
@@ -14,6 +27,8 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StringUtils;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.EnumHelper;
@@ -76,18 +91,13 @@ public class mod_RpgInventory {
 	public static String CLASSARCHER = "archer";
 	public static String CLASSBERSERKER = "berserker";
 	public static String CLASSMAGE = "basicMage";
-	
+
 	public static String CLASSARCHERSHIELD = "shieldedArcher";
 	public static String CLASSBERSERKERSHIELD = "shieldedBerserker";
 	public static String CLASSMAGESHIELD = "shieldedBasicMage";
-	
-//	public static String ShieldedArcher = CLASSARCHER+CLASSARCHERSHIELD;
-//	public static String ShieldedBerserker = CLASSBERSERKER+CLASSBERSERKERSHIELD;
-//	public static String ShieldedMage = CLASSMAGE+CLASSMAGESHIELD;
 
-	
 	public static String playerClass = "none";
-	
+
 	public static mod_RpgInventory instance;
 	@SidedProxy(serverSide = "rpgInventory.handlers.proxy.CommonProxy", clientSide = "rpgInventory.handlers.proxy.ClientProxy")
 	public static CommonProxy proxy;
@@ -136,16 +146,18 @@ public class mod_RpgInventory {
 	public mod_RpgInventory() {
 		instance = this;
 	}
+
 	public int getUniqueID() {
 		return uniqueID++;
 	}
+
 	public  final EnumArmorMaterial mage = EnumHelper.addArmorMaterial("mage", 20, new int[]{2, 2, 2, 1}, 5);
 	public  final EnumArmorMaterial archer = EnumHelper.addArmorMaterial("archer", 20, new int[]{2, 3, 2, 2}, 5);
 	public  final EnumArmorMaterial berserker = EnumHelper.addArmorMaterial("berserker", 20, new int[]{2, 4, 3, 2}, 5);
-	
+
 	EnumToolMaterial clay = EnumHelper.addToolMaterial("claymore", 0, 750, 5F, 6, 0);
 	EnumToolMaterial stone = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 5F, 4, 0);
-	
+
 	public static CreativeTabs tab;
 
 	@EventHandler
@@ -155,10 +167,12 @@ public class mod_RpgInventory {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+
+		setDonators();
+		
 		// NOTHING BEFORE THE GOD DAMN TAB ! 
 		//any items that need to be in it, put in it BEFORE the tab exists will not be in
 		tab = new RpgInventoryTab(CreativeTabs.getNextID(), "RpgTab");
-
 
 		try {
 			Class.forName("rpgNecroPaladin.mod_RpgPlus");
@@ -209,18 +223,12 @@ public class mod_RpgInventory {
 
 		archerShield = new ItemRpgInvArmor(RpgConfig.instance.archersShieldID, 1, 200, "", "subaraki:jewels/Shield1.png").setUnlocalizedName("shieldArcher").setCreativeTab(tab);
 		berserkerShield = new ItemRpgInvArmor(RpgConfig.instance.berserkerShieldID, 1, 350, "", "subaraki:jewels/IronThorn.png").setUnlocalizedName("shieldBerserker").setCreativeTab(tab);
-		talisman = new ItemRpgInvArmor(RpgConfig.instance.talismanID, 1, 200, "", "subaraki:jewels/talisman.png").setUnlocalizedName("shieldMage").setCreativeTab(tab);
+		talisman = new ItemRpgInvArmor(RpgConfig.instance.talismanID, 1, 200, "", "subaraki:jewels/mageShield.png").setUnlocalizedName("shieldMage").setCreativeTab(tab);
 
-		cloak = new ItemRpgInvArmor(RpgConfig.instance.cloakID, 2, -1, "","").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
-		cloakI = new ItemRpgInvArmor(RpgConfig.instance.cloakIID, 2, -1, "","").setFull3D().setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
+		cloak = new ItemRpgInvArmor(RpgConfig.instance.cloakID, 2, -1, "","subaraki:capes/GreyCape.png").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
+		cloakI = new ItemRpgInvArmor(RpgConfig.instance.cloakIID, 2, -1, "","subaraki:capes/GreyCape.png").setFull3D().setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
 
-		magehood = 
-				new ItemMageArmor
-				(RpgConfig.instance.magehoodID,
-						mage, 4, 0)
-		.setUnlocalizedName("mage1")
-		.setCreativeTab(tab);
-		
+		magehood = new ItemMageArmor(RpgConfig.instance.magehoodID,	mage, 4, 0).setUnlocalizedName("mage1").setCreativeTab(tab);
 		magegown = new ItemMageArmor(RpgConfig.instance.magegownID, mage, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);
 		magepants = new ItemMageArmor(RpgConfig.instance.magepantsID, mage, 4, 2).setUnlocalizedName("mage3").setCreativeTab(tab);
 		mageboots = new ItemMageArmor(RpgConfig.instance.magebootsID, mage, 4, 3).setUnlocalizedName("mage4").setCreativeTab(tab);
@@ -260,21 +268,12 @@ public class mod_RpgInventory {
 		ringmold = new ItemMold(RpgConfig.instance.ringmoldID).setUnlocalizedName("moldRing").setCreativeTab(tab);
 		wantmold = new ItemMold(RpgConfig.instance.wantmoldID).setUnlocalizedName("moldGlove").setCreativeTab(tab);
 
-		if (hasRpg == true) {	
-		}
-
-		if (hasShields == true) {
-		}
-		if (hasRogue == true) {			
-		}
-		if (hasMage == true) {
-		}
-
 		proxy.registerRenderInformation();
 
-		addChestLoot(new ItemStack(mod_RpgInventory.colmold), 1, 1, 40, "Necklace Mold");
-		addChestLoot(new ItemStack(mod_RpgInventory.ringmold), 1, 1, 30, "Ring Mold");
-		addChestLoot(new ItemStack(mod_RpgInventory.wantmold), 1, 1, 40, "Gloves Mold");
+		addChestLoot(new ItemStack(mod_RpgInventory.colmold), 1, 1, 20, "Necklace Mold");
+		addChestLoot(new ItemStack(mod_RpgInventory.ringmold), 1, 1, 10, "Ring Mold");
+		addChestLoot(new ItemStack(mod_RpgInventory.wantmold), 1, 1, 20, "Gloves Mold");
+		addRareLoot(new ItemStack(mod_RpgInventory.cloakI), 1, 1, 1, "Gloves Mold");
 
 		GameRegistry.registerTileEntity(TEMold.class, "temold");
 
@@ -304,7 +303,7 @@ public class mod_RpgInventory {
 
 		LanguageRegistry.addName(archerShield, "Small Archer Shield");
 		LanguageRegistry.addName(berserkerShield, "Berserker's Iron Thorn");
-		LanguageRegistry.addName(talisman, "Wizard's Talisman");
+		LanguageRegistry.addName(talisman, "Aura Shield");
 
 		LanguageRegistry.addName(cloak, "Cloak");
 		LanguageRegistry.addName(cloakI, "Invisibility Cloak");
@@ -325,15 +324,15 @@ public class mod_RpgInventory {
 		LanguageRegistry.addName(berserkerBoots, "Berserker's Feet Protection");
 
 		LanguageRegistry.addName(wand, "Soul Sphere");
-		LanguageRegistry.addName(claymore, "Berserker's Claymore");
-		LanguageRegistry.addName(elfbow, "Archer's Bow of Birch");
+		LanguageRegistry.addName(claymore, "Berserker Claymore");
+		LanguageRegistry.addName(elfbow, "Birch Bow");
 
 		LanguageRegistry.addName(animalskin, "Animal Skin");
 		LanguageRegistry.addName(tanHide, "Tanned Hide");
 		LanguageRegistry.addName(magecloth, "Mage Cloth");
 
 		LanguageRegistry.addName(wizardBook, "Wizard's Knowledge, Volume I");
-		LanguageRegistry.addName(hammer, "Berserker's Rage Breaker");
+		LanguageRegistry.addName(hammer, "Rage Breaker");
 		LanguageRegistry.addName(staf, "Lunar Staff");
 		LanguageRegistry.addName(rageSeed, "Rage Seeds");
 
@@ -396,10 +395,10 @@ public class mod_RpgInventory {
 		TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
 		MinecraftForge.EVENT_BUS.register(new RPGEventHooks());
 		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow", getUniqueID(), this, 250, 1, true);
-		
+
 
 		ClientProxy.renderHandler();
-		
+
 
 		//hack to increase the number of potion types allowed
 
@@ -504,6 +503,17 @@ public class mod_RpgInventory {
 
 	}
 
+	public void addRareLoot(ItemStack is, int min, int max, int rarity, String item) {
+		FMLLog.info("Adding to chests: " + item, min);
+		WeightedRandomChestContent chestGen = new WeightedRandomChestContent(is.copy(), min, max, rarity);
+
+		ChestGenHooks.getInfo("dungeonChest").addItem(chestGen);
+		ChestGenHooks.getInfo("mineshaftCorridor").addItem(chestGen);
+		ChestGenHooks.getInfo("strongholdCorridor").addItem(chestGen);
+		ChestGenHooks.getInfo("strongholdLibrary").addItem(chestGen);
+		ChestGenHooks.getInfo("strongholdCrossing").addItem(chestGen);
+	}
+
 	public void addCandyChestLoot(ItemStack is, int min, int max, int rarity, String item) {
 		FMLLog.info("Adding to chests: " + item, min);
 		WeightedRandomChestContent chestGen = new WeightedRandomChestContent(is.copy(), min, max, rarity);
@@ -523,13 +533,32 @@ public class mod_RpgInventory {
 		commandManager.registerCommand(new rpgInventory.handlers.CommandPanel());
 		rpgInventory.handlers.CommandPanel.init();
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	private void registerClientEvents(){
 		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
 	}
-	
+
 	public String playerClass(){
 		return playerClass;
+	}
+
+	public static ArrayList<String> donators = new ArrayList<String>();
+
+	private void setDonators(){
+		try {
+			URL url = new URL("http://www.dnstechpack.com/user/subaraki/rpgcapes/donatorsList.txt");
+			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+			String str;
+			while ((str = in.readLine()) != null) {
+				FMLLog.getLogger().info(""+str);
+				donators.add(str);
+			}
+			in.close();
+		} catch (MalformedURLException e) {
+			FMLLog.getLogger().info("nope");
+		} catch (IOException e) {
+			FMLLog.getLogger().info("nope");
+		}
 	}
 }

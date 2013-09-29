@@ -60,7 +60,7 @@ public class mod_RpgMageSet {
 		earthStaff = new ItemElementalStaff(RpgConfig.instance.staffEarth, 3, 150).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffEarth");
 		windStaff = new ItemElementalStaff(RpgConfig.instance.staffWind, 4, 500).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffWind");
 		ultimateStaff = new ItemElementalStaff(RpgConfig.instance.staffUltimate, 5, 300).setMaxStackSize(1).setMaxDamage(150).setUnlocalizedName("staffElemental");
-		archBook = new ItemMageShield(RpgConfig.instance.archBook, 1, 300, "", "subaraki:jewels/book.png").setUnlocalizedName("archTome");
+		archBook = new ItemMageShield(RpgConfig.instance.archBook, 1, 300, "", "subaraki:jewels/archMageShield.png").setUnlocalizedName("archTome");
 
 		archmageHood = new ItemMageARmor(RpgConfig.instance.archmageHood, archMage, 4, 0).setUnlocalizedName("archMage1");
 		archmageChest = new ItemMageARmor(RpgConfig.instance.archmageChest, archMage, 4, 1).setUnlocalizedName("archMage2");
@@ -72,7 +72,7 @@ public class mod_RpgMageSet {
 		LanguageRegistry.addName(earthStaff, "Earth Staff");
 		LanguageRegistry.addName(windStaff, "Wind Staff");
 		LanguageRegistry.addName(ultimateStaff, "Ultimate Staff");
-		LanguageRegistry.addName(archBook, "ArchMage Book");
+		LanguageRegistry.addName(archBook, "Archmage Aura Shield");
 		LanguageRegistry.addName(archmageHood, "Arch Mage Hat");
 		LanguageRegistry.addName(archmageChest, "Arch Mage Gown");
 		LanguageRegistry.addName(archmageLegs, "Arch Mage Leggings");

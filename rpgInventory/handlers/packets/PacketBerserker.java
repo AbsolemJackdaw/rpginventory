@@ -37,7 +37,7 @@ public class PacketBerserker {
 				CommonTickHandler.globalCooldownMap.put(p.username, 0);
 			}
 			if (CommonTickHandler.globalCooldownMap.get(p.username) <= 0) {
-				CommonTickHandler.globalCooldownMap.put(p.username, 7 * 20);
+				CommonTickHandler.globalCooldownMap.put(p.username, (mod_RpgInventory.donators.contains(p.username) ? 6 : 7) * 20);
 				if (item1.getItemDamage() + 3 >= item1.getMaxDamage()) {
 					//Trigger item break stuff
 					//Only damage what is left
@@ -55,14 +55,13 @@ public class PacketBerserker {
 				}
 
 				float range = 4.0f;
-				if (!mod_RpgInventory.developers.contains(p.username.toLowerCase()))
-					range = 4.0f;
+				if (mod_RpgInventory.developers.contains(p.username.toLowerCase()))
+					range = 8.0f;
 				else
-					range= 8.0f;
+					range = mod_RpgInventory.donators.contains(p.username) ? 5.5f : 4.0f;
 
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - range, p.posY - range, p.posZ - range, p.posX + range, p.posY + range, p.posZ + range);
 
-				
 				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, pool);
 				if (entl != null && entl.size() > 0) {
 					for (EntityLivingBase el : entl) {
@@ -73,18 +72,18 @@ public class PacketBerserker {
 								
 								p.worldObj.spawnParticle("flame", el.posX, el.posY, el.posZ, 0,1,0);
 
-								if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
-									el.motionX = xdir * 1.5F;
-									el.motionY = 1.5F;
-									el.motionZ = zdir * 1.5F;
-								}else{
+								if (mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
 									el.motionX = xdir * 3F;
 									el.motionY = 3F;
 									el.motionZ = zdir * 3F;
+								}else{
+									el.motionX = xdir * (mod_RpgInventory.donators.contains(p.username) ? 2.2f : 1.5F);
+									el.motionY = mod_RpgInventory.donators.contains(p.username) ?2.2f : 3F;
+									el.motionZ = zdir * (mod_RpgInventory.donators.contains(p.username) ? 2.2f : 3F);
 								}
 							} catch (Throwable ex) {
 							}
-							el.attackEntityFrom(DamageSource.causePlayerDamage(p), 10);
+							el.attackEntityFrom(DamageSource.causePlayerDamage(p), mod_RpgInventory.donators.contains(p.username) ? 10 : 8);
 						}
 					}
 				}

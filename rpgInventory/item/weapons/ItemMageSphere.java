@@ -1,14 +1,18 @@
 package rpgInventory.item.weapons;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
@@ -42,18 +46,23 @@ public class ItemMageSphere extends ItemRpgWeapon{
 			if(item.equals(mod_RpgInventory.magehood) && item1.equals(mod_RpgInventory.magegown)
 					&& item2.equals(mod_RpgInventory.magepants)&& item3.equals(mod_RpgInventory.mageboots))
 			{
-				if(par3EntityPlayer.inventory.hasItem(Item.blazePowder.itemID))
+				if(par3EntityPlayer.inventory.hasItem(Item.blazePowder.itemID) || mod_RpgInventory.donators.contains(par3EntityPlayer.username))
 				{
 
-					double var18 = 2.0D;
-					Vec3 var20 = par3EntityPlayer.getLook(1.0F);
-					EntityLargeFireball var17 = new EntityLargeFireball(par2World);
-					var17.posX = par3EntityPlayer.posX + var20.xCoord*var18;
-					var17.posY = par3EntityPlayer.posY +  var20.yCoord+1.5;
-					var17.posZ = par3EntityPlayer.posZ + var20.zCoord*var18;
+
+					Vec3 look = par3EntityPlayer.getLookVec();
+					EntitySmallFireball ball = new EntitySmallFireball(par2World, par3EntityPlayer, 1, 1, 1);
+					ball.setPosition(
+							par3EntityPlayer.posX + look.xCoord * 1,
+							par3EntityPlayer.posY + look.yCoord * 1 + 1.5,
+							par3EntityPlayer.posZ + look.zCoord * 1);
+					ball.accelerationX = look.xCoord * 0.1;
+					ball.accelerationY = look.yCoord * 0.1;
+					ball.accelerationZ = look.zCoord * 0.1;
+					
 					if(!par2World.isRemote)
 					{
-						par2World.spawnEntityInWorld(var17);
+						par2World.spawnEntityInWorld(ball);
 					}
 					par1ItemStack.damageItem(5, par3EntityPlayer);
 				}
@@ -62,6 +71,25 @@ public class ItemMageSphere extends ItemRpgWeapon{
 		return par1ItemStack;
 	}
 
+	Random rand = new Random();
+	private void setThrowableHeading(EntityLargeFireball ball , double par1, double par3, double par5, float par7, float par8){
+		float f2 = MathHelper.sqrt_double(par1 * par1 + par3 * par3 + par5 * par5);
+		par1 /= (double)f2;
+		par3 /= (double)f2;
+		par5 /= (double)f2;
+		par1 += rand.nextGaussian() * (double)(rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double)par8;
+		par3 += rand.nextGaussian() * (double)(rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double)par8;
+		par5 += rand.nextGaussian() * (double)(rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double)par8;
+		par1 *= (double)par7;
+		par3 *= (double)par7;
+		par5 *= (double)par7;
+		ball.motionX = par1;
+		ball.motionY = par3;
+		ball.motionZ = par5;
+		float f3 = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
+		ball.prevRotationYaw = ball.rotationYaw = (float)(Math.atan2(par1, par5) * 180.0D / Math.PI);
+		ball.prevRotationPitch = ball.rotationPitch = (float)(Math.atan2(par3, (double)f3) * 180.0D / Math.PI);
+	}
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
 	{
 		ItemStack var33 = par2EntityPlayer.inventory.armorItemInSlot(3);
@@ -154,7 +182,7 @@ public class ItemMageSphere extends ItemRpgWeapon{
 						if( var12 == Block.oreLapis.blockID)
 						{
 							par3World.setBlock(par4, par5, par6, Block.blockLapis.blockID);
-							par1ItemStack.damageItem(151, par2EntityPlayer);
+							par1ItemStack.damageItem(mod_RpgInventory.donators.contains(par2EntityPlayer.username) ? 50 : 151, par2EntityPlayer);
 						}
 
 					}
@@ -187,8 +215,7 @@ public class ItemMageSphere extends ItemRpgWeapon{
 					&& item2.equals(mod_RpgInventory.magepants)&& item3.equals(mod_RpgInventory.mageboots))
 			{
 				int k = this.itemRand.nextInt(5);
-				switch(k)
-				{
+				switch(k){
 				case 0: par2EntityLiving.setFire(40);
 				break;
 				case 1: par2EntityLiving.motionY = 0.8f;

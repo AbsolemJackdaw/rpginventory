@@ -79,7 +79,7 @@ public class mod_RpgRB {
 
 		tab = new RBTab(CreativeTabs.getNextID(), "RBTab");
 
-		daggers = new ItemRpgInvArmorRB(RpgConfig.instance.daggersID, 1, 800, "", "").setUnlocalizedName("dagger");
+		daggers = new ItemRpgInvArmorRB(RpgConfig.instance.daggersID, 1, 800, "", "subaraki:weapons/dagger.png").setUnlocalizedName("dagger");
 		beastAxe = new ItemBeastAxe(RpgConfig.instance.beastAxe, BeastAxeMaterial).setFull3D().setUnlocalizedName("forestAxe");
 
 		rogueLeather = new ItemRBMats(RpgConfig.instance.rogueLeatherID).setUnlocalizedName("r.leather");

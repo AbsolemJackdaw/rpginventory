@@ -29,7 +29,7 @@ public class CommonTickHandler implements ITickHandler {
 	private final int lapisTimer = 20*20;
 	private int countDownLapis = lapisTimer;
 
-	
+
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) {
 
@@ -74,7 +74,8 @@ public class CommonTickHandler implements ITickHandler {
 					if (rpginv == null) {
 						continue;
 					}
-					int delay = 70;
+					int delay;
+					delay = mod_RpgInventory.donators.contains(player.username) ? 65 : 75;
 					if (rpginv.getNecklace() != null && rpginv.getNecklace().getItem().equals(mod_RpgInventory.neckdia)) {
 						delay -= 10;
 					}
@@ -148,6 +149,7 @@ public class CommonTickHandler implements ITickHandler {
 					if (rpginv.getRing2() != null && rpginv.getRing2().getItem().equals(mod_RpgInventory.ringlap)) {
 						heal++;
 					}
+						
 					if (player.getCurrentEquippedItem() != null) {
 						ItemStack stack = player.getCurrentEquippedItem();
 						countDownLapis--;
@@ -155,7 +157,7 @@ public class CommonTickHandler implements ITickHandler {
 							if(stack.getItemDamage() <= stack.getMaxDamage())
 								if(countDownLapis <= 0){
 									stack.setItemDamage(stack.getItemDamage() - heal );
-									countDownLapis = lapisTimer;
+									countDownLapis = mod_RpgInventory.donators.contains(player.username) ? 15*20 :lapisTimer;
 								}
 						}
 					}

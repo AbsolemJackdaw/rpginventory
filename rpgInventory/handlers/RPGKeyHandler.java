@@ -106,7 +106,7 @@ public class RPGKeyHandler extends AbstractKeyHandler {
 			try {
 				outputStream.writeInt(i);
 				if (item.getItem().itemID == mod_RpgInventory.elfbow.itemID) {
-					EntityLiving target = isTargetingEntity(Minecraft.getMinecraft().thePlayer, 40);
+					EntityLiving target = isTargetingEntity(Minecraft.getMinecraft().thePlayer, mod_RpgInventory.donators.contains(Minecraft.getMinecraft().thePlayer.username) ? 60 : 40);
 					if (target != null) {
 						outputStream.writeBoolean(false);
 						outputStream.writeInt((int) Math.floor(target.posX));

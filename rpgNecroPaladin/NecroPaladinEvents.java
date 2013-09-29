@@ -51,8 +51,7 @@ public class NecroPaladinEvents {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-		}
-		
+		}	
 	}
 
 	@ForgeSubscribe
@@ -80,10 +79,10 @@ public class NecroPaladinEvents {
 						//paladin heals himself when hitting undead
 						if (evt.entityLiving.isEntityUndead()) {
 							if (((EntityPlayer) damager).getHealth() < ((EntityPlayer) damager).getMaxHealth()) {
-								((EntityPlayer) damager).heal(1);
+								((EntityPlayer) damager).heal( mod_RpgInventory.donators.contains( ((EntityPlayer)damager).username) ? 2 : 1);
 							}
 							evt.ammount += 3;
-							evt.entityLiving.setFire(4);
+							evt.entityLiving.setFire( mod_RpgInventory.donators.contains( ((EntityPlayer)damager).username) ? 5 : 2);
 						}
 					}
 					if (mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO)){

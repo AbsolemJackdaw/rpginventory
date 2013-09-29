@@ -21,6 +21,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.Sphere;
 
+import rpgInventory.CapeRenderer;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.entity.EntityHellArrow;
@@ -32,14 +33,17 @@ import rpgInventory.models.armor.ModelBerserkerArmor;
 import rpgInventory.models.armor.ModelMageArmor;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.ModelShield;
+import rpgInventory.models.shields.bookMage;
 import rpgInventory.renderer.RenderRpgPlayer;
 import rpgInventory.renderer.items.shields.ArcherShield;
 import rpgInventory.renderer.items.shields.BerserkerShield;
+import rpgInventory.renderer.items.shields.BookRenderer;
 import rpgInventory.renderer.items.weapons.BowRender;
 import rpgInventory.renderer.items.weapons.ClaymoreRenderer;
 import rpgInventory.renderer.items.weapons.HammerRender;
 import rpgInventory.renderer.items.weapons.SoulSphereRender;
 import rpgInventory.renderer.items.weapons.StafRender;
+import rpgMage.mod_RpgMageSet;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -52,23 +56,26 @@ public class ClientProxy extends CommonProxy {
 	public static int sphereID;
 	public static boolean firstUpdate = false;
 
+	@Override
 	public int getSphereID() {
 		return sphereID;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public static void renderHandler() {
-
+		new CapeRenderer();
 		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
 	}
 
+	@Override
 	public void spawnParticle(World world, EntityLivingBase el, Random rng) {
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityHeartFX efx = new EntityHeartFX(world, el.posX, el.posY + 0.5F + rng.nextFloat(), el.posZ, rng.nextFloat(), rng.nextFloat() + 0.4F, rng.nextFloat());
 		mc.effectRenderer.addEffect(efx);
 	}
 
-	public void spawnCharmParticle(World world, EntityLiving el, Random rng, boolean success) {
+	@Override
+	public void spawnCharmParticle(World world, EntityLivingBase el, Random rng, boolean success) {
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityLargeExplodeFX exfx = new net.minecraft.client.particle.EntityLargeExplodeFX(mc.renderEngine, world, el.posX, el.posY + 0.5F, el.posZ, rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
 		if (success) {
@@ -79,6 +86,7 @@ public class ClientProxy extends CommonProxy {
 		mc.effectRenderer.addEffect(exfx);
 	}
 
+	@Override
 	public void registerRenderInformation() {
 		//		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
 
@@ -97,7 +105,7 @@ public class ClientProxy extends CommonProxy {
 		//GLU_NONE will be completely solid, and probably will have no depth to it's appearance.        
 		sphere.setNormals(GLU.GLU_SMOOTH);
 		//GLU_INSIDE will render as if you are inside the sphere, making it appear inside out.(Similar to how ender portals are rendered)
-		sphere.setOrientation(GLU.GLU_INSIDE);
+		sphere.setOrientation(GLU.GLU_OUTSIDE);
 
 		sphere.setTextureFlag(true);
 		//Simple 1x1 red texture to serve as the spheres skin, the only pixel in this image is red.
@@ -129,27 +137,17 @@ public class ClientProxy extends CommonProxy {
 					(IItemRenderer) new BerserkerShield(new IronThorn(), "subaraki:jewels/IronThorn.png"));
 			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.archerShield.itemID, 
 					(IItemRenderer) new ArcherShield(new ModelShield(), "subaraki:jewels/Shield1.png"));
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.talisman.itemID, 
+					(IItemRenderer) new BookRenderer(new bookMage(), "subaraki:jewels/mageShield.png"));
 		}		
 	}
 
+	@Override
 	public void registerLate() {
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
-
-		//		RenderPlayerJewels renderballs = new RenderPlayerJewels(new ModelBiped());
-		//Ok guys. This is a workaround for other mods the hook the player render(smart moving)
-		//Basically we want to learn the currently bound renderers, and use them to
-		//render the player, and then render our items.
-		//		Map<Class<? extends Entity>, Render> map = RenderManager.instance.entityRenderMap;
-		//		for (Entry<Class<? extends Entity>, Render> entry : map.entrySet()) {
-		//			if (EntityPlayer.class.isAssignableFrom(entry.getKey())) {
-		//				Class clazz = entry.getValue().getClass();
-		//				RenderPlayerJewels.defaultPlayerRender.put(entry.getKey(), entry.getValue());
-		//				RenderingRegistry.registerEntityRenderingHandler(entry.getKey(), renderballs);
-		//			}
-		//		}
-		//		RenderingRegistry.instance().loadEntityRenderers(RenderManager.instance.entityRenderMap);
 	}
 
+	@Override
 	public void openGUI(EntityPlayer p1, int id) {
 		switch (id) {
 		case 1:
@@ -188,7 +186,7 @@ public class ClientProxy extends CommonProxy {
 		return armorMage;
 	}
 
-	
+	@Override
 	public void openGUI(EntityPlayer p1, PlayerRpgInventory inv) {
 		Minecraft.getMinecraft().displayGuiScreen(new rpgInventory.gui.pet.PetGui(p1, inv));
 	}

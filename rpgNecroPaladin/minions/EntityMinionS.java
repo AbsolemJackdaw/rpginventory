@@ -3,6 +3,8 @@ package rpgNecroPaladin.minions;
 import java.util.ArrayList;
 import java.util.List;
 
+import rpgInventory.mod_RpgInventory;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -38,7 +40,7 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob, I
 	public EntityMinionS(World var1, EntityPlayer player) {
 		this(var1);
 		this.player = player;
-		this.setSize(1.0f, 1.0f);
+		this.setSize(1.0f, 0.8f);
 		//All attack requests are filtered through this task to ensure it really should attack.
 		//The minion will attack all aggressives that get close enough, but will
 		//never attack the owner, or other minions of his owner. He will attack other
@@ -61,10 +63,6 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob, I
 	public boolean isEntityInvulnerable() {
 		return invulnerable;
 	}
-
-
-
-
 
 	public EntityMinionS(World var1) {
 		super(var1);
@@ -106,7 +104,7 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob, I
 	public void Harvest() {
 		this.damageEntity(DamageSource.magic, this.getHealth());
 		if (player.getHealth() + 2 <= player.getMaxHealth()) {
-			player.heal(2);
+			player.heal( mod_RpgInventory.donators.contains(getMaster().username) ? 2 : 1);
 		} else {
 			player.setHealth(player.getMaxHealth());
 		}
@@ -168,11 +166,6 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob, I
 		}
 	}
 
-//	public int getMaxHealth() {
-//
-//		return 12;
-//	}
-
 	public boolean isAIEnabled() {
 		return true;
 	}
@@ -180,13 +173,11 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob, I
 	public void writeEntityToNBT(NBTTagCompound var1) {
 		super.writeEntityToNBT(var1);
 		var1.setInteger("Exist", this.getGrowingAge());
-
 	}
 
 	public void readEntityFromNBT(NBTTagCompound var1) {
 		super.readEntityFromNBT(var1);
 		this.setGrowingAge(var1.getInteger("Exist"));
-
 	}
 
 	public EntityAnimal spawnBabyAnimal(EntityAnimal var1) {
@@ -213,14 +204,6 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob, I
 		}
 		super.onDeath(par1DamageSource);
 	}
-
-//	@Override
-//	public void func_82196_d(EntityLivingBase par1EntityLiving) {
-//		EntityArrow var2 = new EntityArrow(this.worldObj, this, par1EntityLiving, 1.6F, 12.0F);
-//
-//		this.worldObj.playSoundAtEntity(this, "random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-//		this.worldObj.spawnEntityInWorld(var2);
-//	}
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable var1) {

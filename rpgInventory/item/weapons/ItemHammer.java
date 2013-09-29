@@ -19,7 +19,7 @@ public class ItemHammer extends ItemRpgSword {
     public ItemHammer(int par1, EnumToolMaterial mat) {
         super(par1, EnumToolMaterial.STONE);
         this.maxStackSize = 1;
-        this.setMaxDamage(EnumToolMaterial.IRON.getMaxUses());
+        this.setMaxDamage(EnumToolMaterial.IRON.getMaxUses()+300);
         this.setCreativeTab(CreativeTabs.tabCombat);
     }
 

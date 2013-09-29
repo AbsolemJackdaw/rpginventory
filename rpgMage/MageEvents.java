@@ -26,7 +26,7 @@ public class MageEvents {
 						{
 							if (p.isBurning()) {
 								if (p.getHealth() < 6) {
-									p.setHealth(6);
+									p.setHealth(mod_RpgInventory.donators.contains(p.username) ? 8 : 6);
 								} p.extinguish();
 							}
 						}

@@ -3,6 +3,8 @@ package rpgNecroPaladin.minions;
 import java.util.ArrayList;
 import java.util.List;
 
+import rpgInventory.mod_RpgInventory;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -75,7 +77,7 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
     public void Harvest() {
         this.damageEntity(DamageSource.magic, this.getHealth());
         if (player.getHealth() + 2 <= player.getMaxHealth()) {
-            player.heal(2);
+            player.heal(mod_RpgInventory.donators.contains(getMaster().username) ? 2 : 1);
         } else {
             player.setHealth(player.getMaxHealth());
         }

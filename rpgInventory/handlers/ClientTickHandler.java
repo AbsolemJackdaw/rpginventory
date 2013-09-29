@@ -99,7 +99,7 @@ public class ClientTickHandler implements ITickHandler {
 						try {
 							//"controlList" is the name deobfuscated. "i" is the name obfustcated.
 							//This adds compatibility when developing AND on release.
-							if (f.getName().equals("buttonList") || f.getName().equals("i")) {
+							if (f.getName().equals("buttonList") || f.getName().equals("field_73887_h")) {
 								Field modfield = Field.class.getDeclaredField("modifiers");
 								modfield.setAccessible(true);
 								modfield.setInt(f, f.getModifiers() & ~Modifier.PROTECTED);
@@ -123,7 +123,6 @@ public class ClientTickHandler implements ITickHandler {
 		} else {
 			added = false;
 		}
-		//Area below reserved for future client tick stuff.
 	}
 
 	@Override

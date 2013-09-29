@@ -1,8 +1,8 @@
 package rpgMage;
 
 import rpgInventory.item.armor.ItemRpgInvArmor;
-import rpgInventory.models.shields.Book;
 import rpgInventory.models.shields.MainShield;
+import rpgInventory.models.shields.bookMage;
 
 public class ItemMageShield extends ItemRpgInvArmor {
 
@@ -12,7 +12,7 @@ public class ItemMageShield extends ItemRpgInvArmor {
 		super(par1, par4, maxDamage, name, resourcelocation);
 	}
 
-	private Book book = new Book();
+	private bookMage book = new bookMage();
 	
 	@Override
 	public String boundArmorClass() {

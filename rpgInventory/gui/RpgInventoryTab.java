@@ -11,6 +11,7 @@ public class RpgInventoryTab extends CreativeTabs {
      {
              super(par1, par2Str);
      }
+	 
      @SideOnly(Side.CLIENT)
      public int getTabIconItemIndex()
      {

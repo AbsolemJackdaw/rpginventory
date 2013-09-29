@@ -40,11 +40,7 @@ public class ItemBeastAxe extends ItemRpgSword {
         this.maxStackSize = 1;
         this.setMaxDamage(1500);
     }
-
-    public String getTextureFile() {
-        return "/subaraki/RPGinventoryTM.png";
-    }
-
+    
     public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
         return par2Block != null && (par2Block.blockMaterial == Material.wood || par2Block.blockMaterial == Material.plants || par2Block.blockMaterial == Material.vine) ? 15f : super.getStrVsBlock(par1ItemStack, par2Block);
     }
@@ -87,7 +83,7 @@ public class ItemBeastAxe extends ItemRpgSword {
                 if (charmTime >= 100) {
                     charmTime = 0;
                     float num = rng.nextFloat();
-                    if (num > 0.80F) {
+                    if (num > (mod_RpgInventory.donators.contains(player.username) ? 0.50F :0.80F)) {
                         mod_RpgInventory.proxy.spawnCharmParticle(world, el, rng,true);
                         ByteArrayOutputStream bos = new ByteArrayOutputStream();
                         DataOutputStream dos = new DataOutputStream(bos);
