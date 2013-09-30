@@ -152,8 +152,6 @@ public class mod_RpgPlus {
 		pala_steel.setCreativeTab(tab);
 		
 		MinecraftForge.EVENT_BUS.register(new NecroPaladinEvents());
-
-
 	}
 	
 	@EventHandler
@@ -168,5 +166,7 @@ public class mod_RpgPlus {
 
 		
 		TickRegistry.registerTickHandler(new CommonTickHandlerRpgPlus(), Side.SERVER);
+		TickRegistry.registerTickHandler(new CommonTickHandlerRpgPlus(), Side.CLIENT);
+
 	}
 }

@@ -7,12 +7,17 @@ package rpgInventory.handlers;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutput;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -24,22 +29,46 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.packets.RpgPacketHandler;
-import rpgInventory.utils.AbstractKeyHandler;
+import rpgInventory.utils.IKeyHandler;
+import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
-public class RPGKeyHandler extends AbstractKeyHandler {
+public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 
 	public static Map<Integer, Integer> abilityMap = new HashMap();
 
-	public RPGKeyHandler() {
-		super();
+	public RPGKeyHandler(KeyBinding[] k, boolean [] b){
+		super(bindKeys, reps);
+
 		abilityMap.put(mod_RpgInventory.staf.itemID, RpgPacketHandler.MAGE1);
 		abilityMap.put(mod_RpgInventory.hammer.itemID, RpgPacketHandler.BERSERKER);
 		abilityMap.put(mod_RpgInventory.elfbow.itemID, RpgPacketHandler.ARCHER);
 		abilityMap.put(mod_RpgInventory.wand.itemID, RpgPacketHandler.MAGE2);
 		// abilityMap.put(mod_RpgInventory.daggers.itemID, 14);
 		// 14 used in another packet !
+	}
+
+	public RPGKeyHandler(){
+		super(registeredKeyBinds.toArray(new KeyBinding[registeredKeyBinds.size()]), new boolean[registeredKeyBinds.size()]);
+	}
+
+	public static Map<KeyBinding, List<IKeyHandler>> keyHandlers = new HashMap();
+	public static List<KeyBinding> registeredKeyBinds = new ArrayList();
+
+	public static void registerKeyhandler(IKeyHandler keyhandler, KeyBinding[] keyBindings, boolean[] repeatings) {
+		for(KeyBinding thisKB: keyBindings){
+			if(!registeredKeyBinds.contains(thisKB)){
+				registeredKeyBinds.add(thisKB);
+			}
+			List<IKeyHandler> keylist = keyHandlers.get(thisKB);
+			if(keylist == null){
+				keylist = new ArrayList();
+				keyHandlers.put(thisKB,keylist );
+			}
+			keylist.add(keyhandler);
+		}
 	}
 
 	public EntityLiving isTargetingEntity(EntityPlayer player, float distance) {
@@ -95,9 +124,27 @@ public class RPGKeyHandler extends AbstractKeyHandler {
 		return null;
 	}
 
+	//	public static void event(KeyBinding keybinding){
+	//		List<IKeyHandler> keyhandlers = keyHandlers.get(keybinding);
+	//		if(keyhandlers != null && keyhandlers.size() > 0){
+	//			for(IKeyHandler thisKH: keyhandlers){
+	//				thisKH.event();
+	//			}
+	//		}
+	//	}
+
 	@Override
-	protected void specialAbility(EnumSet<TickType> types, KeyBinding kb,
+	public void specialAbility(EnumSet<TickType> types, KeyBinding kb,
 			boolean tickEnd, ItemStack item) {
+
+		List<IKeyHandler> keyhandlers = keyHandlers.get(kb);
+		FMLLog.info("" + keyhandlers);
+		if(keyhandlers != null && keyhandlers.size() > 0){
+			for(IKeyHandler thisKH: keyhandlers){
+				thisKH.specialAbility(types, kb, tickEnd, item);
+			}
+		}
+
 		if (abilityMap.containsKey(item.getItem().itemID)) {
 
 			int i = abilityMap.get(item.getItem().itemID);
@@ -124,8 +171,53 @@ public class RPGKeyHandler extends AbstractKeyHandler {
 		}		
 	}
 
-	//	@Override
-	//	public String getLabel() {
-	//		return "RPG Inventory Key";
-	//	}
+	@Override
+	public String getLabel() {
+		return "RpgInventoryKeyHandler";
+	}
+
+	@Override
+	public void keyDown(EnumSet<TickType> types, KeyBinding kb,
+			boolean tickEnd, boolean isRepeat) {
+	}
+
+	@Override
+	public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd) {
+		if (!tickEnd) {
+			return;
+		}
+		try {
+			Minecraft mc = Minecraft.getMinecraft();
+			GuiScreen guiscreen = mc.currentScreen;
+			if (kb.keyDescription.equals("RPG Special Ability")) {
+				ItemStack item = mc.thePlayer.getCurrentEquippedItem();
+				if (guiscreen == null && !(item == null)) {
+					specialAbility(types, kb, tickEnd, item);
+				}
+			}else if (kb.keyDescription.equals("RPG Inventory Key")) {
+				if (guiscreen instanceof GuiInventory || guiscreen instanceof GuiContainerCreative) {
+					int i = 1;
+					ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+					ObjectOutput out;
+					DataOutputStream outputStream = new DataOutputStream(bytes);
+					try {
+						outputStream.writeInt(i);
+						Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
+						PacketDispatcher.sendPacketToServer(packet);
+						//System.out.println("Packet send");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					//System.out.println("opened rpg gui");
+				}
+			}
+		} catch (Throwable e) {
+		}
+	}
+
+	@Override
+	public EnumSet<TickType> ticks() {
+		return EnumSet.of(TickType.CLIENT);
+	}
+
 }

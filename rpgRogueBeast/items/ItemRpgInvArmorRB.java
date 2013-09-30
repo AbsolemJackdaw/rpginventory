@@ -50,8 +50,8 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 	public MainShield getShieldModel() {
 		if(this.equals(mod_RpgRB.beastShield))
 			return lion;
-		if(this.equals(mod_RpgRB.daggers))
-			return dagger;
+//		if(this.equals(mod_RpgRB.daggers))
+//			return dagger;
 		return super.getShieldModel();
 	}
 

@@ -8,7 +8,9 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.config.RpgConfig;
+import rpgInventory.handlers.RPGKeyHandler;
 import rpgInventory.models.armor.ModelRogueArmor;
+import rpgInventory.utils.IKeyHandler;
 import rpgRogueBeast.entity.BoarPet;
 import rpgRogueBeast.entity.BullPet;
 import rpgRogueBeast.entity.EntityPetXP;
@@ -47,7 +49,8 @@ public class RBClientProxy extends RBCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class, new RenderXPOrb());
 		RenderingRegistry.registerEntityRenderingHandler(EntityTeleportStone.class, new RenderSnowball(Item.feather, 1));
 
-		KeyBindingRegistry.registerKeyBinding(new RpgKeyHandlerRB());
+		RPGKeyHandler.registerKeyhandler(new RpgKeyHandlerRB(), IKeyHandler.bindKeys, IKeyHandler.reps);
+
 
 		MinecraftForge.EVENT_BUS.register(new SoundManager());
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);

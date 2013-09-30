@@ -41,7 +41,6 @@ public class RpgPlusPacketHandler implements IPacketHandler {
 			switch (weaponID) {
 
 			case WEAPONIDS.SKULLRCLICK:
-				FMLLog.info("info");
 				new PacketSpawnMinion(weapon, dis, inv, p);
 				break;
 			case WEAPONIDS.NECROSPECIAL:

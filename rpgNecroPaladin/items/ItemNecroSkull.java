@@ -142,7 +142,6 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 			DataOutputStream dos = new DataOutputStream(bos);
 			try {
 				dos.writeInt(RpgPlusPacketHandler.WEAPONIDS.SKULLRCLICK);
-				FMLLog.info("send");
 				Packet250CustomPayload packet = new Packet250CustomPayload("RpgPlusPlus", bos.toByteArray());
 				PacketDispatcher.sendPacketToServer(packet);
 			} catch (IOException ex) {

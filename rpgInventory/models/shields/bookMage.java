@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 
 public class bookMage extends MainShield
@@ -108,7 +109,14 @@ public class bookMage extends MainShield
 	float c = 0;
 	@Override
 	public void renderShield(float f5) {
-				
+		
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
+		
 		super.renderShield(f5);
 		Shape1.render(f5);
 		Shape2.render(f5);
