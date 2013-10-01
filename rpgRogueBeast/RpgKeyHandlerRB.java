@@ -15,12 +15,14 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import rpgInventory.handlers.RPGKeyHandler;
 import rpgInventory.utils.IKeyHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class RpgKeyHandlerRB extends RPGKeyHandler {
 
 
+	@Override
 	public void specialAbility(EnumSet<TickType> types, KeyBinding kb,
 			boolean tickEnd, ItemStack item) {
 		try {

@@ -32,7 +32,6 @@ public class CapeRenderer {
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			String str;
 			while ((str = in.readLine()) != null) {
-				FMLLog.getLogger().info(""+str);
 
 				playersWithCapes.add(str);
 
@@ -40,10 +39,12 @@ public class CapeRenderer {
 				this.downloadImageCape = getDownloadImageCape(this.locationCape, str);
 			}
 			in.close();
+			FMLLog.getLogger().info("Added capes for : " + playersWithCapes.toString());
+
 		} catch (MalformedURLException e) {
-			FMLLog.getLogger().info("nope");
+			FMLLog.getLogger().info("[ERROR] Couldn't Handle Capes. Index 1.");
 		} catch (IOException e) {
-			FMLLog.getLogger().info("nope");
+			FMLLog.getLogger().info("[ERROR] Couldn't Handle Capes. Index 2.");
 		}
 	}
 

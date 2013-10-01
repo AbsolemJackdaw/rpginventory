@@ -25,13 +25,6 @@ public class ItemNecroArmor extends AbstractArmor {
 		if (itemstack.itemID == mod_RpgPlus.necroLeggings.itemID) {
 			return "armor:necro_2.png";
 		}
-
-		if (itemstack.itemID == mod_RpgPlus.palaHelm.itemID || itemstack.itemID == mod_RpgPlus.palaChest.itemID || itemstack.itemID == mod_RpgPlus.palaBoots.itemID) {
-			return "armor:pal_1.png";
-		}
-		if (itemstack.itemID == mod_RpgPlus.palaLeggings.itemID) {
-			return "armor:pal_2.png";
-		}
 		return null;
 	}
 

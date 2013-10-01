@@ -547,18 +547,19 @@ public class mod_RpgInventory {
 
 	private void setDonators(){
 		try {
-			URL url = new URL("http://www.dnstechpack.com/user/subaraki/rpgcapes/donatorsList.txt");
+			URL url = new URL("http://www.dnstechpack.com/user/subaraki/rpgcapes/donatorList.txt");
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			String str;
 			while ((str = in.readLine()) != null) {
-				FMLLog.getLogger().info(""+str);
 				donators.add(str);
 			}
+			FMLLog.getLogger().info("Added Dev-Donation rank for : " + donators.toString());
+
 			in.close();
 		} catch (MalformedURLException e) {
-			FMLLog.getLogger().info("nope");
+			FMLLog.getLogger().info("[ERROR] Couldn't Handle Donators. Index 1.");
 		} catch (IOException e) {
-			FMLLog.getLogger().info("nope");
+			FMLLog.getLogger().info("[ERROR] Couldn't Handle Donators. Index 2.");
 		}
 	}
 }

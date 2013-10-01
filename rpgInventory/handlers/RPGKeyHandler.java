@@ -124,19 +124,10 @@ public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 		return null;
 	}
 
-	//	public static void event(KeyBinding keybinding){
-	//		List<IKeyHandler> keyhandlers = keyHandlers.get(keybinding);
-	//		if(keyhandlers != null && keyhandlers.size() > 0){
-	//			for(IKeyHandler thisKH: keyhandlers){
-	//				thisKH.event();
-	//			}
-	//		}
-	//	}
-
 	@Override
 	public void specialAbility(EnumSet<TickType> types, KeyBinding kb,
 			boolean tickEnd, ItemStack item) {
-
+		
 		List<IKeyHandler> keyhandlers = keyHandlers.get(kb);
 		FMLLog.info("" + keyhandlers);
 		if(keyhandlers != null && keyhandlers.size() > 0){

@@ -42,6 +42,7 @@ import rpgInventory.renderer.items.weapons.ClaymoreRenderer;
 import rpgInventory.renderer.items.weapons.HammerRender;
 import rpgInventory.renderer.items.weapons.SoulSphereRender;
 import rpgInventory.renderer.items.weapons.StafRender;
+import rpgInventory.utils.IKeyHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -61,6 +62,7 @@ public class ClientProxy extends CommonProxy {
 
 	@SideOnly(Side.CLIENT)
 	public static void renderHandler() {
+		
 		new CapeRenderer();
 		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
 	}
@@ -89,7 +91,8 @@ public class ClientProxy extends CommonProxy {
 		//		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
 
 		//		TextureIDs.init();
-		KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler());
+		KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler(IKeyHandler.bindKeys, IKeyHandler.reps));
+		
 		RenderingRegistry.registerEntityRenderingHandler(EntityHellArrow.class, new RenderArrow());
 
 		Sphere sphere = new Sphere();

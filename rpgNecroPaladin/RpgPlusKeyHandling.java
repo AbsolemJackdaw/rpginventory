@@ -22,9 +22,9 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 public class RpgPlusKeyHandling extends RPGKeyHandler {
 
 
+	@Override
 	public void specialAbility(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd, ItemStack item) {
-		FMLLog.info("o/");
-
+		
 		try {
 			if (item.getItem().equals(mod_RpgPlus.necro_weapon)) {
 				ByteArrayOutputStream bt = new ByteArrayOutputStream();

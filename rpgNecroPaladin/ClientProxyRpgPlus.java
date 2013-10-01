@@ -44,17 +44,15 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinionS.class,new RenderMinionS());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinionZ.class, new RenderMinionZ());
 
-		KeyBindingRegistry.registerKeyBinding(new RpgPlusKeyHandling());
-//		RPGKeyHandler.registerKeyhandler(new RpgPlusKeyHandling(), IKeyHandler.bindKeys, IKeyHandler.reps);
-//		AbstractKeyHandler.registerKeyhandler(new RpgPlusKeyHandling(null, null), AbstractKeyHandler.bindKeys, AbstractKeyHandler.reps);
+		RPGKeyHandler.registerKeyhandler(new RpgPlusKeyHandling(), IKeyHandler.bindKeys, IKeyHandler.reps);
 
 	}
 
 	private static final ModelNecroArmor armorNecroChest = new ModelNecroArmor(1.0f);
 	private static final ModelNecroArmor armorNecro = new ModelNecroArmor(0.5f);
 
-	private static ModelPaladinArmor armorPaladinChest = new ModelPaladinArmor(1.0f, Minecraft.getMinecraft().thePlayer); 
-	private static ModelPaladinArmor armorPaladin = new ModelPaladinArmor(0.5f, Minecraft.getMinecraft().thePlayer); 
+	private static ModelPaladinArmor armorPaladinChest = new ModelPaladinArmor(1.0f); 
+	private static ModelPaladinArmor armorPaladin = new ModelPaladinArmor(0.5f); 
 
 	@Override
 	public ModelBiped getArmorModel(int id){

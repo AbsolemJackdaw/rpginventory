@@ -1,5 +1,6 @@
 package rpgNecroPaladin.models;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -32,7 +33,7 @@ public class ModelPaladinArmor extends ModelBiped
 	ModelRenderer RspoulderBottom;
 	ModelRenderer rspoulderBase;
 
-	public ModelPaladinArmor(float par1, EntityLivingBase el)
+	public ModelPaladinArmor(float par1)
 	{
 		super(par1, 0, 65, 64);
 
@@ -188,13 +189,10 @@ public class ModelPaladinArmor extends ModelBiped
 		this.bipedHead.addChild(plume9);
 		this.bipedHead.addChild(plume10);
 
-		if(el instanceof EntityPlayer)
-			if(PlayerRpgInventory.get((EntityPlayer)el).getShield()== null){
-				this.bipedLeftArm.addChild(lspoulderBase);
-				this.bipedLeftArm.addChild(lspoulderMid);
-				this.bipedLeftArm.addChild(lspoulderTop);
-				this.bipedLeftArm.addChild(LspoulderDown);
-			}
+		this.bipedLeftArm.addChild(lspoulderBase);
+		this.bipedLeftArm.addChild(lspoulderMid);
+		this.bipedLeftArm.addChild(lspoulderTop);
+		this.bipedLeftArm.addChild(LspoulderDown);
 
 		this.bipedRightArm.addChild(rspoulderBase);
 		this.bipedRightArm.addChild(rspoulderMid);
