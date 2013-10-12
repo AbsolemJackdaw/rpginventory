@@ -6,9 +6,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import WWBS.wwbs.config.Config;
 import WWBS.wwbs.wwbs.BlockBank;
 import WWBS.wwbs.wwme.BlockME;
+import WWBS.wwbs.wwme.WwmeTE;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
-import cpw.mods.fml.common.Mod.PreInit;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -41,12 +41,12 @@ public class mod_wwbs {
 		instance = this;
 	}
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 
 		Config.instance.loadConfig(event.getSuggestedConfigurationFile());
 	}
-	@Init
+	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		wwbstab = new InventoryTab(CreativeTabs.getNextID(), "Bank System Tab");
 
@@ -61,6 +61,9 @@ public class mod_wwbs {
 		GameRegistry.registerBlock(me, "massiveExchange");
 		
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+        
+		GameRegistry.registerTileEntity(WwmeTE.class, "wwme");
+
 
 	}
 }

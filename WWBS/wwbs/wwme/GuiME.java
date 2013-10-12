@@ -1,7 +1,5 @@
 package WWBS.wwbs.wwme;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -21,7 +19,9 @@ public class GuiME extends GuiContainer {
 	public static String hi;
 	
 	public GuiME(EntityPlayer player, WwmeTE te) {
+		
 		super(new ContainerME(player.inventory, te));
+		
 		this.player = player;
 		hi =  "Welcome "+ player.username;
 		inv = player.username +"'s Inventory";
@@ -58,22 +58,10 @@ public class GuiME extends GuiContainer {
 
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
-
-//		this.buttonList.add(new GuiButton(0, posX , posY , 50, 20, "button"));
 	}
 
 	public boolean doesGuiPauseGame() {
 		return false;
 	}
-
-	@Override
-	public void actionPerformed(GuiButton button) {
-		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-		if (button.id == 0) 
-		{
-
-		} 
-	}
-
 }
 

@@ -6,60 +6,88 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public class WwmeTE extends TileEntity implements IInventory{
+	
+	public ItemStack[] inv;
 
-	private ItemStack[] invSlot;
+	public WwmeTE(){
+		inv = new ItemStack[6];
+	}
+	
 	@Override
 	public int getSizeInventory() {
-		invSlot = new ItemStack[1];
-
-		return 0;
+		return inv.length;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int i) {
-		return null;
+		return inv[i];
 	}
-
+	
 	@Override
-	public ItemStack decrStackSize(int slot, int amt) {
-		ItemStack stack = getStackInSlot(slot);
+	public ItemStack decrStackSize(int i, int j){
+		if (this.inv[i] != null)
+		{
+			ItemStack itemstack;
 
-		if (stack != null) {
-			if (stack.stackSize <= amt) {
-				setInventorySlotContents(slot, null);
-			} else {
-				stack = stack.splitStack(amt);
-				if (stack.stackSize == 0) {
-					setInventorySlotContents(slot, null);
+			if (this.inv[i].stackSize <= j)
+			{
+				itemstack = this.inv[i];
+				this.inv[i] = null;
+				this.onInventoryChanged();
+				return itemstack;
+			}
+			else
+			{
+				itemstack = this.inv[i].splitStack(j);
+
+				if (this.inv[i].stackSize == 0)
+				{
+					this.inv[i] = null;
 				}
+
+				this.onInventoryChanged();
+				return itemstack;
 			}
 		}
-		return stack;
-	}
-
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		if (this.invSlot[slot] != null) {
-			ItemStack var2 = this.invSlot[slot];
-			this.invSlot[slot] = null;
-			return var2;
-		} else {
+		else
+		{
 			return null;
 		}
 	}
 
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack) {
-		//		invSlot [slot] = stack;
+	public ItemStack getStackInSlotOnClosing(int i) {
+//		if (this.inv[i] != null)
+//		{
+//			ItemStack itemstack = this.inv[i];
+//			this.inv[i] = null;
+//			return itemstack;
+//		}
+//		else
+//		{
+//			return null;
+//		}
+		return null;
+	}
 
-		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-			stack.stackSize = getInventoryStackLimit();
+	@Override
+	public void setInventorySlotContents(int i, ItemStack itemstack) {
+		this.inv[i] = itemstack;
+
+		if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit()) {
+			itemstack.stackSize = this.getInventoryStackLimit();
 		}
+		this.onInventoryChanged();		
 	}
 
 	@Override
 	public String getInvName() {
-		return "Bank";
+		return "Massive Exchange";
+	}
+
+	@Override
+	public boolean isInvNameLocalized() {
+		return true;
 	}
 
 	@Override
@@ -73,57 +101,16 @@ public class WwmeTE extends TileEntity implements IInventory{
 	}
 
 	@Override
-	public void openChest() {
-
+	public void openChest() {		
 	}
 
 	@Override
 	public void closeChest() {
-
-	}
-
-	//	@Override
-	//	public void readFromNBT(NBTTagCompound tagCompound) {
-	//		super.readFromNBT(tagCompound);
-	//
-	//		//		NBTTagList tagList = tagCompound.getTagList("Inventory");
-	//		//		for (int i = 0; i < tagList.tagCount(); i++) {
-	//		//			NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
-	//		//			byte slot = tag.getByte("Slot");
-	//		//			if (slot >= 0 && slot < invSlot.length) {
-	//		//				invSlot[slot] = ItemStack.loadItemStackFromNBT(tag);
-	//		//			}
-	//		//		}
-	//
-	//	}
-
-	//	@Override
-	//	public void writeToNBT(NBTTagCompound tagCompound) {
-	//		super.writeToNBT(tagCompound);
-
-	//		NBTTagList itemList = new NBTTagList();
-	//		for (int i = 0; i < invSlot.length; i++) {
-	//			ItemStack stack = invSlot[i];
-	//			if (stack != null) {
-	//				NBTTagCompound tag = new NBTTagCompound();
-	//				tag.setByte("Slot", (byte) i);
-	//				stack.writeToNBT(tag);
-	//				itemList.appendTag(tag);
-	//			}
-	//		}
-	//		tagCompound.setTag("Inventory", itemList);
-	//}
-
-	@Override
-	public boolean isInvNameLocalized() {
-		return false;
+		
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
-
-
 }

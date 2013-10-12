@@ -8,29 +8,21 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import WWBS.wwbs.PacketHandler;
-import WWBS.wwbs.mod_wwbs;
-import cpw.mods.fml.common.network.FMLNetworkHandler;
-
 public class GuiMainB extends GuiScreen {
 
 	private float xSize_lo;
 	private float ySize_lo;
 	private int xSize = 176;
 	private int ySize = 90;
-	public int x;
-	public int y;
-	public int z;
+	public int posX;
+	public int posY;
+	public int posZ;
 	
-	public GuiMainB(EntityPlayer player ) {
+	public GuiMainB(EntityPlayer player,int x, int y, int z ) {
 		super();
-		x = PacketHandler.instance.x1;
- 		y = PacketHandler.instance.y1;
-		z = PacketHandler.instance.z1;
+
 	}
 	public static String hi = "World Wide Banking System";
-
-	
 	
 	@Override
 	public void initGui() {
@@ -66,7 +58,7 @@ public class GuiMainB extends GuiScreen {
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		if (button.id == 0) 
 		{
-	        FMLNetworkHandler.openGui(p, mod_wwbs.instance, 1, p.worldObj, x, y, z);
+
 		} 
 		else if (button.id == 1) 
 		{

@@ -8,15 +8,18 @@ import WWBS.wwbs.gui.blockGui.GuiMainME;
 public class ClientProxy extends CommonProxy{
 
 
-	public void openGui(int id, EntityPlayer p) {
+	public void registerRendering(){
+		
+	}
+	public void openGui(int id, EntityPlayer p, int x,int y, int z) {
 
 		switch(id)
 		{
 		case 1:
-            Minecraft.getMinecraft().displayGuiScreen(new GuiMainB(p));
+            Minecraft.getMinecraft().displayGuiScreen(new GuiMainB(p,x,y,z));
             break;
 		case 2:
-            Minecraft.getMinecraft().displayGuiScreen(new GuiMainME(p));
+            Minecraft.getMinecraft().displayGuiScreen(new GuiMainME(p,x,y,z));
             break;
 		}
 		
