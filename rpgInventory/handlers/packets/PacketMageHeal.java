@@ -3,7 +3,7 @@ package rpgInventory.handlers.packets;
 import java.io.DataInputStream;
 import java.util.List;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -50,13 +50,13 @@ public class PacketMageHeal {
 					}
 				}
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - 4.0F, p.posY - 4.0F, p.posZ - 4.0F, p.posX + 4.0F, p.posY + 4.0F, p.posZ + 4.0F);
-				List<EntityLiving> entl = p.worldObj.getEntitiesWithinAABB(EntityLiving.class, pool);
+				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, pool);
 				if (entl != null && entl.size() > 0) {
-					for (EntityLiving el : entl) {
+					for (EntityLivingBase el : entl) {
 						if (el != null) {
 							double dist = ((EntityPlayer) player).getDistanceSqToEntity(el);
 							double potstrength = 1.0D - Math.sqrt(dist) / (mod_RpgInventory.donators.contains(p.username) ? 6.0D : 4.0D);
-							Potion.heal.affectEntity((EntityLiving) player, el, (mod_RpgInventory.donators.contains(p.username) ? 4 : 2), potstrength);
+							Potion.heal.affectEntity((EntityLivingBase) player, el, (mod_RpgInventory.donators.contains(p.username) ? 4 : 2), potstrength);
 						}
 					}
 				}

@@ -25,7 +25,7 @@ public class BookGui extends GuiScreen
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.renderEngine.bindTexture(new ResourceLocation("rpginventorymod:textures/gui/bookgui.png"));
-//		this.mc.renderEngine.bindTexture("/subaraki/bookgui.png");
+		//		this.mc.renderEngine.bindTexture("/subaraki/bookgui.png");
 
 		int posX = (this.width - xSizeOfTexture) / 2;
 		int posY = (this.height - ySizeOfTexture) / 2;
@@ -59,6 +59,7 @@ public class BookGui extends GuiScreen
 		super.drawScreen(i, j, f);
 	}
 
+	@Override
 	public void initGui()
 	{
 		this.buttonList.clear();
@@ -68,16 +69,18 @@ public class BookGui extends GuiScreen
 
 		this.buttonList.add(new GuiButton(0, posX+176,  posY, 20, 20, "X"));
 	}
+	
+	@Override
 	public boolean doesGuiPauseGame()
 	{
 		return true;
 	}
+	
+	@Override
 	public void actionPerformed(GuiButton button){
-
-		if(button.id == 0)
-		{
+		
+		if(button.id == 0){
 			this.mc.thePlayer.closeScreen();
 		}
-
 	}
 }

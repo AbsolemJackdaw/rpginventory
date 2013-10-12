@@ -7,7 +7,6 @@ package rpgInventory.richUtil;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -22,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class Targetting {
 
     @SideOnly(Side.CLIENT)
-    public static EntityLiving isTargetingLivingEntity(double parDistance) {
+    public static EntityLivingBase isTargetingLivingEntity(double parDistance) {
         net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getMinecraft();
         EntityLivingBase viewEntity = mc.renderViewEntity;
         World worldObj = viewEntity.worldObj;
@@ -43,10 +42,10 @@ public class Targetting {
             Vec3 lookFarCoord = playerPosition.addVector(dirVec.xCoord * parDistance, dirVec.yCoord * parDistance, dirVec.zCoord * parDistance);
 
 
-            List<EntityLiving> targettedEntities = worldObj.getEntitiesWithinAABB(EntityLiving.class, viewEntity.boundingBox.addCoord(dirVec.xCoord * parDistance, dirVec.yCoord * parDistance, dirVec.zCoord * parDistance).expand(0.1, 0.1, 0.1));
+            List<EntityLivingBase> targettedEntities = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, viewEntity.boundingBox.addCoord(dirVec.xCoord * parDistance, dirVec.yCoord * parDistance, dirVec.zCoord * parDistance).expand(0.1, 0.1, 0.1));
             targettedEntities.remove(viewEntity);
 
-            for (EntityLiving targettedEntity : targettedEntities) {
+            for (EntityLivingBase targettedEntity : targettedEntities) {
                 if (targettedEntity != null) {
                     double precheck = viewEntity.getDistanceToEntity(targettedEntity);
                     MovingObjectPosition mopElIntercept = targettedEntity.boundingBox.calculateIntercept(playerPosition, lookFarCoord);
@@ -59,8 +58,8 @@ public class Targetting {
                 }
             }
         }
-        if (Return != null && Return instanceof EntityLiving) {
-            return (EntityLiving) Return;
+        if (Return != null && Return instanceof EntityLivingBase) {
+            return (EntityLivingBase) Return;
         }
         return null;
     }

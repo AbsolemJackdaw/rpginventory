@@ -20,7 +20,7 @@ import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -31,7 +31,6 @@ import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.packets.RpgPacketHandler;
 import rpgInventory.utils.IKeyHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
@@ -71,7 +70,7 @@ public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 		}
 	}
 
-	public EntityLiving isTargetingEntity(EntityPlayer player, float distance) {
+	public EntityLivingBase isTargetingEntity(EntityPlayer player, float distance) {
 		Minecraft mc = Minecraft.getMinecraft();
 		Entity Return = null;
 		float par1 = 1.0F;
@@ -110,8 +109,8 @@ public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 									var11 = var18;
 								}
 							}
-							if (Return != null && Return instanceof EntityLiving) {
-								return (EntityLiving) Return;
+							if (Return != null && Return instanceof EntityLivingBase) {
+								return (EntityLivingBase) Return;
 							}
 						}
 					}
@@ -129,7 +128,6 @@ public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 			boolean tickEnd, ItemStack item) {
 		
 		List<IKeyHandler> keyhandlers = keyHandlers.get(kb);
-		FMLLog.info("" + keyhandlers);
 		if(keyhandlers != null && keyhandlers.size() > 0){
 			for(IKeyHandler thisKH: keyhandlers){
 				thisKH.specialAbility(types, kb, tickEnd, item);
@@ -144,7 +142,7 @@ public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 			try {
 				outputStream.writeInt(i);
 				if (item.getItem().itemID == mod_RpgInventory.elfbow.itemID) {
-					EntityLiving target = isTargetingEntity(Minecraft.getMinecraft().thePlayer, mod_RpgInventory.donators.contains(Minecraft.getMinecraft().thePlayer.username) ? 60 : 40);
+					EntityLivingBase target = isTargetingEntity(Minecraft.getMinecraft().thePlayer, mod_RpgInventory.donators.contains(Minecraft.getMinecraft().thePlayer.username) ? 60 : 40);
 					if (target != null) {
 						outputStream.writeBoolean(false);
 						outputStream.writeInt((int) Math.floor(target.posX));

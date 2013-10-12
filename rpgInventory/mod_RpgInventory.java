@@ -8,18 +8,11 @@ import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
+import modUpdateChecked.OnPlayerLogin;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.renderer.IImageBuffer;
-import net.minecraft.client.renderer.ImageBufferDownload;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.texture.TextureObject;
 import net.minecraft.command.CommandHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
@@ -27,8 +20,6 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StringUtils;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.EnumHelper;
@@ -57,7 +48,6 @@ import rpgInventory.item.weapons.ItemClaymore;
 import rpgInventory.item.weapons.ItemHammer;
 import rpgInventory.item.weapons.ItemMageSphere;
 import rpgInventory.item.weapons.ItemStaf;
-import rpgInventory.renderer.RenderRpgPlayer;
 import rpgInventory.richUtil.potions.DecomposePotion;
 import rpgInventory.richUtil.potions.MasochismPotion;
 import cpw.mods.fml.common.FMLLog;
@@ -76,7 +66,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 
 
@@ -88,6 +77,10 @@ serverPacketHandlerSpec =
 @SidedPacketHandler(channels = {"RpgInv"}, packetHandler = RpgPacketHandler.class))
 public class mod_RpgInventory {
 
+	private static final String name = "RpgInventory";
+	private static final String version = "1.6.4 v1";
+		
+		
 	public static String CLASSARCHER = "archer";
 	public static String CLASSBERSERKER = "berserker";
 	public static String CLASSMAGE = "basicMage";
@@ -169,6 +162,7 @@ public class mod_RpgInventory {
 	public void load(FMLInitializationEvent event) {
 
 		setDonators();
+		GameRegistry.registerPlayerTracker(new OnPlayerLogin(version, name));
 		
 		// NOTHING BEFORE THE GOD DAMN TAB ! 
 		//any items that need to be in it, put in it BEFORE the tab exists will not be in
@@ -534,10 +528,10 @@ public class mod_RpgInventory {
 		rpgInventory.handlers.CommandPanel.init();
 	}
 
-	@SideOnly(Side.CLIENT)
-	private void registerClientEvents(){
-		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
-	}
+//	@SideOnly(Side.CLIENT)
+//	private void registerClientEvents(){
+//		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
+//	}
 
 	public String playerClass(){
 		return playerClass;

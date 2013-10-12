@@ -14,30 +14,24 @@ import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
-import cpw.mods.fml.common.FMLLog;
 
 public class RPGEventHooks {
 
@@ -301,7 +295,6 @@ public class RPGEventHooks {
 				}
 			}
 		} catch (Throwable ex) {
-			FMLLog.getLogger().info("Failed to update Player !! rpgEventHooks");
 		}
 	}
 
@@ -347,9 +340,7 @@ public class RPGEventHooks {
 					if (gloves != null && gloves.getItem().equals(mod_RpgInventory.gloveslap)) {
 						damagebonus += 0.2F;
 					}
-					//					FMLLog.getLogger().info("1 " + evt.ammount);
 					evt.ammount += MathHelper.floor_float(damagebonus * ((float) evt.ammount));
-					//					FMLLog.getLogger().info("2 " + evt.ammount);
 				}
 			}
 		} catch (Throwable e) {
@@ -396,20 +387,20 @@ public class RPGEventHooks {
 					if (shield != null) {
 						if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSMAGESHIELD)) {
 							float damageReduction = 0.20F;
-							EntityLiving damagedealer = null;
+							EntityLivingBase damagedealer = null;
 							if (evt.source.isMagicDamage()) {
 								damageReduction = 0.50F;
 							} else if (evt.source.getSourceOfDamage() != null) {
 								if (evt.source.isProjectile()) {
 									if (evt.source.getSourceOfDamage() instanceof EntityArrow) {
 										if (((EntityArrow) evt.source.getSourceOfDamage()).shootingEntity != null) {
-											if (((EntityArrow) evt.source.getSourceOfDamage()).shootingEntity instanceof EntityLiving) {
-												damagedealer = (EntityLiving) ((EntityArrow) evt.source.getSourceOfDamage()).shootingEntity;
+											if (((EntityArrow) evt.source.getSourceOfDamage()).shootingEntity instanceof EntityLivingBase) {
+												damagedealer = (EntityLivingBase) ((EntityArrow) evt.source.getSourceOfDamage()).shootingEntity;
 											}
 										}
 									}
-									if (evt.source.getSourceOfDamage() instanceof EntityLiving) {
-										damagedealer = (EntityLiving) evt.source.getSourceOfDamage();
+									if (evt.source.getSourceOfDamage() instanceof EntityLivingBase) {
+										damagedealer = (EntityLivingBase) evt.source.getSourceOfDamage();
 									}
 								}
 							}
@@ -423,19 +414,19 @@ public class RPGEventHooks {
 
 						} else if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSARCHERSHIELD)) {
 							float damageReduction = 0.25F;
-							EntityLiving damagedealer = null;
+							EntityLivingBase damagedealer = null;
 							if (evt.source.getSourceOfDamage() != null) {
 								if (evt.source.isProjectile()) {
 									if (evt.source.getSourceOfDamage() instanceof EntityArrow) {
 										if (((EntityArrow) evt.source.getSourceOfDamage()).shootingEntity != null) {
-											if (((EntityArrow) evt.source.getSourceOfDamage()).shootingEntity instanceof EntityLiving) {
-												damagedealer = (EntityLiving) ((EntityArrow) evt.source.getSourceOfDamage()).shootingEntity;
+											if (((EntityArrow) evt.source.getSourceOfDamage()).shootingEntity instanceof EntityLivingBase) {
+												damagedealer = (EntityLivingBase) ((EntityArrow) evt.source.getSourceOfDamage()).shootingEntity;
 												damageReduction = 0.70F;
 											}
 										}
 									}
-									if (evt.source.getSourceOfDamage() instanceof EntityLiving) {
-										damagedealer = (EntityLiving) evt.source.getSourceOfDamage();
+									if (evt.source.getSourceOfDamage() instanceof EntityLivingBase) {
+										damagedealer = (EntityLivingBase) evt.source.getSourceOfDamage();
 									}
 								}
 							}
@@ -500,7 +491,6 @@ public class RPGEventHooks {
 			//			}
 			//
 			//			if( goldenItems == 4 && evt.source.equals(DamageSource.fall)){
-			//				//				FMLLog.getLogger().info("" + evt.ammount);
 			//				if(evt.ammount < 3){
 			//					evt.setCanceled(true);
 			//				}else{

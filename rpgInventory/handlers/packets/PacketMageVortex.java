@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -64,8 +63,8 @@ public class PacketMageVortex {
 							int var4;
 
 							var4 = 10;
-							if (entl instanceof EntityLiving) {
-								var4 += EnchantmentHelper.getKnockbackModifier(p, (EntityLiving) el);
+							if (entl instanceof EntityLivingBase) {
+								var4 += EnchantmentHelper.getKnockbackModifier(p, (EntityLivingBase) el);
 							}
 							if (var4 > 0) {
 								try {

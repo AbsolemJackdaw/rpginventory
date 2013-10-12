@@ -1,10 +1,6 @@
 package rpgInventory.renderer;
 
-import java.util.ArrayList;
-import java.util.Map.Entry;
-
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.model.ModelBiped;
@@ -18,8 +14,6 @@ import net.minecraftforge.event.ForgeSubscribe;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.FMLLog;
-
 import rpgInventory.CapeRenderer;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
@@ -28,7 +22,6 @@ import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.jewels.GloveLeft;
 import rpgInventory.models.jewels.GloveRight;
 import rpgInventory.models.jewels.ModelNecklace;
-import rpgVanillaShields.ItemRpgInvShields;
 
 public class RenderRpgPlayer {
 
@@ -54,7 +47,6 @@ public class RenderRpgPlayer {
 					renderMantle(evt.entityPlayer, 0);
 				}
 			}
-
 		}
 	}
 
@@ -88,15 +80,7 @@ public class RenderRpgPlayer {
 		ItemStack shield = PlayerRpgInventory.get(player).getShield();
 		if(shield != null ){
 			mc.renderEngine.bindTexture(((ItemRpgInvArmor)shield.getItem()).getTexture());
-
-			// this enables alpha blending if the texture is transparent.
-			//			GL11.glEnable(GL11.GL_BLEND);
-			//			GL11.glDisable(GL11.GL_LIGHTING);
-			//			GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11. GL_ONE_MINUS_SRC_ALPHA);
-
 			
-
-			//			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.2F);
 			renderShield((ItemRpgInvArmor)shield.getItem());
 		}
 
@@ -119,7 +103,6 @@ public class RenderRpgPlayer {
 				armor.getShieldModel().parts.get(64-1).rotateAngleZ = main.bipedLeftArm.rotateAngleZ + 0.356f;
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 
 		armor.getShieldModel().renderShield(0.0625f);	
@@ -231,10 +214,12 @@ public class RenderRpgPlayer {
 				/**
 				 * Dev Capes
 				 */
-				if(CapeRenderer.capes != null){
-					if (CapeRenderer.playersWithCapes.contains(player.username)){
-						mc.renderEngine.bindTexture(CapeRenderer.getLocationCape(player.username));//new ResourceLocation("subaraki/playerCapes/"+player.username+".png"));
-					}					
+				if (cloak.getItem() == mod_RpgInventory.cloak){
+					if(CapeRenderer.capes != null){
+						if (CapeRenderer.playersWithCapes.contains(player.username)){
+							mc.renderEngine.bindTexture(CapeRenderer.getLocationCape(player.username));//new ResourceLocation("subaraki/playerCapes/"+player.username+".png"));
+						}		
+					}
 				} 
 
 				GL11.glTranslatef(0.0F, 0.0F, 0.125F);

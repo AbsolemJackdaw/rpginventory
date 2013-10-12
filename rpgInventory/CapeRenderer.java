@@ -58,7 +58,7 @@ public class CapeRenderer {
 	}
 	public static ResourceLocation getLocationCape(String par0Str)
 	{
-		return new ResourceLocation("playerCapes/" + StringUtils.stripControlCodes(par0Str));
+		return new ResourceLocation("Rpgcloaks/" + StringUtils.stripControlCodes(par0Str));
 	}
 	public static ThreadDownloadImageData getDownloadImageCape(ResourceLocation par0ResourceLocation, String par1Str)
 	{
