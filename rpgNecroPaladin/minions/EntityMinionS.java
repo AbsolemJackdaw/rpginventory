@@ -3,8 +3,6 @@ package rpgNecroPaladin.minions;
 import java.util.ArrayList;
 import java.util.List;
 
-import rpgInventory.mod_RpgInventory;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -32,6 +30,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import rpgInventory.mod_RpgInventory;
 
 public class EntityMinionS extends EntityTameable implements IRangedAttackMob, IMob, IMinion {
 

@@ -28,7 +28,6 @@ import rpgNecroPaladin.minions.EntityMinionZ;
 import rpgNecroPaladin.minions.IMinion;
 import rpgNecroPaladin.packets.RpgPlusPacketHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class ItemNecroSkull extends ItemRpgWeapon {

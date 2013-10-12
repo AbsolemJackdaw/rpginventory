@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
@@ -33,7 +33,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 	 * @param stack The Item being used
 	 * @param player The Player using the item
 	 * @param count The amount of time in tick the item has been used for continuously
-	 */
+	 */@Override
 	public void onUsingItemTick(ItemStack stack, EntityPlayer p, int count)
 	{
 		int time = this.getMaxItemUseDuration(stack) - count;
@@ -55,6 +55,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 		stack.setTagCompound(nbt);
 	}
 
+	@Override
 	public void onUpdate(ItemStack stack, World w, Entity e, int par4, boolean par5) 
 	{
 		NBTTagCompound nbt = stack.getTagCompound();
@@ -73,6 +74,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 		stack.setTagCompound(nbt);
 	}
 	
+	@Override
 	public void addInformation(ItemStack stack, EntityPlayer p1, List list, boolean yesno) {
 		NBTTagCompound nbt = stack.getTagCompound();
 		if (nbt == null) stack.setTagCompound(baseNBT());
@@ -81,6 +83,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 		list.add("Overflow: "+Math.floor(nbt.getFloat("EnergyCharge"))+"/"+this.maxUse);
 	}
 
+	
 	public NBTTagCompound baseNBT() {
 		NBTTagCompound nbt = new NBTTagCompound(); //stack.getTagCompound();
 		nbt.setFloat("EnergyCharge", 0.0F);
@@ -88,18 +91,21 @@ public class ItemElementalStaff extends ItemRpgSword {
 		return nbt;
 	}
 
+	@Override
 	public void onCreated(ItemStack stack, World world, EntityPlayer p) 
 	{
 		stack.setTagCompound(baseNBT());
 	}
 
-	public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
+	@Override
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving)
 	{
 		//par1ItemStack.damageItem(1, par3EntityLiving);
 		return true;
 	}
 
-	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
+	@Override
+	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLivingBase par7EntityLiving)
 	{
 		if ((double)Block.blocksList[par3].getBlockHardness(par2World, par4, par5, par6) != 0.0D)
 		{

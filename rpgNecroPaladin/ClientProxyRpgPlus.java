@@ -1,6 +1,5 @@
 package rpgNecroPaladin;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -19,8 +18,6 @@ import rpgNecroPaladin.render.NecroShieldRenderer;
 import rpgNecroPaladin.render.PalaRenderer;
 import rpgNecroPaladin.render.RenderMinionS;
 import rpgNecroPaladin.render.RenderMinionZ;
-import rpgRogueBeast.RpgKeyHandlerRB;
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxyRpgPlus extends CommonProxyRpgplus {

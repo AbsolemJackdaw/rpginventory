@@ -1,12 +1,8 @@
 package rpgNecroPaladin.models;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
 
 public class ModelPaladinArmor extends ModelBiped
 {
