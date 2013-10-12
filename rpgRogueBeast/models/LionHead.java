@@ -9,9 +9,6 @@ package rpgRogueBeast.models;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-
-import org.lwjgl.opengl.GL11;
-
 import rpgInventory.models.shields.MainShield;
 
 public class LionHead extends MainShield

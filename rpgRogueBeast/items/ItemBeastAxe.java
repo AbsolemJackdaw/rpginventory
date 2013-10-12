@@ -9,7 +9,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntitySpider;
@@ -67,7 +67,7 @@ public class ItemBeastAxe extends ItemRpgSword {
                 Minecraft mc = Minecraft.getMinecraft();
                 //Truer Randomization
                 rng = new Random(rng.nextLong() + System.currentTimeMillis());
-                EntityLiving el = Targetting.isTargetingLivingEntity(4.0D);
+                EntityLivingBase el = Targetting.isTargetingLivingEntity(4.0D);
                 if (el != null && pettypes.contains(el.getClass())) {
                     charmTime++;
                     particleTime++;
@@ -92,7 +92,7 @@ public class ItemBeastAxe extends ItemRpgSword {
                             dos.writeInt(el.entityId);
                         } catch (Throwable ex) {
                         }
-                        Packet250CustomPayload pcp = new Packet250CustomPayload("RpgInv", bos.toByteArray());
+                        Packet250CustomPayload pcp = new Packet250CustomPayload("RpgRBPacket", bos.toByteArray());
                         PacketDispatcher.sendPacketToServer(pcp);
                     } else {
                         mod_RpgInventory.proxy.spawnCharmParticle(world, el, rng,false);

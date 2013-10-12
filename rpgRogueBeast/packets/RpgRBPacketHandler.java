@@ -4,15 +4,14 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.util.Random;
 
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.packets.PacketInventory;
-import rpgRogueBeast.entity.IPet;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.packets.PacketInventory;
+import rpgRogueBeast.entity.IPet;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;

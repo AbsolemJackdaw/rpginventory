@@ -2,19 +2,15 @@ package rpgRogueBeast;
 
 import java.util.EnumSet;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import rpgInventory.gui.rpginv.RpgGui;
+import rpgRogueBeast.packets.RpgRBPacketHandler;
+
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.gui.rpginv.RpgGui;
-import rpgInventory.handlers.packets.PacketInventory;
-import rpgRogueBeast.entity.IPet;
-import rpgRogueBeast.packets.RpgRBPacketHandler;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
