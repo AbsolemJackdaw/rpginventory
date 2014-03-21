@@ -8,9 +8,8 @@ import rpgInventory.utils.AbstractArmor;
 
 public class ItemArcherArmor extends AbstractArmor {
 
-	public ItemArcherArmor(int par1, EnumArmorMaterial enumArmorMaterial,
-			int par3, int par4) {
-		super(par1, enumArmorMaterial, par3, par4);
+	public ItemArcherArmor(ArmorMaterial arm, int par3, int par4) {
+		super(par3,par4, arm);
 	}
 
 	@Override
@@ -28,12 +27,12 @@ public class ItemArcherArmor extends AbstractArmor {
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
-		if ((itemstack.itemID == mod_RpgInventory.archerboots.itemID)
-				|| (itemstack.itemID == mod_RpgInventory.archerchest.itemID)
-				|| (itemstack.itemID == mod_RpgInventory.archerhood.itemID)) {
+		if ((itemstack.getItem() == mod_RpgInventory.archerboots)
+				|| (itemstack.getItem() == mod_RpgInventory.archerchest)
+				|| (itemstack.getItem() == mod_RpgInventory.archerhood)) {
 			return "armor:arch_1.png";
 		}
-		if (itemstack.itemID == mod_RpgInventory.archerpants.itemID) {
+		if (itemstack.getItem() == mod_RpgInventory.archerpants) {
 			return "armor:arch_2.png";
 		}
 		return super.getArmorTexture(itemstack, entity, slot, type);

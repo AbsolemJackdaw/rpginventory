@@ -7,6 +7,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -27,8 +29,8 @@ public class ItemMageSphere extends ItemRpgWeapon {
 	// Call forth a fireball with a blazepowder
 	// change ores with gold ingot
 
-	public ItemMageSphere(int par1) {
-		super(par1);
+	public ItemMageSphere() {
+		super();
 	}
 
 	@Override
@@ -93,9 +95,9 @@ public class ItemMageSphere extends ItemRpgWeapon {
 					&& item1.equals(mod_RpgInventory.magegown)
 					&& item2.equals(mod_RpgInventory.magepants)
 					&& item3.equals(mod_RpgInventory.mageboots)) {
-				if (par3EntityPlayer.inventory.hasItem(Item.blazePowder.itemID)
+				if (par3EntityPlayer.inventory.hasItem(Items.blaze_powder)
 						|| mod_RpgInventory.donators
-								.contains(par3EntityPlayer.username)) {
+								.contains(par3EntityPlayer.getDisplayName())) {
 
 					Vec3 look = par3EntityPlayer.getLookVec();
 					EntitySmallFireball ball = new EntitySmallFireball(
@@ -140,7 +142,7 @@ public class ItemMageSphere extends ItemRpgWeapon {
 
 				if ((RpgConfig.instance.useSpell == true)
 						&& par2EntityPlayer.inventory
-								.hasItem(Item.glowstone.itemID)
+								.hasItem(Items.glowstone_dust)
 						&& par2EntityPlayer.isSneaking()) {
 					if (par3World.isDaytime()) {
 						par3World.setWorldTime(13000);
@@ -152,63 +154,64 @@ public class ItemMageSphere extends ItemRpgWeapon {
 				}
 
 				if (RpgConfig.instance.useSpell == false) {
-					par2EntityPlayer
-							.addChatMessage("You can't use the Day/Night Cycle Spell on this Server !");
+					//TODO
+//					par2EntityPlayer
+//							.addChatMessage("You can't use the Day/Night Cycle Spell on this Server !");
 				}
 
 				if (par2EntityPlayer.inventory
-						.hasItem(Item.speckledMelon.itemID)
+						.hasItem(Items.speckled_melon)
 						&& par2EntityPlayer.isSneaking()) {
 					if (!par3World.isRemote) {
 						par2EntityPlayer.inventory
-								.consumeInventoryItem(Item.speckledMelon.itemID);
+								.consumeInventoryItem(Items.speckled_melon);
 						par2EntityPlayer.addPotionEffect(new PotionEffect(
 								Potion.regeneration.id, 200, 0));
 					}
 				}
 
-				if (par2EntityPlayer.inventory.hasItem(Item.ingotGold.itemID)) {
+				if (par2EntityPlayer.inventory.hasItem(Items.gold_ingot)) {
 					int var1 = (int) par2EntityPlayer.posX;
 					int var2 = (int) par2EntityPlayer.posY;
 					int var3 = (int) par2EntityPlayer.posZ;
-					int var13 = par3World.getBlockId(par4, par5, par6);
+					Block var13 = par3World.getBlock(par4, par5, par6);
 
 					for (int x = 0; x < 1; x++) {
 
-						int var12 = par3World.getBlockId(par4, par5, par6);
+						Block var12 = par3World.getBlock(par4, par5, par6);
 
 						if (par5 > var2) {
-							par3World.getBlockId(par4, par5, par6);
+							par3World.getBlock(par4, par5, par6);
 						}
 
 						if (par5 < var2) {
-							par3World.getBlockId(par4, par5, par6);
+							par3World.getBlock(par4, par5, par6);
 						}
 						if ((par4 < var1) && (par6 == var3) && (par5 == var2)) {
-							par3World.getBlockId(par4 - x, par5, par6);
+							par3World.getBlock(par4 - x, par5, par6);
 						}
 						if ((par4 > var1) && (par6 == var3) && (par5 == var2)) {
-							par3World.getBlockId(par4 + x, par5, par6);
+							par3World.getBlock(par4 + x, par5, par6);
 						}
 						if ((par6 < var3) && (par5 == var2)) {
-							par3World.getBlockId(par4, par5, par6 - x);
+							par3World.getBlock(par4, par5, par6 - x);
 						}
 						if ((par6 > var3) && (par5 == var2)) {
-							par3World.getBlockId(par4, par5, par6 + x);
+							par3World.getBlock(par4, par5, par6 + x);
 						}
 
-						if ((var12 == Block.oreIron.blockID)
-								|| (var12 == Block.oreCoal.blockID)
-								|| (var12 == Block.oreDiamond.blockID)) {
+						if ((var12 == Blocks.iron_ore)
+								|| (var12 == Blocks.coal_ore)
+								|| (var12 == Blocks.diamond_ore)) {
 							par3World.setBlock(par4, par5, par6,
-									Block.oreGold.blockID);
+									Blocks.gold_ore);
 							par1ItemStack.damageItem(4, par2EntityPlayer);
 						}
-						if (var12 == Block.oreLapis.blockID) {
+						if (var12 == Blocks.lapis_ore) {
 							par3World.setBlock(par4, par5, par6,
-									Block.blockLapis.blockID);
+									Blocks.lapis_block);
 							par1ItemStack.damageItem(mod_RpgInventory.donators
-									.contains(par2EntityPlayer.username) ? 50
+									.contains(par2EntityPlayer.getDisplayName()) ? 50
 									: 151, par2EntityPlayer);
 						}
 

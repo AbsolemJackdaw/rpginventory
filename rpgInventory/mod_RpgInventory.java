@@ -17,15 +17,15 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
-import rpgInventory.block.BlockForge;
 import rpgInventory.block.te.TEMold;
-import rpgInventory.config.RpgConfig;
 import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.gui.RpgInventoryTab;
 import rpgInventory.handlers.CommonTickHandler;
@@ -141,12 +141,12 @@ public class mod_RpgInventory {
 		return uniqueID++;
 	}
 
-	public  final EnumArmorMaterial mage = EnumHelper.addArmorMaterial("mage", 20, new int[]{2, 2, 2, 1}, 5);
-	public  final EnumArmorMaterial archer = EnumHelper.addArmorMaterial("archer", 20, new int[]{2, 3, 2, 2}, 5);
-	public  final EnumArmorMaterial berserker = EnumHelper.addArmorMaterial("berserker", 20, new int[]{2, 4, 3, 2}, 5);
+	public  final ArmorMaterial mage = EnumHelper.addArmorMaterial("mage", 20, new int[]{2, 2, 2, 1}, 5);
+	public  final ArmorMaterial archer = EnumHelper.addArmorMaterial("archer", 20, new int[]{2, 3, 2, 2}, 5);
+	public  final ArmorMaterial berserker = EnumHelper.addArmorMaterial("berserker", 20, new int[]{2, 4, 3, 2}, 5);
 
-	EnumToolMaterial clay = EnumHelper.addToolMaterial("claymore", 0, 750, 5F, 6, 0);
-	EnumToolMaterial stone = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 5F, 4, 0);
+	ToolMaterial clay = EnumHelper.addToolMaterial("claymore", 0, 750, 5F, 6, 0);
+	ToolMaterial stone = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 5F, 4, 0);
 
 	public static CreativeTabs tab;
 
@@ -159,7 +159,7 @@ public class mod_RpgInventory {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		RpgConfig.instance.loadConfig(event.getSuggestedConfigurationFile());
+		//loadConfig(event.getSuggestedConfigurationFile());
 	}
 
 	@EventHandler
@@ -202,69 +202,69 @@ public class mod_RpgInventory {
 		developers.add("rich1051414");
 		developers.add("darkhax");
 
-		forgeBlock = new BlockForge(RpgConfig.instance.forgeblockID, Material.rock).setHardness(5f)/*.setUnlocalizedName("MoldForge")*/.setCreativeTab(tab);
+		forgeBlock = new BlockForge( Material.rock).setHardness(5f)/*.setUnlocalizedName("MoldForge")*/.setCreativeTab(tab);
 
-		neckgold = new ItemRpgInvArmor(RpgConfig.instance.neckgoldID, 0, -1, "", "subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold").setCreativeTab(tab);
-		neckdia = new ItemRpgInvArmor(RpgConfig.instance.neckdiaID, 0, -1, "", "subaraki:jewels/NeckDia.png").setUnlocalizedName("neckDia").setCreativeTab(tab);
-		neckem = new ItemRpgInvArmor(RpgConfig.instance.neckemID, 0, -1, "", "subaraki:jewels/NeckEm.png").setUnlocalizedName("neckEm").setCreativeTab(tab);
-		necklap = new ItemRpgInvArmor(RpgConfig.instance.necklapID, 0, -1, "", "subaraki:jewels/NeckLap.png").setUnlocalizedName("neckLap").setCreativeTab(tab);
+		neckgold = new ItemRpgInvArmor( 0, -1, "", "subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold").setCreativeTab(tab);
+		neckdia = new ItemRpgInvArmor( 0, -1, "", "subaraki:jewels/NeckDia.png").setUnlocalizedName("neckDia").setCreativeTab(tab);
+		neckem = new ItemRpgInvArmor( 0, -1, "", "subaraki:jewels/NeckEm.png").setUnlocalizedName("neckEm").setCreativeTab(tab);
+		necklap = new ItemRpgInvArmor( 0, -1, "", "subaraki:jewels/NeckLap.png").setUnlocalizedName("neckLap").setCreativeTab(tab);
 
-		ringgold = new ItemRpgInvArmor(RpgConfig.instance.ringgoldID, 4, -1, "", "").setUnlocalizedName("ringGold").setCreativeTab(tab);
-		ringdia = new ItemRpgInvArmor(RpgConfig.instance.ringdiaID, 4, -1, "", "").setUnlocalizedName("ringDia").setCreativeTab(tab);
-		ringem = new ItemRpgInvArmor(RpgConfig.instance.ringemID, 4, -1, "", "").setUnlocalizedName("ringEm").setCreativeTab(tab);
-		ringlap = new ItemRpgInvArmor(RpgConfig.instance.ringlapID, 4, -1, "", "").setUnlocalizedName("ringLap").setCreativeTab(tab);
+		ringgold = new ItemRpgInvArmor( 4, -1, "", "").setUnlocalizedName("ringGold").setCreativeTab(tab);
+		ringdia = new ItemRpgInvArmor( 4, -1, "", "").setUnlocalizedName("ringDia").setCreativeTab(tab);
+		ringem = new ItemRpgInvArmor( 4, -1, "", "").setUnlocalizedName("ringEm").setCreativeTab(tab);
+		ringlap = new ItemRpgInvArmor( 4, -1, "", "").setUnlocalizedName("ringLap").setCreativeTab(tab);
 
-		glovesbutter = new ItemRpgInvArmor(RpgConfig.instance.glovesbutterID, 3, -1, "", "subaraki:jewels/Glove.png").setUnlocalizedName("gloveGold").setCreativeTab(tab);
-		glovesdia = new ItemRpgInvArmor(RpgConfig.instance.glovesdiaID, 3, -1, "", "subaraki:jewels/GloveDia.png").setUnlocalizedName("gloveDia").setCreativeTab(tab);
-		glovesem = new ItemRpgInvArmor(RpgConfig.instance.glovesemID, 3, -1, "", "subaraki:jewels/GloveEm.png").setUnlocalizedName("gloveEm").setCreativeTab(tab);
-		gloveslap = new ItemRpgInvArmor(RpgConfig.instance.gloveslapID, 3, -1, "", "subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap").setCreativeTab(tab);
+		glovesbutter = new ItemRpgInvArmor( 3, -1, "", "subaraki:jewels/Glove.png").setUnlocalizedName("gloveGold").setCreativeTab(tab);
+		glovesdia = new ItemRpgInvArmor( 3, -1, "", "subaraki:jewels/GloveDia.png").setUnlocalizedName("gloveDia").setCreativeTab(tab);
+		glovesem = new ItemRpgInvArmor( 3, -1, "", "subaraki:jewels/GloveEm.png").setUnlocalizedName("gloveEm").setCreativeTab(tab);
+		gloveslap = new ItemRpgInvArmor( 3, -1, "", "subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap").setCreativeTab(tab);
 
-		archerShield = new ItemRpgInvArmor(RpgConfig.instance.archersShieldID, 1, 200, "", "subaraki:jewels/Shield1.png").setUnlocalizedName("shieldArcher").setCreativeTab(tab);
-		berserkerShield = new ItemRpgInvArmor(RpgConfig.instance.berserkerShieldID, 1, 350, "", "subaraki:jewels/IronThorn.png").setUnlocalizedName("shieldBerserker").setCreativeTab(tab);
-		talisman = new ItemRpgInvArmor(RpgConfig.instance.talismanID, 1, 200, "", "subaraki:jewels/mageShield.png").setUnlocalizedName("shieldMage").setCreativeTab(tab);
+		archerShield = new ItemRpgInvArmor( 1, 200, "", "subaraki:jewels/Shield1.png").setUnlocalizedName("shieldArcher").setCreativeTab(tab);
+		berserkerShield = new ItemRpgInvArmor( 1, 350, "", "subaraki:jewels/IronThorn.png").setUnlocalizedName("shieldBerserker").setCreativeTab(tab);
+		talisman = new ItemRpgInvArmor( 1, 200, "", "subaraki:jewels/mageShield.png").setUnlocalizedName("shieldMage").setCreativeTab(tab);
 
-		cloak = new ItemRpgInvArmor(RpgConfig.instance.cloakID, 2, -1, "","subaraki:capes/GreyCape.png").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
-		cloakI = new ItemRpgInvArmor(RpgConfig.instance.cloakIID, 2, -1, "","subaraki:capes/GreyCape.png").setFull3D().setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
+		cloak = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/GreyCape.png").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
+		cloakI = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/GreyCape.png").setFull3D().setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
 
-		magehood = new ItemMageArmor(RpgConfig.instance.magehoodID,	mage, 4, 0).setUnlocalizedName("mage1").setCreativeTab(tab);
-		magegown = new ItemMageArmor(RpgConfig.instance.magegownID, mage, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);
-		magepants = new ItemMageArmor(RpgConfig.instance.magepantsID, mage, 4, 2).setUnlocalizedName("mage3").setCreativeTab(tab);
-		mageboots = new ItemMageArmor(RpgConfig.instance.magebootsID, mage, 4, 3).setUnlocalizedName("mage4").setCreativeTab(tab);
+		magehood = new ItemMageArmor(mage,4, 0,).setUnlocalizedName("mage1").setCreativeTab(tab);
+		magegown = new ItemMageArmor(mage, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);
+		magepants = new ItemMageArmor( mage, 4, 2).setUnlocalizedName("mage3").setCreativeTab(tab);
+		mageboots = new ItemMageArmor( mage, 4, 3).setUnlocalizedName("mage4").setCreativeTab(tab);
 
-		archerhood = new ItemArcherArmor(RpgConfig.instance.archerhoodID, archer, 4, 0).setUnlocalizedName("archer1").setCreativeTab(tab);
-		archerchest = new ItemArcherArmor(RpgConfig.instance.archerchestID, archer, 4, 1).setUnlocalizedName("archer2").setCreativeTab(tab);
-		archerpants = new ItemArcherArmor(RpgConfig.instance.archerpantsID, archer, 4, 2).setUnlocalizedName("archer3").setCreativeTab(tab);
-		archerboots = new ItemArcherArmor(RpgConfig.instance.archerbootsID, archer, 4, 3).setUnlocalizedName("archer4").setCreativeTab(tab);
+		archerhood = new ItemArcherArmor( archer, 4, 0).setUnlocalizedName("archer1").setCreativeTab(tab);
+		archerchest = new ItemArcherArmor( archer, 4, 1).setUnlocalizedName("archer2").setCreativeTab(tab);
+		archerpants = new ItemArcherArmor( archer, 4, 2).setUnlocalizedName("archer3").setCreativeTab(tab);
+		archerboots = new ItemArcherArmor( archer, 4, 3).setUnlocalizedName("archer4").setCreativeTab(tab);
 
-		berserkerHood = new ItemBerserkerArmor(RpgConfig.instance.berserkerHoodID, berserker, 4, 0).setUnlocalizedName("berserk1").setCreativeTab(tab);
-		berserkerChest = new ItemBerserkerArmor(RpgConfig.instance.berserkerChestID, berserker, 4, 1).setUnlocalizedName("berserk2").setCreativeTab(tab);
-		berserkerLegs = new ItemBerserkerArmor(RpgConfig.instance.berserkerLegsID, berserker, 4, 2).setUnlocalizedName("berserk3").setCreativeTab(tab);
-		berserkerBoots = new ItemBerserkerArmor(RpgConfig.instance.berserkerBootsID, berserker, 4, 3).setUnlocalizedName("berserk4").setCreativeTab(tab);
+		berserkerHood = new ItemBerserkerArmor( berserker, 4, 0).setUnlocalizedName("berserk1").setCreativeTab(tab);
+		berserkerChest = new ItemBerserkerArmor( berserker, 4, 1).setUnlocalizedName("berserk2").setCreativeTab(tab);
+		berserkerLegs = new ItemBerserkerArmor( berserker, 4, 2).setUnlocalizedName("berserk3").setCreativeTab(tab);
+		berserkerBoots = new ItemBerserkerArmor( berserker, 4, 3).setUnlocalizedName("berserk4").setCreativeTab(tab);
 
-		claymore = new ItemClaymore(RpgConfig.instance.claymoreID, clay).setFull3D().setMaxDamage(1024).setUnlocalizedName("claymore").setCreativeTab(tab);
-		wand = new ItemMageSphere(RpgConfig.instance.wandID).setFull3D().setMaxDamage(400).setUnlocalizedName("soulsphere").setCreativeTab(tab);
-		elfbow = new ItemArcherBow(RpgConfig.instance.elfbowID).setFull3D().setMaxDamage(350).setUnlocalizedName("elmBow").setCreativeTab(tab);
+		claymore = new ItemClaymore(clay).setFull3D().setMaxDamage(1024).setUnlocalizedName("claymore").setCreativeTab(tab);
+		wand = new ItemMageSphere().setFull3D().setMaxDamage(400).setUnlocalizedName("soulsphere").setCreativeTab(tab);
+		elfbow = new ItemArcherBow().setFull3D().setMaxDamage(350).setUnlocalizedName("elmBow").setCreativeTab(tab);
 
-		animalskin = new ItemRpg(RpgConfig.instance.animalskinID).setUnlocalizedName("a.leather").setCreativeTab(tab);
-		tanHide = new ItemRpg(RpgConfig.instance.tanHideID).setUnlocalizedName("t.leather").setCreativeTab(tab);
-		magecloth = new ItemRpg(RpgConfig.instance.mageclothID).setUnlocalizedName("m.leather").setCreativeTab(tab);
+		animalskin = new ItemRpg().setUnlocalizedName("a.leather").setCreativeTab(tab);
+		tanHide = new ItemRpg().setUnlocalizedName("t.leather").setCreativeTab(tab);
+		magecloth = new ItemRpg().setUnlocalizedName("m.leather").setCreativeTab(tab);
 
-		wizardBook = new ItemRpg(RpgConfig.instance.wizardBookID).setUnlocalizedName("a.book_normal").setCreativeTab(tab);
+		wizardBook = new ItemRpg().setUnlocalizedName("a.book_normal").setCreativeTab(tab);
 
-		hammer = new ItemHammer(RpgConfig.instance.hammerID, stone).setMaxDamage(750).setUnlocalizedName("rageBreaker").setCreativeTab(tab);
-		staf = new ItemStaf(RpgConfig.instance.stafID).setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);
+		hammer = new ItemHammer(, stone).setMaxDamage(750).setUnlocalizedName("rageBreaker").setCreativeTab(tab);
+		staf = new ItemStaf().setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);
 
-		rageSeed = new ItemRageFood(RpgConfig.instance.rageSeedID, 0, 0f, false).setAlwaysEdible().setUnlocalizedName("r.seeds_melon").setMaxStackSize(8).setCreativeTab(tab);
+		rageSeed = new ItemRageFood(, 0, 0f, false).setAlwaysEdible().setUnlocalizedName("r.seeds_melon").setMaxStackSize(8).setCreativeTab(tab);
 
-		cloakRed = new ItemRpgInvArmor(RpgConfig.instance.cloakRedID, 2, -1, "","subaraki:capes/RedCape.png").setFull3D().setUnlocalizedName("r.capeGrey").setCreativeTab(tab);
-		cloakYellow = new ItemRpgInvArmor(RpgConfig.instance.cloakYellowID, 2, -1, "","subaraki:capes/GoldCape.png").setFull3D().setUnlocalizedName("y.capeGrey").setCreativeTab(tab);
-		cloakGreen = new ItemRpgInvArmor(RpgConfig.instance.cloakGreenID, 2, -1, "","subaraki:capes/GreenCape.png").setFull3D().setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
-		cloakBlue = new ItemRpgInvArmor(RpgConfig.instance.cloakBlueID, 2, -1, "","subaraki:capes/SkyCape.png").setFull3D().setUnlocalizedName("b.capeGrey").setCreativeTab(tab);
-		cloakSub = new ItemRpgInvArmor(RpgConfig.instance.cloakSubID, 2, -1, "","subaraki:capes/BlaCape.png").setFull3D().setUnlocalizedName("s.capeGrey").setCreativeTab(tab);
+		cloakRed = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/RedCape.png").setFull3D().setUnlocalizedName("r.capeGrey").setCreativeTab(tab);
+		cloakYellow = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/GoldCape.png").setFull3D().setUnlocalizedName("y.capeGrey").setCreativeTab(tab);
+		cloakGreen = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/GreenCape.png").setFull3D().setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
+		cloakBlue = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/SkyCape.png").setFull3D().setUnlocalizedName("b.capeGrey").setCreativeTab(tab);
+		cloakSub = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/BlaCape.png").setFull3D().setUnlocalizedName("s.capeGrey").setCreativeTab(tab);
 
-		colmold = new ItemMold(RpgConfig.instance.colmoldID).setUnlocalizedName("moldNeck").setCreativeTab(tab);
-		ringmold = new ItemMold(RpgConfig.instance.ringmoldID).setUnlocalizedName("moldRing").setCreativeTab(tab);
-		wantmold = new ItemMold(RpgConfig.instance.wantmoldID).setUnlocalizedName("moldGlove").setCreativeTab(tab);
+		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(tab);
+		ringmold = new ItemMold().setUnlocalizedName("moldRing").setCreativeTab(tab);
+		wantmold = new ItemMold().setUnlocalizedName("moldGlove").setCreativeTab(tab);
 
 		proxy.registerRenderInformation();
 

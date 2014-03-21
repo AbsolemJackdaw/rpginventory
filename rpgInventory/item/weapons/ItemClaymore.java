@@ -6,6 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,12 +18,12 @@ import rpgInventory.mod_RpgInventory;
 
 public class ItemClaymore extends ItemRpgWeapon {
 
-	private EnumToolMaterial toolMaterial;
+	private ToolMaterial toolMaterial;
 	private int weaponDamage;
 	Random rand = new Random();
 
-	public ItemClaymore(int par1, EnumToolMaterial mat) {
-		super(par1);
+	public ItemClaymore(ToolMaterial mat) {
+		super();
 		this.toolMaterial = mat;
 		this.maxStackSize = 1;
 		this.setMaxDamage(mat.getMaxUses());
@@ -38,8 +39,8 @@ public class ItemClaymore extends ItemRpgWeapon {
 				DamageSource.causePlayerDamage((EntityPlayer) player), 7);
 
 		if (mob instanceof EntityPlayer) {
-			String name = ((EntityPlayer) mob).username;
-			ItemStack skull = new ItemStack(Item.skull.itemID, 1, 3);
+			String name = ((EntityPlayer) mob).getDisplayName();
+			ItemStack skull = new ItemStack(Items.skull, 1, 3);
 
 			if (skull.stackTagCompound == null) {
 				skull.setTagCompound(new NBTTagCompound());

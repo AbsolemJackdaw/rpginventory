@@ -44,9 +44,9 @@ public class ItemRpgInvArmor extends Item {
 	 *         damage this item can take. only used for shields name is unused
 	 *         location for texture
 	 */
-	public ItemRpgInvArmor(int par1, int par4, int maxDamage, String name,
+	public ItemRpgInvArmor( int par4, int maxDamage, String name,
 			String resourcelocation) {
-		super(par1);
+		super();
 		this.armorType = par4;
 		this.maxStackSize = 1;
 		this.setCreativeTab(CreativeTabs.tabCombat);
@@ -61,54 +61,54 @@ public class ItemRpgInvArmor extends Item {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer p1, List list,
 			boolean yesno) {
-		if (stack.itemID == mod_RpgInventory.ringem.itemID) {
+		if (stack.getItem() == mod_RpgInventory.ringem) {
 			list.add(StatCollector
 					.translateToLocal("Left: Dispell Negative Effects"));
 			list.add(StatCollector
 					.translateToLocal("Right: Increased Mining Speed x4"));
 		}
 
-		if (stack.itemID == mod_RpgInventory.neckem.itemID) {
+		if (stack.getItem() == mod_RpgInventory.neckem) {
 			list.add(StatCollector.translateToLocal("Water Breathing"));
 			list.add(StatCollector
 					.translateToLocal("Holding breath under water lasts twice as long"));
 		}
 
-		if (stack.itemID == mod_RpgInventory.glovesem.itemID) {
+		if (stack.getItem() == mod_RpgInventory.glovesem) {
 			list.add(StatCollector.translateToLocal("Resistance"));
 			list.add(StatCollector
 					.translateToLocal("Reduces damage taken by 20%"));
 		}
 
-		if ((stack.itemID == mod_RpgInventory.ringdia.itemID)
-				|| (stack.itemID == mod_RpgInventory.glovesdia.itemID)
-				|| (stack.itemID == mod_RpgInventory.neckdia.itemID)) {
+		if ((stack.getItem() == mod_RpgInventory.ringdia)
+				|| (stack.getItem() == mod_RpgInventory.glovesdia)
+				|| (stack.getItem() == mod_RpgInventory.neckdia)) {
 			list.add(StatCollector.translateToLocal("Healing"));
 			list.add(StatCollector.translateToLocal("+15% Heal Speed"));
 		}
 
-		if ((stack.itemID == mod_RpgInventory.ringgold.itemID)
-				|| (stack.itemID == mod_RpgInventory.glovesbutter.itemID)
-				|| (stack.itemID == mod_RpgInventory.neckgold.itemID)) {
+		if ((stack.getItem() == mod_RpgInventory.ringgold)
+				|| (stack.getItem() == mod_RpgInventory.glovesbutter)
+				|| (stack.getItem() == mod_RpgInventory.neckgold)) {
 			list.add(StatCollector.translateToLocal("Speed + 12.5%"));
-			// if (stack.itemID == mod_RpgInventory.ringgold.itemID){
+			// if (stack.getItem() == mod_RpgInventory.ringgold){
 			// list.add(StatCollector.translateToLocal("Jump +0.5 Block height"));
 			// }else{
 			// list.add(StatCollector.translateToLocal("Jump +0.25 Block height"));
 			// }
 		}
 
-		if ((stack.itemID == mod_RpgInventory.ringlap.itemID)
-				|| (stack.itemID == mod_RpgInventory.gloveslap.itemID)
-				|| (stack.itemID == mod_RpgInventory.necklap.itemID)) {
+		if ((stack.getItem() == mod_RpgInventory.ringlap)
+				|| (stack.getItem() == mod_RpgInventory.gloveslap)
+				|| (stack.getItem() == mod_RpgInventory.necklap)) {
 			list.add(StatCollector.translateToLocal("Strength"));
-			if (stack.itemID == mod_RpgInventory.ringlap.itemID) {
+			if (stack.getItem() == mod_RpgInventory.ringlap) {
 				list.add(StatCollector.translateToLocal("+0.5"));
 			}
-			if (stack.itemID == mod_RpgInventory.gloveslap.itemID) {
+			if (stack.getItem() == mod_RpgInventory.gloveslap) {
 				list.add(StatCollector.translateToLocal("+1"));
 			}
-			if (stack.itemID == mod_RpgInventory.necklap.itemID) {
+			if (stack.getItem() == mod_RpgInventory.necklap) {
 				list.add(StatCollector.translateToLocal("+1.5"));
 			}
 			list.add(StatCollector
@@ -137,19 +137,19 @@ public class ItemRpgInvArmor extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
-		if (par1ItemStack.itemID == mod_RpgInventory.cloakRed.itemID) {
+		if (par1ItemStack.getItem() == mod_RpgInventory.cloakRed) {
 			return 0xd2120e;
 		}
-		if (par1ItemStack.itemID == mod_RpgInventory.cloakGreen.itemID) {
+		if (par1ItemStack.getItem() == mod_RpgInventory.cloakGreen) {
 			return 0x0fb15d;
 		}
-		if (par1ItemStack.itemID == mod_RpgInventory.cloakYellow.itemID) {
+		if (par1ItemStack.getItem() == mod_RpgInventory.cloakYellow) {
 			return 0xf7cd09;
 		}
-		if (par1ItemStack.itemID == mod_RpgInventory.cloakSub.itemID) {
+		if (par1ItemStack.getItem() == mod_RpgInventory.cloakSub) {
 			return 0x440001;
 		}
-		if (par1ItemStack.itemID == mod_RpgInventory.cloakBlue.itemID) {
+		if (par1ItemStack.getItem() == mod_RpgInventory.cloakBlue) {
 			return 0x291ef6;
 		}
 
@@ -188,7 +188,7 @@ public class ItemRpgInvArmor extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack) {
-		if (par1ItemStack.itemID == mod_RpgInventory.cloakI.itemID) {
+		if (par1ItemStack.getItem() == mod_RpgInventory.cloakI) {
 			return true;
 		}
 		return false;

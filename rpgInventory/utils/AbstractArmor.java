@@ -10,7 +10,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class AbstractArmor extends ItemArmor {
 
-	// public final EnumArmorMaterial mat;
 	public ModelBiped armorModel;
 
 	public static final int BOOTS = 36;
@@ -18,9 +17,8 @@ public abstract class AbstractArmor extends ItemArmor {
 	public static final int CHEST = 38;
 	public static final int HELM = 39;
 
-	public AbstractArmor(int par1, int par3, int par4) {
-		super(par1, enumArmorMaterial, par3, par4);
-		mat = enumArmorMaterial;
+	public AbstractArmor(int par1, int par2, ItemArmor.ArmorMaterial mats) {
+		super(mats, par2, par1);
 	}
 
 	/** returns the name of the class from this full set of armor */

@@ -11,8 +11,8 @@ import net.minecraft.item.Item;
  * @author Richard Smith <rich1051414@gmail.com>
  */
 public class ItemRpgWeapon extends Item {
-	public ItemRpgWeapon(int par1) {
-		super(par1);
+	public ItemRpgWeapon() {
+		super();
 		this.maxStackSize = 1;
 	}
 

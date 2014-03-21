@@ -8,13 +8,9 @@ import rpgInventory.utils.AbstractArmor;
 
 public class ItemBerserkerArmor extends AbstractArmor {
 
-	public final int renderIndex;
 
-	public ItemBerserkerArmor(int par1,
-			EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4) {
-		super(par1, par2EnumArmorMaterial, par3, par4);
-		this.renderIndex = par3;
-
+	public ItemBerserkerArmor(ArmorMaterial arm, int par3, int par4) {
+		super(par3, par4, arm);
 	}
 
 	@Override
@@ -44,12 +40,12 @@ public class ItemBerserkerArmor extends AbstractArmor {
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
 
-		if ((itemstack.itemID == mod_RpgInventory.berserkerHood.itemID)
-				|| (itemstack.itemID == mod_RpgInventory.berserkerChest.itemID)
-				|| (itemstack.itemID == mod_RpgInventory.berserkerBoots.itemID)) {
+		if ((itemstack.getItem() == mod_RpgInventory.berserkerHood)
+				|| (itemstack.getItem() == mod_RpgInventory.berserkerChest)
+				|| (itemstack.getItem() == mod_RpgInventory.berserkerBoots)) {
 			return "armor:berserk_1.png";
 		}
-		if (itemstack.itemID == mod_RpgInventory.berserkerLegs.itemID) {
+		if (itemstack.getItem() == mod_RpgInventory.berserkerLegs) {
 			return "armor:berserk_2.png";
 		}
 		return null;

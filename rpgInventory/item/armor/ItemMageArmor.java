@@ -9,8 +9,8 @@ import rpgInventory.utils.AbstractArmor;
 
 public class ItemMageArmor extends AbstractArmor {
 
-	public ItemMageArmor(int par1, int par3, int par4) {
-		super(par1, par3, par4);
+	public ItemMageArmor(ArmorMaterial arm, int par1, int par2) {
+		super(par1, par2, arm);
 	}
 
 	@Override
@@ -38,12 +38,12 @@ public class ItemMageArmor extends AbstractArmor {
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
-		if ((itemstack.itemID == mod_RpgInventory.magehood.itemID)
-				|| (itemstack.itemID == mod_RpgInventory.magegown.itemID)
-				|| (itemstack.itemID == mod_RpgInventory.mageboots.itemID)) {
+		if ((itemstack.getItem() == mod_RpgInventory.magehood)
+				|| (itemstack.getItem() == mod_RpgInventory.magegown)
+				|| (itemstack.getItem() == mod_RpgInventory.mageboots)) {
 			return "armor:mage_1.png";
 		}
-		if (itemstack.itemID == mod_RpgInventory.magepants.itemID) {
+		if (itemstack.getItem() == mod_RpgInventory.magepants) {
 			return "armor:mage_2.png";
 		}
 		return super.getArmorTexture(itemstack, entity, slot, type);
