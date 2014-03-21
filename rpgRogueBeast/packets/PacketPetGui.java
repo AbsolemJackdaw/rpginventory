@@ -11,8 +11,7 @@ import rpgRogueBeast.mod_RpgRB;
 
 public class PacketPetGui {
 
-
-	public PacketPetGui(DataInputStream dis, EntityPlayer p){
+	public PacketPetGui(DataInputStream dis, EntityPlayer p) {
 		try {
 			String petname = dis.readUTF();
 			short PetLevel = dis.readShort();
@@ -20,16 +19,17 @@ public class PacketPetGui {
 			short hpmax = dis.readShort();
 			short atk = dis.readShort();
 			int playerLevelsLost = dis.readShort();
-			//currently unused
+			// currently unused
 			int petLevelsAdded = dis.readShort();
 			int petcandyConsumed = dis.readShort();
 
-
 			PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 			ItemStack crystal = inv.getCrystal();
-			
-			NBTTagCompound nbtCrystal = (NBTTagCompound)crystal.getTagCompound().copy();
-			NBTTagCompound nbtPet = (NBTTagCompound)nbtCrystal.getCompoundTag("RPGPetInfo").copy();
+
+			NBTTagCompound nbtCrystal = (NBTTagCompound) crystal
+					.getTagCompound().copy();
+			NBTTagCompound nbtPet = (NBTTagCompound) nbtCrystal.getCompoundTag(
+					"RPGPetInfo").copy();
 
 			nbtCrystal.setString("PetName", petname);
 			nbtPet.setString("Name", petname);
@@ -48,7 +48,8 @@ public class PacketPetGui {
 			nbtCrystal.setCompoundTag("RPGPetInfo", nbtPet);
 
 			p.addExperienceLevel(-playerLevelsLost);
-			ItemStack newcrystal = new ItemStack(mod_RpgRB.crystal, 1, crystal.getItemDamage());
+			ItemStack newcrystal = new ItemStack(mod_RpgRB.crystal, 1,
+					crystal.getItemDamage());
 			newcrystal.setTagCompound(nbtCrystal);
 			newcrystal.setItemName(petname);
 			inv.setInventorySlotContents(6, newcrystal);

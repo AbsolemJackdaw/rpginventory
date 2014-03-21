@@ -7,19 +7,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class WwbsTe extends TileEntity implements IInventory{
+public class WwbsTe extends TileEntity implements IInventory {
 
 	private ItemStack[] invSlot = new ItemStack[54];
 
 	@Override
-	public int getSizeInventory() {
+	public void closeChest() {
 
-		return 54;
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int i) {
-		return null;
 	}
 
 	@Override
@@ -40,6 +34,27 @@ public class WwbsTe extends TileEntity implements IInventory{
 	}
 
 	@Override
+	public int getInventoryStackLimit() {
+		return 64;
+	}
+
+	@Override
+	public String getInvName() {
+		return "Bank";
+	}
+
+	@Override
+	public int getSizeInventory() {
+
+		return 54;
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int i) {
+		return null;
+	}
+
+	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
 		if (this.invSlot[slot] != null) {
 			ItemStack var2 = this.invSlot[slot];
@@ -51,22 +66,14 @@ public class WwbsTe extends TileEntity implements IInventory{
 	}
 
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack) {
-				invSlot [slot] = stack;
-
-		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-			stack.stackSize = getInventoryStackLimit();
-		}
+	public boolean isInvNameLocalized() {
+		return false;
 	}
 
 	@Override
-	public String getInvName() {
-		return "Bank";
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
@@ -80,11 +87,6 @@ public class WwbsTe extends TileEntity implements IInventory{
 	}
 
 	@Override
-	public void closeChest() {
-
-	}
-
-	@Override
 	public void readFromNBT(NBTTagCompound tagCompound) {
 		super.readFromNBT(tagCompound);
 
@@ -92,9 +94,18 @@ public class WwbsTe extends TileEntity implements IInventory{
 		for (int i = 0; i < tagList.tagCount(); i++) {
 			NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
 			byte slot = tag.getByte("Slot");
-			if (slot >= 0 && slot < invSlot.length) {
+			if ((slot >= 0) && (slot < invSlot.length)) {
 				invSlot[slot] = ItemStack.loadItemStackFromNBT(tag);
 			}
+		}
+	}
+
+	@Override
+	public void setInventorySlotContents(int slot, ItemStack stack) {
+		invSlot[slot] = stack;
+
+		if ((stack != null) && (stack.stackSize > getInventoryStackLimit())) {
+			stack.stackSize = getInventoryStackLimit();
 		}
 	}
 
@@ -113,28 +124,18 @@ public class WwbsTe extends TileEntity implements IInventory{
 			}
 		}
 		tagCompound.setTag("Inventory", itemList);
-//		if(FMLCommonHandler.instance().getEffectiveSide().isServer())
-//		{
-//			try{
-//				ObjectOutputStream oss = new ObjectOutputStream(new FileOutputStream(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0).getChunkSaveLocation().getParent()+File.separator+"BankAccount.dat"));
-//				oss.writeObject(null); // should be the map i don't have yet.
-//				oss.flush();
-//				oss.close();
-//			}
-//			catch(Throwable e){
-//
-//			}
-//		}
-	}
-
-	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
-		return false;
+		// if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+		// {
+		// try{
+		// ObjectOutputStream oss = new ObjectOutputStream(new
+		// FileOutputStream(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0).getChunkSaveLocation().getParent()+File.separator+"BankAccount.dat"));
+		// oss.writeObject(null); // should be the map i don't have yet.
+		// oss.flush();
+		// oss.close();
+		// }
+		// catch(Throwable e){
+		//
+		// }
+		// }
 	}
 }

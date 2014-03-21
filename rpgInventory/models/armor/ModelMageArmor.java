@@ -4,14 +4,13 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelMageArmor extends ModelBiped
-{
+public class ModelMageArmor extends ModelBiped {
 	boolean mageChest = false;
 	boolean mageArms = false;
 	boolean mageFeet = false;
 	boolean magehead = false;
 
-	//fields
+	// fields
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
 	ModelRenderer Shape3;
@@ -41,43 +40,38 @@ public class ModelMageArmor extends ModelBiped
 	ModelRenderer rightleg;
 	ModelRenderer leftleg;
 
-	@Deprecated
-	public ModelMageArmor(float par1, float par2, int par3, int par4) {
-		this(par1);
-	}
-
 	public ModelMageArmor(float par1) {
 
-		super(par1, 0, 65,64);
+		super(par1, 0, 65, 64);
 
 		textureWidth = 65;
 		textureHeight = 64;
 		Shape1 = new ModelRenderer(this, 0, 51);
-		Shape1.addBox(-2F, -8F, -6F, 4, 1, 12,par1);
+		Shape1.addBox(-2F, -8F, -6F, 4, 1, 12, par1);
 		Shape1.setRotationPoint(0F, 0F, 0F);
 		Shape1.setTextureSize(65, 64);
 		Shape1.mirror = true;
 		setRotation(Shape1, 0F, 0F, 0F);
 		Shape2 = new ModelRenderer(this, 0, 59);
-		Shape2.addBox(-6F, -8F, -2F, 12, 1, 4,par1);
+		Shape2.addBox(-6F, -8F, -2F, 12, 1, 4, par1);
 		Shape2.setRotationPoint(0F, 0F, 0F);
 		Shape2.setTextureSize(65, 64);
 		Shape2.mirror = true;
 		setRotation(Shape2, 0F, 0F, 0F);
 		Shape3 = new ModelRenderer(this, 0, 62);
-		Shape3.addBox(-4F, -8F, -5F, 8, 1, 1,par1);
+		Shape3.addBox(-4F, -8F, -5F, 8, 1, 1, par1);
 		Shape3.setRotationPoint(0F, 0F, 0F);
 		Shape3.setTextureSize(65, 64);
 		Shape3.mirror = true;
 		setRotation(Shape3, 0F, 0F, 0F);
 		Shape4 = new ModelRenderer(this, 0, 55);
-		Shape4.addBox(4F, -8F, -4F, 1, 1, 8,par1);
+		Shape4.addBox(4F, -8F, -4F, 1, 1, 8, par1);
 		Shape4.setRotationPoint(0F, 0F, 0F);
 		Shape4.setTextureSize(65, 64);
 		Shape4.mirror = true;
 		setRotation(Shape4, 0F, 0F, 0F);
 		Shape5 = new ModelRenderer(this, 0, 55);
-		Shape5.addBox(-5F, -8F, -4F, 1, 1, 8,par1);
+		Shape5.addBox(-5F, -8F, -4F, 1, 1, 8, par1);
 		Shape5.setRotationPoint(0F, 0F, 0F);
 		Shape5.setTextureSize(65, 64);
 		Shape5.mirror = true;
@@ -131,13 +125,13 @@ public class ModelMageArmor extends ModelBiped
 		Shape13.mirror = true;
 		setRotation(Shape13, 0F, 0F, 0F);
 		Shape14 = new ModelRenderer(this, 0, 39);
-		Shape14.addBox(-1F, -1F, -2.5F, 5, 2, 5,par1);
+		Shape14.addBox(-1F, -1F, -2.5F, 5, 2, 5, par1);
 		Shape14.setRotationPoint(0F, 0F, 0F);
 		Shape14.setTextureSize(65, 64);
 		Shape14.mirror = true;
 		setRotation(Shape14, 0F, 0F, 0.296706F);
 		Shape15 = new ModelRenderer(this, 0, 39);
-		Shape15.addBox(-4F, -1F, -2.5F, 5, 2, 5,par1);
+		Shape15.addBox(-4F, -1F, -2.5F, 5, 2, 5, par1);
 		Shape15.setRotationPoint(0F, 0F, 0F);
 		Shape15.setTextureSize(65, 64);
 		Shape15.mirror = true;
@@ -149,37 +143,37 @@ public class ModelMageArmor extends ModelBiped
 		Shape16.mirror = true;
 		setRotation(Shape16, 0.3316126F, 0F, 0F);
 		Shape17 = new ModelRenderer(this, 20, 43);
-		Shape17.addBox(-2F, 10F, -3F, 4, 2, 1,par1/2);
+		Shape17.addBox(-2F, 10F, -3F, 4, 2, 1, par1 / 2);
 		Shape17.setRotationPoint(0F, 0F, 0F);
 		Shape17.setTextureSize(65, 64);
 		Shape17.mirror = true;
 		setRotation(Shape17, 0F, 0F, 0F);
 		Shape18 = new ModelRenderer(this, 20, 40);
-		Shape18.addBox(-1.5F, 9.5F, -4F, 3, 2, 1,par1/2);
+		Shape18.addBox(-1.5F, 9.5F, -4F, 3, 2, 1, par1 / 2);
 		Shape18.setRotationPoint(0F, 0F, 0F);
 		Shape18.setTextureSize(65, 64);
 		Shape18.mirror = true;
 		setRotation(Shape18, 0F, 0F, 0F);
 		Shape19 = new ModelRenderer(this, 20, 38);
-		Shape19.addBox(-0.5F, 9F, -5F, 1, 1, 1,par1/2);
+		Shape19.addBox(-0.5F, 9F, -5F, 1, 1, 1, par1 / 2);
 		Shape19.setRotationPoint(0F, 0F, 0F);
 		Shape19.setTextureSize(65, 64);
 		Shape19.mirror = true;
 		setRotation(Shape19, 0F, 0F, 0F);
 		Shape20 = new ModelRenderer(this, 20, 43);
-		Shape20.addBox(-2F, 10F, -3F, 4, 2, 1,par1/2);
+		Shape20.addBox(-2F, 10F, -3F, 4, 2, 1, par1 / 2);
 		Shape20.setRotationPoint(0F, 0F, 0F);
 		Shape20.setTextureSize(65, 64);
 		Shape20.mirror = true;
 		setRotation(Shape20, 0F, 0F, 0F);
 		Shape21 = new ModelRenderer(this, 20, 40);
-		Shape21.addBox(-1F, 9.5F, -4F, 3, 2, 1,par1/2);
+		Shape21.addBox(-1F, 9.5F, -4F, 3, 2, 1, par1 / 2);
 		Shape21.setRotationPoint(0F, 0F, 0F);
 		Shape21.setTextureSize(65, 64);
 		Shape21.mirror = true;
 		setRotation(Shape21, 0F, 0F, 0F);
 		Shape22 = new ModelRenderer(this, 20, 38);
-		Shape22.addBox(0F, 9F, -5F, 1, 1, 1,par1/2);
+		Shape22.addBox(0F, 9F, -5F, 1, 1, 1, par1 / 2);
 		Shape22.setRotationPoint(0F, 0F, 0F);
 		Shape22.setTextureSize(65, 64);
 		Shape22.mirror = true;
@@ -207,30 +201,17 @@ public class ModelMageArmor extends ModelBiped
 		bipedHead.addChild(Shape3);
 		bipedHead.addChild(Shape2);
 		bipedHead.addChild(Shape1);
-		
-		
+
 	}
-	public void showMageFeet(boolean show)
-	{
-		Shape22.showModel = Shape21.showModel = Shape20.showModel 
-				= Shape19.showModel = Shape18.showModel = show;
+
+	@Deprecated
+	public ModelMageArmor(float par1, float par2, int par3, int par4) {
+		this(par1);
 	}
-	public void showMageChest(boolean show)
-	{
-		Shape16.showModel = show;
-	}
-	public void showMageHat(boolean show)
-	{
-		Shape1.showModel = Shape2.showModel = Shape3.showModel = Shape4.showModel = Shape5.showModel
-				=Shape6.showModel = Shape7.showModel = Shape8.showModel = Shape9.showModel = Shape10.showModel
-				=Shape11.showModel = Shape12.showModel = Shape13.showModel = show;
-	}
-	public void showMageArms(boolean show)
-	{
-		Shape14.showModel = Shape15.showModel = show;
-	}
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		bipedHead.render(f5);
@@ -241,16 +222,32 @@ public class ModelMageArmor extends ModelBiped
 		bipedLeftLeg.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	//  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
-	//  {
-	//    super.setRotationAngles(f, f1, f2, f3, f4, f5);
-	//  }
+	public void showMageArms(boolean show) {
+		Shape14.showModel = Shape15.showModel = show;
+	}
+
+	public void showMageChest(boolean show) {
+		Shape16.showModel = show;
+	}
+
+	public void showMageFeet(boolean show) {
+		Shape22.showModel = Shape21.showModel = Shape20.showModel = Shape19.showModel = Shape18.showModel = show;
+	}
+
+	public void showMageHat(boolean show) {
+		Shape1.showModel = Shape2.showModel = Shape3.showModel = Shape4.showModel = Shape5.showModel = Shape6.showModel = Shape7.showModel = Shape8.showModel = Shape9.showModel = Shape10.showModel = Shape11.showModel = Shape12.showModel = Shape13.showModel = show;
+	}
+
+	// public void setRotationAngles(float f, float f1, float f2, float f3,
+	// float f4, float f5)
+	// {
+	// super.setRotationAngles(f, f1, f2, f3, f4, f5);
+	// }
 
 }

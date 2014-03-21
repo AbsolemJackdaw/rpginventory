@@ -1,4 +1,5 @@
 package rpgInventory.renderer;
+
 //package rpgInventory.renderer;
 //
 //import java.lang.reflect.Field;
@@ -802,4 +803,4 @@ package rpgInventory.renderer;
 //		}
 //		super.doRender((EntityPlayer) par1EntityPlayer, par2, par4, par6, par8, par9);
 //	}
-//}
+// }

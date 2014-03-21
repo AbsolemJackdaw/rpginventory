@@ -1,5 +1,7 @@
 package rpgInventory.handlers.packets;
 
+import ibxm.Player;
+
 import java.io.DataInputStream;
 import java.util.List;
 
@@ -11,12 +13,12 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.CommonTickHandler;
-import cpw.mods.fml.common.network.Player;
 
 public class PacketMageHeal {
 
-	public PacketMageHeal(DataInputStream dis, EntityPlayer p, Player player, World world){
-		
+	public PacketMageHeal(DataInputStream dis, EntityPlayer p, Player player,
+			World world) {
+
 		if (!world.isRemote) {
 			ItemStack item = p.getCurrentEquippedItem();
 			ItemStack var3 = p.inventory.armorItemInSlot(3);
@@ -24,10 +26,15 @@ public class PacketMageHeal {
 			ItemStack var1 = p.inventory.armorItemInSlot(1);
 			ItemStack var0 = p.inventory.armorItemInSlot(0);
 			if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
-				if (item == null || var3 == null || var2 == null || var1 == null || var0 == null) {
+				if ((item == null) || (var3 == null) || (var2 == null)
+						|| (var1 == null) || (var0 == null)) {
 					return;
 				}
-				if (item.getItem() != mod_RpgInventory.staf || var3.getItem() != mod_RpgInventory.magehood || var2.getItem() != mod_RpgInventory.magegown || var1.getItem() != mod_RpgInventory.magepants || var0.getItem() != mod_RpgInventory.mageboots) {
+				if ((item.getItem() != mod_RpgInventory.staf)
+						|| (var3.getItem() != mod_RpgInventory.magehood)
+						|| (var2.getItem() != mod_RpgInventory.magegown)
+						|| (var1.getItem() != mod_RpgInventory.magepants)
+						|| (var0.getItem() != mod_RpgInventory.mageboots)) {
 					return;
 				}
 			}
@@ -36,32 +43,45 @@ public class PacketMageHeal {
 			}
 			if (CommonTickHandler.globalCooldownMap.get(p.username) <= 0) {
 				CommonTickHandler.globalCooldownMap.put(p.username, 5 * 20);
-				//System.out.println("Healing time!");
-				//Allow staff/hammer to perform one last aoe then break the weapon if its damaged enough.
-				if (item.getItemDamage() + 3 >= item.getMaxDamage()) {
-					//Trigger item break stuff
-					item.damageItem(item.getMaxDamage() - item.getItemDamage() + 1, p);
-					//delete the item
+				// System.out.println("Healing time!");
+				// Allow staff/hammer to perform one last aoe then break the
+				// weapon if its damaged enough.
+				if ((item.getItemDamage() + 3) >= item.getMaxDamage()) {
+					// Trigger item break stuff
+					item.damageItem(
+							(item.getMaxDamage() - item.getItemDamage()) + 1, p);
+					// delete the item
 					p.renderBrokenItemStack(item);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
-					if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+					if (!mod_RpgInventory.developers.contains(p.username
+							.toLowerCase())) {
 						item.damageItem(3, p);
 					}
 				}
-				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - 4.0F, p.posY - 4.0F, p.posZ - 4.0F, p.posX + 4.0F, p.posY + 4.0F, p.posZ + 4.0F);
-				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, pool);
-				if (entl != null && entl.size() > 0) {
+				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
+						p.posX - 4.0F, p.posY - 4.0F, p.posZ - 4.0F,
+						p.posX + 4.0F, p.posY + 4.0F, p.posZ + 4.0F);
+				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABB(
+						EntityLivingBase.class, pool);
+				if ((entl != null) && (entl.size() > 0)) {
 					for (EntityLivingBase el : entl) {
 						if (el != null) {
-							double dist = ((EntityPlayer) player).getDistanceSqToEntity(el);
-							double potstrength = 1.0D - Math.sqrt(dist) / (mod_RpgInventory.donators.contains(p.username) ? 6.0D : 4.0D);
-							Potion.heal.affectEntity((EntityLivingBase) player, el, (mod_RpgInventory.donators.contains(p.username) ? 4 : 2), potstrength);
+							double dist = ((EntityPlayer) player)
+									.getDistanceSqToEntity(el);
+							double potstrength = 1.0D - (Math.sqrt(dist) / (mod_RpgInventory.donators
+									.contains(p.username) ? 6.0D : 4.0D));
+							Potion.heal.affectEntity((EntityLivingBase) player,
+									el, (mod_RpgInventory.donators
+											.contains(p.username) ? 4 : 2),
+									potstrength);
 						}
 					}
 				}
 			} else {
-				p.addChatMessage("You must wait for energy to replenish, left: " + Math.floor(1 + CommonTickHandler.globalCooldownMap.get(p.username) / 20) + " seconds");
+				p.addChatMessage("You must wait for energy to replenish, left: "
+						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
+								.get(p.username) / 20)) + " seconds");
 			}
 		}
 	}

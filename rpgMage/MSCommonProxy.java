@@ -7,16 +7,15 @@ package rpgMage;
 import net.minecraft.client.model.ModelBiped;
 
 /**
- *
+ * 
  * @author Home
  */
 public class MSCommonProxy {
-	public void registerRendering(){
-
+	public ModelBiped getArmorModel(int id) {
+		return null;
 	}
 
+	public void registerRendering() {
 
-	public ModelBiped getArmorModel(int id){
-		return null;
 	}
 }

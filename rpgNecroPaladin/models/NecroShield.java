@@ -4,20 +4,14 @@
 // Keep in mind that you still need to fill in some blanks
 // - ZeuX
 
-
-
-
-
-
 package rpgNecroPaladin.models;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import rpgInventory.models.shields.MainShield;
 
-public class NecroShield extends MainShield
-{
-	//fields
+public class NecroShield extends MainShield {
+	// fields
 	ModelRenderer Shape2;
 	ModelRenderer Shape3;
 	ModelRenderer Shape4;
@@ -116,8 +110,7 @@ public class NecroShield extends MainShield
 	ModelRenderer Shape98;
 	ModelRenderer Shape99;
 
-	public NecroShield()
-	{
+	public NecroShield() {
 		textureWidth = 64;
 		textureHeight = 64;
 
@@ -773,8 +766,8 @@ public class NecroShield extends MainShield
 		parts.add(Shape67);
 		parts.add(Shape68);
 		parts.add(Shape69);
-//		parts.add(Shape70);
-//		parts.add(Shape71);
+		// parts.add(Shape70);
+		// parts.add(Shape71);
 		parts.add(Shape72);
 		parts.add(Shape73);
 		parts.add(Shape74);
@@ -805,8 +798,9 @@ public class NecroShield extends MainShield
 		parts.add(Shape99);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		Shape2.render(f5);
@@ -847,8 +841,8 @@ public class NecroShield extends MainShield
 		Shape65.render(f5);
 		Shape66.render(f5);
 		Shape69.render(f5);
-//		Shape70.render(f5);
-//		Shape71.render(f5);
+		// Shape70.render(f5);
+		// Shape71.render(f5);
 		Shape72.render(f5);
 		Shape73.render(f5);
 		Shape74.render(f5);
@@ -910,20 +904,8 @@ public class NecroShield extends MainShield
 		Shape99.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
-	}
-
-	public void renderShield(float f5)
-	{
+	@Override
+	public void renderShield(float f5) {
 		Shape2.render(f5);
 		Shape3.render(f5);
 		Shape4.render(f5);
@@ -962,8 +944,8 @@ public class NecroShield extends MainShield
 		Shape65.render(f5);
 		Shape66.render(f5);
 		Shape69.render(f5);
-//		Shape70.render(f5);
-//		Shape71.render(f5);
+		// Shape70.render(f5);
+		// Shape71.render(f5);
 		Shape72.render(f5);
 		Shape73.render(f5);
 		Shape74.render(f5);
@@ -1023,6 +1005,18 @@ public class NecroShield extends MainShield
 		Shape97.render(f5);
 		Shape98.render(f5);
 		Shape99.render(f5);
+	}
+
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
+	@Override
+	public void setRotationAngles(float f, float f1, float f2, float f3,
+			float f4, float f5, Entity ent) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
 	}
 
 }

@@ -23,45 +23,20 @@ import rpgRogueBeast.render.AxeRender;
 import rpgRogueBeast.render.LionHeadRenderer;
 import rpgRogueBeast.render.RenderDagger;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
+public class RBClientProxy extends RBCommonProxy {
 
+	private static final ModelRogueArmor armorRogueChest = new ModelRogueArmor(
+			1.0f);
 
-
-public class RBClientProxy extends RBCommonProxy{
-
-	public void registerRendering(){
-		if (RpgConfig.instance.render3D == true) {
-			MinecraftForgeClient.registerItemRenderer(mod_RpgRB.beastAxe.itemID,
-					(IItemRenderer) new AxeRender());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgRB.daggers.itemID,
-					(IItemRenderer) new RenderDagger());
-
-			MinecraftForgeClient.registerItemRenderer(mod_RpgRB.beastShield.itemID, 
-					(IItemRenderer) new LionHeadRenderer(new LionHead(), "subaraki:jewels/lion.png"));		
-		}
-
-		RenderingRegistry.registerEntityRenderingHandler(BullPet.class, new RenderPet());
-		RenderingRegistry.registerEntityRenderingHandler(SpiderPet.class, new RenderPet());
-		RenderingRegistry.registerEntityRenderingHandler(BoarPet.class, new RenderPet());
-		RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class, new RenderXPOrb());
-		RenderingRegistry.registerEntityRenderingHandler(EntityTeleportStone.class, new RenderSnowball(Item.feather, 1));
-
-		RPGKeyHandler.registerKeyhandler(new RpgKeyHandlerRB(), IKeyHandler.bindKeys, IKeyHandler.reps);
-
-		MinecraftForge.EVENT_BUS.register(new SoundManager());
-		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
-
-	}
-
-	private static final ModelRogueArmor armorRogueChest = new ModelRogueArmor(1.0f);
 	private static final ModelRogueArmor armorRogue = new ModelRogueArmor(0.5f);
-	private static final ModelBeastArmor armorBeastChest = new ModelBeastArmor(1.0f);
+	private static final ModelBeastArmor armorBeastChest = new ModelBeastArmor(
+			1.0f);
 	private static final ModelBeastArmor armorBeast = new ModelBeastArmor(0.5f);
 
 	@Override
-	public ModelBiped getArmorModel(int id){
+	public ModelBiped getArmorModel(int id) {
 		switch (id) {
 		case 0:
 			return armorRogueChest;
@@ -75,5 +50,38 @@ public class RBClientProxy extends RBCommonProxy{
 			break;
 		}
 		return null;
+	}
+
+	@Override
+	public void registerRendering() {
+		if (RpgConfig.instance.render3D == true) {
+			MinecraftForgeClient.registerItemRenderer(
+					mod_RpgRB.beastAxe.itemID, (IItemRenderer) new AxeRender());
+			MinecraftForgeClient.registerItemRenderer(mod_RpgRB.daggers.itemID,
+					(IItemRenderer) new RenderDagger());
+
+			MinecraftForgeClient.registerItemRenderer(
+					mod_RpgRB.beastShield.itemID,
+					(IItemRenderer) new LionHeadRenderer(new LionHead(),
+							"subaraki:jewels/lion.png"));
+		}
+
+		RenderingRegistry.registerEntityRenderingHandler(BullPet.class,
+				new RenderPet());
+		RenderingRegistry.registerEntityRenderingHandler(SpiderPet.class,
+				new RenderPet());
+		RenderingRegistry.registerEntityRenderingHandler(BoarPet.class,
+				new RenderPet());
+		RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class,
+				new RenderXPOrb());
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityTeleportStone.class, new RenderSnowball(Item.feather, 1));
+
+		RPGKeyHandler.registerKeyhandler(new RpgKeyHandlerRB(),
+				IKeyHandler.bindKeys, IKeyHandler.reps);
+
+		MinecraftForge.EVENT_BUS.register(new SoundManager());
+		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+
 	}
 }

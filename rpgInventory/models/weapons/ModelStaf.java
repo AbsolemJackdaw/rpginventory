@@ -4,11 +4,6 @@
 // Keep in mind that you still need to fill in some blanks
 // - ZeuX
 
-
-
-
-
-
 package rpgInventory.models.weapons;
 
 import net.minecraft.client.model.ModelBase;
@@ -16,9 +11,8 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelStaf extends ModelBase
-{
-	//fields
+public class ModelStaf extends ModelBase {
+	// fields
 	ModelRenderer Shape1;
 	ModelRenderer FloatingSphere1;
 	ModelRenderer FloatingSphere2;
@@ -42,8 +36,7 @@ public class ModelStaf extends ModelBase
 	ModelRenderer Shape21;
 	ModelRenderer Shape22;
 
-	public ModelStaf()
-	{
+	public ModelStaf() {
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -178,12 +171,13 @@ public class ModelStaf extends ModelBase
 		setRotation(Shape22, 0F, 0F, 0F);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5,entity);
+		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		Shape1.render(f5);
-		
+
 		Shape5.render(f5);
 		Shape6.render(f5);
 		Shape8.render(f5);
@@ -204,37 +198,38 @@ public class ModelStaf extends ModelBase
 		Shape22.render(f5);
 	}
 
-	public void sphere(Entity entity, float f, float f1, float f2, float f3, float f4, float f5){
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5,entity);
-		        
-		FloatingSphere1.render(f5);
-		FloatingSphere2.render(f5);
-		FloatingSphere3.render(f5);
-	}
-	
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity et)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5,et);
+	@Override
+	public void setRotationAngles(float f, float f1, float f2, float f3,
+			float f4, float f5, Entity et) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, et);
 		float x7 = 1f;
 		float zc = 0f;
-		
-		this.FloatingSphere1.rotateAngleY = (MathHelper.sin(f)*x7)+0F;
-		this.FloatingSphere1.rotateAngleX = (MathHelper.sin(f)*10f);
 
-		this.FloatingSphere2.rotateAngleZ = (MathHelper.sin(f)*x7)+0f;
-		this.FloatingSphere2.rotateAngleY = (MathHelper.sin(f)*10F);
+		this.FloatingSphere1.rotateAngleY = (MathHelper.sin(f) * x7) + 0F;
+		this.FloatingSphere1.rotateAngleX = (MathHelper.sin(f) * 10f);
 
-		this.FloatingSphere3.rotateAngleX = (MathHelper.sin(f)*x7)+0f;
-		this.FloatingSphere3.rotateAngleZ = (MathHelper.sin(f)*10f);
+		this.FloatingSphere2.rotateAngleZ = (MathHelper.sin(f) * x7) + 0f;
+		this.FloatingSphere2.rotateAngleY = (MathHelper.sin(f) * 10F);
 
+		this.FloatingSphere3.rotateAngleX = (MathHelper.sin(f) * x7) + 0f;
+		this.FloatingSphere3.rotateAngleZ = (MathHelper.sin(f) * 10f);
+
+	}
+
+	public void sphere(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
+		super.render(entity, f, f1, f2, f3, f4, f5);
+		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+
+		FloatingSphere1.render(f5);
+		FloatingSphere2.render(f5);
+		FloatingSphere3.render(f5);
 	}
 
 }

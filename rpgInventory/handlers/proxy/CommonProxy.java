@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
@@ -13,21 +12,19 @@ public class CommonProxy {
 
 	public static final String RPG_DIR = "RPG_Inventories";
 
-	public int getSphereID() {
-		return 0;
+	public static void renderHandler() {
 	}
 
-	public static void renderHandler() {	
+	public void consumeItem(EntityPlayer player, int itemID) {
+		player.inventory.consumeInventoryItem(itemID);
 	}
 
-	public ModelBiped getArmorModel(int id){
+	public ModelBiped getArmorModel(int id) {
 		return null;
 	}
 
-	public void registerLate() {
-	}
-
-	public void registerRenderInformation() {
+	public int getSphereID() {
+		return 0;
 	}
 
 	public void openGUI(EntityPlayer player, int id) {
@@ -40,11 +37,13 @@ public class CommonProxy {
 		player.addExperienceLevel(-amount);
 	}
 
-	public void consumeItem(EntityPlayer player, int itemID) {
-		player.inventory.consumeInventoryItem(itemID);
+	public void registerLate() {
 	}
-	
-	public void spawnCharmParticle(World world, EntityLivingBase p, Random rng, 
+
+	public void registerRenderInformation() {
+	}
+
+	public void spawnCharmParticle(World world, EntityLivingBase p, Random rng,
 			boolean success) {
 	}
 

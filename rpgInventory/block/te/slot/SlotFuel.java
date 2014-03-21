@@ -10,32 +10,32 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
- *
+ * 
  * @author Home
  */
 public class SlotFuel extends Slot {
 
-    public final int slotID;
+	public final int slotID;
 
-    public SlotFuel(IInventory inv, int slotID, int y, int z) {
-        super(inv, slotID, y, z);
-        this.slotID = slotID;
-    }
+	public SlotFuel(IInventory inv, int slotID, int y, int z) {
+		super(inv, slotID, y, z);
+		this.slotID = slotID;
+	}
 
-    @Override
-    public void onSlotChange(ItemStack par1ItemStack, ItemStack par2ItemStack) {
-        inventory.setInventorySlotContents(slotID, par2ItemStack);
-    }
+	@Override
+	public boolean isItemValid(ItemStack par1ItemStack) {
 
-    @Override
-    public boolean isItemValid(ItemStack par1ItemStack) {
+		if ((par1ItemStack.getItem().itemID == Item.coal.itemID)
+				|| par1ItemStack.getItem().equals(Item.bucketLava)
+				|| par1ItemStack.getItem().equals(Item.blazeRod)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-        if (par1ItemStack.getItem().itemID == Item.coal.itemID
-                || par1ItemStack.getItem().equals(Item.bucketLava)
-                || par1ItemStack.getItem().equals(Item.blazeRod)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+	@Override
+	public void onSlotChange(ItemStack par1ItemStack, ItemStack par2ItemStack) {
+		inventory.setInventorySlotContents(slotID, par2ItemStack);
+	}
 }

@@ -4,20 +4,14 @@
 // Keep in mind that you still need to fill in some blanks
 // - ZeuX
 
-
-
-
-
-
 package rpgNecroPaladin.models;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import rpgInventory.models.shields.MainShield;
 
-public class PalaShield extends MainShield
-{
-	//fields
+public class PalaShield extends MainShield {
+	// fields
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
 	ModelRenderer Shape3;
@@ -38,8 +32,7 @@ public class PalaShield extends MainShield
 	ModelRenderer Shape18;
 	ModelRenderer Shape19;
 
-	public PalaShield()
-	{
+	public PalaShield() {
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -157,50 +150,38 @@ public class PalaShield extends MainShield
 		Shape19.setTextureSize(64, 32);
 		Shape19.mirror = true;
 		setRotation(Shape19, 0F, 0F, 0F);
-		
-		
-		 parts.add(Shape1);
-	      parts.add(Shape2);
-	      parts.add(Shape3);
-	      parts.add(Shape4);
-	      parts.add(Shape5);
-	      parts.add(Shape6);
-	      parts.add(Shape7);
-	      parts.add(Shape8);
-	      parts.add(Shape9);
-	      parts.add(Shape10);
-	      parts.add(Shape11);
-	      parts.add(Shape12);
-	      parts.add(Shape13);
-	      parts.add(Shape14);
-	      parts.add(Shape15);
-	      parts.add(Shape16);
-	      parts.add(Shape17);
-	      parts.add(Shape18);
-	      parts.add(Shape19);
+
+		parts.add(Shape1);
+		parts.add(Shape2);
+		parts.add(Shape3);
+		parts.add(Shape4);
+		parts.add(Shape5);
+		parts.add(Shape6);
+		parts.add(Shape7);
+		parts.add(Shape8);
+		parts.add(Shape9);
+		parts.add(Shape10);
+		parts.add(Shape11);
+		parts.add(Shape12);
+		parts.add(Shape13);
+		parts.add(Shape14);
+		parts.add(Shape15);
+		parts.add(Shape16);
+		parts.add(Shape17);
+		parts.add(Shape18);
+		parts.add(Shape19);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		renderShield(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
-	}
-
-	public void renderShield(float f5)
-	{
+	@Override
+	public void renderShield(float f5) {
 		Shape1.render(f5);
 		Shape2.render(f5);
 		Shape3.render(f5);
@@ -220,6 +201,18 @@ public class PalaShield extends MainShield
 		Shape17.render(f5);
 		Shape18.render(f5);
 		Shape19.render(f5);
+	}
+
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
+	@Override
+	public void setRotationAngles(float f, float f1, float f2, float f3,
+			float f4, float f5, Entity ent) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
 	}
 
 }

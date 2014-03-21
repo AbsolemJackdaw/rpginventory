@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -14,40 +13,46 @@ import rpgInventory.gui.rpginv.PlayerRpgInventory;
 
 public class ItemHammer extends ItemRpgSword {
 
-    Random rand = new Random();
+	Random rand = new Random();
 
-    public ItemHammer(int par1, EnumToolMaterial mat) {
-        super(par1, EnumToolMaterial.STONE);
-        this.maxStackSize = 1;
-        this.setMaxDamage(EnumToolMaterial.IRON.getMaxUses()+300);
-        this.setCreativeTab(CreativeTabs.tabCombat);
-    }
+	public ItemHammer(int par1, EnumToolMaterial mat) {
+		super(par1, EnumToolMaterial.STONE);
+		this.maxStackSize = 1;
+		this.setMaxDamage(EnumToolMaterial.IRON.getMaxUses() + 300);
+		this.setCreativeTab(CreativeTabs.tabCombat);
+	}
 
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
+	@Override
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
+			EntityPlayer player) {
 		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 
+		if (mod_RpgInventory.playerClass
+				.contains(mod_RpgInventory.CLASSBERSERKER)) {
+			if (mod_RpgInventory.playerClass
+					.contains(mod_RpgInventory.CLASSBERSERKERSHIELD)) {
+				if ((player.getFoodStats().getFoodLevel() < 6)
+						|| (player.getHealth() < 6)) {
+					player.addPotionEffect(new PotionEffect(
+							Potion.damageBoost.id, 200, 1));
+				} else if ((player.getFoodStats().getFoodLevel() < 3)
+						|| (player.getHealth() < 3)) {
+					player.addPotionEffect(new PotionEffect(
+							Potion.damageBoost.id, 200, 2));
+				}
+			} else {
+				if ((player.getFoodStats().getFoodLevel() < 4)
+						|| (player.getHealth() < 4)) {
 
-        if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSBERSERKER)) {
-            if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSBERSERKERSHIELD)) {
-                if (player.getFoodStats().getFoodLevel() < 6
-                        || player.getHealth() < 6) {
-                    player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 200, 1));
-                } else if (player.getFoodStats().getFoodLevel() < 3
-                        || player.getHealth() < 3) {
-                    player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 200, 2));
-                }
-            } else {
-                if (player.getFoodStats().getFoodLevel() < 4
-                        || player.getHealth() < 4) {
-
-                    player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 200, 1));
-                }
-            }
-        }
-        par1ItemStack.damageItem(1, player);
-        if(par1ItemStack.getItemDamage() > par1ItemStack.getMaxDamage()){
-            par1ItemStack = null;
-        }
-        return par1ItemStack;
-    }
+					player.addPotionEffect(new PotionEffect(
+							Potion.damageBoost.id, 200, 1));
+				}
+			}
+		}
+		par1ItemStack.damageItem(1, player);
+		if (par1ItemStack.getItemDamage() > par1ItemStack.getMaxDamage()) {
+			par1ItemStack = null;
+		}
+		return par1ItemStack;
+	}
 }

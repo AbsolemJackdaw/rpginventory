@@ -13,22 +13,24 @@ import rpgNecroPaladin.minions.MinionRegistry;
 
 public class PacketNecroSpecial {
 
-	public PacketNecroSpecial(ItemStack weapon, DataInputStream dis, PlayerRpgInventory inv, EntityPlayer p){
+	public PacketNecroSpecial(ItemStack weapon, DataInputStream dis,
+			PlayerRpgInventory inv, EntityPlayer p) {
 		try {
-            dis.close();
-        } catch (Throwable ex) {
-            ex.printStackTrace();
-        }
-		
+			dis.close();
+		} catch (Throwable ex) {
+			ex.printStackTrace();
+		}
 
-        if (weapon.getItem().equals(mod_RpgPlus.necro_weapon) && 
-        		mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO)) {
-            if (MinionRegistry.playerMinions.containsKey(p.username)) {
-                List<IMinion> list = MinionRegistry.playerMinions.get(p.username);
-                for (IMinion minion : list) {
-                    minion.Harvest();
-                }
-            }
-        }
+		if (weapon.getItem().equals(mod_RpgPlus.necro_weapon)
+				&& mod_RpgInventory.playerClass
+						.contains(mod_RpgPlus.CLASSNECRO)) {
+			if (MinionRegistry.playerMinions.containsKey(p.username)) {
+				List<IMinion> list = MinionRegistry.playerMinions
+						.get(p.username);
+				for (IMinion minion : list) {
+					minion.Harvest();
+				}
+			}
+		}
 	}
 }

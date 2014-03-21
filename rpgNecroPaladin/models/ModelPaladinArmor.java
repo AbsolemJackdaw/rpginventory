@@ -4,8 +4,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelPaladinArmor extends ModelBiped
-{
+public class ModelPaladinArmor extends ModelBiped {
 	ModelRenderer LspoulderDown;
 	ModelRenderer helmV1;
 	ModelRenderer hemlv4;
@@ -29,8 +28,7 @@ public class ModelPaladinArmor extends ModelBiped
 	ModelRenderer RspoulderBottom;
 	ModelRenderer rspoulderBase;
 
-	public ModelPaladinArmor(float par1)
-	{
+	public ModelPaladinArmor(float par1) {
 		super(par1, 0, 65, 64);
 
 		textureWidth = 65;
@@ -197,37 +195,37 @@ public class ModelPaladinArmor extends ModelBiped
 
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
-		super.setRotationAngles(f,f1,f2,f3,f4,f5, entity);
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-		//		LspoulderDown.render(f5);
-		//		helmV1.render(f5);
-		//		hemlv4.render(f5);
-		//		helmV2.render(f5);
-		//		helmV3.render(f5);
-		//		plume1.render(f5);
-		//		plume2.render(f5);
-		//		plume3.render(f5);
-		//		plume4.render(f5);
-		//		plume5.render(f5);
-		//		plume6.render(f5);
-		//		plume7.render(f5);
-		//		plume8.render(f5);
-		//		plume10.render(f5);
-		//		plume9.render(f5);
-		//		lspoulderMid.render(f5);
-		//		lspoulderTop.render(f5);
-		//		lspoulderBase.render(f5);
-		//		rspoulderMid.render(f5);
-		//		RspoulderTop.render(f5);
-		//		RspoulderBottom.render(f5);
-		//		rspoulderBase.render(f5);
+		// LspoulderDown.render(f5);
+		// helmV1.render(f5);
+		// hemlv4.render(f5);
+		// helmV2.render(f5);
+		// helmV3.render(f5);
+		// plume1.render(f5);
+		// plume2.render(f5);
+		// plume3.render(f5);
+		// plume4.render(f5);
+		// plume5.render(f5);
+		// plume6.render(f5);
+		// plume7.render(f5);
+		// plume8.render(f5);
+		// plume10.render(f5);
+		// plume9.render(f5);
+		// lspoulderMid.render(f5);
+		// lspoulderTop.render(f5);
+		// lspoulderBase.render(f5);
+		// rspoulderMid.render(f5);
+		// RspoulderTop.render(f5);
+		// RspoulderBottom.render(f5);
+		// rspoulderBase.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;

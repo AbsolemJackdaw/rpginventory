@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *
+ * 
  * @author Home
  */
 public class MinionRegistry {
-    public static HashMap<String, List<IMinion>> playerMinions = new HashMap();
+	public static HashMap<String, List<IMinion>> playerMinions = new HashMap();
 }

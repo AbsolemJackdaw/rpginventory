@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 
 public class ModelBeastArmor extends ModelBiped {
-	//fields
+	// fields
 	ModelRenderer SpaulderL;
 	ModelRenderer SpaulderR;
 	ModelRenderer Horn1;
@@ -12,15 +12,10 @@ public class ModelBeastArmor extends ModelBiped {
 	ModelRenderer Horn3;
 	ModelRenderer Horn4;
 
-	@Deprecated
-	public ModelBeastArmor(float par1, float par2, int par3, int par4) {
-		this(par1);
-	}
-
 	public ModelBeastArmor(float par1) {
 
-		super(par1, 0, 65,64);
-		
+		super(par1, 0, 65, 64);
+
 		textureWidth = 65;
 		textureHeight = 64;
 
@@ -37,25 +32,25 @@ public class ModelBeastArmor extends ModelBiped {
 		SpaulderR.mirror = true;
 		setRotation(SpaulderR, 0F, 0F, -0.1745329F);
 		Horn1 = new ModelRenderer(this, 0, 34);
-		Horn1.addBox(4F, -7F, 1F, 1, 2, 2,par1/2);
+		Horn1.addBox(4F, -7F, 1F, 1, 2, 2, par1 / 2);
 		Horn1.setRotationPoint(0F, 0F, 0F);
 		Horn1.setTextureSize(65, 64);
 		Horn1.mirror = true;
 		setRotation(Horn1, 0F, 0F, 0F);
 		Horn2 = new ModelRenderer(this, 0, 32);
-		Horn2.addBox(1F, -7F, 4F, 3, 1, 1,par1/2);
+		Horn2.addBox(1F, -7F, 4F, 3, 1, 1, par1 / 2);
 		Horn2.setRotationPoint(0F, 0F, 0F);
 		Horn2.setTextureSize(65, 64);
 		Horn2.mirror = true;
 		setRotation(Horn2, 0F, 0.7853982F, 0.1745329F);
 		Horn3 = new ModelRenderer(this, 0, 34);
-		Horn3.addBox(-5F, -7F, 1F, 1, 2, 2,par1/2);
+		Horn3.addBox(-5F, -7F, 1F, 1, 2, 2, par1 / 2);
 		Horn3.setRotationPoint(0F, 0F, 0F);
 		Horn3.setTextureSize(65, 64);
 		Horn3.mirror = true;
 		setRotation(Horn3, 0F, 0F, 0F);
 		Horn4 = new ModelRenderer(this, 0, 32);
-		Horn4.addBox(-4F, -7F, 4F, 3, 1, 1,par1/2);
+		Horn4.addBox(-4F, -7F, 4F, 3, 1, 1, par1 / 2);
 		Horn4.setRotationPoint(0F, 0F, 0F);
 		Horn4.setTextureSize(65, 64);
 		Horn4.mirror = true;
@@ -68,16 +63,22 @@ public class ModelBeastArmor extends ModelBiped {
 		this.bipedRightArm.addChild(SpaulderR);
 	}
 
-	public void showBeastHelmet(boolean show){
-		Horn1.showModel = Horn2.showModel = Horn3.showModel = Horn4.showModel = show;
-	}
-	public void showBeastSpaulders(boolean show){
-		SpaulderL.showModel = SpaulderR.showModel = show;
+	@Deprecated
+	public ModelBeastArmor(float par1, float par2, int par3, int par4) {
+		this(par1);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
+	}
+
+	public void showBeastHelmet(boolean show) {
+		Horn1.showModel = Horn2.showModel = Horn3.showModel = Horn4.showModel = show;
+	}
+
+	public void showBeastSpaulders(boolean show) {
+		SpaulderL.showModel = SpaulderR.showModel = show;
 	}
 }

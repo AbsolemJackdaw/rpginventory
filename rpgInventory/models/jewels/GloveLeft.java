@@ -4,11 +4,6 @@
 // Keep in mind that you still need to fill in some blanks
 // - ZeuX
 
-
-
-
-
-
 package rpgInventory.models.jewels;
 
 import java.util.ArrayList;
@@ -17,9 +12,8 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class GloveLeft extends ModelBase
-{
-	//fields
+public class GloveLeft extends ModelBase {
+	// fields
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
 	ModelRenderer Shape3;
@@ -33,12 +27,11 @@ public class GloveLeft extends ModelBase
 	ModelRenderer Shape11;
 	ModelRenderer Shape12;
 	ModelRenderer Shape13;
-	
+
 	public ArrayList<ModelRenderer> parts = new ArrayList<ModelRenderer>();
 
-	public GloveLeft()
-	{
-		
+	public GloveLeft() {
+
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -120,8 +113,7 @@ public class GloveLeft extends ModelBase
 		Shape13.setTextureSize(64, 32);
 		Shape13.mirror = true;
 		setRotation(Shape13, 0F, 0F, 0F);
-		
-		
+
 		parts.add(Shape1);
 		parts.add(Shape2);
 		parts.add(Shape3);
@@ -138,8 +130,9 @@ public class GloveLeft extends ModelBase
 
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		Shape1.render(f5);
@@ -154,23 +147,10 @@ public class GloveLeft extends ModelBase
 		Shape10.render(f5);
 		Shape11.render(f5);
 		Shape12.render(f5);
-	    Shape13.render(f5);
+		Shape13.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
-	}
-
-	public void renderLeftGlove(float f5)
-	{
+	public void renderLeftGlove(float f5) {
 		Shape1.render(f5);
 		Shape2.render(f5);
 		Shape3.render(f5);
@@ -183,6 +163,18 @@ public class GloveLeft extends ModelBase
 		Shape10.render(f5);
 		Shape11.render(f5);
 		Shape12.render(f5);
-	    Shape13.render(f5);
+		Shape13.render(f5);
+	}
+
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
+	@Override
+	public void setRotationAngles(float f, float f1, float f2, float f3,
+			float f4, float f5, Entity ent) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
 	}
 }

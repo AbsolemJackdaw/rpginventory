@@ -4,9 +4,8 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelNecroArmor extends ModelBiped
-{
-	//fields
+public class ModelNecroArmor extends ModelBiped {
+	// fields
 	ModelRenderer head;
 	ModelRenderer body;
 	ModelRenderer rightarm;
@@ -22,36 +21,31 @@ public class ModelNecroArmor extends ModelBiped
 	ModelRenderer TieTop;
 	ModelRenderer TieBottom;
 
-	@Deprecated
-	public ModelNecroArmor(float par1, float par2, int par3, int par4) {
-		this(par1);
-	}
-
 	public ModelNecroArmor(float par1) {
 
-		super(par1, 0, 65,64);
+		super(par1, 0, 65, 64);
 		textureWidth = 65;
 		textureHeight = 64;
 		Shape1 = new ModelRenderer(this, 0, 32);
-		Shape1.addBox(0F, -2F, -2.5F, 5, 1, 5, par1/1.9f);
+		Shape1.addBox(0F, -2F, -2.5F, 5, 1, 5, par1 / 1.9f);
 		Shape1.setRotationPoint(0F, 0F, 0F);
 		Shape1.setTextureSize(65, 64);
 		Shape1.mirror = true;
 		setRotation(Shape1, 0F, 0F, 0.5235988F);
 		Shape2 = new ModelRenderer(this, 0, 32);
-		Shape2.addBox(0F, 0F, -2.5F, 5, 1, 5, par1/1.9f);
+		Shape2.addBox(0F, 0F, -2.5F, 5, 1, 5, par1 / 1.9f);
 		Shape2.setRotationPoint(0F, 0F, 0F);
 		Shape2.setTextureSize(65, 64);
 		Shape2.mirror = true;
 		setRotation(Shape2, 0F, 0F, 0.7872665F);
 		Shape3 = new ModelRenderer(this, 0, 41);
-		Shape3.addBox(-2.5F, 5F, -2.5F, 5, 2, 5, par1/1.5f);
+		Shape3.addBox(-2.5F, 5F, -2.5F, 5, 2, 5, par1 / 1.5f);
 		Shape3.setRotationPoint(0F, 0F, 0F);
 		Shape3.setTextureSize(65, 64);
 		Shape3.mirror = true;
 		setRotation(Shape3, 0F, 0F, 0F);
 		Shape5 = new ModelRenderer(this, 0, 41);
-		Shape5.addBox(-2.5F, 5F, -2.5F, 5, 2, 5, par1/1.5f);
+		Shape5.addBox(-2.5F, 5F, -2.5F, 5, 2, 5, par1 / 1.5f);
 		Shape5.setRotationPoint(0F, 0F, 0F);
 		Shape5.setTextureSize(65, 64);
 		Shape5.mirror = true;
@@ -91,35 +85,41 @@ public class ModelNecroArmor extends ModelBiped
 		bipedLeftArm.addChild(Shape2);
 
 	}
-	public void showBoots(boolean show)
-	{
-		Shape5.showModel = ToeTipL.showModel = ToeTipR.showModel 
-				= Shape3.showModel = show;
+
+	@Deprecated
+	public ModelNecroArmor(float par1, float par2, int par3, int par4) {
+		this(par1);
 	}
-	public void showTie(boolean show)
-	{
-		TieTop.showModel = TieBottom.showModel = show;
-	}
-	public void showGrasps(boolean show)
-	{
-		Shape1.showModel = Shape2.showModel = show;
-	}
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	//  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
-	//  {
-		//    super.setRotationAngles(f, f1, f2, f3, f4, f5);
-		//  }
+	public void showBoots(boolean show) {
+		Shape5.showModel = ToeTipL.showModel = ToeTipR.showModel = Shape3.showModel = show;
+	}
+
+	public void showGrasps(boolean show) {
+		Shape1.showModel = Shape2.showModel = show;
+	}
+
+	public void showTie(boolean show) {
+		TieTop.showModel = TieBottom.showModel = show;
+	}
+
+	// public void setRotationAngles(float f, float f1, float f2, float f3,
+	// float f4, float f5)
+	// {
+	// super.setRotationAngles(f, f1, f2, f3, f4, f5);
+	// }
 
 }

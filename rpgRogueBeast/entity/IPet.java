@@ -12,121 +12,126 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
 /**
- *
+ * 
  * @author Richard Smith <rich1051414@gmail.com>
  */
 public interface IPet {
 
-    public final int LEVELID = 20;
-    public final int NAME = 21;
-//    public final int HP = 22;
-    public final int SADDLE = 23;
-    public final int TOTALXP = 24;
-    public final int NEXTLEVEL = 25;
-    public static HashMap<String, PetID> playersWithActivePets = new HashMap();
+	/**
+	 * New helper to ensure we are always retrieving the correct pet instance.
+	 */
+	public class PetID {
 
-    public boolean isDead();
+		private final int DIM, EID;
 
-    /**
-     *
-     * @return Returns the pet type(item damage) for this pet.
-     */
-    public void addExperienceLevel(int numLevels);
+		public PetID(int dimension, int entityID) {
+			this.DIM = dimension;
+			this.EID = entityID;
+		}
 
-    public int getType();
+		public IPet getPet() {
+			try {
+				World world = MinecraftServer.getServer()
+						.worldServerForDimension(DIM);
+				if (world == null) {
+					return null;
+				}
+				Entity test = world.getEntityByID(EID);
+				if ((test == null) || !(test instanceof IPet)) {
+					return null;
+				}
+				return (IPet) test;
+			} catch (Throwable ex) {
+				return null;
+			}
+		}
+	}
 
-    /**
-     *
-     * @return The current level of this pet.
-     */
-    public int getLevel();
+	public final int LEVELID = 20;
+	public final int NAME = 21;
+	// public final int HP = 22;
+	public final int SADDLE = 23;
+	public final int TOTALXP = 24;
+	public final int NEXTLEVEL = 25;
 
-    /**
-     * @return returns rather the pet is saddled or not
-     */
-    public boolean getSaddled();
+	public static HashMap<String, PetID> playersWithActivePets = new HashMap();
 
-    /**
-     * @return self explanatory
-     */
-    public void setSaddled(boolean set);
+	/**
+	 * 
+	 * @return Returns the pet type(item damage) for this pet.
+	 */
+	public void addExperienceLevel(int numLevels);
 
-    /**
-     *
-     * @return Returns the current health. not max.
-     */
-    public float getHP();
+	/**
+	 * 
+	 * @return Returns the current health. not max.
+	 */
+	public float getHP();
 
-    /**
-     *
-     * @param amount The amount of xp to give to this pet.
-     *
-     */
-    public void giveXP(int amount);
+	/**
+	 * 
+	 * @return The current level of this pet.
+	 */
+	public int getLevel();
 
-    /**
-     *
-     * @return The total xp this mob has.
-     */
-    public int getTotalXP();
+	/**
+	 * 
+	 * @return How large this pet should be. This returns the scale factor.
+	 */
+	public float getPetSize();
 
-    /**
-     * <em>Deprecated!</em> Use the other version, the new method will
-     * automatically set the correct damage values and item type information for
-     * simplicity.
-     *
-     * <s>Writes the pet's information to the provided ItemStack</s> Functions
-     * exactly like writePetToItemStack()
-     *
-     * @param is The itemStack to save the pet to.
-     * @return The ItemStack with the pet written to it.
-     */
-    @Deprecated
-    public ItemStack writePetToItemStack(ItemStack is);
+	/**
+	 * @return returns rather the pet is saddled or not
+	 */
+	public boolean getSaddled();
 
-    public ItemStack writePetToItemStack();
+	/**
+	 * 
+	 * @return The total xp this mob has.
+	 */
+	public int getTotalXP();
 
-    /**
-     *
-     * @param name The name to attempt to set as the pets name.
-     *
-     */
-    public void setName(String name);
+	public int getType();
 
-    /**
-     *
-     * @return How large this pet should be. This returns the scale factor.
-     */
-    public float getPetSize();
+	/**
+	 * 
+	 * @param amount
+	 *            The amount of xp to give to this pet.
+	 * 
+	 */
+	public void giveXP(int amount);
 
-    /**
-     * New helper to ensure we are always retrieving the correct pet instance.
-     */
-    public class PetID {
+	public boolean isDead();
 
-        private final int DIM, EID;
+	public void setLevel(int level);
 
-        public PetID(int dimension, int entityID) {
-            this.DIM = dimension;
-            this.EID = entityID;
-        }
+	/**
+	 * 
+	 * @param name
+	 *            The name to attempt to set as the pets name.
+	 * 
+	 */
+	public void setName(String name);
 
-        public IPet getPet() {
-            try {
-                World world = MinecraftServer.getServer().worldServerForDimension(DIM);
-                if (world == null) {
-                    return null;
-                }
-                Entity test = world.getEntityByID(EID);
-                if (test == null || !(test instanceof IPet)) {
-                    return null;
-                }
-                return (IPet) test;
-            } catch (Throwable ex) {
-                return null;
-            }
-        }
-    }
+	/**
+	 * @return self explanatory
+	 */
+	public void setSaddled(boolean set);
 
-    public void setLevel(int level);
+	public ItemStack writePetToItemStack();
+
+	/**
+	 * <em>Deprecated!</em> Use the other version, the new method will
+	 * automatically set the correct damage values and item type information for
+	 * simplicity.
+	 * 
+	 * <s>Writes the pet's information to the provided ItemStack</s> Functions
+	 * exactly like writePetToItemStack()
+	 * 
+	 * @param is
+	 *            The itemStack to save the pet to.
+	 * @return The ItemStack with the pet written to it.
+	 */
+	@Deprecated
+	public ItemStack writePetToItemStack(ItemStack is);
 }

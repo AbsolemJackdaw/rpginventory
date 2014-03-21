@@ -4,22 +4,22 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
-
 public class CommonTickHandlerRpgPlus implements ITickHandler {
 
+	public static HashMap<String, Integer> rpgPluscooldownMap = new HashMap();
+
 	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {
+	public String getLabel() {
+		return "RpgInventoryServ";
 	}
-        public static HashMap<String, Integer> rpgPluscooldownMap = new HashMap();
+
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-            for(Entry<String, Integer> entry: rpgPluscooldownMap.entrySet()){
-                if(entry.getValue() > 0){
-                    entry.setValue(entry.getValue() - 1);
-                }
-            }
+		for (Entry<String, Integer> entry : rpgPluscooldownMap.entrySet()) {
+			if (entry.getValue() > 0) {
+				entry.setValue(entry.getValue() - 1);
+			}
+		}
 	}
 
 	/**
@@ -31,7 +31,6 @@ public class CommonTickHandlerRpgPlus implements ITickHandler {
 	}
 
 	@Override
-	public String getLabel() {
-		return "RpgInventoryServ";
+	public void tickStart(EnumSet<TickType> type, Object... tickData) {
 	}
 }

@@ -1,4 +1,5 @@
 package rpgInventory.handlers.proxy;
+
 //package rpgInventory.handelers.proxy;
 //
 //import java.util.Scanner;
@@ -56,4 +57,4 @@ package rpgInventory.handlers.proxy;
 //	private static void loopFail(){
 //		
 //	}
-//}
+// }

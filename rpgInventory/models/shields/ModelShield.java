@@ -1,14 +1,10 @@
-
-
-
 package rpgInventory.models.shields;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelShield extends MainShield
-{
-	//fields
+public class ModelShield extends MainShield {
+	// fields
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
 	ModelRenderer Shape3;
@@ -20,8 +16,7 @@ public class ModelShield extends MainShield
 	ModelRenderer Shape9;
 	ModelRenderer Shape10;
 
-	public ModelShield()
-	{
+	public ModelShield() {
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -85,21 +80,22 @@ public class ModelShield extends MainShield
 		Shape10.setTextureSize(64, 32);
 		Shape10.mirror = true;
 		setRotation(Shape10, 0F, 0F, 0F);
-		
-		 parts.add(Shape1);
-	      parts.add(Shape2);
-	      parts.add(Shape3);
-	      parts.add(Shape4);
-	      parts.add(Shape5);
-	      parts.add(Shape6);
-	      parts.add(Shape7);
-	      parts.add(Shape8);
-	      parts.add(Shape9);
-	      parts.add(Shape10);
+
+		parts.add(Shape1);
+		parts.add(Shape2);
+		parts.add(Shape3);
+		parts.add(Shape4);
+		parts.add(Shape5);
+		parts.add(Shape6);
+		parts.add(Shape7);
+		parts.add(Shape8);
+		parts.add(Shape9);
+		parts.add(Shape10);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		Shape1.render(f5);
@@ -114,20 +110,8 @@ public class ModelShield extends MainShield
 		Shape10.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
-	}
-
-	public void renderShield(float f5)
-	{
+	@Override
+	public void renderShield(float f5) {
 		Shape1.render(f5);
 		Shape2.render(f5);
 		Shape3.render(f5);
@@ -138,6 +122,18 @@ public class ModelShield extends MainShield
 		Shape8.render(f5);
 		Shape9.render(f5);
 		Shape10.render(f5);
+	}
+
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
+	@Override
+	public void setRotationAngles(float f, float f1, float f2, float f3,
+			float f4, float f5, Entity ent) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
 	}
 
 }

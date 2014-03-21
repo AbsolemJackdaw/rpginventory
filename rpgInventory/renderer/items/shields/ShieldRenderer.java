@@ -11,7 +11,8 @@ public abstract class ShieldRenderer implements IItemRenderer {
 
 	ModelBase model;
 	ResourceLocation texture;
-	public ShieldRenderer(ModelBase model, String texture){
+
+	public ShieldRenderer(ModelBase model, String texture) {
 		this.model = model;
 		this.texture = new ResourceLocation(texture);
 	}
@@ -19,46 +20,50 @@ public abstract class ShieldRenderer implements IItemRenderer {
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		// TODO Auto-generated method stub
-		return type != ItemRenderType.EQUIPPED || type != ItemRenderType.EQUIPPED_FIRST_PERSON;
+		return (type != ItemRenderType.EQUIPPED)
+				|| (type != ItemRenderType.EQUIPPED_FIRST_PERSON);
 	}
 
-	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-			ItemRendererHelper helper) {
-		return true;
-	}
+	public abstract void renderEntity();
+
+	public abstract void renderEquipped();
+
+	public abstract void renderEquippedFP();
+
+	public abstract void renderInventory();
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
-		renderScale();		
+		renderScale();
 
-		if(type == ItemRenderType.INVENTORY){
+		if (type == ItemRenderType.INVENTORY) {
 			renderInventory();
-			model.render(null,0,0,0,0,0,0.0625f );
+			model.render(null, 0, 0, 0, 0, 0, 0.0625f);
 		}
-		if(type == ItemRenderType.ENTITY){
+		if (type == ItemRenderType.ENTITY) {
 			renderEntity();
-			model.render((Entity)data[1],0,0,0,0,0,0.0625f );
+			model.render((Entity) data[1], 0, 0, 0, 0, 0, 0.0625f);
 
 		}
-		if(type == ItemRenderType.EQUIPPED){
+		if (type == ItemRenderType.EQUIPPED) {
 			renderEquipped();
-			model.render((Entity)data[1],0,0,0,0,0,0.0625f );
+			model.render((Entity) data[1], 0, 0, 0, 0, 0, 0.0625f);
 
 		}
-		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON){
+		if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
 			renderEquippedFP();
-			model.render((Entity)data[1],0,0,0,0,0,0.0625f );
+			model.render((Entity) data[1], 0, 0, 0, 0, 0, 0.0625f);
 		}
 	}
-	
-	public abstract void renderInventory();
 
-	public abstract void renderEntity();
-	public abstract void renderEquipped();
-	public abstract void renderEquippedFP();
 	public abstract void renderScale();
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
+			ItemRendererHelper helper) {
+		return true;
+	}
 }

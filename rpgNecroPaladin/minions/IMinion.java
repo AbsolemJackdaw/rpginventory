@@ -7,11 +7,13 @@ package rpgNecroPaladin.minions;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
- *
+ * 
  * @author Home
  */
 public interface IMinion {
-    public void Harvest();
-    public EntityPlayer getMaster();
-    public void setInvulnerable(boolean val);
+	public EntityPlayer getMaster();
+
+	public void Harvest();
+
+	public void setInvulnerable(boolean val);
 }

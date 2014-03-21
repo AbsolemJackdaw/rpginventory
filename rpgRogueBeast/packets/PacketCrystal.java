@@ -15,8 +15,8 @@ import rpgRogueBeast.mod_RpgRB;
 
 public class PacketCrystal {
 
-	public PacketCrystal(DataInputStream dis, EntityPlayer p){
-		
+	public PacketCrystal(DataInputStream dis, EntityPlayer p) {
+
 		int entityid;
 		try {
 			entityid = dis.readInt();
@@ -30,7 +30,8 @@ public class PacketCrystal {
 						ItemStack is = new ItemStack(mod_RpgRB.crystal, 1, 1);
 						e.entityDropItem(is, 0.5F);
 						e.setDead();
-					} else if (e instanceof EntitySpider || e instanceof EntityCaveSpider) {
+					} else if ((e instanceof EntitySpider)
+							|| (e instanceof EntityCaveSpider)) {
 						ItemStack is = new ItemStack(mod_RpgRB.crystal, 1, 2);
 						e.entityDropItem(is, 0.5F);
 						e.setDead();

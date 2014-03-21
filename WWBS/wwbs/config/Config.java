@@ -2,38 +2,36 @@ package WWBS.wwbs.config;
 
 import java.io.File;
 
-import net.minecraftforge.common.Configuration;
-
 /**
- *
+ * 
  * @author Home
  */
 public class Config {
 
-    public static Config instance = new Config();
-    
-    
-    final int bID_OFFSET = 451;
-   
-    public static int bankBlock;
-    public static int MEBlock;
+	public static Config instance = new Config();
 
+	final int bID_OFFSET = 451;
 
-    //This is to prevent accidintally creating a new instance.
-    private Config() {}
+	public static int bankBlock;
+	public static int MEBlock;
 
-    public void loadConfig(File file) {
-        Configuration config = new Configuration(file);
-        config.load();
-        loadBlocks(config);
-        config.save();
-    }
+	// This is to prevent accidintally creating a new instance.
+	private Config() {
+	}
 
-    private void loadBlocks(Configuration config){
-        int blocknum = bID_OFFSET;
-        bankBlock = config.getBlock("BankBlock", blocknum).getInt(blocknum);
-        blocknum++;
-        MEBlock = config.getBlock("Massive Exchange Block", blocknum).getInt(blocknum);
-        blocknum++;
-    }
+	private void loadBlocks(Configuration config) {
+		int blocknum = bID_OFFSET;
+		bankBlock = config.getBlock("BankBlock", blocknum).getInt(blocknum);
+		blocknum++;
+		MEBlock = config.getBlock("Massive Exchange Block", blocknum).getInt(
+				blocknum);
+		blocknum++;
+	}
+
+	public void loadConfig(File file) {
+		Configuration config = new Configuration(file);
+		config.load();
+		loadBlocks(config);
+		config.save();
+	}
 }

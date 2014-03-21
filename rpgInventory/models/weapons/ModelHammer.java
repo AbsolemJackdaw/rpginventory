@@ -4,9 +4,8 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelHammer extends ModelBase
-{
-	//fields
+public class ModelHammer extends ModelBase {
+	// fields
 	ModelRenderer HammerBase;
 	ModelRenderer Deco1;
 	ModelRenderer Deco2;
@@ -23,8 +22,7 @@ public class ModelHammer extends ModelBase
 	ModelRenderer pist3;
 	ModelRenderer pist4;
 
-	public ModelHammer()
-	{
+	public ModelHammer() {
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -120,14 +118,15 @@ public class ModelHammer extends ModelBase
 		setRotation(pist4, 0F, 0F, 0F);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5,entity);
+		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		render(f5);
 	}
 
-	public void render(float f5){
+	public void render(float f5) {
 		HammerBase.render(f5);
 		Deco1.render(f5);
 		Deco2.render(f5);
@@ -144,17 +143,17 @@ public class ModelHammer extends ModelBase
 		pist3.render(f5);
 		pist4.render(f5);
 	}
-	
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5,ent);
+	@Override
+	public void setRotationAngles(float f, float f1, float f2, float f3,
+			float f4, float f5, Entity ent) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
 	}
 
 }

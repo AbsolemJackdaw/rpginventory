@@ -15,50 +15,57 @@ import org.lwjgl.opengl.GL11;
 
 import rpgRogueBeast.entity.BMPetImpl;
 
-
 public class RenderPet extends RenderLiving {
 
-    public RenderPet() {
-        super(new ModelCow(), 0.5F);
-    }
+	public RenderPet() {
+		super(new ModelCow(), 0.5F);
+	}
 
-    protected void scalePet(BMPetImpl pet, float par2) {
-        float var3 = pet.getPetSize();
-        GL11.glScalef(var3, var3, var3);
+	@Override
+	public void doRender(Entity pet, double par2, double par4, double par6,
+			float par8, float par9) {
+		this.renderCow((BMPetImpl) pet, par2, par4, par6, par8, par9);
+	}
 
-    }
-    
-    @Override
-    protected void preRenderCallback(EntityLivingBase pet, float par2) {
-        this.scalePet((BMPetImpl) pet, par2);
-    }
+	@Override
+	public void doRenderLiving(EntityLiving pet, double par2, double par4,
+			double par6, float par8, float par9) {
+		this.renderCow((BMPetImpl) pet, par2, par4, par6, par8, par9);
 
-    public void renderCow(BMPetImpl pet, double par2, double par4, double par6, float par8, float par9) {
-
-        this.mainModel = pet.getModel();
-        super.doRenderLiving(pet, par2, par4, par6, par8, par9);
-        if (pet.riddenByEntity == null) {
-            super.renderLivingLabel(pet, pet.getEntityName() + " Lvl." + pet.getLevel(), par2, par4 + pet.height - 0.2F, par6, 32);
-        }else{
-            super.renderLivingLabel(pet, pet.getEntityName() + " Lvl." + pet.getLevel(), par2, par4 + pet.height - 0.2F + pet.riddenByEntity.yOffset + pet.riddenByEntity.ySize, par6, 32);
-        }
-
-    }
-
-    @Override
-    public void doRenderLiving(EntityLiving pet, double par2, double par4, double par6, float par8, float par9) {
-        this.renderCow((BMPetImpl) pet, par2, par4, par6, par8, par9);
-
-    }
-
-    @Override
-    public void doRender(Entity pet, double par2, double par4, double par6, float par8, float par9) {
-        this.renderCow((BMPetImpl) pet, par2, par4, par6, par8, par9);
-    }
+	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		// TODO Auto-generated method stub
-		return ((BMPetImpl)entity).getTexture();
+		return ((BMPetImpl) entity).getTexture();
+	}
+
+	@Override
+	protected void preRenderCallback(EntityLivingBase pet, float par2) {
+		this.scalePet((BMPetImpl) pet, par2);
+	}
+
+	public void renderCow(BMPetImpl pet, double par2, double par4, double par6,
+			float par8, float par9) {
+
+		this.mainModel = pet.getModel();
+		super.doRenderLiving(pet, par2, par4, par6, par8, par9);
+		if (pet.riddenByEntity == null) {
+			super.renderLivingLabel(pet,
+					pet.getEntityName() + " Lvl." + pet.getLevel(), par2,
+					(par4 + pet.height) - 0.2F, par6, 32);
+		} else {
+			super.renderLivingLabel(pet,
+					pet.getEntityName() + " Lvl." + pet.getLevel(), par2,
+					((par4 + pet.height) - 0.2F) + pet.riddenByEntity.yOffset
+							+ pet.riddenByEntity.ySize, par6, 32);
+		}
+
+	}
+
+	protected void scalePet(BMPetImpl pet, float par2) {
+		float var3 = pet.getPetSize();
+		GL11.glScalef(var3, var3, var3);
+
 	}
 }

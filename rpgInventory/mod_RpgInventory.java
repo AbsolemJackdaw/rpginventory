@@ -10,20 +10,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import modUpdateChecked.OnPlayerLogin;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.command.CommandHandler;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.EnumArmorMaterial;
-import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.block.BlockForge;
 import rpgInventory.block.te.TEMold;
 import rpgInventory.config.RpgConfig;
@@ -33,7 +32,6 @@ import rpgInventory.handlers.CommonTickHandler;
 import rpgInventory.handlers.GuiHandler;
 import rpgInventory.handlers.PlayerTracker;
 import rpgInventory.handlers.RPGEventHooks;
-import rpgInventory.handlers.packets.RpgPacketHandler;
 import rpgInventory.handlers.proxy.ClientProxy;
 import rpgInventory.handlers.proxy.CommonProxy;
 import rpgInventory.item.ItemMold;
@@ -58,27 +56,26 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 
 
-@Mod(modid = "rpginventorymod", name = "RPG Inventory Mod", version = "1.6.4")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true,
-clientPacketHandlerSpec =
-@SidedPacketHandler(channels = {"RpgInv"}, packetHandler = RpgPacketHandler.class),
-serverPacketHandlerSpec =
-@SidedPacketHandler(channels = {"RpgInv"}, packetHandler = RpgPacketHandler.class))
+@Mod(modid = mod_RpgInventory.name, name =mod_RpgInventory.name, version = mod_RpgInventory.version)
+
+//@NetworkMod(clientSideRequired = true, serverSideRequired = true,
+//clientPacketHandlerSpec =
+//@SidedPacketHandler(channels = {"RpgInv"}, packetHandler = RpgPacketHandler.class),
+//serverPacketHandlerSpec =
+//@SidedPacketHandler(channels = {"RpgInv"}, packetHandler = RpgPacketHandler.class))
+
 public class mod_RpgInventory {
 
-	private static final String name = "RpgInventory";
-	private static final String version = "1.6.4 v1";
+	protected static final String name = "RpgInventory";
+	protected static final String version = "1.7.2";
 		
 		
 	public static String CLASSARCHER = "archer";
@@ -154,6 +151,13 @@ public class mod_RpgInventory {
 	public static CreativeTabs tab;
 
 	@EventHandler
+	public void serverLoad(FMLServerStartingEvent e){
+//        NetworkRegistry.INSTANCE.newChannel("RpgInv", new RpgPacketHandler());
+        
+	}
+	
+	
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		RpgConfig.instance.loadConfig(event.getSuggestedConfigurationFile());
 	}
@@ -162,7 +166,7 @@ public class mod_RpgInventory {
 	public void load(FMLInitializationEvent event) {
 
 		setDonators();
-		GameRegistry.registerPlayerTracker(new OnPlayerLogin(version, name));
+//		GameRegistry.registerPlayerTracker(new OnPlayerLogin(version, name));
 		
 		// NOTHING BEFORE THE GOD DAMN TAB ! 
 		//any items that need to be in it, put in it BEFORE the tab exists will not be in
@@ -198,7 +202,7 @@ public class mod_RpgInventory {
 		developers.add("rich1051414");
 		developers.add("darkhax");
 
-		forgeBlock = new BlockForge(RpgConfig.instance.forgeblockID, Material.rock).setHardness(5f).setUnlocalizedName("MoldForge").setCreativeTab(tab);
+		forgeBlock = new BlockForge(RpgConfig.instance.forgeblockID, Material.rock).setHardness(5f)/*.setUnlocalizedName("MoldForge")*/.setCreativeTab(tab);
 
 		neckgold = new ItemRpgInvArmor(RpgConfig.instance.neckgoldID, 0, -1, "", "subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold").setCreativeTab(tab);
 		neckdia = new ItemRpgInvArmor(RpgConfig.instance.neckdiaID, 0, -1, "", "subaraki:jewels/NeckDia.png").setUnlocalizedName("neckDia").setCreativeTab(tab);
@@ -338,36 +342,36 @@ public class mod_RpgInventory {
 		MinecraftForge.addGrassSeed(new ItemStack(rageSeed, 1), 1);
 
 		//SKINS
-		GameRegistry.addRecipe(new ItemStack(animalskin, 1), new Object[]{"WWW", "WLW", "WWW", 'W', new ItemStack(Block.cloth, 1, 12), 'L', Item.leather});
-		GameRegistry.addShapelessRecipe(new ItemStack(tanHide, 1), new Object[]{Item.leather, Item.silk, Item.silk, Item.silk, Item.silk});
-		GameRegistry.addRecipe(new ItemStack(magecloth, 1), new Object[]{"WWW", "WLW", "WWW", 'W', new ItemStack(Item.dyePowder, 1, 4), 'L', Item.leather});
+		GameRegistry.addRecipe(new ItemStack(animalskin, 1), new Object[]{"WWW", "WLW", "WWW", 'W', new ItemStack(Blocks.wool, 1, 12), 'L', Items.leather});
+		GameRegistry.addShapelessRecipe(new ItemStack(tanHide, 1), new Object[]{Items.leather, Items.string, Items.string, Items.string, Items.string});
+		GameRegistry.addRecipe(new ItemStack(magecloth, 1), new Object[]{"WWW", "WLW", "WWW", 'W', new ItemStack(Items.dye, 1, 4), 'L', Items.leather});
 		//WEAPONRY
-		GameRegistry.addRecipe(new ItemStack(elfbow, 1), new Object[]{"EPP", "P S", "PS ", 'E', Item.emerald, 'S', Item.silk, 'P', new ItemStack(Block.wood, 1, 2)});
-		GameRegistry.addRecipe(new ItemStack(wand, 1), new Object[]{"GGG", "GLG", "GGG", 'L', Block.blockLapis, 'G', Item.ingotGold});
-		GameRegistry.addRecipe(new ItemStack(staf, 1), new Object[]{" ML", " SM", "S  ", 'M', Item.speckledMelon, 'S', Item.stick, 'L', new ItemStack(Item.dyePowder, 1, 4)});
-		GameRegistry.addRecipe(new ItemStack(claymore, 1), new Object[]{" S ", " S ", "LIL", 'I', Item.ingotIron, 'S', Block.stone, 'L', Item.leather});
-		GameRegistry.addRecipe(new ItemStack(hammer, 1), new Object[]{"SSS", "LI ", "LI ", 'I', Item.ingotIron, 'S', Block.blockIron, 'L', Item.leather});
+		GameRegistry.addRecipe(new ItemStack(elfbow, 1), new Object[]{"EPP", "P S", "PS ", 'E', Items.emerald, 'S', Items.string, 'P', new ItemStack(Blocks.log, 1, 2)});
+		GameRegistry.addRecipe(new ItemStack(wand, 1), new Object[]{"GGG", "GLG", "GGG", 'L', Blocks.lapis_block, 'G', Items.gold_ingot});
+		GameRegistry.addRecipe(new ItemStack(staf, 1), new Object[]{" ML", " SM", "S  ", 'M', Items.speckled_melon, 'S', Items.stick, 'L', new ItemStack(Items.dye, 1, 4)});
+		GameRegistry.addRecipe(new ItemStack(claymore, 1), new Object[]{" S ", " S ", "LIL", 'I', Items.iron_ingot, 'S', Blocks.stone, 'L', Items.leather});
+		GameRegistry.addRecipe(new ItemStack(hammer, 1), new Object[]{"SSS", "LI ", "LI ", 'I', Items.iron_ingot, 'S', Blocks.iron_block, 'L', Items.leather});
 
 		//SHIELDS
-		GameRegistry.addRecipe(new ItemStack(archerShield, 1), new Object[]{"WWW", "WBW", " W ", 'W', Item.ingotIron, 'B', Block.wood});
-		GameRegistry.addRecipe(new ItemStack(berserkerShield, 1), new Object[]{"WWW", "WBW", " W ", 'W', Item.ingotIron, 'B', Block.blockIron});
-		GameRegistry.addRecipe(new ItemStack(talisman, 1), new Object[]{"WWW", "WBW", " W ", 'W', new ItemStack(Item.dyePowder, 1, 4), 'B', Block.blockLapis});
+		GameRegistry.addRecipe(new ItemStack(archerShield, 1), new Object[]{"WWW", "WBW", " W ", 'W', Items.iron_ingot, 'B', Blocks.log});
+		GameRegistry.addRecipe(new ItemStack(berserkerShield, 1), new Object[]{"WWW", "WBW", " W ", 'W', Items.iron_ingot, 'B', Blocks.iron_block});
+		GameRegistry.addRecipe(new ItemStack(talisman, 1), new Object[]{"WWW", "WBW", " W ", 'W', new ItemStack(Items.dye, 1, 4), 'B', Blocks.lapis_block});
 
 		//CLOAK
-		GameRegistry.addRecipe(new ItemStack(cloak, 1), new Object[]{"SS", "II", "II", 'I', Block.cloth, 'S', Item.silk});
-		GameRegistry.addRecipe(new ItemStack(cloakI, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Item.potion, 1, 8206)});
-		GameRegistry.addRecipe(new ItemStack(cloakI, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Item.potion, 1, 8270)});
+		GameRegistry.addRecipe(new ItemStack(cloak, 1), new Object[]{"SS", "II", "II", 'I', Blocks.wool, 'S', Items.string});
+		GameRegistry.addRecipe(new ItemStack(cloakI, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Items.potionitem, 1, 8206)});
+		GameRegistry.addRecipe(new ItemStack(cloakI, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Items.potionitem, 1, 8270)});
 
-		GameRegistry.addRecipe(new ItemStack(cloakRed, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Item.dyePowder, 1, 1)});
-		GameRegistry.addRecipe(new ItemStack(cloakYellow, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Item.dyePowder, 1, 11)});
-		GameRegistry.addRecipe(new ItemStack(cloakGreen, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Item.dyePowder, 1, 2)});
-		GameRegistry.addRecipe(new ItemStack(cloakBlue, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Item.dyePowder, 1, 12)});
-		GameRegistry.addRecipe(new ItemStack(cloakSub, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Item.dyePowder, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(cloakRed, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Items.dye, 1, 1)});
+		GameRegistry.addRecipe(new ItemStack(cloakYellow, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Items.dye, 1, 11)});
+		GameRegistry.addRecipe(new ItemStack(cloakGreen, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Items.dye, 1, 2)});
+		GameRegistry.addRecipe(new ItemStack(cloakBlue, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Items.dye, 1, 12)});
+		GameRegistry.addRecipe(new ItemStack(cloakSub, 1), new Object[]{"PPP", "PCP", "PPP", 'C', cloak, 'P', new ItemStack(Items.dye, 1, 0)});
 
-		GameRegistry.addRecipe(new ItemStack(forgeBlock, 1), new Object[]{"BBB", "BOB", "BBB", 'B', Block.brick, 'O', Block.obsidian});
+		GameRegistry.addRecipe(new ItemStack(forgeBlock, 1), new Object[]{"BBB", "BOB", "BBB", 'B', Blocks.brick_block, 'O', Blocks.obsidian});
 
 		//MageBook
-		GameRegistry.addShapelessRecipe(new ItemStack(wizardBook, 1), new Object[]{magecloth, Item.paper, Item.paper, Item.paper});
+		GameRegistry.addShapelessRecipe(new ItemStack(wizardBook, 1), new Object[]{magecloth, Items.paper, Items.paper, Items.paper});
 
 		//ARMOR
 		recipePatterns = new String[][]{{"XXX", "X X"}, {"X X", "XXX", "XXX"}, {"XXX", "X X", "X X"}, {"X X", "X X"}};

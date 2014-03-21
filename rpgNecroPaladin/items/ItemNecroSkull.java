@@ -12,9 +12,7 @@ import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -28,7 +26,6 @@ import rpgNecroPaladin.minions.EntityMinionZ;
 import rpgNecroPaladin.minions.IMinion;
 import rpgNecroPaladin.packets.RpgPlusPacketHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class ItemNecroSkull extends ItemRpgWeapon {
 
@@ -45,31 +42,8 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 	}
 
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer p, Entity entity) {
-		PlayerRpgInventory inv = PlayerRpgInventory.get(p);
-
-		ItemStack weapon = p.getCurrentEquippedItem();
-
-		if (mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO)) {
-			if (entity instanceof IMinion) {
-				if (weapon.getItemDamage() + 2 >= weapon.getMaxDamage()) {
-					//Trigger item break stuff
-					weapon.damageItem(weapon.getMaxDamage() - weapon.getItemDamage() + 1, p);
-					//delete the item
-					p.renderBrokenItemStack(weapon);
-					p.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else {
-					weapon.damageItem(mod_RpgInventory.donators.contains(p.username) ? 1 : 2, p);
-				}
-				((EntityLiving) entity).heal(3);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase mob, EntityLivingBase player) {
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase mob,
+			EntityLivingBase player) {
 		if ((player instanceof EntityPlayer)) {
 			EntityPlayer p = (EntityPlayer) player;
 			World world = p.worldObj;
@@ -78,12 +52,16 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
 				if (weapon != null) {
-					if (weapon.getItem().equals(mod_RpgPlus.necro_weapon) && mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO)) {
+					if (weapon.getItem().equals(mod_RpgPlus.necro_weapon)
+							&& mod_RpgInventory.playerClass
+									.contains(mod_RpgPlus.CLASSNECRO)) {
 
-						if (weapon.getItemDamage() + 2 >= weapon.getMaxDamage()) {
-							//Trigger item break stuff
-							weapon.damageItem(weapon.getMaxDamage() - weapon.getItemDamage() + 1, p);
-							//delete the item
+						if ((weapon.getItemDamage() + 2) >= weapon
+								.getMaxDamage()) {
+							// Trigger item break stuff
+							weapon.damageItem((weapon.getMaxDamage() - weapon
+									.getItemDamage()) + 1, p);
+							// delete the item
 							p.renderBrokenItemStack(weapon);
 							p.setCurrentItemOrArmor(0, (ItemStack) null);
 						} else {
@@ -95,10 +73,11 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 							EntityMinionZ var4 = new EntityMinionZ(world, p);
 							var4.setPosition(mob.posX, mob.posY, mob.posZ);
 
-							for(int i = 0; i < 5; i++){
+							for (int i = 0; i < 5; i++) {
 								ItemStack stack = mob.getCurrentItemOrArmor(i);
-								if(stack != null)
+								if (stack != null) {
 									var4.setCurrentItemOrArmor(i, stack);
+								}
 							}
 							mob.setDead();
 
@@ -113,16 +92,23 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 							var4.setTamed(true);
 							var4.setOwner(p.username);
 						} else if (mob.getClass() == EntityPigZombie.class) {
-							EntityPigZombie pigzombie = new EntityPigZombie(world);
+							EntityPigZombie pigzombie = new EntityPigZombie(
+									world);
 							pigzombie.setPosition(mob.posX, mob.posY, mob.posZ);
 							mob.setDead();
 							world.spawnEntityInWorld(pigzombie);
 							// necromancers can not make pig zombies angry !
-							
+
 						} else {
 							if (!(mob instanceof IMinion)) {
-								mob.attackEntityFrom(DamageSource.wither, mod_RpgInventory.donators.contains(p.username) ? 6 : 4);
-								mob.addPotionEffect(new PotionEffect(Potion.wither.id, mod_RpgInventory.donators.contains(p.username) ? 60 : 40, 1));
+								mob.attackEntityFrom(DamageSource.wither,
+										mod_RpgInventory.donators
+												.contains(p.username) ? 6 : 4);
+								mob.addPotionEffect(new PotionEffect(
+										Potion.wither.id,
+										mod_RpgInventory.donators
+												.contains(p.username) ? 60 : 40,
+										1));
 							} else {
 								mob.heal(3);
 							}
@@ -135,18 +121,49 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 		return true;
 	}
 
-	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
+	@Override
+	public ItemStack onItemRightClick(ItemStack is, World world,
+			EntityPlayer player) {
 		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			DataOutputStream dos = new DataOutputStream(bos);
 			try {
 				dos.writeInt(RpgPlusPacketHandler.WEAPONIDS.SKULLRCLICK);
-				Packet250CustomPayload packet = new Packet250CustomPayload("RpgPlusPlus", bos.toByteArray());
+				Packet250CustomPayload packet = new Packet250CustomPayload(
+						"RpgPlusPlus", bos.toByteArray());
 				PacketDispatcher.sendPacketToServer(packet);
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
 		}
 		return is;
+	}
+
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer p,
+			Entity entity) {
+		PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+
+		ItemStack weapon = p.getCurrentEquippedItem();
+
+		if (mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO)) {
+			if (entity instanceof IMinion) {
+				if ((weapon.getItemDamage() + 2) >= weapon.getMaxDamage()) {
+					// Trigger item break stuff
+					weapon.damageItem(
+							(weapon.getMaxDamage() - weapon.getItemDamage()) + 1,
+							p);
+					// delete the item
+					p.renderBrokenItemStack(weapon);
+					p.setCurrentItemOrArmor(0, (ItemStack) null);
+				} else {
+					weapon.damageItem(mod_RpgInventory.donators
+							.contains(p.username) ? 1 : 2, p);
+				}
+				((EntityLiving) entity).heal(3);
+				return true;
+			}
+		}
+		return false;
 	}
 }

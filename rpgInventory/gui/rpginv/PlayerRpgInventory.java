@@ -16,67 +16,88 @@ import rpgInventory.handlers.packets.PacketInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import cpw.mods.fml.common.FMLLog;
 
-public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties {
+public class PlayerRpgInventory implements IInventory,
+		IExtendedEntityProperties {
 
 	public ItemStack[] armorSlots = new ItemStack[7];
 	public String playername;
-	//	public EnumSet<EnumRpgClass> classSets;
-	//	public LinkedList classSets;
+	// public EnumSet<EnumRpgClass> classSets;
+	// public LinkedList classSets;
 	private EntityPlayer player;
 
 	public final static String EXT_PROP_NAME = "RpgInventory";
 
 	private static final String tagName = "RpgInventory";
 
-	public PlayerRpgInventory(EntityPlayer p) {
-		playername = p.username;
-		player = p;
-		//		classSets = new LinkedList();//EnumSet.noneOf(EnumRpgClass.class);
-	}
-
-	/*=====SAVING ENTITY DATA =====*/
-
-	public static final void register(EntityPlayer player){
-		player.registerExtendedProperties(EXT_PROP_NAME, new PlayerRpgInventory(player));
-		FMLLog.getLogger().info("Player properties registered" );
-	}
-
-	public static final PlayerRpgInventory get(EntityPlayer p){
+	public static final PlayerRpgInventory get(EntityPlayer p) {
 		return (PlayerRpgInventory) p.getExtendedProperties(EXT_PROP_NAME);
 	}
 
-	@Override
-	public void saveNBTData(NBTTagCompound compound) {
-		writeToNBT(compound);
+	/* =====SAVING ENTITY DATA ===== */
+
+	public static final void register(EntityPlayer player) {
+		player.registerExtendedProperties(EXT_PROP_NAME,
+				new PlayerRpgInventory(player));
+		FMLLog.getLogger().info("Player properties registered");
+	}
+
+	public PlayerRpgInventory(EntityPlayer p) {
+		playername = p.username;
+		player = p;
+		// classSets = new LinkedList();//EnumSet.noneOf(EnumRpgClass.class);
 	}
 
 	@Override
-	public void loadNBTData(NBTTagCompound compound) {
-		readFromNBT(compound);
+	public void closeChest() {
+		// ExtendedPlayer props = ExtendedPlayer.get(player);
+		// props.addEntry(this);
+
+		PacketInventory.sendPacket(player, this);
+
 	}
 
+	/**
+	 * Removes from an inventory slot (first arg) up to a specified number
+	 * (second arg) of items and returns them in a new stack.
+	 */
 	@Override
-	public void init(Entity entity, World world) {		
-	}
+	public ItemStack decrStackSize(int par1, int par2) {
+		if (armorSlots[par1] != null) {
+			ItemStack var3;
 
-	/*=====INVENTORY=====*/
-	public boolean hasClass(String rpgenum) {
-		//		if (EnumRpgClass.getPlayerClasses(player).contains(rpgenum)) {
-		//			return true;
-		//		}
-		if(rpgenum.equals(mod_RpgInventory.playerClass)){
-			return true;
+			if (armorSlots[par1].stackSize <= par2) {
+				var3 = armorSlots[par1];
+				armorSlots[par1] = null;
+				// onInventoryChanged();
+				return var3;
+			} else {
+				var3 = armorSlots[par1].splitStack(par2);
+
+				if (armorSlots[par1].stackSize == 0) {
+					armorSlots[par1] = null;
+				}
+
+				// onInventoryChanged();
+				return var3;
+			}
+		} else {
+			return null;
 		}
-		return false;
 	}
 
-	@Override
-	public int getSizeInventory() {
-		return armorSlots.length;
-	}
-
-	public ItemStack getJewelInSlot(int par1) {
-		return armorSlots[par1];
+	/**
+	 * called upon player's death. Will drop Jewels in the world
+	 */
+	public void dropJewels(EntityPlayer player) {
+		PlayerRpgInventory rpg = this;// props.getInventory();
+		int var1;
+		for (var1 = 0; var1 < rpg.armorSlots.length; ++var1) {
+			if (rpg.armorSlots[var1] != null) {
+				player.dropPlayerItemWithRandomChoice(rpg.armorSlots[var1],
+						true);
+				rpg.armorSlots[var1] = null;
+			}
+		}
 	}
 
 	/**
@@ -84,7 +105,7 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 	 */
 	private int findJewel(int par1) {
 		for (int var2 = 0; var2 < armorSlots.length; ++var2) {
-			if (armorSlots[var2] != null && armorSlots[var2].itemID == par1) {
+			if ((armorSlots[var2] != null) && (armorSlots[var2].itemID == par1)) {
 				return var2;
 			}
 		}
@@ -92,32 +113,26 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 		return -1;
 	}
 
-	public ItemStack getShield() {
-		return armorSlots[1];
-	}
-
 	public ItemStack getCloak() {
 		return armorSlots[2];
 	}
 
-	public ItemStack getNecklace() {
-		return armorSlots[0];
+	public ItemStack getCrystal() {
+		return armorSlots[6];
 	}
 
 	public ItemStack getGloves() {
 		return armorSlots[3];
 	}
 
-	public ItemStack getRing1() {
-		return armorSlots[4];
+	@Override
+	public int getInventoryStackLimit() {
+		return 1;
 	}
 
-	public ItemStack getRing2() {
-		return armorSlots[5];
-	}
-
-	public ItemStack getCrystal() {
-		return armorSlots[6];
+	@Override
+	public String getInvName() {
+		return "RpgInventory";
 	}
 
 	public boolean getJewel(int par1) {
@@ -136,33 +151,37 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 		return var2[par1];
 	}
 
-	/**
-	 * Removes from an inventory slot (first arg) up to a specified number
-	 * (second arg) of items and returns them in a new stack.
-	 */
+	public ItemStack getJewelInSlot(int par1) {
+		return armorSlots[par1];
+	}
+
+	public ItemStack getNecklace() {
+		return armorSlots[0];
+	}
+
+	public ItemStack getRing1() {
+		return armorSlots[4];
+	}
+
+	public ItemStack getRing2() {
+		return armorSlots[5];
+	}
+
+	public ItemStack getShield() {
+		return armorSlots[1];
+	}
+
 	@Override
-	public ItemStack decrStackSize(int par1, int par2) {
-		if (armorSlots[par1] != null) {
-			ItemStack var3;
+	public int getSizeInventory() {
+		return armorSlots.length;
+	}
 
-			if (armorSlots[par1].stackSize <= par2) {
-				var3 = armorSlots[par1];
-				armorSlots[par1] = null;
-				//onInventoryChanged();
-				return var3;
-			} else {
-				var3 = armorSlots[par1].splitStack(par2);
-
-				if (armorSlots[par1].stackSize == 0) {
-					armorSlots[par1] = null;
-				}
-
-				//onInventoryChanged();
-				return var3;
-			}
-		} else {
-			return null;
+	@Override
+	public ItemStack getStackInSlot(int par1) {
+		if ((par1 >= 0) && (par1 < armorSlots.length)) {
+			return armorSlots[par1];
 		}
+		return null;
 	}
 
 	/**
@@ -172,201 +191,24 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 	 */
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
-		//        mod_RpgInventory.proxy.addEntry(playername, this);
+		// mod_RpgInventory.proxy.addEntry(playername, this);
 		PacketInventory.sendPacket(player, this);
 		return null;
 	}
 
-	/**
-	 * called upon player's death. Will drop Jewels in the world
-	 */
-	public void dropJewels(EntityPlayer player) {
-		PlayerRpgInventory rpg= this;//props.getInventory();
-		int var1;
-		for (var1 = 0; var1 < rpg.armorSlots.length; ++var1) {
-			if (rpg.armorSlots[var1] != null) {
-				player.dropPlayerItemWithRandomChoice(rpg.armorSlots[var1], true);
-				rpg.armorSlots[var1] = null;
-			}
+	/* =====INVENTORY===== */
+	public boolean hasClass(String rpgenum) {
+		// if (EnumRpgClass.getPlayerClasses(player).contains(rpgenum)) {
+		// return true;
+		// }
+		if (rpgenum.equals(mod_RpgInventory.playerClass)) {
+			return true;
 		}
+		return false;
 	}
 
 	@Override
-	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-		this.armorSlots[par1] = par2ItemStack;
-		PacketInventory.sendPacket(player, this);
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int par1) {
-		if (par1 >= 0 && par1 < armorSlots.length) {
-			return armorSlots[par1];
-		}
-		return null;
-	}
-
-	@Override
-	public String getInvName() {
-		return "RpgInventory";
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 1;
-	}
-
-	@Override
-	public void onInventoryChanged() {
-		try {
-
-			PacketInventory.sendPacket(player, this);
-
-			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(playername);
-			//classSets = EnumRpgClass.getPlayerClasses(player);
-			//TODO is done ! moved that line ^ to eventhooks so it gets updated properly.
-			boolean addtoticks[] = new boolean[3];
-			if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSARCHERSHIELD)) {
-				if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() != null) {
-					if (player.inventory.getCurrentItem().getItem().equals(mod_RpgInventory.elfbow) || player.inventory.getCurrentItem().getItem() instanceof ItemBow) {
-						addtoticks[0] = true;
-					}
-				}
-			} else if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSMAGESHIELD)) {
-				if (player.getCurrentEquippedItem() != null) {
-					if (player.getCurrentEquippedItem().getItem().equals(mod_RpgInventory.staf)) {
-						addtoticks[1] = true;
-					}
-				}
-
-			}
-			if ((getNecklace() != null && getNecklace().itemID == mod_RpgInventory.neckdia.itemID)
-					|| (getRing1() != null && getRing1().itemID == mod_RpgInventory.ringdia.itemID)
-					|| (getRing2() != null && getRing2().itemID == mod_RpgInventory.ringdia.itemID)
-					|| (getGloves() != null && getGloves().itemID == mod_RpgInventory.glovesdia.itemID)) {
-				addtoticks[2] = true;
-			}
-
-
-			if (addtoticks[0]) {
-				if (!RPGEventHooks.ArcherRepairTick.containsKey(player.username)) {
-					RPGEventHooks.ArcherRepairTick.put(player.username, 0);
-				}
-			} else {
-				//keep the cooldown hashmap clean
-				RPGEventHooks.ArcherRepairTick.remove(player.username);
-			}
-
-
-			if (addtoticks[1]) {
-				if (!RPGEventHooks.HealerTick.containsKey(player.username)) {
-					RPGEventHooks.HealerTick.put(player.username, 0);
-				}
-			} else {
-				//keep the cooldown hashmap clean
-				RPGEventHooks.HealerTick.remove(player.username);
-			}
-
-			if (addtoticks[2]) {
-				if (!RPGEventHooks.DiamondTick.containsKey(player.username)) {
-					RPGEventHooks.DiamondTick.put(player.username, 0);
-				}
-			} else {
-				//keep the cooldown hashmap clean
-				RPGEventHooks.DiamondTick.remove(player.username);
-			}
-		} catch (Throwable ex) {
-		}
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-		EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(playername);
-		return player.isDead ? false : par1EntityPlayer.getDistanceSqToEntity(player) <= 64.0D;
-	}
-
-	public void writeToNBT(NBTTagCompound tagcompound)
-	{
-		NBTTagList nbttaglist = new NBTTagList();
-
-		for (int i = 0; i < this.getSizeInventory(); ++i)
-		{
-			if (this.getStackInSlot(i) != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte) i);
-				this.getStackInSlot(i).writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
-		// We're storing our items in a custom tag list using our 'tagName' from above
-		// to prevent potential conflicts
-		tagcompound.setTag(tagName, nbttaglist);
-	}
-
-	public void readFromNBT(NBTTagCompound tagcompound)
-	{
-		NBTTagList nbttaglist = tagcompound.getTagList(tagName);
-		for (int i = 0; i < nbttaglist.tagCount(); ++i)
-		{
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < this.getSizeInventory())
-			{
-				this.setInventorySlotContents(b0, ItemStack.loadItemStackFromNBT(nbttagcompound1));
-			}
-		}
-	}
-
-	//	/**
-	//	 * Writes the inventory out as a list of compound tags. This is where the
-	//	 * slot indices are used (+100 for armor, +80 for crafting).
-	//	 */
-	//	public NBTTagCompound writeToNBT(NBTTagCompound par1NBTTagCompound) {
-	//		NBTTagList var2 = new NBTTagList();
-	//		for (int var3 = 0; var3 < armorSlots.length; ++var3) {
-	//			if (armorSlots[var3] != null) {
-	//				NBTTagCompound compoundSlot = new NBTTagCompound();
-	//				compoundSlot.setByte("SlotNum", (byte) var3);
-	//				armorSlots[var3].writeToNBT(compoundSlot);
-	//				var2.appendTag(compoundSlot);
-	//			}
-	//		}
-	//		par1NBTTagCompound.setTag("Slot", var2);
-	//		return par1NBTTagCompound;
-	//	}
-	//
-	//	/**
-	//	 * Reads from the given tag list and fills the slots in the inventory with
-	//	 * the correct items.
-	//	 */
-	//	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
-	//		NBTTagList var2 = par1NBTTagCompound.getTagList("Slot");
-	//		armorSlots = new ItemStack[getSizeInventory()];
-	//		for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
-	//			NBTTagCompound compoundSlot = (NBTTagCompound) var2.tagAt(var3);
-	//			byte var5 = compoundSlot.getByte("SlotNum");
-	//			if (var5 >= 0 && var5 < armorSlots.length) {
-	//				try {
-	//					armorSlots[var5] = ItemStack.loadItemStackFromNBT(compoundSlot);
-	//				} catch (Throwable ex) {
-	//					ex.printStackTrace();
-	//				}
-	//			}
-	//		}
-	//	}
-
-	@Override
-	public void openChest() {
-	}
-
-	@Override
-	public void closeChest() {
-		//		ExtendedPlayer props = ExtendedPlayer.get(player);
-		//		props.addEntry(this);
-
-		PacketInventory.sendPacket(player, this);
-
+	public void init(Entity entity, World world) {
 	}
 
 	@Override
@@ -417,10 +259,178 @@ public class PlayerRpgInventory implements IInventory, IExtendedEntityProperties
 				}
 				return false;
 			default:
-				//	                    System.out.println("Unknown RPG Inventory type:" + slotIndex);
+				// System.out.println("Unknown RPG Inventory type:" +
+				// slotIndex);
 				return false;
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
+		EntityPlayer player = MinecraftServer.getServer()
+				.getConfigurationManager().getPlayerForUsername(playername);
+		return player.isDead ? false : par1EntityPlayer
+				.getDistanceSqToEntity(player) <= 64.0D;
+	}
+
+	@Override
+	public void loadNBTData(NBTTagCompound compound) {
+		readFromNBT(compound);
+	}
+
+	@Override
+	public void onInventoryChanged() {
+		try {
+
+			PacketInventory.sendPacket(player, this);
+
+			EntityPlayer player = MinecraftServer.getServer()
+					.getConfigurationManager().getPlayerForUsername(playername);
+			// classSets = EnumRpgClass.getPlayerClasses(player);
+			// TODO is done ! moved that line ^ to eventhooks so it gets updated
+			// properly.
+			boolean addtoticks[] = new boolean[3];
+			if (mod_RpgInventory.playerClass
+					.contains(mod_RpgInventory.CLASSARCHERSHIELD)) {
+				if ((player.inventory.getCurrentItem() != null)
+						&& (player.inventory.getCurrentItem().getItem() != null)) {
+					if (player.inventory.getCurrentItem().getItem()
+							.equals(mod_RpgInventory.elfbow)
+							|| (player.inventory.getCurrentItem().getItem() instanceof ItemBow)) {
+						addtoticks[0] = true;
+					}
+				}
+			} else if (mod_RpgInventory.playerClass
+					.contains(mod_RpgInventory.CLASSMAGESHIELD)) {
+				if (player.getCurrentEquippedItem() != null) {
+					if (player.getCurrentEquippedItem().getItem()
+							.equals(mod_RpgInventory.staf)) {
+						addtoticks[1] = true;
+					}
+				}
+
+			}
+			if (((getNecklace() != null) && (getNecklace().itemID == mod_RpgInventory.neckdia.itemID))
+					|| ((getRing1() != null) && (getRing1().itemID == mod_RpgInventory.ringdia.itemID))
+					|| ((getRing2() != null) && (getRing2().itemID == mod_RpgInventory.ringdia.itemID))
+					|| ((getGloves() != null) && (getGloves().itemID == mod_RpgInventory.glovesdia.itemID))) {
+				addtoticks[2] = true;
+			}
+
+			if (addtoticks[0]) {
+				if (!RPGEventHooks.ArcherRepairTick
+						.containsKey(player.username)) {
+					RPGEventHooks.ArcherRepairTick.put(player.username, 0);
+				}
+			} else {
+				// keep the cooldown hashmap clean
+				RPGEventHooks.ArcherRepairTick.remove(player.username);
+			}
+
+			if (addtoticks[1]) {
+				if (!RPGEventHooks.HealerTick.containsKey(player.username)) {
+					RPGEventHooks.HealerTick.put(player.username, 0);
+				}
+			} else {
+				// keep the cooldown hashmap clean
+				RPGEventHooks.HealerTick.remove(player.username);
+			}
+
+			if (addtoticks[2]) {
+				if (!RPGEventHooks.DiamondTick.containsKey(player.username)) {
+					RPGEventHooks.DiamondTick.put(player.username, 0);
+				}
+			} else {
+				// keep the cooldown hashmap clean
+				RPGEventHooks.DiamondTick.remove(player.username);
+			}
+		} catch (Throwable ex) {
+		}
+	}
+
+	@Override
+	public void openChest() {
+	}
+
+	// /**
+	// * Writes the inventory out as a list of compound tags. This is where the
+	// * slot indices are used (+100 for armor, +80 for crafting).
+	// */
+	// public NBTTagCompound writeToNBT(NBTTagCompound par1NBTTagCompound) {
+	// NBTTagList var2 = new NBTTagList();
+	// for (int var3 = 0; var3 < armorSlots.length; ++var3) {
+	// if (armorSlots[var3] != null) {
+	// NBTTagCompound compoundSlot = new NBTTagCompound();
+	// compoundSlot.setByte("SlotNum", (byte) var3);
+	// armorSlots[var3].writeToNBT(compoundSlot);
+	// var2.appendTag(compoundSlot);
+	// }
+	// }
+	// par1NBTTagCompound.setTag("Slot", var2);
+	// return par1NBTTagCompound;
+	// }
+	//
+	// /**
+	// * Reads from the given tag list and fills the slots in the inventory with
+	// * the correct items.
+	// */
+	// public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
+	// NBTTagList var2 = par1NBTTagCompound.getTagList("Slot");
+	// armorSlots = new ItemStack[getSizeInventory()];
+	// for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
+	// NBTTagCompound compoundSlot = (NBTTagCompound) var2.tagAt(var3);
+	// byte var5 = compoundSlot.getByte("SlotNum");
+	// if (var5 >= 0 && var5 < armorSlots.length) {
+	// try {
+	// armorSlots[var5] = ItemStack.loadItemStackFromNBT(compoundSlot);
+	// } catch (Throwable ex) {
+	// ex.printStackTrace();
+	// }
+	// }
+	// }
+	// }
+
+	public void readFromNBT(NBTTagCompound tagcompound) {
+		NBTTagList nbttaglist = tagcompound.getTagList(tagName);
+		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+					.tagAt(i);
+			byte b0 = nbttagcompound1.getByte("Slot");
+
+			if ((b0 >= 0) && (b0 < this.getSizeInventory())) {
+				this.setInventorySlotContents(b0,
+						ItemStack.loadItemStackFromNBT(nbttagcompound1));
+			}
+		}
+	}
+
+	@Override
+	public void saveNBTData(NBTTagCompound compound) {
+		writeToNBT(compound);
+	}
+
+	@Override
+	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
+		this.armorSlots[par1] = par2ItemStack;
+		PacketInventory.sendPacket(player, this);
+	}
+
+	public void writeToNBT(NBTTagCompound tagcompound) {
+		NBTTagList nbttaglist = new NBTTagList();
+
+		for (int i = 0; i < this.getSizeInventory(); ++i) {
+			if (this.getStackInSlot(i) != null) {
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte) i);
+				this.getStackInSlot(i).writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+		// We're storing our items in a custom tag list using our 'tagName' from
+		// above
+		// to prevent potential conflicts
+		tagcompound.setTag(tagName, nbttaglist);
 	}
 }

@@ -2,7 +2,6 @@ package rpgNecroPaladin.items;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import rpgInventory.utils.AbstractArmor;
@@ -16,43 +15,40 @@ public class ItemNecroArmor extends AbstractArmor {
 	}
 
 	@Override
+	public String armorClassName() {
+		return mod_RpgPlus.CLASSNECRO;
+	}
+
+	@Override
+	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
+			int armorSlot) {
+
+		if (stack != null) {
+			if (stack.getItem() instanceof ItemArmor) {
+
+				int type = ((ItemArmor) stack.getItem()).armorType;
+
+				if ((type == 1) || (type == 3)) {
+					armorModel = mod_RpgPlus.proxy.getArmorModel(0);
+				} else {
+					armorModel = mod_RpgPlus.proxy.getArmorModel(1);
+				}
+			}
+		}
+	}
+
+	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
 
-		if (itemstack.itemID == mod_RpgPlus.necroHood.itemID || itemstack.itemID == mod_RpgPlus.necroChestplate.itemID || itemstack.itemID == mod_RpgPlus.necroBoots.itemID) {
+		if ((itemstack.itemID == mod_RpgPlus.necroHood.itemID)
+				|| (itemstack.itemID == mod_RpgPlus.necroChestplate.itemID)
+				|| (itemstack.itemID == mod_RpgPlus.necroBoots.itemID)) {
 			return "armor:necro_1.png";
 		}
 		if (itemstack.itemID == mod_RpgPlus.necroLeggings.itemID) {
 			return "armor:necro_2.png";
 		}
 		return null;
-	}
-
-
-	
-
-	
-
-
-	@Override
-	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
-			int armorSlot) {
-		
-		if(stack != null)
-			if(stack.getItem() instanceof ItemArmor){
-
-				int type = ((ItemArmor)stack.getItem()).armorType;
-
-				if(type == 1 || type == 3){
-						armorModel = mod_RpgPlus.proxy.getArmorModel(0);
-				}else{
-						armorModel = mod_RpgPlus.proxy.getArmorModel(1);
-				}
-			}		
-	}
-
-	@Override
-	public String armorClassName() {
-		return mod_RpgPlus.CLASSNECRO;
 	}
 }

@@ -1,10 +1,6 @@
 package rpgMage;
 
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
-
+import ibxm.Player;
 
 public class RpgMSPacketHandler implements IPacketHandler {
 

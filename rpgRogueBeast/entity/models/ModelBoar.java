@@ -4,11 +4,6 @@
 // Keep in mind that you still need to fill in some blanks
 // - ZeuX
 
-
-
-
-
-
 package rpgRogueBeast.entity.models;
 
 import net.minecraft.client.model.ModelBase;
@@ -16,9 +11,8 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelBoar extends ModelBase
-{
-	//fields
+public class ModelBoar extends ModelBase {
+	// fields
 	ModelRenderer Hornpart1L;
 	ModelRenderer head;
 	ModelRenderer body;
@@ -30,8 +24,7 @@ public class ModelBoar extends ModelBase
 	ModelRenderer Nose;
 	ModelRenderer Hornpart1R;
 
-	public ModelBoar()
-	{
+	public ModelBoar() {
 		textureWidth = 65;
 		textureHeight = 64;
 
@@ -96,14 +89,15 @@ public class ModelBoar extends ModelBase
 		Hornpart1R.mirror = true;
 		setRotation(Hornpart1R, -0.1745329F, 0.2443461F, 0F);
 
-				Nose.addChild(Hornpart1R);
-				Nose.addChild(Hornpart1L);
-//				FrontBody.addChild(body);
-				head.addChild(Nose);
+		Nose.addChild(Hornpart1R);
+		Nose.addChild(Hornpart1L);
+		// FrontBody.addChild(body);
+		head.addChild(Nose);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		head.render(f5);
@@ -113,24 +107,26 @@ public class ModelBoar extends ModelBase
 		leg3.render(f5);
 		leg4.render(f5);
 		FrontBody.render(f5);
-//		Nose.render(f5);
-//		Hornpart1L.render(f5);
-//		Hornpart1R.render(f5);
+		// Nose.render(f5);
+		// Hornpart1L.render(f5);
+		// Hornpart1R.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent)
-	{
+	@Override
+	public void setRotationAngles(float f, float f1, float f2, float f3,
+			float f4, float f5, Entity ent) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
 		this.leg1.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
-		this.leg2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.leg3.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
+		this.leg2.rotateAngleX = MathHelper
+				.cos((f * 0.6662F) + (float) Math.PI) * 1.4F * f1;
+		this.leg3.rotateAngleX = MathHelper
+				.cos((f * 0.6662F) + (float) Math.PI) * 1.4F * f1;
 		this.leg4.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
 	}
 

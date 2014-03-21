@@ -10,14 +10,14 @@ public class InventoryTab extends CreativeTabs {
 	public InventoryTab(int par1, String par2Str) {
 		super(par1, par2Str);
 	}
+
 	@SideOnly(Side.CLIENT)
-	public int getTabIconItemIndex()
-	{
+	public int getTabIconItemIndex() {
 		return Item.ingotGold.itemID;
 	}
 
-	public String getTranslatedTabLabel()
-	{
+	@Override
+	public String getTranslatedTabLabel() {
 		return "Bank Tab";
 	}
 }

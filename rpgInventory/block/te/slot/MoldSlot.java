@@ -10,27 +10,28 @@ import net.minecraft.item.ItemStack;
 import rpgInventory.item.ItemMold;
 
 /**
- *
+ * 
  * @author Home
  */
-public class MoldSlot extends Slot{
+public class MoldSlot extends Slot {
 
-    public MoldSlot(IInventory par1IInventory, int par2, int par3, int par4) {
-        super(par1IInventory, par2, par3, par4);
-    }
+	public MoldSlot(IInventory par1IInventory, int par2, int par3, int par4) {
+		super(par1IInventory, par2, par3, par4);
+	}
 
-    @Override
-    public boolean isItemValid(ItemStack par1ItemStack) {
-        if(par1ItemStack != null){
-            if(par1ItemStack.getItem() instanceof ItemMold){
-                return true;
-            }
-        }
-        return false;
-    }
-    public int getSlotStackLimit()
-    {
-        return 1;
-    }
-    
+	@Override
+	public int getSlotStackLimit() {
+		return 1;
+	}
+
+	@Override
+	public boolean isItemValid(ItemStack par1ItemStack) {
+		if (par1ItemStack != null) {
+			if (par1ItemStack.getItem() instanceof ItemMold) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

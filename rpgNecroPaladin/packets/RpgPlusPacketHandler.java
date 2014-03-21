@@ -4,28 +4,35 @@
  */
 package rpgNecroPaladin.packets;
 
+import ibxm.Player;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
 
 /**
- *
+ * 
  * @author Home
  */
 public class RpgPlusPacketHandler implements IPacketHandler {
 
+	public static class WEAPONIDS {
+
+		public static final int SKULLRCLICK = 5;
+		public static final int NECROSPECIAL = 6;
+		public static final int PALADINSPECIAL = 9;
+	}
+
 	@Override
-	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
+	public void onPacketData(INetworkManager manager,
+			Packet250CustomPayload packet, Player player) {
 		//
-		DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
+		DataInputStream dis = new DataInputStream(new ByteArrayInputStream(
+				packet.data));
 		int weaponID = 0;
 		EntityPlayer p = (EntityPlayer) player;
 		try {
@@ -52,12 +59,5 @@ public class RpgPlusPacketHandler implements IPacketHandler {
 				break;
 			}
 		}
-	}
-
-	public static class WEAPONIDS {
-
-		public static final int SKULLRCLICK = 5;
-		public static final int NECROSPECIAL = 6;
-		public static final int PALADINSPECIAL = 9;
 	}
 }

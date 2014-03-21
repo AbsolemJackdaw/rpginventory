@@ -21,8 +21,7 @@ class SlotFurnace extends Slot {
 	 * getInventoryStackLimit(), but 1 in the case of armor slots)
 	 */
 	@Override
-	public int getSlotStackLimit()
-	{
+	public int getSlotStackLimit() {
 		return 1;
 	}
 
@@ -32,33 +31,33 @@ class SlotFurnace extends Slot {
 	 */
 	@Override
 	public boolean isItemValid(ItemStack is) {
-		//super.isItemValid(par1ItemStack);
+		// super.isItemValid(par1ItemStack);
 
-		if(is != null)
-		{
+		if (is != null) {
 			switch (slotIndex) {
-                        case 0: if( is == new ItemStack(Item.coal)
-				|| is == new ItemStack(Item.bucketLava)
-				|| is == new ItemStack(Item.blazeRod)){
+			case 0:
+				if ((is == new ItemStack(Item.coal))
+						|| (is == new ItemStack(Item.bucketLava))
+						|| (is == new ItemStack(Item.blazeRod))) {
 					return true;
-				} 
+				}
 			case 1:
-				if( is == new ItemStack(Block.blockGold)){
+				if (is == new ItemStack(Block.blockGold)) {
 					return true;
 				}
 				return false;
 			case 2:
-				if(is == new ItemStack(mod_RpgInventory.colmold) 
-				|| is == new ItemStack(mod_RpgInventory.wantmold) 
-				|| is == new ItemStack(mod_RpgInventory.ringmold)){
+				if ((is == new ItemStack(mod_RpgInventory.colmold))
+						|| (is == new ItemStack(mod_RpgInventory.wantmold))
+						|| (is == new ItemStack(mod_RpgInventory.ringmold))) {
 					return true;
 				}
 				return false;
 			case 3:
-				if(is == new ItemStack(Item.diamond) 
-				|| is == new ItemStack(Item.emerald) 
-				|| is == new ItemStack(Item.ingotGold)
-				|| is == new ItemStack(Item.dyePowder,1,4)){
+				if ((is == new ItemStack(Item.diamond))
+						|| (is == new ItemStack(Item.emerald))
+						|| (is == new ItemStack(Item.ingotGold))
+						|| (is == new ItemStack(Item.dyePowder, 1, 4))) {
 					return true;
 				}
 				return false;
@@ -70,7 +69,8 @@ class SlotFurnace extends Slot {
 	@Override
 	public void putStack(ItemStack par1ItemStack) {
 		if (this.inventory != null) {
-			this.inventory.setInventorySlotContents(this.slotIndex, par1ItemStack);
+			this.inventory.setInventorySlotContents(this.slotIndex,
+					par1ItemStack);
 
 		}
 		this.onSlotChanged();

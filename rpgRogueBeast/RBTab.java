@@ -6,18 +6,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class RBTab extends CreativeTabs {
 
-	public RBTab(int par1,String label) {
+	public RBTab(int par1, String label) {
 		super(par1, label);
 		// TODO Auto-generated constructor stub
 	}
+
 	@SideOnly(Side.CLIENT)
-	public int getTabIconItemIndex()
-	{
+	public int getTabIconItemIndex() {
 		return mod_RpgRB.beastAxe.itemID;
 	}
 
-	public String getTranslatedTabLabel()
-	{
+	@Override
+	public String getTranslatedTabLabel() {
 		return "Rogue/BeastMaster Armoury";
 	}
 }

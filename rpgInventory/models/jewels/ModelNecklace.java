@@ -6,9 +6,8 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelNecklace extends ModelBase
-{
-	//fields
+public class ModelNecklace extends ModelBase {
+	// fields
 	ModelRenderer Shape4;
 	ModelRenderer Shape5;
 	ModelRenderer Shape1;
@@ -21,9 +20,7 @@ public class ModelNecklace extends ModelBase
 
 	public ArrayList<ModelRenderer> parts = new ArrayList<ModelRenderer>();
 
-	
-	public ModelNecklace()
-	{
+	public ModelNecklace() {
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -81,7 +78,7 @@ public class ModelNecklace extends ModelBase
 		Shape9.setTextureSize(64, 32);
 		Shape9.mirror = true;
 		setRotation(Shape9, 0F, 0F, 0F);
-		
+
 		parts.add(Shape1);
 		parts.add(Shape2);
 		parts.add(Shape3);
@@ -93,8 +90,9 @@ public class ModelNecklace extends ModelBase
 		parts.add(Shape9);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		Shape4.render(f5);
@@ -108,20 +106,7 @@ public class ModelNecklace extends ModelBase
 		Shape9.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
-	}
-	
-	public void renderNecklace(float f5)
-	{
+	public void renderNecklace(float f5) {
 		Shape4.render(f5);
 		Shape5.render(f5);
 		Shape1.render(f5);
@@ -131,6 +116,18 @@ public class ModelNecklace extends ModelBase
 		Shape7.render(f5);
 		Shape8.render(f5);
 		Shape9.render(f5);
+	}
+
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
+	@Override
+	public void setRotationAngles(float f, float f1, float f2, float f3,
+			float f4, float f5, Entity ent) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
 	}
 
 }
