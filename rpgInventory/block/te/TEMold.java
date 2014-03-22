@@ -2,8 +2,11 @@ package rpgInventory.block.te;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,25 +21,29 @@ public class TEMold extends TileEntity implements IInventory {
 		if (par0ItemStack == null) {
 			return 0;
 		} else {
-			int var1 = par0ItemStack.getItem().itemID;
-			Item var2 = par0ItemStack.getItem();
+			Item var1 = par0ItemStack.getItem();
+			Block var2 = ((ItemBlock)par0ItemStack.getItem()).field_150939_a;
 
-			if (var1 == Item.coal.itemID) {
+			if (var1 == Items.coal) {
 				return 100;
 			}
-			if (var1 == Item.bucketLava.itemID) {
+			if (var1 == Items.lava_bucket) {
 				return 3200;
 			}
-			if (var1 == Item.blazeRod.itemID) {
+			if (var1 == Items.blaze_rod) {
 				return 1600;
 			}
+			
+			if(var2 == Blocks.coal_block)
+				return 1600;
+			
 			return GameRegistry.getFuelValue(par0ItemStack);
 		}
 	}
 
 	public static boolean isGoldBlock(ItemStack stack) {
-		if (stack.getItem() != null) {
-			if (stack.itemID == Block.blockGold.blockID) {
+		if (Block.getBlockFromItem(stack.getItem()) != null) {
+			if (Block.getBlockFromItem(stack.getItem()) == Blocks.gold_block) {
 				return true;
 			}
 		}
@@ -49,13 +56,13 @@ public class TEMold extends TileEntity implements IInventory {
 
 	public static boolean isMineral(ItemStack stack) {
 		if (stack.getItem() != null) {
-			if (stack.getItem().equals(Item.emerald)) {
+			if (stack.getItem().equals(Items.emerald)) {
 				return true;
 			}
-			if (stack.getItem().equals(Item.diamond)) {
+			if (stack.getItem().equals(Items.diamond)) {
 				return true;
 			}
-			if (stack.getItem().equals((Item.ingotGold))) {
+			if (stack.getItem().equals((Items.gold_ingot))) {
 				return true;
 			}
 			if ((stack.getItem() instanceof ItemDye)
@@ -112,21 +119,21 @@ public class TEMold extends TileEntity implements IInventory {
 		}
 		ItemStack stack = null;
 
-		int slot1 = 0;
-		int slot2 = 0;
+		ItemStack slot1 = null;
+		ItemStack slot2 = null;
 
 		if (moldforgeItemStacks[1] != null) {
 			if ((moldforgeItemStacks[2] != null)
 					&& (moldforgeItemStacks[3] != null)) {
-				slot1 = moldforgeItemStacks[2].itemID;
-				slot2 = moldforgeItemStacks[3].itemID;
+				slot1 = moldforgeItemStacks[2];
+				slot2 = moldforgeItemStacks[3];
 				stack = MoldRecipes.recipes().getSmeltingResult(slot1, slot2);
 			}
 
 			if ((stack == null) && (moldforgeItemStacks[2] != null)
 					&& (moldforgeItemStacks[3] != null)) {
-				slot1 = moldforgeItemStacks[2].itemID;
-				slot2 = moldforgeItemStacks[3].itemID;
+				slot1 = moldforgeItemStacks[2];
+				slot2 = moldforgeItemStacks[3];
 				stack = MoldRecipes.recipes().getSmeltingResult(slot1, slot2);
 			}
 		}
@@ -152,10 +159,6 @@ public class TEMold extends TileEntity implements IInventory {
 		return moldforgeItemStacks[4].stackSize < stack.getMaxStackSize();
 	}
 
-	@Override
-	public void closeChest() {
-		//
-	}
 
 	@Override
 	public ItemStack decrStackSize(int slot, int amt) {
@@ -184,7 +187,7 @@ public class TEMold extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public String getInvName() {
+	public String getInventoryName() {
 		return "Mold Forge";
 	}
 
@@ -229,12 +232,7 @@ public class TEMold extends TileEntity implements IInventory {
 		return goldBurnTime > 0;
 	}
 
-	@Override
-	public boolean isInvNameLocalized() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		// TODO Auto-generated method stub
@@ -247,20 +245,16 @@ public class TEMold extends TileEntity implements IInventory {
 		return true;
 	}
 
-	@Override
-	public void openChest() {
-		//
-	}
 
 	public void produceJewel() {
 		if (canSmelt()) {
-			int slot1 = 0;
-			int slot2 = 0;
+			ItemStack slot1 = null;
+			ItemStack slot2 = null;
 
 			if ((moldforgeItemStacks[2] != null)
 					&& (moldforgeItemStacks[3] != null)) {
-				slot1 = moldforgeItemStacks[2].itemID;
-				slot2 = moldforgeItemStacks[3].itemID;
+				slot1 = moldforgeItemStacks[2];
+				slot2 = moldforgeItemStacks[3];
 			}
 
 			ItemStack stack = MoldRecipes.recipes().getSmeltingResult(slot1,
@@ -273,7 +267,7 @@ public class TEMold extends TileEntity implements IInventory {
 			if (moldforgeItemStacks[4] == null) {
 				moldforgeItemStacks[4] = stack.copy();
 
-			} else if (moldforgeItemStacks[4].itemID == stack.itemID) {
+			} else if (moldforgeItemStacks[4] == stack) {
 				moldforgeItemStacks[4].stackSize += 1;
 
 			}

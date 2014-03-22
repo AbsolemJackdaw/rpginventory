@@ -65,7 +65,7 @@ public class BookGui extends GuiScreen {
 		drawTexturedModalRect(posX + 80, posY + 124, 176, 16, 16, 16); // =
 		drawTexturedModalRect(posX + 112, posY + 124, 176, 80, 16, 16); // stand
 
-		drawString(fontRenderer, hi, posX + 40, posY + 10, 0xffffff);
+		drawString(fontRendererObj, hi, posX + 40, posY + 10, 0xffffff);
 
 		super.drawScreen(i, j, f);
 	}

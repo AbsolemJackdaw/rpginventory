@@ -3,6 +3,7 @@ package rpgInventory.gui.rpginv;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -42,7 +43,7 @@ public class PlayerRpgInventory implements IInventory,
 	}
 
 	public PlayerRpgInventory(EntityPlayer p) {
-		playername = p.username;
+		playername = p.getDisplayName();
 		player = p;
 		// classSets = new LinkedList();//EnumSet.noneOf(EnumRpgClass.class);
 	}
@@ -103,9 +104,9 @@ public class PlayerRpgInventory implements IInventory,
 	/**
 	 * Returns a slot index in main inventory containing a specific itemID
 	 */
-	private int findJewel(int par1) {
+	private int findJewel(Item par1) {
 		for (int var2 = 0; var2 < armorSlots.length; ++var2) {
-			if ((armorSlots[var2] != null) && (armorSlots[var2].itemID == par1)) {
+			if ((armorSlots[var2] != null) && (armorSlots[var2].getItem() == par1)) {
 				return var2;
 			}
 		}
@@ -131,11 +132,11 @@ public class PlayerRpgInventory implements IInventory,
 	}
 
 	@Override
-	public String getInvName() {
+	public String getInventoryName() {
 		return "RpgInventory";
 	}
 
-	public boolean getJewel(int par1) {
+	public boolean getJewel(Item par1) {
 		int var2 = findJewel(par1);
 		return var2 >= 0;
 	}
@@ -312,10 +313,10 @@ public class PlayerRpgInventory implements IInventory,
 				}
 
 			}
-			if (((getNecklace() != null) && (getNecklace().itemID == mod_RpgInventory.neckdia.itemID))
-					|| ((getRing1() != null) && (getRing1().itemID == mod_RpgInventory.ringdia.itemID))
-					|| ((getRing2() != null) && (getRing2().itemID == mod_RpgInventory.ringdia.itemID))
-					|| ((getGloves() != null) && (getGloves().itemID == mod_RpgInventory.glovesdia.itemID))) {
+			if (((getNecklace() != null) && (getNecklace() == mod_RpgInventory.neckdia))
+					|| ((getRing1() != null) && (getRing1() == mod_RpgInventory.ringdia))
+					|| ((getRing2() != null) && (getRing2() == mod_RpgInventory.ringdia))
+					|| ((getGloves() != null) && (getGloves() == mod_RpgInventory.glovesdia))) {
 				addtoticks[2] = true;
 			}
 

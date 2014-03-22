@@ -1,6 +1,8 @@
 package rpgInventory.block.te.slot;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
@@ -36,13 +38,13 @@ class SlotFurnace extends Slot {
 		if (is != null) {
 			switch (slotIndex) {
 			case 0:
-				if ((is == new ItemStack(Item.coal))
-						|| (is == new ItemStack(Item.bucketLava))
-						|| (is == new ItemStack(Item.blazeRod))) {
+				if ((is == new ItemStack(Items.coal))
+						|| (is == new ItemStack(Items.lava_bucket))
+						|| (is == new ItemStack(Items.blaze_rod))) {
 					return true;
 				}
 			case 1:
-				if (is == new ItemStack(Block.blockGold)) {
+				if (is == new ItemStack(Blocks.gold_block)) {
 					return true;
 				}
 				return false;
@@ -54,10 +56,10 @@ class SlotFurnace extends Slot {
 				}
 				return false;
 			case 3:
-				if ((is == new ItemStack(Item.diamond))
-						|| (is == new ItemStack(Item.emerald))
-						|| (is == new ItemStack(Item.ingotGold))
-						|| (is == new ItemStack(Item.dyePowder, 1, 4))) {
+				if ((is == new ItemStack(Items.diamond))
+						|| (is == new ItemStack(Items.emerald))
+						|| (is == new ItemStack(Items.gold_ingot))
+						|| (is == new ItemStack(Items.dye, 1, 4))) {
 					return true;
 				}
 				return false;

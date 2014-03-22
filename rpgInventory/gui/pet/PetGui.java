@@ -146,42 +146,42 @@ public class PetGui extends GuiScreen {
 		} finally {
 			textfield.drawTextBox();
 		}
-		drawString(fontRenderer, Name + ": " + PetName, (this.width / 2) - 20,
+		drawString(fontRendererObj, Name + ": " + PetName, (this.width / 2) - 20,
 				(this.height / 2) - 79, 0xffffff);
-		drawString(fontRenderer, petStats, (this.width / 2) - 85,
+		drawString(fontRendererObj, petStats, (this.width / 2) - 85,
 				(this.height / 2) - 10, 0x00ffff);
-		drawString(fontRenderer, "Lvl : " + PetLevel, (this.width / 2) - 80,
+		drawString(fontRendererObj, "Lvl : " + PetLevel, (this.width / 2) - 80,
 				this.height / 2, 0xffffff);
-		drawString(fontRenderer, "Atk : " + petAtk, (this.width / 2) - 80,
+		drawString(fontRendererObj, "Atk : " + petAtk, (this.width / 2) - 80,
 				(this.height / 2) + 10, 0xffffff);
-		drawString(fontRenderer, "HP : " + currentHP + "/" + totalHP,
+		drawString(fontRendererObj, "HP : " + currentHP + "/" + totalHP,
 				(this.width / 2) - 80, (this.height / 2) + 20, 0xffffff);
 
-		drawString(fontRenderer, info, (this.width / 2) - 85,
+		drawString(fontRendererObj, info, (this.width / 2) - 85,
 				(this.height / 2) + 45, 0xff00ff);
 		// Shadow
-		fontRenderer.drawSplitString(saddle, ((this.width / 2) - 80) + 1,
+		fontRendererObj.drawSplitString(saddle, ((this.width / 2) - 80) + 1,
 				(this.height / 2) + 55 + 1, xSizeOfTexture - 9, 0x444444);
 		// text
-		fontRenderer.drawSplitString(saddle, (this.width / 2) - 80,
+		fontRendererObj.drawSplitString(saddle, (this.width / 2) - 80,
 				(this.height / 2) + 55, xSizeOfTexture - 10, 0xffffff);
-		// drawString(fontRenderer, saddle, this.width / 2 - 80, this.height / 2
+		// drawString(fontRendererObj, saddle, this.width / 2 - 80, this.height / 2
 		// + 55, 0xffffff);
 		// Shadow
-		fontRenderer.drawSplitString(levelInfo, (this.width / 2) + 95 + 1,
+		fontRendererObj.drawSplitString(levelInfo, (this.width / 2) + 95 + 1,
 				(this.height / 2) + 65 + 1,
 				(this.width - ((this.width / 2) + 95)) + 1, 0x444444);
 		// text
-		fontRenderer.drawSplitString(levelInfo, (this.width / 2) + 95,
+		fontRendererObj.drawSplitString(levelInfo, (this.width / 2) + 95,
 				(this.height / 2) + 65, this.width - ((this.width / 2) + 95),
 				0xffffff);
-		// drawString(fontRenderer, levelInfo, this.width / 2 + 95, this.height
+		// drawString(fontRendererObj, levelInfo, this.width / 2 + 95, this.height
 		// / 2 + 65, 0xffffff);
-		// drawString(fontRenderer, levelInfo2, this.width / 2 + 95, this.height
+		// drawString(fontRendererObj, levelInfo2, this.width / 2 + 95, this.height
 		// / 2 + 75, 0xffffff);
 		if (PetLevel >= 200) {
 			PetLevel = 200;
-			drawString(fontRenderer, "Maxed out.", (this.width / 2) - 30,
+			drawString(fontRendererObj, "Maxed out.", (this.width / 2) - 30,
 					this.height / 2, 0x00ff00);
 		}
 		super.drawScreen(i, j, f);
@@ -201,8 +201,8 @@ public class PetGui extends GuiScreen {
 	@Override
 	public void initGui() {
 		petCrystal = this.inv.getCrystal();
-		if (IPet.playersWithActivePets.containsKey(p.username)) {
-			thePet = (BMPetImpl) IPet.playersWithActivePets.get(p.username)
+		if (IPet.playersWithActivePets.containsKey(p.getDisplayName())) {
+			thePet = (BMPetImpl) IPet.playersWithActivePets.get(p.getDisplayName())
 					.getPet();
 			if (thePet != null) {
 				// make sure crystal is updated with the mob info
@@ -283,7 +283,7 @@ public class PetGui extends GuiScreen {
 			saddle = PetName + " needs lv50 to be ridden.";
 		}
 
-		textfield = new GuiTextField(fontRenderer, posX + 70, posY + 14, 100,
+		textfield = new GuiTextField(fontRendererObj, posX + 70, posY + 14, 100,
 				20);
 		textfield.setText(PetName);
 		textfield.setMaxStringLength(32);
