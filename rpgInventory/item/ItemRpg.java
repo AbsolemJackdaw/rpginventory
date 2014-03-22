@@ -10,8 +10,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemRpg extends Item {
 
-	public ItemRpg(int par1) {
-		super(par1);
+	public ItemRpg() {
+		super();
 	}
 
 	@Override
@@ -32,8 +32,8 @@ public class ItemRpg extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack) {
-		if ((par1ItemStack.itemID == mod_RpgInventory.magecloth.itemID)
-				|| (par1ItemStack.itemID == mod_RpgInventory.wizardBook.itemID)) {
+		if ((par1ItemStack.getItem() == mod_RpgInventory.magecloth)
+				|| (par1ItemStack.getItem() == mod_RpgInventory.wizardBook)) {
 			return true;
 		}
 		return false;
@@ -42,7 +42,7 @@ public class ItemRpg extends Item {
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer player) {
-		if (par1ItemStack.itemID == mod_RpgInventory.wizardBook.itemID) {
+		if (par1ItemStack.getItem() == mod_RpgInventory.wizardBook) {
 			mod_RpgInventory.proxy.openGUI(player, 2);
 		}
 		return par1ItemStack;

@@ -6,14 +6,10 @@ package rpgInventory.item.weapons;
 
 import net.minecraft.item.ItemSword;
 
-/**
- * 
- * @author Richard Smith <rich1051414@gmail.com>
- */
 public class ItemRpgSword extends ItemSword {
 
-	public ItemRpgSword(int par1, EnumToolMaterial etm) {
-		super(par1, etm);
+	public ItemRpgSword(ToolMaterial etm) {
+		super(etm);
 		this.maxStackSize = 1;
 	}
 

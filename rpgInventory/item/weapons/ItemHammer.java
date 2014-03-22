@@ -15,10 +15,10 @@ public class ItemHammer extends ItemRpgSword {
 
 	Random rand = new Random();
 
-	public ItemHammer(int par1, EnumToolMaterial mat) {
-		super(par1, EnumToolMaterial.STONE);
+	public ItemHammer(ToolMaterial mat) {
+		super(ToolMaterial.STONE);
 		this.maxStackSize = 1;
-		this.setMaxDamage(EnumToolMaterial.IRON.getMaxUses() + 300);
+		this.setMaxDamage(ToolMaterial.IRON.getMaxUses() + 300);
 		this.setCreativeTab(CreativeTabs.tabCombat);
 	}
 

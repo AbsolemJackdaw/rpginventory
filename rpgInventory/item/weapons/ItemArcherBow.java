@@ -5,6 +5,7 @@ import javax.swing.Icon;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,8 +27,8 @@ public class ItemArcherBow extends Item {
 	@SideOnly(Side.CLIENT)
 	private Icon[] IconArray;
 
-	public ItemArcherBow(int par1) {
-		super(par1);
+	public ItemArcherBow() {
+		super();
 		this.maxStackSize = 1;
 		this.setMaxDamage(1000);
 		this.setCreativeTab(CreativeTabs.tabCombat);
@@ -40,7 +41,7 @@ public class ItemArcherBow extends Item {
 		// Now it gets called, added a hook in our custom renderer.
 		if (stack == usingItem) {
 			if ((usingItem != null)
-					&& (usingItem.getItem().itemID == mod_RpgInventory.elfbow.itemID)) {
+					&& (usingItem.getItem() == mod_RpgInventory.elfbow)) {
 				if (useRemaining > 21) {
 					return IconArray[3];
 				} else if (useRemaining > 14) {
@@ -155,15 +156,15 @@ public class ItemArcherBow extends Item {
 					&& item1.equals(mod_RpgInventory.archerchest)
 					&& item2.equals(mod_RpgInventory.archerpants)
 					&& item3.equals(mod_RpgInventory.archerboots)) {
-				boolean flag = ((shield != null) && (shield.itemID == mod_RpgInventory.archerShield.itemID))
+				boolean flag = ((shield != null) && (shield.getItem() == mod_RpgInventory.archerShield))
 						|| player.capabilities.isCreativeMode;
-				if (player.inventory.hasItem(Item.arrow.itemID) || flag) {
+				if (player.inventory.hasItem(Items.arrow) || flag) {
 
 					float f = j / 20.0F;
 					f = ((f * f) + (f * 2.0F)) / 3.0F;
 
 					if ((double) f < (mod_RpgInventory.donators
-							.contains(player.username) ? 0.2d : 0.5D)) {
+							.contains(player.getDisplayName()) ? 0.2d : 0.5D)) {
 						return;
 					}
 
@@ -174,7 +175,7 @@ public class ItemArcherBow extends Item {
 					EntityArrow entityarrow = new EntityArrow(par2World,
 							player, f * 2.0F);
 					boolean crit = mod_RpgInventory.donators
-							.contains(player.username) ? true : false;
+							.contains(player.getDisplayName()) ? true : false;
 					entityarrow.setIsCritical(crit);
 
 					if (f == 1.0F) {
@@ -184,19 +185,19 @@ public class ItemArcherBow extends Item {
 					entityarrow.setDamage(entityarrow.getDamage()
 							+ (flag ? 2D : 1D));
 					entityarrow.setKnockbackStrength(mod_RpgInventory.donators
-							.contains(player.username) ? 2 : 1);
+							.contains(player.getDisplayName()) ? 2 : 1);
 					entityarrow.setFire(mod_RpgInventory.donators
-							.contains(player.username) ? 10 : 5);
+							.contains(player.getDisplayName()) ? 10 : 5);
 
 					if (flag) {
 						entityarrow.canBePickedUp = 2;
 					} else {
 						player.inventory
-								.consumeInventoryItem(Item.arrow.itemID);
+								.consumeInventoryItem(Items.arrow);
 					}
 					if (!par2World.isRemote) {
 						par2World.spawnEntityInWorld(entityarrow);
-						if (mod_RpgInventory.donators.contains(player.username)) {
+						if (mod_RpgInventory.donators.contains(player.getDisplayName())) {
 							par2World.spawnEntityInWorld(new EntityArrow(
 									par2World, player, f * 2.0f));
 						}
@@ -210,8 +211,9 @@ public class ItemArcherBow extends Item {
 		}
 	}
 
+	
 	@Override
-	public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count) {
+	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
 		player.setItemInUse(stack, count);
 		usingItem++;
 	}

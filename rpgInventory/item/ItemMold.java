@@ -4,8 +4,8 @@ import net.minecraft.item.Item;
 
 public class ItemMold extends Item {
 
-	public ItemMold(int par1) {
-		super(par1);
+	public ItemMold() {
+		super();
 		this.maxStackSize = 1;
 	}
 

@@ -25,6 +25,7 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
+import rpgInventory.block.BlockForge;
 import rpgInventory.block.te.TEMold;
 import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.gui.RpgInventoryTab;
@@ -223,10 +224,10 @@ public class mod_RpgInventory {
 		berserkerShield = new ItemRpgInvArmor( 1, 350, "", "subaraki:jewels/IronThorn.png").setUnlocalizedName("shieldBerserker").setCreativeTab(tab);
 		talisman = new ItemRpgInvArmor( 1, 200, "", "subaraki:jewels/mageShield.png").setUnlocalizedName("shieldMage").setCreativeTab(tab);
 
-		cloak = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/GreyCape.png").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
-		cloakI = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/GreyCape.png").setFull3D().setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
+		cloak = new ItemRpgInvArmor( 2, -1, "","subaraki:capes/GreyCape.png").setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
+		cloakI = new ItemRpgInvArmor( 2, -1, "","subaraki:capes/GreyCape.png").setFull3D().setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
 
-		magehood = new ItemMageArmor(mage,4, 0,).setUnlocalizedName("mage1").setCreativeTab(tab);
+		magehood = new ItemMageArmor(mage,4, 0).setUnlocalizedName("mage1").setCreativeTab(tab);
 		magegown = new ItemMageArmor(mage, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);
 		magepants = new ItemMageArmor( mage, 4, 2).setUnlocalizedName("mage3").setCreativeTab(tab);
 		mageboots = new ItemMageArmor( mage, 4, 3).setUnlocalizedName("mage4").setCreativeTab(tab);
@@ -251,16 +252,16 @@ public class mod_RpgInventory {
 
 		wizardBook = new ItemRpg().setUnlocalizedName("a.book_normal").setCreativeTab(tab);
 
-		hammer = new ItemHammer(, stone).setMaxDamage(750).setUnlocalizedName("rageBreaker").setCreativeTab(tab);
+		hammer = new ItemHammer(stone).setMaxDamage(750).setUnlocalizedName("rageBreaker").setCreativeTab(tab);
 		staf = new ItemStaf().setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);
 
-		rageSeed = new ItemRageFood(, 0, 0f, false).setAlwaysEdible().setUnlocalizedName("r.seeds_melon").setMaxStackSize(8).setCreativeTab(tab);
+		rageSeed = new ItemRageFood( 0, 0f, false).setAlwaysEdible().setUnlocalizedName("r.seeds_melon").setMaxStackSize(8).setCreativeTab(tab);
 
-		cloakRed = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/RedCape.png").setFull3D().setUnlocalizedName("r.capeGrey").setCreativeTab(tab);
-		cloakYellow = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/GoldCape.png").setFull3D().setUnlocalizedName("y.capeGrey").setCreativeTab(tab);
-		cloakGreen = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/GreenCape.png").setFull3D().setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
-		cloakBlue = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/SkyCape.png").setFull3D().setUnlocalizedName("b.capeGrey").setCreativeTab(tab);
-		cloakSub = new ItemRpgInvArmor(, 2, -1, "","subaraki:capes/BlaCape.png").setFull3D().setUnlocalizedName("s.capeGrey").setCreativeTab(tab);
+		cloakRed = new ItemRpgInvArmor( 2, -1, "","subaraki:capes/RedCape.png").setFull3D().setUnlocalizedName("r.capeGrey").setCreativeTab(tab);
+		cloakYellow = new ItemRpgInvArmor( 2, -1, "","subaraki:capes/GoldCape.png").setFull3D().setUnlocalizedName("y.capeGrey").setCreativeTab(tab);
+		cloakGreen = new ItemRpgInvArmor( 2, -1, "","subaraki:capes/GreenCape.png").setFull3D().setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
+		cloakBlue = new ItemRpgInvArmor( 2, -1, "","subaraki:capes/SkyCape.png").setFull3D().setUnlocalizedName("b.capeGrey").setCreativeTab(tab);
+		cloakSub = new ItemRpgInvArmor( 2, -1, "","subaraki:capes/BlaCape.png").setFull3D().setUnlocalizedName("s.capeGrey").setCreativeTab(tab);
 
 		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(tab);
 		ringmold = new ItemMold().setUnlocalizedName("moldRing").setCreativeTab(tab);
@@ -388,9 +389,10 @@ public class mod_RpgInventory {
 			}
 		}
 
-		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
-		GameRegistry.registerPlayerTracker(new PlayerTracker());
-		TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
+		//TODO
+//		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+//		GameRegistry.registerPlayerTracker(new PlayerTracker());
+//		TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
 		MinecraftForge.EVENT_BUS.register(new RPGEventHooks());
 		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow", getUniqueID(), this, 250, 1, true);
 

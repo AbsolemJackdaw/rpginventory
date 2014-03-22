@@ -38,8 +38,8 @@ public class BlockForge extends BlockContainer {
 	 */
 	private Random temoldRand = new Random();
 
-	public BlockForge(int par1, Material par2Material) {
-		super(par1, par2Material);
+	public BlockForge(Material par2Material) {
+		super(par2Material);
 		this.setCreativeTab(mod_RpgInventory.tab);
 	}
 
@@ -47,10 +47,11 @@ public class BlockForge extends BlockContainer {
 	 * ejects contained items into the world, and notifies neighbours of an
 	 * update, as appropriate
 	 */
+	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4,
-			int par5, int par6) {
+			Block b, int par6) {
 
-		TEMold temold = (TEMold) par1World.getBlockTileEntity(par2, par3, par4);
+		TEMold temold = (TEMold) par1World.getTileEntity(par2, par3, par4);
 		if (temold != null) {
 			for (int var8 = 0; var8 < 5; ++var8) {
 				ItemStack item = temold.getStackInSlot(var8);
@@ -66,7 +67,7 @@ public class BlockForge extends BlockContainer {
 						item.stackSize -= var13;
 						EntityItem var14 = new EntityItem(par1World, par2
 								+ var10, par3 + var11, par4 + var12,
-								new ItemStack(item.itemID, var13,
+								new ItemStack(item.getItem(), var13,
 										item.getItemDamage()));
 						if (item.hasTagCompound()) {
 							var14.getEntityItem().setTagCompound(
@@ -85,11 +86,11 @@ public class BlockForge extends BlockContainer {
 			}
 		}
 
-		super.breakBlock(par1World, par2, par3, par4, par5, par6);
+		super.breakBlock(par1World, par2, par3, par4, b, par6);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity(World world, int i) {
 		return new TEMold();
 	}
 
@@ -101,7 +102,7 @@ public class BlockForge extends BlockContainer {
 			int side) {
 		int front = 0;
 		Icon icon;
-		TileEntity tile = Minecraft.getMinecraft().theWorld.getBlockTileEntity(
+		TileEntity tile = Minecraft.getMinecraft().theWorld.getTileEntity(
 				x, y, z);
 
 		if (tile != null) {
@@ -147,8 +148,8 @@ public class BlockForge extends BlockContainer {
 	/**
 	 * Returns the ID of the items to drop on destruction.
 	 */
-	public int idDropped(int par1, Random par2Random, int par3) {
-		return this.blockID;
+	public Block idDropped(int par1, Random par2Random, int par3) {
+		return this;
 	}
 
 	/**
@@ -209,7 +210,7 @@ public class BlockForge extends BlockContainer {
 			Random par5Random) {
 		try {
 			TEMold tile = (TEMold) Minecraft.getMinecraft().theWorld
-					.getBlockTileEntity(x, y, z);
+					.getTileEntity(x, y, z);
 			if (tile.isActive()) {
 				int var6 = par1World.getBlockMetadata(x, y, z);
 				float var7 = x + 0.5F;
@@ -258,13 +259,14 @@ public class BlockForge extends BlockContainer {
 	/**
 	 * set a blocks direction
 	 */
+//	@Override
 	private void setDefaultDirection(World par1World, int par2, int par3,
 			int par4) {
 		if (!par1World.isRemote) {
-			int var5 = par1World.getBlockId(par2, par3, par4 - 1);
-			int var6 = par1World.getBlockId(par2, par3, par4 + 1);
-			int var7 = par1World.getBlockId(par2 - 1, par3, par4);
-			int var8 = par1World.getBlockId(par2 + 1, par3, par4);
+			Block var5 = par1World.getBlock(par2, par3, par4 - 1);
+			Block var6 = par1World.getBlock(par2, par3, par4 + 1);
+			Block var7 = par1World.getBlock(par2 - 1, par3, par4);
+			Block var8 = par1World.getBlock(par2 + 1, par3, par4);
 			byte var9 = 3;
 
 			if (Block.opaqueCubeLookup[var5] && !Block.opaqueCubeLookup[var6]) {
@@ -282,7 +284,7 @@ public class BlockForge extends BlockContainer {
 			if (Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var7]) {
 				var9 = 4;
 			}
-			par1World.setBlock(par4, par2, par3, this.blockID, var9, 0);
+			par1World.setBlock(par4, par2, par3, this, var9, 0);
 		}
 	}
 }

@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -16,8 +17,8 @@ public class ItemStaf extends ItemRpgSword {
 
 	protected boolean hasAttacked = false;
 
-	public ItemStaf(int par1) {
-		super(par1, EnumToolMaterial.STONE);
+	public ItemStaf() {
+		super(ToolMaterial.STONE);
 	}
 
 	@Override
@@ -25,10 +26,10 @@ public class ItemStaf extends ItemRpgSword {
 			boolean yesno) {
 
 		list.add(StatCollector.translateToLocal("Charge : Hold "
-				+ GameSettings.getKeyDisplayString(Minecraft.getMinecraft().gameSettings.keyBindUseItem.keyCode)));
+				+ GameSettings.getKeyDisplayString(Minecraft.getMinecraft().gameSettings.keyBindUseItem.getKeyCode())));
 
 		list.add("Heal: "
-				+ GameSettings.getKeyDisplayString(Minecraft.getMinecraft().gameSettings.keyBindSneak.keyCode)
+				+ GameSettings.getKeyDisplayString(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode())
 				+ " and Release");
 	}
 
