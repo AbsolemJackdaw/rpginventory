@@ -26,7 +26,7 @@ public class PacketBerserker {
 			ItemStack var11 = p.inventory.armorItemInSlot(1);
 			ItemStack var01 = p.inventory.armorItemInSlot(0);
 
-			if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+			if (!mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())) {
 				if ((item1 == null) || (var31 == null) || (var21 == null)
 						|| (var11 == null) || (var01 == null)) {
 					return;
@@ -39,17 +39,17 @@ public class PacketBerserker {
 					return;
 				}
 			}
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p.username)) {
-				CommonTickHandler.globalCooldownMap.put(p.username, 0);
+			if (!CommonTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
+				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 			}
-			if (CommonTickHandler.globalCooldownMap.get(p.username) <= 0) {
+			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				CommonTickHandler.globalCooldownMap
-						.put(p.username, (mod_RpgInventory.donators
-								.contains(p.username) ? 6 : 7) * 20);
+						.put(p.getDisplayName(), (mod_RpgInventory.donators
+								.contains(p.getDisplayName()) ? 6 : 7) * 20);
 				if ((item1.getItemDamage() + 3) >= item1.getMaxDamage()) {
 					// Trigger item break stuff
 					// Only damage what is left
-					if (!mod_RpgInventory.developers.contains(p.username
+					if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 							.toLowerCase())) {
 						item1.damageItem(
 								item1.getMaxDamage() - item1.getItemDamage(), p);
@@ -59,18 +59,18 @@ public class PacketBerserker {
 					// delete the item
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
-					if (!mod_RpgInventory.developers.contains(p.username
+					if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 							.toLowerCase())) {
 						item1.damageItem(3, p);
 					}
 				}
 
 				float range = 4.0f;
-				if (mod_RpgInventory.developers.contains(p.username
+				if (mod_RpgInventory.developers.contains(p.getDisplayName()
 						.toLowerCase())) {
 					range = 8.0f;
 				} else {
-					range = mod_RpgInventory.donators.contains(p.username) ? 5.5f
+					range = mod_RpgInventory.donators.contains(p.getDisplayName()) ? 5.5f
 							: 4.0f;
 				}
 
@@ -82,7 +82,7 @@ public class PacketBerserker {
 						EntityLivingBase.class, pool);
 				if ((entl != null) && (entl.size() > 0)) {
 					for (EntityLivingBase el : entl) {
-						if ((el != null) && (el != player)) {
+						if ((el != null) && (el != p)) {
 							try {
 								double xdir = el.posX - p.posX;
 								double zdir = el.posZ - p.posZ;
@@ -91,20 +91,20 @@ public class PacketBerserker {
 										el.posY, el.posZ, 0, 1, 0);
 
 								if (mod_RpgInventory.developers
-										.contains(p.username.toLowerCase())) {
+										.contains(p.getDisplayName().toLowerCase())) {
 									el.motionX = xdir * 3F;
 									el.motionY = 3F;
 									el.motionZ = zdir * 3F;
 								} else {
 									el.motionX = xdir
 											* (mod_RpgInventory.donators
-													.contains(p.username) ? 2.2f
+													.contains(p.getDisplayName()) ? 2.2f
 													: 1.5F);
 									el.motionY = mod_RpgInventory.donators
-											.contains(p.username) ? 2.2f : 3F;
+											.contains(p.getDisplayName()) ? 2.2f : 3F;
 									el.motionZ = zdir
 											* (mod_RpgInventory.donators
-													.contains(p.username) ? 2.2f
+													.contains(p.getDisplayName()) ? 2.2f
 													: 3F);
 								}
 							} catch (Throwable ex) {
@@ -112,14 +112,14 @@ public class PacketBerserker {
 							el.attackEntityFrom(DamageSource
 									.causePlayerDamage(p),
 									mod_RpgInventory.donators
-											.contains(p.username) ? 10 : 8);
+											.contains(p.getDisplayName()) ? 10 : 8);
 						}
 					}
 				}
 			} else {
 				p.addChatMessage("You must wait for energy to replenish, left: "
 						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(p.username) / 20)) + " seconds");
+								.get(p.getDisplayName()) / 20)) + " seconds");
 			}
 		}
 	}

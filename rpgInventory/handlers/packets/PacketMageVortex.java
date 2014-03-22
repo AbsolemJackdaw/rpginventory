@@ -28,7 +28,7 @@ public class PacketMageVortex {
 			ItemStack legs = p.inventory.armorItemInSlot(1);
 			ItemStack boots = p.inventory.armorItemInSlot(0);
 
-			if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+			if (!mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())) {
 				if ((wand == null) || (hat == null) || (chest == null)
 						|| (legs == null) || (boots == null)) {
 					return;
@@ -41,11 +41,11 @@ public class PacketMageVortex {
 					return;
 				}
 			}
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p.username)) {
-				CommonTickHandler.globalCooldownMap.put(p.username, 0);
+			if (!CommonTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
+				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 			}
-			if (CommonTickHandler.globalCooldownMap.get(p.username) <= 0) {
-				CommonTickHandler.globalCooldownMap.put(p.username, 7 * 20);
+			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
+				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 7 * 20);
 				if ((wand.getItemDamage() + 3) >= wand.getMaxDamage()) {
 					// Trigger item break stuff
 					// Only damage what is left
@@ -56,13 +56,13 @@ public class PacketMageVortex {
 					// delete the item
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
-					if (!mod_RpgInventory.developers.contains(p.username
+					if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 							.toLowerCase())) {
 						wand.damageItem(mod_RpgInventory.donators
-								.contains(p.username) ? 1 : 3, p);
+								.contains(p.getDisplayName()) ? 1 : 3, p);
 					}
 				}
-				float f = mod_RpgInventory.donators.contains(p.username) ? 20.0f
+				float f = mod_RpgInventory.donators.contains(p.getDisplayName()) ? 20.0f
 						: 10.0f;
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
 						p.posX - f, p.posY - f, p.posZ - f, p.posX + f,
@@ -72,7 +72,7 @@ public class PacketMageVortex {
 
 				if ((entl != null) && (entl.size() > 0)) {
 					for (Entity el : entl) {
-						if ((el != null) && (el != player)) {
+						if ((el != null) && (el != p)) {
 
 							int var4;
 
@@ -102,7 +102,7 @@ public class PacketMageVortex {
 									el.attackEntityFrom(DamageSource
 											.causePlayerDamage(p),
 											(mod_RpgInventory.donators
-													.contains(p.username) ? 3
+													.contains(p.getDisplayName()) ? 3
 													: 1));
 								} catch (Throwable ex) {
 								}
@@ -113,7 +113,7 @@ public class PacketMageVortex {
 			} else {
 				p.addChatMessage("You must wait for energy to replenish, left: "
 						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(p.username) / 20)) + " seconds");
+								.get(p.getDisplayName()) / 20)) + " seconds");
 			}
 		}
 	}

@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,10 +15,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemGrandSword extends Item {
 
 	private int weaponDamage;
-	private final EnumToolMaterial toolMaterial;
+	private final ToolMaterial toolMaterial;
 
-	public ItemGrandSword(int par1, EnumToolMaterial par2EnumToolMaterial) {
-		super(par1);
+	public ItemGrandSword(int par1, ToolMaterial par2EnumToolMaterial) {
+		super();
 		this.toolMaterial = par2EnumToolMaterial;
 		this.maxStackSize = 1;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
@@ -29,7 +30,7 @@ public class ItemGrandSword extends Item {
 	 * Returns if the item (tool) can harvest results from the block type.
 	 */
 	public boolean canHarvestBlock(Block par1Block) {
-		return par1Block.blockID == Block.web.blockID;
+		return par1Block == Blocks.web;
 	}
 
 	// effects currently set in event handler
@@ -52,7 +53,7 @@ public class ItemGrandSword extends Item {
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack,
 			ItemStack par2ItemStack) {
-		return this.toolMaterial.getToolCraftingMaterial() == par2ItemStack.itemID ? true
+		return this.toolMaterial.getToolCraftingMaterial() == par2ItemStack.getItem() ? true
 				: super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 

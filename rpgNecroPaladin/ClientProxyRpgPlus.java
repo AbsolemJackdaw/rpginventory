@@ -52,19 +52,19 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 	public void registerRenderInformation() {
 		if (RpgConfig.instance.render3D) {
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgPlus.necro_weapon.itemID,
+					mod_RpgPlus.necro_weapon,
 					(IItemRenderer) new NecroRenderer());
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgPlus.pala_weapon.itemID,
+					mod_RpgPlus.pala_weapon,
 					(IItemRenderer) new GrandSwordRender());
 
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgPlus.necro_shield.itemID,
+					mod_RpgPlus.necro_shield,
 					(IItemRenderer) new NecroShieldRenderer(new NecroShield(),
 							"subaraki:jewels/NecroShield.png"));
 
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgPlus.pala_shield.itemID,
+					mod_RpgPlus.pala_shield,
 					(IItemRenderer) new PalaRenderer(new PalaShield(),
 							"subaraki:jewels/PaladinShield.png"));
 		}

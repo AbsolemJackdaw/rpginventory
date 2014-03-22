@@ -2,6 +2,8 @@ package rpgVanillaShields;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -15,7 +17,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "VanillaShields", name = "Vanilla Shields Mod", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false)
+//@NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class mod_VanillaShields {
 
 	@SidedProxy(serverSide = "rpgVanillaShields.CommonProxy", clientSide = "rpgVanillaShields.ClientProxy")
@@ -61,14 +63,14 @@ public class mod_VanillaShields {
 		shieldDiamond.setCreativeTab(tab);
 
 		GameRegistry.addRecipe(new ItemStack(shieldWood, 1), new Object[] {
-				"WWW", "WBW", " W ", 'W', Block.planks, 'B', Block.wood });
+				"WWW", "WBW", " W ", 'W', Blocks.planks, 'B', Blocks.log });
 		GameRegistry.addRecipe(new ItemStack(shieldIron, 1), new Object[] {
-				"WWW", "WWW", " W ", 'W', Item.ingotIron, });
+				"WWW", "WWW", " W ", 'W', Items.iron_ingot, });
 		GameRegistry.addRecipe(new ItemStack(shieldGold, 1), new Object[] {
-				"WWW", "WWW", " W ", 'W', Item.ingotGold });
+				"WWW", "WWW", " W ", 'W', Items.gold_ingot });
 		GameRegistry.addRecipe(new ItemStack(shieldDiamond, 1),
-				new Object[] { "WWW", "WBW", " W ", 'W', Item.diamond, 'B',
-						Block.blockDiamond });
+				new Object[] { "WWW", "WBW", " W ", 'W', Items.diamond, 'B',
+						Blocks.diamond_block });
 
 		proxy.registerRenderers();
 

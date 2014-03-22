@@ -75,11 +75,11 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 				new CustomMinionEntitySelector(player)));
 		// they tend to wander off sometimes if they get too excited, but they
 		// will snap back to the player if they wander too far.
-		if (!MinionRegistry.playerMinions.containsKey(player.username)) {
-			MinionRegistry.playerMinions.put(player.username,
+		if (!MinionRegistry.playerMinions.containsKey(player.getDisplayName())) {
+			MinionRegistry.playerMinions.put(player.getDisplayName(),
 					new ArrayList<IMinion>());
 		}
-		List<IMinion> list = MinionRegistry.playerMinions.get(player.username);
+		List<IMinion> list = MinionRegistry.playerMinions.get(player.getDisplayName());
 		if (!list.contains(this)) {
 			list.add(this);
 		}
@@ -159,7 +159,7 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 		this.damageEntity(DamageSource.magic, this.getHealth());
 		if ((player.getHealth() + 2) <= player.getMaxHealth()) {
 			player.heal(mod_RpgInventory.donators
-					.contains(getMaster().username) ? 2 : 1);
+					.contains(getMaster().getDisplayName()) ? 2 : 1);
 		} else {
 			player.setHealth(player.getMaxHealth());
 		}
@@ -195,9 +195,9 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		if (player != null) {
-			if (MinionRegistry.playerMinions.containsKey(player.username)) {
+			if (MinionRegistry.playerMinions.containsKey(player.getDisplayName())) {
 				List<IMinion> list = MinionRegistry.playerMinions
-						.get(player.username);
+						.get(player.getDisplayName());
 				if (list.contains(this)) {
 					list.remove(this);
 				}

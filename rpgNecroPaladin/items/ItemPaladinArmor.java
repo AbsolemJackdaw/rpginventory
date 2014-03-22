@@ -9,9 +9,9 @@ import rpgNecroPaladin.mod_RpgPlus;
 
 public class ItemPaladinArmor extends AbstractArmor {
 
-	public ItemPaladinArmor(int par1, EnumArmorMaterial enumArmorMaterial,
+	public ItemPaladinArmor( ArmorMaterial enumArmorMaterial,
 			int par3, int par4) {
-		super(par1, enumArmorMaterial, par3, par4);
+		super(par3, par4, enumArmorMaterial);
 	}
 
 	@Override
@@ -41,12 +41,12 @@ public class ItemPaladinArmor extends AbstractArmor {
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
 
-		if ((itemstack.itemID == mod_RpgPlus.palaHelm.itemID)
-				|| (itemstack.itemID == mod_RpgPlus.palaChest.itemID)
-				|| (itemstack.itemID == mod_RpgPlus.palaBoots.itemID)) {
+		if ((itemstack.getItem() == mod_RpgPlus.palaHelm)
+				|| (itemstack.getItem() == mod_RpgPlus.palaChest)
+				|| (itemstack.getItem() == mod_RpgPlus.palaBoots)) {
 			return "armor:pal_1.png";
 		}
-		if (itemstack.itemID == mod_RpgPlus.palaLeggings.itemID) {
+		if (itemstack.getItem() == mod_RpgPlus.palaLeggings) {
 			return "armor:pal_2.png";
 		}
 		return null;

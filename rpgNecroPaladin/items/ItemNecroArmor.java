@@ -9,9 +9,9 @@ import rpgNecroPaladin.mod_RpgPlus;
 
 public class ItemNecroArmor extends AbstractArmor {
 
-	public ItemNecroArmor(int par1, EnumArmorMaterial par2EnumArmorMaterial,
+	public ItemNecroArmor( ArmorMaterial par2EnumArmorMaterial,
 			int par3, int par4) {
-		super(par1, par2EnumArmorMaterial, par3, par4);
+		super(par3, par4, par2EnumArmorMaterial);
 	}
 
 	@Override
@@ -41,12 +41,12 @@ public class ItemNecroArmor extends AbstractArmor {
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
 
-		if ((itemstack.itemID == mod_RpgPlus.necroHood.itemID)
-				|| (itemstack.itemID == mod_RpgPlus.necroChestplate.itemID)
-				|| (itemstack.itemID == mod_RpgPlus.necroBoots.itemID)) {
+		if ((itemstack.getItem() == mod_RpgPlus.necroHood)
+				|| (itemstack.getItem() == mod_RpgPlus.necroChestplate)
+				|| (itemstack.getItem()== mod_RpgPlus.necroBoots)) {
 			return "armor:necro_1.png";
 		}
-		if (itemstack.itemID == mod_RpgPlus.necroLeggings.itemID) {
+		if (itemstack.getItem() == mod_RpgPlus.necroLeggings) {
 			return "armor:necro_2.png";
 		}
 		return null;

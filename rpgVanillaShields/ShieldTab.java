@@ -1,6 +1,7 @@
 package rpgVanillaShields;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -12,8 +13,8 @@ public class ShieldTab extends CreativeTabs {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public int getTabIconItemIndex() {
-		return mod_VanillaShields.shieldDiamond.itemID;
+	public Item getTabIconItem() {
+		return mod_VanillaShields.shieldDiamond;
 	}
 
 	@Override

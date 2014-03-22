@@ -9,10 +9,11 @@ import rpgRogueBeast.mod_RpgRB;
 
 public class ItemRogueArmor extends AbstractArmor {
 
-	public ItemRogueArmor(int par1, EnumArmorMaterial enumArmorMaterial,
+	public ItemRogueArmor(ArmorMaterial enumArmorMaterial,
 			int par3, int par4) {
-		super(par1, enumArmorMaterial, par3, par4);
-		// TODO Auto-generated constructor stub
+	
+		super(par3, par4, enumArmorMaterial);
+	
 	}
 
 	@Override
@@ -42,12 +43,12 @@ public class ItemRogueArmor extends AbstractArmor {
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
-		if ((itemstack.itemID == mod_RpgRB.rogueHood.itemID)
-				|| (itemstack.itemID == mod_RpgRB.rogueChest.itemID)
-				|| (itemstack.itemID == mod_RpgRB.rogueBoots.itemID)) {
+		if ((itemstack.getItem() == mod_RpgRB.rogueHood)
+				|| (itemstack.getItem() == mod_RpgRB.rogueChest)
+				|| (itemstack.getItem() == mod_RpgRB.rogueBoots)) {
 			return "armor:rogue_1.png";
 		}
-		if (itemstack.itemID == mod_RpgRB.rogueLegs.itemID) {
+		if (itemstack.getItem() == mod_RpgRB.rogueLegs) {
 			return "armor:rogue_2.png";
 		}
 		return super.getArmorTexture(itemstack, entity, slot, type);

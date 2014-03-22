@@ -31,7 +31,7 @@ public class NecroPaladinEvents {
 						if (damager.worldObj.isDaytime()) {
 							evt.ammount += 2;
 							if (weapon != null) {
-								if (weapon.itemID == mod_RpgPlus.pala_weapon.itemID) {
+								if (weapon.getItem() == mod_RpgPlus.pala_weapon) {
 									if (mod_RpgInventory.playerClass
 											.contains(mod_RpgPlus.CLASSPALADIN)) {
 										evt.ammount += 2;
@@ -45,13 +45,13 @@ public class NecroPaladinEvents {
 									.getMaxHealth()) {
 								((EntityPlayer) damager)
 										.heal(mod_RpgInventory.donators
-												.contains(((EntityPlayer) damager).username) ? 2
+												.contains(((EntityPlayer) damager).getDisplayName()) ? 2
 												: 1);
 							}
 							evt.ammount += 3;
 							evt.entityLiving
 									.setFire(mod_RpgInventory.donators
-											.contains(((EntityPlayer) damager).username) ? 5
+											.contains(((EntityPlayer) damager).getDisplayName()) ? 5
 											: 2);
 						}
 					}
@@ -117,7 +117,8 @@ public class NecroPaladinEvents {
 					}
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+
+				System.out.println("Fack. I crashed. Something went wrong with them potions ! " + this.getClass().getName());
 			}
 		}
 	}

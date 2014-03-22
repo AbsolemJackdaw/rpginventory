@@ -29,7 +29,8 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -77,7 +78,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		this.tasks.addTask(6, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(8, new EntityAITempt(this, 0.5D,
-				mod_RpgRB.whistle.itemID, false));
+				mod_RpgRB.whistle, false));
 		this.tasks.addTask(9, new EntityAIWatchClosest(this,
 				EntityLivingBase.class, 8.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
@@ -114,9 +115,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 				}
 			} catch (Throwable ex) {
 			}
-			this.setOwner(owner.username);
-			IPet.playersWithActivePets.put(owner.username, new PetID(
-					this.dimension, this.entityId));
+			this.setOwner(owner.getDisplayName());
+			IPet.playersWithActivePets.put(owner.getDisplayName(), new PetID(
+					this.dimension, this.getEntityId()));
 		}
 		if (!sizeSet) {
 			setSize(getBaseWidth(), getBaseHeight());
@@ -164,7 +165,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).
 				.setAttribute(10.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
 				.setAttribute(0.22499999403953552D);
@@ -318,7 +319,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		try {
 			if (((EntityPlayer) par1Entity).isRiding()
 					&& this.getOwnerName().equals(
-							((EntityPlayer) par1Entity).username)) {
+							((EntityPlayer) par1Entity).getDisplayName())) {
 				return true;
 			}
 		} catch (Throwable ex) {
@@ -334,8 +335,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
 			if (var2 != null) {
 				if (this.getHealth() < this.getMaxHealth()) {
-					if (Item.itemsList[var2.itemID] instanceof ItemFood) {
-						ItemFood var3 = (ItemFood) Item.itemsList[var2.itemID];
+					if (var2.getItem() instanceof ItemFood) {
+						ItemFood var3 = (ItemFood) var2.getItem();
 						// This is confusing, people dont know pet is saddled.
 						// if (!par1EntityPlayer.capabilities.isCreativeMode) {
 						if (--var2.stackSize == 0) {
@@ -346,13 +347,13 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 						}
 						// }
 						if (!worldObj.isRemote) {
-							this.heal(var3.getHealAmount());
+							this.heal(var3.func_150905_g(var2));
 						}
 						return true;
 					}
 				}
 				if (!getSaddled() && (this.getLevel() >= 50)) {
-					if (var2.itemID == Item.saddle.itemID) {
+					if (var2.getItem() == Items.saddle) {
 						this.setSaddled(true);
 						// Confusing
 						// if (!par1EntityPlayer.capabilities.isCreativeMode) {
@@ -367,7 +368,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 					}
 				}
 				if ((par1EntityPlayer.getCurrentEquippedItem() != null)
-						&& (par1EntityPlayer.getCurrentEquippedItem().itemID == mod_RpgRB.petCandy.itemID)) {
+						&& (par1EntityPlayer.getCurrentEquippedItem().getItem() == mod_RpgRB.petCandy)) {
 					addExperienceLevel(1);
 					par1EntityPlayer.getCurrentEquippedItem().stackSize--;
 				}
@@ -440,12 +441,12 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 				}
 			}
 
-			int j = worldObj.getBlockId(MathHelper.floor_double(posX),
+			Block j = worldObj.getBlock(MathHelper.floor_double(posX),
 					MathHelper.floor_double(boundingBox.minY) - 1,
 					MathHelper.floor_double(posZ));
 			float f = 1;
-			if (j == Block.ice.blockID) {
-				f = Block.blocksList[j].slipperiness * 0.5F;
+			if (j == Blocks.ice) {
+				f = j.slipperiness * 0.5F;
 			}
 			// This is currently bugged so temporarily disabled.
 			speedBonus = 1F;
@@ -526,7 +527,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		int j = MathHelper.floor_double(posY);
 		int k = MathHelper.floor_double(posZ);
 
-		if (worldObj.getBlockId(i, j - 1, k) == Block.ice.blockID) {
+		if (worldObj.getBlock(i, j - 1, k) == Blocks.ice) {
 			return true;
 		}
 		return false;
@@ -732,7 +733,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		itemstacknbt.setBoolean("isSaddled", getSaddled());
 		ItemStack newIteamstack = new ItemStack(mod_RpgRB.crystal, 1, getType());
 		newIteamstack.setTagCompound(itemstacknbt);
-		newIteamstack.setItemName(getEntityName());
+		newIteamstack.setStackDisplayName(getEntityName());
 		return newIteamstack;
 	}
 

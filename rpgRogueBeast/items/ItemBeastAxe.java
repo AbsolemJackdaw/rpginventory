@@ -32,23 +32,23 @@ public class ItemBeastAxe extends ItemRpgSword {
 	private int particleTime;
 	private Random rng = new Random(1051414);
 
-	public ItemBeastAxe(int par1, EnumToolMaterial mat) {
-		super(par1, mat);
+	public ItemBeastAxe( ToolMaterial mat) {
+		super(mat);
 		this.maxStackSize = 1;
 		this.setMaxDamage(1500);
 	}
 
 	public boolean canHarvestBlock(Block par2Block) {
 		return (par2Block != null)
-				&& ((par2Block.blockMaterial == Material.wood)
-						|| (par2Block.blockMaterial == Material.plants) || (par2Block.blockMaterial == Material.vine)) ? true
+				&& ((par2Block.getMaterial() == Material.wood)
+						|| (par2Block.getMaterial() == Material.plants) || (par2Block.getMaterial() == Material.vine)) ? true
 				: false;
 	}
 
 	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
 		return (par2Block != null)
-				&& ((par2Block.blockMaterial == Material.wood)
-						|| (par2Block.blockMaterial == Material.plants) || (par2Block.blockMaterial == Material.vine)) ? 15f
+				&& ((par2Block.getMaterial() == Material.wood)
+						|| (par2Block.getMaterial() == Material.plants) || (par2Block.getMaterial() == Material.vine)) ? 15f
 				: super.getStrVsBlock(par1ItemStack, par2Block);
 	}
 
@@ -63,7 +63,7 @@ public class ItemBeastAxe extends ItemRpgSword {
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World,
-			int par3, int par4, int par5, int par6,
+			Block b, int par4, int par5, int par6,
 			EntityLivingBase par7EntityLiving) {
 		par1ItemStack.damageItem(1, par7EntityLiving);
 		return true;
@@ -79,7 +79,7 @@ public class ItemBeastAxe extends ItemRpgSword {
 	}
 
 	@Override
-	public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count) {
+	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
 		if (mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSBEASTMASTER)) {
 			World world = player != null ? player.worldObj : null;
 			if ((world != null)
@@ -106,14 +106,14 @@ public class ItemBeastAxe extends ItemRpgSword {
 					charmTime = 0;
 					float num = rng.nextFloat();
 					if (num > (mod_RpgInventory.donators
-							.contains(player.username) ? 0.50F : 0.80F)) {
+							.contains(player.getDisplayName()) ? 0.50F : 0.80F)) {
 						mod_RpgInventory.proxy.spawnCharmParticle(world, el,
 								rng, true);
 						ByteArrayOutputStream bos = new ByteArrayOutputStream();
 						DataOutputStream dos = new DataOutputStream(bos);
 						try {
 							dos.writeInt(11);
-							dos.writeInt(el.entityId);
+							dos.writeInt(el.getEntityId());
 						} catch (Throwable ex) {
 						}
 						Packet250CustomPayload pcp = new Packet250CustomPayload(
@@ -136,6 +136,6 @@ public class ItemBeastAxe extends ItemRpgSword {
 				}
 			}
 		}
-		super.onUsingItemTick(stack, player, count);
+		super.onUsingTick(stack, player, count);
 	}
 }

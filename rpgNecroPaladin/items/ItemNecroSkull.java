@@ -30,10 +30,10 @@ import cpw.mods.fml.common.FMLCommonHandler;
 public class ItemNecroSkull extends ItemRpgWeapon {
 
 	private int weaponDamage;
-	private final EnumToolMaterial toolMaterial;
+	private final ToolMaterial toolMaterial;
 
-	public ItemNecroSkull(int par1, EnumToolMaterial par2EnumToolMaterial) {
-		super(par1);
+	public ItemNecroSkull(ToolMaterial par2EnumToolMaterial) {
+		super();
 		this.toolMaterial = par2EnumToolMaterial;
 		this.maxStackSize = 1;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
@@ -83,14 +83,14 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 
 							world.spawnEntityInWorld(var4);
 							var4.setTamed(true);
-							var4.setOwner(p.username);
+							var4.setOwner(p.getDisplayName());
 						} else if (mob.getClass() == EntitySkeleton.class) {
 							EntityMinionS var4 = new EntityMinionS(world, p);
 							var4.setPosition(mob.posX, mob.posY, mob.posZ);
 							mob.setDead();
 							world.spawnEntityInWorld(var4);
 							var4.setTamed(true);
-							var4.setOwner(p.username);
+							var4.setOwner(p.getDisplayName());
 						} else if (mob.getClass() == EntityPigZombie.class) {
 							EntityPigZombie pigzombie = new EntityPigZombie(
 									world);
@@ -103,11 +103,11 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 							if (!(mob instanceof IMinion)) {
 								mob.attackEntityFrom(DamageSource.wither,
 										mod_RpgInventory.donators
-												.contains(p.username) ? 6 : 4);
+												.contains(p.getDisplayName()) ? 6 : 4);
 								mob.addPotionEffect(new PotionEffect(
 										Potion.wither.id,
 										mod_RpgInventory.donators
-												.contains(p.username) ? 60 : 40,
+												.contains(p.getDisplayName()) ? 60 : 40,
 										1));
 							} else {
 								mob.heal(3);
@@ -158,7 +158,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
 					weapon.damageItem(mod_RpgInventory.donators
-							.contains(p.username) ? 1 : 2, p);
+							.contains(p.getDisplayName()) ? 1 : 2, p);
 				}
 				((EntityLiving) entity).heal(3);
 				return true;

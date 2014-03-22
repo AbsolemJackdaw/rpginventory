@@ -24,7 +24,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
@@ -78,7 +78,7 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob,
 
 		// give minion a bow
 		// slot 0 is what is in their hand, 1-4 are armor slots.
-		this.setCurrentItemOrArmor(0, new ItemStack(Item.bow));
+		this.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
 		this.setSize(0.7F, 1.7F);
 	}
 
@@ -96,11 +96,11 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob,
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this,
 				EntityLiving.class, 0, true, false,
 				new CustomMinionEntitySelector(player)));
-		if (!MinionRegistry.playerMinions.containsKey(player.username)) {
-			MinionRegistry.playerMinions.put(player.username,
+		if (!MinionRegistry.playerMinions.containsKey(player.getDisplayName())) {
+			MinionRegistry.playerMinions.put(player.getDisplayName(),
 					new ArrayList<IMinion>());
 		}
-		List<IMinion> list = MinionRegistry.playerMinions.get(player.username);
+		List<IMinion> list = MinionRegistry.playerMinions.get(player.getDisplayName());
 		if (!list.contains(this)) {
 			list.add(this);
 		}
@@ -173,7 +173,7 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob,
 		this.damageEntity(DamageSource.magic, this.getHealth());
 		if ((player.getHealth() + 2) <= player.getMaxHealth()) {
 			player.heal(mod_RpgInventory.donators
-					.contains(getMaster().username) ? 2 : 1);
+					.contains(getMaster().getDisplayName()) ? 2 : 1);
 		} else {
 			player.setHealth(player.getMaxHealth());
 		}
@@ -192,9 +192,9 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob,
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		if (player != null) {
-			if (MinionRegistry.playerMinions.containsKey(player.username)) {
+			if (MinionRegistry.playerMinions.containsKey(player.getDisplayName())) {
 				List<IMinion> list = MinionRegistry.playerMinions
-						.get(player.username);
+						.get(player.getDisplayName());
 				if (list.contains(this)) {
 					list.remove(this);
 				}

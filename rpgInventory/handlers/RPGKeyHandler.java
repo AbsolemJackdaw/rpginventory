@@ -192,7 +192,7 @@ public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 			}
 		}
 
-		if (abilityMap.containsKey(item.getItem().itemID)) {
+		if (abilityMap.containsKey(item.getItem())) {
 
 			int i = abilityMap.get(item.getItem());
 			ByteArrayOutputStream bytes = new ByteArrayOutputStream();

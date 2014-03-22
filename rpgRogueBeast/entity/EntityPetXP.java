@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -65,9 +66,9 @@ public class EntityPetXP extends EntityXPOrb {
 		this.prevPosZ = this.posZ;
 		this.motionY -= 0.029999999329447746D;
 
-		if (this.worldObj.getBlockMaterial(MathHelper.floor_double(this.posX),
+		if (this.worldObj.getBlock(MathHelper.floor_double(this.posX),
 				MathHelper.floor_double(this.posY),
-				MathHelper.floor_double(this.posZ)) == Material.lava) {
+				MathHelper.floor_double(this.posZ)).getMaterial() == Material.lava) {
 			this.motionY = 0.20000000298023224D;
 			this.motionX = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
 			this.motionZ = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
@@ -75,9 +76,11 @@ public class EntityPetXP extends EntityXPOrb {
 					2.0F + (this.rand.nextFloat() * 0.4F));
 		}
 
-		this.pushOutOfBlocks(this.posX,
-				(this.boundingBox.minY + this.boundingBox.maxY) / 2.0D,
-				this.posZ);
+		
+	
+//		this.()(this.posX,
+//				(this.boundingBox.minY + this.boundingBox.maxY) / 2.0D,
+//				this.posZ);
 		double var1 = 8.0D;
 
 		if ((this.closestPet == null)
@@ -111,13 +114,13 @@ public class EntityPetXP extends EntityXPOrb {
 
 		if (this.onGround) {
 			var13 = 0.58800006F;
-			int var4 = this.worldObj.getBlockId(
+			Block var4 = this.worldObj.getBlock(
 					MathHelper.floor_double(this.posX),
 					MathHelper.floor_double(this.boundingBox.minY) - 1,
 					MathHelper.floor_double(this.posZ));
 
-			if (var4 > 0) {
-				var13 = Block.blocksList[var4].slipperiness * 0.98F;
+			if (var4 != Blocks.air) {
+				var13 = var4.slipperiness * 0.98F;
 			}
 		}
 
