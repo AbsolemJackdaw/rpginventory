@@ -24,9 +24,9 @@ public class PacketNecroSpecial {
 		if (weapon.getItem().equals(mod_RpgPlus.necro_weapon)
 				&& mod_RpgInventory.playerClass
 						.contains(mod_RpgPlus.CLASSNECRO)) {
-			if (MinionRegistry.playerMinions.containsKey(p.username)) {
+			if (MinionRegistry.playerMinions.containsKey(p.getDisplayName())) {
 				List<IMinion> list = MinionRegistry.playerMinions
-						.get(p.username);
+						.get(p.getDisplayName());
 				for (IMinion minion : list) {
 					minion.Harvest();
 				}

@@ -3,6 +3,7 @@ package rpgNecroPaladin.items;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumAction;
@@ -89,14 +90,14 @@ public class ItemGrandSword extends Item {
 		return true;
 	}
 
+	@Override
 	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World,
-			int par3, int par4, int par5, int par6,
-			EntityLiving par7EntityLiving) {
-		if ((double) Block.blocksList[par3].getBlockHardness(par2World, par4,
+			Block b , int par4, int par5, int par6,
+			EntityLivingBase par7EntityLiving) {
+		if ((double) b.getBlockHardness(par2World, par4,
 				par5, par6) != 0.0D) {
 			par1ItemStack.damageItem(2, par7EntityLiving);
 		}
-
 		return true;
 	}
 

@@ -234,7 +234,6 @@ public class TEMold extends TileEntity implements IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -403,5 +402,22 @@ public class TEMold extends TileEntity implements IInventory {
 		tagCompound.setInteger("FrontDirection", front);
 		tagCompound.setShort("BurnTime", (short) goldBurnTime);
 		tagCompound.setShort("CookTime", (short) goldCookTime);
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
+	public void openInventory() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void closeInventory() {
+		// TODO Auto-generated method stub
+		
 	}
 }

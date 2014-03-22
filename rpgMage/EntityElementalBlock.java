@@ -14,6 +14,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
@@ -139,8 +140,8 @@ public class EntityElementalBlock extends EntityThrowable implements
 					}
 				}
 			}
-			if (var1.typeOfHit == EnumMovingObjectType.TILE) {
-			} else if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
+			if (var1.typeOfHit == MovingObjectType.BLOCK) {
+			} else if (var1.typeOfHit == MovingObjectType.ENTITY) {
 				if (!(var1.entityHit instanceof EntityLiving)) {
 					break;
 				}
@@ -195,8 +196,8 @@ public class EntityElementalBlock extends EntityThrowable implements
 						}
 					}
 				}
-				if (var1.typeOfHit == EnumMovingObjectType.TILE) {
-				} else if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
+				if (var1.typeOfHit == MovingObjectType.BLOCK) {
+				} else if (var1.typeOfHit == MovingObjectType.ENTITY) {
 					if (var1.entityHit == p) {
 						break;
 					}
@@ -258,7 +259,7 @@ public class EntityElementalBlock extends EntityThrowable implements
 					}
 				}
 			}
-			if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
+			if (var1.typeOfHit == MovingObjectType.ENTITY) {
 				if (!(var1.entityHit instanceof EntityLiving)) {
 					break;
 				}
@@ -302,7 +303,7 @@ public class EntityElementalBlock extends EntityThrowable implements
 					}
 				}
 			}
-			if (var1.typeOfHit == EnumMovingObjectType.ENTITY) {
+			if (var1.typeOfHit == MovingObjectType.ENTITY) {
 				if (!(var1.entityHit instanceof EntityLiving)) {
 					break;
 				}

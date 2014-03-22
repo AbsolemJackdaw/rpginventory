@@ -46,7 +46,7 @@ public class PacketArcher {
 			ItemStack middle = p.inventory.armorItemInSlot(2);
 			ItemStack middle2 = p.inventory.armorItemInSlot(1);
 			ItemStack bottom = p.inventory.armorItemInSlot(0);
-			if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+			if (!mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())) {
 				if ((bow == null) || (top == null) || (middle == null)
 						|| (middle2 == null) || (bottom == null)) {
 					return;
@@ -59,12 +59,12 @@ public class PacketArcher {
 					return;
 				}
 			}
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p.username)) {
-				CommonTickHandler.globalCooldownMap.put(p.username, 0);
+			if (!CommonTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
+				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 			}
-			if (CommonTickHandler.globalCooldownMap.get(p.username) <= 0) {
-				CommonTickHandler.globalCooldownMap.put(p.username, 30 * 20);
-				if (!mod_RpgInventory.developers.contains(p.username
+			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
+				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 30 * 20);
+				if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 						.toLowerCase())) {
 					bow.damageItem(10, p);
 				}
@@ -124,7 +124,7 @@ public class PacketArcher {
 			} else {
 				p.addChatMessage("You must wait for energy to replenish, left: "
 						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(p.username) / 20)) + " seconds");
+								.get(p.getDisplayName()) / 20)) + " seconds");
 			}
 		}
 	}

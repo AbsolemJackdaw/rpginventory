@@ -31,10 +31,10 @@ public class ItemRBMats2 extends Item {
 					if (stack != null) {
 						// Pet is in the world.
 						if (IPet.playersWithActivePets
-								.containsKey(player.username)) {
+								.containsKey(player.getDisplayName())) {
 							EntityLiving e = (EntityLiving) IPet.playersWithActivePets
-									.get(player.username).getPet();
-							IPet.playersWithActivePets.remove(player.username);
+									.get(player.getDisplayName()).getPet();
+							IPet.playersWithActivePets.remove(player.getDisplayName());
 							if ((e != null) && !e.isDead) {
 								stack = ((IPet) e).writePetToItemStack();
 								inv.setInventorySlotContents(6, stack);
@@ -73,7 +73,7 @@ public class ItemRBMats2 extends Item {
 										stack);
 								spider.setPosition(player.posX,
 										player.posY + 0.5F, player.posZ);
-								spider.setOwner(player.username);
+								spider.setOwner(player.getDisplayName());
 								spider.setTamed(true);
 								try {
 									spider.setName(stack.stackTagCompound

@@ -41,7 +41,7 @@ public class CommandPanel extends CommandBase {
 		sets.put("beast", new ArrayList());
 		sets.put("rogue", new ArrayList());
 
-		for (Item item : Item.itemsList) {
+		for (Item item : Item.itemList) {
 			if (item != null) {
 				if (item instanceof ItemRpgInvArmor) {
 					sets.get("jewels").add(new ItemStack(item));
@@ -300,7 +300,7 @@ public class CommandPanel extends CommandBase {
 								// player.sendChatToPlayer(player.worldObj.isRemote?"Client":"Server");
 								// player.inventory.addItemStackToInventory(is);
 								ItemStack item = is.copy();
-								EntityItem drop = player.dropPlayerItem(item);
+								EntityItem drop = player.dropItem(item.getItem(), item.stackSize);
 								drop.delayBeforeCanPickup = 0;
 							}
 						}
@@ -399,7 +399,7 @@ public class CommandPanel extends CommandBase {
 										.getPlayerForUsername(
 												sender.getCommandSenderName());
 								// player.inventory.addItemStackToInventory(item);
-								EntityItem drop = player.dropPlayerItem(item);
+								EntityItem drop = player.dropItem(item.getItem(), item.stackSize);
 								drop.delayBeforeCanPickup = 0;
 							}
 						}

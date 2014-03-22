@@ -33,7 +33,7 @@ public class PacketPetGui {
 
 			nbtCrystal.setString("PetName", petname);
 			nbtPet.setString("Name", petname);
-			crystal.setItemName(petname);
+			crystal.setStackDisplayName(petname);
 
 			nbtCrystal.setInteger("PetLevel", PetLevel);
 			nbtPet.setInteger("XpLevel", PetLevel);
@@ -51,7 +51,7 @@ public class PacketPetGui {
 			ItemStack newcrystal = new ItemStack(mod_RpgRB.crystal, 1,
 					crystal.getItemDamage());
 			newcrystal.setTagCompound(nbtCrystal);
-			newcrystal.setItemName(petname);
+			newcrystal.setStackDisplayName(petname);
 			inv.setInventorySlotContents(6, newcrystal);
 			PacketInventory.sendPacket(p, inv);
 		} catch (Throwable ex) {

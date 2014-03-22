@@ -98,9 +98,9 @@ public class RpgGui extends GuiContainer {
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
 		drawTexturedModalRect(posX, posY, 0, 0, xSize, ySize);
-		drawString(fontRenderer, rpg, (this.width / 2) + 39,
+		drawString(fontRendererObj, rpg, (this.width / 2) + 39,
 				(this.height / 2) - 23, 0xffffff);
-		drawString(fontRenderer, hi, (this.width / 2) + 39,
+		drawString(fontRendererObj, hi, (this.width / 2) + 39,
 				(this.height / 2) - 15, 0xffffff);
 
 		renderPlayerinInv(this.mc, posX + 51, posY + 75, 30, (posX + 51)

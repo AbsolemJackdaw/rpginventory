@@ -26,7 +26,7 @@ public class PacketPalaSpecial {
 		}
 		inv.onInventoryChanged();
 
-		if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())
+		if (!mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())
 				|| (weapon == null)) {
 			if (!mod_RpgInventory.playerClass
 					.contains(mod_RpgPlus.CLASSPALADIN)) {
@@ -34,13 +34,13 @@ public class PacketPalaSpecial {
 			}
 		}
 
-		if (!CommonTickHandler.globalCooldownMap.containsKey(p.username)) {
-			CommonTickHandler.globalCooldownMap.put(p.username, 0);
+		if (!CommonTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
+			CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 		}
-		if (CommonTickHandler.globalCooldownMap.get(p.username) <= 0) {
+		if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 			CommonTickHandler.globalCooldownMap
-					.put(p.username, (mod_RpgInventory.donators
-							.contains(p.username) ? 5 : 7) * 20);
+					.put(p.getDisplayName(), (mod_RpgInventory.donators
+							.contains(p.getDisplayName()) ? 5 : 7) * 20);
 			// System.out.println("Healing time!");
 			// Allow staff/hammer to perform one last aoe then break the weapon
 			// if its damaged enough.
@@ -52,7 +52,7 @@ public class PacketPalaSpecial {
 				p.renderBrokenItemStack(weapon);
 				p.setCurrentItemOrArmor(0, (ItemStack) null);
 			} else {
-				if (!mod_RpgInventory.developers.contains(p.username
+				if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 						.toLowerCase())) {
 					weapon.damageItem(3, p);
 				}
@@ -72,7 +72,7 @@ public class PacketPalaSpecial {
 						Potion.heal
 								.affectEntity((EntityLiving) player, el,
 										(mod_RpgInventory.donators
-												.contains(p.username) ? 5 : 2),
+												.contains(p.getDisplayName()) ? 5 : 2),
 										potstrength * 2);
 					}
 				}
@@ -80,7 +80,7 @@ public class PacketPalaSpecial {
 		} else {
 			p.addChatMessage("You must wait for energy to replenish, left: "
 					+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-							.get(p.username) / 20)) + " seconds");
+							.get(p.getDisplayName()) / 20)) + " seconds");
 		}
 	}
 }

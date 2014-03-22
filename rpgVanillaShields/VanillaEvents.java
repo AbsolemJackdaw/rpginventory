@@ -13,7 +13,7 @@ public class VanillaEvents {
 
 	public void damageItem(ItemStack item, PlayerRpgInventory inv,
 			EntityPlayer p, int slot, int amount) {
-		if (mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+		if (mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())) {
 			return;
 		}
 		try {
@@ -63,7 +63,7 @@ public class VanillaEvents {
 									vanillaReduction += 1.50f;
 								}
 								vanillaReduction += mod_RpgInventory.donators
-										.contains(player.username) ? 0.20f : 0;
+										.contains(player.getDisplayName()) ? 0.20f : 0;
 								if (vanillaReduction > 1f) {
 									damageReduction = 1f + (vanillaReduction - 1f);
 									vanillaReduction = 0;

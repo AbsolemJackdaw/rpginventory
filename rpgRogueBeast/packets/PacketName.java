@@ -29,8 +29,8 @@ public class PacketName {
 			// System.out.println(newName);
 			ItemStack petCrystal = PlayerRpgInventory.get(p).getCrystal();
 			BMPetImpl thePet = null;
-			if (IPet.playersWithActivePets.containsKey(p.username)) {
-				thePet = (BMPetImpl) IPet.playersWithActivePets.get(p.username)
+			if (IPet.playersWithActivePets.containsKey(p.getDisplayName())) {
+				thePet = (BMPetImpl) IPet.playersWithActivePets.get(p.getDisplayName())
 						.getPet();
 			}
 			if ((thePet != null) && !((EntityLiving) thePet).isDead) {

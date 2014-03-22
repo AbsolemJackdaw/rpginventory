@@ -25,7 +25,7 @@ public class PacketMageHeal {
 			ItemStack var2 = p.inventory.armorItemInSlot(2);
 			ItemStack var1 = p.inventory.armorItemInSlot(1);
 			ItemStack var0 = p.inventory.armorItemInSlot(0);
-			if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+			if (!mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())) {
 				if ((item == null) || (var3 == null) || (var2 == null)
 						|| (var1 == null) || (var0 == null)) {
 					return;
@@ -38,11 +38,11 @@ public class PacketMageHeal {
 					return;
 				}
 			}
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p.username)) {
-				CommonTickHandler.globalCooldownMap.put(p.username, 0);
+			if (!CommonTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
+				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 			}
-			if (CommonTickHandler.globalCooldownMap.get(p.username) <= 0) {
-				CommonTickHandler.globalCooldownMap.put(p.username, 5 * 20);
+			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
+				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 5 * 20);
 				// System.out.println("Healing time!");
 				// Allow staff/hammer to perform one last aoe then break the
 				// weapon if its damaged enough.
@@ -54,7 +54,7 @@ public class PacketMageHeal {
 					p.renderBrokenItemStack(item);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
-					if (!mod_RpgInventory.developers.contains(p.username
+					if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 							.toLowerCase())) {
 						item.damageItem(3, p);
 					}
@@ -70,10 +70,10 @@ public class PacketMageHeal {
 							double dist = ((EntityPlayer) player)
 									.getDistanceSqToEntity(el);
 							double potstrength = 1.0D - (Math.sqrt(dist) / (mod_RpgInventory.donators
-									.contains(p.username) ? 6.0D : 4.0D));
+									.contains(p.getDisplayName()) ? 6.0D : 4.0D));
 							Potion.heal.affectEntity((EntityLivingBase) player,
 									el, (mod_RpgInventory.donators
-											.contains(p.username) ? 4 : 2),
+											.contains(p.getDisplayName()) ? 4 : 2),
 									potstrength);
 						}
 					}
@@ -81,7 +81,7 @@ public class PacketMageHeal {
 			} else {
 				p.addChatMessage("You must wait for energy to replenish, left: "
 						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(p.username) / 20)) + " seconds");
+								.get(p.getDisplayName()) / 20)) + " seconds");
 			}
 		}
 	}

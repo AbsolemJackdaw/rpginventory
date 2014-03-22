@@ -56,7 +56,7 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 				.get((EntityPlayer) par3EntityLiving);
 
 		// RpgInv inv = mod_RpgInventory.proxy.getInventory(((EntityPlayer)
-		// par3EntityLiving).username);
+		// par3EntityLiving).getDisplayName());
 
 		if (((EntityPlayer) par3EntityLiving).getCurrentEquippedItem()
 				.getItem() == mod_RpgRB.daggers) {
@@ -66,7 +66,7 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 						.addPotionEffect(new PotionEffect(
 								Potion.poison.id,
 								mod_RpgInventory.donators
-										.contains(((EntityPlayer) par3EntityLiving).username) ? 80
+										.contains(((EntityPlayer) par3EntityLiving).getDisplayName()) ? 80
 										: 60, 1));
 			} else if (mod_RpgInventory.playerClass
 					.contains(mod_RpgRB.CLASSROGUE)) {
@@ -74,7 +74,7 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 						.addPotionEffect(new PotionEffect(
 								Potion.poison.id,
 								mod_RpgInventory.donators
-										.contains(((EntityPlayer) par3EntityLiving).username) ? 40
+										.contains(((EntityPlayer) par3EntityLiving).getDisplayName()) ? 40
 										: 30, 0));
 				if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
 					par2EntityLiving

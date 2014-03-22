@@ -18,26 +18,26 @@ public class PacketTeleport {
 		if (!world.isRemote) {
 			ItemStack dagger = p.getCurrentEquippedItem();
 
-			if (!mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+			if (!mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())) {
 				if (!mod_RpgInventory.playerClass
 						.contains(mod_RpgRB.CLASSROGUE)) {
 					return;
 				}
 			}
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p.username)) {
-				CommonTickHandler.globalCooldownMap.put(p.username, 0);
+			if (!CommonTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
+				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 			}
-			if (CommonTickHandler.globalCooldownMap.get(p.username) <= 0) {
+			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				CommonTickHandler.globalCooldownMap
-						.put(p.username, (mod_RpgInventory.donators
-								.contains(p.username) ? 3 : 5) * 20);
+						.put(p.getDisplayName(), (mod_RpgInventory.donators
+								.contains(p.getDisplayName()) ? 3 : 5) * 20);
 				if ((dagger.getItemDamage() + 3) >= dagger.getMaxDamage()) {
 					dagger.damageItem(
 							dagger.getMaxDamage() - dagger.getItemDamage(), p);
 					p.renderBrokenItemStack(dagger);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
-					if (!mod_RpgInventory.developers.contains(p.username
+					if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 							.toLowerCase())) {
 						dagger.damageItem(3, p);
 					}
@@ -57,7 +57,7 @@ public class PacketTeleport {
 			} else {
 				p.addChatMessage("You must wait for energy to replenish, left: "
 						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(p.username) / 20)) + " seconds");
+								.get(p.getDisplayName()) / 20)) + " seconds");
 			}
 		}
 	}

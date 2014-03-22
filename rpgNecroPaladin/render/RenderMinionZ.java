@@ -65,7 +65,7 @@ public class RenderMinionZ extends RenderBiped {
 	public void func_82426_a(EntityMinionZ par1EntityMinionZ, double par2,
 			double par4, double par6, float par8, float par9) {
 		this.func_82427_a(par1EntityMinionZ);
-		super.doRenderLiving(par1EntityMinionZ, par2, par4, par6, par8, par9);
+		super.doRender(par1EntityMinionZ, par2, par4, par6, par8, par9);
 	}
 
 	private void func_82427_a(EntityMinionZ par1EntityMinionZ) {

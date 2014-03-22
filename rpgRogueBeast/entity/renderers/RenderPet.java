@@ -28,7 +28,7 @@ public class RenderPet extends RenderLiving {
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving pet, double par2, double par4,
+	public void doRender(EntityLiving pet, double par2, double par4,
 			double par6, float par8, float par9) {
 		this.renderCow((BMPetImpl) pet, par2, par4, par6, par8, par9);
 
@@ -49,7 +49,7 @@ public class RenderPet extends RenderLiving {
 			float par8, float par9) {
 
 		this.mainModel = pet.getModel();
-		super.doRenderLiving(pet, par2, par4, par6, par8, par9);
+		super.doRender(pet, par2, par4, par6, par8, par9);
 		if (pet.riddenByEntity == null) {
 			super.renderLivingLabel(pet,
 					pet.getEntityName() + " Lvl." + pet.getLevel(), par2,

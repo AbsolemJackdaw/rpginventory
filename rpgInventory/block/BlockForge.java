@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -263,28 +264,33 @@ public class BlockForge extends BlockContainer {
 	private void setDefaultDirection(World par1World, int par2, int par3,
 			int par4) {
 		if (!par1World.isRemote) {
-			Block var5 = par1World.getBlock(par2, par3, par4 - 1);
-			Block var6 = par1World.getBlock(par2, par3, par4 + 1);
-			Block var7 = par1World.getBlock(par2 - 1, par3, par4);
-			Block var8 = par1World.getBlock(par2 + 1, par3, par4);
-			byte var9 = 3;
+			Block block = par1World.getBlock(par2, par3, par4 - 1);
+			Block block1 = par1World.getBlock(par2, par3, par4 + 1);
+			Block block2 = par1World.getBlock(par2 - 1, par3, par4);
+			Block block3 = par1World.getBlock(par2 + 1, par3, par4);
+			byte b0 = 3;
 
-			if (Block.opaqueCubeLookup[var5] && !Block.opaqueCubeLookup[var6]) {
-				var9 = 3;
-			}
+			if (block.func_149730_j() && !block1.func_149730_j())
+            {
+                b0 = 3;
+            }
 
-			if (Block.opaqueCubeLookup[var6] && !Block.opaqueCubeLookup[var5]) {
-				var9 = 2;
-			}
+            if (block1.func_149730_j() && !block.func_149730_j())
+            {
+                b0 = 2;
+            }
 
-			if (Block.opaqueCubeLookup[var7] && !Block.opaqueCubeLookup[var8]) {
-				var9 = 5;
-			}
+            if (block2.func_149730_j() && !block3.func_149730_j())
+            {
+                b0 = 5;
+            }
 
-			if (Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var7]) {
-				var9 = 4;
-			}
-			par1World.setBlock(par4, par2, par3, this, var9, 0);
+            if (block3.func_149730_j() && !block2.func_149730_j())
+            {
+                b0 = 4;
+            }
+
+            par1World.setBlockMetadataWithNotify(par2,par3,par4, b0, 2);
 		}
 	}
 }

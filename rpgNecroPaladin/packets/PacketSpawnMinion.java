@@ -26,14 +26,14 @@ public class PacketSpawnMinion {
 				&& mod_RpgInventory.playerClass
 						.contains(mod_RpgPlus.CLASSNECRO)) {
 			if (!CommonTickHandlerRpgPlus.rpgPluscooldownMap
-					.containsKey(p.username)) {
-				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(p.username, 0);
+					.containsKey(p.getDisplayName())) {
+				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(p.getDisplayName(), 0);
 			}
-			if (CommonTickHandlerRpgPlus.rpgPluscooldownMap.get(p.username) <= 0) {
+			if (CommonTickHandlerRpgPlus.rpgPluscooldownMap.get(p.getDisplayName()) <= 0) {
 				// 2 second cooldown
 				CommonTickHandlerRpgPlus.rpgPluscooldownMap
-						.put(p.username, 20 * (mod_RpgInventory.donators
-								.contains(p.username) ? 1 : 2));
+						.put(p.getDisplayName(), 20 * (mod_RpgInventory.donators
+								.contains(p.getDisplayName()) ? 1 : 2));
 				// System.out.println("SpawnMob");
 				// Allow staff/hammer to perform one last aoe then break the
 				// weapon if its damaged enough.
@@ -57,7 +57,7 @@ public class PacketSpawnMinion {
 							var4.setPosition(p.posX, p.posY, p.posZ);
 							world.spawnEntityInWorld(var4);
 							var4.setTamed(true);
-							var4.setOwner(p.username);
+							var4.setOwner(p.getDisplayName());
 						}
 					}
 				} else {
@@ -67,14 +67,14 @@ public class PacketSpawnMinion {
 							var4.setPosition(p.posX, p.posY, p.posZ);
 							world.spawnEntityInWorld(var4);
 							var4.setTamed(true);
-							var4.setOwner(p.username);
+							var4.setOwner(p.getDisplayName());
 						}
 					}
 				}
 			} else {
 				p.addChatMessage("You must wait for energy to replenish, left: "
 						+ Math.floor(1 + (CommonTickHandlerRpgPlus.rpgPluscooldownMap
-								.get(p.username) / 20)) + " seconds");
+								.get(p.getDisplayName()) / 20)) + " seconds");
 			}
 		}
 	}

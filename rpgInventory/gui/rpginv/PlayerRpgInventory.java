@@ -49,7 +49,7 @@ public class PlayerRpgInventory implements IInventory,
 	}
 
 	@Override
-	public void closeChest() {
+	public void closeInventory() {
 		// ExtendedPlayer props = ExtendedPlayer.get(player);
 		// props.addEntry(this);
 
@@ -213,10 +213,10 @@ public class PlayerRpgInventory implements IInventory,
 	public void init(Entity entity, World world) {
 	}
 
-	@Override
-	public boolean isInventoryNameLocalized() {
-		return false;
-	}
+//	@Override
+//	public boolean isInventoryNameLocalized() {
+//		return false;
+//	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
@@ -272,7 +272,7 @@ public class PlayerRpgInventory implements IInventory,
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 		EntityPlayer player = MinecraftServer.getServer()
-				.getConfigurationManager().getPlayerForgetDisplayName()(playername);
+				.getConfigurationManager().getPlayerForUsername(playername);
 		return player.isDead ? false : par1EntityPlayer
 				.getDistanceSqToEntity(player) <= 64.0D;
 	}
@@ -356,7 +356,7 @@ public class PlayerRpgInventory implements IInventory,
 	}
 
 	@Override
-	public void openChest() {
+	public void openInventory() {
 	}
 
 	// /**
@@ -437,5 +437,16 @@ public class PlayerRpgInventory implements IInventory,
 		// above
 		// to prevent potential conflicts
 		tagcompound.setTag(tagName, nbttaglist);
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void markDirty() {
+		
 	}
 }

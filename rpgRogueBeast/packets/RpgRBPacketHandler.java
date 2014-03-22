@@ -44,13 +44,13 @@ public class RpgRBPacketHandler implements IPacketHandler {
 				break;
 			case STOREPET:
 				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
-				if (IPet.playersWithActivePets.containsKey(p.username)) {
-					IPet pet = IPet.playersWithActivePets.get(p.username)
+				if (IPet.playersWithActivePets.containsKey(p.getDisplayName())) {
+					IPet pet = IPet.playersWithActivePets.get(p.getDisplayName())
 							.getPet();
 					if ((pet != null) && !((EntityLiving) pet).isDead) {
 						inv.setInventorySlotContents(6,
 								pet.writePetToItemStack());
-						IPet.playersWithActivePets.remove(p.username);
+						IPet.playersWithActivePets.remove(p.getDisplayName());
 						((EntityLiving) pet).setDead();
 						PacketInventory.sendPacket(p, inv);
 					}
