@@ -4,7 +4,6 @@
  */
 package rpgInventory.block.te;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -30,7 +29,10 @@ public class GoldBlockSlot extends Slot {
 	public boolean isItemValid(ItemStack par1ItemStack) {
 		if (par1ItemStack != null) {
 			if (par1ItemStack.getItem() instanceof ItemBlock) {
-				if (((ItemBlock)par1ItemStack.getItem()).field_150939_a /*getBlock()*/== Blocks.gold_block) {
+				if (((ItemBlock) par1ItemStack.getItem()).field_150939_a /*
+																		 * getBlock(
+																		 * )
+																		 */== Blocks.gold_block) {
 					return true;
 				}
 			}

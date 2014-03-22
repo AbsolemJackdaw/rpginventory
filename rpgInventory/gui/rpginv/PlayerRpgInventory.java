@@ -106,7 +106,8 @@ public class PlayerRpgInventory implements IInventory,
 	 */
 	private int findJewel(Item par1) {
 		for (int var2 = 0; var2 < armorSlots.length; ++var2) {
-			if ((armorSlots[var2] != null) && (armorSlots[var2].getItem() == par1)) {
+			if ((armorSlots[var2] != null)
+					&& (armorSlots[var2].getItem() == par1)) {
 				return var2;
 			}
 		}
@@ -127,13 +128,13 @@ public class PlayerRpgInventory implements IInventory,
 	}
 
 	@Override
-	public int getInventoryStackLimit() {
-		return 1;
+	public String getInventoryName() {
+		return "RpgInventory";
 	}
 
 	@Override
-	public String getInventoryName() {
-		return "RpgInventory";
+	public int getInventoryStackLimit() {
+		return 1;
 	}
 
 	public boolean getJewel(Item par1) {
@@ -213,7 +214,7 @@ public class PlayerRpgInventory implements IInventory,
 	}
 
 	@Override
-	public boolean isInvNameLocalized() {
+	public boolean isInventoryNameLocalized() {
 		return false;
 	}
 
@@ -271,7 +272,7 @@ public class PlayerRpgInventory implements IInventory,
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 		EntityPlayer player = MinecraftServer.getServer()
-				.getConfigurationManager().getPlayerForUsername(playername);
+				.getConfigurationManager().getPlayerForgetDisplayName()(playername);
 		return player.isDead ? false : par1EntityPlayer
 				.getDistanceSqToEntity(player) <= 64.0D;
 	}
@@ -313,39 +314,42 @@ public class PlayerRpgInventory implements IInventory,
 				}
 
 			}
-			if (((getNecklace() != null) && (getNecklace() == mod_RpgInventory.neckdia))
-					|| ((getRing1() != null) && (getRing1() == mod_RpgInventory.ringdia))
-					|| ((getRing2() != null) && (getRing2() == mod_RpgInventory.ringdia))
-					|| ((getGloves() != null) && (getGloves() == mod_RpgInventory.glovesdia))) {
+			if (((getNecklace() != null) && (getNecklace().getItem() == mod_RpgInventory.neckdia))
+					|| ((getRing1() != null) && (getRing1().getItem() == mod_RpgInventory.ringdia))
+					|| ((getRing2() != null) && (getRing2().getItem() == mod_RpgInventory.ringdia))
+					|| ((getGloves() != null) && (getGloves().getItem() == mod_RpgInventory.glovesdia))) {
 				addtoticks[2] = true;
 			}
 
 			if (addtoticks[0]) {
-				if (!RPGEventHooks.ArcherRepairTick
-						.containsKey(player.username)) {
-					RPGEventHooks.ArcherRepairTick.put(player.username, 0);
+				if (!RPGEventHooks.ArcherRepairTick.containsKey(player
+						.getDisplayName())) {
+					RPGEventHooks.ArcherRepairTick.put(player.getDisplayName(),
+							0);
 				}
 			} else {
 				// keep the cooldown hashmap clean
-				RPGEventHooks.ArcherRepairTick.remove(player.username);
+				RPGEventHooks.ArcherRepairTick.remove(player.getDisplayName());
 			}
 
 			if (addtoticks[1]) {
-				if (!RPGEventHooks.HealerTick.containsKey(player.username)) {
-					RPGEventHooks.HealerTick.put(player.username, 0);
+				if (!RPGEventHooks.HealerTick.containsKey(player
+						.getDisplayName())) {
+					RPGEventHooks.HealerTick.put(player.getDisplayName(), 0);
 				}
 			} else {
 				// keep the cooldown hashmap clean
-				RPGEventHooks.HealerTick.remove(player.username);
+				RPGEventHooks.HealerTick.remove(player.getDisplayName());
 			}
 
 			if (addtoticks[2]) {
-				if (!RPGEventHooks.DiamondTick.containsKey(player.username)) {
-					RPGEventHooks.DiamondTick.put(player.username, 0);
+				if (!RPGEventHooks.DiamondTick.containsKey(player
+						.getDisplayName())) {
+					RPGEventHooks.DiamondTick.put(player.getDisplayName(), 0);
 				}
 			} else {
 				// keep the cooldown hashmap clean
-				RPGEventHooks.DiamondTick.remove(player.username);
+				RPGEventHooks.DiamondTick.remove(player.getDisplayName());
 			}
 		} catch (Throwable ex) {
 		}

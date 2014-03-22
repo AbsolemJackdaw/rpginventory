@@ -9,7 +9,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -31,7 +30,7 @@ public class SlotFuel extends Slot {
 		if ((par1ItemStack.getItem() == Items.coal)
 				|| par1ItemStack.getItem().equals(Items.lava_bucket)
 				|| par1ItemStack.getItem().equals(Items.blaze_rod)
-				|| Block.getBlockFromItem(par1ItemStack.getItem()) == Blocks.coal_block) {
+				|| (Block.getBlockFromItem(par1ItemStack.getItem()) == Blocks.coal_block)) {
 			return true;
 		} else {
 			return false;

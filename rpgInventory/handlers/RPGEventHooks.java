@@ -66,7 +66,8 @@ public class RPGEventHooks {
 
 	public void damageItem(ItemStack item, PlayerRpgInventory inv,
 			EntityPlayer p, int slot, int amount) {
-		if (mod_RpgInventory.developers.contains(p.username.toLowerCase())) {
+		if (mod_RpgInventory.developers.contains(p.getDisplayName()
+				.toLowerCase())) {
 			return;
 		}
 		try {
@@ -138,7 +139,7 @@ public class RPGEventHooks {
 					ItemStack weapon = ((EntityPlayer) damager)
 							.getCurrentEquippedItem();
 					if (weapon != null) {
-						if (weapon.itemID == mod_RpgInventory.hammer.itemID) {
+						if (weapon.getItem() == mod_RpgInventory.hammer) {
 							if (mod_RpgInventory.playerClass
 									.contains(mod_RpgInventory.CLASSBERSERKER)) {
 								evt.ammount += 4;
@@ -166,14 +167,14 @@ public class RPGEventHooks {
 					if ((ringa != null)
 							&& ringa.getItem().equals(mod_RpgInventory.ringlap)) {
 						damagebonus += mod_RpgInventory.donators
-								.contains(((EntityPlayer) damager).username) ? 0.2f
-								: 0.1F;
+								.contains(((EntityPlayer) damager)
+										.getDisplayName()) ? 0.2f : 0.1F;
 					}
 					if ((ringb != null)
 							&& ringb.getItem().equals(mod_RpgInventory.ringlap)) {
 						damagebonus += mod_RpgInventory.donators
-								.contains(((EntityPlayer) damager).username) ? 0.2f
-								: 0.1F;
+								.contains(((EntityPlayer) damager)
+										.getDisplayName()) ? 0.2f : 0.1F;
 					}
 					if ((gloves != null)
 							&& gloves.getItem().equals(
@@ -225,11 +226,9 @@ public class RPGEventHooks {
 					if ((evt.ammount * 0.2F) < 1) {
 						evt.ammount -= 1;
 					} else {
-						evt.ammount -= MathHelper
-								.floor_float((float) evt.ammount
-										* (mod_RpgInventory.donators
-												.contains(player.username) ? 0.3f
-												: 0.2F));
+						evt.ammount -= MathHelper.floor_float(evt.ammount
+								* (mod_RpgInventory.donators.contains(player
+										.getDisplayName()) ? 0.3f : 0.2F));
 					}
 				}
 				if (inv != null) {
@@ -425,27 +424,29 @@ public class RPGEventHooks {
 						if ((decompose != null) && (machicism != null)) {
 							p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
 							p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
-							CustomPotionList.remove(p.username);
+							CustomPotionList.remove(p.getDisplayName());
 						} else {
 							if (decompose != null) {
 								if (decompose.getDuration() == 0) {
 									p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
-									CustomPotionList.remove(p.username);
+									CustomPotionList.remove(p.getDisplayName());
 								} else {
-									if (!CustomPotionList
-											.containsKey(p.username)) {
-										CustomPotionList.put(p.username,
+									if (!CustomPotionList.containsKey(p
+											.getDisplayName())) {
+										CustomPotionList.put(
+												p.getDisplayName(),
 												decompose.getDuration());
 									}
 								}
 							} else if (machicism != null) {
 								if (machicism.getDuration() == 0) {
 									p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
-									CustomPotionList.remove(p.username);
+									CustomPotionList.remove(p.getDisplayName());
 								} else {
-									if (!CustomPotionList
-											.containsKey(p.username)) {
-										CustomPotionList.put(p.username,
+									if (!CustomPotionList.containsKey(p
+											.getDisplayName())) {
+										CustomPotionList.put(
+												p.getDisplayName(),
 												machicism.getDuration());
 									}
 								}
@@ -480,11 +481,11 @@ public class RPGEventHooks {
 						armorheal = true;
 					}
 					if (armorheal) {
-						if (!LapisTick.containsKey(p.username)) {
-							LapisTick.put(p.username, 60);
+						if (!LapisTick.containsKey(p.getDisplayName())) {
+							LapisTick.put(p.getDisplayName(), 60);
 						}
 					} else {
-						LapisTick.remove(p.username);
+						LapisTick.remove(p.getDisplayName());
 					}
 
 					/* ====ARCHER EFFECTS==== */
@@ -493,8 +494,8 @@ public class RPGEventHooks {
 					float jumpboost = p.jumpMovementFactor;
 					if (mod_RpgInventory.playerClass
 							.contains(mod_RpgInventory.CLASSARCHER)) {
-						jumpboost *= mod_RpgInventory.donators
-								.contains(p.username) ? 3.0f : 2.0F;
+						jumpboost *= mod_RpgInventory.donators.contains(p
+								.getDisplayName()) ? 3.0f : 2.0F;
 					}
 					p.jumpMovementFactor = jumpboost;
 
@@ -510,7 +511,7 @@ public class RPGEventHooks {
 						/* BERSEKRER KNOCKBACK */
 						// sets Berserker weapon with knockback if the apropiate
 						// classes match
-						if (weapon.itemID == mod_RpgInventory.hammer.itemID) {
+						if (weapon.getItem() == mod_RpgInventory.hammer) {
 							if (mod_RpgInventory.playerClass
 									.contains(mod_RpgInventory.CLASSBERSERKERSHIELD)) {
 								if (((p.getFoodStats().getFoodLevel() < 4) || (p
@@ -590,27 +591,27 @@ public class RPGEventHooks {
 					int goldenItems = 0;
 
 					if ((neck != null)
-							&& (neck.itemID == mod_RpgInventory.neckgold.itemID)) {
-						speedboost += mod_RpgInventory.donators
-								.contains(p.username) ? 0.02f : 0.0125f;
+							&& (neck.getItem() == mod_RpgInventory.neckgold)) {
+						speedboost += mod_RpgInventory.donators.contains(p
+								.getDisplayName()) ? 0.02f : 0.0125f;
 						goldenItems += 1;
 					}
 					if ((ringa != null)
 							&& (ringa.getItem() == mod_RpgInventory.ringgold)) {
-						speedboost += mod_RpgInventory.donators
-								.contains(p.username) ? 0.02f : 0.0125f;
+						speedboost += mod_RpgInventory.donators.contains(p
+								.getDisplayName()) ? 0.02f : 0.0125f;
 						goldenItems += 1;
 					}
 					if ((ringb != null)
 							&& (ringb.getItem() == mod_RpgInventory.ringgold)) {
-						speedboost += mod_RpgInventory.donators
-								.contains(p.username) ? 0.02f : 0.0125f;
+						speedboost += mod_RpgInventory.donators.contains(p
+								.getDisplayName()) ? 0.02f : 0.0125f;
 						goldenItems += 1;
 					}
 					if ((gloves != null)
 							&& (gloves.getItem() == mod_RpgInventory.glovesbutter)) {
-						speedboost += mod_RpgInventory.donators
-								.contains(p.username) ? 0.02f : 0.0125f;
+						speedboost += mod_RpgInventory.donators.contains(p
+								.getDisplayName()) ? 0.02f : 0.0125f;
 						goldenItems += 1;
 					}
 					p.capabilities.setPlayerWalkSpeed(0.1f + speedboost);
@@ -622,12 +623,12 @@ public class RPGEventHooks {
 					//
 
 					/* ==== Something about the archer .__. ==== */
-					if (ArcherRepairTick.containsKey(p.username)) {
+					if (ArcherRepairTick.containsKey(p.getDisplayName())) {
 						if (mod_RpgInventory.playerClass
 								.contains(mod_RpgInventory.CLASSARCHER)) {
 							p.jumpMovementFactor = 0.09F;
 						} else {
-							ArcherRepairTick.remove(p.username);
+							ArcherRepairTick.remove(p.getDisplayName());
 							p.jumpMovementFactor = 0.02F;
 						}
 					}
@@ -635,7 +636,7 @@ public class RPGEventHooks {
 					/* ==== Invisibility Cloak==== */
 					ItemStack cloak = inv.getCloak();
 					if (cloak != null) {
-						if (cloak.itemID == mod_RpgInventory.cloakI.itemID) {
+						if (cloak.getItem() == mod_RpgInventory.cloakI) {
 							p.addPotionEffect(new PotionEffect(
 									Potion.invisibility.id, 20, 1));
 						}

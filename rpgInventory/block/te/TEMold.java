@@ -22,7 +22,7 @@ public class TEMold extends TileEntity implements IInventory {
 			return 0;
 		} else {
 			Item var1 = par0ItemStack.getItem();
-			Block var2 = ((ItemBlock)par0ItemStack.getItem()).field_150939_a;
+			Block var2 = ((ItemBlock) par0ItemStack.getItem()).field_150939_a;
 
 			if (var1 == Items.coal) {
 				return 100;
@@ -33,10 +33,11 @@ public class TEMold extends TileEntity implements IInventory {
 			if (var1 == Items.blaze_rod) {
 				return 1600;
 			}
-			
-			if(var2 == Blocks.coal_block)
+
+			if (var2 == Blocks.coal_block) {
 				return 1600;
-			
+			}
+
 			return GameRegistry.getFuelValue(par0ItemStack);
 		}
 	}
@@ -159,7 +160,6 @@ public class TEMold extends TileEntity implements IInventory {
 		return moldforgeItemStacks[4].stackSize < stack.getMaxStackSize();
 	}
 
-
 	@Override
 	public ItemStack decrStackSize(int slot, int amt) {
 		ItemStack stack = getStackInSlot(slot);
@@ -182,13 +182,13 @@ public class TEMold extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public int getInventoryStackLimit() {
-		return 64;
+	public String getInventoryName() {
+		return "Mold Forge";
 	}
 
 	@Override
-	public String getInventoryName() {
-		return "Mold Forge";
+	public int getInventoryStackLimit() {
+		return 64;
 	}
 
 	public int getProgressScaled(int i) {
@@ -232,7 +232,6 @@ public class TEMold extends TileEntity implements IInventory {
 		return goldBurnTime > 0;
 	}
 
-	
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		// TODO Auto-generated method stub
@@ -244,7 +243,6 @@ public class TEMold extends TileEntity implements IInventory {
 
 		return true;
 	}
-
 
 	public void produceJewel() {
 		if (canSmelt()) {

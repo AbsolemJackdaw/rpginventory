@@ -146,8 +146,8 @@ public class PetGui extends GuiScreen {
 		} finally {
 			textfield.drawTextBox();
 		}
-		drawString(fontRendererObj, Name + ": " + PetName, (this.width / 2) - 20,
-				(this.height / 2) - 79, 0xffffff);
+		drawString(fontRendererObj, Name + ": " + PetName,
+				(this.width / 2) - 20, (this.height / 2) - 79, 0xffffff);
 		drawString(fontRendererObj, petStats, (this.width / 2) - 85,
 				(this.height / 2) - 10, 0x00ffff);
 		drawString(fontRendererObj, "Lvl : " + PetLevel, (this.width / 2) - 80,
@@ -165,7 +165,8 @@ public class PetGui extends GuiScreen {
 		// text
 		fontRendererObj.drawSplitString(saddle, (this.width / 2) - 80,
 				(this.height / 2) + 55, xSizeOfTexture - 10, 0xffffff);
-		// drawString(fontRendererObj, saddle, this.width / 2 - 80, this.height / 2
+		// drawString(fontRendererObj, saddle, this.width / 2 - 80, this.height
+		// / 2
 		// + 55, 0xffffff);
 		// Shadow
 		fontRendererObj.drawSplitString(levelInfo, (this.width / 2) + 95 + 1,
@@ -175,9 +176,11 @@ public class PetGui extends GuiScreen {
 		fontRendererObj.drawSplitString(levelInfo, (this.width / 2) + 95,
 				(this.height / 2) + 65, this.width - ((this.width / 2) + 95),
 				0xffffff);
-		// drawString(fontRendererObj, levelInfo, this.width / 2 + 95, this.height
+		// drawString(fontRendererObj, levelInfo, this.width / 2 + 95,
+		// this.height
 		// / 2 + 65, 0xffffff);
-		// drawString(fontRendererObj, levelInfo2, this.width / 2 + 95, this.height
+		// drawString(fontRendererObj, levelInfo2, this.width / 2 + 95,
+		// this.height
 		// / 2 + 75, 0xffffff);
 		if (PetLevel >= 200) {
 			PetLevel = 200;
@@ -202,8 +205,8 @@ public class PetGui extends GuiScreen {
 	public void initGui() {
 		petCrystal = this.inv.getCrystal();
 		if (IPet.playersWithActivePets.containsKey(p.getDisplayName())) {
-			thePet = (BMPetImpl) IPet.playersWithActivePets.get(p.getDisplayName())
-					.getPet();
+			thePet = (BMPetImpl) IPet.playersWithActivePets.get(
+					p.getDisplayName()).getPet();
 			if (thePet != null) {
 				// make sure crystal is updated with the mob info
 				petCrystal = thePet.writePetToItemStack();
@@ -283,8 +286,8 @@ public class PetGui extends GuiScreen {
 			saddle = PetName + " needs lv50 to be ridden.";
 		}
 
-		textfield = new GuiTextField(fontRendererObj, posX + 70, posY + 14, 100,
-				20);
+		textfield = new GuiTextField(fontRendererObj, posX + 70, posY + 14,
+				100, 20);
 		textfield.setText(PetName);
 		textfield.setMaxStringLength(32);
 		playerLevel = (short) Minecraft.getMinecraft().thePlayer.experienceLevel;

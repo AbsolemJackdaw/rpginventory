@@ -44,7 +44,7 @@ public class ItemRpgInvArmor extends Item {
 	 *         damage this item can take. only used for shields name is unused
 	 *         location for texture
 	 */
-	public ItemRpgInvArmor( int par4, int maxDamage, String name,
+	public ItemRpgInvArmor(int par4, int maxDamage, String name,
 			String resourcelocation) {
 		super();
 		this.armorType = par4;

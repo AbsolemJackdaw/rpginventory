@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -26,11 +25,12 @@ public class ItemStaf extends ItemRpgSword {
 			boolean yesno) {
 
 		list.add(StatCollector.translateToLocal("Charge : Hold "
-				+ GameSettings.getKeyDisplayString(Minecraft.getMinecraft().gameSettings.keyBindUseItem.getKeyCode())));
+				+ GameSettings.getKeyDisplayString(Minecraft.getMinecraft().gameSettings.keyBindUseItem
+						.getKeyCode())));
 
 		list.add("Heal: "
-				+ GameSettings.getKeyDisplayString(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode())
-				+ " and Release");
+				+ GameSettings.getKeyDisplayString(Minecraft.getMinecraft().gameSettings.keyBindSneak
+						.getKeyCode()) + " and Release");
 	}
 
 	@Override
@@ -68,12 +68,18 @@ public class ItemStaf extends ItemRpgSword {
 				double var2 = p.worldObj.rand.nextGaussian() * 0.02D;
 				double var4 = p.worldObj.rand.nextGaussian() * 0.02D;
 				double var6 = p.worldObj.rand.nextGaussian() * 0.02D;
-				p.worldObj.spawnParticle("heart",
-						(p.posX + p.worldObj.rand.nextFloat() * p.width * 2.0F)
-								- p.width,
-						p.posY + 0.5D + p.worldObj.rand.nextFloat() * p.height,
-						(p.posZ + p.worldObj.rand.nextFloat() * p.width * 2.0F)
-								- p.width, var2, var4, var6);
+				p.worldObj
+						.spawnParticle(
+								"heart",
+								(p.posX + (p.worldObj.rand.nextFloat()
+										* p.width * 2.0F))
+										- p.width,
+								p.posY
+										+ 0.5D
+										+ (p.worldObj.rand.nextFloat() * p.height),
+								(p.posZ + (p.worldObj.rand.nextFloat()
+										* p.width * 2.0F))
+										- p.width, var2, var4, var6);
 				int heal = time / 50;
 				if ((p.getHealth() + heal) <= p.getMaxHealth()) {
 					p.heal(heal);
@@ -86,12 +92,18 @@ public class ItemStaf extends ItemRpgSword {
 				double var2 = p.worldObj.rand.nextGaussian() * 0.02D;
 				double var4 = p.worldObj.rand.nextGaussian() * 0.02D;
 				double var6 = p.worldObj.rand.nextGaussian() * 0.02D;
-				p.worldObj.spawnParticle("heart",
-						(p.posX + p.worldObj.rand.nextFloat() * p.width * 2.0F)
-								- p.width,
-						p.posY + 0.5D + p.worldObj.rand.nextFloat() * p.height,
-						(p.posZ + p.worldObj.rand.nextFloat() * p.width * 2.0F)
-								- p.width, var2, var4, var6);
+				p.worldObj
+						.spawnParticle(
+								"heart",
+								(p.posX + (p.worldObj.rand.nextFloat()
+										* p.width * 2.0F))
+										- p.width,
+								p.posY
+										+ 0.5D
+										+ (p.worldObj.rand.nextFloat() * p.height),
+								(p.posZ + (p.worldObj.rand.nextFloat()
+										* p.width * 2.0F))
+										- p.width, var2, var4, var6);
 				int heal = time / 30;
 				if ((p.getHealth() + heal) <= p.getMaxHealth()) {
 					p.heal(heal);

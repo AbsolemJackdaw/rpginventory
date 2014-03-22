@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -165,32 +164,24 @@ public class ClientProxy extends CommonProxy {
 
 		if (RpgConfig.instance.render3D == true) {
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgInventory.claymore.itemID,
-					(IItemRenderer) new ClaymoreRenderer());
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgInventory.hammer.itemID,
-					(IItemRenderer) new HammerRender());
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgInventory.wand.itemID,
-					(IItemRenderer) new SoulSphereRender());
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgInventory.staf.itemID,
-					(IItemRenderer) new StafRender());
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgInventory.elfbow.itemID,
-					(IItemRenderer) new BowRender());
+					mod_RpgInventory.claymore, new ClaymoreRenderer());
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.hammer,
+					new HammerRender());
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.wand,
+					new SoulSphereRender());
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.staf,
+					new StafRender());
+			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.elfbow,
+					new BowRender());
 
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgInventory.berserkerShield.itemID,
-					(IItemRenderer) new BerserkerShield(new IronThorn(),
-							"subaraki:jewels/IronThorn.png"));
+					mod_RpgInventory.berserkerShield, new BerserkerShield(
+							new IronThorn(), "subaraki:jewels/IronThorn.png"));
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgInventory.archerShield.itemID,
-					(IItemRenderer) new ArcherShield(new ModelShield(),
-							"subaraki:jewels/Shield1.png"));
+					mod_RpgInventory.archerShield, new ArcherShield(
+							new ModelShield(), "subaraki:jewels/Shield1.png"));
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgInventory.talisman.itemID,
-					(IItemRenderer) new BookRenderer(new bookMage(),
+					mod_RpgInventory.talisman, new BookRenderer(new bookMage(),
 							"subaraki:jewels/mageShield.png"));
 		}
 	}

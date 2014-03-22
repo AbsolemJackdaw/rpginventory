@@ -8,7 +8,6 @@ import rpgInventory.utils.AbstractArmor;
 
 public class ItemBerserkerArmor extends AbstractArmor {
 
-
 	public ItemBerserkerArmor(ArmorMaterial arm, int par3, int par4) {
 		super(par3, par4, arm);
 	}

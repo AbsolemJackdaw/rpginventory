@@ -24,35 +24,35 @@ public class MoldRecipes {
 	private MoldRecipes() {
 
 		addRecipe(new ItemStack(mod_RpgInventory.ringmold), new ItemStack(
-				Items.gold_ingot), new ItemStack(mod_RpgInventory.ringgold), 0.7F);
+				Items.gold_ingot), new ItemStack(mod_RpgInventory.ringgold),
+				0.7F);
 		addRecipe(new ItemStack(mod_RpgInventory.ringmold), new ItemStack(
 				Items.emerald), new ItemStack(mod_RpgInventory.ringem), 0.7F);
 		addRecipe(new ItemStack(mod_RpgInventory.ringmold), new ItemStack(
 				Items.diamond), new ItemStack(mod_RpgInventory.ringdia), 0.7F);
 		addRecipe(new ItemStack(mod_RpgInventory.ringmold), new ItemStack(
-				Items.dye, 1, 4), new ItemStack(mod_RpgInventory.ringlap),
-				0.7F);
+				Items.dye, 1, 4), new ItemStack(mod_RpgInventory.ringlap), 0.7F);
 
 		addRecipe(new ItemStack(mod_RpgInventory.colmold), new ItemStack(
-				Items.gold_ingot), new ItemStack(mod_RpgInventory.neckgold), 0.7F);
+				Items.gold_ingot), new ItemStack(mod_RpgInventory.neckgold),
+				0.7F);
 		addRecipe(new ItemStack(mod_RpgInventory.colmold), new ItemStack(
 				Items.emerald), new ItemStack(mod_RpgInventory.neckem), 0.7F);
 		addRecipe(new ItemStack(mod_RpgInventory.colmold), new ItemStack(
 				Items.diamond), new ItemStack(mod_RpgInventory.neckdia), 0.7F);
 		addRecipe(new ItemStack(mod_RpgInventory.colmold), new ItemStack(
-				Items.dye, 1, 4), new ItemStack(mod_RpgInventory.necklap),
-				0.7F);
+				Items.dye, 1, 4), new ItemStack(mod_RpgInventory.necklap), 0.7F);
 
 		addRecipe(new ItemStack(mod_RpgInventory.wantmold), new ItemStack(
-				Items.gold_ingot), new ItemStack(mod_RpgInventory.glovesbutter),
-				0.7F);
+				Items.gold_ingot),
+				new ItemStack(mod_RpgInventory.glovesbutter), 0.7F);
 		addRecipe(new ItemStack(mod_RpgInventory.wantmold), new ItemStack(
 				Items.emerald), new ItemStack(mod_RpgInventory.glovesem), 0.7F);
 		addRecipe(new ItemStack(mod_RpgInventory.wantmold), new ItemStack(
 				Items.diamond), new ItemStack(mod_RpgInventory.glovesdia), 0.7F);
 		addRecipe(new ItemStack(mod_RpgInventory.wantmold), new ItemStack(
-				Items.dye, 1, 4),
-				new ItemStack(mod_RpgInventory.gloveslap), 0.7F);
+				Items.dye, 1, 4), new ItemStack(mod_RpgInventory.gloveslap),
+				0.7F);
 
 	}
 

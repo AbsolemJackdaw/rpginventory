@@ -96,8 +96,8 @@ public class ItemMageSphere extends ItemRpgWeapon {
 					&& item2.equals(mod_RpgInventory.magepants)
 					&& item3.equals(mod_RpgInventory.mageboots)) {
 				if (par3EntityPlayer.inventory.hasItem(Items.blaze_powder)
-						|| mod_RpgInventory.donators
-								.contains(par3EntityPlayer.getDisplayName())) {
+						|| mod_RpgInventory.donators.contains(par3EntityPlayer
+								.getDisplayName())) {
 
 					Vec3 look = par3EntityPlayer.getLookVec();
 					EntitySmallFireball ball = new EntitySmallFireball(
@@ -154,13 +154,12 @@ public class ItemMageSphere extends ItemRpgWeapon {
 				}
 
 				if (RpgConfig.instance.useSpell == false) {
-					//TODO
-//					par2EntityPlayer
-//							.addChatMessage("You can't use the Day/Night Cycle Spell on this Server !");
+					// TODO
+					// par2EntityPlayer
+					// .addChatMessage("You can't use the Day/Night Cycle Spell on this Server !");
 				}
 
-				if (par2EntityPlayer.inventory
-						.hasItem(Items.speckled_melon)
+				if (par2EntityPlayer.inventory.hasItem(Items.speckled_melon)
 						&& par2EntityPlayer.isSneaking()) {
 					if (!par3World.isRemote) {
 						par2EntityPlayer.inventory
@@ -210,9 +209,11 @@ public class ItemMageSphere extends ItemRpgWeapon {
 						if (var12 == Blocks.lapis_ore) {
 							par3World.setBlock(par4, par5, par6,
 									Blocks.lapis_block);
-							par1ItemStack.damageItem(mod_RpgInventory.donators
-									.contains(par2EntityPlayer.getDisplayName()) ? 50
-									: 151, par2EntityPlayer);
+							par1ItemStack.damageItem(
+									mod_RpgInventory.donators
+											.contains(par2EntityPlayer
+													.getDisplayName()) ? 50
+											: 151, par2EntityPlayer);
 						}
 
 					}

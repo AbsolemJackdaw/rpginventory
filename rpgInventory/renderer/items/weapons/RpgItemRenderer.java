@@ -39,7 +39,7 @@ public abstract class RpgItemRenderer implements IItemRenderer {
 			GL11.glPushMatrix();
 			float f8 = 0.125F;
 			GL11.glScalef(f8, f8, f8);
-			float f9 = (Minecraft.getSystemTime() % 3000L / 3000.0F) * 8.0F;
+			float f9 = ((Minecraft.getSystemTime() % 3000L) / 3000.0F) * 8.0F;
 			// FMLLog.getLogger().info("" + f9);
 			GL11.glTranslatef(f9, 0.0F, 0.0F);
 			GL11.glRotatef(-50.0F, 0.0F, 0.0F, 1.0F);
@@ -47,7 +47,7 @@ public abstract class RpgItemRenderer implements IItemRenderer {
 			GL11.glPopMatrix();
 			GL11.glPushMatrix();
 			GL11.glScalef(f8, f8, f8);
-			f9 = (Minecraft.getSystemTime() % 4873L / 4873.0F) * 8.0F;
+			f9 = ((Minecraft.getSystemTime() % 4873L) / 4873.0F) * 8.0F;
 			GL11.glTranslatef(-f9, 0.0F, 0.0F);
 			GL11.glRotatef(10.0F, 0.0F, 0.0F, 1.0F);
 			// swordmodel.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);

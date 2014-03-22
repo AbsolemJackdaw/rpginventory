@@ -28,7 +28,7 @@ public class ButtonInventory extends GuiButton {
 		player = Minecraft.getMinecraft().thePlayer;
 		this.width = 80;
 		this.height = 20;
-		this.field_146123_n /*drawButton boolean*/= true;
+		this.field_146123_n /* drawButton boolean */= true;
 		this.enabled = true;
 	}
 

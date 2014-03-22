@@ -1,7 +1,6 @@
 package rpgMage;
 
 import net.minecraft.client.model.ModelBiped;
-import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.models.armor.ModelMageArmor;
@@ -38,24 +37,18 @@ public class MSClientProxy extends MSCommonProxy {
 
 		if (RpgConfig.instance.render3D) {
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgMageSet.frostStaff.itemID,
-					(IItemRenderer) new StaffRenderer());
+					mod_RpgMageSet.frostStaff, new StaffRenderer());
+			MinecraftForgeClient.registerItemRenderer(mod_RpgMageSet.fireStaff,
+					new StaffRenderer());
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgMageSet.fireStaff.itemID,
-					(IItemRenderer) new StaffRenderer());
+					mod_RpgMageSet.earthStaff, new StaffRenderer());
+			MinecraftForgeClient.registerItemRenderer(mod_RpgMageSet.windStaff,
+					new StaffRenderer());
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgMageSet.earthStaff.itemID,
-					(IItemRenderer) new StaffRenderer());
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgMageSet.windStaff.itemID,
-					(IItemRenderer) new StaffRenderer());
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgMageSet.ultimateStaff.itemID,
-					(IItemRenderer) new StaffRenderer());
+					mod_RpgMageSet.ultimateStaff, new StaffRenderer());
 
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgMageSet.archBook.itemID,
-					(IItemRenderer) new BookRenderer(new bookMage(),
+			MinecraftForgeClient.registerItemRenderer(mod_RpgMageSet.archBook,
+					new BookRenderer(new bookMage(),
 							"subaraki:jewels/archMageShield.png"));
 		}
 	}

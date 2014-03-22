@@ -1,7 +1,7 @@
 package rpgMage;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import rpgInventory.mod_RpgInventory;
@@ -20,15 +20,16 @@ public class MageEvents {
 					/* ==== ARCHMAGE EFFECTS ==== */
 					if (mod_RpgInventory.playerClass
 							.contains(mod_RpgMageSet.CLASSARCHMAGESHIELD)
-							|| mod_RpgInventory.developers.contains(p.username
-									.toLowerCase())) {
+							|| mod_RpgInventory.developers.contains(p
+									.getDisplayName().toLowerCase())) {
 						if (weapon.getItem().equals(mod_RpgMageSet.fireStaff)
 								|| weapon.getItem().equals(
 										mod_RpgMageSet.ultimateStaff)) {
 							if (p.isBurning()) {
 								if (p.getHealth() < 6) {
 									p.setHealth(mod_RpgInventory.donators
-											.contains(p.username) ? 8 : 6);
+											.contains(p.getDisplayName()) ? 8
+											: 6);
 								}
 								p.extinguish();
 							}
@@ -48,8 +49,9 @@ public class MageEvents {
 						if (weapon.getItem().equals(mod_RpgMageSet.earthStaff)
 								|| weapon.getItem().equals(
 										mod_RpgMageSet.ultimateStaff)) {
-							p.curePotionEffects(new ItemStack(Item.bucketMilk,
-									1)); // cure all negative potion effects
+							p.curePotionEffects(new ItemStack(
+									Items.milk_bucket, 1)); // cure all negative
+															// potion effects
 						}
 					}
 				}

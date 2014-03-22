@@ -9,7 +9,7 @@ import rpgInventory.utils.AbstractArmor;
 public class ItemArcherArmor extends AbstractArmor {
 
 	public ItemArcherArmor(ArmorMaterial arm, int par3, int par4) {
-		super(par3,par4, arm);
+		super(par3, par4, arm);
 	}
 
 	@Override

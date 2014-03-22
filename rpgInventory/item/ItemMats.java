@@ -5,7 +5,7 @@ import net.minecraft.item.Item;
 public class ItemMats extends Item {
 
 	public ItemMats(int par1) {
-		super(par1);
+		super();
 	}
 
 	@Override

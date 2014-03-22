@@ -8,9 +8,11 @@ public class ItemMageShield extends ItemRpgInvArmor {
 
 	private bookMage book = new bookMage();
 
-	public ItemMageShield(int par1, int par4, int maxDamage, String name,
+	public ItemMageShield(int par4, int maxDamage, String name,
 			String resourcelocation) {
-		super(par1, par4, maxDamage, name, resourcelocation);
+
+		super(par4, maxDamage, name, resourcelocation);
+
 	}
 
 	@Override

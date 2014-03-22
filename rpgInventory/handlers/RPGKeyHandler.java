@@ -22,6 +22,7 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
@@ -32,7 +33,7 @@ import rpgInventory.utils.IKeyHandler;
 
 public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 
-	public static Map<Integer, Integer> abilityMap = new HashMap();
+	public static Map<Item, Integer> abilityMap = new HashMap();
 
 	public static Map<KeyBinding, List<IKeyHandler>> keyHandlers = new HashMap();
 
@@ -61,11 +62,10 @@ public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 	public RPGKeyHandler(KeyBinding[] k, boolean[] b) {
 		super(bindKeys, reps);
 
-		abilityMap.put(mod_RpgInventory.staf.itemID, RpgPacketHandler.MAGE1);
-		abilityMap.put(mod_RpgInventory.hammer.itemID,
-				RpgPacketHandler.BERSERKER);
-		abilityMap.put(mod_RpgInventory.elfbow.itemID, RpgPacketHandler.ARCHER);
-		abilityMap.put(mod_RpgInventory.wand.itemID, RpgPacketHandler.MAGE2);
+		abilityMap.put(mod_RpgInventory.staf, RpgPacketHandler.MAGE1);
+		abilityMap.put(mod_RpgInventory.hammer, RpgPacketHandler.BERSERKER);
+		abilityMap.put(mod_RpgInventory.elfbow, RpgPacketHandler.ARCHER);
+		abilityMap.put(mod_RpgInventory.wand, RpgPacketHandler.MAGE2);
 		// abilityMap.put(mod_RpgInventory.daggers.itemID, 14);
 		// 14 used in another packet !
 	}
@@ -194,16 +194,16 @@ public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 
 		if (abilityMap.containsKey(item.getItem().itemID)) {
 
-			int i = abilityMap.get(item.getItem().itemID);
+			int i = abilityMap.get(item.getItem());
 			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 			DataOutputStream outputStream = new DataOutputStream(bytes);
 			try {
 				outputStream.writeInt(i);
-				if (item.getItem().itemID == mod_RpgInventory.elfbow.itemID) {
+				if (item.getItem() == mod_RpgInventory.elfbow) {
 					EntityLivingBase target = isTargetingEntity(
 							Minecraft.getMinecraft().thePlayer,
 							mod_RpgInventory.donators.contains(Minecraft
-									.getMinecraft().thePlayer.username) ? 60
+									.getMinecraft().thePlayer.getDisplayName()) ? 60
 									: 40);
 					if (target != null) {
 						outputStream.writeBoolean(false);

@@ -56,7 +56,9 @@ public class RenderRpgPlayer {
 	public void PlayerRender(RenderPlayerEvent.SetArmorModel evt) {
 
 		EntityPlayer player = evt.entityPlayer;
-		main = evt.renderer.modelBipedMain;
+		main = evt.renderer.modelBipedMain; // all fields get set to public when
+											// forge compiles them
+		// or they used to. that's why this worked before :)
 
 		/* ===== RENDERING CLOAK===== */
 		ItemStack cloak = PlayerRpgInventory.get(player).getCloak();
@@ -111,11 +113,11 @@ public class RenderRpgPlayer {
 				 */
 				if (cloak.getItem() == mod_RpgInventory.cloak) {
 					if (CapeRenderer.capes != null) {
-						if (CapeRenderer.playersWithCapes
-								.contains(player.username)) {
+						if (CapeRenderer.playersWithCapes.contains(player
+								.getDisplayName())) {
 							mc.renderEngine.bindTexture(CapeRenderer
-									.getLocationCape(player.username));// new
-																		// ResourceLocation("subaraki/playerCapes/"+player.username+".png"));
+									.getLocationCape(player.getDisplayName()));// new
+							// ResourceLocation("subaraki/playerCapes/"+player.username+".png"));
 						}
 					}
 				}

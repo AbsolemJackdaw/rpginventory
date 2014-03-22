@@ -22,7 +22,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 	public int maxUse = 150;
 
 	public ItemElementalStaff(int par1, int type, int maxUse) {
-		super(par1, EnumToolMaterial.WOOD);
+		super(ToolMaterial.WOOD);
 		this.type = type;
 		this.maxUse = maxUse;
 	}
@@ -72,10 +72,10 @@ public class ItemElementalStaff extends ItemRpgSword {
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World,
-			int par3, int par4, int par5, int par6,
+			Block b, int par4, int par5, int par6,
 			EntityLivingBase par7EntityLiving) {
-		if ((double) Block.blocksList[par3].getBlockHardness(par2World, par4,
-				par5, par6) != 0.0D) {
+
+		if (b.getBlockHardness(par2World, par4, par5, par6) != 0.0D) {
 			// par1ItemStack.damageItem(2, par7EntityLiving);
 		}
 
@@ -91,7 +91,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 	public ItemStack onItemRightClick(ItemStack is, World par2World,
 			EntityPlayer p) {
 		if (mod_RpgInventory.playerClass.contains(mod_RpgMageSet.CLASSARCHMAGE)
-				|| mod_RpgInventory.developers.contains(p.username
+				|| mod_RpgInventory.developers.contains(p.getDisplayName()
 						.toLowerCase())) {
 			if (p.isUsingItem()) {
 				p.stopUsingItem();
@@ -140,8 +140,9 @@ public class ItemElementalStaff extends ItemRpgSword {
 	 *            The amount of time in tick the item has been used for
 	 *            continuously
 	 */
+
 	@Override
-	public void onUsingItemTick(ItemStack stack, EntityPlayer p, int count) {
+	public void onUsingTick(ItemStack stack, EntityPlayer p, int count) {
 		int time = this.getMaxItemUseDuration(stack) - count;
 		NBTTagCompound nbt = stack.getTagCompound();
 		if (!p.worldObj.isRemote) {
@@ -149,12 +150,13 @@ public class ItemElementalStaff extends ItemRpgSword {
 					&& !nbt.getBoolean("ReCharging")) {
 				float var7 = time / 20.0F;
 				var7 = ((var7 * var7) + (var7 * 2.0F)) / 3.0F;
-				int limit = ((p.username.toLowerCase().matches("unjustice")) ? 35
-						: ((this.type == 5) ? 10 : 7));
+				int limit = ((p.getDisplayName().toLowerCase()
+						.matches("unjustice")) ? 35 : ((this.type == 5) ? 10
+						: 7));
 				EntityElementalBlock var9 = new EntityElementalBlock(
 						p.worldObj, p, var7 * 2, this.type, limit);
 				p.worldObj.spawnEntityInWorld(var9);
-				if (!mod_RpgInventory.developers.contains(p.username
+				if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 						.toLowerCase())) {
 					nbt.setFloat("EnergyCharge",
 							nbt.getFloat("EnergyCharge") + 1.0F);

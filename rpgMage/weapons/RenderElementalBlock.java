@@ -110,7 +110,7 @@ public class RenderElementalBlock extends Render {
 	public void renderBlockEntity(EntityElementalBlock theEntity, double par2,
 			double par4, double par6, float par8, float par9) {
 
-		Block b = Block.blocksList[(new Random()).nextInt(2) + 1];
+		Block b = Block.getBlockById((new Random()).nextInt(2) + 1);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) par2, (float) par4, (float) par6);
 		GL11.glRotatef((new Random()).nextInt(360), 1, 1, 1);

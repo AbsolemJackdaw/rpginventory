@@ -163,8 +163,8 @@ public class ItemArcherBow extends Item {
 					float f = j / 20.0F;
 					f = ((f * f) + (f * 2.0F)) / 3.0F;
 
-					if ((double) f < (mod_RpgInventory.donators
-							.contains(player.getDisplayName()) ? 0.2d : 0.5D)) {
+					if (f < (mod_RpgInventory.donators.contains(player
+							.getDisplayName()) ? 0.2d : 0.5D)) {
 						return;
 					}
 
@@ -174,8 +174,8 @@ public class ItemArcherBow extends Item {
 
 					EntityArrow entityarrow = new EntityArrow(par2World,
 							player, f * 2.0F);
-					boolean crit = mod_RpgInventory.donators
-							.contains(player.getDisplayName()) ? true : false;
+					boolean crit = mod_RpgInventory.donators.contains(player
+							.getDisplayName()) ? true : false;
 					entityarrow.setIsCritical(crit);
 
 					if (f == 1.0F) {
@@ -192,12 +192,12 @@ public class ItemArcherBow extends Item {
 					if (flag) {
 						entityarrow.canBePickedUp = 2;
 					} else {
-						player.inventory
-								.consumeInventoryItem(Items.arrow);
+						player.inventory.consumeInventoryItem(Items.arrow);
 					}
 					if (!par2World.isRemote) {
 						par2World.spawnEntityInWorld(entityarrow);
-						if (mod_RpgInventory.donators.contains(player.getDisplayName())) {
+						if (mod_RpgInventory.donators.contains(player
+								.getDisplayName())) {
 							par2World.spawnEntityInWorld(new EntityArrow(
 									par2World, player, f * 2.0f));
 						}
@@ -211,7 +211,6 @@ public class ItemArcherBow extends Item {
 		}
 	}
 
-	
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
 		player.setItemInUse(stack, count);

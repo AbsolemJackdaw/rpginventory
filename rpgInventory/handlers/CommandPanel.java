@@ -57,13 +57,13 @@ public class CommandPanel extends CommandBase {
 						new ItemStack(item, item.getItemStackLimit()));
 			}
 		}
-		sets.get("mats").add(new ItemStack(Block.blockGold, 64));
-		sets.get("mats").add(new ItemStack(mod_RpgInventory.forgeBlock, 64));
-		sets.get("mats").add(new ItemStack(Item.ingotGold, 64));
-		sets.get("mats").add(new ItemStack(Item.blazeRod, 64));
-		sets.get("mats").add(new ItemStack(Item.dyePowder, 64, 4));
-		sets.get("mats").add(new ItemStack(Item.emerald, 64));
-		sets.get("mats").add(new ItemStack(Item.diamond, 64));
+		// sets.get("mats").add(new ItemStack(Blocks.blockGold, 64));
+		// sets.get("mats").add(new ItemStack(mod_RpgInventory.forgeBlock, 64));
+		// sets.get("mats").add(new ItemStack(Items.ingotGold, 64));
+		// sets.get("mats").add(new ItemStack(Items.blazeRod, 64));
+		// sets.get("mats").add(new ItemStack(Items.dyePowder, 64, 4));
+		// sets.get("mats").add(new ItemStack(Items.emerald, 64));
+		// sets.get("mats").add(new ItemStack(Items.diamond, 64));
 
 		sets.get("weapons").add(new ItemStack(mod_RpgInventory.hammer));
 		sets.get("weapons").add(new ItemStack(mod_RpgInventory.claymore));
@@ -257,7 +257,14 @@ public class CommandPanel extends CommandBase {
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender commandSender) {
 		return mod_RpgInventory.developers
-				.contains(((EntityPlayer) commandSender).username.toLowerCase());
+				.contains(((EntityPlayer) commandSender).getDisplayName()
+						.toLowerCase());
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
@@ -397,7 +404,7 @@ public class CommandPanel extends CommandBase {
 							}
 						}
 					} else {
-						((EntityPlayer) sender)
+						((EntityPlayer) sender).
 								.addChatMessage("What do you wish to do master?");
 					}
 				} else {

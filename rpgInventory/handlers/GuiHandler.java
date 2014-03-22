@@ -20,8 +20,8 @@ public class GuiHandler implements IGuiHandler {
 		}
 
 		if (ID == 2) {
-			return new GuiMF(player.inventory,
-					(TEMold) world.getBlockTileEntity(x, y, z));
+			return new GuiMF(player.inventory, (TEMold) world.getTileEntity(x,
+					y, z));
 		}
 		return null;
 	}
@@ -36,7 +36,7 @@ public class GuiHandler implements IGuiHandler {
 		}
 		if (ID == 2) {
 			return new MoldContainer(player.inventory,
-					(TEMold) world.getBlockTileEntity(x, y, z));
+					(TEMold) world.getTileEntity(x, y, z));
 		}
 
 		return null;

@@ -48,10 +48,11 @@ public class PacketTeleport {
 				double d1 = rand.nextGaussian() * 0.02D;
 				double d2 = rand.nextGaussian() * 0.02D;
 				p.worldObj.spawnParticle("largesmoke",
-						(p.posX + rand.nextFloat() * p.width * 2.0F) - p.width,
-						p.posY + 0.5D + rand.nextFloat() * p.height,
-						(p.posZ + rand.nextFloat() * p.width * 2.0F) - p.width,
-						d0, d1, d2);
+						(p.posX + (rand.nextFloat() * p.width * 2.0F))
+								- p.width, p.posY + 0.5D
+								+ (rand.nextFloat() * p.height),
+						(p.posZ + (rand.nextFloat() * p.width * 2.0F))
+								- p.width, d0, d1, d2);
 
 			} else {
 				p.addChatMessage("You must wait for energy to replenish, left: "

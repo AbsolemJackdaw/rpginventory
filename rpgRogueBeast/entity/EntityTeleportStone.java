@@ -63,10 +63,10 @@ public class EntityTeleportStone extends EntityThrowable {
 			double d1 = this.rand.nextGaussian() * 0.02D;
 			double d2 = this.rand.nextGaussian() * 0.02D;
 			this.worldObj.spawnParticle("largesmoke",
-					(this.posX + this.rand.nextFloat() * this.width * 2.0F)
+					(this.posX + (this.rand.nextFloat() * this.width * 2.0F))
 							- this.width,
-					this.posY + 0.5D + this.rand.nextFloat() * this.height,
-					(this.posZ + this.rand.nextFloat() * this.width * 2.0F)
+					this.posY + 0.5D + (this.rand.nextFloat() * this.height),
+					(this.posZ + (this.rand.nextFloat() * this.width * 2.0F))
 							- this.width, d0, d1, d2);
 		}
 

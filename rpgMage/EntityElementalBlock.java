@@ -1,5 +1,7 @@
 package rpgMage;
 
+import io.netty.buffer.ByteBuf;
+
 import java.util.List;
 
 import net.minecraft.entity.EntityLiving;
@@ -14,10 +16,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntityElementalBlock extends EntityThrowable implements
@@ -54,7 +52,7 @@ public class EntityElementalBlock extends EntityThrowable implements
 		this.sizeLimit = sizeLimit;
 		this.type = type;
 		this.noClip = true;
-		this.owner = e.getEntityName();
+		// this.owner = e.getEntityName(); TODO
 		this.shootingEntity = e;
 
 	}
@@ -98,12 +96,13 @@ public class EntityElementalBlock extends EntityThrowable implements
 	}
 
 	@Override
-	public void readSpawnData(ByteArrayDataInput data) {
+	public void readSpawnData(ByteBuf data) {
 		this.size = data.readInt();
 		this.type = data.readInt();
 		this.step = data.readInt();
 		this.sizeLimit = data.readInt();
-		this.owner = data.readUTF();
+		// this.owner = data.readUTF();
+		// TODO
 	}
 
 	public void specialAttack(MovingObjectPosition var1, int type) {
@@ -361,12 +360,12 @@ public class EntityElementalBlock extends EntityThrowable implements
 	}
 
 	@Override
-	public void writeSpawnData(ByteArrayDataOutput data) {
+	public void writeSpawnData(ByteBuf data) {
 		data.writeInt(this.size);
 		data.writeInt(this.type);
 		data.writeInt(this.step);
 		data.writeInt(this.sizeLimit);
-		data.writeUTF(this.owner);
+		// data.writeUTF(this.owner);
 	}
 
 	@Override

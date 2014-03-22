@@ -103,7 +103,7 @@ public class RpgGui extends GuiContainer {
 		drawString(fontRenderer, hi, (this.width / 2) + 39,
 				(this.height / 2) - 15, 0xffffff);
 
-		renderPlayerinInv(this.mc, posX + 51, posY + 75, 30, posX + 51
+		renderPlayerinInv(this.mc, posX + 51, posY + 75, 30, (posX + 51)
 				- this.xSize_lo, (posY + 75) - 50 - this.ySize_lo);
 	}
 

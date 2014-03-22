@@ -1,8 +1,10 @@
 package rpgMage;
 
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
@@ -19,7 +21,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "RPGMS", name = "RpgInv Mage Addon", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, clientPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgMSPacket" }, packetHandler = RpgMSPacketHandler.class), serverPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgMSPacket" }, packetHandler = RpgMSPacketHandler.class))
+// @NetworkMod(clientSideRequired = true, serverSideRequired = false,
+// clientPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgMSPacket" },
+// packetHandler = RpgMSPacketHandler.class), serverPacketHandlerSpec =
+// @SidedPacketHandler(channels = { "RpgMSPacket" }, packetHandler =
+// RpgMSPacketHandler.class))
 public class mod_RpgMageSet {
 
 	public static String CLASSARCHMAGE = "archMage";
@@ -34,8 +40,8 @@ public class mod_RpgMageSet {
 			ultimateStaff, archmageHood, archmageChest, archmageLegs,
 			archMageBoots, archMageLeather;
 
-	public final static EnumArmorMaterial archMage = EnumHelper
-			.addArmorMaterial("archmage", 20, new int[] { 4, 4, 4, 2 }, 5);
+	public final static ArmorMaterial archMage = EnumHelper.addArmorMaterial(
+			"archmage", 20, new int[] { 4, 4, 4, 2 }, 5);
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
@@ -59,18 +65,18 @@ public class mod_RpgMageSet {
 		ultimateStaff = new ItemElementalStaff(
 				RpgConfig.instance.staffUltimate, 5, 300).setMaxStackSize(1)
 				.setMaxDamage(150).setUnlocalizedName("staffElemental");
-		archBook = new ItemMageShield(RpgConfig.instance.archBook, 1, 300, "",
+		archBook = new ItemMageShield(1, 300, "",
 				"subaraki:jewels/archMageShield.png")
 				.setUnlocalizedName("archTome");
 
-		archmageHood = new ItemMageARmor(RpgConfig.instance.archmageHood,
-				archMage, 4, 0).setUnlocalizedName("archMage1");
-		archmageChest = new ItemMageARmor(RpgConfig.instance.archmageChest,
-				archMage, 4, 1).setUnlocalizedName("archMage2");
-		archmageLegs = new ItemMageARmor(RpgConfig.instance.archmageLegs,
-				archMage, 4, 2).setUnlocalizedName("archMage3");
-		archMageBoots = new ItemMageARmor(RpgConfig.instance.archmageBoots,
-				archMage, 4, 3).setUnlocalizedName("archMage4");
+		archmageHood = new ItemMageARmor(archMage, 4, 0)
+				.setUnlocalizedName("archMage1");
+		archmageChest = new ItemMageARmor(archMage, 4, 1)
+				.setUnlocalizedName("archMage2");
+		archmageLegs = new ItemMageARmor(archMage, 4, 2)
+				.setUnlocalizedName("archMage3");
+		archMageBoots = new ItemMageARmor(archMage, 4, 3)
+				.setUnlocalizedName("archMage4");
 
 		LanguageRegistry.addName(fireStaff, "Fire Staff");
 		LanguageRegistry.addName(frostStaff, "Frost Staff");
@@ -85,34 +91,34 @@ public class mod_RpgMageSet {
 
 		GameRegistry.addShapelessRecipe(new ItemStack(ultimateStaff),
 				new Object[] { windStaff, earthStaff, frostStaff, fireStaff,
-						Item.netherStar });
+						Items.nether_star });
 		GameRegistry.addRecipe(new ItemStack(windStaff), new Object[] { "III",
-				"DSD", "III", 'I', Item.feather, 'D', Item.diamond, 'S',
+				"DSD", "III", 'I', Items.feather, 'D', Items.diamond, 'S',
 				mod_RpgInventory.staf });
 		GameRegistry.addRecipe(new ItemStack(frostStaff), new Object[] { "III",
-				"DSD", "III", 'I', Block.ice, 'D', Item.diamond, 'S',
+				"DSD", "III", 'I', Blocks.ice, 'D', Items.diamond, 'S',
 				mod_RpgInventory.staf });
 		GameRegistry.addRecipe(new ItemStack(earthStaff), new Object[] { "III",
-				"DSD", "III", 'I', Block.grass, 'D', Item.diamond, 'S',
+				"DSD", "III", 'I', Blocks.grass, 'D', Items.diamond, 'S',
 				mod_RpgInventory.staf });
 		GameRegistry.addRecipe(new ItemStack(fireStaff), new Object[] { "III",
-				"DSD", "III", 'I', Item.blazePowder, 'D', Item.diamond, 'S',
+				"DSD", "III", 'I', Items.blaze_powder, 'D', Items.diamond, 'S',
 				mod_RpgInventory.staf });
 		GameRegistry.addRecipe(new ItemStack(archBook), new Object[] { "III",
-				"IBI", " I ", 'I', new ItemStack(Item.dyePowder, 1, 4), 'B',
-				Item.book });
+				"IBI", " I ", 'I', new ItemStack(Items.dye, 1, 4), 'B',
+				Items.book });
 		GameRegistry.addRecipe(new ItemStack(archMageBoots), new Object[] {
 				"III", "IBI", "III", 'B', mod_RpgInventory.mageboots, 'I',
-				Item.goldNugget });
+				Items.gold_nugget });
 		GameRegistry.addRecipe(new ItemStack(archmageLegs), new Object[] {
 				"III", "IBI", "III", 'B', mod_RpgInventory.magepants, 'I',
-				Item.goldNugget });
+				Items.gold_nugget });
 		GameRegistry.addRecipe(new ItemStack(archmageChest), new Object[] {
 				"III", "IBI", "III", 'B', mod_RpgInventory.magegown, 'I',
-				Item.goldNugget });
+				Items.gold_nugget });
 		GameRegistry.addRecipe(new ItemStack(archmageHood), new Object[] {
 				"III", "IBI", "III", 'B', mod_RpgInventory.magehood, 'I',
-				Item.goldNugget });
+				Items.gold_nugget });
 
 		fireStaff.setCreativeTab(tab);
 		frostStaff.setCreativeTab(tab);
@@ -125,7 +131,7 @@ public class mod_RpgMageSet {
 		archmageLegs.setCreativeTab(tab);
 		archMageBoots.setCreativeTab(tab);
 
-		EntityRegistry.registerGlobalEntityID(EntityElementalBlock.class,
+		EntityRegistry.registerGlobalEntityID(EntityElementalBlocks.class,
 				"Elemental", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityElementalBlock.class,
 				"Elemental", mod_RpgInventory.instance.getUniqueID(), this,

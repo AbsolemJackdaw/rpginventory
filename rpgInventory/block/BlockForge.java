@@ -102,8 +102,8 @@ public class BlockForge extends BlockContainer {
 			int side) {
 		int front = 0;
 		Icon icon;
-		TileEntity tile = Minecraft.getMinecraft().theWorld.getTileEntity(
-				x, y, z);
+		TileEntity tile = Minecraft.getMinecraft().theWorld.getTileEntity(x, y,
+				z);
 
 		if (tile != null) {
 			front = access.getBlockMetadata(x, y, z);
@@ -176,7 +176,7 @@ public class BlockForge extends BlockContainer {
 	public void onBlockPlacedBy(World w, int x, int y, int z,
 			EntityLivingBase entity, ItemStack par6ItemStack) {
 		int var = MathHelper
-				.floor_double((entity.rotationYaw * 4.0F) / 360.0F + 0.5D) & 3;
+				.floor_double(((entity.rotationYaw * 4.0F) / 360.0F) + 0.5D) & 3;
 		// Unsure what the last var is for, 0 seems to skip what it does tho...
 		switch (var) {
 		case 0:
@@ -259,7 +259,7 @@ public class BlockForge extends BlockContainer {
 	/**
 	 * set a blocks direction
 	 */
-//	@Override
+	// @Override
 	private void setDefaultDirection(World par1World, int par2, int par3,
 			int par4) {
 		if (!par1World.isRemote) {

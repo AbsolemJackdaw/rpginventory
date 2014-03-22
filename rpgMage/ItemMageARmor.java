@@ -8,15 +8,14 @@ import rpgInventory.utils.AbstractArmor;
 
 public class ItemMageARmor extends AbstractArmor {
 
-	public ItemMageARmor(int par1, EnumArmorMaterial enumArmorMaterial,
-			int par3, int par4) {
-		super(par1, enumArmorMaterial, par3, par4);
-		// TODO Auto-generated constructor stub
+	public ItemMageARmor(ItemArmor.ArmorMaterial enumArmorMaterial, int par3,
+			int par4) {
+		super(par3, par4, enumArmorMaterial);
+
 	}
 
 	@Override
 	public String armorClassName() {
-		// TODO Auto-generated method stub
 		return mod_RpgMageSet.CLASSARCHMAGE;
 	}
 
@@ -37,12 +36,12 @@ public class ItemMageARmor extends AbstractArmor {
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
-		if ((itemstack.itemID == mod_RpgMageSet.archmageHood.itemID)
-				|| (itemstack.itemID == mod_RpgMageSet.archmageChest.itemID)
-				|| (itemstack.itemID == mod_RpgMageSet.archMageBoots.itemID)) {
+		if ((itemstack.getItem() == mod_RpgMageSet.archmageHood)
+				|| (itemstack.getItem() == mod_RpgMageSet.archmageChest)
+				|| (itemstack.getItem() == mod_RpgMageSet.archMageBoots)) {
 			return "armor:archMage_1.png";
 		}
-		if (itemstack.itemID == mod_RpgMageSet.archmageLegs.itemID) {
+		if (itemstack.getItem() == mod_RpgMageSet.archmageLegs) {
 			return "armor:archMage_2.png";
 		}
 		return super.getArmorTexture(itemstack, entity, slot, type);

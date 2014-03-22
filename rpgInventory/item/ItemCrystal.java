@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
@@ -18,7 +19,7 @@ public class ItemCrystal extends ItemRpgInvArmor {
 			"Spider", "Bull" };
 
 	public ItemCrystal(int id, int armorType, int maxDamage, String name) {
-		super(id, armorType, maxDamage, name, "");
+		super(armorType, maxDamage, name, "");
 		this.setHasSubtypes(true);
 		// Max stack size MUST be 1!
 		this.maxStackSize = 1;
@@ -88,7 +89,7 @@ public class ItemCrystal extends ItemRpgInvArmor {
 	}
 
 	@Override
-	public String getItemDisplayName(ItemStack par1ItemStack) {
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 		int var2 = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 3);
 		String itemname = pets[var2];
 		if (var2 > 0) {
@@ -111,7 +112,8 @@ public class ItemCrystal extends ItemRpgInvArmor {
 	 * returns a list of items with the same ID, but different meta (eg: dye
 	 * returns 16 items)
 	 */
-	public void getSubItems(int par1, CreativeTabs par2CreativeTabs,
+	@Override
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
 			List par3List) {
 		par3List.add(new ItemStack(par1, 1, 0));
 		par3List.add(new ItemStack(par1, 1, 1));
