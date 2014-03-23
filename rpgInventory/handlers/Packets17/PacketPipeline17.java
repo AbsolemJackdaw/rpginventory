@@ -132,6 +132,10 @@ public class PacketPipeline17 extends
 		this.channels = NetworkRegistry.INSTANCE.newChannel("RPGInv", this);
 		
 		registerPacket(PacketInventory.class);
+		registerPacket(PacketMageHeal.class);
+		registerPacket(PacketArcher.class);
+		registerPacket(PacketBerserker.class);
+		registerPacket(PacketMageVortex.class);
 	}
 
 	// Method to call from FMLPostInitializationEvent
