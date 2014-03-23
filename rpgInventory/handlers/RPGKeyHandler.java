@@ -8,8 +8,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
-import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,37 +25,57 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
+
+import org.lwjgl.input.Keyboard;
+
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.handlers.packets.RpgPacketHandler;
-import rpgInventory.utils.IKeyHandler;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 
-public class RPGKeyHandler extends KeyInputEvent implements IKeyHandler {
+public class RPGKeyHandler {
 
-	public static Map<Item, Integer> abilityMap = new HashMap();
+	protected static Map<Item, Integer> abilityMap = new HashMap();
 
-	public static Map<KeyBinding, List<IKeyHandler>> keyHandlers = new HashMap();
+//	public static List<KeyBinding> registeredKeyBinds = new ArrayList();
 
-	public static List<KeyBinding> registeredKeyBinds = new ArrayList();
 
-	public static void registerKeyhandler(IKeyHandler keyhandler,
-			KeyBinding[] keyBindings, boolean[] repeatings) {
-		for (KeyBinding thisKB : keyBindings) {
-			if (!registeredKeyBinds.contains(thisKB)) {
-				registeredKeyBinds.add(thisKB);
-			}
-			List<IKeyHandler> keylist = keyHandlers.get(thisKB);
-			if (keylist == null) {
-				keylist = new ArrayList();
-				keyHandlers.put(thisKB, keylist);
-			}
-			keylist.add(keyhandler);
-		}
-	}
+
+	protected static KeyBinding keyInventory = new KeyBinding("RPG Inventory Key",
+			Keyboard.KEY_END, "rpginventorymod");
+
+
+	protected static KeyBinding keySpecial = new KeyBinding("RPG Special Ability",
+			Keyboard.KEY_F, "rpginventorymod");
+
+	public static final int OPENRPGINV = 1;
+	public static final int MAGE1 = 3;
+	public static final int BERSERKER = 4;
+	public static final int ARCHER = 5;
+	public static final int MAGE2 = 7;
+	public static final int INVENTORY = 15;
+	public static final int SMP_INVENTORY_SYNC = 20;
+
+	//	public static void registerKeyhandler(IKeyHandler keyhandler,
+	//			KeyBinding[] keyBindings, boolean[] repeatings) {
+	//		for (KeyBinding thisKB : keyBindings) {
+	//			if (!registeredKeyBinds.contains(thisKB)) {
+	//				registeredKeyBinds.add(thisKB);
+	//			}
+	//			List<IKeyHandler> keylist = keyHandlers.get(thisKB);
+	//			if (keylist == null) {
+	//				keylist = new ArrayList();
+	//				keyHandlers.put(thisKB, keylist);
+	//			}
+	//			keylist.add(keyhandler);
+	//		}
+	//	}
 
 	public RPGKeyHandler() {
 		super();
+
+		ClientRegistry.registerKeyBinding(keyInventory);
+		ClientRegistry.registerKeyBinding(keySpecial);
 
 		// registeredKeyBinds.toArray(new KeyBinding[registeredKeyBinds
 		// .size()]), new boolean[registeredKeyBinds.size()]
@@ -67,17 +85,12 @@ public class RPGKeyHandler extends KeyInputEvent implements IKeyHandler {
 		// super(bindKeys, reps);
 		super();
 
-		abilityMap.put(mod_RpgInventory.staf, RpgPacketHandler.MAGE1);
-		abilityMap.put(mod_RpgInventory.hammer, RpgPacketHandler.BERSERKER);
-		abilityMap.put(mod_RpgInventory.elfbow, RpgPacketHandler.ARCHER);
-		abilityMap.put(mod_RpgInventory.wand, RpgPacketHandler.MAGE2);
+		abilityMap.put(mod_RpgInventory.staf, MAGE1);
+		abilityMap.put(mod_RpgInventory.hammer, BERSERKER);
+		abilityMap.put(mod_RpgInventory.elfbow, ARCHER);
+		abilityMap.put(mod_RpgInventory.wand, MAGE2);
 		// abilityMap.put(mod_RpgInventory.daggers.itemID, 14);
 		// 14 used in another packet !
-	}
-
-	@Override
-	public String getLabel() {
-		return "RpgInventoryKeyHandler";
 	}
 
 	public EntityLivingBase isTargetingEntity(EntityPlayer player,
@@ -107,7 +120,7 @@ public class RPGKeyHandler extends KeyInputEvent implements IKeyHandler {
 											var7.xCoord * var2,
 											var7.yCoord * var2,
 											var7.zCoord * var2).expand(var9,
-											var9, var9));
+													var9, var9));
 					double var11 = var4;
 					for (int var13 = 0; var13 < var10.size(); ++var13) {
 						Entity var14 = (Entity) var10.get(var13);
@@ -145,25 +158,19 @@ public class RPGKeyHandler extends KeyInputEvent implements IKeyHandler {
 		return null;
 	}
 
-	@Override
-	public void keyDown(EnumSet<TickType> types, KeyBinding kb,
-			boolean tickEnd, boolean isRepeat) {
-	}
+	@SubscribeEvent
+	public void keys(KeyInputEvent evt) {
 
-	@Override
-	public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd) {
-		if (!tickEnd) {
-			return;
-		}
+
 		try {
 			Minecraft mc = Minecraft.getMinecraft();
 			GuiScreen guiscreen = mc.currentScreen;
-			if (kb.keyDescription.equals("RPG Special Ability")) {
+			if (keySpecial.isPressed()){
 				ItemStack item = mc.thePlayer.getCurrentEquippedItem();
 				if ((guiscreen == null) && !(item == null)) {
-					specialAbility(types, kb, tickEnd, item);
+					specialAbility(item);
 				}
-			} else if (kb.keyDescription.equals("RPG Inventory Key")) {
+			} else if (keyInventory.isPressed()) {
 				if ((guiscreen instanceof GuiInventory)
 						|| (guiscreen instanceof GuiContainerCreative)) {
 					int i = 1;
@@ -172,9 +179,12 @@ public class RPGKeyHandler extends KeyInputEvent implements IKeyHandler {
 					DataOutputStream outputStream = new DataOutputStream(bytes);
 					try {
 						outputStream.writeInt(i);
-						Packet250CustomPayload packet = new Packet250CustomPayload(
-								"RpgInv", bytes.toByteArray());
-						PacketDispatcher.sendPacketToServer(packet);
+
+						//TODO
+						System.out.println("send packet keyhandler open inventory");
+						//						Packet250CustomPayload packet = new Packet250CustomPayload(
+						//								"RpgInv", bytes.toByteArray());
+						//						PacketDispatcher.sendPacketToServer(packet);
 						// System.out.println("Packet send");
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -186,16 +196,16 @@ public class RPGKeyHandler extends KeyInputEvent implements IKeyHandler {
 		}
 	}
 
-	@Override
-	public void specialAbility(EnumSet<TickType> types, KeyBinding kb,
-			boolean tickEnd, ItemStack item) {
+	//	@Override
+	public void specialAbility(ItemStack item) {
 
-		List<IKeyHandler> keyhandlers = keyHandlers.get(kb);
-		if ((keyhandlers != null) && (keyhandlers.size() > 0)) {
-			for (IKeyHandler thisKH : keyhandlers) {
-				thisKH.specialAbility(types, kb, tickEnd, item);
-			}
-		}
+//		List<IKeyHandler> keyhandlers = keyHandlers.get(kb);
+		
+//		if ((keyhandlers != null) && (keyhandlers.size() > 0)) {
+//			for (IKeyHandler thisKH : keyhandlers) {
+//				thisKH.specialAbility(kb, item);
+//			}
+//		}
 
 		if (abilityMap.containsKey(item.getItem())) {
 
@@ -209,7 +219,7 @@ public class RPGKeyHandler extends KeyInputEvent implements IKeyHandler {
 							Minecraft.getMinecraft().thePlayer,
 							mod_RpgInventory.donators.contains(Minecraft
 									.getMinecraft().thePlayer.getDisplayName()) ? 60
-									: 40);
+											: 40);
 					if (target != null) {
 						outputStream.writeBoolean(false);
 						outputStream.writeInt((int) Math.floor(target.posX));
@@ -220,9 +230,9 @@ public class RPGKeyHandler extends KeyInputEvent implements IKeyHandler {
 					}
 				}
 				//TODO sendpacket
-//				Packet250CustomPayload packet = new Packet250CustomPayload(
-//						"RpgInv", bytes.toByteArray());
-//				PacketDispatcher.sendPacketToServer(packet);
+				//				Packet250CustomPayload packet = new Packet250CustomPayload(
+				//						"RpgInv", bytes.toByteArray());
+				//				PacketDispatcher.sendPacketToServer(packet);
 				System.out.println("todo : send packet");
 
 			} catch (IOException e) {
@@ -231,9 +241,9 @@ public class RPGKeyHandler extends KeyInputEvent implements IKeyHandler {
 		}
 	}
 
-	@Override
-	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.CLIENT);
-	}
+	//	@Override
+	//	public EnumSet<TickType> ticks() {
+	//		return EnumSet.of(TickType.CLIENT);
+	//	}
 
 }

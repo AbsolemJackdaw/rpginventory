@@ -7,6 +7,8 @@ import java.util.EnumSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.settings.KeyBinding;
@@ -16,27 +18,14 @@ import rpgInventory.handlers.RPGKeyHandler;
 public class RpgPlusKeyHandling extends RPGKeyHandler {
 
 	@Override
-	public String getLabel() {
-		// TODO Auto-generated method stub
-		return "RpgPlusHandler";
-	}
-
-	@Override
-	public void keyDown(EnumSet<TickType> types, KeyBinding kb,
-			boolean tickEnd, boolean isRepeat) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd) {
+	public void keys(KeyInputEvent evt) {
 		try {
 			Minecraft mc = Minecraft.getMinecraft();
 			GuiScreen guiscreen = mc.currentScreen;
-			if (kb.keyDescription.equals("RPG Special Ability")) {
+			if (this.keySpecial.isPressed()) {
 				ItemStack item = mc.thePlayer.getCurrentEquippedItem();
 				if ((guiscreen == null) && !(item == null)) {
-					specialAbility(types, kb, tickEnd, item);
+					specialAbility(item);
 				}
 			}
 		} catch (Throwable e) {
@@ -44,8 +33,7 @@ public class RpgPlusKeyHandling extends RPGKeyHandler {
 	}
 
 	@Override
-	public void specialAbility(EnumSet<TickType> types, KeyBinding kb,
-			boolean tickEnd, ItemStack item) {
+	public void specialAbility(ItemStack item) {
 
 		try {
 			if (item.getItem().equals(mod_RpgPlus.necro_weapon)) {
@@ -53,9 +41,11 @@ public class RpgPlusKeyHandling extends RPGKeyHandler {
 				DataOutputStream out = new DataOutputStream(bt);
 				try {
 					out.writeInt(6);
-					Packet250CustomPayload packet = new Packet250CustomPayload(
-							"RpgPlusPlus", bt.toByteArray());
-					PacketDispatcher.sendPacketToServer(packet);
+
+					System.out.println("Send packet rpg++ keyhandler");
+					//					Packet250CustomPayload packet = new Packet250CustomPayload(
+					//							"RpgPlusPlus", bt.toByteArray());
+					//					PacketDispatcher.sendPacketToServer(packet);
 				} catch (IOException ex) {
 					Logger.getLogger(RPGKeyHandler.class.getName()).log(
 							Level.SEVERE, null, ex);
@@ -69,9 +59,11 @@ public class RpgPlusKeyHandling extends RPGKeyHandler {
 				DataOutputStream out = new DataOutputStream(bt);
 				try {
 					out.writeInt(9);
-					Packet250CustomPayload packet = new Packet250CustomPayload(
-							"RpgPlusPlus", bt.toByteArray());
-					PacketDispatcher.sendPacketToServer(packet);
+					//TODO
+					System.out.println("add packet for paladin special here");
+					//					Packet250CustomPayload packet = new Packet250CustomPayload(
+					//							"RpgPlusPlus", bt.toByteArray());
+					//					PacketDispatcher.sendPacketToServer(packet);
 				} catch (IOException ex) {
 					Logger.getLogger(RPGKeyHandler.class.getName()).log(
 							Level.SEVERE, null, ex);
@@ -80,10 +72,4 @@ public class RpgPlusKeyHandling extends RPGKeyHandler {
 		} catch (Throwable e) {
 		}
 	}
-
-	@Override
-	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.CLIENT);
-	}
-
 }
