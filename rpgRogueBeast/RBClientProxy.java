@@ -7,9 +7,7 @@ import net.minecraft.init.Items;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.handlers.RPGKeyHandler;
 import rpgInventory.models.armor.ModelRogueArmor;
-import rpgInventory.utils.IKeyHandler;
 import rpgRogueBeast.entity.BoarPet;
 import rpgRogueBeast.entity.BullPet;
 import rpgRogueBeast.entity.EntityPetXP;
@@ -22,7 +20,6 @@ import rpgRogueBeast.render.AxeRender;
 import rpgRogueBeast.render.LionHeadRenderer;
 import rpgRogueBeast.render.RenderDagger;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 public class RBClientProxy extends RBCommonProxy {
 
@@ -76,8 +73,8 @@ public class RBClientProxy extends RBCommonProxy {
 				.registerEntityRenderingHandler(EntityTeleportStone.class,
 						new RenderSnowball(Items.feather, 1));
 
-		RPGKeyHandler.registerKeyhandler(new RpgKeyHandlerRB(),
-				IKeyHandler.bindKeys, IKeyHandler.reps);
+//		RPGKeyHandler.registerKeyhandler(new RpgKeyHandlerRB(),
+//				IKeyHandler.bindKeys, IKeyHandler.reps);
 
 		MinecraftForge.EVENT_BUS.register(new SoundManager());
 		
