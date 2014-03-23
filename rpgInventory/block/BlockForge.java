@@ -8,30 +8,35 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.block.te.TEMold;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockForge extends BlockContainer {
 
 	private static boolean keepInventory = true;
 
 	// TEXTUREN
-	public static Icon temoldOvenBottom;
-
-	public static Icon temoldOvenTop;
-	public static Icon temoldOvenSide;
-	public static Icon temoldOvenFront;
-	public static Icon temoldOvenFrontActive;
+	public static IIcon temoldOvenBottom;
+	public static IIcon temoldOvenTop;
+	public static IIcon temoldOvenSide;
+	
+	public static IIcon temoldOvenFront;
+	public static IIcon temoldOvenFrontActive;
+	
 	/**
 	 * Is the random generator used by furnace to drop the inventory contents in
 	 * random directions.
@@ -92,57 +97,6 @@ public class BlockForge extends BlockContainer {
 	@Override
 	public TileEntity createNewTileEntity(World world, int i) {
 		return new TEMold();
-	}
-
-	/**
-	 * Retrieves the block texture to use based on the display side. Args:
-	 * iBlockAccess, x, y, z, side
-	 */
-	public Icon getBlockTexture(IBlockAccess access, int x, int y, int z,
-			int side) {
-		int front = 0;
-		Icon icon;
-		TileEntity tile = Minecraft.getMinecraft().theWorld.getTileEntity(x, y,
-				z);
-
-		if (tile != null) {
-			front = access.getBlockMetadata(x, y, z);
-		} else {
-			Minecraft.getMinecraft().theWorld.markBlockForUpdate(x, y, z);
-		}
-
-		switch (side) {
-		case 0:
-			icon = temoldOvenBottom;
-			break;
-		case 1:
-			icon = temoldOvenTop;
-			break;
-		case 2:
-			icon = temoldOvenSide;
-			break;
-		case 3:
-			icon = temoldOvenSide;
-			break;
-		case 4:
-			icon = temoldOvenSide;
-			break;
-		case 5:
-			icon = temoldOvenSide;
-			break;
-		default:
-			return temoldOvenSide;
-		}
-		if (side == front) {
-			return ((TEMold) tile).isActive() ? temoldOvenFrontActive
-					: temoldOvenFront;
-		} else {
-			return icon;
-		}
-	}
-
-	public String getTextureFile() {
-		return "/subaraki/RPGinventoryTM.png";
 	}
 
 	/**
@@ -246,20 +200,29 @@ public class BlockForge extends BlockContainer {
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
-		this.blockIcon = temoldOvenSide = temoldOvenTop = temoldOvenBottom = par1IconRegister
+	public void registerBlockIcons(IIconRegister reg) {
+		this.blockIcon = temoldOvenSide = temoldOvenTop = temoldOvenBottom = reg
 				.registerIcon("rpginventorymod:ovenSide");
-		temoldOvenFront = par1IconRegister
+		
+		temoldOvenFront = reg
 				.registerIcon("rpginventorymod:ovenFront");
-		temoldOvenFrontActive = par1IconRegister
+		
+		temoldOvenFrontActive = reg
 				.registerIcon("rpginventorymod:ovenFrontBurning");
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public IIcon getIcon(int side, int i)
+	{
+        return side != i ? this.blockIcon : this.temoldOvenFront;
 	}
 
 	/**
-	 * set a blocks direction
+	 * set this block's direction
 	 */
-	// @Override
 	private void setDefaultDirection(World par1World, int par2, int par3,
 			int par4) {
 		if (!par1World.isRemote) {

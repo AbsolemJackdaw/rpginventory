@@ -2,6 +2,7 @@ package rpgInventory.item.weapons;
 
 import javax.swing.Icon;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -9,6 +10,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -21,11 +23,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemArcherBow extends Item {
 
 	public static final String[] ItemNameArray = new String[] { "elmBow",
-			"elmBow2", "elmBow3", "elmBow4" };
+		"elmBow2", "elmBow3", "elmBow4" };
 
 	public int usingItem = 0;
 	@SideOnly(Side.CLIENT)
-	private Icon[] IconArray;
+	private IIcon[] IconArray;
 
 	public ItemArcherBow() {
 		super();
@@ -35,7 +37,7 @@ public class ItemArcherBow extends Item {
 	}
 
 	@Override
-	public Icon getIcon(ItemStack stack, int renderPass, EntityPlayer player,
+	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player,
 			ItemStack usingItem, int useRemaining) {
 		// This never get called.
 		// Now it gets called, added a hook in our custom renderer.
@@ -55,7 +57,7 @@ public class ItemArcherBow extends Item {
 	}
 
 	@Override
-	public Icon getIconFromDamage(int par1) {
+	public IIcon getIconFromDamage(int par1) {
 		return this.IconArray[0];
 	}
 
@@ -93,11 +95,6 @@ public class ItemArcherBow extends Item {
 	@Override
 	public ItemStack onEaten(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
-		return par1ItemStack;
-	}
-
-	public ItemStack onFoodEaten(ItemStack par1ItemStack, World par2World,
-			EntityPlayer player) {
 		return par1ItemStack;
 	}
 
@@ -205,7 +202,7 @@ public class ItemArcherBow extends Item {
 					stack.damageItem(1, player);
 					par2World.playSoundAtEntity(player, "random.bow", 1.0F,
 							(1.0F / ((itemRand.nextFloat() * 0.4F) + 1.2F))
-									+ (f * 0.5F));
+							+ (f * 0.5F));
 				}
 			}
 		}
@@ -217,9 +214,18 @@ public class ItemArcherBow extends Item {
 		usingItem++;
 	}
 
+	/**
+	 * used to cycle through icons based on their used duration, i.e. for the bow
+	 */
+	@SideOnly(Side.CLIENT)
+	public IIcon getItemIconForUseDuration(int par1)
+	{
+		return this.IconArray[par1];
+	}
+
 	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
-		this.IconArray = new Icon[ItemNameArray.length];
+	public void registerIcons(IIconRegister par1IconRegister) {
+		this.IconArray = new IIcon[ItemNameArray.length];
 
 		for (int i = 0; i < this.IconArray.length; ++i) {
 			String prefix = "rpginventorymod:";
