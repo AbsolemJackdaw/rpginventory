@@ -16,9 +16,19 @@ import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.PacketInventory;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class CommonTickHandler implements ITickHandler {
 
+	/*
+	 * TickEvent.Tick s% 
+	 * use with @SubscribeEvent 
+	 * 
+	 * 
+	 * */
+	
+	
+	
 	/**
 	 * Used to count down 1 second and send a package to every player on the
 	 * server with info about the player's inventory

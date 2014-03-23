@@ -1,5 +1,10 @@
 package rpgInventory.handlers;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.PacketInventory;
@@ -9,26 +14,25 @@ import rpgInventory.handlers.packets.PacketInventory;
  * 
  * @author AbrarSyed
  */
-public class PlayerTracker implements IPlayerTracker {
+public class PlayerTracker /*implements IPlayerTracker*/ {
 
-	// noone cares about this....
-	@Override
-	public void onPlayerChangedDimension(EntityPlayer player) {
-		PacketInventory.sendPacket(player, PlayerRpgInventory.get(player));
+	@SubscribeEvent
+	public void onPlayerChangedDimension(PlayerChangedDimensionEvent e) {
+		PacketInventory.sendPacket(e.player, PlayerRpgInventory.get(e.player));
 	}
 
-	@Override
-	public void onPlayerLogin(EntityPlayer player) {
-		PacketInventory.sendPacket(player, PlayerRpgInventory.get(player));
+	@SubscribeEvent
+	public void onPlayerLogin(PlayerLoggedInEvent e) {
+		PacketInventory.sendPacket(e.player, PlayerRpgInventory.get(e.player));
 	}
 
-	@Override
-	public void onPlayerLogout(EntityPlayer player) {
+	@SubscribeEvent
+	public void onPlayerLogout(PlayerLoggedOutEvent e) {
 		// write the Inventory and then remove it from Ram.
 	}
 
-	@Override
-	public void onPlayerRespawn(EntityPlayer player) {
-		PacketInventory.sendPacket(player, PlayerRpgInventory.get(player));
+	@SubscribeEvent
+	public void onPlayerRespawn(PlayerRespawnEvent e) {
+		PacketInventory.sendPacket(e.player, PlayerRpgInventory.get(e.player));
 	}
 }

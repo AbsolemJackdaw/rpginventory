@@ -30,6 +30,7 @@ import net.minecraft.util.Vec3;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.packets.RpgPacketHandler;
 import rpgInventory.utils.IKeyHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 
 public class RPGKeyHandler extends KeyInputEvent implements IKeyHandler {
