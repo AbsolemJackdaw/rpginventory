@@ -219,9 +219,10 @@ public class RPGKeyHandler extends KeyInputEvent implements IKeyHandler {
 						outputStream.writeBoolean(true);
 					}
 				}
-				Packet250CustomPayload packet = new Packet250CustomPayload(
-						"RpgInv", bytes.toByteArray());
-				PacketDispatcher.sendPacketToServer(packet);
+				//TODO sendpacket
+//				Packet250CustomPayload packet = new Packet250CustomPayload(
+//						"RpgInv", bytes.toByteArray());
+//				PacketDispatcher.sendPacketToServer(packet);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -17,13 +17,14 @@ import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.PacketInventory;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
-public class CommonTickHandler implements ITickHandler {
+public class CommonTickHandler /*implements ITickHandler*/ {
 
 	/*
-	 * TickEvent.Tick s% 
-	 * use with @SubscribeEvent 
-	 * 
+	 * WARNING
+	 * NAMES OF METHODS TICKEND AND TICKSTART ARE OF NO IMPORTANCE
+	 * i just kept them from the old handler 
 	 * 
 	 * */
 	
@@ -60,13 +61,13 @@ public class CommonTickHandler implements ITickHandler {
 		}
 	}
 
-	@Override
-	public String getLabel() {
-		return "RpgInventoryServ";
-	}
+//	@Override
+//	public String getLabel() {
+//		return "RpgInventoryServ";
+//	}
 
-	@Override
-	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
+	@SubscribeEvent
+	public void tickEnd(TickEvent.ServerTickEvent ev) {
 
 		for (Entry<String, Integer> entry : globalCooldownMap.entrySet()) {
 			if (entry.getValue() > 0) {
@@ -79,7 +80,7 @@ public class CommonTickHandler implements ITickHandler {
 		}
 
 		List<EntityPlayer> players = MinecraftServer
-				.getServerConfigurationManager(MinecraftServer.getServer()).playerEntityList;
+				.getServer().getConfigurationManager().playerEntityList;
 		for (EntityPlayer player : players) {
 			if ((player.getHealth() <= 0) || player.isDead) {
 				if (!player.worldObj.getGameRules().getGameRuleBooleanValue(
@@ -99,16 +100,16 @@ public class CommonTickHandler implements ITickHandler {
 		}
 	}
 
-	/**
-	 * called upon player's death. Will drop Jewels in the world
-	 */
-	@Override
-	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.SERVER);
-	}
+//	/**
+//	 * called upon player's death. Will drop Jewels in the world
+//	 */
+//	@Override
+//	public EnumSet<TickType> ticks() {
+//		return EnumSet.of(TickType.SERVER);
+//	}
 
-	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {
+	@SubscribeEvent
+	public void tickStart(TickEvent.ServerTickEvent ev) {
 
 		for (String username : RPGEventHooks.ArcherRepairTick.keySet()) {
 			try {
