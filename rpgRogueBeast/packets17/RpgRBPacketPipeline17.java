@@ -131,6 +131,9 @@ public class RpgRBPacketPipeline17 extends
 	public void initialise() {
 		this.channels = NetworkRegistry.INSTANCE.newChannel("RPGRB", this);
 
+		registerPacket(PacketCrystal.class);
+		registerPacket(PacketPetGui.class);
+		registerPacket(PacketTeleport.class);
 	}
 
 	// Method to call from FMLPostInitializationEvent

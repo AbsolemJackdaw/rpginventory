@@ -33,6 +33,7 @@ import rpgInventory.handlers.CommonTickHandler;
 import rpgInventory.handlers.GuiHandler;
 import rpgInventory.handlers.RPGEventHooks;
 import rpgInventory.handlers.RPGKeyHandler;
+import rpgInventory.handlers.Packets17.PacketPipeline17;
 import rpgInventory.handlers.proxy.ClientProxy;
 import rpgInventory.handlers.proxy.CommonProxy;
 import rpgInventory.item.ItemMold;
@@ -98,6 +99,8 @@ public class mod_RpgInventory {
 	public static String playerClass = "none";
 	public static mod_RpgInventory instance;
 
+	public static final PacketPipeline17 PIPELINE = new PacketPipeline17();
+	
 	@SidedProxy(serverSide = "rpgInventory.handlers.proxy.CommonProxy", clientSide = "rpgInventory.handlers.proxy.ClientProxy")
 	public static CommonProxy proxy;
 
@@ -210,6 +213,8 @@ public class mod_RpgInventory {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		
+		PIPELINE.initialise();
 
 		setDonators();
 		// GameRegistry.registerPlayerTracker(new OnPlayerLogin(version, name));
@@ -647,6 +652,8 @@ public class mod_RpgInventory {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt) {
+		PIPELINE.postInitialise();
+		
 		proxy.registerLate();
 		// All mods should be initialized now, check what potion effects are
 		// installed

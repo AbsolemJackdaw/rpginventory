@@ -18,6 +18,7 @@ import rpgNecroPaladin.items.ItemPaladinArmor;
 import rpgNecroPaladin.items.ItemRpgInvArmorPlus;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
+import rpgNecroPaladin.packets17.RpgPlusPacketPipeline17;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -42,6 +43,8 @@ public class mod_RpgPlus {
 	public static String CLASSNECROSHIELD = "shieldedNecro";
 	public static String CLASSPALADIN = "paladin";
 	public static String CLASSPALADINSHIELD = "shieldedPaladin";
+	
+	public static final RpgPlusPacketPipeline17 PIPELINE = new RpgPlusPacketPipeline17();
 
 	private String[][] recipePatterns;
 	private Object[][] recipeItems;
@@ -83,6 +86,8 @@ public class mod_RpgPlus {
 				"Rpg++ Necromancer and Paladin is installed. Renderers can be Used",
 				1);
 
+		PIPELINE.initialise();
+		
 		tab = new PlusTab(CreativeTabs.getNextID(), "++Tab");
 
 		necroHood = new ItemNecroArmor(necroArmor, 4, 0)
@@ -193,6 +198,8 @@ public class mod_RpgPlus {
 
 	@EventHandler
 	public void post(FMLPostInitializationEvent evt) {
+		
+		PIPELINE.postInitialise();
 
 		proxy.registerRenderInformation();
 

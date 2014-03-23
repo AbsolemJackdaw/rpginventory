@@ -26,11 +26,12 @@ import rpgRogueBeast.items.ItemRBMats2;
 import rpgRogueBeast.items.ItemRogueArmor;
 import rpgRogueBeast.items.ItemRpgInvArmorRB;
 import rpgRogueBeast.items.PetExpPotion;
+import rpgRogueBeast.packets17.RpgRBPacketPipeline17;
 import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -53,6 +54,8 @@ public class mod_RpgRB {
 
 	public static String CLASSROGUE = "rogue";
 	public static String CLASSROGUESHIELDED = "Ninja";
+	
+	public static final RpgRBPacketPipeline17 PIPELINE = new RpgRBPacketPipeline17();
 
 	private String[][] recipePatterns;
 	private Object[][] recipeItems;
@@ -74,6 +77,8 @@ public class mod_RpgRB {
 	public void load(FMLInitializationEvent event) {
 
 		FMLLog.info("Rpg++ Rogue and BeastMaster Installed. Renderers can be Used");
+		
+		PIPELINE.initialise();
 
 		tab = new RBTab(CreativeTabs.getNextID(), "RBTab");
 
@@ -228,5 +233,11 @@ public class mod_RpgRB {
 				80, 1, true);
 
 		MinecraftForge.EVENT_BUS.register(new BeastMasterEvent());
+	}
+	
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent evt) {
+		
+		PIPELINE.postInitialise();
 	}
 }
