@@ -41,22 +41,22 @@ public class CommandPanel extends CommandBase {
 		sets.put("beast", new ArrayList());
 		sets.put("rogue", new ArrayList());
 
-		for (Item item : Item.itemList) {
-			if (item != null) {
-				if (item instanceof ItemRpgInvArmor) {
-					sets.get("jewels").add(new ItemStack(item));
-				}
-			}
-			if ((item instanceof ItemRpg) || (item instanceof ItemMats)
-					|| (item instanceof ItemMold)) {
-				sets.get("mats").add(
-						new ItemStack(item, item.getItemStackLimit()));
-			}
-			if (item instanceof AbstractArmor) {
-				sets.get("armor").add(
-						new ItemStack(item, item.getItemStackLimit()));
-			}
-		}
+//		for (Item item : Item.itemList) {
+//			if (item != null) {
+//				if (item instanceof ItemRpgInvArmor) {
+//					sets.get("jewels").add(new ItemStack(item));
+//				}
+//			}
+//			if ((item instanceof ItemRpg) || (item instanceof ItemMats)
+//					|| (item instanceof ItemMold)) {
+//				sets.get("mats").add(
+//						new ItemStack(item, item.getItemStackLimit()));
+//			}
+//			if (item instanceof AbstractArmor) {
+//				sets.get("armor").add(
+//						new ItemStack(item, item.getItemStackLimit()));
+//			}
+//		}
 		// sets.get("mats").add(new ItemStack(Blocks.blockGold, 64));
 		// sets.get("mats").add(new ItemStack(mod_RpgInventory.forgeBlock, 64));
 		// sets.get("mats").add(new ItemStack(Items.ingotGold, 64));

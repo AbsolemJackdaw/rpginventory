@@ -19,7 +19,7 @@ public abstract class AbstractArmor extends ItemArmor {
 	public static final int HELM = 39;
 
 	public AbstractArmor(int par1, int par2, ItemArmor.ArmorMaterial mats) {
-		super(mats, par2, par1);
+		super(mats, par1, par2);
 	}
 
 	/** returns the name of the class from this full set of armor */

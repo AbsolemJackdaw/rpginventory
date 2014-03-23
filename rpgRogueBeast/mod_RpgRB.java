@@ -35,7 +35,8 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "RPGRB", name = "Rogue and BeastMaster Patch", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
+//@Mod(modid = "RPGRB", name = "Rogue and BeastMaster Patch", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
+
 // @NetworkMod(clientSideRequired = true, serverSideRequired = false,
 // clientPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgRBPacket" },
 // packetHandler = RpgRBPacketHandler.class), serverPacketHandlerSpec =

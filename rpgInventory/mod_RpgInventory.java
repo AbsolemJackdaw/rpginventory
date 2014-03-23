@@ -78,7 +78,7 @@ public class mod_RpgInventory {
 		public static final int CRYSTAL = 5;
 	}
 
-	protected static final String name = "rpginventory";
+	protected static final String name = "rpginventorymod";
 	protected static final String ID = "Rpg Inventory";
 
 	protected static final String version = "1.7.2";
@@ -664,11 +664,12 @@ public class mod_RpgInventory {
 
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event) {
-		CommandHandler commandManager = (CommandHandler) event.getServer()
-				.getCommandManager();
-		commandManager
-				.registerCommand(new rpgInventory.handlers.CommandPanel());
-		rpgInventory.handlers.CommandPanel.init();
+		//TODO get commands back
+//		CommandHandler commandManager = (CommandHandler) event.getServer()
+//				.getCommandManager();
+//		commandManager
+//				.registerCommand(new rpgInventory.handlers.CommandPanel());
+//		rpgInventory.handlers.CommandPanel.init();
 	}
 
 	private void setDonators() {

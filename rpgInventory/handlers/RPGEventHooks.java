@@ -406,7 +406,7 @@ public class RPGEventHooks {
 		try {
 			if (evt.entityLiving instanceof EntityPlayer) {
 				PlayerRpgInventory.get((EntityPlayer) evt.entityLiving)
-						.onInventoryChanged();
+						.markDirty();
 			}
 		} catch (Throwable ex) {
 		}
