@@ -5,9 +5,6 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
-import net.minecraft.entity.player.EntityPlayer;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.packets.PacketInventory;
 
 /**
  * To catch login/Logouts for reading/writing the Inventory
@@ -18,12 +15,17 @@ public class PlayerTracker /*implements IPlayerTracker*/ {
 
 	@SubscribeEvent
 	public void onPlayerChangedDimension(PlayerChangedDimensionEvent e) {
-		PacketInventory.sendPacket(e.player, PlayerRpgInventory.get(e.player));
+		//TODO
+		System.out.println("send packet here dimension");
+		
+//		PacketInventory.sendPacket(e.player, PlayerRpgInventory.get(e.player));
 	}
 
 	@SubscribeEvent
 	public void onPlayerLogin(PlayerLoggedInEvent e) {
-		PacketInventory.sendPacket(e.player, PlayerRpgInventory.get(e.player));
+		//TODO
+		System.out.println("send packet here login");
+//		PacketInventory.sendPacket(e.player, PlayerRpgInventory.get(e.player));
 	}
 
 	@SubscribeEvent
@@ -33,6 +35,9 @@ public class PlayerTracker /*implements IPlayerTracker*/ {
 
 	@SubscribeEvent
 	public void onPlayerRespawn(PlayerRespawnEvent e) {
-		PacketInventory.sendPacket(e.player, PlayerRpgInventory.get(e.player));
+		
+		//TODO
+		System.out.println("send packet here respawn");
+//		PacketInventory.sendPacket(e.player, PlayerRpgInventory.get(e.player));
 	}
 }

@@ -144,11 +144,11 @@ public class SpiderPet extends BMPetImpl {
 		super.onUpdate();
 		if (previousLevel < getLevel()) {
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-					.setAttribute(
+					.setBaseValue(
 							25D + MathHelper
 									.floor_double(((getLevel()) * 1.0D) / 1.6D));
 			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-					.setAttribute(0.1D + (getLevel() / 400D));
+					.setBaseValue(0.1D + (getLevel() / 400D));
 			previousLevel = getLevel();
 		}
 	}

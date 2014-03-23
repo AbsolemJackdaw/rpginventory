@@ -131,12 +131,12 @@ public class BullPet extends BMPetImpl {
 		super.onUpdate();
 		if (previousLevel < getLevel()) {
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-					.setAttribute(
+					.setBaseValue(
 							30D + MathHelper
 									.floor_double((getLevel()) / 1.538D));
 
 			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-					.setAttribute(0.05D + (getLevel() / 500D));
+					.setBaseValue(0.05D + (getLevel() / 500D));
 
 			previousLevel = getLevel();
 		}

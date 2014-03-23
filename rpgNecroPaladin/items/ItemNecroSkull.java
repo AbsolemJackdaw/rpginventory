@@ -127,10 +127,12 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			DataOutputStream dos = new DataOutputStream(bos);
 			try {
+				//TODO
+				System.out.println("send packet here necroSkull spawning entity");
 				dos.writeInt(RpgPlusPacketHandler.WEAPONIDS.SKULLRCLICK);
-				Packet250CustomPayload packet = new Packet250CustomPayload(
-						"RpgPlusPlus", bos.toByteArray());
-				PacketDispatcher.sendPacketToServer(packet);
+//				Packet250CustomPayload packet = new Packet250CustomPayload(
+//						"RpgPlusPlus", bos.toByteArray());
+//				PacketDispatcher.sendPacketToServer(packet);
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}

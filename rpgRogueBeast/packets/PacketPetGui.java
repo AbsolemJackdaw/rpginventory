@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.packets.PacketInventory;
 import rpgRogueBeast.mod_RpgRB;
 
 public class PacketPetGui {
@@ -53,7 +52,10 @@ public class PacketPetGui {
 			newcrystal.setTagCompound(nbtCrystal);
 			newcrystal.setStackDisplayName(petname);
 			inv.setInventorySlotContents(6, newcrystal);
-			PacketInventory.sendPacket(p, inv);
+			
+			System.out.println("Send packet here");
+			//TODO
+//			PacketInventory.sendPacket(p, inv);
 		} catch (Throwable ex) {
 		}
 	}

@@ -4,7 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.handlers.packets.PacketInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 
 class SlotRpgArmor extends Slot {
@@ -90,7 +89,11 @@ class SlotRpgArmor extends Slot {
 
 	@Override
 	public void onSlotChanged() {
-		PacketInventory.sendPacket(player, (PlayerRpgInventory) this.inventory);
+		
+		
+		//TODO
+		System.out.println("send packet here onslotchanged");
+//		PacketInventory.sendPacket(player, (PlayerRpgInventory) this.inventory);
 
 		super.onSlotChanged();
 	}

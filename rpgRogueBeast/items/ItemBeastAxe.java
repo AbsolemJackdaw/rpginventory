@@ -117,9 +117,12 @@ public class ItemBeastAxe extends ItemRpgSword {
 							dos.writeInt(el.getEntityId());
 						} catch (Throwable ex) {
 						}
-						Packet250CustomPayload pcp = new Packet250CustomPayload(
-								"RpgRBPacket", bos.toByteArray());
-						PacketDispatcher.sendPacketToServer(pcp);
+						
+						//TODO
+						System.out.println("send packet here");
+//						Packet250CustomPayload pcp = new Packet250CustomPayload(
+//								"RpgRBPacket", bos.toByteArray());
+//						PacketDispatcher.sendPacketToServer(pcp);
 					} else {
 						mod_RpgInventory.proxy.spawnCharmParticle(world, el,
 								rng, false);
@@ -130,9 +133,12 @@ public class ItemBeastAxe extends ItemRpgSword {
 							dos.writeInt(0);
 						} catch (Throwable ex) {
 						}
-						Packet250CustomPayload pcp = new Packet250CustomPayload(
-								"RpgInv", bos.toByteArray());
-						PacketDispatcher.sendPacketToServer(pcp);
+						
+						//TODO
+						System.out.println("send packet here");
+//						Packet250CustomPayload pcp = new Packet250CustomPayload(
+//								"RpgInv", bos.toByteArray());
+//						PacketDispatcher.sendPacketToServer(pcp);
 					}
 				}
 			}

@@ -1,6 +1,5 @@
 package rpgInventory.handlers;
 
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,7 +13,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.packets.PacketInventory;
+import rpgInventory.handlers.Packets17.PacketInventory;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -90,7 +89,10 @@ public class CommonTickHandler /*implements ITickHandler*/ {
 			}
 			if (countdown == 0) {
 				//
-				PacketInventory.sendServerPacket(player);
+//				PacketInventory.sendServerPacket(player);
+				
+				//TODO
+				System.out.println("send packet here");
 			}
 		}
 

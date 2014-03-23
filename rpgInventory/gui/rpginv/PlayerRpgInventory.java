@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.RPGEventHooks;
-import rpgInventory.handlers.packets.PacketInventory;
+import rpgInventory.handlers.Packets17.PacketInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import cpw.mods.fml.common.FMLLog;
 
@@ -53,7 +53,9 @@ public class PlayerRpgInventory implements IInventory,
 		// ExtendedPlayer props = ExtendedPlayer.get(player);
 		// props.addEntry(this);
 
-		PacketInventory.sendPacket(player, this);
+		//TODO
+		System.out.println("send packet here closed inventory");
+//		PacketInventory.sendPacket(player, this);
 
 	}
 
@@ -194,7 +196,9 @@ public class PlayerRpgInventory implements IInventory,
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
 		// mod_RpgInventory.proxy.addEntry(playername, this);
-		PacketInventory.sendPacket(player, this);
+		//TODO
+		System.out.println("send packet here slotclosed");
+//		PacketInventory.sendPacket(player, this);
 		return null;
 	}
 
@@ -330,7 +334,9 @@ public class PlayerRpgInventory implements IInventory,
 	public void markDirty() {
 		try {
 
-			PacketInventory.sendPacket(player, this);
+			//TODO
+			System.out.println("send packet here updated as unclean");
+//			PacketInventory.sendPacket(player, this);
 
 			EntityPlayer player = MinecraftServer.getServer()
 					.getConfigurationManager().getPlayerForUsername(playername);
@@ -425,7 +431,10 @@ public class PlayerRpgInventory implements IInventory,
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		this.armorSlots[par1] = par2ItemStack;
-		PacketInventory.sendPacket(player, this);
+		
+		//TODO
+		System.out.println("send packet here slot content set remotely");
+//		PacketInventory.sendPacket(player, this);
 	}
 
 	public void writeToNBT(NBTTagCompound tagcompound) {

@@ -24,7 +24,7 @@ public class PacketPalaSpecial {
 		} catch (Throwable ex) {
 			ex.printStackTrace();
 		}
-		inv.onInventoryChanged();
+		inv.markDirty();
 
 		if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 				.toLowerCase()) || (weapon == null)) {
