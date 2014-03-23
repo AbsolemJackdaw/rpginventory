@@ -86,6 +86,8 @@ public class PetGui extends GuiScreen {
 			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 			DataOutputStream outputStream = new DataOutputStream(bytes);
 			//TODO
+			System.out.println("todo : send packet");
+
 //			try {
 //				outputStream.writeInt(RpgPacketHandler.OPENRPGINV);
 //				Packet250CustomPayload packet = new Packet250CustomPayload(
@@ -343,6 +345,10 @@ public class PetGui extends GuiScreen {
 			dos.writeShort(petcandyConsumed);
 
 			//TODO
+			
+			System.out.println("todo : send packet");
+
+			
 //			PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(
 //					"RpgRBPacket", bos.toByteArray()));
 		} catch (Throwable ex) {

@@ -1,5 +1,7 @@
 package rpgRogueBeast;
 
+import java.lang.reflect.Field;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -22,7 +24,10 @@ public class BeastMasterEvent {
 					EntityLiving corpse = (EntityLiving) evt.entityLiving;
 					EntityLivingBase murderer = (EntityLiving) evt.source
 							.getSourceOfDamage();
-					int totalXP = corpse.experienceValue;
+					
+					Field f = corpse.getClass().getField("experienceValue");
+					f.setAccessible(true);
+					int totalXP = f.getInt(corpse);
 
 					while (totalXP > 0) {
 						int partialXP = EntityXPOrb.getXPSplit(totalXP);
@@ -34,7 +39,7 @@ public class BeastMasterEvent {
 				}
 			}
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 }

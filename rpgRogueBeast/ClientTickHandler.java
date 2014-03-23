@@ -10,15 +10,18 @@ import rpgRogueBeast.packets.RpgRBPacketHandler;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
-public class ClientTickHandler implements ITickHandler {
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
-	@Override
-	public String getLabel() {
-		return "pet syncher";
-	}
+public class ClientTickHandler {
 
-	@Override
-	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
+//	@Override
+//	public String getLabel() {
+//		return "pet syncher";
+//	}
+
+	@SubscribeEvent
+	public void tickEnd(TickEvent.ClientTickEvent ev) {
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		// Put away pet when gui is opened. This is a nerf and a fix for lag
 		// induced duping.
@@ -27,8 +30,12 @@ public class ClientTickHandler implements ITickHandler {
 
 				ByteArrayDataOutput out = ByteStreams.newDataOutput();
 				out.writeInt(RpgRBPacketHandler.STOREPET);
-				PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(
-						"RpgRBPacket", out.toByteArray()));
+				
+				//TODO sendpacket
+//				PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(
+//						"RpgRBPacket", out.toByteArray()));
+				
+				System.out.println("todo : send packet");
 			}
 
 		} catch (Exception e) {
@@ -36,15 +43,15 @@ public class ClientTickHandler implements ITickHandler {
 		}
 	}
 
-	@Override
-	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.CLIENT);
-	}
-
-	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {
-		// TODO Auto-generated method stub
-
-	}
+//	@Override
+//	public EnumSet<TickType> ticks() {
+//		return EnumSet.of(TickType.CLIENT);
+//	}
+//
+//	@Override
+//	public void tickStart(EnumSet<TickType> type, Object... tickData) {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 }

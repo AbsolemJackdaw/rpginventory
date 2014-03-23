@@ -7,6 +7,6 @@ public class SoundManager {
 
 	@SubscribeEvent
 	public void onSound(SoundLoadEvent event) {
-		event.manager.addSound("subaraki:petWhistle.ogg");
+//		event.manager.addSound("subaraki:petWhistle.ogg");
 	}
 }

@@ -80,7 +80,9 @@ public class RBClientProxy extends RBCommonProxy {
 				IKeyHandler.bindKeys, IKeyHandler.reps);
 
 		MinecraftForge.EVENT_BUS.register(new SoundManager());
-		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+		
+		MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
+//		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 
 	}
 }
