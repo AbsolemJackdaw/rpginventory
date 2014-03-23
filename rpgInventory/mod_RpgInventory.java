@@ -81,8 +81,6 @@ public class mod_RpgInventory {
 	protected static final String name = "rpginventory";
 	protected static final String ID = "Rpg Inventory";
 
-	
-	
 	protected static final String version = "1.7.2";
 	public static String CLASSARCHER = "archer";
 	public static String CLASSBERSERKER = "berserker";
@@ -248,7 +246,7 @@ public class mod_RpgInventory {
 		developers.add("darkhax");
 
 		forgeBlock = new BlockForge(Material.rock).setHardness(5f)
-				/* .setUnlocalizedName("MoldForge") */.setCreativeTab(tab);
+		/* .setUnlocalizedName("MoldForge") */.setCreativeTab(tab);
 
 		neckgold = new ItemRpgInvArmor(0, -1, "",
 				"subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold")

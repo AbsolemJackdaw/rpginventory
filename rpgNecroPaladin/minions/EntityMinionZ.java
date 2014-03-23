@@ -79,7 +79,8 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 			MinionRegistry.playerMinions.put(player.getDisplayName(),
 					new ArrayList<IMinion>());
 		}
-		List<IMinion> list = MinionRegistry.playerMinions.get(player.getDisplayName());
+		List<IMinion> list = MinionRegistry.playerMinions.get(player
+				.getDisplayName());
 		if (!list.contains(this)) {
 			list.add(this);
 		}
@@ -158,8 +159,8 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 	public void Harvest() {
 		this.damageEntity(DamageSource.magic, this.getHealth());
 		if ((player.getHealth() + 2) <= player.getMaxHealth()) {
-			player.heal(mod_RpgInventory.donators
-					.contains(getMaster().getDisplayName()) ? 2 : 1);
+			player.heal(mod_RpgInventory.donators.contains(getMaster()
+					.getDisplayName()) ? 2 : 1);
 		} else {
 			player.setHealth(player.getMaxHealth());
 		}
@@ -195,9 +196,10 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		if (player != null) {
-			if (MinionRegistry.playerMinions.containsKey(player.getDisplayName())) {
-				List<IMinion> list = MinionRegistry.playerMinions
-						.get(player.getDisplayName());
+			if (MinionRegistry.playerMinions.containsKey(player
+					.getDisplayName())) {
+				List<IMinion> list = MinionRegistry.playerMinions.get(player
+						.getDisplayName());
 				if (list.contains(this)) {
 					list.remove(this);
 				}

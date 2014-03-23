@@ -52,7 +52,7 @@ public class ItemRpg extends Item {
 	public Item setTextureName(String s) {
 		String itemName = getUnlocalizedName().substring(
 				getUnlocalizedName().indexOf(".") + 1);
-		this.iconString = "rpginventorymod:"+ itemName;
+		this.iconString = "rpginventorymod:" + itemName;
 		return this;
 	}
 }

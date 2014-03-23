@@ -18,13 +18,15 @@ public class PacketTeleport {
 		if (!world.isRemote) {
 			ItemStack dagger = p.getCurrentEquippedItem();
 
-			if (!mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())) {
+			if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+					.toLowerCase())) {
 				if (!mod_RpgInventory.playerClass
 						.contains(mod_RpgRB.CLASSROGUE)) {
 					return;
 				}
 			}
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
+			if (!CommonTickHandler.globalCooldownMap.containsKey(p
+					.getDisplayName())) {
 				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 			}
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
@@ -37,8 +39,8 @@ public class PacketTeleport {
 					p.renderBrokenItemStack(dagger);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
-					if (!mod_RpgInventory.developers.contains(p.getDisplayName()
-							.toLowerCase())) {
+					if (!mod_RpgInventory.developers.contains(p
+							.getDisplayName().toLowerCase())) {
 						dagger.damageItem(3, p);
 					}
 				}

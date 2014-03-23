@@ -54,8 +54,8 @@ public abstract class AbstractArmor extends ItemArmor {
 				armorModel.isSneak = entityLiving.isSneaking();
 				armorModel.isRiding = entityLiving.isRiding();
 				armorModel.isChild = entityLiving.isChild();
-				armorModel.heldItemRight = entityLiving
-						.getEquipmentInSlot(0) != null ? 1 : 0;
+				armorModel.heldItemRight = entityLiving.getEquipmentInSlot(0) != null ? 1
+						: 0;
 				if (entityLiving instanceof EntityPlayer) {
 					armorModel.aimedBow = ((EntityPlayer) entityLiving)
 							.getItemInUseDuration() > 2;
@@ -70,8 +70,8 @@ public abstract class AbstractArmor extends ItemArmor {
 	public Item setTextureName(String s) {
 		String itemName = getUnlocalizedName().substring(
 				getUnlocalizedName().lastIndexOf(".") + 1);
-		this.iconString = "rpginventorymod:"+ itemName;
-		
+		this.iconString = "rpginventorymod:" + itemName;
+
 		return this;
 	}
 }

@@ -31,6 +31,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class RPGEventHooks {
 

@@ -26,21 +26,22 @@ public class PacketPalaSpecial {
 		}
 		inv.onInventoryChanged();
 
-		if (!mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())
-				|| (weapon == null)) {
+		if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+				.toLowerCase()) || (weapon == null)) {
 			if (!mod_RpgInventory.playerClass
 					.contains(mod_RpgPlus.CLASSPALADIN)) {
 				return;
 			}
 		}
 
-		if (!CommonTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
+		if (!CommonTickHandler.globalCooldownMap
+				.containsKey(p.getDisplayName())) {
 			CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 		}
 		if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
-			CommonTickHandler.globalCooldownMap
-					.put(p.getDisplayName(), (mod_RpgInventory.donators
-							.contains(p.getDisplayName()) ? 5 : 7) * 20);
+			CommonTickHandler.globalCooldownMap.put(p.getDisplayName(),
+					(mod_RpgInventory.donators.contains(p.getDisplayName()) ? 5
+							: 7) * 20);
 			// System.out.println("Healing time!");
 			// Allow staff/hammer to perform one last aoe then break the weapon
 			// if its damaged enough.
@@ -69,18 +70,17 @@ public class PacketPalaSpecial {
 						double dist = ((EntityPlayer) player)
 								.getDistanceSqToEntity(el);
 						double potstrength = 1.0D - (Math.sqrt(dist) / 4.0D);
-						Potion.heal
-								.affectEntity((EntityLiving) player, el,
-										(mod_RpgInventory.donators
-												.contains(p.getDisplayName()) ? 5 : 2),
-										potstrength * 2);
+						Potion.heal.affectEntity((EntityLiving) player, el,
+								(mod_RpgInventory.donators.contains(p
+										.getDisplayName()) ? 5 : 2),
+								potstrength * 2);
 					}
 				}
 			}
 		} else {
 			p.addChatMessage("You must wait for energy to replenish, left: "
-					+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-							.get(p.getDisplayName()) / 20)) + " seconds");
+					+ Math.floor(1 + (CommonTickHandler.globalCooldownMap.get(p
+							.getDisplayName()) / 20)) + " seconds");
 		}
 	}
 }

@@ -12,8 +12,7 @@ public class ItemRpgInvArmorPlus extends ItemRpgInvArmor {
 
 	private PalaShield pala = new PalaShield();
 
-	public ItemRpgInvArmorPlus( int par4, int maxDamage, String name,
-			String loc) {
+	public ItemRpgInvArmorPlus(int par4, int maxDamage, String name, String loc) {
 		super(par4, maxDamage, name, loc);
 	}
 

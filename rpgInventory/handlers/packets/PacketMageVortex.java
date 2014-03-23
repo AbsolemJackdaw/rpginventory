@@ -28,7 +28,8 @@ public class PacketMageVortex {
 			ItemStack legs = p.inventory.armorItemInSlot(1);
 			ItemStack boots = p.inventory.armorItemInSlot(0);
 
-			if (!mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())) {
+			if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+					.toLowerCase())) {
 				if ((wand == null) || (hat == null) || (chest == null)
 						|| (legs == null) || (boots == null)) {
 					return;
@@ -41,11 +42,13 @@ public class PacketMageVortex {
 					return;
 				}
 			}
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
+			if (!CommonTickHandler.globalCooldownMap.containsKey(p
+					.getDisplayName())) {
 				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 			}
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
-				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 7 * 20);
+				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(),
+						7 * 20);
 				if ((wand.getItemDamage() + 3) >= wand.getMaxDamage()) {
 					// Trigger item break stuff
 					// Only damage what is left
@@ -56,14 +59,14 @@ public class PacketMageVortex {
 					// delete the item
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
-					if (!mod_RpgInventory.developers.contains(p.getDisplayName()
-							.toLowerCase())) {
-						wand.damageItem(mod_RpgInventory.donators
-								.contains(p.getDisplayName()) ? 1 : 3, p);
+					if (!mod_RpgInventory.developers.contains(p
+							.getDisplayName().toLowerCase())) {
+						wand.damageItem(mod_RpgInventory.donators.contains(p
+								.getDisplayName()) ? 1 : 3, p);
 					}
 				}
-				float f = mod_RpgInventory.donators.contains(p.getDisplayName()) ? 20.0f
-						: 10.0f;
+				float f = mod_RpgInventory.donators
+						.contains(p.getDisplayName()) ? 20.0f : 10.0f;
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
 						p.posX - f, p.posY - f, p.posZ - f, p.posX + f,
 						p.posY + f, p.posZ + f);
@@ -99,10 +102,11 @@ public class PacketMageVortex {
 									el.setVelocity(posFinal.xCoord * 4,
 											posFinal.yCoord * 4,
 											posFinal.zCoord * 4);
-									el.attackEntityFrom(DamageSource
-											.causePlayerDamage(p),
+									el.attackEntityFrom(
+											DamageSource.causePlayerDamage(p),
 											(mod_RpgInventory.donators
-													.contains(p.getDisplayName()) ? 3
+													.contains(p
+															.getDisplayName()) ? 3
 													: 1));
 								} catch (Throwable ex) {
 								}

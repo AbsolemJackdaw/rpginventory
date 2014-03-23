@@ -21,6 +21,7 @@ import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.jewels.GloveLeft;
 import rpgInventory.models.jewels.GloveRight;
 import rpgInventory.models.jewels.ModelNecklace;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class RenderRpgPlayer {
 

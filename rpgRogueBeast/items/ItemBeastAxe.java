@@ -32,7 +32,7 @@ public class ItemBeastAxe extends ItemRpgSword {
 	private int particleTime;
 	private Random rng = new Random(1051414);
 
-	public ItemBeastAxe( ToolMaterial mat) {
+	public ItemBeastAxe(ToolMaterial mat) {
 		super(mat);
 		this.maxStackSize = 1;
 		this.setMaxDamage(1500);
@@ -41,16 +41,17 @@ public class ItemBeastAxe extends ItemRpgSword {
 	public boolean canHarvestBlock(Block par2Block) {
 		return (par2Block != null)
 				&& ((par2Block.getMaterial() == Material.wood)
-						|| (par2Block.getMaterial() == Material.plants) || (par2Block.getMaterial() == Material.vine)) ? true
-				: false;
+						|| (par2Block.getMaterial() == Material.plants) || (par2Block
+						.getMaterial() == Material.vine)) ? true : false;
 	}
 
-//	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
-//		return (par2Block != null)
-//				&& ((par2Block.getMaterial() == Material.wood)
-//						|| (par2Block.getMaterial() == Material.plants) || (par2Block.getMaterial() == Material.vine)) ? 15f
-//				: super.getStrVsBlock(par1ItemStack, par2Block);
-//	}
+	// public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
+	// return (par2Block != null)
+	// && ((par2Block.getMaterial() == Material.wood)
+	// || (par2Block.getMaterial() == Material.plants) ||
+	// (par2Block.getMaterial() == Material.vine)) ? 15f
+	// : super.getStrVsBlock(par1ItemStack, par2Block);
+	// }
 
 	@Override
 	public boolean hitEntity(ItemStack par1ItemStack,
@@ -105,8 +106,8 @@ public class ItemBeastAxe extends ItemRpgSword {
 				if (charmTime >= 100) {
 					charmTime = 0;
 					float num = rng.nextFloat();
-					if (num > (mod_RpgInventory.donators
-							.contains(player.getDisplayName()) ? 0.50F : 0.80F)) {
+					if (num > (mod_RpgInventory.donators.contains(player
+							.getDisplayName()) ? 0.50F : 0.80F)) {
 						mod_RpgInventory.proxy.spawnCharmParticle(world, el,
 								rng, true);
 						ByteArrayOutputStream bos = new ByteArrayOutputStream();

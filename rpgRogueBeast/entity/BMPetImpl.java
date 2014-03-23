@@ -77,8 +77,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 5.0F, 2.0F));
 		this.tasks.addTask(6, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(8, new EntityAITempt(this, 0.5D,
-				mod_RpgRB.whistle, false));
+		this.tasks.addTask(8, new EntityAITempt(this, 0.5D, mod_RpgRB.whistle,
+				false));
 		this.tasks.addTask(9, new EntityAIWatchClosest(this,
 				EntityLivingBase.class, 8.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));

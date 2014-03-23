@@ -1,12 +1,12 @@
 package rpgVanillaShields;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class VanillaEvents {
 
@@ -14,7 +14,8 @@ public class VanillaEvents {
 
 	public void damageItem(ItemStack item, PlayerRpgInventory inv,
 			EntityPlayer p, int slot, int amount) {
-		if (mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())) {
+		if (mod_RpgInventory.developers.contains(p.getDisplayName()
+				.toLowerCase())) {
 			return;
 		}
 		try {
@@ -64,7 +65,8 @@ public class VanillaEvents {
 									vanillaReduction += 1.50f;
 								}
 								vanillaReduction += mod_RpgInventory.donators
-										.contains(player.getDisplayName()) ? 0.20f : 0;
+										.contains(player.getDisplayName()) ? 0.20f
+										: 0;
 								if (vanillaReduction > 1f) {
 									damageReduction = 1f + (vanillaReduction - 1f);
 									vanillaReduction = 0;

@@ -102,13 +102,12 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 						} else {
 							if (!(mob instanceof IMinion)) {
 								mob.attackEntityFrom(DamageSource.wither,
-										mod_RpgInventory.donators
-												.contains(p.getDisplayName()) ? 6 : 4);
+										mod_RpgInventory.donators.contains(p
+												.getDisplayName()) ? 6 : 4);
 								mob.addPotionEffect(new PotionEffect(
 										Potion.wither.id,
-										mod_RpgInventory.donators
-												.contains(p.getDisplayName()) ? 60 : 40,
-										1));
+										mod_RpgInventory.donators.contains(p
+												.getDisplayName()) ? 60 : 40, 1));
 							} else {
 								mob.heal(3);
 							}
@@ -157,8 +156,8 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 					p.renderBrokenItemStack(weapon);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
-					weapon.damageItem(mod_RpgInventory.donators
-							.contains(p.getDisplayName()) ? 1 : 2, p);
+					weapon.damageItem(mod_RpgInventory.donators.contains(p
+							.getDisplayName()) ? 1 : 2, p);
 				}
 				((EntityLiving) entity).heal(3);
 				return true;

@@ -62,20 +62,16 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 				.getItem() == mod_RpgRB.daggers) {
 			if (mod_RpgInventory.playerClass
 					.contains(mod_RpgRB.CLASSROGUESHIELDED)) {
-				par2EntityLiving
-						.addPotionEffect(new PotionEffect(
-								Potion.poison.id,
-								mod_RpgInventory.donators
-										.contains(((EntityPlayer) par3EntityLiving).getDisplayName()) ? 80
-										: 60, 1));
+				par2EntityLiving.addPotionEffect(new PotionEffect(
+						Potion.poison.id, mod_RpgInventory.donators
+								.contains(((EntityPlayer) par3EntityLiving)
+										.getDisplayName()) ? 80 : 60, 1));
 			} else if (mod_RpgInventory.playerClass
 					.contains(mod_RpgRB.CLASSROGUE)) {
-				par2EntityLiving
-						.addPotionEffect(new PotionEffect(
-								Potion.poison.id,
-								mod_RpgInventory.donators
-										.contains(((EntityPlayer) par3EntityLiving).getDisplayName()) ? 40
-										: 30, 0));
+				par2EntityLiving.addPotionEffect(new PotionEffect(
+						Potion.poison.id, mod_RpgInventory.donators
+								.contains(((EntityPlayer) par3EntityLiving)
+										.getDisplayName()) ? 40 : 30, 0));
 				if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
 					par2EntityLiving
 							.attackEntityFrom(

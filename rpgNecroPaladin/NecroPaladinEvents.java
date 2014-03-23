@@ -10,6 +10,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class NecroPaladinEvents {
 
@@ -45,14 +46,14 @@ public class NecroPaladinEvents {
 									.getMaxHealth()) {
 								((EntityPlayer) damager)
 										.heal(mod_RpgInventory.donators
-												.contains(((EntityPlayer) damager).getDisplayName()) ? 2
+												.contains(((EntityPlayer) damager)
+														.getDisplayName()) ? 2
 												: 1);
 							}
 							evt.ammount += 3;
-							evt.entityLiving
-									.setFire(mod_RpgInventory.donators
-											.contains(((EntityPlayer) damager).getDisplayName()) ? 5
-											: 2);
+							evt.entityLiving.setFire(mod_RpgInventory.donators
+									.contains(((EntityPlayer) damager)
+											.getDisplayName()) ? 5 : 2);
 						}
 					}
 					if (mod_RpgInventory.playerClass
@@ -118,7 +119,9 @@ public class NecroPaladinEvents {
 				}
 			} catch (Exception e) {
 
-				System.out.println("Fack. I crashed. Something went wrong with them potions ! " + this.getClass().getName());
+				System.out
+						.println("Fack. I crashed. Something went wrong with them potions ! "
+								+ this.getClass().getName());
 			}
 		}
 	}

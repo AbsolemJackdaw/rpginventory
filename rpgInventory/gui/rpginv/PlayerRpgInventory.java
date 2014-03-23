@@ -210,13 +210,19 @@ public class PlayerRpgInventory implements IInventory,
 	}
 
 	@Override
-	public void init(Entity entity, World world) {
+	public boolean hasCustomInventoryName() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
-//	@Override
-//	public boolean isInventoryNameLocalized() {
-//		return false;
-//	}
+	// @Override
+	// public boolean isInventoryNameLocalized() {
+	// return false;
+	// }
+
+	@Override
+	public void init(Entity entity, World world) {
+	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
@@ -281,6 +287,49 @@ public class PlayerRpgInventory implements IInventory,
 	public void loadNBTData(NBTTagCompound compound) {
 		readFromNBT(compound);
 	}
+
+	@Override
+	public void markDirty() {
+
+	}
+
+	// /**
+	// * Writes the inventory out as a list of compound tags. This is where the
+	// * slot indices are used (+100 for armor, +80 for crafting).
+	// */
+	// public NBTTagCompound writeToNBT(NBTTagCompound par1NBTTagCompound) {
+	// NBTTagList var2 = new NBTTagList();
+	// for (int var3 = 0; var3 < armorSlots.length; ++var3) {
+	// if (armorSlots[var3] != null) {
+	// NBTTagCompound compoundSlot = new NBTTagCompound();
+	// compoundSlot.setByte("SlotNum", (byte) var3);
+	// armorSlots[var3].writeToNBT(compoundSlot);
+	// var2.appendTag(compoundSlot);
+	// }
+	// }
+	// par1NBTTagCompound.setTag("Slot", var2);
+	// return par1NBTTagCompound;
+	// }
+	//
+	// /**
+	// * Reads from the given tag list and fills the slots in the inventory with
+	// * the correct items.
+	// */
+	// public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
+	// NBTTagList var2 = par1NBTTagCompound.getTagList("Slot");
+	// armorSlots = new ItemStack[getSizeInventory()];
+	// for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
+	// NBTTagCompound compoundSlot = (NBTTagCompound) var2.tagAt(var3);
+	// byte var5 = compoundSlot.getByte("SlotNum");
+	// if (var5 >= 0 && var5 < armorSlots.length) {
+	// try {
+	// armorSlots[var5] = ItemStack.loadItemStackFromNBT(compoundSlot);
+	// } catch (Throwable ex) {
+	// ex.printStackTrace();
+	// }
+	// }
+	// }
+	// }
 
 	@Override
 	public void onInventoryChanged() {
@@ -359,44 +408,6 @@ public class PlayerRpgInventory implements IInventory,
 	public void openInventory() {
 	}
 
-	// /**
-	// * Writes the inventory out as a list of compound tags. This is where the
-	// * slot indices are used (+100 for armor, +80 for crafting).
-	// */
-	// public NBTTagCompound writeToNBT(NBTTagCompound par1NBTTagCompound) {
-	// NBTTagList var2 = new NBTTagList();
-	// for (int var3 = 0; var3 < armorSlots.length; ++var3) {
-	// if (armorSlots[var3] != null) {
-	// NBTTagCompound compoundSlot = new NBTTagCompound();
-	// compoundSlot.setByte("SlotNum", (byte) var3);
-	// armorSlots[var3].writeToNBT(compoundSlot);
-	// var2.appendTag(compoundSlot);
-	// }
-	// }
-	// par1NBTTagCompound.setTag("Slot", var2);
-	// return par1NBTTagCompound;
-	// }
-	//
-	// /**
-	// * Reads from the given tag list and fills the slots in the inventory with
-	// * the correct items.
-	// */
-	// public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
-	// NBTTagList var2 = par1NBTTagCompound.getTagList("Slot");
-	// armorSlots = new ItemStack[getSizeInventory()];
-	// for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
-	// NBTTagCompound compoundSlot = (NBTTagCompound) var2.tagAt(var3);
-	// byte var5 = compoundSlot.getByte("SlotNum");
-	// if (var5 >= 0 && var5 < armorSlots.length) {
-	// try {
-	// armorSlots[var5] = ItemStack.loadItemStackFromNBT(compoundSlot);
-	// } catch (Throwable ex) {
-	// ex.printStackTrace();
-	// }
-	// }
-	// }
-	// }
-
 	public void readFromNBT(NBTTagCompound tagcompound) {
 		NBTTagList nbttaglist = tagcompound.getTagList(tagName);
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
@@ -437,16 +448,5 @@ public class PlayerRpgInventory implements IInventory,
 		// above
 		// to prevent potential conflicts
 		tagcompound.setTag(tagName, nbttaglist);
-	}
-
-	@Override
-	public boolean hasCustomInventoryName() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void markDirty() {
-		
 	}
 }

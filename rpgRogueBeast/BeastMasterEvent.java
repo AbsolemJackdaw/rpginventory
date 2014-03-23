@@ -6,6 +6,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import rpgRogueBeast.entity.EntityPetXP;
 import rpgRogueBeast.entity.IPet;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class BeastMasterEvent {
 

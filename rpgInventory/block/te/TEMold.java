@@ -161,6 +161,12 @@ public class TEMold extends TileEntity implements IInventory {
 	}
 
 	@Override
+	public void closeInventory() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
 	public ItemStack decrStackSize(int slot, int amt) {
 		ItemStack stack = getStackInSlot(slot);
 
@@ -224,6 +230,11 @@ public class TEMold extends TileEntity implements IInventory {
 		return (goldBurnTime * i) / goldItemBurnTime;
 	}
 
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
 	public boolean isActive() {
 		return isActive;
 	}
@@ -241,6 +252,12 @@ public class TEMold extends TileEntity implements IInventory {
 	public boolean isUseableByPlayer(EntityPlayer player) {
 
 		return true;
+	}
+
+	@Override
+	public void openInventory() {
+		// TODO Auto-generated method stub
+
 	}
 
 	public void produceJewel() {
@@ -310,6 +327,12 @@ public class TEMold extends TileEntity implements IInventory {
 		goldItemBurnTime = getItemTime(moldforgeItemStacks[0]);
 	}
 
+	// @Override
+	// public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+	// // TODO Auto-generated method stub
+	// return false;
+	// } v
+
 	public void setFrontDirection(int f) {
 		this.front = f;
 	}
@@ -377,12 +400,6 @@ public class TEMold extends TileEntity implements IInventory {
 		}
 	}
 
-	// @Override
-	// public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-	// // TODO Auto-generated method stub
-	// return false;
-	// } v
-
 	@Override
 	public void writeToNBT(NBTTagCompound tagCompound) {
 		super.writeToNBT(tagCompound);
@@ -402,22 +419,5 @@ public class TEMold extends TileEntity implements IInventory {
 		tagCompound.setInteger("FrontDirection", front);
 		tagCompound.setShort("BurnTime", (short) goldBurnTime);
 		tagCompound.setShort("CookTime", (short) goldCookTime);
-	}
-
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
-
-	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void closeInventory() {
-		// TODO Auto-generated method stub
-		
 	}
 }

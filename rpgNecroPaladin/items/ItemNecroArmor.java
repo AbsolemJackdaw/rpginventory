@@ -9,8 +9,8 @@ import rpgNecroPaladin.mod_RpgPlus;
 
 public class ItemNecroArmor extends AbstractArmor {
 
-	public ItemNecroArmor( ArmorMaterial par2EnumArmorMaterial,
-			int par3, int par4) {
+	public ItemNecroArmor(ArmorMaterial par2EnumArmorMaterial, int par3,
+			int par4) {
 		super(par3, par4, par2EnumArmorMaterial);
 	}
 
@@ -43,7 +43,7 @@ public class ItemNecroArmor extends AbstractArmor {
 
 		if ((itemstack.getItem() == mod_RpgPlus.necroHood)
 				|| (itemstack.getItem() == mod_RpgPlus.necroChestplate)
-				|| (itemstack.getItem()== mod_RpgPlus.necroBoots)) {
+				|| (itemstack.getItem() == mod_RpgPlus.necroBoots)) {
 			return "armor:necro_1.png";
 		}
 		if (itemstack.getItem() == mod_RpgPlus.necroLeggings) {

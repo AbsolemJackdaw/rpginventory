@@ -9,8 +9,7 @@ import rpgNecroPaladin.mod_RpgPlus;
 
 public class ItemPaladinArmor extends AbstractArmor {
 
-	public ItemPaladinArmor( ArmorMaterial enumArmorMaterial,
-			int par3, int par4) {
+	public ItemPaladinArmor(ArmorMaterial enumArmorMaterial, int par3, int par4) {
 		super(par3, par4, enumArmorMaterial);
 	}
 

@@ -4,7 +4,6 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.entity.RenderXPOrb;
 import net.minecraft.init.Items;
-import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.config.RpgConfig;
@@ -55,14 +54,13 @@ public class RBClientProxy extends RBCommonProxy {
 	@Override
 	public void registerRendering() {
 		if (RpgConfig.instance.render3D == true) {
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgRB.beastAxe, (IItemRenderer) new AxeRender());
+			MinecraftForgeClient.registerItemRenderer(mod_RpgRB.beastAxe,
+					new AxeRender());
 			MinecraftForgeClient.registerItemRenderer(mod_RpgRB.daggers,
-					(IItemRenderer) new RenderDagger());
+					new RenderDagger());
 
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgRB.beastShield,
-					(IItemRenderer) new LionHeadRenderer(new LionHead(),
+			MinecraftForgeClient.registerItemRenderer(mod_RpgRB.beastShield,
+					new LionHeadRenderer(new LionHead(),
 							"subaraki:jewels/lion.png"));
 		}
 
@@ -74,8 +72,9 @@ public class RBClientProxy extends RBCommonProxy {
 				new RenderPet());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class,
 				new RenderXPOrb());
-		RenderingRegistry.registerEntityRenderingHandler(
-				EntityTeleportStone.class, new RenderSnowball(Items.feather, 1));
+		RenderingRegistry
+				.registerEntityRenderingHandler(EntityTeleportStone.class,
+						new RenderSnowball(Items.feather, 1));
 
 		RPGKeyHandler.registerKeyhandler(new RpgKeyHandlerRB(),
 				IKeyHandler.bindKeys, IKeyHandler.reps);

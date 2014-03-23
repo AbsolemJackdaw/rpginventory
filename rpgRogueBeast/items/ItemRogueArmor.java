@@ -9,11 +9,10 @@ import rpgRogueBeast.mod_RpgRB;
 
 public class ItemRogueArmor extends AbstractArmor {
 
-	public ItemRogueArmor(ArmorMaterial enumArmorMaterial,
-			int par3, int par4) {
-	
+	public ItemRogueArmor(ArmorMaterial enumArmorMaterial, int par3, int par4) {
+
 		super(par3, par4, enumArmorMaterial);
-	
+
 	}
 
 	@Override

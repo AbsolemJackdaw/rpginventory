@@ -53,11 +53,11 @@ public class ButtonInventory extends GuiButton {
 						e.printStackTrace();
 					}
 				} else if (this.displayString.equals("Close")) {
-//					player.closeScreen();
+					// player.closeScreen();
 					player.openContainer = player.inventoryContainer;
 				}
-				Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
-						1.0F, 1.0F);
+				// Minecraft.getMinecraft().getSoundHandler().playSoundFX("random.click",
+				// 1.0F, 1.0F);
 				return false;
 			}
 		}

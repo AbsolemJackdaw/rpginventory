@@ -30,11 +30,12 @@ public class ItemRBMats2 extends Item {
 					ItemStack stack = inv.getCrystal();
 					if (stack != null) {
 						// Pet is in the world.
-						if (IPet.playersWithActivePets
-								.containsKey(player.getDisplayName())) {
+						if (IPet.playersWithActivePets.containsKey(player
+								.getDisplayName())) {
 							EntityLiving e = (EntityLiving) IPet.playersWithActivePets
 									.get(player.getDisplayName()).getPet();
-							IPet.playersWithActivePets.remove(player.getDisplayName());
+							IPet.playersWithActivePets.remove(player
+									.getDisplayName());
 							if ((e != null) && !e.isDead) {
 								stack = ((IPet) e).writePetToItemStack();
 								inv.setInventorySlotContents(6, stack);
@@ -124,7 +125,7 @@ public class ItemRBMats2 extends Item {
 	public Item setTextureName(String s) {
 		String itemName = getUnlocalizedName().substring(
 				getUnlocalizedName().indexOf(".") + 1);
-		this.iconString = "rpginventorymod:"+ itemName;
+		this.iconString = "rpginventorymod:" + itemName;
 		return this;
 	}
 }

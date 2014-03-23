@@ -1,13 +1,11 @@
 package rpgVanillaShields;
 
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import rpgInventory.config.RpgConfig;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -17,7 +15,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "VanillaShields", name = "Vanilla Shields Mod", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
-//@NetworkMod(clientSideRequired = true, serverSideRequired = false)
+// @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class mod_VanillaShields {
 
 	@SidedProxy(serverSide = "rpgVanillaShields.CommonProxy", clientSide = "rpgVanillaShields.ClientProxy")
@@ -39,17 +37,16 @@ public class mod_VanillaShields {
 
 		tab = new ShieldTab(CreativeTabs.getNextID(), "ShieldTab");
 
-		shieldWood = new ItemRpgInvShields( 1,
-				50, "wood", "subaraki:jewels/ShieldWood.png")
+		shieldWood = new ItemRpgInvShields(1, 50, "wood",
+				"subaraki:jewels/ShieldWood.png")
 				.setUnlocalizedName("shieldWood");
-		shieldIron = new ItemRpgInvShields( 1,
-				125, "iron", "subaraki:jewels/ShieldIron.png")
+		shieldIron = new ItemRpgInvShields(1, 125, "iron",
+				"subaraki:jewels/ShieldIron.png")
 				.setUnlocalizedName("shieldIron");
-		shieldGold = new ItemRpgInvShields( 1,
-				250, "gold", "subaraki:jewels/ShieldGold.png")
+		shieldGold = new ItemRpgInvShields(1, 250, "gold",
+				"subaraki:jewels/ShieldGold.png")
 				.setUnlocalizedName("shieldGold");
-		shieldDiamond = new ItemRpgInvShields(
-				1, 500, "diamond",
+		shieldDiamond = new ItemRpgInvShields(1, 500, "diamond",
 				"subaraki:jewels/ShieldDiamond.png")
 				.setUnlocalizedName("shieldDiamond");
 
@@ -68,9 +65,9 @@ public class mod_VanillaShields {
 				"WWW", "WWW", " W ", 'W', Items.iron_ingot, });
 		GameRegistry.addRecipe(new ItemStack(shieldGold, 1), new Object[] {
 				"WWW", "WWW", " W ", 'W', Items.gold_ingot });
-		GameRegistry.addRecipe(new ItemStack(shieldDiamond, 1),
-				new Object[] { "WWW", "WBW", " W ", 'W', Items.diamond, 'B',
-						Blocks.diamond_block });
+		GameRegistry.addRecipe(new ItemStack(shieldDiamond, 1), new Object[] {
+				"WWW", "WBW", " W ", 'W', Items.diamond, 'B',
+				Blocks.diamond_block });
 
 		proxy.registerRenderers();
 

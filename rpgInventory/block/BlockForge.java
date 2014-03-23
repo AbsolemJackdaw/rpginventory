@@ -11,7 +11,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -270,27 +269,23 @@ public class BlockForge extends BlockContainer {
 			Block block3 = par1World.getBlock(par2 + 1, par3, par4);
 			byte b0 = 3;
 
-			if (block.func_149730_j() && !block1.func_149730_j())
-            {
-                b0 = 3;
-            }
+			if (block.func_149730_j() && !block1.func_149730_j()) {
+				b0 = 3;
+			}
 
-            if (block1.func_149730_j() && !block.func_149730_j())
-            {
-                b0 = 2;
-            }
+			if (block1.func_149730_j() && !block.func_149730_j()) {
+				b0 = 2;
+			}
 
-            if (block2.func_149730_j() && !block3.func_149730_j())
-            {
-                b0 = 5;
-            }
+			if (block2.func_149730_j() && !block3.func_149730_j()) {
+				b0 = 5;
+			}
 
-            if (block3.func_149730_j() && !block2.func_149730_j())
-            {
-                b0 = 4;
-            }
+			if (block3.func_149730_j() && !block2.func_149730_j()) {
+				b0 = 4;
+			}
 
-            par1World.setBlockMetadataWithNotify(par2,par3,par4, b0, 2);
+			par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
 		}
 	}
 }

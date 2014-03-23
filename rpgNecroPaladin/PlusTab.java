@@ -12,6 +12,7 @@ public class PlusTab extends CreativeTabs {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
 		return mod_RpgPlus.necro_weapon;

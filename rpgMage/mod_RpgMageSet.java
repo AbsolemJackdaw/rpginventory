@@ -131,8 +131,8 @@ public class mod_RpgMageSet {
 		archmageLegs.setCreativeTab(tab);
 		archMageBoots.setCreativeTab(tab);
 
-//		EntityRegistry.registerGlobalEntityID(EntityElementalBlocks.class,
-//				"Elemental", EntityRegistry.findGlobalUniqueEntityId());
+		// EntityRegistry.registerGlobalEntityID(EntityElementalBlocks.class,
+		// "Elemental", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityElementalBlock.class,
 				"Elemental", mod_RpgInventory.instance.getUniqueID(), this,
 				250, 1, true);

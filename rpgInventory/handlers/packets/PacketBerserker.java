@@ -26,7 +26,8 @@ public class PacketBerserker {
 			ItemStack var11 = p.inventory.armorItemInSlot(1);
 			ItemStack var01 = p.inventory.armorItemInSlot(0);
 
-			if (!mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())) {
+			if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+					.toLowerCase())) {
 				if ((item1 == null) || (var31 == null) || (var21 == null)
 						|| (var11 == null) || (var01 == null)) {
 					return;
@@ -39,7 +40,8 @@ public class PacketBerserker {
 					return;
 				}
 			}
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
+			if (!CommonTickHandler.globalCooldownMap.containsKey(p
+					.getDisplayName())) {
 				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 			}
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
@@ -49,8 +51,8 @@ public class PacketBerserker {
 				if ((item1.getItemDamage() + 3) >= item1.getMaxDamage()) {
 					// Trigger item break stuff
 					// Only damage what is left
-					if (!mod_RpgInventory.developers.contains(p.getDisplayName()
-							.toLowerCase())) {
+					if (!mod_RpgInventory.developers.contains(p
+							.getDisplayName().toLowerCase())) {
 						item1.damageItem(
 								item1.getMaxDamage() - item1.getItemDamage(), p);
 					}
@@ -59,8 +61,8 @@ public class PacketBerserker {
 					// delete the item
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
-					if (!mod_RpgInventory.developers.contains(p.getDisplayName()
-							.toLowerCase())) {
+					if (!mod_RpgInventory.developers.contains(p
+							.getDisplayName().toLowerCase())) {
 						item1.damageItem(3, p);
 					}
 				}
@@ -70,8 +72,8 @@ public class PacketBerserker {
 						.toLowerCase())) {
 					range = 8.0f;
 				} else {
-					range = mod_RpgInventory.donators.contains(p.getDisplayName()) ? 5.5f
-							: 4.0f;
+					range = mod_RpgInventory.donators.contains(p
+							.getDisplayName()) ? 5.5f : 4.0f;
 				}
 
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
@@ -90,29 +92,32 @@ public class PacketBerserker {
 								p.worldObj.spawnParticle("flame", el.posX,
 										el.posY, el.posZ, 0, 1, 0);
 
-								if (mod_RpgInventory.developers
-										.contains(p.getDisplayName().toLowerCase())) {
+								if (mod_RpgInventory.developers.contains(p
+										.getDisplayName().toLowerCase())) {
 									el.motionX = xdir * 3F;
 									el.motionY = 3F;
 									el.motionZ = zdir * 3F;
 								} else {
 									el.motionX = xdir
 											* (mod_RpgInventory.donators
-													.contains(p.getDisplayName()) ? 2.2f
+													.contains(p
+															.getDisplayName()) ? 2.2f
 													: 1.5F);
 									el.motionY = mod_RpgInventory.donators
-											.contains(p.getDisplayName()) ? 2.2f : 3F;
+											.contains(p.getDisplayName()) ? 2.2f
+											: 3F;
 									el.motionZ = zdir
 											* (mod_RpgInventory.donators
-													.contains(p.getDisplayName()) ? 2.2f
+													.contains(p
+															.getDisplayName()) ? 2.2f
 													: 3F);
 								}
 							} catch (Throwable ex) {
 							}
 							el.attackEntityFrom(DamageSource
 									.causePlayerDamage(p),
-									mod_RpgInventory.donators
-											.contains(p.getDisplayName()) ? 10 : 8);
+									mod_RpgInventory.donators.contains(p
+											.getDisplayName()) ? 10 : 8);
 						}
 					}
 				}

@@ -1,6 +1,5 @@
 package rpgRogueBeast;
 
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -37,7 +36,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "RPGRB", name = "Rogue and BeastMaster Patch", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
-//@NetworkMod(clientSideRequired = true, serverSideRequired = false, clientPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgRBPacket" }, packetHandler = RpgRBPacketHandler.class), serverPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgRBPacket" }, packetHandler = RpgRBPacketHandler.class))
+// @NetworkMod(clientSideRequired = true, serverSideRequired = false,
+// clientPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgRBPacket" },
+// packetHandler = RpgRBPacketHandler.class), serverPacketHandlerSpec =
+// @SidedPacketHandler(channels = { "RpgRBPacket" }, packetHandler =
+// RpgRBPacketHandler.class))
 public class mod_RpgRB {
 
 	@SidedProxy(serverSide = "rpgRogueBeast.RBCommonProxy", clientSide = "rpgRogueBeast.RBClientProxy")
@@ -58,13 +61,13 @@ public class mod_RpgRB {
 			rogueBoots, rogueLeather, beastLeather, crystal, whistle, petCandy,
 			tangledBrench, PetXPBottle;
 
-	public final static ArmorMaterial rogueArmor = EnumHelper
-			.addArmorMaterial("rogue", 20, new int[] { 3, 5, 4, 3 }, 5);
+	public final static ArmorMaterial rogueArmor = EnumHelper.addArmorMaterial(
+			"rogue", 20, new int[] { 3, 5, 4, 3 }, 5);
 	public final static ArmorMaterial beastMaster = EnumHelper
 			.addArmorMaterial("beastmaster", 20, new int[] { 4, 5, 4, 3 }, 5);
 
-	ToolMaterial BeastAxeMaterial = EnumHelper.addToolMaterial("BeastAxe",
-			4, 1280, 6.0F, 3, 22);
+	ToolMaterial BeastAxeMaterial = EnumHelper.addToolMaterial("BeastAxe", 4,
+			1280, 6.0F, 3, 22);
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
@@ -73,45 +76,42 @@ public class mod_RpgRB {
 
 		tab = new RBTab(CreativeTabs.getNextID(), "RBTab");
 
-		daggers = new ItemRpgInvArmorRB( 1, 800,
-				"", "subaraki:weapons/dagger.png").setUnlocalizedName("dagger");
-		beastAxe = new ItemBeastAxe(BeastAxeMaterial).setFull3D().setUnlocalizedName("forestAxe");
+		daggers = new ItemRpgInvArmorRB(1, 800, "",
+				"subaraki:weapons/dagger.png").setUnlocalizedName("dagger");
+		beastAxe = new ItemBeastAxe(BeastAxeMaterial).setFull3D()
+				.setUnlocalizedName("forestAxe");
 
-		rogueLeather = new ItemRBMats()
-				.setUnlocalizedName("r.leather");
-		beastLeather = new ItemRBMats()
-				.setUnlocalizedName("b.leather");
-		beastShield = new ItemRpgInvArmorRB(1,
-				150, "", "subaraki:jewels/lion.png")
+		rogueLeather = new ItemRBMats().setUnlocalizedName("r.leather");
+		beastLeather = new ItemRBMats().setUnlocalizedName("b.leather");
+		beastShield = new ItemRpgInvArmorRB(1, 150, "",
+				"subaraki:jewels/lion.png")
 				.setUnlocalizedName("shieldBeastMaster");
 
-		rogueHood = new ItemRogueArmor(
-				rogueArmor, 4, 0).setUnlocalizedName("rogue1");
-		rogueChest = new ItemRogueArmor(
-				rogueArmor, 4, 1).setUnlocalizedName("rogue2");
-		rogueLegs = new ItemRogueArmor(
-				rogueArmor, 4, 2).setUnlocalizedName("rogue3");
-		rogueBoots = new ItemRogueArmor(
-				rogueArmor, 4, 3).setUnlocalizedName("rogue4");
+		rogueHood = new ItemRogueArmor(rogueArmor, 4, 0)
+				.setUnlocalizedName("rogue1");
+		rogueChest = new ItemRogueArmor(rogueArmor, 4, 1)
+				.setUnlocalizedName("rogue2");
+		rogueLegs = new ItemRogueArmor(rogueArmor, 4, 2)
+				.setUnlocalizedName("rogue3");
+		rogueBoots = new ItemRogueArmor(rogueArmor, 4, 3)
+				.setUnlocalizedName("rogue4");
 
-		beastHood = new ItemBeastMasterArmor(
-				beastMaster, 4, 0).setUnlocalizedName("beast1");
-		beastChest = new ItemBeastMasterArmor(
-				beastMaster, 4, 1).setUnlocalizedName("beast2");
-		beastLegs = new ItemBeastMasterArmor(
-				beastMaster, 4, 2).setUnlocalizedName("beast3");
-		beastBoots = new ItemBeastMasterArmor(
-				beastMaster, 4, 3).setUnlocalizedName("beast4");
+		beastHood = new ItemBeastMasterArmor(beastMaster, 4, 0)
+				.setUnlocalizedName("beast1");
+		beastChest = new ItemBeastMasterArmor(beastMaster, 4, 1)
+				.setUnlocalizedName("beast2");
+		beastLegs = new ItemBeastMasterArmor(beastMaster, 4, 2)
+				.setUnlocalizedName("beast3");
+		beastBoots = new ItemBeastMasterArmor(beastMaster, 4, 3)
+				.setUnlocalizedName("beast4");
 
-		whistle = new ItemRBMats2()
-				.setUnlocalizedName("whistle");
+		whistle = new ItemRBMats2().setUnlocalizedName("whistle");
 
 		petCandy = new ItemCandy(RpgConfig.instance.candy)
 				.setUnlocalizedName("petCandy");
 		tangledBrench = new ItemCandy(RpgConfig.instance.brench)
 				.setUnlocalizedName("tangledBrench");
-		PetXPBottle = new PetExpPotion()
-				.setUnlocalizedName("PetXPBottle");
+		PetXPBottle = new PetExpPotion().setUnlocalizedName("PetXPBottle");
 
 		crystal = new ItemCrystal(RpgConfig.instance.crystalID,
 				ITEMTYPE.CRYSTAL, -1, "").setUnlocalizedName("petCrystal");
@@ -140,23 +140,23 @@ public class mod_RpgRB {
 		LanguageRegistry.addName(new ItemStack(crystal, 1, 3), "Bull");
 
 		GameRegistry.addRecipe(new ItemStack(daggers, 1), new Object[] { " ei",
-				"eie", "se ", 'i', Items.iron_ingot, 'e', Items.spider_eye, 's',
-				Items.stick });
+				"eie", "se ", 'i', Items.iron_ingot, 'e', Items.spider_eye,
+				's', Items.stick });
 		GameRegistry.addShapelessRecipe(new ItemStack(whistle), new Object[] {
 				Items.stick, Items.reeds, Items.reeds });
 		GameRegistry.addRecipe(new ItemStack(beastLeather), new Object[] {
 				"LLL", "LVL", "LLL", 'L', Blocks.leaves, 'V', Items.leather });
 		GameRegistry.addRecipe(new ItemStack(rogueLeather), new Object[] {
-				"DSD", "SLS", "DSD", 'S', Items.string, 'L', Items.leather, 'D',
-				new ItemStack(Items.dye, 1, 5) });
+				"DSD", "SLS", "DSD", 'S', Items.string, 'L', Items.leather,
+				'D', new ItemStack(Items.dye, 1, 5) });
 		GameRegistry.addRecipe(new ItemStack(beastShield), new Object[] {
-				"III", "IDI", " I ", 'I', beastLeather, 'D', Blocks.log});
+				"III", "IDI", " I ", 'I', beastLeather, 'D', Blocks.log });
 		GameRegistry.addRecipe(new ItemStack(beastAxe), new Object[] { " IW",
 				" SI", "S  ", 'S', tangledBrench, 'I', Blocks.iron_block, 'W',
 				Blocks.log });
 		GameRegistry.addShapelessRecipe(new ItemStack(tangledBrench),
-				new Object[] { Items.stick, Items.stick, Items.string, Items.string,
-						Items.string, Items.string });
+				new Object[] { Items.stick, Items.stick, Items.string,
+						Items.string, Items.string, Items.string });
 
 		recipePatterns = new String[][] { { "XXX", "X X" },
 				{ "X X", "XXX", "XXX" }, { "XXX", "X X", "X X" },

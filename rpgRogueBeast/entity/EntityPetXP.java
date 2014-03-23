@@ -76,11 +76,9 @@ public class EntityPetXP extends EntityXPOrb {
 					2.0F + (this.rand.nextFloat() * 0.4F));
 		}
 
-		
-	
-//		this.()(this.posX,
-//				(this.boundingBox.minY + this.boundingBox.maxY) / 2.0D,
-//				this.posZ);
+		// this.()(this.posX,
+		// (this.boundingBox.minY + this.boundingBox.maxY) / 2.0D,
+		// this.posZ);
 		double var1 = 8.0D;
 
 		if ((this.closestPet == null)

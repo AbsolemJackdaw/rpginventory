@@ -29,7 +29,7 @@ public class ItemRBMats extends ItemMats {
 	public Item setTextureName(String s) {
 		String itemName = getUnlocalizedName().substring(
 				getUnlocalizedName().indexOf(".") + 1);
-		this.iconString = "rpginventorymod:"+ itemName;
+		this.iconString = "rpginventorymod:" + itemName;
 		return this;
 	}
 }

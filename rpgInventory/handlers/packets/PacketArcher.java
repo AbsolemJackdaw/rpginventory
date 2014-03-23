@@ -46,7 +46,8 @@ public class PacketArcher {
 			ItemStack middle = p.inventory.armorItemInSlot(2);
 			ItemStack middle2 = p.inventory.armorItemInSlot(1);
 			ItemStack bottom = p.inventory.armorItemInSlot(0);
-			if (!mod_RpgInventory.developers.contains(p.getDisplayName().toLowerCase())) {
+			if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+					.toLowerCase())) {
 				if ((bow == null) || (top == null) || (middle == null)
 						|| (middle2 == null) || (bottom == null)) {
 					return;
@@ -59,11 +60,13 @@ public class PacketArcher {
 					return;
 				}
 			}
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
+			if (!CommonTickHandler.globalCooldownMap.containsKey(p
+					.getDisplayName())) {
 				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 			}
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
-				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 30 * 20);
+				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(),
+						30 * 20);
 				if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 						.toLowerCase())) {
 					bow.damageItem(10, p);

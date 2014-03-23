@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import rpgInventory.mod_RpgInventory;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class MageEvents {
 

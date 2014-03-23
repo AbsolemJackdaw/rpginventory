@@ -40,9 +40,11 @@ public class EntityTeleportStone extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
 		{
-			if (par1MovingObjectPosition.entityHit != null)
-			{
-				par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 0.0F);
+			if (par1MovingObjectPosition.entityHit != null) {
+				par1MovingObjectPosition.entityHit
+						.attackEntityFrom(
+								DamageSource.causeThrownDamage(this,
+										this.getThrower()), 0.0F);
 			}
 
 			if (this.getThrower() != null) {
@@ -54,9 +56,9 @@ public class EntityTeleportStone extends EntityThrowable {
 					if (par1MovingObjectPosition.entityHit instanceof EntityPlayer) {
 						EntityPlayer player = (EntityPlayer) par1MovingObjectPosition.entityHit;
 						player.addPotionEffect(new PotionEffect(
-								Potion.blindness.id, mod_RpgInventory.donators
-								.contains(player.getDisplayName()) ? 5 * 20
-										: 3 * 20, 2));
+								Potion.blindness.id,
+								mod_RpgInventory.donators.contains(player
+										.getDisplayName()) ? 5 * 20 : 3 * 20, 2));
 					}
 				}
 			}
@@ -65,35 +67,42 @@ public class EntityTeleportStone extends EntityThrowable {
 				double d0 = this.rand.nextGaussian() * 0.02D;
 				double d1 = this.rand.nextGaussian() * 0.02D;
 				double d2 = this.rand.nextGaussian() * 0.02D;
-				this.worldObj.spawnParticle("largesmoke",
-						(this.posX + (this.rand.nextFloat() * this.width * 2.0F))
-						- this.width,
-						this.posY + 0.5D + (this.rand.nextFloat() * this.height),
-						(this.posZ + (this.rand.nextFloat() * this.width * 2.0F))
-						- this.width, d0, d1, d2);
+				this.worldObj
+						.spawnParticle(
+								"largesmoke",
+								(this.posX + (this.rand.nextFloat()
+										* this.width * 2.0F))
+										- this.width,
+								this.posY + 0.5D
+										+ (this.rand.nextFloat() * this.height),
+								(this.posZ + (this.rand.nextFloat()
+										* this.width * 2.0F))
+										- this.width, d0, d1, d2);
 			}
 
+			if (!this.worldObj.isRemote) {
+				if ((this.getThrower() != null)
+						&& (this.getThrower() instanceof EntityPlayerMP)) {
+					EntityPlayerMP entityplayermp = (EntityPlayerMP) this
+							.getThrower();
 
-			if (!this.worldObj.isRemote)
-			{
-				if (this.getThrower() != null && this.getThrower() instanceof EntityPlayerMP)
-				{
-					EntityPlayerMP entityplayermp = (EntityPlayerMP)this.getThrower();
-
-					if (entityplayermp.playerNetServerHandler.func_147362_b().isChannelOpen() && entityplayermp.worldObj == this.worldObj)
-					{
-						EnderTeleportEvent event = new EnderTeleportEvent(entityplayermp, this.posX, this.posY, this.posZ, 5.0F);
-						if (!MinecraftForge.EVENT_BUS.post(event))
-						{ 
+					if (entityplayermp.playerNetServerHandler.func_147362_b()
+							.isChannelOpen()
+							&& (entityplayermp.worldObj == this.worldObj)) {
+						EnderTeleportEvent event = new EnderTeleportEvent(
+								entityplayermp, this.posX, this.posY,
+								this.posZ, 5.0F);
+						if (!MinecraftForge.EVENT_BUS.post(event)) {
 							// Don't indent to lower patch size
-							if (this.getThrower().isRiding())
-							{
-								this.getThrower().mountEntity((Entity)null);
+							if (this.getThrower().isRiding()) {
+								this.getThrower().mountEntity((Entity) null);
 							}
 
-							this.getThrower().setPositionAndUpdate(this.posX, this.posY, this.posZ);
+							this.getThrower().setPositionAndUpdate(this.posX,
+									this.posY, this.posZ);
 							this.getThrower().fallDistance = 0.0F;
-							this.getThrower().attackEntityFrom(DamageSource.fall, 5.0F);
+							this.getThrower().attackEntityFrom(
+									DamageSource.fall, 5.0F);
 						}
 					}
 				}
