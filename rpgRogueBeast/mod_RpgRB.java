@@ -103,14 +103,14 @@ public class mod_RpgRB {
 		beastBoots = new ItemBeastMasterArmor(
 				beastMaster, 4, 3).setUnlocalizedName("beast4");
 
-		whistle = new ItemRBMats2(RpgConfig.instance.whistleID)
+		whistle = new ItemRBMats2()
 				.setUnlocalizedName("whistle");
 
 		petCandy = new ItemCandy(RpgConfig.instance.candy)
 				.setUnlocalizedName("petCandy");
 		tangledBrench = new ItemCandy(RpgConfig.instance.brench)
 				.setUnlocalizedName("tangledBrench");
-		PetXPBottle = new PetExpPotion(RpgConfig.instance.petxppotion)
+		PetXPBottle = new PetExpPotion()
 				.setUnlocalizedName("PetXPBottle");
 
 		crystal = new ItemCrystal(RpgConfig.instance.crystalID,

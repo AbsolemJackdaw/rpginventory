@@ -30,8 +30,9 @@ import net.minecraft.util.Vec3;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.packets.RpgPacketHandler;
 import rpgInventory.utils.IKeyHandler;
+import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 
-public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
+public class RPGKeyHandler extends KeyInputEvent implements IKeyHandler {
 
 	public static Map<Item, Integer> abilityMap = new HashMap();
 
@@ -55,12 +56,15 @@ public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 	}
 
 	public RPGKeyHandler() {
-		super(registeredKeyBinds.toArray(new KeyBinding[registeredKeyBinds
-				.size()]), new boolean[registeredKeyBinds.size()]);
+		super();
+
+		//registeredKeyBinds.toArray(new KeyBinding[registeredKeyBinds
+		//		.size()]), new boolean[registeredKeyBinds.size()]
 	}
 
 	public RPGKeyHandler(KeyBinding[] k, boolean[] b) {
-		super(bindKeys, reps);
+//		super(bindKeys, reps);
+		super();
 
 		abilityMap.put(mod_RpgInventory.staf, RpgPacketHandler.MAGE1);
 		abilityMap.put(mod_RpgInventory.hammer, RpgPacketHandler.BERSERKER);
@@ -102,7 +106,7 @@ public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 											var7.xCoord * var2,
 											var7.yCoord * var2,
 											var7.zCoord * var2).expand(var9,
-											var9, var9));
+													var9, var9));
 					double var11 = var4;
 					for (int var13 = 0; var13 < var10.size(); ++var13) {
 						Entity var14 = (Entity) var10.get(var13);
@@ -204,7 +208,7 @@ public class RPGKeyHandler extends KeyHandler implements IKeyHandler {
 							Minecraft.getMinecraft().thePlayer,
 							mod_RpgInventory.donators.contains(Minecraft
 									.getMinecraft().thePlayer.getDisplayName()) ? 60
-									: 40);
+											: 40);
 					if (target != null) {
 						outputStream.writeBoolean(false);
 						outputStream.writeInt((int) Math.floor(target.posX));

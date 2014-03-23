@@ -10,9 +10,9 @@ import org.lwjgl.input.Keyboard;
 public interface IKeyHandler {
 
 	static KeyBinding keyInventory = new KeyBinding("RPG Inventory Key",
-			Keyboard.KEY_END);
+			Keyboard.KEY_END, "");
 	static KeyBinding keySpecial = new KeyBinding("RPG Special Ability",
-			Keyboard.KEY_F);
+			Keyboard.KEY_F, "");
 	public static boolean[] reps = new boolean[] { false, false };
 
 	public static KeyBinding[] bindKeys = new KeyBinding[] { keyInventory,
