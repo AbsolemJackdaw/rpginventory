@@ -2,7 +2,6 @@ package rpgInventory.gui.pet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +22,6 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.packets.RpgPacketHandler;
 import rpgRogueBeast.entity.BMPetImpl;
 import rpgRogueBeast.entity.BoarPet;
 import rpgRogueBeast.entity.BullPet;
