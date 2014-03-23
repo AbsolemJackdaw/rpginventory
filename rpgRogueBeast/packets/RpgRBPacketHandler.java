@@ -1,17 +1,17 @@
-package rpgRogueBeast.packets;
-
-import ibxm.Player;
-
-import java.util.Random;
-
-public class RpgRBPacketHandler implements IPacketHandler {
-	private Random rand = new Random(5);
-
-	public static final int PETGUI = 2;
-	public static final int CRYSTAL = 11;
-	public static final int STOREPET = 7;
-
-	private void handleRandom(Packet250CustomPayload packet, Player player) {
+//package rpgRogueBeast.packets;
+//
+//import ibxm.Player;
+//
+//import java.util.Random;
+//
+//public class RpgRBPacketHandler implements IPacketHandler {
+//	private Random rand = new Random(5);
+//
+//	public static final int PETGUI = 2;
+//	public static final int CRYSTAL = 11;
+//	public static final int STOREPET = 7;
+//
+//	private void handleRandom(Packet250CustomPayload packet, Player player) {
 //
 //		EntityPlayer p = (EntityPlayer) player;
 //		World world = p.worldObj;
@@ -61,5 +61,5 @@ public class RpgRBPacketHandler implements IPacketHandler {
 //			Packet250CustomPayload packet, Player player) {
 //		handleRandom(packet, player);
 //	}
-	}
-}
+//	}
+//}

@@ -1,11 +1,8 @@
 package rpgRogueBeast;
 
-import java.util.EnumSet;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import rpgInventory.gui.rpginv.RpgGui;
-import rpgRogueBeast.packets.RpgRBPacketHandler;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -29,7 +26,7 @@ public class ClientTickHandler {
 			if (Minecraft.getMinecraft().currentScreen instanceof RpgGui) {
 
 				ByteArrayDataOutput out = ByteStreams.newDataOutput();
-				out.writeInt(RpgRBPacketHandler.STOREPET);
+//				out.writeInt(RpgRBPacketHandler.STOREPET);
 				
 				//TODO sendpacket
 //				PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(
