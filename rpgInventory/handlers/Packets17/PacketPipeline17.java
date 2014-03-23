@@ -29,7 +29,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @author sirgingalot some code from: cpw
  */
 @ChannelHandler.Sharable
-public class PacketHandler17 extends
+public class PacketPipeline17 extends
 		MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 
 	private EnumMap<Side, FMLEmbeddedChannel> channels;
@@ -50,14 +50,14 @@ public class PacketHandler17 extends
 	public boolean registerPacket(Class<? extends AbstractPacket> clazz) {
 		if (this.packets.size() > 256) {
 
-			System.out.println("Packetsize to big !! Aborting ...");
+			System.out.println("Too many packets registered !! Aborting ...");
 
 			return false;
 		}
 
 		if (this.packets.contains(clazz)) {
 
-			System.out.println("Packet not registered !! Aborting ...");
+			System.out.println("Packet already registered !! Aborting ...");
 
 			return false;
 		}
@@ -129,7 +129,9 @@ public class PacketHandler17 extends
 
 	// Method to call from FMLInitializationEvent
 	public void initialise() {
-		this.channels = NetworkRegistry.INSTANCE.newChannel("TUT", this);
+		this.channels = NetworkRegistry.INSTANCE.newChannel("RPGInv", this);
+		
+		registerPacket(PacketInventory.class);
 	}
 
 	// Method to call from FMLPostInitializationEvent
