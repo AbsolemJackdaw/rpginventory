@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 
@@ -15,7 +16,7 @@ public class CommonProxy {
 	public static void renderHandler() {
 	}
 
-	public void consumeItem(EntityPlayer player, int itemID) {
+	public void consumeItem(EntityPlayer player, Item itemID) {
 		player.inventory.consumeInventoryItem(itemID);
 	}
 

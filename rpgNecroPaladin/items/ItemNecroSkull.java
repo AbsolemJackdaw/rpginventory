@@ -74,7 +74,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 							var4.setPosition(mob.posX, mob.posY, mob.posZ);
 
 							for (int i = 0; i < 5; i++) {
-								ItemStack stack = mob.getCurrentItemOrArmor(i);
+								ItemStack stack = mob.getEquipmentInSlot(i);
 								if (stack != null) {
 									var4.setCurrentItemOrArmor(i, stack);
 								}
