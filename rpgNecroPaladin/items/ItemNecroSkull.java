@@ -24,7 +24,7 @@ import rpgNecroPaladin.mod_RpgPlus;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
 import rpgNecroPaladin.minions.IMinion;
-import rpgNecroPaladin.packets.RpgPlusPacketHandler;
+import rpgNecroPaladin.packets17.RpgPlusPacketPipeline17;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class ItemNecroSkull extends ItemRpgWeapon {
@@ -127,9 +127,9 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			DataOutputStream dos = new DataOutputStream(bos);
 			try {
-				//TODO
+				//TODO sendpacket
 				System.out.println("send packet here necroSkull spawning entity");
-				dos.writeInt(RpgPlusPacketHandler.WEAPONIDS.SKULLRCLICK);
+				dos.writeInt(RpgPlusPacketPipeline17.WEAPONIDS.SKULLRCLICK);
 //				Packet250CustomPayload packet = new Packet250CustomPayload(
 //						"RpgPlusPlus", bos.toByteArray());
 //				PacketDispatcher.sendPacketToServer(packet);
