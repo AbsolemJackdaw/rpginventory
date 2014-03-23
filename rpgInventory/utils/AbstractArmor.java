@@ -3,6 +3,7 @@ package rpgInventory.utils;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
@@ -66,10 +67,11 @@ public abstract class AbstractArmor extends ItemArmor {
 	}
 
 	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
+	public Item setTextureName(String s) {
 		String itemName = getUnlocalizedName().substring(
 				getUnlocalizedName().lastIndexOf(".") + 1);
-		this.itemIcon = par1IconRegister.registerIcon("rpginventorymod:"
-				+ itemName);
+		this.iconString = "rpginventorymod:"+ itemName;
+		
+		return this;
 	}
 }

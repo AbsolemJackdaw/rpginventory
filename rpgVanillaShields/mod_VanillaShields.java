@@ -39,17 +39,17 @@ public class mod_VanillaShields {
 
 		tab = new ShieldTab(CreativeTabs.getNextID(), "ShieldTab");
 
-		shieldWood = new ItemRpgInvShields(RpgConfig.instance.shieldWoodID, 1,
+		shieldWood = new ItemRpgInvShields( 1,
 				50, "wood", "subaraki:jewels/ShieldWood.png")
 				.setUnlocalizedName("shieldWood");
-		shieldIron = new ItemRpgInvShields(RpgConfig.instance.shieldIronID, 1,
+		shieldIron = new ItemRpgInvShields( 1,
 				125, "iron", "subaraki:jewels/ShieldIron.png")
 				.setUnlocalizedName("shieldIron");
-		shieldGold = new ItemRpgInvShields(RpgConfig.instance.shieldGoldID, 1,
+		shieldGold = new ItemRpgInvShields( 1,
 				250, "gold", "subaraki:jewels/ShieldGold.png")
 				.setUnlocalizedName("shieldGold");
 		shieldDiamond = new ItemRpgInvShields(
-				RpgConfig.instance.shieldDiamondID, 1, 500, "diamond",
+				1, 500, "diamond",
 				"subaraki:jewels/ShieldDiamond.png")
 				.setUnlocalizedName("shieldDiamond");
 

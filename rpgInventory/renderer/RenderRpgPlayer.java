@@ -33,7 +33,7 @@ public class RenderRpgPlayer {
 
 	float rotation = 0;
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void PlayerPrerenderer(RenderPlayerEvent.Post evt) {
 		/* ===== RENDERING SHIELDS===== */
 		ItemStack shield = PlayerRpgInventory.get(evt.entityPlayer).getShield();
@@ -52,7 +52,7 @@ public class RenderRpgPlayer {
 		}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void PlayerRender(RenderPlayerEvent.SetArmorModel evt) {
 
 		EntityPlayer player = evt.entityPlayer;

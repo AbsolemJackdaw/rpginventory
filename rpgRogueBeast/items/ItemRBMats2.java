@@ -15,8 +15,8 @@ import rpgRogueBeast.entity.SpiderPet;
 
 public class ItemRBMats2 extends Item {
 
-	public ItemRBMats2(int par1) {
-		super(par1);
+	public ItemRBMats2() {
+		super();
 	}
 
 	@Override
@@ -121,10 +121,10 @@ public class ItemRBMats2 extends Item {
 	}
 
 	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
+	public Item setTextureName(String s) {
 		String itemName = getUnlocalizedName().substring(
 				getUnlocalizedName().indexOf(".") + 1);
-		this.itemIcon = par1IconRegister.registerIcon("rpginventorymod:"
-				+ itemName);
+		this.iconString = "rpginventorymod:"+ itemName;
+		return this;
 	}
 }

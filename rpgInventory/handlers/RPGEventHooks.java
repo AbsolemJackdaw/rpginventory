@@ -44,7 +44,7 @@ public class RPGEventHooks {
 
 	float vanillaReduction = 0f;
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void BreakSpeed(PlayerEvent.BreakSpeed evt) {
 		/*
 		 * Increases Block-breaking speed while wearing emerald ring (right
@@ -82,7 +82,7 @@ public class RPGEventHooks {
 		}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void DeathEvent(LivingDeathEvent evt) {
 		/* ====PET EXP==== */
 		try {
@@ -109,7 +109,7 @@ public class RPGEventHooks {
 		return (j > 0) && (rand.nextInt(j + 1) > 0) ? par1 : par1 - 1;
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onEntityConstructing(EntityConstructing event) {
 		/*
 		 * Be sure to check if the entity being constructed is the correct type
@@ -125,7 +125,7 @@ public class RPGEventHooks {
 		}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void PlayerDamage(LivingHurtEvent evt) {
 
 		try {
@@ -399,7 +399,7 @@ public class RPGEventHooks {
 	// }
 	// }
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void PlayerUpdate(PlayerEvent.LivingUpdateEvent evt) {
 		/* ====UPDATING INVENTORY==== */
 		try {

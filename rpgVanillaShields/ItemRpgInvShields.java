@@ -7,9 +7,9 @@ public class ItemRpgInvShields extends ItemRpgInvArmor {
 
 	private VanillaShield van = new VanillaShield();
 
-	public ItemRpgInvShields(int par1, int par4, int maxDamage, String name,
+	public ItemRpgInvShields( int par4, int maxDamage, String name,
 			String resourcelocation) {
-		super(par1, par4, maxDamage, name, resourcelocation);
+		super( par4, maxDamage, name, resourcelocation);
 
 	}
 

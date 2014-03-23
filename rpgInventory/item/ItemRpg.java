@@ -49,9 +49,10 @@ public class ItemRpg extends Item {
 	}
 
 	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
-		String texture = getUnlocalizedName().substring(
-				getUnlocalizedName().lastIndexOf(".") + 1);
-		this.itemIcon = par1IconRegister.registerIcon(texture);
+	public Item setTextureName(String s) {
+		String itemName = getUnlocalizedName().substring(
+				getUnlocalizedName().indexOf(".") + 1);
+		this.iconString = "rpginventorymod:"+ itemName;
+		return this;
 	}
 }

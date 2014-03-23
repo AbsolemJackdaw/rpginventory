@@ -45,12 +45,12 @@ public class ItemBeastAxe extends ItemRpgSword {
 				: false;
 	}
 
-	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
-		return (par2Block != null)
-				&& ((par2Block.getMaterial() == Material.wood)
-						|| (par2Block.getMaterial() == Material.plants) || (par2Block.getMaterial() == Material.vine)) ? 15f
-				: super.getStrVsBlock(par1ItemStack, par2Block);
-	}
+//	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
+//		return (par2Block != null)
+//				&& ((par2Block.getMaterial() == Material.wood)
+//						|| (par2Block.getMaterial() == Material.plants) || (par2Block.getMaterial() == Material.vine)) ? 15f
+//				: super.getStrVsBlock(par1ItemStack, par2Block);
+//	}
 
 	@Override
 	public boolean hitEntity(ItemStack par1ItemStack,

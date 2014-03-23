@@ -9,7 +9,7 @@ import rpgRogueBeast.entity.IPet;
 
 public class BeastMasterEvent {
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void DeathEvent(LivingDeathEvent evt) {
 		/* ====PET EXP==== */
 		try {

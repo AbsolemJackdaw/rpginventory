@@ -216,11 +216,11 @@ public class ItemRpgInvArmor extends Item {
 	}
 
 	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
+	public Item setTextureName(String s) {
 		String itemName = getUnlocalizedName().substring(
-				getUnlocalizedName().lastIndexOf(".") + 1);
-		this.itemIcon = par1IconRegister.registerIcon("rpginventorymod:"
-				+ itemName);
+				getUnlocalizedName().indexOf(".") + 1);
+		this.iconString = "rpginventorymod:"+ itemName;
+		return this;
 	}
 
 	/**

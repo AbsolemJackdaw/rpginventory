@@ -13,7 +13,7 @@ import cpw.mods.fml.common.FMLLog;
 
 public class NecroPaladinEvents {
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void PlayerDamage(LivingHurtEvent evt) {
 
 		try {
@@ -69,7 +69,7 @@ public class NecroPaladinEvents {
 		}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void PlayerUpdate(PlayerEvent.LivingUpdateEvent evt) {
 
 		if (evt.entityLiving instanceof EntityPlayer) {

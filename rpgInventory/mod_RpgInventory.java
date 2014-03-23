@@ -58,7 +58,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = mod_RpgInventory.name, name = mod_RpgInventory.name, version = mod_RpgInventory.version)
+@Mod(modid = mod_RpgInventory.name, name = mod_RpgInventory.ID, version = mod_RpgInventory.version)
 // @NetworkMod(clientSideRequired = true, serverSideRequired = true,
 // clientPacketHandlerSpec =
 // @SidedPacketHandler(channels = {"RpgInv"}, packetHandler =
@@ -78,8 +78,11 @@ public class mod_RpgInventory {
 		public static final int CRYSTAL = 5;
 	}
 
-	protected static final String name = "RpgInventory";
+	protected static final String name = "rpginventory";
+	protected static final String ID = "Rpg Inventory";
 
+	
+	
 	protected static final String version = "1.7.2";
 	public static String CLASSARCHER = "archer";
 	public static String CLASSBERSERKER = "berserker";

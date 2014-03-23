@@ -4,6 +4,7 @@
  */
 package rpgInventory.item.weapons;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemSword;
 
 public class ItemRpgSword extends ItemSword {
@@ -14,10 +15,10 @@ public class ItemRpgSword extends ItemSword {
 	}
 
 	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
+	public Item setTextureName(String s) {
 		String itemName = getUnlocalizedName().substring(
 				getUnlocalizedName().indexOf(".") + 1);
-		this.itemIcon = par1IconRegister.registerIcon("rpginventorymod:"
-				+ itemName);
+		this.iconString = "rpginventorymod:"+ itemName;
+		return this;
 	}
 }

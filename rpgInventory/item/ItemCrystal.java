@@ -131,8 +131,8 @@ public class ItemCrystal extends ItemRpgInvArmor {
 	}
 
 	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
-		this.itemIcon = par1IconRegister
-				.registerIcon("rpginventorymod:petCrystal");
+	public Item setTextureName(String s) {
+		this.iconString = "rpginventorymod:petcrystal";
+		return this;
 	}
 }

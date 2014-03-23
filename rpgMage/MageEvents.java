@@ -9,7 +9,7 @@ import cpw.mods.fml.common.FMLLog;
 
 public class MageEvents {
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void PlayerUpdate(PlayerEvent.LivingUpdateEvent evt) {
 
 		try {

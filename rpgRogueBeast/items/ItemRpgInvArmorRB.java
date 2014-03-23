@@ -20,9 +20,9 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 
 	private ModelDaggerL dagger = new ModelDaggerL();
 
-	public ItemRpgInvArmorRB(int par1, int par4, int maxDamage, String name,
+	public ItemRpgInvArmorRB(int par4, int maxDamage, String name,
 			String resourcelocation) {
-		super(par1, par4, maxDamage, name, resourcelocation);
+		super(par4, maxDamage, name, resourcelocation);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -5,6 +5,7 @@
 package rpgRogueBeast.items;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemExpBottle;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -16,8 +17,8 @@ import rpgRogueBeast.entity.EntityPetXPBottle;
  */
 public class PetExpPotion extends ItemExpBottle {
 
-	public PetExpPotion(int par1) {
-		super(par1);
+	public PetExpPotion() {
+		super();
 	}
 
 	@Override
@@ -39,10 +40,10 @@ public class PetExpPotion extends ItemExpBottle {
 	}
 
 	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
+	public Item setTextureName(String s) {
 		String itemName = getUnlocalizedName().substring(
 				getUnlocalizedName().indexOf(".") + 1);
-		this.itemIcon = par1IconRegister.registerIcon("RPGInventoryMod:"
-				+ itemName);
+		this.iconString = "rpginventorymod:"+ itemName;
+		return this;
 	}
 }
