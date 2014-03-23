@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.item.ItemMats;
 import rpgInventory.item.ItemMold;
@@ -320,14 +321,14 @@ public class CommandPanel extends CommandBase {
 											.getCompoundTag("RPGPetInfo");
 									nbt2.setInteger("XpLevel",
 											nbt2.getInteger("XpLevel") + level);
-									nbt.setCompoundTag("RPGPetInfo", nbt2);
+									nbt.setTag("RPGPetInfo", nbt2);
 									nbt.setInteger("PetLevel",
 											nbt.getInteger("PetLevel") + level);
 									player.getCurrentEquippedItem()
 											.setTagCompound(nbt);
 								} else {
 									((EntityPlayer) sender)
-											.addChatMessage("Sorry Master, I am afraid this crystal is empty...");
+											.addChatMessage(new ChatComponentText("Sorry Master, I am afraid this crystal is empty..."));
 								}
 							}
 							if (args[2].matches("name")) {
@@ -349,7 +350,7 @@ public class CommandPanel extends CommandBase {
 											.setTagCompound(nbt);
 								} else {
 									((EntityPlayer) sender)
-											.addChatMessage("Sorry Master, I am afraid this crystal is empty...");
+											.addChatMessage(new ChatComponentText("Sorry Master, I am afraid this crystal is empty..."));
 								}
 							}
 						}
@@ -405,11 +406,11 @@ public class CommandPanel extends CommandBase {
 						}
 					} else {
 						((EntityPlayer) sender)
-								.addChatMessage("What do you wish to do master?");
+								.addChatMessage(new ChatComponentText("What do you wish to do master?"));
 					}
 				} else {
 					((EntityPlayer) sender)
-							.addChatMessage("You do not have permission to use this command.");
+							.addChatMessage(new ChatComponentText("You do not have permission to use this command."));
 				}
 				if (args.length >= 2) {
 					// int i = parseIntWithMin(sender, args[1], 1);
@@ -417,11 +418,11 @@ public class CommandPanel extends CommandBase {
 				}
 			} else {
 				((EntityPlayer) sender)
-						.addChatMessage("Looking for something here?");
+						.addChatMessage(new ChatComponentText("Looking for something here?"));
 			}
 		} else {
 			((EntityPlayer) sender)
-					.addChatMessage("Looking for something here?");
+					.addChatMessage(new ChatComponentText("Looking for something here?"));
 		}
 	}
 }
