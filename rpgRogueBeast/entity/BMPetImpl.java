@@ -165,7 +165,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
 				.setAttribute(10.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
 				.setAttribute(0.22499999403953552D);

@@ -9,7 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemNecroPaladinMats extends ItemMats {
 
 	public ItemNecroPaladinMats(int par1) {
-		super(par1);
+		super();
 	}
 
 	@Override

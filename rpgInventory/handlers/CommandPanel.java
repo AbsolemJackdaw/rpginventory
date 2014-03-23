@@ -404,7 +404,7 @@ public class CommandPanel extends CommandBase {
 							}
 						}
 					} else {
-						((EntityPlayer) sender).
+						((EntityPlayer) sender)
 								.addChatMessage("What do you wish to do master?");
 					}
 				} else {
