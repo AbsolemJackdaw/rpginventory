@@ -288,11 +288,6 @@ public class PlayerRpgInventory implements IInventory,
 		readFromNBT(compound);
 	}
 
-	@Override
-	public void markDirty() {
-
-	}
-
 	// /**
 	// * Writes the inventory out as a list of compound tags. This is where the
 	// * slot indices are used (+100 for armor, +80 for crafting).
@@ -331,8 +326,8 @@ public class PlayerRpgInventory implements IInventory,
 	// }
 	// }
 
-	@Override
-	public void onInventoryChanged() {
+	@Override //onInventoryChanged
+	public void markDirty() {
 		try {
 
 			PacketInventory.sendPacket(player, this);
@@ -409,10 +404,10 @@ public class PlayerRpgInventory implements IInventory,
 	}
 
 	public void readFromNBT(NBTTagCompound tagcompound) {
-		NBTTagList nbttaglist = tagcompound.getTagList(tagName);
+		NBTTagList nbttaglist = tagcompound.getTagList(tagName, 10);
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
 
 			if ((b0 >= 0) && (b0 < this.getSizeInventory())) {

@@ -1,10 +1,13 @@
 package rpgInventory.renderer;
 
+import java.lang.reflect.Field;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -57,8 +60,31 @@ public class RenderRpgPlayer {
 	public void PlayerRender(RenderPlayerEvent.SetArmorModel evt) {
 
 		EntityPlayer player = evt.entityPlayer;
-		main = evt.renderer.modelBipedMain; // all fields get set to public when
-											// forge compiles them
+
+		Field f = null;
+		try {
+
+			f = evt.renderer.getClass().getDeclaredField("modelBipedMain");
+			f.setAccessible(true);
+			main = (ModelBiped) f.get(evt.renderer);
+
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong accesing the modelbipedmain ! Index 1");
+		} catch (SecurityException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong accesing the modelbipedmain ! Index 2");
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong accesing the modelbipedmain ! Index 3");
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong accesing the modelbipedmain ! Index 4");
+		}
+
+
+		// all fields get set to public when
+		// forge compiles them
 		// or they used to. that's why this worked before :)
 
 		/* ===== RENDERING CLOAK===== */
@@ -218,7 +244,7 @@ public class RenderRpgPlayer {
 		if (player == Minecraft.getMinecraft().thePlayer) {
 			if (!(((Minecraft.getMinecraft().currentScreen instanceof GuiInventory)
 					|| (Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) || (Minecraft
-						.getMinecraft().currentScreen instanceof RpgGui)) && (RenderManager.instance.playerViewY == 180.0F))) {
+							.getMinecraft().currentScreen instanceof RpgGui)) && (RenderManager.instance.playerViewY == 180.0F))) {
 
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glDisable(GL11.GL_LIGHTING);

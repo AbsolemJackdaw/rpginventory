@@ -85,14 +85,15 @@ public class PetGui extends GuiScreen {
 
 			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 			DataOutputStream outputStream = new DataOutputStream(bytes);
-			try {
-				outputStream.writeInt(RpgPacketHandler.OPENRPGINV);
-				Packet250CustomPayload packet = new Packet250CustomPayload(
-						"RpgInv", bytes.toByteArray());
-				PacketDispatcher.sendPacketToServer(packet);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			//TODO
+//			try {
+//				outputStream.writeInt(RpgPacketHandler.OPENRPGINV);
+//				Packet250CustomPayload packet = new Packet250CustomPayload(
+//						"RpgInv", bytes.toByteArray());
+//				PacketDispatcher.sendPacketToServer(packet);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 		}
 		if (guibutton.id == IMBUE_BUTTON) {
 			// levelInfo = "Imbue to next level : " + (PetLevel/2) +
@@ -341,8 +342,9 @@ public class PetGui extends GuiScreen {
 			dos.writeShort(petLevelsAdded);
 			dos.writeShort(petcandyConsumed);
 
-			PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(
-					"RpgRBPacket", bos.toByteArray()));
+			//TODO
+//			PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(
+//					"RpgRBPacket", bos.toByteArray()));
 		} catch (Throwable ex) {
 			ex.printStackTrace();
 		}
