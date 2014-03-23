@@ -1,3 +1,4 @@
+package rpgInventory.handlers.oldpackets;
 //package rpgInventory.handlers.packets;
 //
 //import ibxm.Player;

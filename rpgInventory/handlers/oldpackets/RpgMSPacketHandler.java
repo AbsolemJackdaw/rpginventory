@@ -1,4 +1,4 @@
-package rpgMage;
+package rpgInventory.handlers.oldpackets;
 
 import ibxm.Player;
 
