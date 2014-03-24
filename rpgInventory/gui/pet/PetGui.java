@@ -204,9 +204,9 @@ public class PetGui extends GuiScreen {
 	@Override
 	public void initGui() {
 		petCrystal = this.inv.getCrystal();
-		if (IPet.playersWithActivePets.containsKey(p.getDisplayName())) {
+		if (IPet.playersWithActivePets.containsKey(p.getCommandSenderName())) {
 			thePet = (BMPetImpl) IPet.playersWithActivePets.get(
-					p.getDisplayName()).getPet();
+					p.getCommandSenderName()).getPet();
 			if (thePet != null) {
 				// make sure crystal is updated with the mob info
 				petCrystal = thePet.writePetToItemStack();

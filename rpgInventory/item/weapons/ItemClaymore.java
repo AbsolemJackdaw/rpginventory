@@ -39,7 +39,7 @@ public class ItemClaymore extends ItemRpgWeapon {
 				DamageSource.causePlayerDamage((EntityPlayer) player), 7);
 
 		if (mob instanceof EntityPlayer) {
-			String name = ((EntityPlayer) mob).getDisplayName();
+			String name = ((EntityPlayer) mob).getCommandSenderName();
 			ItemStack skull = new ItemStack(Items.skull, 1, 3);
 
 			if (skull.stackTagCompound == null) {

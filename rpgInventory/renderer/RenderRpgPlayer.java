@@ -141,9 +141,9 @@ public class RenderRpgPlayer {
 				if (cloak.getItem() == mod_RpgInventory.cloak) {
 					if (CapeRenderer.capes != null) {
 						if (CapeRenderer.playersWithCapes.contains(player
-								.getDisplayName())) {
+								.getCommandSenderName())) {
 							mc.renderEngine.bindTexture(CapeRenderer
-									.getLocationCape(player.getDisplayName()));// new
+									.getLocationCape(player.getCommandSenderName()));// new
 							// ResourceLocation("subaraki/playerCapes/"+player.username+".png"));
 						}
 					}

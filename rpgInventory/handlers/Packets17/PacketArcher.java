@@ -68,7 +68,7 @@ public class PacketArcher extends AbstractPacket {
 			ItemStack middle = player.inventory.armorItemInSlot(2);
 			ItemStack middle2 = player.inventory.armorItemInSlot(1);
 			ItemStack bottom = player.inventory.armorItemInSlot(0);
-			if (!mod_RpgInventory.developers.contains(player.getDisplayName()
+			if (!mod_RpgInventory.developers.contains(player.getCommandSenderName()
 					.toLowerCase())) {
 				if ((bow == null) || (top == null) || (middle == null)
 						|| (middle2 == null) || (bottom == null)) {
@@ -83,13 +83,13 @@ public class PacketArcher extends AbstractPacket {
 				}
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(player
-					.getDisplayName())) {
-				CommonTickHandler.globalCooldownMap.put(player.getDisplayName(), 0);
+					.getCommandSenderName())) {
+				CommonTickHandler.globalCooldownMap.put(player.getCommandSenderName(), 0);
 			}
-			if (CommonTickHandler.globalCooldownMap.get(player.getDisplayName()) <= 0) {
-				CommonTickHandler.globalCooldownMap.put(player.getDisplayName(),
+			if (CommonTickHandler.globalCooldownMap.get(player.getCommandSenderName()) <= 0) {
+				CommonTickHandler.globalCooldownMap.put(player.getCommandSenderName(),
 						30 * 20);
-				if (!mod_RpgInventory.developers.contains(player.getDisplayName()
+				if (!mod_RpgInventory.developers.contains(player.getCommandSenderName()
 						.toLowerCase())) {
 					bow.damageItem(10, player);
 				}
@@ -149,7 +149,7 @@ public class PacketArcher extends AbstractPacket {
 			} else {
 				player.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
 						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(player.getDisplayName()) / 20)) + " seconds"));
+								.get(player.getCommandSenderName()) / 20)) + " seconds"));
 			}
 		}
 	}

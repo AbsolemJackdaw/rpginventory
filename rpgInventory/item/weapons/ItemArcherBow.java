@@ -161,7 +161,7 @@ public class ItemArcherBow extends Item {
 					f = ((f * f) + (f * 2.0F)) / 3.0F;
 
 					if (f < (mod_RpgInventory.donators.contains(player
-							.getDisplayName()) ? 0.2d : 0.5D)) {
+							.getCommandSenderName()) ? 0.2d : 0.5D)) {
 						return;
 					}
 
@@ -172,7 +172,7 @@ public class ItemArcherBow extends Item {
 					EntityArrow entityarrow = new EntityArrow(par2World,
 							player, f * 2.0F);
 					boolean crit = mod_RpgInventory.donators.contains(player
-							.getDisplayName()) ? true : false;
+							.getCommandSenderName()) ? true : false;
 					entityarrow.setIsCritical(crit);
 
 					if (f == 1.0F) {
@@ -182,9 +182,9 @@ public class ItemArcherBow extends Item {
 					entityarrow.setDamage(entityarrow.getDamage()
 							+ (flag ? 2D : 1D));
 					entityarrow.setKnockbackStrength(mod_RpgInventory.donators
-							.contains(player.getDisplayName()) ? 2 : 1);
+							.contains(player.getCommandSenderName()) ? 2 : 1);
 					entityarrow.setFire(mod_RpgInventory.donators
-							.contains(player.getDisplayName()) ? 10 : 5);
+							.contains(player.getCommandSenderName()) ? 10 : 5);
 
 					if (flag) {
 						entityarrow.canBePickedUp = 2;
@@ -194,7 +194,7 @@ public class ItemArcherBow extends Item {
 					if (!par2World.isRemote) {
 						par2World.spawnEntityInWorld(entityarrow);
 						if (mod_RpgInventory.donators.contains(player
-								.getDisplayName())) {
+								.getCommandSenderName())) {
 							par2World.spawnEntityInWorld(new EntityArrow(
 									par2World, player, f * 2.0f));
 						}

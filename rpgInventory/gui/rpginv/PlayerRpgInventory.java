@@ -1,7 +1,10 @@
 package rpgInventory.gui.rpginv;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerAdapter;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
@@ -18,10 +21,10 @@ import rpgInventory.item.armor.ItemRpgInvArmor;
 import cpw.mods.fml.common.FMLLog;
 
 public class PlayerRpgInventory implements IInventory,
-		IExtendedEntityProperties {
+IExtendedEntityProperties {
 
 	public ItemStack[] armorSlots = new ItemStack[7];
-	public String playername;
+	//	public String playername;
 	// public EnumSet<EnumRpgClass> classSets;
 	// public LinkedList classSets;
 	private EntityPlayer player;
@@ -37,14 +40,20 @@ public class PlayerRpgInventory implements IInventory,
 	/* =====SAVING ENTITY DATA ===== */
 
 	public static final void register(EntityPlayer player) {
-		player.registerExtendedProperties(EXT_PROP_NAME,
-				new PlayerRpgInventory(player));
-		FMLLog.getLogger().info("Player properties registered");
+		if(player != null){
+			player.registerExtendedProperties(EXT_PROP_NAME,
+					new PlayerRpgInventory(player));
+			FMLLog.getLogger().info("Player properties registered");
+		}
+		else{
+			System.out.println("NOPE. player was null");	
+		}
 	}
 
 	public PlayerRpgInventory(EntityPlayer p) {
-		playername = p.getDisplayName();
-		player = p;
+		if(p != null){
+			player = p;
+		}
 		// classSets = new LinkedList();//EnumSet.noneOf(EnumRpgClass.class);
 	}
 
@@ -55,7 +64,7 @@ public class PlayerRpgInventory implements IInventory,
 
 		//TODO
 		System.out.println("send packet here closed inventory");
-//		PacketInventory.sendPacket(player, this);
+		//		PacketInventory.sendPacket(player, this);
 
 	}
 
@@ -198,7 +207,7 @@ public class PlayerRpgInventory implements IInventory,
 		// mod_RpgInventory.proxy.addEntry(playername, this);
 		//TODO
 		System.out.println("send packet here slotclosed");
-//		PacketInventory.sendPacket(player, this);
+		//		PacketInventory.sendPacket(player, this);
 		return null;
 	}
 
@@ -282,7 +291,7 @@ public class PlayerRpgInventory implements IInventory,
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 		EntityPlayer player = MinecraftServer.getServer()
-				.getConfigurationManager().getPlayerForUsername(playername);
+				.getConfigurationManager().getPlayerForUsername(par1EntityPlayer.getCommandSenderName());
 		return player.isDead ? false : par1EntityPlayer
 				.getDistanceSqToEntity(player) <= 64.0D;
 	}
@@ -330,16 +339,21 @@ public class PlayerRpgInventory implements IInventory,
 	// }
 	// }
 
+	PacketInventory pa = new PacketInventory();
+
 	@Override //onInventoryChanged
 	public void markDirty() {
 		try {
 
 			//TODO
-			System.out.println("send packet here updated as unclean");
-//			PacketInventory.sendPacket(player, this);
+			//System.out.println("send packet here updated as unclean");
+			//			PacketInventory.sendPacket(player, this);
+
+//			mod_RpgInventory.PIPELINE.sendTo(new PacketInventory(player, this), (EntityPlayerMP) player);
+
 
 			EntityPlayer player = MinecraftServer.getServer()
-					.getConfigurationManager().getPlayerForUsername(playername);
+					.getConfigurationManager().getPlayerForUsername(this.player.getCommandSenderName());
 			// classSets = EnumRpgClass.getPlayerClasses(player);
 			// TODO is done ! moved that line ^ to eventhooks so it gets updated
 			// properly.
@@ -373,33 +387,33 @@ public class PlayerRpgInventory implements IInventory,
 
 			if (addtoticks[0]) {
 				if (!RPGEventHooks.ArcherRepairTick.containsKey(player
-						.getDisplayName())) {
-					RPGEventHooks.ArcherRepairTick.put(player.getDisplayName(),
+						.getCommandSenderName())) {
+					RPGEventHooks.ArcherRepairTick.put(player.getCommandSenderName(),
 							0);
 				}
 			} else {
 				// keep the cooldown hashmap clean
-				RPGEventHooks.ArcherRepairTick.remove(player.getDisplayName());
+				RPGEventHooks.ArcherRepairTick.remove(player.getCommandSenderName());
 			}
 
 			if (addtoticks[1]) {
 				if (!RPGEventHooks.HealerTick.containsKey(player
-						.getDisplayName())) {
-					RPGEventHooks.HealerTick.put(player.getDisplayName(), 0);
+						.getCommandSenderName())) {
+					RPGEventHooks.HealerTick.put(player.getCommandSenderName(), 0);
 				}
 			} else {
 				// keep the cooldown hashmap clean
-				RPGEventHooks.HealerTick.remove(player.getDisplayName());
+				RPGEventHooks.HealerTick.remove(player.getCommandSenderName());
 			}
 
 			if (addtoticks[2]) {
 				if (!RPGEventHooks.DiamondTick.containsKey(player
-						.getDisplayName())) {
-					RPGEventHooks.DiamondTick.put(player.getDisplayName(), 0);
+						.getCommandSenderName())) {
+					RPGEventHooks.DiamondTick.put(player.getCommandSenderName(), 0);
 				}
 			} else {
 				// keep the cooldown hashmap clean
-				RPGEventHooks.DiamondTick.remove(player.getDisplayName());
+				RPGEventHooks.DiamondTick.remove(player.getCommandSenderName());
 			}
 		} catch (Throwable ex) {
 		}
@@ -431,10 +445,10 @@ public class PlayerRpgInventory implements IInventory,
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		this.armorSlots[par1] = par2ItemStack;
-		
+
 		//TODO
 		System.out.println("send packet here slot content set remotely");
-//		PacketInventory.sendPacket(player, this);
+		//		PacketInventory.sendPacket(player, this);
 	}
 
 	public void writeToNBT(NBTTagCompound tagcompound) {

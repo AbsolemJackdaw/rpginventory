@@ -37,7 +37,7 @@ public class PacketBerserker extends AbstractPacket {
 			ItemStack var11 = player.inventory.armorItemInSlot(1);
 			ItemStack var01 = player.inventory.armorItemInSlot(0);
 
-			if (!mod_RpgInventory.developers.contains(player.getDisplayName()
+			if (!mod_RpgInventory.developers.contains(player.getCommandSenderName()
 					.toLowerCase())) {
 				if ((item1 == null) || (var31 == null) || (var21 == null)
 						|| (var11 == null) || (var01 == null)) {
@@ -52,18 +52,18 @@ public class PacketBerserker extends AbstractPacket {
 				}
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(player
-					.getDisplayName())) {
-				CommonTickHandler.globalCooldownMap.put(player.getDisplayName(), 0);
+					.getCommandSenderName())) {
+				CommonTickHandler.globalCooldownMap.put(player.getCommandSenderName(), 0);
 			}
-			if (CommonTickHandler.globalCooldownMap.get(player.getDisplayName()) <= 0) {
+			if (CommonTickHandler.globalCooldownMap.get(player.getCommandSenderName()) <= 0) {
 				CommonTickHandler.globalCooldownMap
-						.put(player.getDisplayName(), (mod_RpgInventory.donators
-								.contains(player.getDisplayName()) ? 6 : 7) * 20);
+						.put(player.getCommandSenderName(), (mod_RpgInventory.donators
+								.contains(player.getCommandSenderName()) ? 6 : 7) * 20);
 				if ((item1.getItemDamage() + 3) >= item1.getMaxDamage()) {
 					// Trigger item break stuff
 					// Only damage what is left
 					if (!mod_RpgInventory.developers.contains(player
-							.getDisplayName().toLowerCase())) {
+							.getCommandSenderName().toLowerCase())) {
 						item1.damageItem(
 								item1.getMaxDamage() - item1.getItemDamage(), player);
 					}
@@ -73,18 +73,18 @@ public class PacketBerserker extends AbstractPacket {
 					player.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
 					if (!mod_RpgInventory.developers.contains(player
-							.getDisplayName().toLowerCase())) {
+							.getCommandSenderName().toLowerCase())) {
 						item1.damageItem(3, player);
 					}
 				}
 
 				float range = 4.0f;
-				if (mod_RpgInventory.developers.contains(player.getDisplayName()
+				if (mod_RpgInventory.developers.contains(player.getCommandSenderName()
 						.toLowerCase())) {
 					range = 8.0f;
 				} else {
 					range = mod_RpgInventory.donators.contains(player
-							.getDisplayName()) ? 5.5f : 4.0f;
+							.getCommandSenderName()) ? 5.5f : 4.0f;
 				}
 
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
@@ -104,7 +104,7 @@ public class PacketBerserker extends AbstractPacket {
 										el.posY, el.posZ, 0, 1, 0);
 
 								if (mod_RpgInventory.developers.contains(player
-										.getDisplayName().toLowerCase())) {
+										.getCommandSenderName().toLowerCase())) {
 									el.motionX = xdir * 3F;
 									el.motionY = 3F;
 									el.motionZ = zdir * 3F;
@@ -112,15 +112,15 @@ public class PacketBerserker extends AbstractPacket {
 									el.motionX = xdir
 											* (mod_RpgInventory.donators
 													.contains(player
-															.getDisplayName()) ? 2.2f
+															.getCommandSenderName()) ? 2.2f
 													: 1.5F);
 									el.motionY = mod_RpgInventory.donators
-											.contains(player.getDisplayName()) ? 2.2f
+											.contains(player.getCommandSenderName()) ? 2.2f
 											: 3F;
 									el.motionZ = zdir
 											* (mod_RpgInventory.donators
 													.contains(player
-															.getDisplayName()) ? 2.2f
+															.getCommandSenderName()) ? 2.2f
 													: 3F);
 								}
 							} catch (Throwable ex) {
@@ -128,14 +128,14 @@ public class PacketBerserker extends AbstractPacket {
 							el.attackEntityFrom(DamageSource
 									.causePlayerDamage(player),
 									mod_RpgInventory.donators.contains(player
-											.getDisplayName()) ? 10 : 8);
+											.getCommandSenderName()) ? 10 : 8);
 						}
 					}
 				}
 			} else {
 				player.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
 						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(player.getDisplayName()) / 20)) + " seconds"));
+								.get(player.getCommandSenderName()) / 20)) + " seconds"));
 			}
 		}
 	}

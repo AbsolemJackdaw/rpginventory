@@ -97,7 +97,7 @@ public class ItemMageSphere extends ItemRpgWeapon {
 					&& item3.equals(mod_RpgInventory.mageboots)) {
 				if (par3EntityPlayer.inventory.hasItem(Items.blaze_powder)
 						|| mod_RpgInventory.donators.contains(par3EntityPlayer
-								.getDisplayName())) {
+								.getCommandSenderName())) {
 
 					Vec3 look = par3EntityPlayer.getLookVec();
 					EntitySmallFireball ball = new EntitySmallFireball(
@@ -212,7 +212,7 @@ public class ItemMageSphere extends ItemRpgWeapon {
 							par1ItemStack.damageItem(
 									mod_RpgInventory.donators
 											.contains(par2EntityPlayer
-													.getDisplayName()) ? 50
+													.getCommandSenderName()) ? 50
 											: 151, par2EntityPlayer);
 						}
 

@@ -67,7 +67,7 @@ public class RPGEventHooks {
 
 	public void damageItem(ItemStack item, PlayerRpgInventory inv,
 			EntityPlayer p, int slot, int amount) {
-		if (mod_RpgInventory.developers.contains(p.getDisplayName()
+		if (mod_RpgInventory.developers.contains(p.getCommandSenderName()
 				.toLowerCase())) {
 			return;
 		}
@@ -115,7 +115,7 @@ public class RPGEventHooks {
 		/*
 		 * Be sure to check if the entity being constructed is the correct type
 		 * for the extended properties you're about to add!The null check may
-		 * not be necessary - I only use it to make sureproperties are only
+		 * not be necessary - I only use it to make sure properties are only
 		 * registered once per entity
 		 */
 		if ((event.entity instanceof EntityPlayer)
@@ -169,13 +169,13 @@ public class RPGEventHooks {
 							&& ringa.getItem().equals(mod_RpgInventory.ringlap)) {
 						damagebonus += mod_RpgInventory.donators
 								.contains(((EntityPlayer) damager)
-										.getDisplayName()) ? 0.2f : 0.1F;
+										.getCommandSenderName()) ? 0.2f : 0.1F;
 					}
 					if ((ringb != null)
 							&& ringb.getItem().equals(mod_RpgInventory.ringlap)) {
 						damagebonus += mod_RpgInventory.donators
 								.contains(((EntityPlayer) damager)
-										.getDisplayName()) ? 0.2f : 0.1F;
+										.getCommandSenderName()) ? 0.2f : 0.1F;
 					}
 					if ((gloves != null)
 							&& gloves.getItem().equals(
@@ -229,7 +229,7 @@ public class RPGEventHooks {
 					} else {
 						evt.ammount -= MathHelper.floor_float(evt.ammount
 								* (mod_RpgInventory.donators.contains(player
-										.getDisplayName()) ? 0.3f : 0.2F));
+										.getCommandSenderName()) ? 0.3f : 0.2F));
 					}
 				}
 				if (inv != null) {
@@ -425,29 +425,29 @@ public class RPGEventHooks {
 						if ((decompose != null) && (machicism != null)) {
 							p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
 							p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
-							CustomPotionList.remove(p.getDisplayName());
+							CustomPotionList.remove(p.getCommandSenderName());
 						} else {
 							if (decompose != null) {
 								if (decompose.getDuration() == 0) {
 									p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
-									CustomPotionList.remove(p.getDisplayName());
+									CustomPotionList.remove(p.getCommandSenderName());
 								} else {
 									if (!CustomPotionList.containsKey(p
-											.getDisplayName())) {
+											.getCommandSenderName())) {
 										CustomPotionList.put(
-												p.getDisplayName(),
+												p.getCommandSenderName(),
 												decompose.getDuration());
 									}
 								}
 							} else if (machicism != null) {
 								if (machicism.getDuration() == 0) {
 									p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
-									CustomPotionList.remove(p.getDisplayName());
+									CustomPotionList.remove(p.getCommandSenderName());
 								} else {
 									if (!CustomPotionList.containsKey(p
-											.getDisplayName())) {
+											.getCommandSenderName())) {
 										CustomPotionList.put(
-												p.getDisplayName(),
+												p.getCommandSenderName(),
 												machicism.getDuration());
 									}
 								}
@@ -482,11 +482,11 @@ public class RPGEventHooks {
 						armorheal = true;
 					}
 					if (armorheal) {
-						if (!LapisTick.containsKey(p.getDisplayName())) {
-							LapisTick.put(p.getDisplayName(), 60);
+						if (!LapisTick.containsKey(p.getCommandSenderName())) {
+							LapisTick.put(p.getCommandSenderName(), 60);
 						}
 					} else {
-						LapisTick.remove(p.getDisplayName());
+						LapisTick.remove(p.getCommandSenderName());
 					}
 
 					/* ====ARCHER EFFECTS==== */
@@ -496,7 +496,7 @@ public class RPGEventHooks {
 					if (mod_RpgInventory.playerClass
 							.contains(mod_RpgInventory.CLASSARCHER)) {
 						jumpboost *= mod_RpgInventory.donators.contains(p
-								.getDisplayName()) ? 3.0f : 2.0F;
+								.getCommandSenderName()) ? 3.0f : 2.0F;
 					}
 					p.jumpMovementFactor = jumpboost;
 
@@ -594,25 +594,25 @@ public class RPGEventHooks {
 					if ((neck != null)
 							&& (neck.getItem() == mod_RpgInventory.neckgold)) {
 						speedboost += mod_RpgInventory.donators.contains(p
-								.getDisplayName()) ? 0.02f : 0.0125f;
+								.getCommandSenderName()) ? 0.02f : 0.0125f;
 						goldenItems += 1;
 					}
 					if ((ringa != null)
 							&& (ringa.getItem() == mod_RpgInventory.ringgold)) {
 						speedboost += mod_RpgInventory.donators.contains(p
-								.getDisplayName()) ? 0.02f : 0.0125f;
+								.getCommandSenderName()) ? 0.02f : 0.0125f;
 						goldenItems += 1;
 					}
 					if ((ringb != null)
 							&& (ringb.getItem() == mod_RpgInventory.ringgold)) {
 						speedboost += mod_RpgInventory.donators.contains(p
-								.getDisplayName()) ? 0.02f : 0.0125f;
+								.getCommandSenderName()) ? 0.02f : 0.0125f;
 						goldenItems += 1;
 					}
 					if ((gloves != null)
 							&& (gloves.getItem() == mod_RpgInventory.glovesbutter)) {
 						speedboost += mod_RpgInventory.donators.contains(p
-								.getDisplayName()) ? 0.02f : 0.0125f;
+								.getCommandSenderName()) ? 0.02f : 0.0125f;
 						goldenItems += 1;
 					}
 					p.capabilities.setPlayerWalkSpeed(0.1f + speedboost);
@@ -624,12 +624,12 @@ public class RPGEventHooks {
 					//
 
 					/* ==== Something about the archer .__. ==== */
-					if (ArcherRepairTick.containsKey(p.getDisplayName())) {
+					if (ArcherRepairTick.containsKey(p.getCommandSenderName())) {
 						if (mod_RpgInventory.playerClass
 								.contains(mod_RpgInventory.CLASSARCHER)) {
 							p.jumpMovementFactor = 0.09F;
 						} else {
-							ArcherRepairTick.remove(p.getDisplayName());
+							ArcherRepairTick.remove(p.getCommandSenderName());
 							p.jumpMovementFactor = 0.02F;
 						}
 					}

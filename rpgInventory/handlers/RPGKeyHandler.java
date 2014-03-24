@@ -161,7 +161,6 @@ public class RPGKeyHandler {
 	@SubscribeEvent
 	public void keys(KeyInputEvent evt) {
 
-
 		try {
 			Minecraft mc = Minecraft.getMinecraft();
 			GuiScreen guiscreen = mc.currentScreen;
@@ -171,6 +170,10 @@ public class RPGKeyHandler {
 					specialAbility(item);
 				}
 			} else if (keyInventory.isPressed()) {
+				
+				System.out.println("send packet keyhandler open inventory");
+				System.out.println((guiscreen instanceof GuiInventory));
+				
 				if ((guiscreen instanceof GuiInventory)
 						|| (guiscreen instanceof GuiContainerCreative)) {
 					int i = 1;
@@ -218,7 +221,7 @@ public class RPGKeyHandler {
 					EntityLivingBase target = isTargetingEntity(
 							Minecraft.getMinecraft().thePlayer,
 							mod_RpgInventory.donators.contains(Minecraft
-									.getMinecraft().thePlayer.getDisplayName()) ? 60
+									.getMinecraft().thePlayer.getCommandSenderName()) ? 60
 											: 40);
 					if (target != null) {
 						outputStream.writeBoolean(false);

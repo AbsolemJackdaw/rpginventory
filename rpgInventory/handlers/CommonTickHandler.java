@@ -132,7 +132,7 @@ public class CommonTickHandler /*implements ITickHandler*/ {
 										.equals(mod_RpgInventory.elfbow)) {
 							if (!player.isUsingItem()) {
 								RPGEventHooks.ArcherRepairTick.put(
-										player.getDisplayName(), 60);
+										player.getCommandSenderName(), 60);
 								if (player.inventory.getCurrentItem()
 										.getItemDamage() <= 1) {
 									player.inventory.getCurrentItem()
@@ -172,7 +172,7 @@ public class CommonTickHandler /*implements ITickHandler*/ {
 					}
 					int delay;
 					delay = mod_RpgInventory.donators.contains(player
-							.getDisplayName()) ? 65 : 75;
+							.getCommandSenderName()) ? 65 : 75;
 					if ((rpginv.getNecklace() != null)
 							&& rpginv.getNecklace().getItem()
 									.equals(mod_RpgInventory.neckdia)) {
@@ -193,7 +193,7 @@ public class CommonTickHandler /*implements ITickHandler*/ {
 									.equals(mod_RpgInventory.ringdia)) {
 						delay -= 10;
 					}
-					RPGEventHooks.DiamondTick.put(player.getDisplayName(),
+					RPGEventHooks.DiamondTick.put(player.getCommandSenderName(),
 							delay);
 					if (player.getHealth() < player.getMaxHealth()) {
 						player.heal(1);
@@ -220,7 +220,7 @@ public class CommonTickHandler /*implements ITickHandler*/ {
 								.equals(mod_RpgInventory.staf)) {
 							if (player.isUsingItem()) {
 								RPGEventHooks.HealerTick.put(
-										player.getDisplayName(), 30);
+										player.getCommandSenderName(), 30);
 								if (player.getHealth() < player.getMaxHealth()) {
 									// while staf is being used, regen the
 									// healer
@@ -283,7 +283,7 @@ public class CommonTickHandler /*implements ITickHandler*/ {
 									stack.setItemDamage(stack.getItemDamage()
 											- heal);
 									countDownLapis = mod_RpgInventory.donators
-											.contains(player.getDisplayName()) ? 15 * 20
+											.contains(player.getCommandSenderName()) ? 15 * 20
 											: lapisTimer;
 								}
 							}
