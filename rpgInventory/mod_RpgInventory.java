@@ -50,6 +50,7 @@ import rpgInventory.item.weapons.ItemMageSphere;
 import rpgInventory.item.weapons.ItemStaf;
 import rpgInventory.richUtil.potions.DecomposePotion;
 import rpgInventory.richUtil.potions.MasochismPotion;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -556,7 +557,7 @@ public class mod_RpgInventory {
 		MinecraftForge.EVENT_BUS.register(new CommonTickHandler());
 		MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
 
-		MinecraftForge.EVENT_BUS.register(new RPGKeyHandler());
+		FMLCommonHandler.instance().bus().register(new RPGKeyHandler());
 
 		MinecraftForge.EVENT_BUS.register(new RPGEventHooks());
 

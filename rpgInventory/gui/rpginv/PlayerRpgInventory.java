@@ -2,6 +2,7 @@ package rpgInventory.gui.rpginv;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerAdapter;
+import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -349,6 +350,7 @@ IExtendedEntityProperties {
 			//System.out.println("send packet here updated as unclean");
 			//			PacketInventory.sendPacket(player, this);
 
+			
 //			mod_RpgInventory.PIPELINE.sendTo(new PacketInventory(player, this), (EntityPlayerMP) player);
 
 
