@@ -261,128 +261,7 @@ public class mod_RpgInventory {
 		forgeBlock = new BlockForge(Material.rock).setHardness(5f)
 				/* .setUnlocalizedName("MoldForge") */.setCreativeTab(tab);
 
-		neckgold = new ItemRpgInvArmor(0, -1, "",
-				"subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold")
-				.setCreativeTab(tab);
-		neckdia = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckDia.png")
-		.setUnlocalizedName("neckDia").setCreativeTab(tab);
-		neckem = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckEm.png")
-		.setUnlocalizedName("neckEm").setCreativeTab(tab);
-		necklap = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckLap.png")
-		.setUnlocalizedName("neckLap").setCreativeTab(tab);
-
-		ringgold = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
-				"ringGold").setCreativeTab(tab);
-		ringdia = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
-				"ringDia").setCreativeTab(tab);
-		ringem = new ItemRpgInvArmor(4, -1, "", "")
-		.setUnlocalizedName("ringEm").setCreativeTab(tab);
-		ringlap = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
-				"ringLap").setCreativeTab(tab);
-
-		glovesbutter = new ItemRpgInvArmor(3, -1, "",
-				"subaraki:jewels/Glove.png").setUnlocalizedName("gloveGold")
-				.setCreativeTab(tab);
-		glovesdia = new ItemRpgInvArmor(3, -1, "",
-				"subaraki:jewels/GloveDia.png").setUnlocalizedName("gloveDia")
-				.setCreativeTab(tab);
-		glovesem = new ItemRpgInvArmor(3, -1, "", "subaraki:jewels/GloveEm.png")
-		.setUnlocalizedName("gloveEm").setCreativeTab(tab);
-		gloveslap = new ItemRpgInvArmor(3, -1, "",
-				"subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap")
-				.setCreativeTab(tab);
-
-		archerShield = new ItemRpgInvArmor(1, 200, "",
-				"subaraki:jewels/Shield1.png").setUnlocalizedName(
-						"shieldArcher").setCreativeTab(tab);
-		berserkerShield = new ItemRpgInvArmor(1, 350, "",
-				"subaraki:jewels/IronThorn.png").setUnlocalizedName(
-						"shieldBerserker").setCreativeTab(tab);
-		talisman = new ItemRpgInvArmor(1, 200, "",
-				"subaraki:jewels/mageShield.png").setUnlocalizedName(
-						"shieldMage").setCreativeTab(tab);
-
-		cloak = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/GreyCape.png")
-		.setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
-		cloakI = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/GreyCape.png")
-		.setFull3D().setUnlocalizedName("i.capeGrey")
-		.setCreativeTab(tab);
-
-		magehood = new ItemMageArmor(mage, 4, 0).setUnlocalizedName("mage1")
-				.setCreativeTab(tab);
-		magegown = new ItemMageArmor(mage, 4, 1).setUnlocalizedName("mage2")
-				.setCreativeTab(tab);
-		magepants = new ItemMageArmor(mage, 4, 2).setUnlocalizedName("mage3")
-				.setCreativeTab(tab);
-		mageboots = new ItemMageArmor(mage, 4, 3).setUnlocalizedName("mage4")
-				.setCreativeTab(tab);
-
-		archerhood = new ItemArcherArmor(archer, 4, 0).setUnlocalizedName(
-				"archer1").setCreativeTab(tab);
-		archerchest = new ItemArcherArmor(archer, 4, 1).setUnlocalizedName(
-				"archer2").setCreativeTab(tab);
-		archerpants = new ItemArcherArmor(archer, 4, 2).setUnlocalizedName(
-				"archer3").setCreativeTab(tab);
-		archerboots = new ItemArcherArmor(archer, 4, 3).setUnlocalizedName(
-				"archer4").setCreativeTab(tab);
-
-		berserkerHood = new ItemBerserkerArmor(berserker, 4, 0)
-		.setUnlocalizedName("berserk1").setCreativeTab(tab);
-		berserkerChest = new ItemBerserkerArmor(berserker, 4, 1)
-		.setUnlocalizedName("berserk2").setCreativeTab(tab);
-		berserkerLegs = new ItemBerserkerArmor(berserker, 4, 2)
-		.setUnlocalizedName("berserk3").setCreativeTab(tab);
-		berserkerBoots = new ItemBerserkerArmor(berserker, 4, 3)
-		.setUnlocalizedName("berserk4").setCreativeTab(tab);
-
-		claymore = new ItemClaymore(clay).setFull3D().setMaxDamage(1024)
-				.setUnlocalizedName("claymore").setCreativeTab(tab);
-		wand = new ItemMageSphere().setFull3D().setMaxDamage(400)
-				.setUnlocalizedName("soulsphere").setCreativeTab(tab);
-		elfbow = new ItemArcherBow().setFull3D().setMaxDamage(350)
-				.setUnlocalizedName("elmBow").setCreativeTab(tab);
-
-		animalskin = new ItemRpg().setUnlocalizedName("a.leather")
-				.setCreativeTab(tab);
-		tanHide = new ItemRpg().setUnlocalizedName("t.leather").setCreativeTab(
-				tab);
-		magecloth = new ItemRpg().setUnlocalizedName("m.leather")
-				.setCreativeTab(tab);
-
-		wizardBook = new ItemRpg().setUnlocalizedName("a.book_normal")
-				.setCreativeTab(tab);
-
-		hammer = new ItemHammer(stone).setMaxDamage(750)
-				.setUnlocalizedName("rageBreaker").setCreativeTab(tab);
-		staf = new ItemStaf().setMaxStackSize(1).setMaxDamage(1500)
-				.setUnlocalizedName("lunarStaff").setCreativeTab(tab);
-
-		rageSeed = new ItemRageFood(0, 0f, false).setAlwaysEdible()
-				.setUnlocalizedName("r.seeds_melon").setMaxStackSize(8)
-				.setCreativeTab(tab);
-
-		cloakRed = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/RedCape.png")
-		.setFull3D().setUnlocalizedName("r.capeGrey")
-		.setCreativeTab(tab);
-		cloakYellow = new ItemRpgInvArmor(2, -1, "",
-				"subaraki:capes/GoldCape.png").setFull3D()
-				.setUnlocalizedName("y.capeGrey").setCreativeTab(tab);
-		cloakGreen = new ItemRpgInvArmor(2, -1, "",
-				"subaraki:capes/GreenCape.png").setFull3D()
-				.setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
-		cloakBlue = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/SkyCape.png")
-		.setFull3D().setUnlocalizedName("b.capeGrey")
-		.setCreativeTab(tab);
-		cloakSub = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/BlaCape.png")
-		.setFull3D().setUnlocalizedName("s.capeGrey")
-		.setCreativeTab(tab);
-
-		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(
-				tab);
-		ringmold = new ItemMold().setUnlocalizedName("moldRing")
-				.setCreativeTab(tab);
-		wantmold = new ItemMold().setUnlocalizedName("moldGlove")
-				.setCreativeTab(tab);
+		
 
 		proxy.registerRenderInformation();
 
@@ -651,6 +530,150 @@ public class mod_RpgInventory {
 		}
 
 
+	
+	}
+
+	public String playerClass() {
+		return playerClass;
+	}
+
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent evt) {
+		PIPELINE.postInitialise();
+
+		proxy.registerLate();
+		// All mods should be initialized now, check what potion effects are
+		// installed
+		// and list the bad ones for later reference.
+	}
+
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		// loadConfig(event.getSuggestedConfigurationFile());
+		
+		neckgold = new ItemRpgInvArmor(0, -1, "",
+				"subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold")
+				.setCreativeTab(tab);
+		neckdia = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckDia.png")
+		.setUnlocalizedName("neckDia").setCreativeTab(tab);
+		neckem = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckEm.png")
+		.setUnlocalizedName("neckEm").setCreativeTab(tab);
+		necklap = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckLap.png")
+		.setUnlocalizedName("neckLap").setCreativeTab(tab);
+
+		ringgold = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
+				"ringGold").setCreativeTab(tab);
+		ringdia = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
+				"ringDia").setCreativeTab(tab);
+		ringem = new ItemRpgInvArmor(4, -1, "", "")
+		.setUnlocalizedName("ringEm").setCreativeTab(tab);
+		ringlap = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
+				"ringLap").setCreativeTab(tab);
+
+		glovesbutter = new ItemRpgInvArmor(3, -1, "",
+				"subaraki:jewels/Glove.png").setUnlocalizedName("gloveGold")
+				.setCreativeTab(tab);
+		glovesdia = new ItemRpgInvArmor(3, -1, "",
+				"subaraki:jewels/GloveDia.png").setUnlocalizedName("gloveDia")
+				.setCreativeTab(tab);
+		glovesem = new ItemRpgInvArmor(3, -1, "", "subaraki:jewels/GloveEm.png")
+		.setUnlocalizedName("gloveEm").setCreativeTab(tab);
+		gloveslap = new ItemRpgInvArmor(3, -1, "",
+				"subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap")
+				.setCreativeTab(tab);
+
+		archerShield = new ItemRpgInvArmor(1, 200, "",
+				"subaraki:jewels/Shield1.png").setUnlocalizedName(
+						"shieldArcher").setCreativeTab(tab);
+		berserkerShield = new ItemRpgInvArmor(1, 350, "",
+				"subaraki:jewels/IronThorn.png").setUnlocalizedName(
+						"shieldBerserker").setCreativeTab(tab);
+		talisman = new ItemRpgInvArmor(1, 200, "",
+				"subaraki:jewels/mageShield.png").setUnlocalizedName(
+						"shieldMage").setCreativeTab(tab);
+
+		cloak = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/GreyCape.png")
+		.setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
+		cloakI = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/GreyCape.png")
+		.setFull3D().setUnlocalizedName("i.capeGrey")
+		.setCreativeTab(tab);
+
+		magehood = new ItemMageArmor(mage, 4, 0).setUnlocalizedName("mage1")
+				.setCreativeTab(tab);
+		magegown = new ItemMageArmor(mage, 4, 1).setUnlocalizedName("mage2")
+				.setCreativeTab(tab);
+		magepants = new ItemMageArmor(mage, 4, 2).setUnlocalizedName("mage3")
+				.setCreativeTab(tab);
+		mageboots = new ItemMageArmor(mage, 4, 3).setUnlocalizedName("mage4")
+				.setCreativeTab(tab);
+
+		archerhood = new ItemArcherArmor(archer, 4, 0).setUnlocalizedName(
+				"archer1").setCreativeTab(tab);
+		archerchest = new ItemArcherArmor(archer, 4, 1).setUnlocalizedName(
+				"archer2").setCreativeTab(tab);
+		archerpants = new ItemArcherArmor(archer, 4, 2).setUnlocalizedName(
+				"archer3").setCreativeTab(tab);
+		archerboots = new ItemArcherArmor(archer, 4, 3).setUnlocalizedName(
+				"archer4").setCreativeTab(tab);
+
+		berserkerHood = new ItemBerserkerArmor(berserker, 4, 0)
+		.setUnlocalizedName("berserk1").setCreativeTab(tab);
+		berserkerChest = new ItemBerserkerArmor(berserker, 4, 1)
+		.setUnlocalizedName("berserk2").setCreativeTab(tab);
+		berserkerLegs = new ItemBerserkerArmor(berserker, 4, 2)
+		.setUnlocalizedName("berserk3").setCreativeTab(tab);
+		berserkerBoots = new ItemBerserkerArmor(berserker, 4, 3)
+		.setUnlocalizedName("berserk4").setCreativeTab(tab);
+
+		claymore = new ItemClaymore(clay).setFull3D().setMaxDamage(1024)
+				.setUnlocalizedName("claymore").setCreativeTab(tab);
+		wand = new ItemMageSphere().setFull3D().setMaxDamage(400)
+				.setUnlocalizedName("soulsphere").setCreativeTab(tab);
+		elfbow = new ItemArcherBow().setFull3D().setMaxDamage(350)
+				.setUnlocalizedName("elmBow").setCreativeTab(tab);
+
+		animalskin = new ItemRpg().setUnlocalizedName("a.leather")
+				.setCreativeTab(tab);
+		tanHide = new ItemRpg().setUnlocalizedName("t.leather").setCreativeTab(
+				tab);
+		magecloth = new ItemRpg().setUnlocalizedName("m.leather")
+				.setCreativeTab(tab);
+
+		wizardBook = new ItemRpg().setUnlocalizedName("a.book_normal")
+				.setCreativeTab(tab);
+
+		hammer = new ItemHammer(stone).setMaxDamage(750)
+				.setUnlocalizedName("rageBreaker").setCreativeTab(tab);
+		staf = new ItemStaf().setMaxStackSize(1).setMaxDamage(1500)
+				.setUnlocalizedName("lunarStaff").setCreativeTab(tab);
+
+		rageSeed = new ItemRageFood(0, 0f, false).setAlwaysEdible()
+				.setUnlocalizedName("r.seeds_melon").setMaxStackSize(8)
+				.setCreativeTab(tab);
+
+		cloakRed = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/RedCape.png")
+		.setFull3D().setUnlocalizedName("r.capeGrey")
+		.setCreativeTab(tab);
+		cloakYellow = new ItemRpgInvArmor(2, -1, "",
+				"subaraki:capes/GoldCape.png").setFull3D()
+				.setUnlocalizedName("y.capeGrey").setCreativeTab(tab);
+		cloakGreen = new ItemRpgInvArmor(2, -1, "",
+				"subaraki:capes/GreenCape.png").setFull3D()
+				.setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
+		cloakBlue = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/SkyCape.png")
+		.setFull3D().setUnlocalizedName("b.capeGrey")
+		.setCreativeTab(tab);
+		cloakSub = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/BlaCape.png")
+		.setFull3D().setUnlocalizedName("s.capeGrey")
+		.setCreativeTab(tab);
+
+		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(
+				tab);
+		ringmold = new ItemMold().setUnlocalizedName("moldRing")
+				.setCreativeTab(tab);
+		wantmold = new ItemMold().setUnlocalizedName("moldGlove")
+				.setCreativeTab(tab);
+		
 		allItems = new Item[]{
 				neckgold, neckdia, neckem, necklap, glovesbutter, glovesdia, glovesem,
 				gloveslap, ringgold, ringdia, ringem, ringlap,
@@ -677,25 +700,6 @@ public class mod_RpgInventory {
 				break;
 			}
 		}
-	}
-
-	public String playerClass() {
-		return playerClass;
-	}
-
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent evt) {
-		PIPELINE.postInitialise();
-
-		proxy.registerLate();
-		// All mods should be initialized now, check what potion effects are
-		// installed
-		// and list the bad ones for later reference.
-	}
-
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		// loadConfig(event.getSuggestedConfigurationFile());
 	}
 
 	// @SideOnly(Side.CLIENT)
