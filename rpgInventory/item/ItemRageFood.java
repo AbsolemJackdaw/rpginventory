@@ -1,7 +1,6 @@
 package rpgInventory.item;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -22,11 +21,11 @@ public class ItemRageFood extends ItemFood {
 		par1ItemStack.stackSize--;
 	}
 
-	@Override
-	public Item setTextureName(String s) {
-		String itemName = getUnlocalizedName().substring(
-				getUnlocalizedName().indexOf(".") + 1);
-		this.iconString = "rpginventorymod:" + itemName;
-		return this;
-	}
+	// @Override
+	// public Item setTextureName(String s) {
+	// String itemName = getUnlocalizedName().substring(
+	// getUnlocalizedName().indexOf(".") + 1);
+	// this.iconString = "rpginventorymod:" + itemName;
+	// return this;
+	// }
 }

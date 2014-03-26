@@ -13,22 +13,17 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.Packets17.PacketInventory;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 
-public class CommonTickHandler /*implements ITickHandler*/ {
+public class CommonTickHandler /* implements ITickHandler */{
 
 	/*
-	 * WARNING
-	 * NAMES OF METHODS TICKEND AND TICKSTART ARE OF NO IMPORTANCE
-	 * i just kept them from the old handler 
-	 * 
-	 * */
-	
-	
-	
+	 * WARNING NAMES OF METHODS TICKEND AND TICKSTART ARE OF NO IMPORTANCE i
+	 * just kept them from the old handler
+	 */
+
 	/**
 	 * Used to count down 1 second and send a package to every player on the
 	 * server with info about the player's inventory
@@ -60,10 +55,10 @@ public class CommonTickHandler /*implements ITickHandler*/ {
 		}
 	}
 
-//	@Override
-//	public String getLabel() {
-//		return "RpgInventoryServ";
-//	}
+	// @Override
+	// public String getLabel() {
+	// return "RpgInventoryServ";
+	// }
 
 	@SubscribeEvent
 	public void tickEnd(TickEvent.ServerTickEvent ev) {
@@ -78,8 +73,8 @@ public class CommonTickHandler /*implements ITickHandler*/ {
 			}
 		}
 
-		List<EntityPlayer> players = MinecraftServer
-				.getServer().getConfigurationManager().playerEntityList;
+		List<EntityPlayer> players = MinecraftServer.getServer()
+				.getConfigurationManager().playerEntityList;
 		for (EntityPlayer player : players) {
 			if ((player.getHealth() <= 0) || player.isDead) {
 				if (!player.worldObj.getGameRules().getGameRuleBooleanValue(
@@ -89,9 +84,9 @@ public class CommonTickHandler /*implements ITickHandler*/ {
 			}
 			if (countdown == 0) {
 				//
-//				PacketInventory.sendServerPacket(player);
-				
-				//TODO
+				// PacketInventory.sendServerPacket(player);
+
+				// TODO
 				System.out.println("send packet here");
 			}
 		}
@@ -102,13 +97,13 @@ public class CommonTickHandler /*implements ITickHandler*/ {
 		}
 	}
 
-//	/**
-//	 * called upon player's death. Will drop Jewels in the world
-//	 */
-//	@Override
-//	public EnumSet<TickType> ticks() {
-//		return EnumSet.of(TickType.SERVER);
-//	}
+	// /**
+	// * called upon player's death. Will drop Jewels in the world
+	// */
+	// @Override
+	// public EnumSet<TickType> ticks() {
+	// return EnumSet.of(TickType.SERVER);
+	// }
 
 	@SubscribeEvent
 	public void tickStart(TickEvent.ServerTickEvent ev) {
@@ -193,8 +188,8 @@ public class CommonTickHandler /*implements ITickHandler*/ {
 									.equals(mod_RpgInventory.ringdia)) {
 						delay -= 10;
 					}
-					RPGEventHooks.DiamondTick.put(player.getCommandSenderName(),
-							delay);
+					RPGEventHooks.DiamondTick.put(
+							player.getCommandSenderName(), delay);
 					if (player.getHealth() < player.getMaxHealth()) {
 						player.heal(1);
 					}
@@ -283,7 +278,8 @@ public class CommonTickHandler /*implements ITickHandler*/ {
 									stack.setItemDamage(stack.getItemDamage()
 											- heal);
 									countDownLapis = mod_RpgInventory.donators
-											.contains(player.getCommandSenderName()) ? 15 * 20
+											.contains(player
+													.getCommandSenderName()) ? 15 * 20
 											: lapisTimer;
 								}
 							}

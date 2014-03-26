@@ -2,11 +2,7 @@ package rpgInventory.handlers;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.EnumSet;
 import java.util.List;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -19,8 +15,10 @@ import rpgInventory.gui.ButtonInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.utils.AbstractArmor;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
-public class ClientTickHandler /*implements ITickHandler*/ {
+public class ClientTickHandler /* implements ITickHandler */{
 
 	boolean added = false;
 
@@ -29,10 +27,10 @@ public class ClientTickHandler /*implements ITickHandler*/ {
 	public static final int CHEST = 38;
 	public static final int HELM = 39;
 
-//	@Override
-//	public String getLabel() {
-//		return "rpgInventory";
-//	}
+	// @Override
+	// public String getLabel() {
+	// return "rpgInventory";
+	// }
 
 	@SubscribeEvent
 	public void tickEnd(TickEvent.ClientTickEvent ev) {
@@ -158,13 +156,13 @@ public class ClientTickHandler /*implements ITickHandler*/ {
 		}
 	}
 
-	//old code. preserve for later hints tips and tricks
-//	@Override
-//	public EnumSet<TickType> ticks() {
-//		return EnumSet.of(TickType.CLIENT);
-//	}
-//
-//	@Override
-//	public void tickStart(EnumSet<TickType> type, Object... tickData) {
-//	}
+	// old code. preserve for later hints tips and tricks
+	// @Override
+	// public EnumSet<TickType> ticks() {
+	// return EnumSet.of(TickType.CLIENT);
+	// }
+	//
+	// @Override
+	// public void tickStart(EnumSet<TickType> type, Object... tickData) {
+	// }
 }

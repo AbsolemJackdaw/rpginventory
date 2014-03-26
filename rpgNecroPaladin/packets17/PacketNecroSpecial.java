@@ -14,12 +14,13 @@ import rpgNecroPaladin.minions.MinionRegistry;
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class PacketNecroSpecial extends RpgPlusAbstractPacket {
-	
+
 	private EntityPlayer player;
 	private ItemStack weapon;
-	
-	public PacketNecroSpecial() {}
-	
+
+	public PacketNecroSpecial() {
+	}
+
 	public PacketNecroSpecial(EntityPlayer player) {
 		super();
 		this.player = player;
@@ -32,7 +33,8 @@ public class PacketNecroSpecial extends RpgPlusAbstractPacket {
 
 	@Override
 	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
-		ByteBufUtils.writeItemStack(buffer, this.player.getCurrentEquippedItem());
+		ByteBufUtils.writeItemStack(buffer,
+				this.player.getCurrentEquippedItem());
 	}
 
 	@Override
@@ -44,7 +46,8 @@ public class PacketNecroSpecial extends RpgPlusAbstractPacket {
 		if (weapon.getItem().equals(mod_RpgPlus.necro_weapon)
 				&& mod_RpgInventory.playerClass
 						.contains(mod_RpgPlus.CLASSNECRO)) {
-			if (MinionRegistry.playerMinions.containsKey(player.getDisplayName())) {
+			if (MinionRegistry.playerMinions.containsKey(player
+					.getDisplayName())) {
 				List<IMinion> list = MinionRegistry.playerMinions.get(player
 						.getDisplayName());
 				for (IMinion minion : list) {

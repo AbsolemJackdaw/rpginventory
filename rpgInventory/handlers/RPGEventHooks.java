@@ -227,9 +227,11 @@ public class RPGEventHooks {
 					if ((evt.ammount * 0.2F) < 1) {
 						evt.ammount -= 1;
 					} else {
-						evt.ammount -= MathHelper.floor_float(evt.ammount
-								* (mod_RpgInventory.donators.contains(player
-										.getCommandSenderName()) ? 0.3f : 0.2F));
+						evt.ammount -= MathHelper
+								.floor_float(evt.ammount
+										* (mod_RpgInventory.donators.contains(player
+												.getCommandSenderName()) ? 0.3f
+												: 0.2F));
 					}
 				}
 				if (inv != null) {
@@ -430,7 +432,8 @@ public class RPGEventHooks {
 							if (decompose != null) {
 								if (decompose.getDuration() == 0) {
 									p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
-									CustomPotionList.remove(p.getCommandSenderName());
+									CustomPotionList.remove(p
+											.getCommandSenderName());
 								} else {
 									if (!CustomPotionList.containsKey(p
 											.getCommandSenderName())) {
@@ -442,7 +445,8 @@ public class RPGEventHooks {
 							} else if (machicism != null) {
 								if (machicism.getDuration() == 0) {
 									p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
-									CustomPotionList.remove(p.getCommandSenderName());
+									CustomPotionList.remove(p
+											.getCommandSenderName());
 								} else {
 									if (!CustomPotionList.containsKey(p
 											.getCommandSenderName())) {

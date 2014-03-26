@@ -54,10 +54,12 @@ public class ItemGrandSword extends Item {
 	public boolean getIsRepairable(ItemStack par1ItemStack,
 			ItemStack par2ItemStack) {
 		return true;
-				
-				/*this.toolMaterial.getToolCraftingMaterial() == par2ItemStack
-				.getItem() ? true : super.getIsRepairable(par1ItemStack,
-				par2ItemStack);*/
+
+		/*
+		 * this.toolMaterial.getToolCraftingMaterial() == par2ItemStack
+		 * .getItem() ? true : super.getIsRepairable(par1ItemStack,
+		 * par2ItemStack);
+		 */
 	}
 
 	/**

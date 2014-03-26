@@ -12,10 +12,10 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class ClientTickHandler {
 
-//	@Override
-//	public String getLabel() {
-//		return "pet syncher";
-//	}
+	// @Override
+	// public String getLabel() {
+	// return "pet syncher";
+	// }
 
 	@SubscribeEvent
 	public void tickEnd(TickEvent.ClientTickEvent ev) {
@@ -26,12 +26,13 @@ public class ClientTickHandler {
 			if (Minecraft.getMinecraft().currentScreen instanceof RpgGui) {
 
 				ByteArrayDataOutput out = ByteStreams.newDataOutput();
-//				out.writeInt(RpgRBPacketHandler.STOREPET);
-				
-				//TODO sendpacket
-//				PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(
-//						"RpgRBPacket", out.toByteArray()));
-				
+				// out.writeInt(RpgRBPacketHandler.STOREPET);
+
+				// TODO sendpacket
+				// PacketDispatcher.sendPacketToServer(new
+				// Packet250CustomPayload(
+				// "RpgRBPacket", out.toByteArray()));
+
 				System.out.println("todo : send packet");
 			}
 
@@ -40,15 +41,15 @@ public class ClientTickHandler {
 		}
 	}
 
-//	@Override
-//	public EnumSet<TickType> ticks() {
-//		return EnumSet.of(TickType.CLIENT);
-//	}
-//
-//	@Override
-//	public void tickStart(EnumSet<TickType> type, Object... tickData) {
-//		// TODO Auto-generated method stub
-//
-//	}
+	// @Override
+	// public EnumSet<TickType> ticks() {
+	// return EnumSet.of(TickType.CLIENT);
+	// }
+	//
+	// @Override
+	// public void tickStart(EnumSet<TickType> type, Object... tickData) {
+	// // TODO Auto-generated method stub
+	//
+	// }
 
 }

@@ -1,25 +1,26 @@
 package rpgNecroPaladin.packets17;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
-import rpgInventory.mod_RpgInventory;
-import rpgNecroPaladin.CommonTickHandlerRpgPlus;
-import rpgNecroPaladin.mod_RpgPlus;
-import rpgNecroPaladin.minions.EntityMinionS;
-import rpgNecroPaladin.minions.EntityMinionZ;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import rpgInventory.mod_RpgInventory;
+import rpgNecroPaladin.CommonTickHandlerRpgPlus;
+import rpgNecroPaladin.mod_RpgPlus;
+import rpgNecroPaladin.minions.EntityMinionS;
+import rpgNecroPaladin.minions.EntityMinionZ;
+import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class PacketSpawnMinion extends RpgPlusAbstractPacket {
-	
+
 	public EntityPlayer player;
 	public ItemStack weapon;
-	
-	public PacketSpawnMinion() {}
-	
+
+	public PacketSpawnMinion() {
+	}
+
 	public PacketSpawnMinion(EntityPlayer player) {
 		super();
 		this.player = player;
@@ -32,7 +33,8 @@ public class PacketSpawnMinion extends RpgPlusAbstractPacket {
 
 	@Override
 	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
-		ByteBufUtils.writeItemStack(buffer, this.player.getCurrentEquippedItem());
+		ByteBufUtils.writeItemStack(buffer,
+				this.player.getCurrentEquippedItem());
 	}
 
 	@Override
@@ -75,7 +77,8 @@ public class PacketSpawnMinion extends RpgPlusAbstractPacket {
 					if (!world.isRemote) {
 						EntityMinionS var4 = new EntityMinionS(world, player);
 						if (var4 != null) {
-							var4.setPosition(player.posX, player.posY, player.posZ);
+							var4.setPosition(player.posX, player.posY,
+									player.posZ);
 							world.spawnEntityInWorld(var4);
 							var4.setTamed(true);
 							var4.setOwner(player.getDisplayName());
@@ -85,7 +88,8 @@ public class PacketSpawnMinion extends RpgPlusAbstractPacket {
 					if (!world.isRemote) {
 						EntityMinionZ var4 = new EntityMinionZ(world, player);
 						if (var4 != null) {
-							var4.setPosition(player.posX, player.posY, player.posZ);
+							var4.setPosition(player.posX, player.posY,
+									player.posZ);
 							world.spawnEntityInWorld(var4);
 							var4.setTamed(true);
 							var4.setOwner(player.getDisplayName());
@@ -93,9 +97,11 @@ public class PacketSpawnMinion extends RpgPlusAbstractPacket {
 					}
 				}
 			} else {
-				player.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
-						+ Math.floor(1 + (CommonTickHandlerRpgPlus.rpgPluscooldownMap
-								.get(player.getDisplayName()) / 20)) + " seconds"));
+				player.addChatMessage(new ChatComponentText(
+						"You must wait for energy to replenish, left: "
+								+ Math.floor(1 + (CommonTickHandlerRpgPlus.rpgPluscooldownMap
+										.get(player.getDisplayName()) / 20))
+								+ " seconds"));
 			}
 		}
 	}

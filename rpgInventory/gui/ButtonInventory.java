@@ -6,7 +6,6 @@ package rpgInventory.gui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -43,15 +42,16 @@ public class ButtonInventory extends GuiButton {
 
 					ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 					DataOutputStream outputStream = new DataOutputStream(bytes);
-//					try {
-//						outputStream.writeInt(1);
-//						Packet250CustomPayload packet = new Packet250CustomPayload(
-//								"RpgInv", bytes.toByteArray());
-//						PacketDispatcher.sendPacketToServer(packet);
-//						// System.out.println("Packet send");
-//					} catch (IOException e) {
-//						e.printStackTrace();
-//					}
+					// try {
+					// outputStream.writeInt(1);
+					// Packet250CustomPayload packet = new
+					// Packet250CustomPayload(
+					// "RpgInv", bytes.toByteArray());
+					// PacketDispatcher.sendPacketToServer(packet);
+					// // System.out.println("Packet send");
+					// } catch (IOException e) {
+					// e.printStackTrace();
+					// }
 				} else if (this.displayString.equals("Close")) {
 					// player.closeScreen();
 					player.openContainer = player.inventoryContainer;

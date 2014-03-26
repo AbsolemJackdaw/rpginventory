@@ -12,7 +12,6 @@ import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
 import rpgMage.weapons.ItemElementalStaff;
 import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;

@@ -1,27 +1,28 @@
 package rpgInventory.handlers.Packets17;
 
-import java.io.IOException;
-import java.util.Random;
-
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.entity.EntityHellArrow;
-import rpgInventory.handlers.CommonTickHandler;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+
+import java.util.Random;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
+import rpgInventory.mod_RpgInventory;
+import rpgInventory.entity.EntityHellArrow;
+import rpgInventory.handlers.CommonTickHandler;
 
 public class PacketArcher extends AbstractPacket {
-	
+
 	private double xx;
 	private double yy;
 	private double zz;
 	public boolean self;
 
-	public PacketArcher() {}
-	
+	public PacketArcher() {
+	}
+
 	public PacketArcher(boolean self, double xx, double yy, double zz) {
 		super();
 		this.self = self;
@@ -29,7 +30,7 @@ public class PacketArcher extends AbstractPacket {
 		this.yy = yy;
 		this.zz = zz;
 	}
-	
+
 	@Override
 	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
 		this.self = buffer.readBoolean();
@@ -68,8 +69,8 @@ public class PacketArcher extends AbstractPacket {
 			ItemStack middle = player.inventory.armorItemInSlot(2);
 			ItemStack middle2 = player.inventory.armorItemInSlot(1);
 			ItemStack bottom = player.inventory.armorItemInSlot(0);
-			if (!mod_RpgInventory.developers.contains(player.getCommandSenderName()
-					.toLowerCase())) {
+			if (!mod_RpgInventory.developers.contains(player
+					.getCommandSenderName().toLowerCase())) {
 				if ((bow == null) || (top == null) || (middle == null)
 						|| (middle2 == null) || (bottom == null)) {
 					return;
@@ -84,13 +85,15 @@ public class PacketArcher extends AbstractPacket {
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(player
 					.getCommandSenderName())) {
-				CommonTickHandler.globalCooldownMap.put(player.getCommandSenderName(), 0);
+				CommonTickHandler.globalCooldownMap.put(
+						player.getCommandSenderName(), 0);
 			}
-			if (CommonTickHandler.globalCooldownMap.get(player.getCommandSenderName()) <= 0) {
-				CommonTickHandler.globalCooldownMap.put(player.getCommandSenderName(),
-						30 * 20);
-				if (!mod_RpgInventory.developers.contains(player.getCommandSenderName()
-						.toLowerCase())) {
+			if (CommonTickHandler.globalCooldownMap.get(player
+					.getCommandSenderName()) <= 0) {
+				CommonTickHandler.globalCooldownMap.put(
+						player.getCommandSenderName(), 30 * 20);
+				if (!mod_RpgInventory.developers.contains(player
+						.getCommandSenderName().toLowerCase())) {
 					bow.damageItem(10, player);
 				}
 				for (int x1 = -10; x1 < 10; x1++) {
@@ -106,8 +109,8 @@ public class PacketArcher extends AbstractPacket {
 								if (dist > 2) {
 									if ((dist < (10 + 5.0F))) {
 										EntityHellArrow var8 = new EntityHellArrow(
-												player.worldObj, xx + x1, yy + 100,
-												zz + z1);
+												player.worldObj, xx + x1,
+												yy + 100, zz + z1);
 										var8.setIsCritical(true);
 										var8.setDamage(10);
 										var8.setKnockbackStrength(5);
@@ -119,15 +122,16 @@ public class PacketArcher extends AbstractPacket {
 										// (itemRand.nextFloat() * 0.4F + 1.2F)
 										// + 100);
 										if (!player.worldObj.isRemote) {
-											player.worldObj.spawnEntityInWorld(var8);
+											player.worldObj
+													.spawnEntityInWorld(var8);
 										}
 									}
 								}
 							} else {
 								if ((dist < (10 + 5.0F))) {
 									EntityHellArrow var8 = new EntityHellArrow(
-											player.worldObj, xx + x1, yy + 100, zz
-													+ z1);
+											player.worldObj, xx + x1, yy + 100,
+											zz + z1);
 									var8.setIsCritical(true);
 									var8.setDamage(10);
 									var8.setKnockbackStrength(5);
@@ -139,7 +143,8 @@ public class PacketArcher extends AbstractPacket {
 									// (itemRand.nextFloat() * 0.4F + 1.2F) +
 									// 100);
 									if (!player.worldObj.isRemote) {
-										player.worldObj.spawnEntityInWorld(var8);
+										player.worldObj
+												.spawnEntityInWorld(var8);
 									}
 								}
 							}
@@ -147,9 +152,11 @@ public class PacketArcher extends AbstractPacket {
 					}
 				}
 			} else {
-				player.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
-						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(player.getCommandSenderName()) / 20)) + " seconds"));
+				player.addChatMessage(new ChatComponentText(
+						"You must wait for energy to replenish, left: "
+								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
+										.get(player.getCommandSenderName()) / 20))
+								+ " seconds"));
 			}
 		}
 	}

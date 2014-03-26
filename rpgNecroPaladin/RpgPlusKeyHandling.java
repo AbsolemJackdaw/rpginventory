@@ -3,17 +3,14 @@ package rpgNecroPaladin;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.EnumSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.ItemStack;
 import rpgInventory.handlers.RPGKeyHandler;
+import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 
 public class RpgPlusKeyHandling extends RPGKeyHandler {
 
@@ -22,7 +19,7 @@ public class RpgPlusKeyHandling extends RPGKeyHandler {
 		try {
 			Minecraft mc = Minecraft.getMinecraft();
 			GuiScreen guiscreen = mc.currentScreen;
-			if (this.keySpecial.isPressed()) {
+			if (RPGKeyHandler.keySpecial.isPressed()) {
 				ItemStack item = mc.thePlayer.getCurrentEquippedItem();
 				if ((guiscreen == null) && !(item == null)) {
 					specialAbility(item);
@@ -43,9 +40,10 @@ public class RpgPlusKeyHandling extends RPGKeyHandler {
 					out.writeInt(6);
 
 					System.out.println("Send packet rpg++ keyhandler");
-					//					Packet250CustomPayload packet = new Packet250CustomPayload(
-					//							"RpgPlusPlus", bt.toByteArray());
-					//					PacketDispatcher.sendPacketToServer(packet);
+					// Packet250CustomPayload packet = new
+					// Packet250CustomPayload(
+					// "RpgPlusPlus", bt.toByteArray());
+					// PacketDispatcher.sendPacketToServer(packet);
 				} catch (IOException ex) {
 					Logger.getLogger(RPGKeyHandler.class.getName()).log(
 							Level.SEVERE, null, ex);
@@ -59,11 +57,12 @@ public class RpgPlusKeyHandling extends RPGKeyHandler {
 				DataOutputStream out = new DataOutputStream(bt);
 				try {
 					out.writeInt(9);
-					//TODO
+					// TODO
 					System.out.println("add packet for paladin special here");
-					//					Packet250CustomPayload packet = new Packet250CustomPayload(
-					//							"RpgPlusPlus", bt.toByteArray());
-					//					PacketDispatcher.sendPacketToServer(packet);
+					// Packet250CustomPayload packet = new
+					// Packet250CustomPayload(
+					// "RpgPlusPlus", bt.toByteArray());
+					// PacketDispatcher.sendPacketToServer(packet);
 				} catch (IOException ex) {
 					Logger.getLogger(RPGKeyHandler.class.getName()).log(
 							Level.SEVERE, null, ex);

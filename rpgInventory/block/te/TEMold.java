@@ -315,7 +315,7 @@ public class TEMold extends TileEntity implements IInventory {
 
 		NBTTagList tagList = tagCompound.getTagList("Inventory", 10);
 		for (int i = 0; i < tagList.tagCount(); i++) {
-			NBTTagCompound tag = (NBTTagCompound) tagList.getCompoundTagAt(i);
+			NBTTagCompound tag = tagList.getCompoundTagAt(i);
 			byte slot = tag.getByte("Slot");
 			if ((slot >= 0) && (slot < moldforgeItemStacks.length)) {
 				moldforgeItemStacks[slot] = ItemStack.loadItemStackFromNBT(tag);
@@ -396,7 +396,7 @@ public class TEMold extends TileEntity implements IInventory {
 		}
 
 		if (var2) {
-//			this.onInventoryChanged();
+			// this.onInventoryChanged();
 			markDirty();
 		}
 	}

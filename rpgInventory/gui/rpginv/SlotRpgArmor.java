@@ -89,11 +89,11 @@ class SlotRpgArmor extends Slot {
 
 	@Override
 	public void onSlotChanged() {
-		
-		
-		//TODO
+
+		// TODO
 		System.out.println("send packet here onslotchanged");
-//		PacketInventory.sendPacket(player, (PlayerRpgInventory) this.inventory);
+		// PacketInventory.sendPacket(player, (PlayerRpgInventory)
+		// this.inventory);
 
 		super.onSlotChanged();
 	}

@@ -82,17 +82,17 @@ public class PetGui extends GuiScreen {
 
 			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 			DataOutputStream outputStream = new DataOutputStream(bytes);
-			//TODO
+			// TODO
 			System.out.println("todo : send packet");
 
-//			try {
-//				outputStream.writeInt(RpgPacketHandler.OPENRPGINV);
-//				Packet250CustomPayload packet = new Packet250CustomPayload(
-//						"RpgInv", bytes.toByteArray());
-//				PacketDispatcher.sendPacketToServer(packet);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+			// try {
+			// outputStream.writeInt(RpgPacketHandler.OPENRPGINV);
+			// Packet250CustomPayload packet = new Packet250CustomPayload(
+			// "RpgInv", bytes.toByteArray());
+			// PacketDispatcher.sendPacketToServer(packet);
+			// } catch (IOException e) {
+			// e.printStackTrace();
+			// }
 		}
 		if (guibutton.id == IMBUE_BUTTON) {
 			// levelInfo = "Imbue to next level : " + (PetLevel/2) +
@@ -331,23 +331,22 @@ public class PetGui extends GuiScreen {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(bos);
 		try {
-//			dos.writeInt(RpgRBPacketHandler.PETGUI);
-//			dos.writeUTF(new String(PetName.getBytes("UTF-8"), "UTF-8"));
-//			dos.writeShort(PetLevel);
-//			dos.writeShort(currentHP);
-//			dos.writeShort(totalHP);
-//			dos.writeShort(petAtk);
-//			dos.writeShort(playerLevelsLost);
-//			dos.writeShort(petLevelsAdded);
-//			dos.writeShort(petcandyConsumed);
+			// dos.writeInt(RpgRBPacketHandler.PETGUI);
+			// dos.writeUTF(new String(PetName.getBytes("UTF-8"), "UTF-8"));
+			// dos.writeShort(PetLevel);
+			// dos.writeShort(currentHP);
+			// dos.writeShort(totalHP);
+			// dos.writeShort(petAtk);
+			// dos.writeShort(playerLevelsLost);
+			// dos.writeShort(petLevelsAdded);
+			// dos.writeShort(petcandyConsumed);
 
-			//TODO
-			
+			// TODO
+
 			System.out.println("todo : send packet");
 
-			
-//			PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(
-//					"RpgRBPacket", bos.toByteArray()));
+			// PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(
+			// "RpgRBPacket", bos.toByteArray()));
 		} catch (Throwable ex) {
 			ex.printStackTrace();
 		}

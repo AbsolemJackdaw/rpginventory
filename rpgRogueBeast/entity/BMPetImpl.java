@@ -225,9 +225,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
 	// ABSTRACTS END
 
-	
-	
-//	@Override
+	// @Override
 	public String getEntityName() {
 		return this.dataWatcher.getWatchableObjectString(NAME);
 	}

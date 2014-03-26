@@ -10,8 +10,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.CharSequenceUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -110,25 +108,24 @@ public class mod_RpgInventory {
 	public static Item
 	/* ====jewels==== */
 	neckgold, neckdia, neckem, necklap, glovesbutter, glovesdia, glovesem,
-	gloveslap, ringgold, ringdia, ringem, ringlap,
-	/* ====shields==== */
-	archerShield, berserkerShield, talisman,
-	/* ====cloaks==== */
-	cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen,
-	cloakBlue,
-	/* ====weapons==== */
-	elfbow, claymore, hammer, wand, staf,
-	/* ====extra items==== */
-	rageSeed, wizardBook,
-	/* ====armor==== */
-	magehood, magegown, magepants, mageboots, archerhood, archerchest,
-	archerpants, archerboots, berserkerHood, berserkerChest,
-	berserkerLegs, berserkerBoots,
-	/* ====leathers/skins==== */
-	animalskin, tanHide, magecloth,
-	/* ====molds==== */
-	colmold, ringmold, wantmold;
-
+			gloveslap, ringgold, ringdia, ringem, ringlap,
+			/* ====shields==== */
+			archerShield, berserkerShield, talisman,
+			/* ====cloaks==== */
+			cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen,
+			cloakBlue,
+			/* ====weapons==== */
+			elfbow, claymore, hammer, wand, staf,
+			/* ====extra items==== */
+			rageSeed, wizardBook,
+			/* ====armor==== */
+			magehood, magegown, magepants, mageboots, archerhood, archerchest,
+			archerpants, archerboots, berserkerHood, berserkerChest,
+			berserkerLegs, berserkerBoots,
+			/* ====leathers/skins==== */
+			animalskin, tanHide, magecloth,
+			/* ====molds==== */
+			colmold, ringmold, wantmold;
 
 	public Item[] allItems;
 
@@ -225,8 +222,6 @@ public class mod_RpgInventory {
 		setDonators();
 		// GameRegistry.registerPlayerTracker(new OnPlayerLogin(version, name));
 
-
-
 		try {
 			Class.forName("rpgNecroPaladin.mod_RpgPlus");
 			hasRpg = true;
@@ -258,9 +253,7 @@ public class mod_RpgInventory {
 		developers.add("darkhax");
 
 		forgeBlock = new BlockForge(Material.rock).setHardness(5f)
-				/* .setUnlocalizedName("MoldForge") */.setCreativeTab(tab);
-
-
+		/* .setUnlocalizedName("MoldForge") */.setCreativeTab(tab);
 
 		proxy.registerRenderInformation();
 
@@ -277,8 +270,6 @@ public class mod_RpgInventory {
 
 		LanguageRegistry.addName(forgeBlock, "Mold Forge");
 		GameRegistry.registerBlock(forgeBlock, "MoldForge");
-
-
 
 		LanguageRegistry.addName(cloakRed, "Red Cape");
 		LanguageRegistry.addName(cloakYellow, "Yellow Cape");
@@ -344,74 +335,74 @@ public class mod_RpgInventory {
 
 		// SKINS
 		GameRegistry.addRecipe(new ItemStack(animalskin, 1), new Object[] {
-			"WWW", "WLW", "WWW", 'W', new ItemStack(Blocks.wool, 1, 12),
-			'L', Items.leather });
+				"WWW", "WLW", "WWW", 'W', new ItemStack(Blocks.wool, 1, 12),
+				'L', Items.leather });
 		GameRegistry.addShapelessRecipe(new ItemStack(tanHide, 1),
 				new Object[] { Items.leather, Items.string, Items.string,
-			Items.string, Items.string });
+						Items.string, Items.string });
 		GameRegistry.addRecipe(new ItemStack(magecloth, 1), new Object[] {
-			"WWW", "WLW", "WWW", 'W', new ItemStack(Items.dye, 1, 4), 'L',
-			Items.leather });
+				"WWW", "WLW", "WWW", 'W', new ItemStack(Items.dye, 1, 4), 'L',
+				Items.leather });
 		// WEAPONRY
 		GameRegistry.addRecipe(new ItemStack(elfbow, 1), new Object[] { "EPP",
-			"P S", "PS ", 'E', Items.emerald, 'S', Items.string, 'P',
-			new ItemStack(Blocks.log, 1, 2) });
+				"P S", "PS ", 'E', Items.emerald, 'S', Items.string, 'P',
+				new ItemStack(Blocks.log, 1, 2) });
 		GameRegistry.addRecipe(new ItemStack(wand, 1), new Object[] { "GGG",
-			"GLG", "GGG", 'L', Blocks.lapis_block, 'G', Items.gold_ingot });
+				"GLG", "GGG", 'L', Blocks.lapis_block, 'G', Items.gold_ingot });
 		GameRegistry.addRecipe(new ItemStack(staf, 1), new Object[] { " ML",
-			" SM", "S  ", 'M', Items.speckled_melon, 'S', Items.stick, 'L',
-			new ItemStack(Items.dye, 1, 4) });
+				" SM", "S  ", 'M', Items.speckled_melon, 'S', Items.stick, 'L',
+				new ItemStack(Items.dye, 1, 4) });
 		GameRegistry.addRecipe(new ItemStack(claymore, 1), new Object[] {
-			" S ", " S ", "LIL", 'I', Items.iron_ingot, 'S', Blocks.stone,
-			'L', Items.leather });
+				" S ", " S ", "LIL", 'I', Items.iron_ingot, 'S', Blocks.stone,
+				'L', Items.leather });
 		GameRegistry.addRecipe(new ItemStack(hammer, 1), new Object[] { "SSS",
-			"LI ", "LI ", 'I', Items.iron_ingot, 'S', Blocks.iron_block,
-			'L', Items.leather });
+				"LI ", "LI ", 'I', Items.iron_ingot, 'S', Blocks.iron_block,
+				'L', Items.leather });
 
 		// SHIELDS
 		GameRegistry.addRecipe(new ItemStack(archerShield, 1), new Object[] {
-			"WWW", "WBW", " W ", 'W', Items.iron_ingot, 'B', Blocks.log });
+				"WWW", "WBW", " W ", 'W', Items.iron_ingot, 'B', Blocks.log });
 		GameRegistry.addRecipe(new ItemStack(berserkerShield, 1), new Object[] {
-			"WWW", "WBW", " W ", 'W', Items.iron_ingot, 'B',
-			Blocks.iron_block });
+				"WWW", "WBW", " W ", 'W', Items.iron_ingot, 'B',
+				Blocks.iron_block });
 		GameRegistry.addRecipe(new ItemStack(talisman, 1), new Object[] {
-			"WWW", "WBW", " W ", 'W', new ItemStack(Items.dye, 1, 4), 'B',
-			Blocks.lapis_block });
+				"WWW", "WBW", " W ", 'W', new ItemStack(Items.dye, 1, 4), 'B',
+				Blocks.lapis_block });
 
 		// CLOAK
 		GameRegistry.addRecipe(new ItemStack(cloak, 1), new Object[] { "SS",
-			"II", "II", 'I', Blocks.wool, 'S', Items.string });
+				"II", "II", 'I', Blocks.wool, 'S', Items.string });
 		GameRegistry.addRecipe(new ItemStack(cloakI, 1), new Object[] { "PPP",
-			"PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.potionitem, 1, 8206) });
+				"PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.potionitem, 1, 8206) });
 		GameRegistry.addRecipe(new ItemStack(cloakI, 1), new Object[] { "PPP",
-			"PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.potionitem, 1, 8270) });
+				"PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.potionitem, 1, 8270) });
 
 		GameRegistry.addRecipe(new ItemStack(cloakRed, 1), new Object[] {
-			"PPP", "PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.dye, 1, 1) });
+				"PPP", "PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.dye, 1, 1) });
 		GameRegistry.addRecipe(new ItemStack(cloakYellow, 1), new Object[] {
-			"PPP", "PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.dye, 1, 11) });
+				"PPP", "PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.dye, 1, 11) });
 		GameRegistry.addRecipe(new ItemStack(cloakGreen, 1), new Object[] {
-			"PPP", "PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.dye, 1, 2) });
+				"PPP", "PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.dye, 1, 2) });
 		GameRegistry.addRecipe(new ItemStack(cloakBlue, 1), new Object[] {
-			"PPP", "PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.dye, 1, 12) });
+				"PPP", "PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.dye, 1, 12) });
 		GameRegistry.addRecipe(new ItemStack(cloakSub, 1), new Object[] {
-			"PPP", "PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.dye, 1, 0) });
+				"PPP", "PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.dye, 1, 0) });
 
 		GameRegistry.addRecipe(new ItemStack(forgeBlock, 1), new Object[] {
-			"BBB", "BOB", "BBB", 'B', Blocks.brick_block, 'O',
-			Blocks.obsidian });
+				"BBB", "BOB", "BBB", 'B', Blocks.brick_block, 'O',
+				Blocks.obsidian });
 
 		// MageBook
 		GameRegistry
-		.addShapelessRecipe(new ItemStack(wizardBook, 1), new Object[] {
-			magecloth, Items.paper, Items.paper, Items.paper });
+				.addShapelessRecipe(new ItemStack(wizardBook, 1), new Object[] {
+						magecloth, Items.paper, Items.paper, Items.paper });
 
 		// ARMOR
 		recipePatterns = new String[][] { { "XXX", "X X" },
@@ -429,13 +420,12 @@ public class mod_RpgInventory {
 			for (int var4 = 0; var4 < (this.recipeItems.length - 1); ++var4) {
 				Item var5 = (Item) this.recipeItems[var4 + 1][var2];
 				GameRegistry.addRecipe(new ItemStack(var5), new Object[] {
-					this.recipePatterns[var4], 'X', var3 });
+						this.recipePatterns[var4], 'X', var3 });
 			}
 		}
 
 		// TODO
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new
-				GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
 		MinecraftForge.EVENT_BUS.register(new CommonTickHandler());
 		MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
@@ -479,7 +469,7 @@ public class mod_RpgInventory {
 					}
 				} catch (Exception e) {
 					System.err
-					.println("Severe error, please report this to the mod author:");
+							.println("Severe error, please report this to the mod author:");
 					System.err.println(e);
 				}
 			}
@@ -498,7 +488,7 @@ public class mod_RpgInventory {
 				}
 			} catch (Exception ex) {
 				System.err
-				.println("Severe error, please report this to the mod author:");
+						.println("Severe error, please report this to the mod author:");
 				System.err.println(ex);
 			}
 		}
@@ -528,8 +518,6 @@ public class mod_RpgInventory {
 			RPGEventHooks.negativeEffects.add(decomposePotion.id);
 		}
 
-
-
 	}
 
 	public String playerClass() {
@@ -550,7 +538,6 @@ public class mod_RpgInventory {
 	public void preInit(FMLPreInitializationEvent event) {
 		// loadConfig(event.getSuggestedConfigurationFile());
 
-
 		// NOTHING BEFORE THE GOD DAMN TAB !
 		// any items that need to be in it, put in it BEFORE the tab exists will
 		// not be in
@@ -560,18 +547,18 @@ public class mod_RpgInventory {
 				"subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold")
 				.setCreativeTab(tab);
 		neckdia = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckDia.png")
-		.setUnlocalizedName("neckDia").setCreativeTab(tab);
+				.setUnlocalizedName("neckDia").setCreativeTab(tab);
 		neckem = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckEm.png")
-		.setUnlocalizedName("neckEm").setCreativeTab(tab);
+				.setUnlocalizedName("neckEm").setCreativeTab(tab);
 		necklap = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckLap.png")
-		.setUnlocalizedName("neckLap").setCreativeTab(tab);
+				.setUnlocalizedName("neckLap").setCreativeTab(tab);
 
 		ringgold = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
 				"ringGold").setCreativeTab(tab);
 		ringdia = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
 				"ringDia").setCreativeTab(tab);
 		ringem = new ItemRpgInvArmor(4, -1, "", "")
-		.setUnlocalizedName("ringEm").setCreativeTab(tab);
+				.setUnlocalizedName("ringEm").setCreativeTab(tab);
 		ringlap = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
 				"ringLap").setCreativeTab(tab);
 
@@ -582,26 +569,26 @@ public class mod_RpgInventory {
 				"subaraki:jewels/GloveDia.png").setUnlocalizedName("gloveDia")
 				.setCreativeTab(tab);
 		glovesem = new ItemRpgInvArmor(3, -1, "", "subaraki:jewels/GloveEm.png")
-		.setUnlocalizedName("gloveEm").setCreativeTab(tab);
+				.setUnlocalizedName("gloveEm").setCreativeTab(tab);
 		gloveslap = new ItemRpgInvArmor(3, -1, "",
 				"subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap")
 				.setCreativeTab(tab);
 
 		archerShield = new ItemRpgInvArmor(1, 200, "",
 				"subaraki:jewels/Shield1.png").setUnlocalizedName(
-						"shieldArcher").setCreativeTab(tab);
+				"shieldArcher").setCreativeTab(tab);
 		berserkerShield = new ItemRpgInvArmor(1, 350, "",
 				"subaraki:jewels/IronThorn.png").setUnlocalizedName(
-						"shieldBerserker").setCreativeTab(tab);
+				"shieldBerserker").setCreativeTab(tab);
 		talisman = new ItemRpgInvArmor(1, 200, "",
 				"subaraki:jewels/mageShield.png").setUnlocalizedName(
-						"shieldMage").setCreativeTab(tab);
+				"shieldMage").setCreativeTab(tab);
 
 		cloak = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/GreyCape.png")
-		.setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
+				.setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
 		cloakI = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/GreyCape.png")
-		.setFull3D().setUnlocalizedName("i.capeGrey")
-		.setCreativeTab(tab);
+				.setFull3D().setUnlocalizedName("i.capeGrey")
+				.setCreativeTab(tab);
 
 		magehood = new ItemMageArmor(mage, 4, 0).setUnlocalizedName("mage1")
 				.setCreativeTab(tab);
@@ -622,13 +609,13 @@ public class mod_RpgInventory {
 				"archer4").setCreativeTab(tab);
 
 		berserkerHood = new ItemBerserkerArmor(berserker, 4, 0)
-		.setUnlocalizedName("berserk1").setCreativeTab(tab);
+				.setUnlocalizedName("berserk1").setCreativeTab(tab);
 		berserkerChest = new ItemBerserkerArmor(berserker, 4, 1)
-		.setUnlocalizedName("berserk2").setCreativeTab(tab);
+				.setUnlocalizedName("berserk2").setCreativeTab(tab);
 		berserkerLegs = new ItemBerserkerArmor(berserker, 4, 2)
-		.setUnlocalizedName("berserk3").setCreativeTab(tab);
+				.setUnlocalizedName("berserk3").setCreativeTab(tab);
 		berserkerBoots = new ItemBerserkerArmor(berserker, 4, 3)
-		.setUnlocalizedName("berserk4").setCreativeTab(tab);
+				.setUnlocalizedName("berserk4").setCreativeTab(tab);
 
 		claymore = new ItemClaymore(clay).setFull3D().setMaxDamage(1024)
 				.setUnlocalizedName("claymore").setCreativeTab(tab);
@@ -657,22 +644,22 @@ public class mod_RpgInventory {
 				.setCreativeTab(tab);
 
 		cloakRed = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/RedCape.png")
-		.setFull3D().setUnlocalizedName("r.capeGrey")
-		.setCreativeTab(tab);
-		
+				.setFull3D().setUnlocalizedName("r.capeGrey")
+				.setCreativeTab(tab);
+
 		cloakYellow = new ItemRpgInvArmor(2, -1, "",
 				"subaraki:capes/GoldCape.png").setFull3D()
 				.setUnlocalizedName("y.capeGrey").setCreativeTab(tab);
-		
+
 		cloakGreen = new ItemRpgInvArmor(2, -1, "",
 				"subaraki:capes/GreenCape.png").setFull3D()
 				.setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
 		cloakBlue = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/SkyCape.png")
-		.setFull3D().setUnlocalizedName("b.capeGrey")
-		.setCreativeTab(tab);
+				.setFull3D().setUnlocalizedName("b.capeGrey")
+				.setCreativeTab(tab);
 		cloakSub = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/BlaCape.png")
-		.setFull3D().setUnlocalizedName("s.capeGrey")
-		.setCreativeTab(tab);
+				.setFull3D().setUnlocalizedName("s.capeGrey")
+				.setCreativeTab(tab);
 
 		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(
 				tab);
@@ -681,41 +668,48 @@ public class mod_RpgInventory {
 		wantmold = new ItemMold().setUnlocalizedName("moldGlove")
 				.setCreativeTab(tab);
 
-		allItems = new Item[]{
-				neckgold, neckdia, neckem, necklap, glovesbutter, glovesdia, glovesem,
-				gloveslap, ringgold, ringdia, ringem, ringlap,
-				archerShield, berserkerShield, talisman,
-				cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen,
-				cloakBlue,
-				elfbow, claymore, hammer, wand, staf,
-				rageSeed, wizardBook,
-				magehood, magegown, magepants, mageboots, archerhood, archerchest,
-				archerpants, archerboots, berserkerHood, berserkerChest,
-				berserkerLegs, berserkerBoots,
-				animalskin, tanHide, magecloth,
-				colmold, ringmold, wantmold
-		};
+		allItems = new Item[] { neckgold, neckdia, neckem, necklap,
+				glovesbutter, glovesdia, glovesem, gloveslap, ringgold,
+				ringdia, ringem, ringlap, archerShield, berserkerShield,
+				talisman, cloak, cloakI, cloakSub, cloakRed, cloakYellow,
+				cloakGreen, cloakBlue, elfbow, claymore, hammer, wand, staf,
+				rageSeed, wizardBook, magehood, magegown, magepants, mageboots,
+				archerhood, archerchest, archerpants, archerboots,
+				berserkerHood, berserkerChest, berserkerLegs, berserkerBoots,
+				animalskin, tanHide, magecloth, colmold, ringmold, wantmold };
 
-		//TODO
-		for(int i =0; i < allItems.length; i++){
-			
-				
-			if(allItems[i] != null){
-				
-				String itemName = allItems[i].getUnlocalizedName()/*.substring(
-						allItems[i].getUnlocalizedName().indexOf(".") + 1)*/;	
-				
-				System.out.println(itemName);
-				
-				allItems[i].setTextureName(this.name +":" + 
-				(itemName.contains(".") ? itemName.substring(2) : itemName));
-				
-				GameRegistry.registerItem(allItems[i], allItems[i].getUnlocalizedName(), this.name);
-				System.out.println("Registered Item " + i + "/n" + allItems[i]);
-			}
-			else{
+		// TODO
+		for (int i = 0; i < allItems.length; i++) {
+
+			if (allItems[i] != null) {
+
+				String itemName = allItems[i].getUnlocalizedName().substring(
+						allItems[i].getUnlocalizedName().indexOf(".") + 1);
+
+				String name = itemName.substring(itemName.indexOf(".") + 1);
+
+				System.out.println(name + " "
+						+ allItems[i].getUnlocalizedName());
+
+				if ((allItems[i] != rageSeed) || (allItems[i] != animalskin)
+						|| (allItems[i] != tanHide)
+						|| (allItems[i] != magecloth)
+						|| (allItems[i] != wizardBook)) {
+					allItems[i].setTextureName(mod_RpgInventory.name + ":"
+							+ name);
+				} else {
+					allItems[i].setTextureName(name);
+				}
+
+				GameRegistry
+						.registerItem(allItems[i],
+								allItems[i].getUnlocalizedName(),
+								mod_RpgInventory.name);
+				// System.out.println("Registered Item " + i + "/n" +
+				// allItems[i]);
+			} else {
 				System.out.println("Item is null !" + i);
-//				break;
+				// break;
 			}
 		}
 	}
@@ -734,13 +728,13 @@ public class mod_RpgInventory {
 
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event) {
-		//TODO get commands back
+		// TODO get commands back
 
-		//		CommandHandler commandManager = (CommandHandler) event.getServer()
-		//				.getCommandManager();
-		//		commandManager
-		//				.registerCommand(new rpgInventory.handlers.CommandPanel());
-		//		rpgInventory.handlers.CommandPanel.init();
+		// CommandHandler commandManager = (CommandHandler) event.getServer()
+		// .getCommandManager();
+		// commandManager
+		// .registerCommand(new rpgInventory.handlers.CommandPanel());
+		// rpgInventory.handlers.CommandPanel.init();
 	}
 
 	private void setDonators() {

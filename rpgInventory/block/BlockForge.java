@@ -2,8 +2,6 @@ package rpgInventory.block;
 
 import java.util.Random;
 
-import javax.swing.Icon;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -17,7 +15,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.block.te.TEMold;
@@ -33,10 +30,10 @@ public class BlockForge extends BlockContainer {
 	public static IIcon temoldOvenBottom;
 	public static IIcon temoldOvenTop;
 	public static IIcon temoldOvenSide;
-	
+
 	public static IIcon temoldOvenFront;
 	public static IIcon temoldOvenFrontActive;
-	
+
 	/**
 	 * Is the random generator used by furnace to drop the inventory contents in
 	 * random directions.
@@ -97,6 +94,12 @@ public class BlockForge extends BlockContainer {
 	@Override
 	public TileEntity createNewTileEntity(World world, int i) {
 		return new TEMold();
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public IIcon getIcon(int side, int i) {
+		return side != i ? this.blockIcon : BlockForge.temoldOvenFront;
 	}
 
 	/**
@@ -205,19 +208,11 @@ public class BlockForge extends BlockContainer {
 	public void registerBlockIcons(IIconRegister reg) {
 		this.blockIcon = temoldOvenSide = temoldOvenTop = temoldOvenBottom = reg
 				.registerIcon("rpginventorymod:ovenSide");
-		
-		temoldOvenFront = reg
-				.registerIcon("rpginventorymod:ovenFront");
-		
+
+		temoldOvenFront = reg.registerIcon("rpginventorymod:ovenFront");
+
 		temoldOvenFrontActive = reg
 				.registerIcon("rpginventorymod:ovenFrontBurning");
-	}
-	
-	@SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getIcon(int side, int i)
-	{
-        return side != i ? this.blockIcon : this.temoldOvenFront;
 	}
 
 	/**

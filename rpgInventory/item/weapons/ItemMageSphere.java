@@ -209,11 +209,11 @@ public class ItemMageSphere extends ItemRpgWeapon {
 						if (var12 == Blocks.lapis_ore) {
 							par3World.setBlock(par4, par5, par6,
 									Blocks.lapis_block);
-							par1ItemStack.damageItem(
-									mod_RpgInventory.donators
-											.contains(par2EntityPlayer
+							par1ItemStack
+									.damageItem(
+											mod_RpgInventory.donators.contains(par2EntityPlayer
 													.getCommandSenderName()) ? 50
-											: 151, par2EntityPlayer);
+													: 151, par2EntityPlayer);
 						}
 
 					}

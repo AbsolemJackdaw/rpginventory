@@ -1,11 +1,7 @@
 package rpgInventory.gui.rpginv;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerAdapter;
-import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
@@ -22,10 +18,10 @@ import rpgInventory.item.armor.ItemRpgInvArmor;
 import cpw.mods.fml.common.FMLLog;
 
 public class PlayerRpgInventory implements IInventory,
-IExtendedEntityProperties {
+		IExtendedEntityProperties {
 
 	public ItemStack[] armorSlots = new ItemStack[7];
-	//	public String playername;
+	// public String playername;
 	// public EnumSet<EnumRpgClass> classSets;
 	// public LinkedList classSets;
 	private EntityPlayer player;
@@ -41,18 +37,19 @@ IExtendedEntityProperties {
 	/* =====SAVING ENTITY DATA ===== */
 
 	public static final void register(EntityPlayer player) {
-		if(player != null){
+		if (player != null) {
 			player.registerExtendedProperties(EXT_PROP_NAME,
 					new PlayerRpgInventory(player));
 			FMLLog.getLogger().info("Player properties registered");
-		}
-		else{
-			System.out.println("NOPE. player was null");	
+		} else {
+			System.out.println("NOPE. player was null");
 		}
 	}
 
+	PacketInventory pa = new PacketInventory();
+
 	public PlayerRpgInventory(EntityPlayer p) {
-		if(p != null){
+		if (p != null) {
 			player = p;
 		}
 		// classSets = new LinkedList();//EnumSet.noneOf(EnumRpgClass.class);
@@ -63,9 +60,9 @@ IExtendedEntityProperties {
 		// ExtendedPlayer props = ExtendedPlayer.get(player);
 		// props.addEntry(this);
 
-		//TODO
+		// TODO
 		System.out.println("send packet here closed inventory");
-		//		PacketInventory.sendPacket(player, this);
+		// PacketInventory.sendPacket(player, this);
 
 	}
 
@@ -206,9 +203,9 @@ IExtendedEntityProperties {
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
 		// mod_RpgInventory.proxy.addEntry(playername, this);
-		//TODO
+		// TODO
 		System.out.println("send packet here slotclosed");
-		//		PacketInventory.sendPacket(player, this);
+		// PacketInventory.sendPacket(player, this);
 		return null;
 	}
 
@@ -223,16 +220,16 @@ IExtendedEntityProperties {
 		return false;
 	}
 
+	// @Override
+	// public boolean isInventoryNameLocalized() {
+	// return false;
+	// }
+
 	@Override
 	public boolean hasCustomInventoryName() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	// @Override
-	// public boolean isInventoryNameLocalized() {
-	// return false;
-	// }
 
 	@Override
 	public void init(Entity entity, World world) {
@@ -292,14 +289,10 @@ IExtendedEntityProperties {
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 		EntityPlayer player = MinecraftServer.getServer()
-				.getConfigurationManager().getPlayerForUsername(par1EntityPlayer.getCommandSenderName());
+				.getConfigurationManager()
+				.getPlayerForUsername(par1EntityPlayer.getCommandSenderName());
 		return player.isDead ? false : par1EntityPlayer
 				.getDistanceSqToEntity(player) <= 64.0D;
-	}
-
-	@Override
-	public void loadNBTData(NBTTagCompound compound) {
-		readFromNBT(compound);
 	}
 
 	// /**
@@ -340,22 +333,26 @@ IExtendedEntityProperties {
 	// }
 	// }
 
-	PacketInventory pa = new PacketInventory();
+	@Override
+	public void loadNBTData(NBTTagCompound compound) {
+		readFromNBT(compound);
+	}
 
-	@Override //onInventoryChanged
+	@Override
+	// onInventoryChanged
 	public void markDirty() {
 		try {
 
-			//TODO
-			//System.out.println("send packet here updated as unclean");
-			//			PacketInventory.sendPacket(player, this);
+			// TODO
+			// System.out.println("send packet here updated as unclean");
+			// PacketInventory.sendPacket(player, this);
 
-			
-//			mod_RpgInventory.PIPELINE.sendTo(new PacketInventory(player, this), (EntityPlayerMP) player);
-
+			// mod_RpgInventory.PIPELINE.sendTo(new PacketInventory(player,
+			// this), (EntityPlayerMP) player);
 
 			EntityPlayer player = MinecraftServer.getServer()
-					.getConfigurationManager().getPlayerForUsername(this.player.getCommandSenderName());
+					.getConfigurationManager()
+					.getPlayerForUsername(this.player.getCommandSenderName());
 			// classSets = EnumRpgClass.getPlayerClasses(player);
 			// TODO is done ! moved that line ^ to eventhooks so it gets updated
 			// properly.
@@ -390,18 +387,20 @@ IExtendedEntityProperties {
 			if (addtoticks[0]) {
 				if (!RPGEventHooks.ArcherRepairTick.containsKey(player
 						.getCommandSenderName())) {
-					RPGEventHooks.ArcherRepairTick.put(player.getCommandSenderName(),
-							0);
+					RPGEventHooks.ArcherRepairTick.put(
+							player.getCommandSenderName(), 0);
 				}
 			} else {
 				// keep the cooldown hashmap clean
-				RPGEventHooks.ArcherRepairTick.remove(player.getCommandSenderName());
+				RPGEventHooks.ArcherRepairTick.remove(player
+						.getCommandSenderName());
 			}
 
 			if (addtoticks[1]) {
 				if (!RPGEventHooks.HealerTick.containsKey(player
 						.getCommandSenderName())) {
-					RPGEventHooks.HealerTick.put(player.getCommandSenderName(), 0);
+					RPGEventHooks.HealerTick.put(player.getCommandSenderName(),
+							0);
 				}
 			} else {
 				// keep the cooldown hashmap clean
@@ -411,7 +410,8 @@ IExtendedEntityProperties {
 			if (addtoticks[2]) {
 				if (!RPGEventHooks.DiamondTick.containsKey(player
 						.getCommandSenderName())) {
-					RPGEventHooks.DiamondTick.put(player.getCommandSenderName(), 0);
+					RPGEventHooks.DiamondTick.put(
+							player.getCommandSenderName(), 0);
 				}
 			} else {
 				// keep the cooldown hashmap clean
@@ -428,8 +428,7 @@ IExtendedEntityProperties {
 	public void readFromNBT(NBTTagCompound tagcompound) {
 		NBTTagList nbttaglist = tagcompound.getTagList(tagName, 10);
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.getCompoundTagAt(i);
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
 
 			if ((b0 >= 0) && (b0 < this.getSizeInventory())) {
@@ -448,9 +447,9 @@ IExtendedEntityProperties {
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 		this.armorSlots[par1] = par2ItemStack;
 
-		//TODO
+		// TODO
 		System.out.println("send packet here slot content set remotely");
-		//		PacketInventory.sendPacket(player, this);
+		// PacketInventory.sendPacket(player, this);
 	}
 
 	public void writeToNBT(NBTTagCompound tagcompound) {

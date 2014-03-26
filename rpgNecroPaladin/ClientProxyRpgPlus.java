@@ -3,7 +3,6 @@ package rpgNecroPaladin;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.handlers.RPGKeyHandler;
 import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
 import rpgNecroPaladin.models.ModelNecroArmor;
@@ -68,8 +67,8 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinionZ.class,
 				new RenderMinionZ());
 
-//		RPGKeyHandler.registerKeyhandler(new RpgPlusKeyHandling(),
-//				IKeyHandler.bindKeys, IKeyHandler.reps);
+		// RPGKeyHandler.registerKeyhandler(new RpgPlusKeyHandling(),
+		// IKeyHandler.bindKeys, IKeyHandler.reps);
 
 	}
 }

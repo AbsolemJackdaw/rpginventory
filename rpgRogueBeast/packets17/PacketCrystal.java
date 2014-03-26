@@ -17,14 +17,15 @@ public class PacketCrystal extends RpgRBAbstractPacket {
 
 	private EntityLivingBase entity;
 	private int entityid;
-	
-	public PacketCrystal() {}
-	
+
+	public PacketCrystal() {
+	}
+
 	public PacketCrystal(EntityLivingBase entity) {
 		super();
 		this.entity = entity;
 	}
-	
+
 	@Override
 	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
 		this.entityid = buffer.readInt();
@@ -41,7 +42,7 @@ public class PacketCrystal extends RpgRBAbstractPacket {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		
+
 		if (entityid == 0) {
 			player.attackEntityFrom(DamageSource.magic, 1);
 		} else {

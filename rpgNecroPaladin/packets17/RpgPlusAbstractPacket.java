@@ -11,11 +11,12 @@ import net.minecraft.entity.player.EntityPlayer;
  * @author sirgingalot
  */
 public abstract class RpgPlusAbstractPacket {
-	
+
 	/**
 	 * Decode the packet data from the ByteBuf stream. Complex data sets may
 	 * need specific data handlers (See
-	 * @link{cpw.mods.fml.common.network.ByteBuffUtils})
+	 * 
+	 * @link{cpw.mods.fml.common.network.ByteBuffUtils )
 	 * 
 	 * @param ctx
 	 *            channel context
@@ -27,7 +28,8 @@ public abstract class RpgPlusAbstractPacket {
 	/**
 	 * Encode the packet data into the ByteBuf stream. Complex data sets may
 	 * need specific data handlers (See
-	 * @link{cpw.mods.fml.common.network.ByteBuffUtils})
+	 * 
+	 * @link{cpw.mods.fml.common.network.ByteBuffUtils )
 	 * 
 	 * @param ctx
 	 *            channel context

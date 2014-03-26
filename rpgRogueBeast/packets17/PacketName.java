@@ -5,7 +5,7 @@ import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class PacketName extends RpgRBAbstractPacket {
-	
+
 	// lets wait and see about this
 
 	@Override

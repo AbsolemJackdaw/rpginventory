@@ -115,7 +115,8 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerLate() {
-		//TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+		// TickRegistry.registerTickHandler(new ClientTickHandler(),
+		// Side.CLIENT);
 	}
 
 	@Override
@@ -123,10 +124,10 @@ public class ClientProxy extends CommonProxy {
 		// MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
 
 		// TextureIDs.init();
-		
-		//TODO keyhandlers to event bus
-//		KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler(
-//				IKeyHandler.bindKeys, IKeyHandler.reps));
+
+		// TODO keyhandlers to event bus
+		// KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler(
+		// IKeyHandler.bindKeys, IKeyHandler.reps));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityHellArrow.class,
 				new RenderArrow());

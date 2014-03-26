@@ -20,7 +20,6 @@ import rpgNecroPaladin.minions.EntityMinionS;
 import rpgNecroPaladin.minions.EntityMinionZ;
 import rpgNecroPaladin.packets17.RpgPlusPacketPipeline17;
 import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -30,7 +29,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 //@Mod(modid = "RPGPlusPlus", name = "Subarakis RPG++ mod", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
-
 
 // @NetworkMod(clientSideRequired = true, serverSideRequired = false,
 // clientPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgPlusPlus" },
@@ -43,7 +41,7 @@ public class mod_RpgPlus {
 	public static String CLASSNECROSHIELD = "shieldedNecro";
 	public static String CLASSPALADIN = "paladin";
 	public static String CLASSPALADINSHIELD = "shieldedPaladin";
-	
+
 	public static final RpgPlusPacketPipeline17 PIPELINE = new RpgPlusPacketPipeline17();
 
 	private String[][] recipePatterns;
@@ -87,7 +85,7 @@ public class mod_RpgPlus {
 				1);
 
 		PIPELINE.initialise();
-		
+
 		tab = new PlusTab(CreativeTabs.getNextID(), "++Tab");
 
 		necroHood = new ItemNecroArmor(necroArmor, 4, 0)
@@ -198,7 +196,7 @@ public class mod_RpgPlus {
 
 	@EventHandler
 	public void post(FMLPostInitializationEvent evt) {
-		
+
 		PIPELINE.postInitialise();
 
 		proxy.registerRenderInformation();

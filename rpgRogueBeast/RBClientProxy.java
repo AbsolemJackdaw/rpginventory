@@ -73,13 +73,14 @@ public class RBClientProxy extends RBCommonProxy {
 				.registerEntityRenderingHandler(EntityTeleportStone.class,
 						new RenderSnowball(Items.feather, 1));
 
-//		RPGKeyHandler.registerKeyhandler(new RpgKeyHandlerRB(),
-//				IKeyHandler.bindKeys, IKeyHandler.reps);
+		// RPGKeyHandler.registerKeyhandler(new RpgKeyHandlerRB(),
+		// IKeyHandler.bindKeys, IKeyHandler.reps);
 
 		MinecraftForge.EVENT_BUS.register(new SoundManager());
-		
+
 		MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
-//		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+		// TickRegistry.registerTickHandler(new ClientTickHandler(),
+		// Side.CLIENT);
 
 	}
 }

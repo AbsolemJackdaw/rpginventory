@@ -1,6 +1,5 @@
 package rpgInventory.handlers.oldpackets;
 
-import ibxm.Player;
 
 //public class RpgMSPacketHandler implements IPacketHandler {
 //
@@ -9,4 +8,4 @@ import ibxm.Player;
 //			Packet250CustomPayload packet, Player player) {
 //	}
 
-//}
+// }

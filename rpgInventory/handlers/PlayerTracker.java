@@ -11,21 +11,23 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
  * 
  * @author AbrarSyed
  */
-public class PlayerTracker /*implements IPlayerTracker*/ {
+public class PlayerTracker /* implements IPlayerTracker */{
 
 	@SubscribeEvent
 	public void onPlayerChangedDimension(PlayerChangedDimensionEvent e) {
-		//TODO
+		// TODO
 		System.out.println("send packet here dimension");
-		
-//		PacketInventory.sendPacket(e.player, PlayerRpgInventory.get(e.player));
+
+		// PacketInventory.sendPacket(e.player,
+		// PlayerRpgInventory.get(e.player));
 	}
 
 	@SubscribeEvent
 	public void onPlayerLogin(PlayerLoggedInEvent e) {
-		//TODO
+		// TODO
 		System.out.println("send packet here login");
-//		PacketInventory.sendPacket(e.player, PlayerRpgInventory.get(e.player));
+		// PacketInventory.sendPacket(e.player,
+		// PlayerRpgInventory.get(e.player));
 	}
 
 	@SubscribeEvent
@@ -35,9 +37,10 @@ public class PlayerTracker /*implements IPlayerTracker*/ {
 
 	@SubscribeEvent
 	public void onPlayerRespawn(PlayerRespawnEvent e) {
-		
-		//TODO
+
+		// TODO
 		System.out.println("send packet here respawn");
-//		PacketInventory.sendPacket(e.player, PlayerRpgInventory.get(e.player));
+		// PacketInventory.sendPacket(e.player,
+		// PlayerRpgInventory.get(e.player));
 	}
 }

@@ -1,7 +1,5 @@
 package rpgInventory.item.weapons;
 
-import javax.swing.Icon;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemArcherBow extends Item {
 
 	public static final String[] ItemNameArray = new String[] { "elmBow",
-		"elmBow2", "elmBow3", "elmBow4" };
+			"elmBow2", "elmBow3", "elmBow4" };
 
 	public int usingItem = 0;
 	@SideOnly(Side.CLIENT)
@@ -68,6 +66,15 @@ public class ItemArcherBow extends Item {
 	@Override
 	public int getItemEnchantability() {
 		return -1;
+	}
+
+	/**
+	 * used to cycle through icons based on their used duration, i.e. for the
+	 * bow
+	 */
+	@SideOnly(Side.CLIENT)
+	public IIcon getItemIconForUseDuration(int par1) {
+		return this.IconArray[par1];
 	}
 
 	/**
@@ -202,7 +209,7 @@ public class ItemArcherBow extends Item {
 					stack.damageItem(1, player);
 					par2World.playSoundAtEntity(player, "random.bow", 1.0F,
 							(1.0F / ((itemRand.nextFloat() * 0.4F) + 1.2F))
-							+ (f * 0.5F));
+									+ (f * 0.5F));
 				}
 			}
 		}
@@ -212,15 +219,6 @@ public class ItemArcherBow extends Item {
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
 		player.setItemInUse(stack, count);
 		usingItem++;
-	}
-
-	/**
-	 * used to cycle through icons based on their used duration, i.e. for the bow
-	 */
-	@SideOnly(Side.CLIENT)
-	public IIcon getItemIconForUseDuration(int par1)
-	{
-		return this.IconArray[par1];
 	}
 
 	@Override

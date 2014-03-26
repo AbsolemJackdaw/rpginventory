@@ -24,7 +24,7 @@ public class BeastMasterEvent {
 					EntityLiving corpse = (EntityLiving) evt.entityLiving;
 					EntityLivingBase murderer = (EntityLiving) evt.source
 							.getSourceOfDamage();
-					
+
 					Field f = corpse.getClass().getField("experienceValue");
 					f.setAccessible(true);
 					int totalXP = f.getInt(corpse);

@@ -6,7 +6,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.handlers.Packets17.PacketInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 
 public class PlayerRpgContainer extends Container {
@@ -60,9 +59,9 @@ public class PlayerRpgContainer extends Container {
 
 	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
-		//TODO
+		// TODO
 		System.out.println("send packet here closing inventory");
-//		PacketInventory.sendPacket(par1EntityPlayer, this.inventory);
+		// PacketInventory.sendPacket(par1EntityPlayer, this.inventory);
 		super.onContainerClosed(par1EntityPlayer);
 	}
 
@@ -75,10 +74,10 @@ public class PlayerRpgContainer extends Container {
 	public ItemStack slotClick(int par1, int par2, int par3,
 			EntityPlayer par4EntityPlayer) {
 		ItemStack rv = super.slotClick(par1, par2, par3, par4EntityPlayer);
-		
-		//TODO
+
+		// TODO
 		System.out.println("send packet here clicked slot");
-//		PacketInventory.sendPacket(par4EntityPlayer, this.inventory);
+		// PacketInventory.sendPacket(par4EntityPlayer, this.inventory);
 		return rv;
 	}
 

@@ -1,11 +1,10 @@
 package rpgInventory.handlers.Packets17;
 
-import java.util.List;
-
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.handlers.CommonTickHandler;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+
+import java.util.List;
+
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,6 +14,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
+import rpgInventory.mod_RpgInventory;
+import rpgInventory.handlers.CommonTickHandler;
 
 public class PacketMageVortex extends AbstractPacket {
 
@@ -39,8 +40,8 @@ public class PacketMageVortex extends AbstractPacket {
 			ItemStack legs = player.inventory.armorItemInSlot(1);
 			ItemStack boots = player.inventory.armorItemInSlot(0);
 
-			if (!mod_RpgInventory.developers.contains(player.getCommandSenderName()
-					.toLowerCase())) {
+			if (!mod_RpgInventory.developers.contains(player
+					.getCommandSenderName().toLowerCase())) {
 				if ((wand == null) || (hat == null) || (chest == null)
 						|| (legs == null) || (boots == null)) {
 					return;
@@ -55,11 +56,13 @@ public class PacketMageVortex extends AbstractPacket {
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(player
 					.getCommandSenderName())) {
-				CommonTickHandler.globalCooldownMap.put(player.getCommandSenderName(), 0);
+				CommonTickHandler.globalCooldownMap.put(
+						player.getCommandSenderName(), 0);
 			}
-			if (CommonTickHandler.globalCooldownMap.get(player.getCommandSenderName()) <= 0) {
-				CommonTickHandler.globalCooldownMap.put(player.getCommandSenderName(),
-						7 * 20);
+			if (CommonTickHandler.globalCooldownMap.get(player
+					.getCommandSenderName()) <= 0) {
+				CommonTickHandler.globalCooldownMap.put(
+						player.getCommandSenderName(), 7 * 20);
 				if ((wand.getItemDamage() + 3) >= wand.getMaxDamage()) {
 					// Trigger item break stuff
 					// Only damage what is left
@@ -72,15 +75,16 @@ public class PacketMageVortex extends AbstractPacket {
 				} else {
 					if (!mod_RpgInventory.developers.contains(player
 							.getCommandSenderName().toLowerCase())) {
-						wand.damageItem(mod_RpgInventory.donators.contains(player
-								.getCommandSenderName()) ? 1 : 3, player);
+						wand.damageItem(mod_RpgInventory.donators
+								.contains(player.getCommandSenderName()) ? 1
+								: 3, player);
 					}
 				}
-				float f = mod_RpgInventory.donators
-						.contains(player.getCommandSenderName()) ? 20.0f : 10.0f;
+				float f = mod_RpgInventory.donators.contains(player
+						.getCommandSenderName()) ? 20.0f : 10.0f;
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
-						player.posX - f, player.posY - f, player.posZ - f, player.posX + f,
-						player.posY + f, player.posZ + f);
+						player.posX - f, player.posY - f, player.posZ - f,
+						player.posX + f, player.posY + f, player.posZ + f);
 				List<EntityLivingBase> entl = player.worldObj
 						.getEntitiesWithinAABBExcludingEntity(player, pool);
 
@@ -100,7 +104,8 @@ public class PacketMageVortex extends AbstractPacket {
 									Vec3 posPlayer = Vec3.createVectorHelper(
 											el.posX, el.posY, el.posZ);
 									Vec3 posEntity = Vec3.createVectorHelper(
-											player.posX, player.posY, player.posZ);
+											player.posX, player.posY,
+											player.posZ);
 									Vec3 posFinal = posPlayer.myVec3LocalPool
 											.getVecFromPool(
 													posEntity.xCoord
@@ -114,10 +119,10 @@ public class PacketMageVortex extends AbstractPacket {
 											posFinal.yCoord * 4,
 											posFinal.zCoord * 4);
 									el.attackEntityFrom(
-											DamageSource.causePlayerDamage(player),
-											(mod_RpgInventory.donators
-													.contains(player
-															.getCommandSenderName()) ? 3
+											DamageSource
+													.causePlayerDamage(player),
+											(mod_RpgInventory.donators.contains(player
+													.getCommandSenderName()) ? 3
 													: 1));
 								} catch (Throwable ex) {
 								}
@@ -126,9 +131,11 @@ public class PacketMageVortex extends AbstractPacket {
 					}
 				}
 			} else {
-				player.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
-						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(player.getCommandSenderName()) / 20)) + " seconds"));
+				player.addChatMessage(new ChatComponentText(
+						"You must wait for energy to replenish, left: "
+								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
+										.get(player.getCommandSenderName()) / 20))
+								+ " seconds"));
 			}
 		}
 	}

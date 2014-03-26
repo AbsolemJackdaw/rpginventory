@@ -215,13 +215,13 @@ public class ItemRpgInvArmor extends Item {
 				par3EntityPlayer);
 	}
 
-	@Override
-	public Item setTextureName(String s) {
-		String itemName = getUnlocalizedName().substring(
-				getUnlocalizedName().indexOf(".") + 1);
-		this.iconString = "rpginventorymod:" + itemName;
-		return this;
-	}
+	// @Override
+	// public Item setTextureName(String s) {
+	// String itemName = getUnlocalizedName().substring(
+	// getUnlocalizedName().indexOf(".") + 1);
+	// this.iconString = "rpginventorymod:" + itemName;
+	// return this;
+	// }
 
 	/**
 	 * Used to upgrade the player's class to 'playerClass' + 'shieldedClass'

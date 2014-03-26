@@ -54,7 +54,7 @@ public class mod_RpgRB {
 
 	public static String CLASSROGUE = "rogue";
 	public static String CLASSROGUESHIELDED = "Ninja";
-	
+
 	public static final RpgRBPacketPipeline17 PIPELINE = new RpgRBPacketPipeline17();
 
 	private String[][] recipePatterns;
@@ -77,7 +77,7 @@ public class mod_RpgRB {
 	public void load(FMLInitializationEvent event) {
 
 		FMLLog.info("Rpg++ Rogue and BeastMaster Installed. Renderers can be Used");
-		
+
 		PIPELINE.initialise();
 
 		tab = new RBTab(CreativeTabs.getNextID(), "RBTab");
@@ -234,10 +234,10 @@ public class mod_RpgRB {
 
 		MinecraftForge.EVENT_BUS.register(new BeastMasterEvent());
 	}
-	
+
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt) {
-		
+
 		PIPELINE.postInitialise();
 	}
 }

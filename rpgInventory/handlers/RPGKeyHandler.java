@@ -37,16 +37,13 @@ public class RPGKeyHandler {
 
 	protected static Map<Item, Integer> abilityMap = new HashMap();
 
-//	public static List<KeyBinding> registeredKeyBinds = new ArrayList();
+	// public static List<KeyBinding> registeredKeyBinds = new ArrayList();
 
+	protected static KeyBinding keyInventory = new KeyBinding(
+			"RPG Inventory Key", Keyboard.KEY_END, "rpginventorymod");
 
-
-	protected static KeyBinding keyInventory = new KeyBinding("RPG Inventory Key",
-			Keyboard.KEY_END, "rpginventorymod");
-
-
-	protected static KeyBinding keySpecial = new KeyBinding("RPG Special Ability",
-			Keyboard.KEY_F, "rpginventorymod");
+	protected static KeyBinding keySpecial = new KeyBinding(
+			"RPG Special Ability", Keyboard.KEY_F, "rpginventorymod");
 
 	public static final int OPENRPGINV = 1;
 	public static final int MAGE1 = 3;
@@ -56,20 +53,20 @@ public class RPGKeyHandler {
 	public static final int INVENTORY = 15;
 	public static final int SMP_INVENTORY_SYNC = 20;
 
-	//	public static void registerKeyhandler(IKeyHandler keyhandler,
-	//			KeyBinding[] keyBindings, boolean[] repeatings) {
-	//		for (KeyBinding thisKB : keyBindings) {
-	//			if (!registeredKeyBinds.contains(thisKB)) {
-	//				registeredKeyBinds.add(thisKB);
-	//			}
-	//			List<IKeyHandler> keylist = keyHandlers.get(thisKB);
-	//			if (keylist == null) {
-	//				keylist = new ArrayList();
-	//				keyHandlers.put(thisKB, keylist);
-	//			}
-	//			keylist.add(keyhandler);
-	//		}
-	//	}
+	// public static void registerKeyhandler(IKeyHandler keyhandler,
+	// KeyBinding[] keyBindings, boolean[] repeatings) {
+	// for (KeyBinding thisKB : keyBindings) {
+	// if (!registeredKeyBinds.contains(thisKB)) {
+	// registeredKeyBinds.add(thisKB);
+	// }
+	// List<IKeyHandler> keylist = keyHandlers.get(thisKB);
+	// if (keylist == null) {
+	// keylist = new ArrayList();
+	// keyHandlers.put(thisKB, keylist);
+	// }
+	// keylist.add(keyhandler);
+	// }
+	// }
 
 	public RPGKeyHandler() {
 		super();
@@ -120,7 +117,7 @@ public class RPGKeyHandler {
 											var7.xCoord * var2,
 											var7.yCoord * var2,
 											var7.zCoord * var2).expand(var9,
-													var9, var9));
+											var9, var9));
 					double var11 = var4;
 					for (int var13 = 0; var13 < var10.size(); ++var13) {
 						Entity var14 = (Entity) var10.get(var13);
@@ -164,16 +161,16 @@ public class RPGKeyHandler {
 		try {
 			Minecraft mc = Minecraft.getMinecraft();
 			GuiScreen guiscreen = mc.currentScreen;
-			if (keySpecial.isPressed()){
+			if (keySpecial.isPressed()) {
 				ItemStack item = mc.thePlayer.getCurrentEquippedItem();
 				if ((guiscreen == null) && !(item == null)) {
 					specialAbility(item);
 				}
 			} else if (keyInventory.isPressed()) {
-				
+
 				System.out.println("send packet keyhandler open inventory");
 				System.out.println((guiscreen instanceof GuiInventory));
-				
+
 				if ((guiscreen instanceof GuiInventory)
 						|| (guiscreen instanceof GuiContainerCreative)) {
 					int i = 1;
@@ -183,11 +180,13 @@ public class RPGKeyHandler {
 					try {
 						outputStream.writeInt(i);
 
-						//TODO
-						System.out.println("send packet keyhandler open inventory");
-						//						Packet250CustomPayload packet = new Packet250CustomPayload(
-						//								"RpgInv", bytes.toByteArray());
-						//						PacketDispatcher.sendPacketToServer(packet);
+						// TODO
+						System.out
+								.println("send packet keyhandler open inventory");
+						// Packet250CustomPayload packet = new
+						// Packet250CustomPayload(
+						// "RpgInv", bytes.toByteArray());
+						// PacketDispatcher.sendPacketToServer(packet);
 						// System.out.println("Packet send");
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -199,16 +198,16 @@ public class RPGKeyHandler {
 		}
 	}
 
-	//	@Override
+	// @Override
 	public void specialAbility(ItemStack item) {
 
-//		List<IKeyHandler> keyhandlers = keyHandlers.get(kb);
-		
-//		if ((keyhandlers != null) && (keyhandlers.size() > 0)) {
-//			for (IKeyHandler thisKH : keyhandlers) {
-//				thisKH.specialAbility(kb, item);
-//			}
-//		}
+		// List<IKeyHandler> keyhandlers = keyHandlers.get(kb);
+
+		// if ((keyhandlers != null) && (keyhandlers.size() > 0)) {
+		// for (IKeyHandler thisKH : keyhandlers) {
+		// thisKH.specialAbility(kb, item);
+		// }
+		// }
 
 		if (abilityMap.containsKey(item.getItem())) {
 
@@ -221,8 +220,8 @@ public class RPGKeyHandler {
 					EntityLivingBase target = isTargetingEntity(
 							Minecraft.getMinecraft().thePlayer,
 							mod_RpgInventory.donators.contains(Minecraft
-									.getMinecraft().thePlayer.getCommandSenderName()) ? 60
-											: 40);
+									.getMinecraft().thePlayer
+									.getCommandSenderName()) ? 60 : 40);
 					if (target != null) {
 						outputStream.writeBoolean(false);
 						outputStream.writeInt((int) Math.floor(target.posX));
@@ -232,10 +231,10 @@ public class RPGKeyHandler {
 						outputStream.writeBoolean(true);
 					}
 				}
-				//TODO sendpacket
-				//				Packet250CustomPayload packet = new Packet250CustomPayload(
-				//						"RpgInv", bytes.toByteArray());
-				//				PacketDispatcher.sendPacketToServer(packet);
+				// TODO sendpacket
+				// Packet250CustomPayload packet = new Packet250CustomPayload(
+				// "RpgInv", bytes.toByteArray());
+				// PacketDispatcher.sendPacketToServer(packet);
 				System.out.println("todo : send packet");
 
 			} catch (IOException e) {
@@ -244,9 +243,9 @@ public class RPGKeyHandler {
 		}
 	}
 
-	//	@Override
-	//	public EnumSet<TickType> ticks() {
-	//		return EnumSet.of(TickType.CLIENT);
-	//	}
+	// @Override
+	// public EnumSet<TickType> ticks() {
+	// return EnumSet.of(TickType.CLIENT);
+	// }
 
 }

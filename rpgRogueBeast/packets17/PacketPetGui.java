@@ -1,23 +1,26 @@
 package rpgRogueBeast.packets17;
 
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgRogueBeast.mod_RpgRB;
-import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgRogueBeast.mod_RpgRB;
+import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class PacketPetGui extends RpgRBAbstractPacket {
-	
+
 	String petName;
-	short petLevel, currentHP, hpMax, atk, playerLevelsLost, petLevelsAdded, petLevelsConsumed;
-	
-	public PacketPetGui() {}
-	
-	public PacketPetGui(String petName, short petLevel, short currentHP, short hpMax, 
-			short atk, short playerLevelsLost, short petLevelsAdded, short petLevelsConsumed) {
+	short petLevel, currentHP, hpMax, atk, playerLevelsLost, petLevelsAdded,
+			petLevelsConsumed;
+
+	public PacketPetGui() {
+	}
+
+	public PacketPetGui(String petName, short petLevel, short currentHP,
+			short hpMax, short atk, short playerLevelsLost,
+			short petLevelsAdded, short petLevelsConsumed) {
 		this.petName = petName;
 		this.petLevel = petLevel;
 		this.currentHP = currentHP;
@@ -64,8 +67,8 @@ public class PacketPetGui extends RpgRBAbstractPacket {
 		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 		ItemStack crystal = inv.getCrystal();
 
-		NBTTagCompound nbtCrystal = (NBTTagCompound) crystal
-				.getTagCompound().copy();
+		NBTTagCompound nbtCrystal = (NBTTagCompound) crystal.getTagCompound()
+				.copy();
 		NBTTagCompound nbtPet = (NBTTagCompound) nbtCrystal.getCompoundTag(
 				"RPGPetInfo").copy();
 
@@ -91,7 +94,7 @@ public class PacketPetGui extends RpgRBAbstractPacket {
 		newcrystal.setTagCompound(nbtCrystal);
 		newcrystal.setStackDisplayName(petName);
 		inv.setInventorySlotContents(6, newcrystal);
-		
+
 		System.out.println("Send packet here");
 	}
 }
