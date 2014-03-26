@@ -34,12 +34,12 @@ public class CapeRenderer {
 		Object object = texturemanager.getTexture(par0ResourceLocation);
 
 		if (object == null) {
-			object = new ThreadDownloadImageData(par1Str, par2ResourceLocation,
-					par3IImageBuffer);
-			texturemanager.bindTexture(par0ResourceLocation/*
-															 * , (TextureObject)
-															 * object
-															 */);
+//			object = new ThreadDownloadImageData(par1Str, par2ResourceLocation,
+//					par3IImageBuffer);
+//			texturemanager.bindTexture(par0ResourceLocation/*
+//															 * , (TextureObject)
+//															 * object
+//															 */);
 		}
 
 		return (ThreadDownloadImageData) object;

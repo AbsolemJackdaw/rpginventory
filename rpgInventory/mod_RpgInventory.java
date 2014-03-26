@@ -101,7 +101,7 @@ public class mod_RpgInventory {
 	public static mod_RpgInventory instance;
 
 	public static final PacketPipeline17 PIPELINE = new PacketPipeline17();
-	
+
 	@SidedProxy(serverSide = "rpgInventory.handlers.proxy.CommonProxy", clientSide = "rpgInventory.handlers.proxy.ClientProxy")
 	public static CommonProxy proxy;
 
@@ -127,6 +127,9 @@ public class mod_RpgInventory {
 	/* ====molds==== */
 	colmold, ringmold, wantmold;
 
+
+	public Item[] allItems;
+	
 	public static Block forgeBlock;
 	// Die bitches.
 	public static List<String> developers = new ArrayList<String>();
@@ -214,7 +217,7 @@ public class mod_RpgInventory {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		
+
 		PIPELINE.initialise();
 
 		setDonators();
@@ -396,6 +399,8 @@ public class mod_RpgInventory {
 
 		LanguageRegistry.addName(forgeBlock, "Mold Forge");
 		GameRegistry.registerBlock(forgeBlock, "MoldForge");
+
+
 
 		LanguageRegistry.addName(cloakRed, "Red Cape");
 		LanguageRegistry.addName(cloakYellow, "Yellow Cape");
@@ -645,6 +650,33 @@ public class mod_RpgInventory {
 			RPGEventHooks.negativeEffects.add(decomposePotion.id);
 		}
 
+
+		allItems = new Item[]{
+				neckgold, neckdia, neckem, necklap, glovesbutter, glovesdia, glovesem,
+				gloveslap, ringgold, ringdia, ringem, ringlap,
+				archerShield, berserkerShield, talisman,
+				cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen,
+				cloakBlue,
+				elfbow, claymore, hammer, wand, staf,
+				rageSeed, wizardBook,
+				magehood, magegown, magepants, mageboots, archerhood, archerchest,
+				archerpants, archerboots, berserkerHood, berserkerChest,
+				berserkerLegs, berserkerBoots,
+				animalskin, tanHide, magecloth,
+				colmold, ringmold, wantmold
+		};
+
+		//TODO
+		for(int i =0; i < allItems.length; i++){
+			if(allItems[i] != null){
+				GameRegistry.registerItem(allItems[i], allItems[i].getUnlocalizedName(), this.name);
+				System.out.println("Registered Item " + i + "/n" + allItems[i]);
+			}
+			else{
+				System.out.println("Items is null !" + i);
+				break;
+			}
+		}
 	}
 
 	public String playerClass() {
@@ -654,7 +686,7 @@ public class mod_RpgInventory {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt) {
 		PIPELINE.postInitialise();
-		
+
 		proxy.registerLate();
 		// All mods should be initialized now, check what potion effects are
 		// installed
@@ -681,7 +713,7 @@ public class mod_RpgInventory {
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event) {
 		//TODO get commands back
-		
+
 		//		CommandHandler commandManager = (CommandHandler) event.getServer()
 		//				.getCommandManager();
 		//		commandManager
