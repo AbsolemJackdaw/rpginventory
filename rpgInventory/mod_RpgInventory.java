@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.CharSequenceUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -129,7 +131,7 @@ public class mod_RpgInventory {
 
 
 	public Item[] allItems;
-	
+
 	public static Block forgeBlock;
 	// Die bitches.
 	public static List<String> developers = new ArrayList<String>();
@@ -223,10 +225,7 @@ public class mod_RpgInventory {
 		setDonators();
 		// GameRegistry.registerPlayerTracker(new OnPlayerLogin(version, name));
 
-		// NOTHING BEFORE THE GOD DAMN TAB !
-		// any items that need to be in it, put in it BEFORE the tab exists will
-		// not be in
-		tab = new RpgInventoryTab(CreativeTabs.getNextID(), "RpgTab");
+
 
 		try {
 			Class.forName("rpgNecroPaladin.mod_RpgPlus");
@@ -261,7 +260,7 @@ public class mod_RpgInventory {
 		forgeBlock = new BlockForge(Material.rock).setHardness(5f)
 				/* .setUnlocalizedName("MoldForge") */.setCreativeTab(tab);
 
-		
+
 
 		proxy.registerRenderInformation();
 
@@ -530,7 +529,7 @@ public class mod_RpgInventory {
 		}
 
 
-	
+
 	}
 
 	public String playerClass() {
@@ -550,7 +549,13 @@ public class mod_RpgInventory {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		// loadConfig(event.getSuggestedConfigurationFile());
-		
+
+
+		// NOTHING BEFORE THE GOD DAMN TAB !
+		// any items that need to be in it, put in it BEFORE the tab exists will
+		// not be in
+		tab = new RpgInventoryTab(CreativeTabs.getNextID(), "RpgTab");
+
 		neckgold = new ItemRpgInvArmor(0, -1, "",
 				"subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold")
 				.setCreativeTab(tab);
@@ -654,9 +659,11 @@ public class mod_RpgInventory {
 		cloakRed = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/RedCape.png")
 		.setFull3D().setUnlocalizedName("r.capeGrey")
 		.setCreativeTab(tab);
+		
 		cloakYellow = new ItemRpgInvArmor(2, -1, "",
 				"subaraki:capes/GoldCape.png").setFull3D()
 				.setUnlocalizedName("y.capeGrey").setCreativeTab(tab);
+		
 		cloakGreen = new ItemRpgInvArmor(2, -1, "",
 				"subaraki:capes/GreenCape.png").setFull3D()
 				.setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
@@ -673,7 +680,7 @@ public class mod_RpgInventory {
 				.setCreativeTab(tab);
 		wantmold = new ItemMold().setUnlocalizedName("moldGlove")
 				.setCreativeTab(tab);
-		
+
 		allItems = new Item[]{
 				neckgold, neckdia, neckem, necklap, glovesbutter, glovesdia, glovesem,
 				gloveslap, ringgold, ringdia, ringem, ringlap,
@@ -691,13 +698,24 @@ public class mod_RpgInventory {
 
 		//TODO
 		for(int i =0; i < allItems.length; i++){
+			
+				
 			if(allItems[i] != null){
+				
+				String itemName = allItems[i].getUnlocalizedName()/*.substring(
+						allItems[i].getUnlocalizedName().indexOf(".") + 1)*/;	
+				
+				System.out.println(itemName);
+				
+				allItems[i].setTextureName(this.name +":" + 
+				(itemName.contains(".") ? itemName.substring(2) : itemName));
+				
 				GameRegistry.registerItem(allItems[i], allItems[i].getUnlocalizedName(), this.name);
 				System.out.println("Registered Item " + i + "/n" + allItems[i]);
 			}
 			else{
-				System.out.println("Items is null !" + i);
-				break;
+				System.out.println("Item is null !" + i);
+//				break;
 			}
 		}
 	}
