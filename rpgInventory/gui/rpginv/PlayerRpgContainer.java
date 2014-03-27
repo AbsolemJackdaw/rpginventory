@@ -1,7 +1,5 @@
 package rpgInventory.gui.rpginv;
 
-import io.netty.buffer.ByteBuf;
-import cpw.mods.fml.common.network.ByteBufUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -10,7 +8,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.Packets17.PacketInventory;
-import rpgInventory.handlers.Packets17.PacketOpenInventory;
 import rpgInventory.handlers.Packets17.PacketPipeline17;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 
@@ -66,15 +63,15 @@ public class PlayerRpgContainer extends Container {
 	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 
-		//TODO
+		// TODO
 		System.out.println("complete packet here closing inventory");
 		// PacketInventory.sendPacket(par1EntityPlayer, this.inventory);
-		if(!par1EntityPlayer.worldObj.isRemote){
+		if (!par1EntityPlayer.worldObj.isRemote) {
 			PacketInventory pack = new PacketInventory();
 			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
 			pipe.sendTo(pack, (EntityPlayerMP) par1EntityPlayer);
 		}
-		//		pipe.sendToAll(pack);
+		// pipe.sendToAll(pack);
 
 		super.onContainerClosed(par1EntityPlayer);
 	}
@@ -89,13 +86,12 @@ public class PlayerRpgContainer extends Container {
 			EntityPlayer par4EntityPlayer) {
 		ItemStack rv = super.slotClick(par1, par2, par3, par4EntityPlayer);
 
-
 		System.out.println("complete packet send from clickslot");
 		// PacketInventory.sendPacket(par4EntityPlayer, this.inventory);
 
-		if(par4EntityPlayer.worldObj.isRemote){
+		if (par4EntityPlayer.worldObj.isRemote) {
 			PacketInventory pack = new PacketInventory();
-			//TODO fill packet
+			// TODO fill packet
 			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
 			pipe.sendToServer(pack);
 		}

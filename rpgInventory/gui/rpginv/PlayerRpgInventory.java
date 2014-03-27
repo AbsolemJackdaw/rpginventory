@@ -1,19 +1,5 @@
 package rpgInventory.gui.rpginv;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
-import io.netty.buffer.ByteBufProcessor;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.channels.GatheringByteChannel;
-import java.nio.channels.ScatteringByteChannel;
-import java.nio.charset.Charset;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -32,10 +18,9 @@ import rpgInventory.handlers.Packets17.PacketInventory;
 import rpgInventory.handlers.Packets17.PacketPipeline17;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class PlayerRpgInventory implements IInventory,
-IExtendedEntityProperties {
+		IExtendedEntityProperties {
 
 	public ItemStack[] armorSlots = new ItemStack[7];
 	// public String playername;
@@ -80,10 +65,10 @@ IExtendedEntityProperties {
 		// TODO
 		System.out.println("fill packet here for closed inventory");
 		// PacketInventory.sendPacket(player, this);
-		if(!player.worldObj.isRemote){
-		PacketInventory pack = new PacketInventory();
-		PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-		pipe.sendTo(pack, (EntityPlayerMP) player);
+		if (!player.worldObj.isRemote) {
+			PacketInventory pack = new PacketInventory();
+			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			pipe.sendTo(pack, (EntityPlayerMP) player);
 		}
 	}
 
@@ -191,6 +176,10 @@ IExtendedEntityProperties {
 		return armorSlots[0];
 	}
 
+	public EntityPlayer getPlayer() {
+		return player;
+	}
+
 	public ItemStack getRing1() {
 		return armorSlots[4];
 	}
@@ -227,14 +216,19 @@ IExtendedEntityProperties {
 		// TODO
 		System.out.println("fill packet here slotclosed");
 		// PacketInventory.sendPacket(player, this);
-		
-		if(!player.worldObj.isRemote){
-		PacketInventory pack = new PacketInventory();
-		PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-		pipe.sendTo(pack, (EntityPlayerMP) player);
+
+		if (!player.worldObj.isRemote) {
+			PacketInventory pack = new PacketInventory();
+			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			pipe.sendTo(pack, (EntityPlayerMP) player);
 		}
 		return null;
 	}
+
+	// @Override
+	// public boolean isInventoryNameLocalized() {
+	// return false;
+	// }
 
 	/* =====INVENTORY===== */
 	public boolean hasClass(String rpgenum) {
@@ -246,11 +240,6 @@ IExtendedEntityProperties {
 		}
 		return false;
 	}
-
-	// @Override
-	// public boolean isInventoryNameLocalized() {
-	// return false;
-	// }
 
 	@Override
 	public boolean hasCustomInventoryName() {
@@ -312,15 +301,6 @@ IExtendedEntityProperties {
 		return false;
 	}
 
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-		EntityPlayer player = MinecraftServer.getServer()
-				.getConfigurationManager()
-				.getPlayerForUsername(par1EntityPlayer.getCommandSenderName());
-		return player.isDead ? false : par1EntityPlayer
-				.getDistanceSqToEntity(player) <= 64.0D;
-	}
-
 	// /**
 	// * Writes the inventory out as a list of compound tags. This is where the
 	// * slot indices are used (+100 for armor, +80 for crafting).
@@ -360,6 +340,15 @@ IExtendedEntityProperties {
 	// }
 
 	@Override
+	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
+		EntityPlayer player = MinecraftServer.getServer()
+				.getConfigurationManager()
+				.getPlayerForUsername(par1EntityPlayer.getCommandSenderName());
+		return player.isDead ? false : par1EntityPlayer
+				.getDistanceSqToEntity(player) <= 64.0D;
+	}
+
+	@Override
 	public void loadNBTData(NBTTagCompound compound) {
 		readFromNBT(compound);
 	}
@@ -370,12 +359,12 @@ IExtendedEntityProperties {
 		try {
 
 			// TODO
-			//			 System.out.println("send packet here updated as unclean");
+			// System.out.println("send packet here updated as unclean");
 			// PacketInventory.sendPacket(player, this);
-			if(!player.worldObj.isRemote){
-			PacketInventory pack = new PacketInventory();
-			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			pipe.sendTo(pack, (EntityPlayerMP) player);
+			if (!player.worldObj.isRemote) {
+				PacketInventory pack = new PacketInventory();
+				PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+				pipe.sendTo(pack, (EntityPlayerMP) player);
 			}
 			// mod_RpgInventory.PIPELINE.sendTo(new PacketInventory(player,
 			// this), (EntityPlayerMP) player);
@@ -384,7 +373,8 @@ IExtendedEntityProperties {
 					.getConfigurationManager()
 					.getPlayerForUsername(this.player.getCommandSenderName());
 			// classSets = EnumRpgClass.getPlayerClasses(player);
-			// this to-do is done ! moved that line ^ to eventhooks so it gets updated
+			// this to-do is done ! moved that line ^ to eventhooks so it gets
+			// updated
 			// properly.
 			boolean addtoticks[] = new boolean[3];
 			if (mod_RpgInventory.playerClass
@@ -481,7 +471,7 @@ IExtendedEntityProperties {
 		System.out.println("fill packet here slot content set remotely");
 		// PacketInventory.sendPacket(player, this);
 
-		if(!player.worldObj.isRemote){
+		if (!player.worldObj.isRemote) {
 			PacketInventory pack = new PacketInventory();
 			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
 			pipe.sendTo(pack, (EntityPlayerMP) player);
@@ -503,9 +493,5 @@ IExtendedEntityProperties {
 		// above
 		// to prevent potential conflicts
 		tagcompound.setTag(tagName, nbttaglist);
-	}
-
-	public EntityPlayer getPlayer(){
-		return player;
 	}
 }

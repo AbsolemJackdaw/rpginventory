@@ -325,7 +325,6 @@ public class TEMold extends TileEntity implements IInventory {
 		goldItemBurnTime = getItemTime(moldforgeItemStacks[0]);
 	}
 
-
 	public void setFrontDirection(int f) {
 		this.front = f;
 	}

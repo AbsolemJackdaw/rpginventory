@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -93,7 +92,7 @@ public class CommonTickHandler /* implements ITickHandler */{
 				PacketInventory pack = new PacketInventory();
 				PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
 				pipe.sendToServer(pack);
-				
+
 				System.out.println("fill packet here");
 			}
 		}

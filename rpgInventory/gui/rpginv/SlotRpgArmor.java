@@ -98,12 +98,12 @@ class SlotRpgArmor extends Slot {
 		// PacketInventory.sendPacket(player, (PlayerRpgInventory)
 		// this.inventory);
 
-		if(!player.worldObj.isRemote){
+		if (!player.worldObj.isRemote) {
 			PacketInventory pack = new PacketInventory();
 			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
 			pipe.sendTo(pack, (EntityPlayerMP) player);
 		}
-		
+
 		super.onSlotChanged();
 	}
 

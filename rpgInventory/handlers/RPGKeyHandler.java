@@ -7,20 +7,16 @@ package rpgInventory.handlers;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutput;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -30,14 +26,11 @@ import net.minecraft.util.Vec3;
 import org.lwjgl.input.Keyboard;
 
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.Packets17.PacketInventory;
 import rpgInventory.handlers.Packets17.PacketOpenInventory;
 import rpgInventory.handlers.Packets17.PacketPipeline17;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 
 public class RPGKeyHandler {
 
@@ -123,7 +116,7 @@ public class RPGKeyHandler {
 											var7.xCoord * var2,
 											var7.yCoord * var2,
 											var7.zCoord * var2).expand(var9,
-													var9, var9));
+											var9, var9));
 					double var11 = var4;
 					for (int var13 = 0; var13 < var10.size(); ++var13) {
 						Entity var14 = (Entity) var10.get(var13);
@@ -175,49 +168,49 @@ public class RPGKeyHandler {
 			} else if (keyInventory.isPressed()) {
 
 				System.out.println("send packet keyhandler open inventory");
-				//				System.out.println((guiscreen instanceof GuiInventory));
+				// System.out.println((guiscreen instanceof GuiInventory));
 
 				EntityPlayer p = mc.thePlayer;
-
 
 				PacketOpenInventory pack = new PacketOpenInventory();
 				PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
 				pipe.sendToServer(pack);
-				
-//				pipe.sendToAll(pack);
+
+				// pipe.sendToAll(pack);
 			}
-			//				
-			//				if ((guiscreen instanceof GuiInventory)
-			//						|| (guiscreen instanceof GuiContainerCreative)) {
-			//					int i = 1;
-			//					ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-			//					ObjectOutput out;
-			//					DataOutputStream outputStream = new DataOutputStream(bytes);
-			//					
-			////					PacketInventory pack = new PacketInventory(p, PlayerRpgInventory.get(mc.thePlayer));
-			////					PacketPipeline17 p7 = new PacketPipeline17();
-			////					p7.sendTo(pack, (EntityPlayerMP) pack.player);
-			//					
-			//					
-			//					try {
-			//						outputStream.writeInt(i);
 			//
-			//						
-			//						System.out
-			//								.println("send packet keyhandler open inventory");
-			//						// Packet250CustomPayload packet = new
-			//						// Packet250CustomPayload(
-			//						// "RpgInv", bytes.toByteArray());
-			//						// PacketDispatcher.sendPacketToServer(packet);
-			//						// System.out.println("Packet send");
-			//					} catch (IOException e) {
-			//						e.printStackTrace();
-			//					}
-			//					// System.out.println("opened rpg gui");
-			//				}
-			//			}
-			//		} 
-		}catch (Throwable e) {
+			// if ((guiscreen instanceof GuiInventory)
+			// || (guiscreen instanceof GuiContainerCreative)) {
+			// int i = 1;
+			// ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+			// ObjectOutput out;
+			// DataOutputStream outputStream = new DataOutputStream(bytes);
+			//
+			// // PacketInventory pack = new PacketInventory(p,
+			// PlayerRpgInventory.get(mc.thePlayer));
+			// // PacketPipeline17 p7 = new PacketPipeline17();
+			// // p7.sendTo(pack, (EntityPlayerMP) pack.player);
+			//
+			//
+			// try {
+			// outputStream.writeInt(i);
+			//
+			//
+			// System.out
+			// .println("send packet keyhandler open inventory");
+			// // Packet250CustomPayload packet = new
+			// // Packet250CustomPayload(
+			// // "RpgInv", bytes.toByteArray());
+			// // PacketDispatcher.sendPacketToServer(packet);
+			// // System.out.println("Packet send");
+			// } catch (IOException e) {
+			// e.printStackTrace();
+			// }
+			// // System.out.println("opened rpg gui");
+			// }
+			// }
+			// }
+		} catch (Throwable e) {
 		}
 	}
 
