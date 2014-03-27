@@ -106,7 +106,7 @@ public class PacketPipeline17 extends
 		registerPacket(PacketArcher.class);
 		registerPacket(PacketBerserker.class);
 		registerPacket(PacketMageVortex.class);
-		
+
 		registerPacket(PacketInventory.class);
 		registerPacket(PacketOpenInventory.class);
 

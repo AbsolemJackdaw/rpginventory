@@ -1,6 +1,5 @@
 package rpgInventory.handlers.oldpackets;
 
-
 //public class RpgMSPacketHandler implements IPacketHandler {
 //
 //	@Override
