@@ -1,5 +1,10 @@
 package rpgInventory.handlers;
 
+import net.minecraft.entity.player.EntityPlayerMP;
+import rpgInventory.mod_RpgInventory;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.Packets17.PacketInventory;
+import rpgInventory.handlers.Packets17.PacketPipeline17;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -18,16 +23,27 @@ public class PlayerTracker /* implements IPlayerTracker */{
 		// TODO
 		System.out.println("send packet here dimension");
 
-		// PacketInventory.sendPacket(e.player,
-		// PlayerRpgInventory.get(e.player));
+		if(!e.player.worldObj.isRemote){
+			PacketInventory pack = new PacketInventory();
+			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			pipe.sendTo(pack, (EntityPlayerMP) e.player);
+			// PacketInventory.sendPacket(e.player,
+		}
+		PlayerRpgInventory.get(e.player);
 	}
 
 	@SubscribeEvent
 	public void onPlayerLogin(PlayerLoggedInEvent e) {
 		// TODO
 		System.out.println("send packet here login");
+
+		if(!e.player.worldObj.isRemote){
+			PacketInventory pack = new PacketInventory();
+			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			pipe.sendTo(pack, (EntityPlayerMP) e.player);
+		}
 		// PacketInventory.sendPacket(e.player,
-		// PlayerRpgInventory.get(e.player));
+		PlayerRpgInventory.get(e.player);
 	}
 
 	@SubscribeEvent
@@ -41,6 +57,12 @@ public class PlayerTracker /* implements IPlayerTracker */{
 		// TODO
 		System.out.println("send packet here respawn");
 		// PacketInventory.sendPacket(e.player,
-		// PlayerRpgInventory.get(e.player));
+
+		if(!e.player.worldObj.isRemote){
+			PacketInventory pack = new PacketInventory();
+			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			pipe.sendTo(pack, (EntityPlayerMP) e.player);
+		}
+		PlayerRpgInventory.get(e.player);
 	}
 }

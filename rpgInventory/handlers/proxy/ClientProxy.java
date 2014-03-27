@@ -125,7 +125,7 @@ public class ClientProxy extends CommonProxy {
 
 		// TextureIDs.init();
 
-		// TODO keyhandlers to event bus
+		// DONE keyhandlers to event bus
 		// KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler(
 		// IKeyHandler.bindKeys, IKeyHandler.reps));
 

@@ -162,7 +162,6 @@ public class TEMold extends TileEntity implements IInventory {
 
 	@Override
 	public void closeInventory() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -256,7 +255,6 @@ public class TEMold extends TileEntity implements IInventory {
 
 	@Override
 	public void openInventory() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -327,11 +325,6 @@ public class TEMold extends TileEntity implements IInventory {
 		goldItemBurnTime = getItemTime(moldforgeItemStacks[0]);
 	}
 
-	// @Override
-	// public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-	// // TODO Auto-generated method stub
-	// return false;
-	// } v
 
 	public void setFrontDirection(int f) {
 		this.front = f;

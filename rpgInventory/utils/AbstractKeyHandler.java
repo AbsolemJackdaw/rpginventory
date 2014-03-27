@@ -67,14 +67,12 @@
 //
 //	@Override
 //	public String getLabel() {
-//		// TODO Auto-generated method stub
 //		return "Rpg Inventory KeyHandler";
 //	}
 //
 //	@Override
 //	public void keyDown(EnumSet<TickType> types, KeyBinding kb,
 //			boolean tickEnd, boolean isRepeat) {
-//		// TODO Auto-generated method stub
 //
 //	}
 //

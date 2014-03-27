@@ -424,7 +424,7 @@ public class mod_RpgInventory {
 			}
 		}
 
-		// TODO
+		// DONE ?
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
 		MinecraftForge.EVENT_BUS.register(new CommonTickHandler());
@@ -678,7 +678,7 @@ public class mod_RpgInventory {
 				berserkerHood, berserkerChest, berserkerLegs, berserkerBoots,
 				animalskin, tanHide, magecloth, colmold, ringmold, wantmold };
 
-		// TODO
+		// DONE
 		for (int i = 0; i < allItems.length; i++) {
 
 			if (allItems[i] != null) {

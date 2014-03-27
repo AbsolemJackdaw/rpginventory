@@ -19,7 +19,6 @@ public abstract class ShieldRenderer implements IItemRenderer {
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		// TODO Auto-generated method stub
 		return (type != ItemRenderType.EQUIPPED)
 				|| (type != ItemRenderType.EQUIPPED_FIRST_PERSON);
 	}

@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -13,6 +14,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.Packets17.PacketInventory;
+import rpgInventory.handlers.Packets17.PacketPipeline17;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -87,7 +90,11 @@ public class CommonTickHandler /* implements ITickHandler */{
 				// PacketInventory.sendServerPacket(player);
 
 				// TODO
-				System.out.println("send packet here");
+				PacketInventory pack = new PacketInventory();
+				PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+				pipe.sendToServer(pack);
+				
+				System.out.println("fill packet here");
 			}
 		}
 
