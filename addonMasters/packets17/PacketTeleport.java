@@ -5,15 +5,14 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.Random;
 
-import addonMasters.mod_RpgRB;
-import addonMasters.entity.EntityTeleportStone;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.CommonTickHandler;
+import addonMasters.mod_RpgRB;
+import addonMasters.entity.EntityTeleportStone;
 
 public class PacketTeleport extends RpgRBAbstractPacket {
 

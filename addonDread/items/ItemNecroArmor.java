@@ -1,11 +1,11 @@
 package addonDread.items;
 
-import addonDread.mod_RpgPlus;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import rpgInventory.utils.AbstractArmor;
+import addonDread.mod_RpgPlus;
 
 public class ItemNecroArmor extends AbstractArmor {
 

@@ -1,10 +1,5 @@
 package addonMasters.items;
 
-import addonMasters.mod_RpgRB;
-import addonMasters.entity.BoarPet;
-import addonMasters.entity.BullPet;
-import addonMasters.entity.IPet;
-import addonMasters.entity.SpiderPet;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -12,6 +7,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import addonMasters.mod_RpgRB;
+import addonMasters.entity.BoarPet;
+import addonMasters.entity.BullPet;
+import addonMasters.entity.IPet;
+import addonMasters.entity.SpiderPet;
 
 public class ItemRBMats2 extends Item {
 

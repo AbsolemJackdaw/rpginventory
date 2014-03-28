@@ -1,11 +1,11 @@
 package addonMasters.items;
 
-import addonMasters.mod_RpgRB;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import rpgInventory.utils.AbstractArmor;
+import addonMasters.mod_RpgRB;
 
 public class ItemRogueArmor extends AbstractArmor {
 

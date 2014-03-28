@@ -6,9 +6,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import addonMasters.models.ModelDaggerR;
-
 import rpgInventory.renderer.items.weapons.RpgItemRenderer;
+import addonMasters.models.ModelDaggerR;
 
 public class RenderDagger extends RpgItemRenderer {
 

@@ -5,14 +5,12 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.client.particle.EntityLargeExplodeFX;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.opengl.GL11;
@@ -21,23 +19,11 @@ import org.lwjgl.util.glu.Sphere;
 
 import rpgInventory.CapeRenderer;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.config.RpgConfig;
 import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.gui.BookGui;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.ClientPacketHandler;
-import rpgInventory.models.shields.IronThorn;
-import rpgInventory.models.shields.ModelShield;
-import rpgInventory.models.shields.bookMage;
 import rpgInventory.renderer.RenderRpgPlayer;
-import rpgInventory.renderer.items.shields.ArcherShield;
-import rpgInventory.renderer.items.shields.BerserkerShield;
-import rpgInventory.renderer.items.shields.BookRenderer;
-import rpgInventory.renderer.items.weapons.BowRender;
-import rpgInventory.renderer.items.weapons.ClaymoreRenderer;
-import rpgInventory.renderer.items.weapons.HammerRender;
-import rpgInventory.renderer.items.weapons.SoulSphereRender;
-import rpgInventory.renderer.items.weapons.StafRender;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -48,8 +34,6 @@ public class ClientProxy extends CommonProxy {
 	public static int sphereID;
 	public static boolean firstUpdate = false;
 
-	
-
 	@SideOnly(Side.CLIENT)
 	public static void renderHandler() {
 
@@ -57,11 +41,14 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
 	}
 
-	
-
 	@Override
 	public int getSphereID() {
 		return sphereID;
+	}
+
+	@Override
+	public void load() {
+		mod_RpgInventory.Channel.register(new ClientPacketHandler());
 	}
 
 	@Override
@@ -137,7 +124,6 @@ public class ClientProxy extends CommonProxy {
 		// Tell LWJGL that we are done creating our list.
 		GL11.glEndList();
 
-		
 	}
 
 	@Override
@@ -162,9 +148,5 @@ public class ClientProxy extends CommonProxy {
 				+ rng.nextFloat(), el.posZ, rng.nextFloat(),
 				rng.nextFloat() + 0.4F, rng.nextFloat());
 		mc.effectRenderer.addEffect(efx);
-	}
-	
-	public void load(){
-		mod_RpgInventory.Channel.register(new ClientPacketHandler());
 	}
 }

@@ -1,5 +1,12 @@
 package addonMasters;
 
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.client.renderer.entity.RenderXPOrb;
+import net.minecraft.init.Items;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
+import rpgInventory.config.RpgConfig;
 import addonBasic.models.item.ModelRogueArmor;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
@@ -12,13 +19,6 @@ import addonMasters.models.ModelBeastArmor;
 import addonMasters.render.AxeRender;
 import addonMasters.render.LionHeadRenderer;
 import addonMasters.render.RenderDagger;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.client.renderer.entity.RenderXPOrb;
-import net.minecraft.init.Items;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
-import rpgInventory.config.RpgConfig;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class RBClientProxy extends RBCommonProxy {

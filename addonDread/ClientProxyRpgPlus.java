@@ -1,5 +1,8 @@
 package addonDread;
 
+import net.minecraft.client.model.ModelBiped;
+import net.minecraftforge.client.MinecraftForgeClient;
+import rpgInventory.config.RpgConfig;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
 import addonDread.models.ModelNecroArmor;
@@ -12,9 +15,6 @@ import addonDread.render.NecroShieldRenderer;
 import addonDread.render.PalaRenderer;
 import addonDread.render.RenderMinionS;
 import addonDread.render.RenderMinionZ;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraftforge.client.MinecraftForgeClient;
-import rpgInventory.config.RpgConfig;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxyRpgPlus extends CommonProxyRpgplus {

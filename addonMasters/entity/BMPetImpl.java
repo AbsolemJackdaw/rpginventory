@@ -6,8 +6,6 @@ package addonMasters.entity;
 
 import java.util.List;
 
-import addonMasters.mod_RpgRB;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
@@ -43,6 +41,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import addonMasters.mod_RpgRB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

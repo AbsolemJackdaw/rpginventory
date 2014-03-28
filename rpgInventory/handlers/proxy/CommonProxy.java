@@ -2,7 +2,6 @@ package rpgInventory.handlers.proxy;
 
 import java.util.Random;
 
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -24,6 +23,10 @@ public class CommonProxy {
 
 	public int getSphereID() {
 		return 0;
+	}
+
+	public void load() {
+		mod_RpgInventory.Channel.register(new ServerPacketHandler());
 	}
 
 	public void openGUI(EntityPlayer player, int id) {
@@ -48,10 +51,5 @@ public class CommonProxy {
 
 	public void spawnParticle(World world, EntityLivingBase el, Random rng) {
 
-	}
-	
-	
-	public void load(){
-		mod_RpgInventory.Channel.register(new ServerPacketHandler());
 	}
 }

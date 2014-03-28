@@ -1,15 +1,14 @@
 package addonBasic.items;
 
-import addonBasic.mod_addonBase;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.MainShield;
 import rpgInventory.models.shields.ModelShield;
 import rpgInventory.models.shields.bookMage;
+import addonBasic.mod_addonBase;
 
-public class ItemRpgInventoryItem extends ItemRpgInvArmor{
-
+public class ItemRpgInventoryItem extends ItemRpgInvArmor {
 
 	private IronThorn it = new IronThorn();
 
@@ -20,24 +19,10 @@ public class ItemRpgInventoryItem extends ItemRpgInvArmor{
 	public ItemRpgInventoryItem(int par4, int maxDamage, String name,
 			String resourcelocation) {
 		super(par4, maxDamage, name, resourcelocation);
-		
-		if(this.equals(mod_addonBase.talisman)){
+
+		if (this.equals(mod_addonBase.talisman)) {
 			isMantle = true;
 		}
-	}
-
-
-	@Override
-	public MainShield getShieldModel() {
-		if (this.equals(mod_addonBase.berserkerShield)) {
-			return it;
-		}
-		if (this.equals(mod_addonBase.archerShield)) {
-			return arch;
-		}
-		if (this.equals(mod_addonBase.talisman)) {
-			return book;
-		}		return super.getShieldModel();
 	}
 
 	@Override
@@ -54,6 +39,19 @@ public class ItemRpgInventoryItem extends ItemRpgInvArmor{
 		return super.boundArmorClass();
 	}
 
+	@Override
+	public MainShield getShieldModel() {
+		if (this.equals(mod_addonBase.berserkerShield)) {
+			return it;
+		}
+		if (this.equals(mod_addonBase.archerShield)) {
+			return arch;
+		}
+		if (this.equals(mod_addonBase.talisman)) {
+			return book;
+		}
+		return super.getShieldModel();
+	}
 
 	@Override
 	public String shieldClass() {
@@ -65,6 +63,7 @@ public class ItemRpgInventoryItem extends ItemRpgInvArmor{
 		}
 		if (this.equals(mod_addonBase.talisman)) {
 			return mod_RpgInventory.CLASSMAGESHIELD;
-		}		return super.shieldClass();
+		}
+		return super.shieldClass();
 	}
 }

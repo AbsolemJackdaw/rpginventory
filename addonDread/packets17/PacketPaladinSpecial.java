@@ -5,8 +5,6 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.List;
 
-import addonDread.mod_RpgPlus;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,6 +14,7 @@ import net.minecraft.util.ChatComponentText;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.CommonTickHandler;
+import addonDread.mod_RpgPlus;
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class PacketPaladinSpecial extends RpgPlusAbstractPacket {

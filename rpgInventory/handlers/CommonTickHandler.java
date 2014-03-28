@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
@@ -88,9 +87,9 @@ public class CommonTickHandler /* implements ITickHandler */{
 				// PacketInventory.sendServerPacket(player);
 				PacketInventory.sendServerPacket(player);
 				// TODO
-//				PacketInventory pack = new PacketInventory();
-//				PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-//				pipe.sendToServer(pack);
+				// PacketInventory pack = new PacketInventory();
+				// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+				// pipe.sendToServer(pack);
 
 				System.out.println("fill packet here");
 			}
@@ -126,29 +125,31 @@ public class CommonTickHandler /* implements ITickHandler */{
 						RPGEventHooks.ArcherRepairTick.remove(username);
 						continue;
 					}
-					//TODO place this elsewhere. the bow and magestaff ar no longer part of rpg inventory
-//					if (player.getCurrentEquippedItem() != null) {
-//						if ((player.getCurrentEquippedItem().getItem() instanceof ItemBow)
-//								|| player.getCurrentEquippedItem().getItem()
-//										.equals(mod_RpgInventory.elfbow)) {
-//							if (!player.isUsingItem()) {
-//								RPGEventHooks.ArcherRepairTick.put(
-//										player.getCommandSenderName(), 60);
-//								if (player.inventory.getCurrentItem()
-//										.getItemDamage() <= 1) {
-//									player.inventory.getCurrentItem()
-//											.setItemDamage(0);
-//								} else {
-//									player.inventory
-//											.getCurrentItem()
-//											.setItemDamage(
-//													player.inventory
-//															.getCurrentItem()
-//															.getItemDamage() - 1);
-//								}
-//							}
-//						}
-//					}
+					// TODO place this elsewhere. the bow and magestaff ar no
+					// longer part of rpg inventory
+					// if (player.getCurrentEquippedItem() != null) {
+					// if ((player.getCurrentEquippedItem().getItem() instanceof
+					// ItemBow)
+					// || player.getCurrentEquippedItem().getItem()
+					// .equals(mod_RpgInventory.elfbow)) {
+					// if (!player.isUsingItem()) {
+					// RPGEventHooks.ArcherRepairTick.put(
+					// player.getCommandSenderName(), 60);
+					// if (player.inventory.getCurrentItem()
+					// .getItemDamage() <= 1) {
+					// player.inventory.getCurrentItem()
+					// .setItemDamage(0);
+					// } else {
+					// player.inventory
+					// .getCurrentItem()
+					// .setItemDamage(
+					// player.inventory
+					// .getCurrentItem()
+					// .getItemDamage() - 1);
+					// }
+					// }
+					// }
+					// }
 				}
 			} catch (Throwable ex) {
 			}
@@ -216,22 +217,23 @@ public class CommonTickHandler /* implements ITickHandler */{
 						RPGEventHooks.HealerTick.remove(username);
 						continue;
 					}
-					
-					//TODO place this elsewhere. the bow and magestaff ar no longer part of rpg inventory
-//					if (player.getCurrentEquippedItem() != null) {
-//						if (player.getCurrentEquippedItem().getItem()
-//								.equals(mod_RpgInventory.staf)) {
-//							if (player.isUsingItem()) {
-//								RPGEventHooks.HealerTick.put(
-//										player.getCommandSenderName(), 30);
-//								if (player.getHealth() < player.getMaxHealth()) {
-//									// while staf is being used, regen the
-//									// healer
-//									player.heal(1);
-//								}
-//							}
-//						}
-//					}
+
+					// TODO place this elsewhere. the bow and magestaff ar no
+					// longer part of rpg inventory
+					// if (player.getCurrentEquippedItem() != null) {
+					// if (player.getCurrentEquippedItem().getItem()
+					// .equals(mod_RpgInventory.staf)) {
+					// if (player.isUsingItem()) {
+					// RPGEventHooks.HealerTick.put(
+					// player.getCommandSenderName(), 30);
+					// if (player.getHealth() < player.getMaxHealth()) {
+					// // while staf is being used, regen the
+					// // healer
+					// player.heal(1);
+					// }
+					// }
+					// }
+					// }
 				}
 			} catch (Throwable ex) {
 			}

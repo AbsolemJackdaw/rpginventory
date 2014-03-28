@@ -1,12 +1,12 @@
 package addonMasters.packets17;
 
-import addonMasters.mod_RpgRB;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import addonMasters.mod_RpgRB;
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class PacketPetGui extends RpgRBAbstractPacket {

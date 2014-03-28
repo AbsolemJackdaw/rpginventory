@@ -1,4 +1,5 @@
 package addonMasters.packets;
+
 //package rpgRogueBeast.packets;
 //
 //import java.io.DataInputStream;

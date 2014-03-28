@@ -4,13 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import addonBasic.items.weapons.ItemRpgWeapon;
-import addonDread.mod_RpgPlus;
-import addonDread.minions.EntityMinionS;
-import addonDread.minions.EntityMinionZ;
-import addonDread.minions.IMinion;
-import addonDread.packets17.RpgPlusPacketPipeline17;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -26,6 +19,12 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import addonBasic.items.weapons.ItemRpgWeapon;
+import addonDread.mod_RpgPlus;
+import addonDread.minions.EntityMinionS;
+import addonDread.minions.EntityMinionZ;
+import addonDread.minions.IMinion;
+import addonDread.packets17.RpgPlusPacketPipeline17;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class ItemNecroSkull extends ItemRpgWeapon {

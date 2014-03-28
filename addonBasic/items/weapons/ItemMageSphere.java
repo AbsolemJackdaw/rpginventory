@@ -2,8 +2,6 @@ package addonBasic.items.weapons;
 
 import java.util.Random;
 
-import addonBasic.mod_addonBase;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +19,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
+import addonBasic.mod_addonBase;
 
 public class ItemMageSphere extends ItemRpgWeapon {
 

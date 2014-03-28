@@ -1,8 +1,5 @@
 package addonMasters.items;
 
-import addonMasters.mod_RpgRB;
-import addonMasters.models.LionHead;
-import addonMasters.models.ModelDaggerL;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,6 +10,9 @@ import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.shields.MainShield;
+import addonMasters.mod_RpgRB;
+import addonMasters.models.LionHead;
+import addonMasters.models.ModelDaggerL;
 
 public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 

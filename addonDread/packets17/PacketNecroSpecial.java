@@ -5,13 +5,12 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.List;
 
-import addonDread.mod_RpgPlus;
-import addonDread.minions.IMinion;
-import addonDread.minions.MinionRegistry;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
+import addonDread.mod_RpgPlus;
+import addonDread.minions.IMinion;
+import addonDread.minions.MinionRegistry;
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class PacketNecroSpecial extends RpgPlusAbstractPacket {

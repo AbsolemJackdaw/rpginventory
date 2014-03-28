@@ -9,7 +9,6 @@ public class MageTab extends CreativeTabs {
 
 	public MageTab(int par1, String label) {
 		super(par1, label);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -20,6 +19,6 @@ public class MageTab extends CreativeTabs {
 
 	@Override
 	public String getTranslatedTabLabel() {
-		return "Mage Armoury";
+		return this.getTabLabel();
 	}
 }

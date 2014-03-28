@@ -1,6 +1,7 @@
 package addonBasic;
 
-import rpgInventory.mod_RpgInventory;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.ModelShield;
@@ -13,13 +14,10 @@ import rpgInventory.renderer.items.weapons.ClaymoreRenderer;
 import rpgInventory.renderer.items.weapons.HammerRender;
 import rpgInventory.renderer.items.weapons.SoulSphereRender;
 import rpgInventory.renderer.items.weapons.StafRender;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraftforge.client.MinecraftForgeClient;
 import addonBasic.models.item.ModelBerserkerArmor;
 import addonBasic.models.item.ModelMageArmor;
 
-public class ClientAddonProxy extends CommonAddonProxy{
-
+public class ClientAddonProxy extends CommonAddonProxy {
 
 	private static final ModelMageArmor armorMageChest = new ModelMageArmor(
 			1.0f);
@@ -48,10 +46,12 @@ public class ClientAddonProxy extends CommonAddonProxy{
 		}
 		return armorMage;
 	}
+
+	@Override
 	public void registerRenderInformation() {
 		if (RpgConfig.instance.render3D == true) {
-			MinecraftForgeClient.registerItemRenderer(
-					mod_addonBase.claymore, new ClaymoreRenderer());
+			MinecraftForgeClient.registerItemRenderer(mod_addonBase.claymore,
+					new ClaymoreRenderer());
 			MinecraftForgeClient.registerItemRenderer(mod_addonBase.hammer,
 					new HammerRender());
 			MinecraftForgeClient.registerItemRenderer(mod_addonBase.wand,
@@ -67,11 +67,10 @@ public class ClientAddonProxy extends CommonAddonProxy{
 			MinecraftForgeClient.registerItemRenderer(
 					mod_addonBase.archerShield, new ArcherShield(
 							new ModelShield(), "subaraki:jewels/Shield1.png"));
-			MinecraftForgeClient.registerItemRenderer(
-					mod_addonBase.talisman, new BookRenderer(new bookMage(),
+			MinecraftForgeClient.registerItemRenderer(mod_addonBase.talisman,
+					new BookRenderer(new bookMage(),
 							"subaraki:jewels/mageShield.png"));
 		}
 	}
-
 
 }

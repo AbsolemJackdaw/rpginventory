@@ -2,91 +2,109 @@ package rpgInventory.block.te;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
 
 public class MoldRecipes {
 
-	public static MoldRecipes recipes = new MoldRecipes();
+	//	public static MoldRecipes recipes = new MoldRecipes();
+	//
+	//	public static final MoldRecipes recipes() {
+	//		return recipes;
+	//	}
 
-	public static final MoldRecipes recipes() {
-		return recipes;
+	/*item to melt, result*/
+	//	private Map<Item, ItemStack> combinationList = new HashMap<Item, ItemStack>();
+
+	private Map<Item, ItemStack> necklaceCombination = new HashMap<Item, ItemStack>();
+	private Map<Item, ItemStack> gloveCombination = new HashMap<Item, ItemStack>();
+	private Map<Item, ItemStack> ringCombination = new HashMap<Item, ItemStack>();
+
+	//	private Map<ItemStack, ItemStack[]> breakdownList = new HashMap<ItemStack, ItemStack[]>();
+
+	//	private Map exp = new HashMap();
+
+	public MoldRecipes() {
+
+		addRecipe(mod_RpgInventory.ringmold,Items.gold_ingot, new ItemStack(mod_RpgInventory.ringgold),0.7F);
+		addRecipe(mod_RpgInventory.ringmold, Items.emerald, new ItemStack(mod_RpgInventory.ringem), 0.7F);
+		addRecipe(mod_RpgInventory.ringmold, Items.diamond, new ItemStack(mod_RpgInventory.ringdia), 0.7F);
+		addRecipe(mod_RpgInventory.ringmold, Items.dye, new ItemStack(mod_RpgInventory.ringlap), 0.7F);
+
+		addRecipe(mod_RpgInventory.colmold,Items.gold_ingot, new ItemStack(mod_RpgInventory.neckgold),0.7F);
+		addRecipe(mod_RpgInventory.colmold, Items.emerald, new ItemStack(mod_RpgInventory.neckem), 0.7F);
+		addRecipe(mod_RpgInventory.colmold, Items.diamond, new ItemStack(mod_RpgInventory.neckdia), 0.7F);
+		addRecipe(mod_RpgInventory.colmold, Items.dye, new ItemStack(mod_RpgInventory.necklap), 0.7F);
+
+		addRecipe(mod_RpgInventory.wantmold,Items.gold_ingot, new ItemStack(mod_RpgInventory.glovesbutter),0.7F);
+		addRecipe(mod_RpgInventory.wantmold, Items.emerald, new ItemStack(mod_RpgInventory.glovesem), 0.7F);
+		addRecipe(mod_RpgInventory.wantmold, Items.diamond, new ItemStack(mod_RpgInventory.glovesdia), 0.7F);
+		addRecipe(mod_RpgInventory.wantmold, Items.dye, new ItemStack(mod_RpgInventory.gloveslap), 0.7F);
 	}
 
-	private Map combinationList = new HashMap();
-	private Map breakdownList = new HashMap();
+	public void addRecipe(Item mold, Item p, ItemStack result,float experience) {
+		//		ItemStack[] comboBreakdown = { Items.copy(), Items2.copy() };
 
-	private Map exp = new HashMap();
-
-	private MoldRecipes() {
-
-		addRecipe(new ItemStack(mod_RpgInventory.ringmold), new ItemStack(
-				Items.gold_ingot), new ItemStack(mod_RpgInventory.ringgold),
-				0.7F);
-		addRecipe(new ItemStack(mod_RpgInventory.ringmold), new ItemStack(
-				Items.emerald), new ItemStack(mod_RpgInventory.ringem), 0.7F);
-		addRecipe(new ItemStack(mod_RpgInventory.ringmold), new ItemStack(
-				Items.diamond), new ItemStack(mod_RpgInventory.ringdia), 0.7F);
-		addRecipe(new ItemStack(mod_RpgInventory.ringmold), new ItemStack(
-				Items.dye, 1, 4), new ItemStack(mod_RpgInventory.ringlap), 0.7F);
-
-		addRecipe(new ItemStack(mod_RpgInventory.colmold), new ItemStack(
-				Items.gold_ingot), new ItemStack(mod_RpgInventory.neckgold),
-				0.7F);
-		addRecipe(new ItemStack(mod_RpgInventory.colmold), new ItemStack(
-				Items.emerald), new ItemStack(mod_RpgInventory.neckem), 0.7F);
-		addRecipe(new ItemStack(mod_RpgInventory.colmold), new ItemStack(
-				Items.diamond), new ItemStack(mod_RpgInventory.neckdia), 0.7F);
-		addRecipe(new ItemStack(mod_RpgInventory.colmold), new ItemStack(
-				Items.dye, 1, 4), new ItemStack(mod_RpgInventory.necklap), 0.7F);
-
-		addRecipe(new ItemStack(mod_RpgInventory.wantmold), new ItemStack(
-				Items.gold_ingot),
-				new ItemStack(mod_RpgInventory.glovesbutter), 0.7F);
-		addRecipe(new ItemStack(mod_RpgInventory.wantmold), new ItemStack(
-				Items.emerald), new ItemStack(mod_RpgInventory.glovesem), 0.7F);
-		addRecipe(new ItemStack(mod_RpgInventory.wantmold), new ItemStack(
-				Items.diamond), new ItemStack(mod_RpgInventory.glovesdia), 0.7F);
-		addRecipe(new ItemStack(mod_RpgInventory.wantmold), new ItemStack(
-				Items.dye, 1, 4), new ItemStack(mod_RpgInventory.gloveslap),
-				0.7F);
-
+		if(mold != null){
+			if(mold == mod_RpgInventory.colmold){
+				necklaceCombination.put(p, result);
+			}
+			if(mold == mod_RpgInventory.wantmold){
+				gloveCombination.put(p, result);
+			}
+			if(mold == mod_RpgInventory.ringmold){
+				ringCombination.put(p, result);
+			}
+		}
+		//		Item moldUsed = mold;
+		//		breakdownList.put(stack, comboBreakdown);
+		//		exp.put((mineral), Float.valueOf(experience));
+		//		exp.put((result), Float.valueOf(experience));
+		//		exp.put((mold), Float.valueOf(experience));
 	}
 
-	public void addRecipe(ItemStack Items, ItemStack Items2, ItemStack stack,
-			float experience) {
-		ItemStack[] comboBreakdown = { Items.copy(), Items2.copy() };
+	//	public Map getBreakdownList() {
+	//		return breakdownList;
+	//	}
+	//
+	//	public ItemStack[] getBreakdownResult(int id) {
+	//		return (ItemStack[]) breakdownList.get(id);
+	//	}
+	//
+	//	public Map getCombinationList() {
+	//		return combinationList;
+	//	}
 
-		combinationList.put(Arrays.asList(Items, Items2), stack);
-		breakdownList.put(stack, comboBreakdown);
-		exp.put((stack), Float.valueOf(experience));
-		exp.put((Items), Float.valueOf(experience));
-		exp.put((Items2), Float.valueOf(experience));
-	}
+//	public float getExperience(int i) {
+//		return this.exp.containsKey(Integer.valueOf(i)) ? ((Float) exp
+//				.get(Integer.valueOf(i))).floatValue() : 0.0F;
+//	}
 
-	public Map getBreakdownList() {
-		return breakdownList;
-	}
+	public ItemStack getSmeltingResult(Item mineral, Item mold) {
 
-	public ItemStack[] getBreakdownResult(int id) {
-		return (ItemStack[]) breakdownList.get(id);
-	}
+		if(mold == mod_RpgInventory.colmold){
+			//			System.out.println("mold recognized");
+			return	necklaceCombination.get(mineral);
+		}
 
-	public Map getCombinationList() {
-		return combinationList;
-	}
+		else if(mold == mod_RpgInventory.wantmold){
+			return	gloveCombination.get(mineral);
+		}
 
-	public float getExperience(int i) {
-		return this.exp.containsKey(Integer.valueOf(i)) ? ((Float) exp
-				.get(Integer.valueOf(i))).floatValue() : 0.0F;
-	}
-
-	public ItemStack getSmeltingResult(ItemStack stack, ItemStack stack2) {
-		// int[] ids = {stack, stack2};
-
-		return (ItemStack) combinationList.get(Arrays.asList(stack, stack2));
+		else if(mold == mod_RpgInventory.ringmold){
+			return	ringCombination.get(mineral);
+		}
+		else{
+			System.out.println("mold wasnt recognized");
+			return null;
+		}
 	}
 }

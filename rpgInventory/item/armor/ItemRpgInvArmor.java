@@ -11,10 +11,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.MainShield;
-import rpgInventory.models.shields.ModelShield;
-import rpgInventory.models.shields.bookMage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -31,7 +28,7 @@ public class ItemRpgInvArmor extends Item {
 	public int armorType;
 
 	public boolean isMantle;
-	
+
 	private ResourceLocation TEXTURE;
 
 	/**
@@ -119,7 +116,7 @@ public class ItemRpgInvArmor extends Item {
 	 * armor and can be used by anyone (like Vanilla Shields)
 	 */
 	public String boundArmorClass() {
-		
+
 		return "none";
 	}
 
@@ -154,7 +151,7 @@ public class ItemRpgInvArmor extends Item {
 	}
 
 	public MainShield getShieldModel() {
-		
+
 		return new MainShield();
 	}
 
@@ -209,7 +206,7 @@ public class ItemRpgInvArmor extends Item {
 	 * Only works if the shield finds the matching class with boundArmorClass()
 	 */
 	public String shieldClass() {
-		
+
 		return "none";
 	}
 }

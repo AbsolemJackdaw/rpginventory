@@ -1,9 +1,9 @@
 package addonMasters.items;
 
-import addonMasters.mod_RpgRB;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import rpgInventory.item.ItemMats;
+import addonMasters.mod_RpgRB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

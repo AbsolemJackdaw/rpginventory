@@ -2,10 +2,6 @@ package addonArchmage.weapons;
 
 import java.util.List;
 
-import addonArchmage.EntityElementalBlock;
-import addonArchmage.mod_RpgMageSet;
-import addonBasic.items.weapons.ItemRpgSword;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,6 +11,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
+import addonArchmage.EntityElementalBlock;
+import addonArchmage.mod_RpgMageSet;
+import addonBasic.items.weapons.ItemRpgSword;
 
 public class ItemElementalStaff extends ItemRpgSword {
 

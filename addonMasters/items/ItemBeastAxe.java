@@ -6,9 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import addonBasic.items.weapons.ItemRpgSword;
-import addonMasters.mod_RpgRB;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -23,6 +20,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.richUtil.Targetting;
+import addonBasic.items.weapons.ItemRpgSword;
+import addonMasters.mod_RpgRB;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class ItemBeastAxe extends ItemRpgSword {

@@ -2,8 +2,6 @@ package addonBasic.items.weapons;
 
 import java.util.Random;
 
-import addonBasic.mod_addonBase;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -16,6 +14,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import addonBasic.mod_addonBase;
 
 public class ItemClaymore extends ItemRpgWeapon {
 

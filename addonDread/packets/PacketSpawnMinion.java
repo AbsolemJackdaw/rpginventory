@@ -1,4 +1,5 @@
 package addonDread.packets;
+
 //package rpgNecroPaladin.packets;
 //
 //import java.io.DataInputStream;

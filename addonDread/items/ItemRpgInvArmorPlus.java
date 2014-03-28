@@ -1,10 +1,10 @@
 package addonDread.items;
 
+import rpgInventory.item.armor.ItemRpgInvArmor;
+import rpgInventory.models.shields.MainShield;
 import addonDread.mod_RpgPlus;
 import addonDread.models.NecroShield;
 import addonDread.models.PalaShield;
-import rpgInventory.item.armor.ItemRpgInvArmor;
-import rpgInventory.models.shields.MainShield;
 
 public class ItemRpgInvArmorPlus extends ItemRpgInvArmor {
 

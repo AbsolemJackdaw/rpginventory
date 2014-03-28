@@ -1,11 +1,11 @@
 package addonBasic.items;
 
-import addonBasic.mod_addonBase;
-import rpgInventory.mod_RpgInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import rpgInventory.mod_RpgInventory;
+import addonBasic.mod_addonBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

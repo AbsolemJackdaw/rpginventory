@@ -20,7 +20,6 @@ public class RpgInventoryTab extends CreativeTabs {
 
 	@Override
 	public String getTranslatedTabLabel() {
-		return "RPG Armoury";
+		return this.getTabLabel();
 	}
-
 }

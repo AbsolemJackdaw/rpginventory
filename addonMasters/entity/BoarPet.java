@@ -4,7 +4,6 @@
  */
 package addonMasters.entity;
 
-import addonMasters.entity.models.ModelBoar;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import addonMasters.entity.models.ModelBoar;
 
 /**
  * 

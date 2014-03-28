@@ -30,7 +30,6 @@ import net.minecraft.util.Vec3;
 import org.lwjgl.input.Keyboard;
 
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.handlers.oldpackets.PacketInventory;
 import rpgInventory.handlers.packets.ServerPacketHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -85,14 +84,14 @@ public class RPGKeyHandler {
 	public RPGKeyHandler(KeyBinding[] k, boolean[] b) {
 		// super(bindKeys, reps);
 		super();
-		
-		//TODO place this elsewhere. the bow and magestaff ar no longer part of rpg inventory
-//		abilityMap.put(mod_RpgInventory.staf, MAGE1);
-//		abilityMap.put(mod_RpgInventory.hammer, BERSERKER);
-//		abilityMap.put(mod_RpgInventory.elfbow, ARCHER);
-//		abilityMap.put(mod_RpgInventory.wand, MAGE2);
-		
-		
+
+		// TODO place this elsewhere. the bow and magestaff ar no longer part of
+		// rpg inventory
+		// abilityMap.put(mod_RpgInventory.staf, MAGE1);
+		// abilityMap.put(mod_RpgInventory.hammer, BERSERKER);
+		// abilityMap.put(mod_RpgInventory.elfbow, ARCHER);
+		// abilityMap.put(mod_RpgInventory.wand, MAGE2);
+
 		// abilityMap.put(mod_RpgInventory.daggers.itemID, 14);
 		// 14 used in another packet !
 	}
@@ -178,17 +177,17 @@ public class RPGKeyHandler {
 				System.out.println("send packet keyhandler open inventory");
 				// System.out.println((guiscreen instanceof GuiInventory));
 
-//				EntityPlayer p = mc.thePlayer;
+				// EntityPlayer p = mc.thePlayer;
 
-				
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(ServerPacketHandler.OPENRPGINV);
-				mod_RpgInventory.Channel.sendToServer(new FMLProxyPacket(buf,"RpgInv"));
+				mod_RpgInventory.Channel.sendToServer(new FMLProxyPacket(buf,
+						"RpgInv"));
 
-//				PacketOpenInventory pack = new PacketOpenInventory();
-//				PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-//				pipe.sendToServer(pack);
+				// PacketOpenInventory pack = new PacketOpenInventory();
+				// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+				// pipe.sendToServer(pack);
 
 				// pipe.sendToAll(pack);
 			}
@@ -246,31 +245,31 @@ public class RPGKeyHandler {
 			DataOutputStream outputStream = new DataOutputStream(bytes);
 			try {
 				outputStream.writeInt(i);
-				
-				//TODO place this elsewhere. the bow and mage staff are no longer part of rpg inventory
-				
-//				if (item.getItem() == mod_RpgInventory.elfbow) {
-//					EntityLivingBase target = isTargetingEntity(
-//							Minecraft.getMinecraft().thePlayer,
-//							mod_RpgInventory.donators.contains(Minecraft
-//									.getMinecraft().thePlayer
-//									.getCommandSenderName()) ? 60 : 40);
-//					if (target != null) {
-//						outputStream.writeBoolean(false);
-//						outputStream.writeInt((int) Math.floor(target.posX));
-//						outputStream.writeInt((int) Math.floor(target.posY));
-//						outputStream.writeInt((int) Math.floor(target.posZ));
-//					} else {
-//						outputStream.writeBoolean(true);
-//					}
-//				}
-				
-				
+
+				// TODO place this elsewhere. the bow and mage staff are no
+				// longer part of rpg inventory
+
+				// if (item.getItem() == mod_RpgInventory.elfbow) {
+				// EntityLivingBase target = isTargetingEntity(
+				// Minecraft.getMinecraft().thePlayer,
+				// mod_RpgInventory.donators.contains(Minecraft
+				// .getMinecraft().thePlayer
+				// .getCommandSenderName()) ? 60 : 40);
+				// if (target != null) {
+				// outputStream.writeBoolean(false);
+				// outputStream.writeInt((int) Math.floor(target.posX));
+				// outputStream.writeInt((int) Math.floor(target.posY));
+				// outputStream.writeInt((int) Math.floor(target.posZ));
+				// } else {
+				// outputStream.writeBoolean(true);
+				// }
+				// }
+
 				// TODO sendpacket
 				// Packet250CustomPayload packet = new Packet250CustomPayload(
 				// "RpgInv", bytes.toByteArray());
 				// PacketDispatcher.sendPacketToServer(packet);
-				
+
 				System.out.println("todo : send packet");
 
 			} catch (IOException e) {

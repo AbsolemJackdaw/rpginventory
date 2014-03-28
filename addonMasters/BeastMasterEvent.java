@@ -2,13 +2,12 @@ package addonMasters;
 
 import java.lang.reflect.Field;
 
-import addonMasters.entity.EntityPetXP;
-import addonMasters.entity.IPet;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import addonMasters.entity.EntityPetXP;
+import addonMasters.entity.IPet;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class BeastMasterEvent {

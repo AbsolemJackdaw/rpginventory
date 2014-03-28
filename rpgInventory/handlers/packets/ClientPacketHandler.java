@@ -20,7 +20,7 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ClientCustomPacketEvent;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 
-public class ClientPacketHandler extends ServerPacketHandler{
+public class ClientPacketHandler extends ServerPacketHandler {
 
 	public static final int OPENRPGINV = 1;
 	public static final int MAGE1 = 3;
@@ -36,7 +36,7 @@ public class ClientPacketHandler extends ServerPacketHandler{
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
 		ByteBuf buf = event.packet.payload();
-		
+
 		World world = p.worldObj;
 
 		int x = (int) p.posX;
@@ -66,25 +66,27 @@ public class ClientPacketHandler extends ServerPacketHandler{
 				break;
 
 			case INVENTORY:
-				//				System.out.println("recieved");
+				// System.out.println("recieved");
 
-				for(int i = 0; i < PlayerRpgInventory.get(p).getSizeInventory(); i++){
-					PlayerRpgInventory.get(p).setInventorySlotContents(i,ByteBufUtils.readItemStack(buf));				
+				for (int i = 0; i < PlayerRpgInventory.get(p)
+						.getSizeInventory(); i++) {
+					PlayerRpgInventory.get(p).setInventorySlotContents(i,
+							ByteBufUtils.readItemStack(buf));
 				}
-				//				PlayerRpgInventory.get(p).setInventorySlotContents(0,
-				//						ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
-				//				PlayerRpgInventory.get(p).setInventorySlotContents(1,
-				//						ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
-				//				PlayerRpgInventory.get(p).setInventorySlotContents(2,
-				//						ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
-				//				PlayerRpgInventory.get(p).setInventorySlotContents(3,
-				//						ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
-				//				PlayerRpgInventory.get(p).setInventorySlotContents(4,
-				//						ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
-				//				PlayerRpgInventory.get(p).setInventorySlotContents(5,
-				//						ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
-				//				PlayerRpgInventory.get(p).setInventorySlotContents(6,
-				//						ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
+				// PlayerRpgInventory.get(p).setInventorySlotContents(0,
+				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
+				// PlayerRpgInventory.get(p).setInventorySlotContents(1,
+				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
+				// PlayerRpgInventory.get(p).setInventorySlotContents(2,
+				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
+				// PlayerRpgInventory.get(p).setInventorySlotContents(3,
+				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
+				// PlayerRpgInventory.get(p).setInventorySlotContents(4,
+				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
+				// PlayerRpgInventory.get(p).setInventorySlotContents(5,
+				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
+				// PlayerRpgInventory.get(p).setInventorySlotContents(6,
+				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
 				break;
 
 			default:

@@ -4,12 +4,12 @@
  */
 package addonMasters.items;
 
-import addonMasters.entity.EntityPetXPBottle;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemExpBottle;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import addonMasters.entity.EntityPetXPBottle;
 
 /**
  * 

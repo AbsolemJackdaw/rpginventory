@@ -6,9 +6,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import addonDread.models.NecroSkull;
-
 import rpgInventory.renderer.items.weapons.RpgItemRenderer;
+import addonDread.models.NecroSkull;
 
 public class NecroRenderer extends RpgItemRenderer {
 

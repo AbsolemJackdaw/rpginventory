@@ -1,7 +1,6 @@
 package rpgInventory.handlers;
 
 import net.minecraft.entity.player.EntityPlayerMP;
-import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.oldpackets.PacketInventory;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -23,10 +22,11 @@ public class PlayerTracker /* implements IPlayerTracker */{
 		System.out.println("send packet here dimension");
 
 		if (!e.player.worldObj.isRemote) {
-			PacketInventory.sendPacket((EntityPlayerMP)e.player, PlayerRpgInventory.get(e.player));
-			//			PacketInventory pack = new PacketInventory();
-			//			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			//			pipe.sendTo(pack, (EntityPlayerMP) e.player);
+			PacketInventory.sendPacket((EntityPlayerMP) e.player,
+					PlayerRpgInventory.get(e.player));
+			// PacketInventory pack = new PacketInventory();
+			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			// pipe.sendTo(pack, (EntityPlayerMP) e.player);
 			// PacketInventory.sendPacket(e.player,
 		}
 		PlayerRpgInventory.get(e.player);
@@ -38,10 +38,11 @@ public class PlayerTracker /* implements IPlayerTracker */{
 		System.out.println("send packet here login");
 
 		if (!e.player.worldObj.isRemote) {
-			//			PacketInventory pack = new PacketInventory();
-			//			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			//			pipe.sendTo(pack, (EntityPlayerMP) e.player);
-			PacketInventory.sendPacket((EntityPlayerMP)e.player, PlayerRpgInventory.get(e.player));
+			// PacketInventory pack = new PacketInventory();
+			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			// pipe.sendTo(pack, (EntityPlayerMP) e.player);
+			PacketInventory.sendPacket((EntityPlayerMP) e.player,
+					PlayerRpgInventory.get(e.player));
 
 		}
 		// PacketInventory.sendPacket(e.player,
@@ -61,10 +62,11 @@ public class PlayerTracker /* implements IPlayerTracker */{
 		// PacketInventory.sendPacket(e.player,
 
 		if (!e.player.worldObj.isRemote) {
-			PacketInventory.sendPacket((EntityPlayerMP)e.player, PlayerRpgInventory.get(e.player));
-			//			PacketInventory pack = new PacketInventory();
-			//			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			//			pipe.sendTo(pack, (EntityPlayerMP) e.player);
+			PacketInventory.sendPacket((EntityPlayerMP) e.player,
+					PlayerRpgInventory.get(e.player));
+			// PacketInventory pack = new PacketInventory();
+			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			// pipe.sendTo(pack, (EntityPlayerMP) e.player);
 		}
 		PlayerRpgInventory.get(e.player);
 	}

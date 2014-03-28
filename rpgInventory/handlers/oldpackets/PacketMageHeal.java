@@ -20,11 +20,9 @@ public class PacketMageHeal {
 
 	/*
 	 * MOVE PACKET TO API
-	 * 
 	 */
 
-
-	/**Move packet to API*/
+	/** Move packet to API */
 	public PacketMageHeal(ByteBufInputStream dis, EntityPlayer p, World world) {
 
 		if (!world.isRemote) {
@@ -78,21 +76,22 @@ public class PacketMageHeal {
 				if ((entl != null) && (entl.size() > 0)) {
 					for (EntityLivingBase el : entl) {
 						if (el != null) {
-							double dist = ((EntityPlayer) p)
-									.getDistanceSqToEntity(el);
+							double dist = p.getDistanceSqToEntity(el);
 							double potstrength = 1.0D - (Math.sqrt(dist) / (mod_RpgInventory.donators
 									.contains(p.getDisplayName()) ? 6.0D : 4.0D));
-							Potion.heal.affectEntity((EntityLivingBase) p,
-									el, (mod_RpgInventory.donators.contains(p
+							Potion.heal.affectEntity(p, el,
+									(mod_RpgInventory.donators.contains(p
 											.getDisplayName()) ? 4 : 2),
-											potstrength);
+									potstrength);
 						}
 					}
 				}
 			} else {
-				p.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
-						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(p.getDisplayName()) / 20)) + " seconds"));
+				p.addChatMessage(new ChatComponentText(
+						"You must wait for energy to replenish, left: "
+								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
+										.get(p.getDisplayName()) / 20))
+								+ " seconds"));
 			}
 		}
 	}

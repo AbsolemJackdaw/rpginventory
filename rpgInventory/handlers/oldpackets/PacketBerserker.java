@@ -1,11 +1,8 @@
 package rpgInventory.handlers.oldpackets;
 
-
 import io.netty.buffer.ByteBufInputStream;
 
 import java.util.List;
-
-import addonBasic.mod_addonBase;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +13,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.CommonTickHandler;
+import addonBasic.mod_addonBase;
 
 public class PacketBerserker {
 
@@ -23,12 +21,10 @@ public class PacketBerserker {
 
 	/*
 	 * MOVE PACKET TO API
-	 * 
 	 */
 
-
-	/**Move packet to API*/
-	public PacketBerserker(World world, EntityPlayer p,	ByteBufInputStream dis) {
+	/** Move packet to API */
+	public PacketBerserker(World world, EntityPlayer p, ByteBufInputStream dis) {
 		if (!world.isRemote) {
 			// System.out.println("Hammer time!");
 			ItemStack item1 = p.getCurrentEquippedItem();
@@ -57,8 +53,8 @@ public class PacketBerserker {
 			}
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				CommonTickHandler.globalCooldownMap
-				.put(p.getDisplayName(), (mod_RpgInventory.donators
-						.contains(p.getDisplayName()) ? 6 : 7) * 20);
+						.put(p.getDisplayName(), (mod_RpgInventory.donators
+								.contains(p.getDisplayName()) ? 6 : 7) * 20);
 				if ((item1.getItemDamage() + 3) >= item1.getMaxDamage()) {
 					// Trigger item break stuff
 					// Only damage what is left
@@ -113,15 +109,15 @@ public class PacketBerserker {
 											* (mod_RpgInventory.donators
 													.contains(p
 															.getDisplayName()) ? 2.2f
-																	: 1.5F);
+													: 1.5F);
 									el.motionY = mod_RpgInventory.donators
 											.contains(p.getDisplayName()) ? 2.2f
-													: 3F;
+											: 3F;
 									el.motionZ = zdir
 											* (mod_RpgInventory.donators
 													.contains(p
 															.getDisplayName()) ? 2.2f
-																	: 3F);
+													: 3F);
 								}
 							} catch (Throwable ex) {
 							}
@@ -133,9 +129,11 @@ public class PacketBerserker {
 					}
 				}
 			} else {
-				p.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
-						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(p.getDisplayName()) / 20)) + " seconds"));
+				p.addChatMessage(new ChatComponentText(
+						"You must wait for energy to replenish, left: "
+								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
+										.get(p.getDisplayName()) / 20))
+								+ " seconds"));
 			}
 		}
 	}

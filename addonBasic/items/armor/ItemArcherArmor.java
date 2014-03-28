@@ -1,11 +1,11 @@
 package addonBasic.items.armor;
 
-import addonBasic.mod_addonBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.utils.AbstractArmor;
+import addonBasic.mod_addonBase;
 
 public class ItemArcherArmor extends AbstractArmor {
 

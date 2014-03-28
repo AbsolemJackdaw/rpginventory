@@ -4,7 +4,6 @@
  */
 package addonMasters.entity;
 
-import addonMasters.entity.models.ModelSpiderB;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -16,6 +15,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import addonMasters.entity.models.ModelSpiderB;
 
 /**
  * 

@@ -15,7 +15,6 @@ import org.lwjgl.opengl.GL11;
 
 import addonMasters.entity.BMPetImpl;
 
-
 public class RenderPet extends RenderLiving {
 
 	public RenderPet() {

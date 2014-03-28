@@ -5,8 +5,6 @@ import io.netty.buffer.ByteBufInputStream;
 import java.io.IOException;
 import java.util.Random;
 
-import addonBasic.mod_addonBase;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
@@ -15,6 +13,7 @@ import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.handlers.CommonTickHandler;
+import addonBasic.mod_addonBase;
 
 public class PacketArcher {
 
@@ -23,14 +22,12 @@ public class PacketArcher {
 	private double zz;
 
 	// TODO move packet
-	
+
 	/*
 	 * MOVE PACKET TO API
-	 * 
 	 */
-	
-	
-	/**Move packet to API*/
+
+	/** Move packet to API */
 	public PacketArcher(ByteBufInputStream dis, EntityPlayer p, World world) {
 		if (!world.isRemote) {
 			boolean self = false;
@@ -134,10 +131,12 @@ public class PacketArcher {
 					}
 				}
 			} else {
-				p.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
-						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(p.getDisplayName()) / 20)) + " seconds"));
+				p.addChatMessage(new ChatComponentText(
+						"You must wait for energy to replenish, left: "
+								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
+										.get(p.getDisplayName()) / 20))
+								+ " seconds"));
 			}
 		}
 	}
- }
+}

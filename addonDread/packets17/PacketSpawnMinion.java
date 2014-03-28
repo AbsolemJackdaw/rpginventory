@@ -1,9 +1,5 @@
 package addonDread.packets17;
 
-import addonDread.CommonTickHandlerRpgPlus;
-import addonDread.mod_RpgPlus;
-import addonDread.minions.EntityMinionS;
-import addonDread.minions.EntityMinionZ;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +7,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
+import addonDread.CommonTickHandlerRpgPlus;
+import addonDread.mod_RpgPlus;
+import addonDread.minions.EntityMinionS;
+import addonDread.minions.EntityMinionZ;
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class PacketSpawnMinion extends RpgPlusAbstractPacket {

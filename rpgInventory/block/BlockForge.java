@@ -24,15 +24,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockForge extends BlockContainer {
 
-	private static boolean keepInventory = true;
+//	private static boolean keepInventory = true;
 
-	// TEXTUREN
-	public static IIcon temoldOvenBottom;
-	public static IIcon temoldOvenTop;
+	// TEXTURES
+//	public static IIcon temoldOvenBottom;
+//	public static IIcon temoldOvenTop;
 	public static IIcon temoldOvenSide;
 
 	public static IIcon temoldOvenFront;
 	public static IIcon temoldOvenFrontActive;
+	
+	public boolean isBurning;
 
 	/**
 	 * Is the random generator used by furnace to drop the inventory contents in
@@ -74,7 +76,7 @@ public class BlockForge extends BlockContainer {
 						if (item.hasTagCompound()) {
 							var14.getEntityItem().setTagCompound(
 									(NBTTagCompound) item.getTagCompound()
-											.copy());
+									.copy());
 						}
 						float var15 = 0.05F;
 						var14.motionX = (float) this.temoldRand.nextGaussian()
@@ -96,10 +98,11 @@ public class BlockForge extends BlockContainer {
 		return new TEMold();
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
-	public IIcon getIcon(int side, int i) {
-		return side != i ? this.blockIcon : BlockForge.temoldOvenFront;
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
+	{
+		return side == 1 ? this.blockIcon : (side == 0 ? this.blockIcon : (side != meta ? this.blockIcon : (isBurning ?temoldOvenFrontActive : temoldOvenFront )));
 	}
 
 	/**
@@ -206,7 +209,7 @@ public class BlockForge extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = temoldOvenSide = temoldOvenTop = temoldOvenBottom = reg
+		this.blockIcon = temoldOvenSide  = reg
 				.registerIcon("rpginventorymod:ovenSide");
 
 		temoldOvenFront = reg.registerIcon("rpginventorymod:ovenFront");

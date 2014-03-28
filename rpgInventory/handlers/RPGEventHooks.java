@@ -11,8 +11,6 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -140,13 +138,14 @@ public class RPGEventHooks {
 					ItemStack weapon = ((EntityPlayer) damager)
 							.getCurrentEquippedItem();
 					if (weapon != null) {
-						//TODO place this elsewhere. the bow, hammer and magestaff ar no longer part of rpg inventory
-//						if (weapon.getItem() == mod_RpgInventory.hammer) {
-//							if (mod_RpgInventory.playerClass
-//									.contains(mod_RpgInventory.CLASSBERSERKER)) {
-//								evt.ammount += 4;
-//							}
-//						}
+						// TODO place this elsewhere. the bow, hammer and
+						// magestaff ar no longer part of rpg inventory
+						// if (weapon.getItem() == mod_RpgInventory.hammer) {
+						// if (mod_RpgInventory.playerClass
+						// .contains(mod_RpgInventory.CLASSBERSERKER)) {
+						// evt.ammount += 4;
+						// }
+						// }
 					}
 					if (mod_RpgInventory.playerClass
 							.contains(mod_RpgInventory.CLASSBERSERKER)) {
@@ -419,46 +418,47 @@ public class RPGEventHooks {
 				EntityPlayer p = (EntityPlayer) evt.entityLiving;
 				if (p != null) {
 
-					if ((p.getActivePotionEffects() != null)
-							&& (p.getActivePotionEffects().size() > 0)) {
-						PotionEffect decompose = p
-								.getActivePotionEffect(mod_RpgInventory.decomposePotion);
-						PotionEffect machicism = p
-								.getActivePotionEffect(mod_RpgInventory.masochismPotion);
-						if ((decompose != null) && (machicism != null)) {
-							p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
-							p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
-							CustomPotionList.remove(p.getCommandSenderName());
-						} else {
-							if (decompose != null) {
-								if (decompose.getDuration() == 0) {
-									p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
-									CustomPotionList.remove(p
-											.getCommandSenderName());
-								} else {
-									if (!CustomPotionList.containsKey(p
-											.getCommandSenderName())) {
-										CustomPotionList.put(
-												p.getCommandSenderName(),
-												decompose.getDuration());
-									}
-								}
-							} else if (machicism != null) {
-								if (machicism.getDuration() == 0) {
-									p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
-									CustomPotionList.remove(p
-											.getCommandSenderName());
-								} else {
-									if (!CustomPotionList.containsKey(p
-											.getCommandSenderName())) {
-										CustomPotionList.put(
-												p.getCommandSenderName(),
-												machicism.getDuration());
-									}
-								}
-							}
-						}
-					}
+					//TODO place potion effects under addonDread
+//					if ((p.getActivePotionEffects() != null)
+//							&& (p.getActivePotionEffects().size() > 0)) {
+//						PotionEffect decompose = p
+//								.getActivePotionEffect(mod_RpgInventory.decomposePotion);
+//						PotionEffect machicism = p
+//								.getActivePotionEffect(mod_RpgInventory.masochismPotion);
+//						if ((decompose != null) && (machicism != null)) {
+//							p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
+//							p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
+//							CustomPotionList.remove(p.getCommandSenderName());
+//						} else {
+//							if (decompose != null) {
+//								if (decompose.getDuration() == 0) {
+//									p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
+//									CustomPotionList.remove(p
+//											.getCommandSenderName());
+//								} else {
+//									if (!CustomPotionList.containsKey(p
+//											.getCommandSenderName())) {
+//										CustomPotionList.put(
+//												p.getCommandSenderName(),
+//												decompose.getDuration());
+//									}
+//								}
+//							} else if (machicism != null) {
+//								if (machicism.getDuration() == 0) {
+//									p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
+//									CustomPotionList.remove(p
+//											.getCommandSenderName());
+//								} else {
+//									if (!CustomPotionList.containsKey(p
+//											.getCommandSenderName())) {
+//										CustomPotionList.put(
+//												p.getCommandSenderName(),
+//												machicism.getDuration());
+//									}
+//								}
+//							}
+//						}
+//					}
 
 					PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
@@ -517,38 +517,39 @@ public class RPGEventHooks {
 						/* BERSEKRER KNOCKBACK */
 						// sets Berserker weapon with knockback if the apropiate
 						// classes match
-						
-						//TODO place this elsewhere. the bow, hammer and magestaff ar no longer part of rpg inventory
-//						if (weapon.getItem() == mod_RpgInventory.hammer) {
-//							if (mod_RpgInventory.playerClass
-//									.contains(mod_RpgInventory.CLASSBERSERKERSHIELD)) {
-//								if (((p.getFoodStats().getFoodLevel() < 4) || (p
-//										.getHealth() < 4))) {
-//									Map tmp = EnchantmentHelper
-//											.getEnchantments(weapon);
-//									tmp.put(Enchantment.knockback.effectId, 3);
-//									EnchantmentHelper.setEnchantments(tmp,
-//											weapon);
-//								} else {
-//									Map tmp = EnchantmentHelper
-//											.getEnchantments(weapon);
-//									tmp.put(Enchantment.knockback.effectId, 2);
-//									EnchantmentHelper.setEnchantments(tmp,
-//											weapon);
-//								}
-//							} else if (mod_RpgInventory.playerClass
-//									.contains(mod_RpgInventory.CLASSBERSERKER)) {
-//								Map tmp = EnchantmentHelper
-//										.getEnchantments(weapon);
-//								tmp.put(Enchantment.knockback.effectId, 1);
-//								EnchantmentHelper.setEnchantments(tmp, weapon);
-//							} else {
-//								Map tmp = EnchantmentHelper
-//										.getEnchantments(weapon);
-//								tmp.remove(Enchantment.knockback.effectId);
-//								EnchantmentHelper.setEnchantments(tmp, weapon);
-//							}
-//						}
+
+						// TODO place this elsewhere. the bow, hammer and
+						// magestaff ar no longer part of rpg inventory
+						// if (weapon.getItem() == mod_RpgInventory.hammer) {
+						// if (mod_RpgInventory.playerClass
+						// .contains(mod_RpgInventory.CLASSBERSERKERSHIELD)) {
+						// if (((p.getFoodStats().getFoodLevel() < 4) || (p
+						// .getHealth() < 4))) {
+						// Map tmp = EnchantmentHelper
+						// .getEnchantments(weapon);
+						// tmp.put(Enchantment.knockback.effectId, 3);
+						// EnchantmentHelper.setEnchantments(tmp,
+						// weapon);
+						// } else {
+						// Map tmp = EnchantmentHelper
+						// .getEnchantments(weapon);
+						// tmp.put(Enchantment.knockback.effectId, 2);
+						// EnchantmentHelper.setEnchantments(tmp,
+						// weapon);
+						// }
+						// } else if (mod_RpgInventory.playerClass
+						// .contains(mod_RpgInventory.CLASSBERSERKER)) {
+						// Map tmp = EnchantmentHelper
+						// .getEnchantments(weapon);
+						// tmp.put(Enchantment.knockback.effectId, 1);
+						// EnchantmentHelper.setEnchantments(tmp, weapon);
+						// } else {
+						// Map tmp = EnchantmentHelper
+						// .getEnchantments(weapon);
+						// tmp.remove(Enchantment.knockback.effectId);
+						// EnchantmentHelper.setEnchantments(tmp, weapon);
+						// }
+						// }
 					}
 
 					/* ==== EMERALD WATER BREATHING ==== */

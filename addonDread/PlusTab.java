@@ -9,7 +9,6 @@ public class PlusTab extends CreativeTabs {
 
 	public PlusTab(int par1, String label) {
 		super(par1, label);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -20,6 +19,6 @@ public class PlusTab extends CreativeTabs {
 
 	@Override
 	public String getTranslatedTabLabel() {
-		return "Necro/Paladin Armoury";
+		return this.getTabLabel();
 	}
 }

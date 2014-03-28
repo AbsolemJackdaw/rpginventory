@@ -10,7 +10,6 @@ import org.lwjgl.opengl.GL11;
 
 import addonDread.minions.EntityMinionS;
 import addonDread.models.ModelDeath;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

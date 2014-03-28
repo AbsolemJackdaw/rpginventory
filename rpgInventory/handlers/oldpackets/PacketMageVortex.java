@@ -1,6 +1,5 @@
 package rpgInventory.handlers.oldpackets;
 
-import ibxm.Player;
 import io.netty.buffer.ByteBufInputStream;
 
 import java.util.List;
@@ -20,16 +19,13 @@ import rpgInventory.handlers.CommonTickHandler;
 
 public class PacketMageVortex {
 
-
 	// TODO move packet
 
 	/*
 	 * MOVE PACKET TO API
-	 * 
 	 */
 
-
-	/**Move packet to API*/
+	/** Move packet to API */
 	public PacketMageVortex(ByteBufInputStream dis, World world, EntityPlayer p) {
 		if (!world.isRemote) {
 			ItemStack wand = p.getCurrentEquippedItem();
@@ -103,12 +99,12 @@ public class PacketMageVortex {
 									Vec3 posFinal = posPlayer.myVec3LocalPool
 											.getVecFromPool(
 													posEntity.xCoord
-													- posPlayer.xCoord,
+															- posPlayer.xCoord,
 													posEntity.yCoord
-													- posPlayer.yCoord,
+															- posPlayer.yCoord,
 													posEntity.zCoord
-													- posPlayer.zCoord)
-													.normalize();
+															- posPlayer.zCoord)
+											.normalize();
 									el.setVelocity(posFinal.xCoord * 4,
 											posFinal.yCoord * 4,
 											posFinal.zCoord * 4);
@@ -117,7 +113,7 @@ public class PacketMageVortex {
 											(mod_RpgInventory.donators
 													.contains(p
 															.getDisplayName()) ? 3
-																	: 1));
+													: 1));
 								} catch (Throwable ex) {
 								}
 							}
@@ -125,9 +121,11 @@ public class PacketMageVortex {
 					}
 				}
 			} else {
-				p.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
-						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
-								.get(p.getDisplayName()) / 20)) + " seconds"));
+				p.addChatMessage(new ChatComponentText(
+						"You must wait for energy to replenish, left: "
+								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
+										.get(p.getDisplayName()) / 20))
+								+ " seconds"));
 			}
 		}
 	}

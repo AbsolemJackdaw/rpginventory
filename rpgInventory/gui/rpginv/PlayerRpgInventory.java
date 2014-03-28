@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -19,7 +18,7 @@ import rpgInventory.item.armor.ItemRpgInvArmor;
 import cpw.mods.fml.common.FMLLog;
 
 public class PlayerRpgInventory implements IInventory,
-IExtendedEntityProperties {
+		IExtendedEntityProperties {
 
 	public ItemStack[] armorSlots = new ItemStack[7];
 	// public String playername;
@@ -47,7 +46,7 @@ IExtendedEntityProperties {
 		}
 	}
 
-	//	PacketInventory pa = new PacketInventory();
+	// PacketInventory pa = new PacketInventory();
 
 	public PlayerRpgInventory(EntityPlayer p) {
 		if (p != null) {
@@ -65,12 +64,12 @@ IExtendedEntityProperties {
 		System.out.println("send packet here for closed inventory");
 		// PacketInventory.sendPacket(player, this);
 
-				if (!player.worldObj.isRemote) {
-					PacketInventory.sendPacket((EntityPlayerMP)player, this);
-		//			PacketInventory pack = new PacketInventory();
-		//			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-		//			pipe.sendTo(pack, (EntityPlayerMP) player);
-				}
+		if (!player.worldObj.isRemote) {
+			PacketInventory.sendPacket((EntityPlayerMP) player, this);
+			// PacketInventory pack = new PacketInventory();
+			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			// pipe.sendTo(pack, (EntityPlayerMP) player);
+		}
 	}
 
 	/**
@@ -220,9 +219,9 @@ IExtendedEntityProperties {
 
 		if (!player.worldObj.isRemote) {
 			PacketInventory.sendPacket((EntityPlayerMP) player, this);
-			//			PacketInventory pack = new PacketInventory();
-			//			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			//			pipe.sendTo(pack, (EntityPlayerMP) player);
+			// PacketInventory pack = new PacketInventory();
+			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			// pipe.sendTo(pack, (EntityPlayerMP) player);
 		}
 		return null;
 	}
@@ -366,10 +365,10 @@ IExtendedEntityProperties {
 
 			if (!player.worldObj.isRemote) {
 				PacketInventory.sendPacket((EntityPlayerMP) player, this);
-				
-				//				PacketInventory pack = new PacketInventory();
-				//				PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-				//				pipe.sendTo(pack, (EntityPlayerMP) player);
+
+				// PacketInventory pack = new PacketInventory();
+				// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+				// pipe.sendTo(pack, (EntityPlayerMP) player);
 			}
 			// mod_RpgInventory.PIPELINE.sendTo(new PacketInventory(player,
 			// this), (EntityPlayerMP) player);
@@ -382,29 +381,30 @@ IExtendedEntityProperties {
 			// updated
 			// properly.
 			boolean addtoticks[] = new boolean[3];
-			
-			//TODO place this elsewhere. the bow and magestaff ar no longer part of rpg inventory
-//			if (mod_RpgInventory.playerClass
-//					.contains(mod_RpgInventory.CLASSARCHERSHIELD)) {
-//				if ((player.inventory.getCurrentItem() != null)
-//						&& (player.inventory.getCurrentItem().getItem() != null)) {
-//					if (player.inventory.getCurrentItem().getItem()
-//							.equals(mod_RpgInventory.elfbow)
-//							|| (player.inventory.getCurrentItem().getItem() instanceof ItemBow)) {
-//						addtoticks[0] = true;
-//					}
-//				}
-//			} else if (mod_RpgInventory.playerClass
-//					.contains(mod_RpgInventory.CLASSMAGESHIELD)) {
-//				if (player.getCurrentEquippedItem() != null) {
-//					if (player.getCurrentEquippedItem().getItem()
-//							.equals(mod_RpgInventory.staf)) {
-//						addtoticks[1] = true;
-//					}
-//				}
-//			}
-			
-			
+
+			// TODO place this elsewhere. the bow and magestaff ar no longer
+			// part of rpg inventory
+			// if (mod_RpgInventory.playerClass
+			// .contains(mod_RpgInventory.CLASSARCHERSHIELD)) {
+			// if ((player.inventory.getCurrentItem() != null)
+			// && (player.inventory.getCurrentItem().getItem() != null)) {
+			// if (player.inventory.getCurrentItem().getItem()
+			// .equals(mod_RpgInventory.elfbow)
+			// || (player.inventory.getCurrentItem().getItem() instanceof
+			// ItemBow)) {
+			// addtoticks[0] = true;
+			// }
+			// }
+			// } else if (mod_RpgInventory.playerClass
+			// .contains(mod_RpgInventory.CLASSMAGESHIELD)) {
+			// if (player.getCurrentEquippedItem() != null) {
+			// if (player.getCurrentEquippedItem().getItem()
+			// .equals(mod_RpgInventory.staf)) {
+			// addtoticks[1] = true;
+			// }
+			// }
+			// }
+
 			if (((getNecklace() != null) && (getNecklace().getItem() == mod_RpgInventory.neckdia))
 					|| ((getRing1() != null) && (getRing1().getItem() == mod_RpgInventory.ringdia))
 					|| ((getRing2() != null) && (getRing2().getItem() == mod_RpgInventory.ringdia))
@@ -473,18 +473,18 @@ IExtendedEntityProperties {
 
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
+
 		this.armorSlots[par1] = par2ItemStack;
 
 		// TODO
+		// if (!player.worldObj.isRemote) {
+		// PacketInventory.sendPacket((EntityPlayerMP) player, this);
+		// System.out.println("fill packet here slot content set remotely");
 
-		if (!player.worldObj.isRemote) {
-			 PacketInventory.sendPacket((EntityPlayerMP) player, this);
-				System.out.println("fill packet here slot content set remotely");
-
-			//			PacketInventory pack = new PacketInventory();
-			//			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			//			pipe.sendTo(pack, (EntityPlayerMP) player);
-		}
+		// PacketInventory pack = new PacketInventory();
+		// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+		// pipe.sendTo(pack, (EntityPlayerMP) player);
+		// }
 	}
 
 	public void writeToNBT(NBTTagCompound tagcompound) {

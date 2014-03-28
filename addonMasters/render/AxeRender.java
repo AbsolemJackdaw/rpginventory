@@ -6,9 +6,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import addonMasters.models.Axe;
-
 import rpgInventory.renderer.items.weapons.RpgItemRenderer;
+import addonMasters.models.Axe;
 
 public class AxeRender extends RpgItemRenderer {
 

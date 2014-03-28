@@ -65,12 +65,13 @@ public class PlayerRpgContainer extends Container {
 		// TODO
 		// PacketInventory.sendPacket(par1EntityPlayer, this.inventory);
 		if (!par1EntityPlayer.worldObj.isRemote) {
-			PacketInventory.sendPacket((EntityPlayerMP) par1EntityPlayer, this.inventory);
+			PacketInventory.sendPacket((EntityPlayerMP) par1EntityPlayer,
+					this.inventory);
 			System.out.println("complete packet here closing inventory");
 
-			//			PacketInventory pack = new PacketInventory();
-			//			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			//			pipe.sendTo(pack, (EntityPlayerMP) par1EntityPlayer);
+			// PacketInventory pack = new PacketInventory();
+			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			// pipe.sendTo(pack, (EntityPlayerMP) par1EntityPlayer);
 		}
 		// pipe.sendToAll(pack);
 
@@ -90,13 +91,14 @@ public class PlayerRpgContainer extends Container {
 		// PacketInventory.sendPacket(par4EntityPlayer, this.inventory);
 
 		if (!par4EntityPlayer.worldObj.isRemote) {
-			PacketInventory.sendPacket((EntityPlayerMP)par4EntityPlayer, this.inventory);
+			PacketInventory.sendPacket((EntityPlayerMP) par4EntityPlayer,
+					this.inventory);
 			System.out.println("complete packet send from clickslot");
 
-			//			PacketInventory pack = new PacketInventory();
-			//			// TODO fill packet
-			//			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			//			pipe.sendToServer(pack);
+			// PacketInventory pack = new PacketInventory();
+			// // TODO fill packet
+			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			// pipe.sendToServer(pack);
 		}
 		return rv;
 	}

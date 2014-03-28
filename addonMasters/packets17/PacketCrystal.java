@@ -1,6 +1,5 @@
 package addonMasters.packets17;
 
-import addonMasters.mod_RpgRB;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.Entity;
@@ -12,6 +11,7 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import addonMasters.mod_RpgRB;
 
 public class PacketCrystal extends RpgRBAbstractPacket {
 

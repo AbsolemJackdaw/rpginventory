@@ -1,8 +1,8 @@
 package addonDread.items;
 
-import addonDread.mod_RpgPlus;
 import net.minecraft.item.ItemStack;
 import rpgInventory.item.ItemMats;
+import addonDread.mod_RpgPlus;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -3,21 +3,10 @@ package rpgInventory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import addonBasic.items.armor.ItemArcherArmor;
-import addonBasic.items.armor.ItemBerserkerArmor;
-import addonBasic.items.armor.ItemMageArmor;
-import addonBasic.items.weapons.ItemArcherBow;
-import addonBasic.items.weapons.ItemClaymore;
-import addonBasic.items.weapons.ItemHammer;
-import addonBasic.items.weapons.ItemMageSphere;
-import addonBasic.items.weapons.ItemStaf;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -25,15 +14,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.block.BlockForge;
+import rpgInventory.block.te.MoldRecipes;
 import rpgInventory.block.te.TEMold;
 import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.gui.RpgInventoryTab;
@@ -45,10 +31,7 @@ import rpgInventory.handlers.RPGKeyHandler;
 import rpgInventory.handlers.proxy.ClientProxy;
 import rpgInventory.handlers.proxy.CommonProxy;
 import rpgInventory.item.ItemMold;
-import rpgInventory.item.ItemRageFood;
 import rpgInventory.item.armor.ItemRpgInvArmor;
-import rpgInventory.richUtil.potions.DecomposePotion;
-import rpgInventory.richUtil.potions.MasochismPotion;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -84,6 +67,8 @@ public class mod_RpgInventory {
 		public static final int CRYSTAL = 5;
 	}
 
+	public static MoldRecipes recipes;
+	
 	public static final String name = "rpginventorymod";
 	public static final String ID = "Rpg Inventory";
 
@@ -100,7 +85,7 @@ public class mod_RpgInventory {
 	public static String playerClass = "none";
 	public static mod_RpgInventory instance;
 
-	//	public static final PacketPipeline17 PIPELINE = new PacketPipeline17();
+	// public static final PacketPipeline17 PIPELINE = new PacketPipeline17();
 	public static FMLEventChannel Channel;
 
 	@SidedProxy(serverSide = "rpgInventory.handlers.proxy.CommonProxy", clientSide = "rpgInventory.handlers.proxy.ClientProxy")
@@ -123,18 +108,10 @@ public class mod_RpgInventory {
 	public static List<String> developers = new ArrayList<String>();
 
 	public static List<Integer> rpvInvIDs = new ArrayList();
-	public static boolean hasRpg;
-	public static boolean hasShields;
-	public static boolean hasRogue;
-
-	public static boolean hasMage;
 
 	private static int uniqueID = 0;
-	public static Potion decomposePotion;
-
-	public static Potion masochismPotion;
-
 	
+
 	public static CreativeTabs tab;
 
 	public static ArrayList<String> donators = new ArrayList<String>();
@@ -192,45 +169,21 @@ public class mod_RpgInventory {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 
-		//		PIPELINE.initialise();
+		recipes = new MoldRecipes();
+		
+		// PIPELINE.initialise();
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("RpgInv");
 		proxy.load();
 
 		setDonators();
 		// GameRegistry.registerPlayerTracker(new OnPlayerLogin(version, name));
 
-		try {
-			Class.forName("rpgNecroPaladin.mod_RpgPlus");
-			hasRpg = true;
-		} catch (Throwable e) {
-			hasRpg = false;
-		}
-		try {
-			Class.forName("rpgVanillaShields.mod_VanillaShields");
-			hasShields = true;
-		} catch (Throwable e) {
-			hasShields = false;
-		}
-		try {
-			Class.forName("rpgRogueBeast.mod_RpgRB");
-			hasRogue = true;
-		} catch (Throwable e) {
-			hasRogue = false;
-		}
-		try {
-			Class.forName("rpgMage.mod_RpgMageSet");
-			hasMage = true;
-		} catch (Throwable e) {
-			hasMage = false;
-		}
-
 		developers.add("unjustice");
 		developers.add("artix_all_mighty");
 		developers.add("rich1051414");
 		developers.add("darkhax");
 
-		forgeBlock = new BlockForge(Material.rock).setHardness(5f)
-				/* .setUnlocalizedName("MoldForge") */.setCreativeTab(tab);
+		
 
 		proxy.registerRenderInformation();
 
@@ -246,7 +199,6 @@ public class mod_RpgInventory {
 		GameRegistry.registerTileEntity(TEMold.class, "temold");
 
 		LanguageRegistry.addName(forgeBlock, "Mold Forge");
-		GameRegistry.registerBlock(forgeBlock, "MoldForge");
 
 		LanguageRegistry.addName(cloakRed, "Red Cape");
 		LanguageRegistry.addName(cloakYellow, "Yellow Cape");
@@ -272,13 +224,9 @@ public class mod_RpgInventory {
 		LanguageRegistry.addName(cloak, "Cloak");
 		LanguageRegistry.addName(cloakI, "Invisibility Cloak");
 
-		
-
 		LanguageRegistry.addName(colmold, "Necklace Mold");
 		LanguageRegistry.addName(ringmold, "Ring Mold");
 		LanguageRegistry.addName(wantmold, "Glove Mold");
-
-		
 
 		// CLOAK
 		GameRegistry.addRecipe(new ItemStack(cloak, 1), new Object[] { "SS",
@@ -310,8 +258,6 @@ public class mod_RpgInventory {
 			"BBB", "BOB", "BBB", 'B', Blocks.brick_block, 'O',
 			Blocks.obsidian });
 
-		
-
 		// DONE ?
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
@@ -327,84 +273,7 @@ public class mod_RpgInventory {
 
 		ClientProxy.renderHandler();
 
-		// hack to increase the number of potion types allowed
-
-		if (Potion.potionTypes.length < 256) {
-			boolean found = false;
-			Field fallbackfield = null;
-			Potion[] potionTypes = null;
-			for (Field f : Potion.class.getDeclaredFields()) {
-				try {
-					if ((fallbackfield != null)
-							&& (f.getType() == Potion[].class)) {
-						fallbackfield = f;
-					}
-					if (f.getName().equals("potionTypes")
-							|| f.getName().equals("a")
-							|| f.getName().equals("field_76425_a")) {
-						found = true;
-						Field modfield = Field.class
-								.getDeclaredField("modifiers");
-						modfield.setAccessible(true);
-						modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
-
-						potionTypes = (Potion[]) f.get(null);
-						final Potion[] newPotionTypes = new Potion[256];
-						System.arraycopy(potionTypes, 0, newPotionTypes, 0,
-								potionTypes.length);
-						f.set(null, newPotionTypes);
-						break;
-					}
-				} catch (Exception e) {
-					System.err
-					.println("Severe error, please report this to the mod author:");
-					System.err.println(e);
-				}
-			}
-			try {
-				if ((fallbackfield != null) && !found) {
-					Field modfield = Field.class.getDeclaredField("modifiers");
-					modfield.setAccessible(true);
-					modfield.setInt(fallbackfield, fallbackfield.getModifiers()
-							& ~Modifier.FINAL);
-
-					potionTypes = (Potion[]) fallbackfield.get(null);
-					final Potion[] newPotionTypes = new Potion[256];
-					System.arraycopy(potionTypes, 0, newPotionTypes, 0,
-							potionTypes.length);
-					fallbackfield.set(null, newPotionTypes);
-				}
-			} catch (Exception ex) {
-				System.err
-				.println("Severe error, please report this to the mod author:");
-				System.err.println(ex);
-			}
-		}
-
-		if (hasRpg == true) {
-			for (int pos = 32; pos < Potion.potionTypes.length; pos++) {
-				if (Potion.potionTypes[pos] == null) {
-					if (decomposePotion == null) {
-						decomposePotion = new DecomposePotion(pos);
-						Potion.potionTypes[pos] = decomposePotion;
-					} else if (masochismPotion == null) {
-						masochismPotion = new MasochismPotion(pos);
-						Potion.potionTypes[pos] = masochismPotion;
-					} else {
-						break;
-					}
-				}
-			}
-			RPGEventHooks.negativeEffects.add(2);
-			RPGEventHooks.negativeEffects.add(4);
-			RPGEventHooks.negativeEffects.add(9);
-			RPGEventHooks.negativeEffects.add(15);
-			RPGEventHooks.negativeEffects.add(17);
-			RPGEventHooks.negativeEffects.add(18);
-			RPGEventHooks.negativeEffects.add(19);
-			RPGEventHooks.negativeEffects.add(20);
-			RPGEventHooks.negativeEffects.add(decomposePotion.id);
-		}
+		
 
 	}
 
@@ -414,7 +283,7 @@ public class mod_RpgInventory {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt) {
-		//		PIPELINE.postInitialise();
+		// PIPELINE.postInitialise();
 
 		proxy.registerLate();
 		// All mods should be initialized now, check what potion effects are
@@ -429,7 +298,8 @@ public class mod_RpgInventory {
 		// NOTHING BEFORE THE GOD DAMN TAB !
 		// any items that need to be in it, put in it BEFORE the tab exists will
 		// not be in
-		tab = new RpgInventoryTab(CreativeTabs.getNextID(), "RpgTab");
+		tab = new RpgInventoryTab(CreativeTabs.getNextID(),
+				"Rpg Inventory Jewelery");
 
 		neckgold = new ItemRpgInvArmor(0, -1, "",
 				"subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold")
@@ -462,15 +332,12 @@ public class mod_RpgInventory {
 				"subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap")
 				.setCreativeTab(tab);
 
-		
-
 		cloak = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/GreyCape.png")
 		.setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
 		cloakI = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/GreyCape.png")
 		.setFull3D().setUnlocalizedName("i.capeGrey")
 		.setCreativeTab(tab);
 
-		
 		cloakRed = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/RedCape.png")
 		.setFull3D().setUnlocalizedName("r.capeGrey")
 		.setCreativeTab(tab);
@@ -496,38 +363,32 @@ public class mod_RpgInventory {
 		wantmold = new ItemMold().setUnlocalizedName("moldGlove")
 				.setCreativeTab(tab);
 
+		forgeBlock = new BlockForge(Material.rock).setHardness(5f).setBlockName("MoldForge").setCreativeTab(tab);
+		GameRegistry.registerBlock(forgeBlock, "MoldForge");
+		
 		allItems = new Item[] { neckgold, neckdia, neckem, necklap,
 				glovesbutter, glovesdia, glovesem, gloveslap, ringgold,
-				ringdia, ringem, ringlap, cloak, cloakI, cloakSub, cloakRed, cloakYellow,
-				cloakGreen, cloakBlue, colmold, ringmold, wantmold };
+				ringdia, ringem, ringlap, cloak, cloakI, cloakSub, cloakRed,
+				cloakYellow, cloakGreen, cloakBlue, colmold, ringmold, wantmold };
 
 		// DONE
 		for (int i = 0; i < allItems.length; i++) {
 
 			if (allItems[i] != null) {
-
 				String itemName = allItems[i].getUnlocalizedName().substring(
 						allItems[i].getUnlocalizedName().indexOf(".") + 1);
 
-				String name = itemName.substring(itemName.indexOf(".") + 1);
+				String itemNameCropped = itemName.substring(itemName.indexOf(".") + 1);
 
-				// System.out.println(name + " "
-				// + allItems[i].getUnlocalizedName());
-
-				
-					allItems[i].setTextureName(mod_RpgInventory.name + ":"
-							+ name);
-				
+				allItems[i].setTextureName(mod_RpgInventory.name + ":" + itemNameCropped);
 
 				GameRegistry
 				.registerItem(allItems[i],
 						allItems[i].getUnlocalizedName(),
 						mod_RpgInventory.name);
-				// System.out.println("Registered Item " + i + "/n" +
-				// allItems[i]);
+
 			} else {
 				System.out.println("Item is null !" + i);
-				// break;
 			}
 		}
 	}
