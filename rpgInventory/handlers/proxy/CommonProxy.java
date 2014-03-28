@@ -7,7 +7,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.packets.ServerPacketHandler;
 
 public class CommonProxy {
 
@@ -50,5 +52,10 @@ public class CommonProxy {
 
 	public void spawnParticle(World world, EntityLivingBase el, Random rng) {
 
+	}
+	
+	
+	public void load(){
+		mod_RpgInventory.Channel.register(new ServerPacketHandler());
 	}
 }

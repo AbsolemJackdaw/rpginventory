@@ -25,6 +25,7 @@ import rpgInventory.config.RpgConfig;
 import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.gui.BookGui;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.packets.ClientPacketHandler;
 import rpgInventory.models.armor.ModelBerserkerArmor;
 import rpgInventory.models.armor.ModelMageArmor;
 import rpgInventory.models.shields.IronThorn;
@@ -208,5 +209,9 @@ public class ClientProxy extends CommonProxy {
 				+ rng.nextFloat(), el.posZ, rng.nextFloat(),
 				rng.nextFloat() + 0.4F, rng.nextFloat());
 		mc.effectRenderer.addEffect(efx);
+	}
+	
+	public void load(){
+		mod_RpgInventory.Channel.register(new ClientPacketHandler());
 	}
 }

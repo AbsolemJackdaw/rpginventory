@@ -5,8 +5,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.handlers.Packets17.PacketInventory;
-import rpgInventory.handlers.Packets17.PacketPipeline17;
+import rpgInventory.handlers.oldpackets.PacketInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 
 class SlotRpgArmor extends Slot {
@@ -94,14 +93,16 @@ class SlotRpgArmor extends Slot {
 	public void onSlotChanged() {
 
 		// TODO
-		System.out.println("send packet here onslotchanged");
 		// PacketInventory.sendPacket(player, (PlayerRpgInventory)
 		// this.inventory);
 
 		if (!player.worldObj.isRemote) {
-			PacketInventory pack = new PacketInventory();
-			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			pipe.sendTo(pack, (EntityPlayerMP) player);
+			PacketInventory.sendPacket((EntityPlayerMP) player, PlayerRpgInventory.get(player));
+			System.out.println("send packet here onslotchanged");
+
+//			PacketInventory pack = new PacketInventory();
+//			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+//			pipe.sendTo(pack, (EntityPlayerMP) player);
 		}
 
 		super.onSlotChanged();

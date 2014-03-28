@@ -13,8 +13,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.Packets17.PacketInventory;
-import rpgInventory.handlers.Packets17.PacketPipeline17;
+import rpgInventory.handlers.oldpackets.PacketInventory;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -87,11 +86,11 @@ public class CommonTickHandler /* implements ITickHandler */{
 			if (countdown == 0) {
 				//
 				// PacketInventory.sendServerPacket(player);
-
+				PacketInventory.sendServerPacket(player);
 				// TODO
-				PacketInventory pack = new PacketInventory();
-				PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-				pipe.sendToServer(pack);
+//				PacketInventory pack = new PacketInventory();
+//				PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+//				pipe.sendToServer(pack);
 
 				System.out.println("fill packet here");
 			}

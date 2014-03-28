@@ -4,6 +4,10 @@
  */
 package rpgInventory.handlers;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -26,11 +30,12 @@ import net.minecraft.util.Vec3;
 import org.lwjgl.input.Keyboard;
 
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.handlers.Packets17.PacketOpenInventory;
-import rpgInventory.handlers.Packets17.PacketPipeline17;
+import rpgInventory.handlers.oldpackets.PacketInventory;
+import rpgInventory.handlers.packets.ServerPacketHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class RPGKeyHandler {
 
@@ -170,11 +175,17 @@ public class RPGKeyHandler {
 				System.out.println("send packet keyhandler open inventory");
 				// System.out.println((guiscreen instanceof GuiInventory));
 
-				EntityPlayer p = mc.thePlayer;
+//				EntityPlayer p = mc.thePlayer;
 
-				PacketOpenInventory pack = new PacketOpenInventory();
-				PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-				pipe.sendToServer(pack);
+				
+				ByteBuf buf = Unpooled.buffer();
+				ByteBufOutputStream out = new ByteBufOutputStream(buf);
+				out.writeInt(ServerPacketHandler.OPENRPGINV);
+				mod_RpgInventory.Channel.sendToServer(new FMLProxyPacket(buf,"RpgInv"));
+
+//				PacketOpenInventory pack = new PacketOpenInventory();
+//				PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+//				pipe.sendToServer(pack);
 
 				// pipe.sendToAll(pack);
 			}
@@ -247,10 +258,13 @@ public class RPGKeyHandler {
 						outputStream.writeBoolean(true);
 					}
 				}
+				
+				
 				// TODO sendpacket
 				// Packet250CustomPayload packet = new Packet250CustomPayload(
 				// "RpgInv", bytes.toByteArray());
 				// PacketDispatcher.sendPacketToServer(packet);
+				
 				System.out.println("todo : send packet");
 
 			} catch (IOException e) {

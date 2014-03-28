@@ -7,8 +7,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.handlers.Packets17.PacketInventory;
-import rpgInventory.handlers.Packets17.PacketPipeline17;
+import rpgInventory.handlers.oldpackets.PacketInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 
 public class PlayerRpgContainer extends Container {
@@ -64,12 +63,14 @@ public class PlayerRpgContainer extends Container {
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 
 		// TODO
-		System.out.println("complete packet here closing inventory");
 		// PacketInventory.sendPacket(par1EntityPlayer, this.inventory);
 		if (!par1EntityPlayer.worldObj.isRemote) {
-			PacketInventory pack = new PacketInventory();
-			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			pipe.sendTo(pack, (EntityPlayerMP) par1EntityPlayer);
+			PacketInventory.sendPacket((EntityPlayerMP) par1EntityPlayer, this.inventory);
+			System.out.println("complete packet here closing inventory");
+
+			//			PacketInventory pack = new PacketInventory();
+			//			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			//			pipe.sendTo(pack, (EntityPlayerMP) par1EntityPlayer);
 		}
 		// pipe.sendToAll(pack);
 
@@ -86,14 +87,16 @@ public class PlayerRpgContainer extends Container {
 			EntityPlayer par4EntityPlayer) {
 		ItemStack rv = super.slotClick(par1, par2, par3, par4EntityPlayer);
 
-		System.out.println("complete packet send from clickslot");
 		// PacketInventory.sendPacket(par4EntityPlayer, this.inventory);
 
-		if (par4EntityPlayer.worldObj.isRemote) {
-			PacketInventory pack = new PacketInventory();
-			// TODO fill packet
-			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			pipe.sendToServer(pack);
+		if (!par4EntityPlayer.worldObj.isRemote) {
+			PacketInventory.sendPacket((EntityPlayerMP)par4EntityPlayer, this.inventory);
+			System.out.println("complete packet send from clickslot");
+
+			//			PacketInventory pack = new PacketInventory();
+			//			// TODO fill packet
+			//			PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			//			pipe.sendToServer(pack);
 		}
 		return rv;
 	}
