@@ -72,10 +72,9 @@ public class ServerPacketHandler {
 						.getPlayerEntityByName(otherPlayerName);
 
 				for (int i = 0; i < PlayerRpgInventory.get(other)
-						.getSizeInventory(); i++) {
+						.getSizeInventory(); i++)
 					PlayerRpgInventory.get(other).setInventorySlotContents(i,
 							ByteBufUtils.readItemStack(buf));
-				}
 				// PlayerRpgInventory.get(other).setInventorySlotContents(0,
 				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
 				// PlayerRpgInventory.get(other).setInventorySlotContents(1,

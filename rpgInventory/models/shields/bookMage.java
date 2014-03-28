@@ -128,9 +128,8 @@ public class bookMage extends MainShield {
 		Shape8.render(f5);
 		Shape9.render(f5);
 
-		if (f == 0.1) {
+		if (f == 0.1)
 			f = -0.1f;
-		}
 		f += 0.001;
 
 		Shape1.offsetY = MathHelper.sin(f * 6f) * 0.3f;

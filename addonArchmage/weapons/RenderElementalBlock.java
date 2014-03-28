@@ -156,9 +156,8 @@ public class RenderElementalBlock extends Render {
 		default:
 			break;
 		}
-		if (theEntity.step > 1000) {
+		if (theEntity.step > 1000)
 			theEntity.step = 0;
-		}
 		Render.renderAABB(AxisAlignedBB.getBoundingBox(-0.5, -0.5, -0.5, 0.5,
 				0.5, 0.5));
 		GL11.glPopMatrix();

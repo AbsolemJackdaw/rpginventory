@@ -69,10 +69,9 @@ public class ClientPacketHandler extends ServerPacketHandler {
 				// System.out.println("recieved");
 
 				for (int i = 0; i < PlayerRpgInventory.get(p)
-						.getSizeInventory(); i++) {
+						.getSizeInventory(); i++)
 					PlayerRpgInventory.get(p).setInventorySlotContents(i,
 							ByteBufUtils.readItemStack(buf));
-				}
 				// PlayerRpgInventory.get(p).setInventorySlotContents(0,
 				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
 				// PlayerRpgInventory.get(p).setInventorySlotContents(1,

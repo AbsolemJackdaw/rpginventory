@@ -42,12 +42,10 @@ public class ItemClaymore extends ItemRpgWeapon {
 			String name = ((EntityPlayer) mob).getCommandSenderName();
 			ItemStack skull = new ItemStack(Items.skull, 1, 3);
 
-			if (skull.stackTagCompound == null) {
+			if (skull.stackTagCompound == null)
 				skull.setTagCompound(new NBTTagCompound());
-			}
-			if (!skull.stackTagCompound.hasKey("SkullOwner")) {
+			if (!skull.stackTagCompound.hasKey("SkullOwner"))
 				skull.stackTagCompound.setString("SkullOwner", name);
-			}
 
 			if (mob.getHealth() < 1) {
 				EntityItem entityitem = new EntityItem(mob.worldObj, mob.posX,
@@ -90,9 +88,8 @@ public class ItemClaymore extends ItemRpgWeapon {
 						Potion.moveSlowdown.id, 400, 1));
 				par1ItemStack.damageItem(5, par3EntityPlayer);
 
-			} else {
+			} else
 				par3EntityPlayer.removePotionEffect(Potion.moveSlowdown.id);
-			}
 
 			par1ItemStack.damageItem(1, par3EntityPlayer);
 		}

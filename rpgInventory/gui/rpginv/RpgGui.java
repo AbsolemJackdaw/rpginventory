@@ -69,16 +69,12 @@ public class RpgGui extends GuiContainer {
 	public void actionPerformed(GuiButton button) {
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		PlayerRpgContainer container = (PlayerRpgContainer) this.inventorySlots;
-		if (button.id == 0) {
+		if (button.id == 0)
 			mod_RpgInventory.proxy.openGUI(p, 1);
-		} else if (button.id == 1) {
-			if (container.inventory.getCrystal() != null) {
-				if (container.inventory.getCrystal().getItemDamage() > 0) {
+		else if (button.id == 1)
+			if (container.inventory.getCrystal() != null)
+				if (container.inventory.getCrystal().getItemDamage() > 0)
 					mod_RpgInventory.proxy.openGUI(p, container.inventory);
-				}
-			}
-
-		}
 
 	}
 

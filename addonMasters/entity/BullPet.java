@@ -108,13 +108,12 @@ public class BullPet extends BMPetImpl {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (getLevel() <= 200) {
+		if (getLevel() <= 200)
 			petSize = 0.5F + (((getLevel()) / 200.0F) * 1.5F);
-		} else {
+		else
 			petSize = 2.0F;
-		}
 
-		if (dataWatcher.getWatchableObjectInt(LEVELID) == 200) {
+		if (dataWatcher.getWatchableObjectInt(LEVELID) == 200)
 			// this.worldObj.spawnParticle("flame", this.posX +
 			// (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY +
 			// this.rand.nextDouble() * (double)this.height, this.posZ +
@@ -122,8 +121,6 @@ public class BullPet extends BMPetImpl {
 			// 0.0D);
 			this.worldObj.spawnParticle("flame", this.posX + 3, this.posY + 2d,
 					this.posZ, 0.0D, 0.0D, 0.0D);
-
-		}
 	}
 
 	@Override

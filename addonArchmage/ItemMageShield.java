@@ -22,9 +22,8 @@ public class ItemMageShield extends ItemRpgInvArmor {
 
 	@Override
 	public MainShield getShieldModel() {
-		if (this.equals(mod_RpgMageSet.archBook)) {
+		if (this.equals(mod_RpgMageSet.archBook))
 			return book;
-		}
 		return super.getShieldModel();
 	}
 

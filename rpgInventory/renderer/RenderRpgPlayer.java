@@ -40,19 +40,16 @@ public class RenderRpgPlayer {
 	public void PlayerPrerenderer(RenderPlayerEvent.Post evt) {
 		/* ===== RENDERING SHIELDS===== */
 		ItemStack shield = PlayerRpgInventory.get(evt.entityPlayer).getShield();
-		if (shield != null) {
+		if (shield != null)
 			// this is an exception towards all other rendering.
 			// I do not have a hook for it yet, but I hope I soon will.
 			if (shield.getItem() instanceof ItemRpgInvArmor) {
 				if (((ItemRpgInvArmor) shield.getItem()).shieldClass()
-						.toLowerCase().contains("archmage")) {
+						.toLowerCase().contains("archmage"))
 					renderMantle(evt.entityPlayer, 1);
-				}
-				if (((ItemRpgInvArmor) shield.getItem()).isMantle) {
+				if (((ItemRpgInvArmor) shield.getItem()).isMantle)
 					renderMantle(evt.entityPlayer, 0);
-				}
 			}
-		}
 	}
 
 	@SubscribeEvent
@@ -91,9 +88,8 @@ public class RenderRpgPlayer {
 
 		/* ===== RENDERING CLOAK===== */
 		ItemStack cloak = PlayerRpgInventory.get(player).getCloak();
-		if (cloak != null) {
+		if (cloak != null)
 			rendercape(player, cloak, evt.partialRenderTick);
-		}
 
 		/* ===== RENDERING GLOVES===== */
 		ItemStack gloves = PlayerRpgInventory.get(player).getGloves();
@@ -125,7 +121,7 @@ public class RenderRpgPlayer {
 	private void rendercape(EntityPlayer player, ItemStack cloak,
 			float partialTick) {
 		float var11;
-		if ((cloak != null) && !player.getHideCape()) {
+		if ((cloak != null) && !player.getHideCape())
 			if ((cloak.getItem() == mod_RpgInventory.cloak)
 					|| (cloak.getItem() == mod_RpgInventory.cloakYellow)
 					|| (cloak.getItem() == mod_RpgInventory.cloakRed)
@@ -140,17 +136,14 @@ public class RenderRpgPlayer {
 				/**
 				 * Dev Capes
 				 */
-				if (cloak.getItem() == mod_RpgInventory.cloak) {
-					if (CapeRenderer.capes != null) {
+				if (cloak.getItem() == mod_RpgInventory.cloak)
+					if (CapeRenderer.capes != null)
 						if (CapeRenderer.playersWithCapes.contains(player
-								.getCommandSenderName())) {
+								.getCommandSenderName()))
 							mc.renderEngine.bindTexture(CapeRenderer
 									.getLocationCape(player
 											.getCommandSenderName()));// new
-							// ResourceLocation("subaraki/playerCapes/"+player.username+".png"));
-						}
-					}
-				}
+				// ResourceLocation("subaraki/playerCapes/"+player.username+".png"));
 
 				GL11.glTranslatef(0.0F, 0.0F, 0.125F);
 				double var22 = (player.field_71091_bM + ((player.field_71094_bP - player.field_71091_bM) * partialTick))
@@ -167,20 +160,17 @@ public class RenderRpgPlayer {
 						.cos((var11 * (float) Math.PI) / 180.0F));
 				float var16 = (float) var24 * 10.0F;
 
-				if (var16 < -6.0F) {
+				if (var16 < -6.0F)
 					var16 = -6.0F;
-				}
 
-				if (var16 > 32.0F) {
+				if (var16 > 32.0F)
 					var16 = 32.0F;
-				}
 
 				float var17 = (float) ((var22 * var12) + (var9 * var14)) * 100.0F;
 				float var18 = (float) ((var22 * var14) - (var9 * var12)) * 100.0F;
 
-				if (var17 < 0.0F) {
+				if (var17 < 0.0F)
 					var17 = 0.0F;
-				}
 
 				float var19 = player.prevCameraYaw
 						+ ((player.cameraYaw - player.prevCameraYaw) * partialTick);
@@ -188,9 +178,8 @@ public class RenderRpgPlayer {
 						.sin((player.prevDistanceWalkedModified + ((player.distanceWalkedModified - player.prevDistanceWalkedModified) * partialTick)) * 6.0F)
 						* 32.0F * var19;
 
-				if (player.isSneaking()) {
+				if (player.isSneaking())
 					var16 += 25.0F;
-				}
 				GL11.glRotatef(6.0F + (var17 / 2.0F) + var16, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(var18 / 2.0F, 0.0F, 0.0F, 1.0F);
 				GL11.glRotatef(-var18 / 2.0F, 0.0F, 1.0F, 0.0F);
@@ -198,7 +187,6 @@ public class RenderRpgPlayer {
 				this.main.renderCloak(0.0625F);
 				GL11.glPopMatrix();
 			}
-		}
 	}
 
 	private void renderGloves() {
@@ -229,16 +217,14 @@ public class RenderRpgPlayer {
 
 	private void renderMantle(EntityPlayer player, int id) {
 		rotation += 1f;
-		if (rotation == 360) {
+		if (rotation == 360)
 			rotation = 0;
-		}
-		if (id == 1) {
+		if (id == 1)
 			mc.renderEngine.bindTexture(new ResourceLocation(
 					"subaraki:jewels/magemantle.png"));
-		} else {
+		else
 			mc.renderEngine.bindTexture(new ResourceLocation(
 					"subaraki:jewels/talisman.png"));
-		}
 
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		GL11.glPushMatrix();
@@ -282,11 +268,10 @@ public class RenderRpgPlayer {
 			necklace.parts.get(i).rotationPointY = main.bipedBody.rotationPointY;
 			necklace.parts.get(i).rotationPointZ = main.bipedBody.rotationPointZ;
 		}
-		if (chest != null) {
+		if (chest != null)
 			GL11.glTranslatef(0F, 0F, -0.06F);
-		} else {
+		else
 			GL11.glTranslatef(0F, 0F, 0.0F);
-		}
 		necklace.renderNecklace(0.0625f);
 		GL11.glPopMatrix();
 	}
@@ -303,9 +288,8 @@ public class RenderRpgPlayer {
 			armor.getShieldModel().parts.get(i).rotationPointZ = main.bipedLeftArm.rotationPointZ;
 		}
 		try {
-			if (armor.shieldClass().contains("vanilla")) {
+			if (armor.shieldClass().contains("vanilla"))
 				armor.getShieldModel().parts.get(64 - 1).rotateAngleZ = main.bipedLeftArm.rotateAngleZ + 0.356f;
-			}
 		} catch (Exception e) {
 		}
 

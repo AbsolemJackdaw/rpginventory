@@ -76,28 +76,7 @@ public class mod_RpgRB {
 
 		FMLLog.info("Rpg++ Rogue and BeastMaster Installed. Renderers can be Used");
 
-		LanguageRegistry.addName(daggers, "Rogue Daggers");
-		LanguageRegistry.addName(rogueLeather, "Rogue Leather");
-		LanguageRegistry.addName(beastLeather, "BeastMaster Leather");
-		LanguageRegistry.addName(rogueHood, "Rogue Hood");
-		LanguageRegistry.addName(rogueChest, "Rogue Breast Plate");
-		LanguageRegistry.addName(rogueLegs, "Rogue Chaps");
-		LanguageRegistry.addName(rogueBoots, "Rogue Boots");
-		LanguageRegistry.addName(beastHood, "BeastMaster Hood");
-		LanguageRegistry.addName(beastChest, "BeastMaster Body Protection");
-		LanguageRegistry.addName(beastLegs, "BeastMaster Leg Protection");
-		LanguageRegistry.addName(beastBoots, "BeastMaster Shoes");
-		LanguageRegistry.addName(whistle, "Pet Whistle");
-		LanguageRegistry.addName(beastShield, "BeastMaster Shield");
-		LanguageRegistry.addName(beastAxe, "BeastMaster Forest Axe");
-		LanguageRegistry.addName(petCandy, "Rare Pet Candy");
-		LanguageRegistry.addName(tangledBrench, "Tangled Brench");
-		LanguageRegistry.addName(PetXPBottle, "Bottle 'O Pet");
-
-		LanguageRegistry.addName(new ItemStack(crystal, 1, 0), "Pet Crystal");
-		LanguageRegistry.addName(new ItemStack(crystal, 1, 1), "Boar");
-		LanguageRegistry.addName(new ItemStack(crystal, 1, 2), "Spider");
-		LanguageRegistry.addName(new ItemStack(crystal, 1, 3), "Bull");
+		
 
 		GameRegistry.addRecipe(new ItemStack(daggers, 1), new Object[] { " ei",
 				"eie", "se ", 'i', Items.iron_ingot, 'e', Items.spider_eye,
@@ -201,7 +180,7 @@ public class mod_RpgRB {
 
 		rogueLeather = new ItemRBMats().setUnlocalizedName("r.leather");
 		beastLeather = new ItemRBMats().setUnlocalizedName("b.leather");
-		
+
 		beastShield = new ItemRpgInvArmorRB(1, 150, "",
 				"subaraki:jewels/lion.png")
 				.setUnlocalizedName("shieldBeastMaster");
@@ -232,16 +211,38 @@ public class mod_RpgRB {
 				.setUnlocalizedName("tangledBrench");
 		PetXPBottle = new PetExpPotion().setUnlocalizedName("PetXPBottle");
 
-		crystal = new ItemCrystal(RpgConfig.instance.crystalID,
-				ITEMTYPE.CRYSTAL, -1, "").setUnlocalizedName("petCrystal");
+		crystal = new ItemCrystal(ITEMTYPE.CRYSTAL, -1, "").setUnlocalizedName("petCrystal");
 
+		LanguageRegistry.addName(daggers, "Rogue Daggers");
+		LanguageRegistry.addName(rogueLeather, "Rogue Leather");
+		LanguageRegistry.addName(beastLeather, "BeastMaster Leather");
+		LanguageRegistry.addName(rogueHood, "Rogue Hood");
+		LanguageRegistry.addName(rogueChest, "Rogue Breast Plate");
+		LanguageRegistry.addName(rogueLegs, "Rogue Chaps");
+		LanguageRegistry.addName(rogueBoots, "Rogue Boots");
+		LanguageRegistry.addName(beastHood, "BeastMaster Hood");
+		LanguageRegistry.addName(beastChest, "BeastMaster Body Protection");
+		LanguageRegistry.addName(beastLegs, "BeastMaster Leg Protection");
+		LanguageRegistry.addName(beastBoots, "BeastMaster Shoes");
+		LanguageRegistry.addName(whistle, "Pet Whistle");
+		LanguageRegistry.addName(beastShield, "BeastMaster Shield");
+		LanguageRegistry.addName(beastAxe, "BeastMaster Forest Axe");
+		LanguageRegistry.addName(petCandy, "Rare Pet Candy");
+		LanguageRegistry.addName(tangledBrench, "Tangled Brench");
+		LanguageRegistry.addName(PetXPBottle, "Bottle 'O Pet");
+
+		LanguageRegistry.addName(new ItemStack(crystal, 1, 0), "Pet Crystal");
+		LanguageRegistry.addName(new ItemStack(crystal, 1, 1), "Boar");
+		LanguageRegistry.addName(new ItemStack(crystal, 1, 2), "Spider");
+		LanguageRegistry.addName(new ItemStack(crystal, 1, 3), "Bull");
+		
+		
 		allItems = new Item[] { beastShield, daggers, beastAxe, beastHood,
 				beastChest, beastLegs, beastBoots, rogueHood, rogueChest,
 				rogueLegs, rogueBoots, rogueLeather, beastLeather, crystal,
 				whistle, petCandy, tangledBrench, PetXPBottle };
 
-		for (int i = 0; i < allItems.length; i++) {
-
+		for (int i = 0; i < allItems.length; i++)
 			if (allItems[i] != null) {
 
 				String itemName = allItems[i].getUnlocalizedName().substring(
@@ -250,20 +251,18 @@ public class mod_RpgRB {
 				String itemNameCropped = itemName.substring(itemName
 						.indexOf(".") + 1);
 
-				if ((allItems[i] == rogueLeather)|| (allItems[i] == beastLeather)) {
+				if ((allItems[i] == rogueLeather)
+						|| (allItems[i] == beastLeather))
 					allItems[i].setTextureName("minecraft:" + itemNameCropped);
-				} else {
+				else
 					allItems[i].setTextureName(mod_RpgInventory.name + ":"
 							+ itemNameCropped);
-				}
 
 				GameRegistry
 						.registerItem(allItems[i],
 								allItems[i].getUnlocalizedName(),
 								mod_RpgInventory.name);
-			} else {
+			} else
 				System.out.println("Item is null !" + i);
-			}
-		}
 	}
 }

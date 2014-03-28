@@ -98,9 +98,8 @@ public class ItemGrandSword extends Item {
 	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World,
 			Block b, int par4, int par5, int par6,
 			EntityLivingBase par7EntityLiving) {
-		if (b.getBlockHardness(par2World, par4, par5, par6) != 0.0D) {
+		if (b.getBlockHardness(par2World, par4, par5, par6) != 0.0D)
 			par1ItemStack.damageItem(2, par7EntityLiving);
-		}
 		return true;
 	}
 

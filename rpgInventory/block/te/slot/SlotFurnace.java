@@ -33,46 +33,39 @@ class SlotFurnace extends Slot {
 	public boolean isItemValid(ItemStack is) {
 		// super.isItemValid(par1ItemStack);
 
-		if (is != null) {
+		if (is != null)
 			switch (slotIndex) {
 			case 0:
 				if ((is == new ItemStack(Items.coal))
 						|| (is == new ItemStack(Items.lava_bucket))
-						|| (is == new ItemStack(Items.blaze_rod))) {
+						|| (is == new ItemStack(Items.blaze_rod)))
 					return true;
-				}
 			case 1:
-				if (is == new ItemStack(Blocks.gold_block)) {
+				if (is == new ItemStack(Blocks.gold_block))
 					return true;
-				}
 				return false;
 			case 2:
 				if ((is == new ItemStack(mod_RpgInventory.colmold))
 						|| (is == new ItemStack(mod_RpgInventory.wantmold))
-						|| (is == new ItemStack(mod_RpgInventory.ringmold))) {
+						|| (is == new ItemStack(mod_RpgInventory.ringmold)))
 					return true;
-				}
 				return false;
 			case 3:
 				if ((is == new ItemStack(Items.diamond))
 						|| (is == new ItemStack(Items.emerald))
 						|| (is == new ItemStack(Items.gold_ingot))
-						|| (is == new ItemStack(Items.dye, 1, 4))) {
+						|| (is == new ItemStack(Items.dye, 1, 4)))
 					return true;
-				}
 				return false;
 			}
-		}
 		return false;
 	}
 
 	@Override
 	public void putStack(ItemStack par1ItemStack) {
-		if (this.inventory != null) {
+		if (this.inventory != null)
 			this.inventory.setInventorySlotContents(this.slotIndex,
 					par1ItemStack);
-
-		}
 		this.onSlotChanged();
 	}
 }

@@ -18,15 +18,12 @@ public class ItemRpg extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack is, int par2) {
-		if (is.getItem() == mod_addonBase.tanHide) {
+		if (is.getItem() == mod_addonBase.tanHide)
 			return 0xa24203;
-		}
-		if (is.getItem() == mod_addonBase.magecloth) {
+		if (is.getItem() == mod_addonBase.magecloth)
 			return 0x000080;
-		}
-		if (is.getItem() == mod_addonBase.animalskin) {
+		if (is.getItem() == mod_addonBase.animalskin)
 			return 0x71544f;
-		}
 		return 16777215;
 	}
 
@@ -34,18 +31,16 @@ public class ItemRpg extends Item {
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack) {
 		if ((par1ItemStack.getItem() == mod_addonBase.magecloth)
-				|| (par1ItemStack.getItem() == mod_addonBase.wizardBook)) {
+				|| (par1ItemStack.getItem() == mod_addonBase.wizardBook))
 			return true;
-		}
 		return false;
 	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer player) {
-		if (par1ItemStack.getItem() == mod_addonBase.wizardBook) {
+		if (par1ItemStack.getItem() == mod_addonBase.wizardBook)
 			mod_RpgInventory.proxy.openGUI(player, 2);
-		}
 		return par1ItemStack;
 	}
 

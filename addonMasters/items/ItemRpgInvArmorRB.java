@@ -29,20 +29,17 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 	@Override
 	public String boundArmorClass() {
 
-		if (this.equals(mod_RpgRB.beastShield)) {
+		if (this.equals(mod_RpgRB.beastShield))
 			return mod_RpgRB.CLASSBEASTMASTER;
-		}
-		if (this.equals(mod_RpgRB.daggers)) {
+		if (this.equals(mod_RpgRB.daggers))
 			return mod_RpgRB.CLASSROGUE;
-		}
 		return super.boundArmorClass();
 	}
 
 	@Override
 	public MainShield getShieldModel() {
-		if (this.equals(mod_RpgRB.beastShield)) {
+		if (this.equals(mod_RpgRB.beastShield))
 			return lion;
-		}
 		// if(this.equals(mod_RpgRB.daggers))
 		// return dagger;
 		return super.getShieldModel();
@@ -61,47 +58,43 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 		if (((EntityPlayer) par3EntityLiving).getCurrentEquippedItem()
 				.getItem() == mod_RpgRB.daggers) {
 			if (mod_RpgInventory.playerClass
-					.contains(mod_RpgRB.CLASSROGUESHIELDED)) {
+					.contains(mod_RpgRB.CLASSROGUESHIELDED))
 				par2EntityLiving.addPotionEffect(new PotionEffect(
 						Potion.poison.id, mod_RpgInventory.donators
 								.contains(((EntityPlayer) par3EntityLiving)
 										.getDisplayName()) ? 80 : 60, 1));
-			} else if (mod_RpgInventory.playerClass
+			else if (mod_RpgInventory.playerClass
 					.contains(mod_RpgRB.CLASSROGUE)) {
 				par2EntityLiving.addPotionEffect(new PotionEffect(
 						Potion.poison.id, mod_RpgInventory.donators
 								.contains(((EntityPlayer) par3EntityLiving)
 										.getDisplayName()) ? 40 : 30, 0));
-				if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
+				if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime())
 					par2EntityLiving
 							.attackEntityFrom(
 									DamageSource
 											.causePlayerDamage((EntityPlayer) par3EntityLiving),
 									10);
-				}
 			}
-			if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
+			if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime())
 				par2EntityLiving
 						.attackEntityFrom(
 								DamageSource
 										.causePlayerDamage((EntityPlayer) par3EntityLiving),
 								10);
-			} else {
+			else
 				par2EntityLiving.attackEntityFrom(DamageSource
 						.causePlayerDamage((EntityPlayer) par3EntityLiving), 6);
-			}
 		}
 		return false;
 	}
 
 	@Override
 	public String shieldClass() {
-		if (this.equals(mod_RpgRB.beastShield)) {
+		if (this.equals(mod_RpgRB.beastShield))
 			return mod_RpgRB.CLASSBEASTMASTERSHIELDED;
-		}
-		if (this.equals(mod_RpgRB.daggers)) {
+		if (this.equals(mod_RpgRB.daggers))
 			return mod_RpgRB.CLASSROGUESHIELDED;
-		}
 		return super.shieldClass();
 	}
 

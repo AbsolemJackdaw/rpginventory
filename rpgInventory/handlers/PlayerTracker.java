@@ -21,14 +21,13 @@ public class PlayerTracker /* implements IPlayerTracker */{
 		// TODO
 		System.out.println("send packet here dimension");
 
-		if (!e.player.worldObj.isRemote) {
+		if (!e.player.worldObj.isRemote)
 			PacketInventory.sendPacket((EntityPlayerMP) e.player,
 					PlayerRpgInventory.get(e.player));
-			// PacketInventory pack = new PacketInventory();
-			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			// pipe.sendTo(pack, (EntityPlayerMP) e.player);
-			// PacketInventory.sendPacket(e.player,
-		}
+		// PacketInventory pack = new PacketInventory();
+		// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+		// pipe.sendTo(pack, (EntityPlayerMP) e.player);
+		// PacketInventory.sendPacket(e.player,
 		PlayerRpgInventory.get(e.player);
 	}
 
@@ -37,14 +36,12 @@ public class PlayerTracker /* implements IPlayerTracker */{
 		// TODO
 		System.out.println("send packet here login");
 
-		if (!e.player.worldObj.isRemote) {
+		if (!e.player.worldObj.isRemote)
 			// PacketInventory pack = new PacketInventory();
 			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
 			// pipe.sendTo(pack, (EntityPlayerMP) e.player);
 			PacketInventory.sendPacket((EntityPlayerMP) e.player,
 					PlayerRpgInventory.get(e.player));
-
-		}
 		// PacketInventory.sendPacket(e.player,
 		PlayerRpgInventory.get(e.player);
 	}
@@ -61,13 +58,12 @@ public class PlayerTracker /* implements IPlayerTracker */{
 		System.out.println("send packet here respawn");
 		// PacketInventory.sendPacket(e.player,
 
-		if (!e.player.worldObj.isRemote) {
+		if (!e.player.worldObj.isRemote)
 			PacketInventory.sendPacket((EntityPlayerMP) e.player,
 					PlayerRpgInventory.get(e.player));
-			// PacketInventory pack = new PacketInventory();
-			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			// pipe.sendTo(pack, (EntityPlayerMP) e.player);
-		}
+		// PacketInventory pack = new PacketInventory();
+		// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+		// pipe.sendTo(pack, (EntityPlayerMP) e.player);
 		PlayerRpgInventory.get(e.player);
 	}
 }

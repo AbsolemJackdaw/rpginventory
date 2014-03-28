@@ -15,16 +15,14 @@ public class VanillaEvents {
 	public void damageItem(ItemStack item, PlayerRpgInventory inv,
 			EntityPlayer p, int slot, int amount) {
 		if (mod_RpgInventory.developers.contains(p.getDisplayName()
-				.toLowerCase())) {
+				.toLowerCase()))
 			return;
-		}
 		try {
-			if ((item.getItemDamage() + amount) >= item.getMaxDamage()) {
+			if ((item.getItemDamage() + amount) >= item.getMaxDamage())
 				// Trigger item break stuff
 				item = null;
-			} else {
+			else
 				item.damageItem(amount, p);
-			}
 			inv.setInventorySlotContents(slot, item);
 		} catch (Throwable e) {
 		}
@@ -36,8 +34,8 @@ public class VanillaEvents {
 		try {
 			/* ADDING EXTRA DAMAGE TO CLASS ARMOR COMBINATIONS */
 			Entity damager = evt.source.getSourceOfDamage();
-			if (damager != null) {
-				if (damager instanceof EntityPlayer) {
+			if (damager != null)
+				if (damager instanceof EntityPlayer)
 					try {
 						/* DAMAGING AND REDUCING DAMAGE / VANILLA SHIELDS */
 						if ((evt.entityLiving != null)
@@ -52,18 +50,17 @@ public class VanillaEvents {
 									&& (shield.getItem() instanceof ItemRpgInvShields)) {
 
 								if (mod_RpgInventory.playerClass
-										.contains(mod_VanillaShields.WOODENSHIELD)) {
+										.contains(mod_VanillaShields.WOODENSHIELD))
 									vanillaReduction += 0.27f;
-								} else if (mod_RpgInventory.playerClass
-										.contains(mod_VanillaShields.IRONSHIELD)) {
+								else if (mod_RpgInventory.playerClass
+										.contains(mod_VanillaShields.IRONSHIELD))
 									vanillaReduction += 0.4f;
-								} else if (mod_RpgInventory.playerClass
-										.contains(mod_VanillaShields.GOLDENSHIELD)) {
+								else if (mod_RpgInventory.playerClass
+										.contains(mod_VanillaShields.GOLDENSHIELD))
 									vanillaReduction += 0.7f;
-								} else if (mod_RpgInventory.playerClass
-										.contains(mod_VanillaShields.DIAMONDSHIELD)) {
+								else if (mod_RpgInventory.playerClass
+										.contains(mod_VanillaShields.DIAMONDSHIELD))
 									vanillaReduction += 1.50f;
-								}
 								vanillaReduction += mod_RpgInventory.donators
 										.contains(player.getDisplayName()) ? 0.20f
 										: 0;
@@ -79,8 +76,6 @@ public class VanillaEvents {
 						}
 					} catch (Throwable e) {
 					}
-				}
-			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

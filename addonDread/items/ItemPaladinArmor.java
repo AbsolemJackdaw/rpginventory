@@ -22,18 +22,16 @@ public class ItemPaladinArmor extends AbstractArmor {
 	@Override
 	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
 			int armorSlot) {
-		if (stack != null) {
+		if (stack != null)
 			if (stack.getItem() instanceof ItemArmor) {
 
 				int type = ((ItemArmor) stack.getItem()).armorType;
 
-				if ((type == 1) || (type == 3)) {
+				if ((type == 1) || (type == 3))
 					armorModel = mod_RpgPlus.proxy.getArmorModel(2);
-				} else {
+				else
 					armorModel = mod_RpgPlus.proxy.getArmorModel(3);
-				}
 			}
-		}
 	}
 
 	@Override
@@ -42,12 +40,10 @@ public class ItemPaladinArmor extends AbstractArmor {
 
 		if ((itemstack.getItem() == mod_RpgPlus.palaHelm)
 				|| (itemstack.getItem() == mod_RpgPlus.palaChest)
-				|| (itemstack.getItem() == mod_RpgPlus.palaBoots)) {
+				|| (itemstack.getItem() == mod_RpgPlus.palaBoots))
 			return "armor:pal_1.png";
-		}
-		if (itemstack.getItem() == mod_RpgPlus.palaLeggings) {
+		if (itemstack.getItem() == mod_RpgPlus.palaLeggings)
 			return "armor:pal_2.png";
-		}
 		return null;
 	}
 

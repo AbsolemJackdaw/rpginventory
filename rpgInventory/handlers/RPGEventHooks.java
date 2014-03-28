@@ -55,9 +55,8 @@ public class RPGEventHooks {
 						.get(evt.entityPlayer);
 				ItemStack ringa = inv.getRing1();
 				if ((ringa != null)
-						&& ringa.getItem().equals(mod_RpgInventory.ringem)) {
+						&& ringa.getItem().equals(mod_RpgInventory.ringem))
 					evt.newSpeed = evt.originalSpeed * 4;
-				}
 			}
 		} catch (Throwable e) {
 		}
@@ -66,16 +65,14 @@ public class RPGEventHooks {
 	public void damageItem(ItemStack item, PlayerRpgInventory inv,
 			EntityPlayer p, int slot, int amount) {
 		if (mod_RpgInventory.developers.contains(p.getCommandSenderName()
-				.toLowerCase())) {
+				.toLowerCase()))
 			return;
-		}
 		try {
-			if ((item.getItemDamage() + amount) >= item.getMaxDamage()) {
+			if ((item.getItemDamage() + amount) >= item.getMaxDamage())
 				// Trigger item break stuff
 				item = null;
-			} else {
+			else
 				item.damageItem(amount, p);
-			}
 			inv.setInventorySlotContents(slot, item);
 		} catch (Throwable e) {
 		}
@@ -92,10 +89,9 @@ public class RPGEventHooks {
 				PlayerRpgInventory inv = PlayerRpgInventory
 						.get((EntityPlayer) evt.entityLiving);
 				if (mod_RpgInventory.playerClass
-						.contains(mod_RpgInventory.CLASSBERSERKER)) {
+						.contains(mod_RpgInventory.CLASSBERSERKER))
 					player.worldObj.newExplosion(player, player.posX,
 							player.posY, player.posZ, 20, false, false);
-				}
 			}
 
 		} catch (Throwable e) {
@@ -117,11 +113,10 @@ public class RPGEventHooks {
 		 * registered once per entity
 		 */
 		if ((event.entity instanceof EntityPlayer)
-				&& (PlayerRpgInventory.get((EntityPlayer) event.entity) == null)) {
+				&& (PlayerRpgInventory.get((EntityPlayer) event.entity) == null))
 			// This is how extended properties are registered using our
 			// convenient method from earlier
 			PlayerRpgInventory.register((EntityPlayer) event.entity);
-		}
 	}
 
 	@SubscribeEvent
@@ -130,7 +125,7 @@ public class RPGEventHooks {
 		try {
 			/* ADDING EXTRA DAMAGE TO CLASS ARMOR COMBINATIONS */
 			Entity damager = evt.source.getSourceOfDamage();
-			if (damager != null) {
+			if (damager != null)
 				if (damager instanceof EntityPlayer) {
 					float damagebonus = 0.0F;
 					PlayerRpgInventory inv = PlayerRpgInventory
@@ -148,13 +143,11 @@ public class RPGEventHooks {
 						// }
 					}
 					if (mod_RpgInventory.playerClass
-							.contains(mod_RpgInventory.CLASSBERSERKER)) {
+							.contains(mod_RpgInventory.CLASSBERSERKER))
 						// hit harder with both hands 'free'
 						if (!mod_RpgInventory.playerClass
-								.contains(mod_RpgInventory.CLASSBERSERKERSHIELD)) {
+								.contains(mod_RpgInventory.CLASSBERSERKERSHIELD))
 							evt.ammount += 2;
-						}
-					}
 
 					/* ==== LAPIS BONUS ATTACK==== */
 					ItemStack neck = inv.getNecklace();
@@ -162,30 +155,25 @@ public class RPGEventHooks {
 					ItemStack ringb = inv.getRing2();
 					ItemStack gloves = inv.getGloves();
 					if ((neck != null)
-							&& neck.getItem().equals(mod_RpgInventory.necklap)) {
+							&& neck.getItem().equals(mod_RpgInventory.necklap))
 						damagebonus += 0.3F;
-					}
 					if ((ringa != null)
-							&& ringa.getItem().equals(mod_RpgInventory.ringlap)) {
+							&& ringa.getItem().equals(mod_RpgInventory.ringlap))
 						damagebonus += mod_RpgInventory.donators
 								.contains(((EntityPlayer) damager)
 										.getCommandSenderName()) ? 0.2f : 0.1F;
-					}
 					if ((ringb != null)
-							&& ringb.getItem().equals(mod_RpgInventory.ringlap)) {
+							&& ringb.getItem().equals(mod_RpgInventory.ringlap))
 						damagebonus += mod_RpgInventory.donators
 								.contains(((EntityPlayer) damager)
 										.getCommandSenderName()) ? 0.2f : 0.1F;
-					}
 					if ((gloves != null)
 							&& gloves.getItem().equals(
-									mod_RpgInventory.gloveslap)) {
+									mod_RpgInventory.gloveslap))
 						damagebonus += 0.2F;
-					}
 					evt.ammount += MathHelper.floor_float(damagebonus
 							* (evt.ammount));
 				}
-			}
 		} catch (Throwable e) {
 		}
 		try {
@@ -201,9 +189,8 @@ public class RPGEventHooks {
 
 					if (((ItemRpgInvArmor) inv.getShield().getItem())
 							.boundArmorClass().equals(
-									mod_RpgInventory.playerClass)) {
+									mod_RpgInventory.playerClass))
 						vanillaReduction += 0.6f;
-					}
 
 					if (vanillaReduction > 1f) {
 						damageReduction = 1f + (vanillaReduction - 1f);
@@ -223,17 +210,15 @@ public class RPGEventHooks {
 				EntityPlayer player = (EntityPlayer) evt.entityLiving;
 				PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 				if ((inv.getGloves() != null)
-						&& (inv.getGloves().getItem() == mod_RpgInventory.glovesem)) {
-					if ((evt.ammount * 0.2F) < 1) {
+						&& (inv.getGloves().getItem() == mod_RpgInventory.glovesem))
+					if ((evt.ammount * 0.2F) < 1)
 						evt.ammount -= 1;
-					} else {
+					else
 						evt.ammount -= MathHelper
 								.floor_float(evt.ammount
 										* (mod_RpgInventory.donators.contains(player
 												.getCommandSenderName()) ? 0.3f
 												: 0.2F));
-					}
-				}
 				if (inv != null) {
 					ItemStack shield = inv.getShield();
 					if (shield != null) {
@@ -241,31 +226,24 @@ public class RPGEventHooks {
 								.contains(mod_RpgInventory.CLASSMAGESHIELD)) {
 							float damageReduction = 0.20F;
 							EntityLivingBase damagedealer = null;
-							if (evt.source.isMagicDamage()) {
+							if (evt.source.isMagicDamage())
 								damageReduction = 0.50F;
-							} else if (evt.source.getSourceOfDamage() != null) {
+							else if (evt.source.getSourceOfDamage() != null)
 								if (evt.source.isProjectile()) {
-									if (evt.source.getSourceOfDamage() instanceof EntityArrow) {
+									if (evt.source.getSourceOfDamage() instanceof EntityArrow)
 										if (((EntityArrow) evt.source
-												.getSourceOfDamage()).shootingEntity != null) {
+												.getSourceOfDamage()).shootingEntity != null)
 											if (((EntityArrow) evt.source
-													.getSourceOfDamage()).shootingEntity instanceof EntityLivingBase) {
+													.getSourceOfDamage()).shootingEntity instanceof EntityLivingBase)
 												damagedealer = (EntityLivingBase) ((EntityArrow) evt.source
 														.getSourceOfDamage()).shootingEntity;
-											}
-										}
-									}
-									if (evt.source.getSourceOfDamage() instanceof EntityLivingBase) {
+									if (evt.source.getSourceOfDamage() instanceof EntityLivingBase)
 										damagedealer = (EntityLivingBase) evt.source
 												.getSourceOfDamage();
-									}
 								}
-							}
-							if (damagedealer != null) {
-								if (damagedealer.isEntityUndead()) {
+							if (damagedealer != null)
+								if (damagedealer.isEntityUndead())
 									damageReduction = 0.75F;
-								}
-							}
 							evt.ammount -= MathHelper.floor_float((evt.ammount)
 									* damageReduction);
 							damageItem(shield, inv, player, 1, 1);
@@ -274,45 +252,36 @@ public class RPGEventHooks {
 								.contains(mod_RpgInventory.CLASSARCHERSHIELD)) {
 							float damageReduction = 0.25F;
 							EntityLivingBase damagedealer = null;
-							if (evt.source.getSourceOfDamage() != null) {
+							if (evt.source.getSourceOfDamage() != null)
 								if (evt.source.isProjectile()) {
-									if (evt.source.getSourceOfDamage() instanceof EntityArrow) {
+									if (evt.source.getSourceOfDamage() instanceof EntityArrow)
 										if (((EntityArrow) evt.source
-												.getSourceOfDamage()).shootingEntity != null) {
+												.getSourceOfDamage()).shootingEntity != null)
 											if (((EntityArrow) evt.source
 													.getSourceOfDamage()).shootingEntity instanceof EntityLivingBase) {
 												damagedealer = (EntityLivingBase) ((EntityArrow) evt.source
 														.getSourceOfDamage()).shootingEntity;
 												damageReduction = 0.70F;
 											}
-										}
-									}
-									if (evt.source.getSourceOfDamage() instanceof EntityLivingBase) {
+									if (evt.source.getSourceOfDamage() instanceof EntityLivingBase)
 										damagedealer = (EntityLivingBase) evt.source
 												.getSourceOfDamage();
-									}
 								}
-							}
-							if (damageReduction < 0.70F) {
+							if (damageReduction < 0.70F)
 								if (damagedealer != null) {
-									if (damagedealer.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD) {
+									if (damagedealer.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD)
 										damageReduction = 0.40F;
-									}
-									if (damagedealer instanceof EntityTameable) {
-										if (!damagedealer.isEntityUndead()) {
+									if (damagedealer instanceof EntityTameable)
+										if (!damagedealer.isEntityUndead())
 											damageReduction = 0.50F;
-										}
-									}
 								}
-							}
-							if (evt.source.isFireDamage()) {
+							if (evt.source.isFireDamage())
 								evt.ammount += MathHelper
 										.floor_float((evt.ammount) * 0.10F);
-							} else {
+							else
 								evt.ammount -= MathHelper
 										.floor_float((evt.ammount)
 												* damageReduction);
-							}
 							damageItem(shield, inv, player, 1, 1);
 						}
 					} else if (mod_RpgInventory.playerClass
@@ -320,13 +289,12 @@ public class RPGEventHooks {
 						float damageReduction = 0.50F;
 						evt.ammount -= MathHelper.floor_float((evt.ammount)
 								* damageReduction);
-						if (evt.ammount > 1) {
+						if (evt.ammount > 1)
 							// Flat 1 damage absorption on top of resistance if
 							// the damage is greater than 1.
 							// The additional absorbtion alone will never reduce
 							// all damage.
 							evt.ammount -= 1;
-						}
 						damageItem(shield, inv, player, 1, 1);
 					}
 				}
@@ -406,10 +374,9 @@ public class RPGEventHooks {
 	public void PlayerUpdate(PlayerEvent.LivingUpdateEvent evt) {
 		/* ====UPDATING INVENTORY==== */
 		try {
-			if (evt.entityLiving instanceof EntityPlayer) {
+			if (evt.entityLiving instanceof EntityPlayer)
 				PlayerRpgInventory.get((EntityPlayer) evt.entityLiving)
 						.markDirty();
-			}
 		} catch (Throwable ex) {
 		}
 
@@ -470,46 +437,38 @@ public class RPGEventHooks {
 					/* ====LAPIS WEAPON HEALING==== */
 					boolean armorheal = false;
 					if ((neck != null)
-							&& neck.getItem().equals(mod_RpgInventory.necklap)) {
+							&& neck.getItem().equals(mod_RpgInventory.necklap))
 						armorheal = true;
-					}
 					if ((ringa != null)
-							&& ringa.getItem().equals(mod_RpgInventory.ringlap)) {
+							&& ringa.getItem().equals(mod_RpgInventory.ringlap))
 						armorheal = true;
-					}
 					if ((ringb != null)
-							&& ringb.getItem().equals(mod_RpgInventory.ringlap)) {
+							&& ringb.getItem().equals(mod_RpgInventory.ringlap))
 						armorheal = true;
-					}
 					if ((gloves != null)
 							&& gloves.getItem().equals(
-									mod_RpgInventory.gloveslap)) {
+									mod_RpgInventory.gloveslap))
 						armorheal = true;
-					}
 					if (armorheal) {
-						if (!LapisTick.containsKey(p.getCommandSenderName())) {
+						if (!LapisTick.containsKey(p.getCommandSenderName()))
 							LapisTick.put(p.getCommandSenderName(), 60);
-						}
-					} else {
+					} else
 						LapisTick.remove(p.getCommandSenderName());
-					}
 
 					/* ====ARCHER EFFECTS==== */
 					// doesnt work TODO
 					// needs to be checked if actually works or not
 					float jumpboost = p.jumpMovementFactor;
 					if (mod_RpgInventory.playerClass
-							.contains(mod_RpgInventory.CLASSARCHER)) {
+							.contains(mod_RpgInventory.CLASSARCHER))
 						jumpboost *= mod_RpgInventory.donators.contains(p
 								.getCommandSenderName()) ? 3.0f : 2.0F;
-					}
 					p.jumpMovementFactor = jumpboost;
 
 					/* ====MAGE FALLDAMAGE NEGATION==== */
 					if (mod_RpgInventory.playerClass
-							.contains(mod_RpgInventory.CLASSMAGESHIELD)) {
+							.contains(mod_RpgInventory.CLASSMAGESHIELD))
 						p.fallDistance = 0;
-					}
 
 					ItemStack weapon = p.getCurrentEquippedItem();
 					if (weapon != null) {
@@ -581,19 +540,16 @@ public class RPGEventHooks {
 								p.attackEntityFrom(DamageSource.drown, 1);
 							}
 							p.extinguish();
-						} else {
+						} else
 							p.setAir(300);
-						}
 					}
 
 					/* ==== EMERALD CURE ==== */
 					// works
 					if ((ringb != null)
-							&& ringb.getItem().equals(mod_RpgInventory.ringem)) {
-						for (Integer id : negativeEffects) {
+							&& ringb.getItem().equals(mod_RpgInventory.ringem))
+						for (Integer id : negativeEffects)
 							p.removePotionEffect(id);
-						}
-					}
 
 					/* ==== SPEED BOOST GOLD JEWELS ==== */
 					float speedboost = 0;
@@ -632,24 +588,21 @@ public class RPGEventHooks {
 					//
 
 					/* ==== Something about the archer .__. ==== */
-					if (ArcherRepairTick.containsKey(p.getCommandSenderName())) {
+					if (ArcherRepairTick.containsKey(p.getCommandSenderName()))
 						if (mod_RpgInventory.playerClass
-								.contains(mod_RpgInventory.CLASSARCHER)) {
+								.contains(mod_RpgInventory.CLASSARCHER))
 							p.jumpMovementFactor = 0.09F;
-						} else {
+						else {
 							ArcherRepairTick.remove(p.getCommandSenderName());
 							p.jumpMovementFactor = 0.02F;
 						}
-					}
 
 					/* ==== Invisibility Cloak==== */
 					ItemStack cloak = inv.getCloak();
-					if (cloak != null) {
-						if (cloak.getItem() == mod_RpgInventory.cloakI) {
+					if (cloak != null)
+						if (cloak.getItem() == mod_RpgInventory.cloakI)
 							p.addPotionEffect(new PotionEffect(
 									Potion.invisibility.id, 20, 1));
-						}
-					}
 				}
 			}
 		} catch (Throwable ex) {

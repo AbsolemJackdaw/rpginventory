@@ -15,14 +15,12 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
-		if (ID == 1) {
+		if (ID == 1)
 			return new RpgGui(player, new PlayerRpgInventory(player));
-		}
 
-		if (ID == 2) {
+		if (ID == 2)
 			return new GuiMF(player.inventory, (TEMold) world.getTileEntity(x,
 					y, z));
-		}
 		return null;
 	}
 
@@ -34,10 +32,9 @@ public class GuiHandler implements IGuiHandler {
 			PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 			return new PlayerRpgContainer(player, inv);
 		}
-		if (ID == 2) {
+		if (ID == 2)
 			return new MoldContainer(player.inventory,
 					(TEMold) world.getTileEntity(x, y, z));
-		}
 
 		return null;
 	}

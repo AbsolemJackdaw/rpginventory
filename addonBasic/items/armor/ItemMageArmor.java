@@ -22,18 +22,16 @@ public class ItemMageArmor extends AbstractArmor {
 	@Override
 	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
 			int armorSlot) {
-		if (stack != null) {
+		if (stack != null)
 			if (stack.getItem() instanceof ItemArmor) {
 
 				int type = ((ItemArmor) stack.getItem()).armorType;
 
-				if ((type == 1) || (type == 3)) {
+				if ((type == 1) || (type == 3))
 					armorModel = mod_addonBase.proxy.getArmorModel(1);
-				} else {
+				else
 					armorModel = mod_addonBase.proxy.getArmorModel(0);
-				}
 			}
-		}
 	}
 
 	@Override
@@ -41,12 +39,10 @@ public class ItemMageArmor extends AbstractArmor {
 			String type) {
 		if ((itemstack.getItem() == mod_addonBase.magehood)
 				|| (itemstack.getItem() == mod_addonBase.magegown)
-				|| (itemstack.getItem() == mod_addonBase.mageboots)) {
+				|| (itemstack.getItem() == mod_addonBase.mageboots))
 			return "armor:mage_1.png";
-		}
-		if (itemstack.getItem() == mod_addonBase.magepants) {
+		if (itemstack.getItem() == mod_addonBase.magepants)
 			return "armor:mage_2.png";
-		}
 		return super.getArmorTexture(itemstack, entity, slot, type);
 	}
 }

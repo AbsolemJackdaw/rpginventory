@@ -57,11 +57,10 @@ public class SpiderPet extends BMPetImpl {
 		if (super.attackEntityAsMob(par1Entity)) {
 			if (par1Entity instanceof EntityLiving) {
 				int level = getLevel();
-				if (level > 10) {
+				if (level > 10)
 					((EntityLiving) par1Entity)
 							.addPotionEffect(new PotionEffect(Potion.poison.id,
 									200, level < 50 ? 1 : 2));
-				}
 			}
 			return true;
 		}
@@ -131,9 +130,9 @@ public class SpiderPet extends BMPetImpl {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (getLevel() <= 200) {
+		if (getLevel() <= 200)
 			petSize = 0.5F + (((getLevel()) / 200.0F) * 1.5F);
-		} else {
+		else {
 			setLevel(200);
 			petSize = 2.0F;
 		}

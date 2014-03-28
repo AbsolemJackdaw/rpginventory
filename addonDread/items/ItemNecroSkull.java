@@ -51,7 +51,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 				ItemStack weapon = p.getCurrentEquippedItem();
 				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
-				if (weapon != null) {
+				if (weapon != null)
 					if (weapon.getItem().equals(mod_RpgPlus.necro_weapon)
 							&& mod_RpgInventory.playerClass
 									.contains(mod_RpgPlus.CLASSNECRO)) {
@@ -64,9 +64,8 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 							// delete the item
 							p.renderBrokenItemStack(weapon);
 							p.setCurrentItemOrArmor(0, (ItemStack) null);
-						} else {
+						} else
 							weapon.damageItem(2, p);
-						}
 
 						if (mob.getClass() == EntityZombie.class) {
 
@@ -75,9 +74,8 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 
 							for (int i = 0; i < 5; i++) {
 								ItemStack stack = mob.getEquipmentInSlot(i);
-								if (stack != null) {
+								if (stack != null)
 									var4.setCurrentItemOrArmor(i, stack);
-								}
 							}
 							mob.setDead();
 
@@ -99,21 +97,17 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 							world.spawnEntityInWorld(pigzombie);
 							// necromancers can not make pig zombies angry !
 
-						} else {
-							if (!(mob instanceof IMinion)) {
-								mob.attackEntityFrom(DamageSource.wither,
-										mod_RpgInventory.donators.contains(p
-												.getDisplayName()) ? 6 : 4);
-								mob.addPotionEffect(new PotionEffect(
-										Potion.wither.id,
-										mod_RpgInventory.donators.contains(p
-												.getDisplayName()) ? 60 : 40, 1));
-							} else {
-								mob.heal(3);
-							}
-						}
+						} else if (!(mob instanceof IMinion)) {
+							mob.attackEntityFrom(DamageSource.wither,
+									mod_RpgInventory.donators.contains(p
+											.getDisplayName()) ? 6 : 4);
+							mob.addPotionEffect(new PotionEffect(
+									Potion.wither.id, mod_RpgInventory.donators
+											.contains(p.getDisplayName()) ? 60
+											: 40, 1));
+						} else
+							mob.heal(3);
 					}
-				}
 
 			}
 		}
@@ -148,7 +142,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 
 		ItemStack weapon = p.getCurrentEquippedItem();
 
-		if (mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO)) {
+		if (mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO))
 			if (entity instanceof IMinion) {
 				if ((weapon.getItemDamage() + 2) >= weapon.getMaxDamage()) {
 					// Trigger item break stuff
@@ -158,14 +152,12 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 					// delete the item
 					p.renderBrokenItemStack(weapon);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else {
+				} else
 					weapon.damageItem(mod_RpgInventory.donators.contains(p
 							.getDisplayName()) ? 1 : 2, p);
-				}
 				((EntityLiving) entity).heal(3);
 				return true;
 			}
-		}
 		return false;
 	}
 }

@@ -35,24 +35,22 @@ public class CommonTickHandler /* implements ITickHandler */{
 	private int countDownLapis = lapisTimer;
 
 	public void dropJewels(EntityPlayer player) {
-		if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+		if (FMLCommonHandler.instance().getEffectiveSide().isServer())
 			if (player.worldObj.getGameRules().getGameRuleBooleanValue(
 					"keepInventory") == false) {
 				PlayerRpgInventory rpg = PlayerRpgInventory.get(player);
 				int var1;
 				player.inventory.dropAllItems();
-				for (var1 = 0; var1 < rpg.armorSlots.length; ++var1) {
+				for (var1 = 0; var1 < rpg.armorSlots.length; ++var1)
 					if (rpg.getStackInSlot(var1) != null) {
 						player.inventory.setInventorySlotContents(
 								player.inventory.getFirstEmptyStack(),
 								rpg.getStackInSlot(var1));
 						rpg.setInventorySlotContents(var1, null);
 					}
-				}
 				player.inventory.dropAllItems();
 				// System.out.println("JEWELS DROPPED!");
 			}
-		}
 	}
 
 	// @Override
@@ -64,24 +62,20 @@ public class CommonTickHandler /* implements ITickHandler */{
 	public void tickEnd(TickEvent.ServerTickEvent ev) {
 
 		for (Entry<String, Integer> entry : globalCooldownMap.entrySet()) {
-			if (entry.getValue() > 0) {
+			if (entry.getValue() > 0)
 				entry.setValue(entry.getValue() - 1);
-			}
 			if (mod_RpgInventory.developers.contains(entry.getKey()
-					.toLowerCase())) {
+					.toLowerCase()))
 				entry.setValue(0);
-			}
 		}
 
 		List<EntityPlayer> players = MinecraftServer.getServer()
 				.getConfigurationManager().playerEntityList;
 		for (EntityPlayer player : players) {
-			if ((player.getHealth() <= 0) || player.isDead) {
+			if ((player.getHealth() <= 0) || player.isDead)
 				if (!player.worldObj.getGameRules().getGameRuleBooleanValue(
-						"keepInventory")) {
+						"keepInventory"))
 					dropJewels(player);
-				}
-			}
 			if (countdown == 0) {
 				//
 				// PacketInventory.sendServerPacket(player);
@@ -96,9 +90,8 @@ public class CommonTickHandler /* implements ITickHandler */{
 		}
 
 		countdown--;
-		if (countdown < 0) {
+		if (countdown < 0)
 			countdown = 20;
-		}
 	}
 
 	// /**
@@ -112,12 +105,12 @@ public class CommonTickHandler /* implements ITickHandler */{
 	@SubscribeEvent
 	public void tickStart(TickEvent.ServerTickEvent ev) {
 
-		for (String username : RPGEventHooks.ArcherRepairTick.keySet()) {
+		for (String username : RPGEventHooks.ArcherRepairTick.keySet())
 			try {
-				if (RPGEventHooks.ArcherRepairTick.get(username) > 0) {
+				if (RPGEventHooks.ArcherRepairTick.get(username) > 0)
 					RPGEventHooks.ArcherRepairTick.put(username,
 							RPGEventHooks.ArcherRepairTick.get(username) - 1);
-				} else {
+				else {
 					EntityPlayer player = MinecraftServer.getServer()
 							.getConfigurationManager()
 							.getPlayerForUsername(username);
@@ -153,13 +146,12 @@ public class CommonTickHandler /* implements ITickHandler */{
 				}
 			} catch (Throwable ex) {
 			}
-		}
-		for (String username : RPGEventHooks.DiamondTick.keySet()) {
+		for (String username : RPGEventHooks.DiamondTick.keySet())
 			try {
-				if (RPGEventHooks.DiamondTick.get(username) > 0) {
+				if (RPGEventHooks.DiamondTick.get(username) > 0)
 					RPGEventHooks.DiamondTick.put(username,
 							RPGEventHooks.DiamondTick.get(username) - 1);
-				} else {
+				else {
 					EntityPlayer player = MinecraftServer.getServer()
 							.getConfigurationManager()
 							.getPlayerForUsername(username);
@@ -169,47 +161,40 @@ public class CommonTickHandler /* implements ITickHandler */{
 					}
 
 					PlayerRpgInventory rpginv = PlayerRpgInventory.get(player);
-					if (rpginv == null) {
+					if (rpginv == null)
 						continue;
-					}
 					int delay;
 					delay = mod_RpgInventory.donators.contains(player
 							.getCommandSenderName()) ? 65 : 75;
 					if ((rpginv.getNecklace() != null)
 							&& rpginv.getNecklace().getItem()
-									.equals(mod_RpgInventory.neckdia)) {
+									.equals(mod_RpgInventory.neckdia))
 						delay -= 10;
-					}
 					if ((rpginv.getGloves() != null)
 							&& rpginv.getGloves().getItem()
-									.equals(mod_RpgInventory.glovesdia)) {
+									.equals(mod_RpgInventory.glovesdia))
 						delay -= 10;
-					}
 					if ((rpginv.getRing1() != null)
 							&& rpginv.getRing1().getItem()
-									.equals(mod_RpgInventory.ringdia)) {
+									.equals(mod_RpgInventory.ringdia))
 						delay -= 10;
-					}
 					if ((rpginv.getRing2() != null)
 							&& rpginv.getRing2().getItem()
-									.equals(mod_RpgInventory.ringdia)) {
+									.equals(mod_RpgInventory.ringdia))
 						delay -= 10;
-					}
 					RPGEventHooks.DiamondTick.put(
 							player.getCommandSenderName(), delay);
-					if (player.getHealth() < player.getMaxHealth()) {
+					if (player.getHealth() < player.getMaxHealth())
 						player.heal(1);
-					}
 				}
 			} catch (Throwable ex) {
 			}
-		}
-		for (String username : RPGEventHooks.HealerTick.keySet()) {
+		for (String username : RPGEventHooks.HealerTick.keySet())
 			try {
-				if (RPGEventHooks.HealerTick.get(username) > 0) {
+				if (RPGEventHooks.HealerTick.get(username) > 0)
 					RPGEventHooks.HealerTick.put(username,
 							RPGEventHooks.HealerTick.get(username) - 1);
-				} else {
+				else {
 					EntityPlayer player = MinecraftServer.getServer()
 							.getConfigurationManager()
 							.getPlayerForUsername(username);
@@ -237,14 +222,13 @@ public class CommonTickHandler /* implements ITickHandler */{
 				}
 			} catch (Throwable ex) {
 			}
-		}
 
-		for (String username : RPGEventHooks.LapisTick.keySet()) {
+		for (String username : RPGEventHooks.LapisTick.keySet())
 			try {
-				if (RPGEventHooks.LapisTick.get(username) > 0) {
+				if (RPGEventHooks.LapisTick.get(username) > 0)
 					RPGEventHooks.LapisTick.put(username,
 							RPGEventHooks.LapisTick.get(username) - 1);
-				} else {
+				else {
 					EntityPlayer player = MinecraftServer.getServer()
 							.getConfigurationManager()
 							.getPlayerForUsername(username);
@@ -253,37 +237,32 @@ public class CommonTickHandler /* implements ITickHandler */{
 						continue;
 					}
 					PlayerRpgInventory rpginv = PlayerRpgInventory.get(player);
-					if (rpginv == null) {
+					if (rpginv == null)
 						continue;
-					}
 					int heal = 0;
 					if ((rpginv.getNecklace() != null)
 							&& rpginv.getNecklace().getItem()
-									.equals(mod_RpgInventory.necklap)) {
+									.equals(mod_RpgInventory.necklap))
 						heal++;
-					}
 					if ((rpginv.getGloves() != null)
 							&& rpginv.getGloves().getItem()
-									.equals(mod_RpgInventory.gloveslap)) {
+									.equals(mod_RpgInventory.gloveslap))
 						heal++;
-					}
 					if ((rpginv.getRing1() != null)
 							&& rpginv.getRing1().getItem()
-									.equals(mod_RpgInventory.ringlap)) {
+									.equals(mod_RpgInventory.ringlap))
 						heal++;
-					}
 					if ((rpginv.getRing2() != null)
 							&& rpginv.getRing2().getItem()
-									.equals(mod_RpgInventory.ringlap)) {
+									.equals(mod_RpgInventory.ringlap))
 						heal++;
-					}
 
 					if (player.getCurrentEquippedItem() != null) {
 						ItemStack stack = player.getCurrentEquippedItem();
 						countDownLapis--;
 						if (stack.isItemDamaged() && (stack.stackSize == 1)
-								&& (stack.getMaxStackSize() == 1)) {
-							if (stack.getItemDamage() <= stack.getMaxDamage()) {
+								&& (stack.getMaxStackSize() == 1))
+							if (stack.getItemDamage() <= stack.getMaxDamage())
 								if (countDownLapis <= 0) {
 									stack.setItemDamage(stack.getItemDamage()
 											- heal);
@@ -292,15 +271,12 @@ public class CommonTickHandler /* implements ITickHandler */{
 													.getCommandSenderName()) ? 15 * 20
 											: lapisTimer;
 								}
-							}
-						}
 					}
 				}
 			} catch (Throwable ex) {
 			}
-		}
 
-		for (String username : RPGEventHooks.CustomPotionList.keySet()) {
+		for (String username : RPGEventHooks.CustomPotionList.keySet())
 			try {
 				EntityPlayer p = MinecraftServer.getServer()
 						.getConfigurationManager()
@@ -309,30 +285,25 @@ public class CommonTickHandler /* implements ITickHandler */{
 						.getActivePotionEffect(mod_RpgInventory.decomposePotion);
 				PotionEffect machicism = p
 						.getActivePotionEffect(mod_RpgInventory.masochismPotion);
-				if (decompose != null) {
+				if (decompose != null)
 					if ((RPGEventHooks.CustomPotionList.get(username) - 20) > decompose
 							.getDuration()) {
 						RPGEventHooks.CustomPotionList.put(username,
 								decompose.getDuration());
-						if (p.getHealth() > 1) {
+						if (p.getHealth() > 1)
 							p.attackEntityFrom(DamageSource.generic, 1);
-						}
 					}
-				}
-				if (machicism != null) {
+				if (machicism != null)
 					if ((RPGEventHooks.CustomPotionList.get(username) - 20) > machicism
 							.getDuration()) {
 						RPGEventHooks.CustomPotionList.put(username,
 								machicism.getDuration());
-						if (p.getHealth() < p.getMaxHealth()) {
+						if (p.getHealth() < p.getMaxHealth())
 							// while staf is being used, regen the healer
 							p.heal(1);
-						}
 					}
-				}
 			} catch (Throwable ex) {
 			}
-		}
 
 	}
 }

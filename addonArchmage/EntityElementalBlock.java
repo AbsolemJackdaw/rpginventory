@@ -124,8 +124,8 @@ public class EntityElementalBlock extends EntityThrowable implements
 					var1.hitVec.zCoord + this.size);
 			List<EntityLiving> entl = this.worldObj.getEntitiesWithinAABB(
 					EntityLiving.class, pool);
-			if ((entl != null) && (entl.size() > 0)) {
-				for (EntityLiving el : entl) {
+			if ((entl != null) && (entl.size() > 0))
+				for (EntityLiving el : entl)
 					if ((el != null) && (el != p)) {
 						el.setFire(30);
 						if (this.getThrower() instanceof EntityPlayer) {
@@ -133,30 +133,24 @@ public class EntityElementalBlock extends EntityThrowable implements
 									.causePlayerDamage((EntityPlayer) this
 											.getThrower()), 1);
 							el.attackEntityFrom(DamageSource.onFire, 2);
-						} else {
+						} else
 							el.attackEntityFrom(DamageSource.onFire, 2);
-						}
 
 					}
-				}
-			}
 			if (var1.typeOfHit == MovingObjectType.BLOCK) {
 			} else if (var1.typeOfHit == MovingObjectType.ENTITY) {
-				if (!(var1.entityHit instanceof EntityLiving)) {
+				if (!(var1.entityHit instanceof EntityLiving))
 					break;
-				}
-				if (var1.entityHit == p) {
+				if (var1.entityHit == p)
 					break;
-				}
 				var1.entityHit.setFire(30);
 				if (p instanceof EntityPlayer) {
 					var1.entityHit
 							.attackEntityFrom(DamageSource
 									.causePlayerDamage((EntityPlayer) p), 1);
 					var1.entityHit.attackEntityFrom(DamageSource.onFire, 2);
-				} else {
+				} else
 					var1.entityHit.attackEntityFrom(DamageSource.onFire, 2);
-				}
 			}
 			break;
 		case 2:
@@ -170,8 +164,8 @@ public class EntityElementalBlock extends EntityThrowable implements
 						var1.hitVec.zCoord + this.size);
 				List<EntityLiving> entl1 = this.worldObj.getEntitiesWithinAABB(
 						EntityLiving.class, pool1);
-				if ((entl1 != null) && (entl1.size() > 0)) {
-					for (EntityLiving el : entl1) {
+				if ((entl1 != null) && (entl1.size() > 0))
+					for (EntityLiving el : entl1)
 						if ((el != null) && (el != p)) {
 							if (el.isEntityUndead()) {
 								el.addPotionEffect(new PotionEffect(
@@ -189,18 +183,14 @@ public class EntityElementalBlock extends EntityThrowable implements
 								el.attackEntityFrom(DamageSource
 										.causePlayerDamage((EntityPlayer) p), 1);
 								el.attackEntityFrom(DamageSource.drown, 2);
-							} else {
+							} else
 								el.attackEntityFrom(DamageSource.drown, 2);
-							}
 
 						}
-					}
-				}
 				if (var1.typeOfHit == MovingObjectType.BLOCK) {
 				} else if (var1.typeOfHit == MovingObjectType.ENTITY) {
-					if (var1.entityHit == p) {
+					if (var1.entityHit == p)
 						break;
-					}
 					if (var1.entityHit instanceof EntityLiving) {
 						EntityLiving el = (EntityLiving) var1.entityHit;
 						if (el.isEntityUndead()) {
@@ -209,25 +199,21 @@ public class EntityElementalBlock extends EntityThrowable implements
 										Potion.moveSlowdown.id, 120, 2));
 								el.attackEntityFrom(DamageSource.magic, 4);
 							}
-						} else {
-							if (!worldObj.isRemote) {
-								el.addPotionEffect(new PotionEffect(
-										Potion.poison.id, 120, 2));
-								el.addPotionEffect(new PotionEffect(
-										Potion.moveSlowdown.id, 120, 2));
-							}
+						} else if (!worldObj.isRemote) {
+							el.addPotionEffect(new PotionEffect(
+									Potion.poison.id, 120, 2));
+							el.addPotionEffect(new PotionEffect(
+									Potion.moveSlowdown.id, 120, 2));
 						}
-						if (!worldObj.isRemote) {
+						if (!worldObj.isRemote)
 							el.addPotionEffect(new PotionEffect(
 									Potion.weakness.id, 120, 5));
-						}
 						if (p instanceof EntityPlayer) {
 							el.attackEntityFrom(DamageSource
 									.causePlayerDamage((EntityPlayer) p), 1);
 							el.attackEntityFrom(DamageSource.drown, 2);
-						} else {
+						} else
 							el.attackEntityFrom(DamageSource.drown, 2);
-						}
 					}
 				}
 			}
@@ -243,38 +229,31 @@ public class EntityElementalBlock extends EntityThrowable implements
 					var1.hitVec.zCoord + this.size);
 			entl = this.worldObj
 					.getEntitiesWithinAABB(EntityLiving.class, pool);
-			if ((entl != null) && (entl.size() > 0)) {
-				for (EntityLiving el : entl) {
+			if ((entl != null) && (entl.size() > 0))
+				for (EntityLiving el : entl)
 					if ((el != null) && (el != p)) {
-						if (p instanceof EntityPlayer) {
+						if (p instanceof EntityPlayer)
 							el.attackEntityFrom(DamageSource
 									.causePlayerDamage((EntityPlayer) p), dmg);
-						} else {
+						else
 							el.attackEntityFrom(DamageSource.anvil, dmg);
-						}
-						if (!worldObj.isRemote) {
+						if (!worldObj.isRemote)
 							el.addPotionEffect(new PotionEffect(
 									Potion.blindness.id, 120, 2));
-						}
 					}
-				}
-			}
 			if (var1.typeOfHit == MovingObjectType.ENTITY) {
-				if (!(var1.entityHit instanceof EntityLiving)) {
+				if (!(var1.entityHit instanceof EntityLiving))
 					break;
-				}
 				EntityLiving el = (EntityLiving) var1.entityHit;
 				if ((el != null) && (el != p)) {
-					if (p instanceof EntityPlayer) {
+					if (p instanceof EntityPlayer)
 						el.attackEntityFrom(DamageSource
 								.causePlayerDamage((EntityPlayer) p), dmg);
-					} else {
+					else
 						el.attackEntityFrom(DamageSource.anvil, dmg);
-					}
-					if (!worldObj.isRemote) {
+					if (!worldObj.isRemote)
 						el.addPotionEffect(new PotionEffect(
 								Potion.blindness.id, 120, 2));
-					}
 				}
 			}
 
@@ -289,9 +268,9 @@ public class EntityElementalBlock extends EntityThrowable implements
 					var1.hitVec.zCoord + this.size);
 			entl = this.worldObj
 					.getEntitiesWithinAABB(EntityLiving.class, pool);
-			if ((entl != null) && (entl.size() > 0)) {
-				for (EntityLiving el : entl) {
-					if ((el != null) && (el != p)) {
+			if ((entl != null) && (entl.size() > 0))
+				for (EntityLiving el : entl)
+					if ((el != null) && (el != p))
 						try {
 							double xdir = el.posX - this.getThrower().posX;
 							double zdir = el.posZ - this.getThrower().posZ;
@@ -300,15 +279,11 @@ public class EntityElementalBlock extends EntityThrowable implements
 							el.motionZ = zdir * 0.1F;
 						} catch (Throwable ex) {
 						}
-					}
-				}
-			}
 			if (var1.typeOfHit == MovingObjectType.ENTITY) {
-				if (!(var1.entityHit instanceof EntityLiving)) {
+				if (!(var1.entityHit instanceof EntityLiving))
 					break;
-				}
 				EntityLiving el = (EntityLiving) var1.entityHit;
-				if ((el != null) && (el != p)) {
+				if ((el != null) && (el != p))
 					try {
 						double xdir = el.posX - this.getThrower().posX;
 						double zdir = el.posZ - this.getThrower().posZ;
@@ -317,36 +292,28 @@ public class EntityElementalBlock extends EntityThrowable implements
 						el.motionZ = zdir * 0.1F;
 					} catch (Throwable ex) {
 					}
-				}
 			}
 
-			if (p != null) {
+			if (p != null)
 				if ((p.getDistanceToEntity(this) < 3)
 						&& ((p.rotationPitch > 70) && (p.rotationPitch < 110))) {
 					double ydir = p.posY - this.posY;
 					p.motionX = p.motionX * 5F;
 					p.motionY = ydir * 0.5F;
 					p.motionZ = p.motionZ * 5F;
-					if (p.motionX < -5) {
+					if (p.motionX < -5)
 						p.motionX = -4;
-					}
-					if (p.motionX > 5) {
+					if (p.motionX > 5)
 						p.motionX = 4;
-					}
-					if (p.motionY < -5) {
+					if (p.motionY < -5)
 						p.motionY = -4;
-					}
-					if (p.motionY > 5) {
+					if (p.motionY > 5)
 						p.motionY = 4;
-					}
-					if (p.motionZ < -5) {
+					if (p.motionZ < -5)
 						p.motionZ = -4;
-					}
-					if (p.motionZ > 5) {
+					if (p.motionZ > 5)
 						p.motionZ = 4;
-					}
 				}
-			}
 			break;
 		case 5:
 			specialAttack(var1, 1);

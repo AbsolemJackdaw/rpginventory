@@ -25,19 +25,16 @@ public class ItemBeastMasterArmor extends AbstractArmor {
 	@Override
 	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
 			int armorSlot) {
-		if (stack != null) {
+		if (stack != null)
 			if (stack.getItem() instanceof ItemArmor) {
 
 				int type = ((ItemArmor) stack.getItem()).armorType;
 
-				if ((type == 1) || (type == 3)) {
-
+				if ((type == 1) || (type == 3))
 					armorModel = mod_RpgRB.proxy.getArmorModel(2);
-				} else {
+				else
 					armorModel = mod_RpgRB.proxy.getArmorModel(3);
-				}
 			}
-		}
 	}
 
 	@Override
@@ -45,12 +42,10 @@ public class ItemBeastMasterArmor extends AbstractArmor {
 			String type) {
 		if ((itemstack.getItem() == mod_RpgRB.beastBoots)
 				|| (itemstack.getItem() == mod_RpgRB.beastChest)
-				|| (itemstack.getItem() == mod_RpgRB.beastHood)) {
+				|| (itemstack.getItem() == mod_RpgRB.beastHood))
 			return "armor:beast_1.png";
-		}
-		if (itemstack.getItem() == mod_RpgRB.beastLegs) {
+		if (itemstack.getItem() == mod_RpgRB.beastLegs)
 			return "armor:beast_2.png";
-		}
 		return super.getArmorTexture(itemstack, entity, slot, type);
 	}
 }

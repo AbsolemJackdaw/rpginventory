@@ -151,8 +151,7 @@ public class mod_RpgMageSet {
 		allItems = new Item[] { archBook, fireStaff, frostStaff, earthStaff,
 				windStaff, ultimateStaff, archmageHood, archmageChest,
 				archmageLegs, archMageBoots, archMageLeather };
-		for (int i = 0; i < allItems.length; i++) {
-
+		for (int i = 0; i < allItems.length; i++)
 			if (allItems[i] != null) {
 
 				String itemName = allItems[i].getUnlocalizedName().substring(
@@ -167,9 +166,7 @@ public class mod_RpgMageSet {
 				GameRegistry.registerItem(allItems[i],
 						allItems[i].getUnlocalizedName(), name);
 
-			} else {
+			} else
 				System.out.println("Item is null !" + i);
-			}
-		}
 	}
 }

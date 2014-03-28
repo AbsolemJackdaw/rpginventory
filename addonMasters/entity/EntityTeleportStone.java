@@ -40,19 +40,18 @@ public class EntityTeleportStone extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
 		{
-			if (par1MovingObjectPosition.entityHit != null) {
+			if (par1MovingObjectPosition.entityHit != null)
 				par1MovingObjectPosition.entityHit
 						.attackEntityFrom(
 								DamageSource.causeThrownDamage(this,
 										this.getThrower()), 0.0F);
-			}
 
 			if (this.getThrower() != null) {
 				PlayerRpgInventory inv = PlayerRpgInventory
 						.get((EntityPlayer) getThrower());
 
 				if ((inv.getShield() != null)
-						&& (inv.getShield().getItem() == mod_RpgRB.daggers)) {
+						&& (inv.getShield().getItem() == mod_RpgRB.daggers))
 					if (par1MovingObjectPosition.entityHit instanceof EntityPlayer) {
 						EntityPlayer player = (EntityPlayer) par1MovingObjectPosition.entityHit;
 						player.addPotionEffect(new PotionEffect(
@@ -60,7 +59,6 @@ public class EntityTeleportStone extends EntityThrowable {
 								mod_RpgInventory.donators.contains(player
 										.getDisplayName()) ? 5 * 20 : 3 * 20, 2));
 					}
-				}
 			}
 
 			for (int i = 0; i < 32; ++i) {
@@ -94,9 +92,8 @@ public class EntityTeleportStone extends EntityThrowable {
 								this.posZ, 5.0F);
 						if (!MinecraftForge.EVENT_BUS.post(event)) {
 							// Don't indent to lower patch size
-							if (this.getThrower().isRiding()) {
+							if (this.getThrower().isRiding())
 								this.getThrower().mountEntity((Entity) null);
-							}
 
 							this.getThrower().setPositionAndUpdate(this.posX,
 									this.posY, this.posZ);

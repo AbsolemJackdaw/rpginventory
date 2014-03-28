@@ -18,20 +18,15 @@ public class SlotMineral extends Slot {
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack) {
 		if (par1ItemStack != null) {
-			if (par1ItemStack.getItem() == Items.gold_ingot) {
+			if (par1ItemStack.getItem() == Items.gold_ingot)
 				return true;
-			}
-			if (par1ItemStack.getItem() == Items.emerald) {
+			if (par1ItemStack.getItem() == Items.emerald)
 				return true;
-			}
-			if (par1ItemStack.getItem() == Items.diamond) {
+			if (par1ItemStack.getItem() == Items.diamond)
 				return true;
-			}
-			if (par1ItemStack.getItem() == Items.dye) {
-				if (par1ItemStack.getItemDamage() == 4) {
+			if (par1ItemStack.getItem() == Items.dye)
+				if (par1ItemStack.getItemDamage() == 4)
 					return true;
-				}
-			}
 		}
 		return false;
 	}

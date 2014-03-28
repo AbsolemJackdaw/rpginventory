@@ -20,9 +20,8 @@ public class BookGui extends GuiScreen {
 	@Override
 	public void actionPerformed(GuiButton button) {
 
-		if (button.id == 0) {
+		if (button.id == 0)
 			this.mc.thePlayer.closeScreen();
-		}
 	}
 
 	@Override

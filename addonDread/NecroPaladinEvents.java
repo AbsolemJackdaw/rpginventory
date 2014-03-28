@@ -20,7 +20,7 @@ public class NecroPaladinEvents {
 		try {
 			/* ADDING EXTRA DAMAGE TO CLASS ARMOR COMBINATIONS */
 			Entity damager = evt.source.getSourceOfDamage();
-			if (damager != null) {
+			if (damager != null)
 				if (damager instanceof EntityPlayer) {
 					float damagebonus = 0.0F;
 					PlayerRpgInventory inv = PlayerRpgInventory
@@ -31,25 +31,21 @@ public class NecroPaladinEvents {
 							.contains(mod_RpgPlus.CLASSPALADIN)) {
 						if (damager.worldObj.isDaytime()) {
 							evt.ammount += 2;
-							if (weapon != null) {
-								if (weapon.getItem() == mod_RpgPlus.pala_weapon) {
+							if (weapon != null)
+								if (weapon.getItem() == mod_RpgPlus.pala_weapon)
 									if (mod_RpgInventory.playerClass
-											.contains(mod_RpgPlus.CLASSPALADIN)) {
+											.contains(mod_RpgPlus.CLASSPALADIN))
 										evt.ammount += 2;
-									}
-								}
-							}
 						}
 						// paladin heals himself when hitting undead
 						if (evt.entityLiving.isEntityUndead()) {
 							if (((EntityPlayer) damager).getHealth() < ((EntityPlayer) damager)
-									.getMaxHealth()) {
+									.getMaxHealth())
 								((EntityPlayer) damager)
 										.heal(mod_RpgInventory.donators
 												.contains(((EntityPlayer) damager)
 														.getDisplayName()) ? 2
 												: 1);
-							}
 							evt.ammount += 3;
 							evt.entityLiving.setFire(mod_RpgInventory.donators
 									.contains(((EntityPlayer) damager)
@@ -57,13 +53,10 @@ public class NecroPaladinEvents {
 						}
 					}
 					if (mod_RpgInventory.playerClass
-							.contains(mod_RpgPlus.CLASSNECRO)) {
-						if (!damager.worldObj.isDaytime()) {
+							.contains(mod_RpgPlus.CLASSNECRO))
+						if (!damager.worldObj.isDaytime())
 							evt.ammount += 3;
-						}
-					}
 				}
-			}
 		} catch (Exception e) {
 			FMLLog.getLogger()
 					.info("Couldnt add extra damage to paladin weapon. report to mod author.");

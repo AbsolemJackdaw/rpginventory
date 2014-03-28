@@ -36,18 +36,15 @@ public class MoldContainer extends Container {
 				par2TileEntityGoldOven, 4, 136, 40));
 
 		// 5-32
-		for (int i = 0; i < 3; i++) {
-			for (int k = 0; k < 9; k++) {
+		for (int i = 0; i < 3; i++)
+			for (int k = 0; k < 9; k++)
 				addSlotToContainer(new Slot(par1InventoryPlayer, k + (i * 9)
 						+ 9, 8 + (k * 18), 84 + (i * 18) + 18));
-			}
-		}
 
 		// 32-41
-		for (int j = 0; j < 9; j++) {
+		for (int j = 0; j < 9; j++)
 			addSlotToContainer(new Slot(par1InventoryPlayer, j, 8 + (j * 18),
 					142 + 18));
-		}
 	}
 
 	@Override
@@ -64,16 +61,13 @@ public class MoldContainer extends Container {
 		Iterator var1 = this.crafters.iterator();
 		while (var1.hasNext()) {
 			ICrafting var2 = (ICrafting) var1.next();
-			if (this.lastGoldOvenCookTime != this.temold.goldCookTime) {
+			if (this.lastGoldOvenCookTime != this.temold.goldCookTime)
 				var2.sendProgressBarUpdate(this, 0, this.temold.goldCookTime);
-			}
-			if (this.lastGoldOvenBurnTime != this.temold.goldBurnTime) {
+			if (this.lastGoldOvenBurnTime != this.temold.goldBurnTime)
 				var2.sendProgressBarUpdate(this, 1, this.temold.goldBurnTime);
-			}
-			if (this.lastGoldOvenItemBurnTime != this.temold.goldItemBurnTime) {
+			if (this.lastGoldOvenItemBurnTime != this.temold.goldItemBurnTime)
 				var2.sendProgressBarUpdate(this, 2,
 						this.temold.goldItemBurnTime);
-			}
 		}
 		this.lastGoldOvenCookTime = this.temold.goldCookTime;
 		this.lastGoldOvenBurnTime = this.temold.goldBurnTime;
@@ -124,16 +118,13 @@ public class MoldContainer extends Container {
 
 	@Override
 	public void updateProgressBar(int par1, int par2) {
-		if (par1 == 0) {
+		if (par1 == 0)
 			temold.goldCookTime = par2;
-		}
 
-		if (par1 == 1) {
+		if (par1 == 1)
 			temold.goldBurnTime = par2;
-		}
 
-		if (par1 == 2) {
+		if (par1 == 2)
 			temold.goldItemBurnTime = par2;
-		}
 	}
 }

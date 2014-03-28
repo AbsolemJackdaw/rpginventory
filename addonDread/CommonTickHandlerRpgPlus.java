@@ -17,11 +17,9 @@ public class CommonTickHandlerRpgPlus /* implements ITickHandler */{
 
 	@SubscribeEvent
 	public void tickEnd(TickEvent.ServerTickEvent ev) {
-		for (Entry<String, Integer> entry : rpgPluscooldownMap.entrySet()) {
-			if (entry.getValue() > 0) {
+		for (Entry<String, Integer> entry : rpgPluscooldownMap.entrySet())
+			if (entry.getValue() > 0)
 				entry.setValue(entry.getValue() - 1);
-			}
-		}
 	}
 
 	// /**

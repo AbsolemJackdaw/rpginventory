@@ -95,7 +95,7 @@ public class ItemMageSphere extends ItemRpgWeapon {
 			if (item.equals(mod_addonBase.magehood)
 					&& item1.equals(mod_addonBase.magegown)
 					&& item2.equals(mod_addonBase.magepants)
-					&& item3.equals(mod_addonBase.mageboots)) {
+					&& item3.equals(mod_addonBase.mageboots))
 				if (par3EntityPlayer.inventory.hasItem(Items.blaze_powder)
 						|| mod_RpgInventory.donators.contains(par3EntityPlayer
 								.getCommandSenderName())) {
@@ -110,12 +110,10 @@ public class ItemMageSphere extends ItemRpgWeapon {
 					ball.accelerationY = look.yCoord * 0.1;
 					ball.accelerationZ = look.zCoord * 0.1;
 
-					if (!par2World.isRemote) {
+					if (!par2World.isRemote)
 						par2World.spawnEntityInWorld(ball);
-					}
 					par1ItemStack.damageItem(5, par3EntityPlayer);
 				}
-			}
 		}
 		return par1ItemStack;
 	}
@@ -144,7 +142,7 @@ public class ItemMageSphere extends ItemRpgWeapon {
 				if ((RpgConfig.instance.useSpell == true)
 						&& par2EntityPlayer.inventory
 								.hasItem(Items.glowstone_dust)
-						&& par2EntityPlayer.isSneaking()) {
+						&& par2EntityPlayer.isSneaking())
 					if (par3World.isDaytime()) {
 						par3World.setWorldTime(13000);
 						par1ItemStack.damageItem(1, par2EntityPlayer);
@@ -152,7 +150,6 @@ public class ItemMageSphere extends ItemRpgWeapon {
 						par3World.setWorldTime(300);
 						par1ItemStack.damageItem(1, par2EntityPlayer);
 					}
-				}
 
 				if (RpgConfig.instance.useSpell == false) {
 					// TODO
@@ -161,14 +158,13 @@ public class ItemMageSphere extends ItemRpgWeapon {
 				}
 
 				if (par2EntityPlayer.inventory.hasItem(Items.speckled_melon)
-						&& par2EntityPlayer.isSneaking()) {
+						&& par2EntityPlayer.isSneaking())
 					if (!par3World.isRemote) {
 						par2EntityPlayer.inventory
 								.consumeInventoryItem(Items.speckled_melon);
 						par2EntityPlayer.addPotionEffect(new PotionEffect(
 								Potion.regeneration.id, 200, 0));
 					}
-				}
 
 				if (par2EntityPlayer.inventory.hasItem(Items.gold_ingot)) {
 					int var1 = (int) par2EntityPlayer.posX;
@@ -180,25 +176,19 @@ public class ItemMageSphere extends ItemRpgWeapon {
 
 						Block var12 = par3World.getBlock(par4, par5, par6);
 
-						if (par5 > var2) {
+						if (par5 > var2)
 							par3World.getBlock(par4, par5, par6);
-						}
 
-						if (par5 < var2) {
+						if (par5 < var2)
 							par3World.getBlock(par4, par5, par6);
-						}
-						if ((par4 < var1) && (par6 == var3) && (par5 == var2)) {
+						if ((par4 < var1) && (par6 == var3) && (par5 == var2))
 							par3World.getBlock(par4 - x, par5, par6);
-						}
-						if ((par4 > var1) && (par6 == var3) && (par5 == var2)) {
+						if ((par4 > var1) && (par6 == var3) && (par5 == var2))
 							par3World.getBlock(par4 + x, par5, par6);
-						}
-						if ((par6 < var3) && (par5 == var2)) {
+						if ((par6 < var3) && (par5 == var2))
 							par3World.getBlock(par4, par5, par6 - x);
-						}
-						if ((par6 > var3) && (par5 == var2)) {
+						if ((par6 > var3) && (par5 == var2))
 							par3World.getBlock(par4, par5, par6 + x);
-						}
 
 						if ((var12 == Blocks.iron_ore)
 								|| (var12 == Blocks.coal_ore)

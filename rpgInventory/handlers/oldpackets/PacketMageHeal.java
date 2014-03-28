@@ -34,21 +34,18 @@ public class PacketMageHeal {
 			if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 					.toLowerCase())) {
 				if ((item == null) || (var3 == null) || (var2 == null)
-						|| (var1 == null) || (var0 == null)) {
+						|| (var1 == null) || (var0 == null))
 					return;
-				}
 				if ((item.getItem() != mod_RpgInventory.staf)
 						|| (var3.getItem() != mod_RpgInventory.magehood)
 						|| (var2.getItem() != mod_RpgInventory.magegown)
 						|| (var1.getItem() != mod_RpgInventory.magepants)
-						|| (var0.getItem() != mod_RpgInventory.mageboots)) {
+						|| (var0.getItem() != mod_RpgInventory.mageboots))
 					return;
-				}
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(p
-					.getDisplayName())) {
+					.getDisplayName()))
 				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
-			}
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(),
 						5 * 20);
@@ -62,19 +59,16 @@ public class PacketMageHeal {
 					// delete the item
 					p.renderBrokenItemStack(item);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else {
-					if (!mod_RpgInventory.developers.contains(p
-							.getDisplayName().toLowerCase())) {
-						item.damageItem(3, p);
-					}
-				}
+				} else if (!mod_RpgInventory.developers.contains(p
+						.getDisplayName().toLowerCase()))
+					item.damageItem(3, p);
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
 						p.posX - 4.0F, p.posY - 4.0F, p.posZ - 4.0F,
 						p.posX + 4.0F, p.posY + 4.0F, p.posZ + 4.0F);
 				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABB(
 						EntityLivingBase.class, pool);
-				if ((entl != null) && (entl.size() > 0)) {
-					for (EntityLivingBase el : entl) {
+				if ((entl != null) && (entl.size() > 0))
+					for (EntityLivingBase el : entl)
 						if (el != null) {
 							double dist = p.getDistanceSqToEntity(el);
 							double potstrength = 1.0D - (Math.sqrt(dist) / (mod_RpgInventory.donators
@@ -84,15 +78,12 @@ public class PacketMageHeal {
 											.getDisplayName()) ? 4 : 2),
 									potstrength);
 						}
-					}
-				}
-			} else {
+			} else
 				p.addChatMessage(new ChatComponentText(
 						"You must wait for energy to replenish, left: "
 								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
 										.get(p.getDisplayName()) / 20))
 								+ " seconds"));
-			}
 		}
 	}
 }

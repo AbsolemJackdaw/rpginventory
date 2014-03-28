@@ -1,6 +1,5 @@
 package addonMasters.items;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import rpgInventory.item.ItemMats;
 import addonMasters.mod_RpgRB;
@@ -16,12 +15,10 @@ public class ItemRBMats extends ItemMats {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack is, int par2) {
-		if (is.getItem() == mod_RpgRB.beastLeather) {
+		if (is.getItem() == mod_RpgRB.beastLeather)
 			return 0x0b910d;
-		}
-		if (is.getItem() == mod_RpgRB.rogueLeather) {
+		if (is.getItem() == mod_RpgRB.rogueLeather)
 			return 0xae1fe1;
-		}
 		return 16777215;
 	}
 }

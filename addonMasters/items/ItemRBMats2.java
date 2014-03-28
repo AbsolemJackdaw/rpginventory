@@ -22,13 +22,13 @@ public class ItemRBMats2 extends Item {
 	@Override
 	public ItemStack onItemRightClick(ItemStack whistle, World world,
 			EntityPlayer player) {
-		if (mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSBEASTMASTER)) {
-			if (!world.isRemote && (player.ridingEntity == null)) {
+		if (mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSBEASTMASTER))
+			if (!world.isRemote && (player.ridingEntity == null))
 				try {
 					PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 
 					ItemStack stack = inv.getCrystal();
-					if (stack != null) {
+					if (stack != null)
 						// Pet is in the world.
 						if (IPet.playersWithActivePets.containsKey(player
 								.getDisplayName())) {
@@ -62,9 +62,8 @@ public class ItemRBMats2 extends Item {
 											.getInteger("PetLevel"));
 									Boar.setHealth(stack.stackTagCompound
 											.getFloat("PetHealth"));
-									if (Boar.getHealth() <= 0) {
+									if (Boar.getHealth() <= 0)
 										Boar.setHealth(1);
-									}
 								} catch (Throwable ex) {
 								}
 								world.spawnEntityInWorld(Boar);
@@ -83,9 +82,8 @@ public class ItemRBMats2 extends Item {
 											.getInteger("PetLevel"));
 									spider.setHealth(stack.stackTagCompound
 											.getFloat("PetHealth"));
-									if (spider.getHealth() <= 0) {
+									if (spider.getHealth() <= 0)
 										spider.setHealth(1);
-									}
 								} catch (Throwable ex) {
 								}
 								world.spawnEntityInWorld(spider);
@@ -102,9 +100,8 @@ public class ItemRBMats2 extends Item {
 											.getInteger("PetLevel"));
 									bull.setHealth(stack.stackTagCompound
 											.getFloat("PetHealth"));
-									if (bull.getHealth() <= 0) {
+									if (bull.getHealth() <= 0)
 										bull.setHealth(1);
-									}
 								} catch (Throwable ex) {
 								}
 								world.spawnEntityInWorld(bull);
@@ -112,12 +109,9 @@ public class ItemRBMats2 extends Item {
 							}
 							inv.setInventorySlotContents(6, stack);
 						}
-					}
 				} catch (Throwable ex) {
 					ex.printStackTrace();
 				}
-			}
-		}
 		return whistle;
 	}
 

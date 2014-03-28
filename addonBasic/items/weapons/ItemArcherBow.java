@@ -40,18 +40,15 @@ public class ItemArcherBow extends Item {
 			ItemStack usingItem, int useRemaining) {
 		// This never get called.
 		// Now it gets called, added a hook in our custom renderer.
-		if (stack == usingItem) {
+		if (stack == usingItem)
 			if ((usingItem != null)
-					&& (usingItem.getItem() == mod_addonBase.elfbow)) {
-				if (useRemaining > 21) {
+					&& (usingItem.getItem() == mod_addonBase.elfbow))
+				if (useRemaining > 21)
 					return IconArray[3];
-				} else if (useRemaining > 14) {
+				else if (useRemaining > 14)
 					return IconArray[2];
-				} else if (useRemaining > 7) {
+				else if (useRemaining > 7)
 					return IconArray[1];
-				}
-			}
-		}
 		return IconArray[0];
 	}
 
@@ -115,9 +112,8 @@ public class ItemArcherBow extends Item {
 			EntityPlayer player) {
 		ArrowNockEvent event = new ArrowNockEvent(player, par1ItemStack);
 		MinecraftForge.EVENT_BUS.post(event);
-		if (event.isCanceled()) {
+		if (event.isCanceled())
 			return event.result;
-		}
 		player.setItemInUse(par1ItemStack,
 				this.getMaxItemUseDuration(par1ItemStack));
 		return par1ItemStack;
@@ -138,9 +134,8 @@ public class ItemArcherBow extends Item {
 		int j = this.getMaxItemUseDuration(stack) - par4;
 		ArrowLooseEvent event = new ArrowLooseEvent(player, stack, j);
 		MinecraftForge.EVENT_BUS.post(event);
-		if (event.isCanceled()) {
+		if (event.isCanceled())
 			return;
-		}
 		j = event.charge;
 
 		boolean var5 = player.capabilities.isCreativeMode;
@@ -169,13 +164,11 @@ public class ItemArcherBow extends Item {
 					f = ((f * f) + (f * 2.0F)) / 3.0F;
 
 					if (f < (mod_RpgInventory.donators.contains(player
-							.getCommandSenderName()) ? 0.2d : 0.5D)) {
+							.getCommandSenderName()) ? 0.2d : 0.5D))
 						return;
-					}
 
-					if (f > 1.0F) {
+					if (f > 1.0F)
 						f = 1.0F;
-					}
 
 					EntityArrow entityarrow = new EntityArrow(par2World,
 							player, f * 2.0F);
@@ -183,9 +176,8 @@ public class ItemArcherBow extends Item {
 							.getCommandSenderName()) ? true : false;
 					entityarrow.setIsCritical(crit);
 
-					if (f == 1.0F) {
+					if (f == 1.0F)
 						entityarrow.setIsCritical(true);
-					}
 
 					entityarrow.setDamage(entityarrow.getDamage()
 							+ (flag ? 2D : 1D));
@@ -194,18 +186,16 @@ public class ItemArcherBow extends Item {
 					entityarrow.setFire(mod_RpgInventory.donators
 							.contains(player.getCommandSenderName()) ? 10 : 5);
 
-					if (flag) {
+					if (flag)
 						entityarrow.canBePickedUp = 2;
-					} else {
+					else
 						player.inventory.consumeInventoryItem(Items.arrow);
-					}
 					if (!par2World.isRemote) {
 						par2World.spawnEntityInWorld(entityarrow);
 						if (mod_RpgInventory.donators.contains(player
-								.getCommandSenderName())) {
+								.getCommandSenderName()))
 							par2World.spawnEntityInWorld(new EntityArrow(
 									par2World, player, f * 2.0f));
-						}
 					}
 					stack.damageItem(1, player);
 					par2World.playSoundAtEntity(player, "random.bow", 1.0F,

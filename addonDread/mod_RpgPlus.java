@@ -94,21 +94,7 @@ public class mod_RpgPlus {
 				"Rpg++ Necromancer and Paladin is installed. Renderers can be Used",
 				1);
 
-		LanguageRegistry.addName(necro_shield, "NecroMancer Shield");
-		LanguageRegistry.addName(pala_shield, "Paladin Shield");
-		LanguageRegistry.addName(necroHood, "NecroMancer Hood");
-		LanguageRegistry.addName(necroChestplate, "NecroMancer Vest");
-		LanguageRegistry.addName(necroLeggings, "NecroMancer Pants");
-		LanguageRegistry.addName(necroBoots, "NecroMancer Boots");
-		LanguageRegistry.addName(palaHelm, "Paladin Helmet");
-		LanguageRegistry.addName(palaChest, "Paladin Chestplate");
-		LanguageRegistry.addName(palaLeggings, "Paladin Leggings");
-		LanguageRegistry.addName(palaBoots, "Paladin Boots");
-		LanguageRegistry.addName(necro_weapon, "NecroMancer Skull");
-		LanguageRegistry.addName(pala_weapon, "Paladin's Pride");
-		LanguageRegistry.addName(pala_steel, "Paladin's Steel");
-		LanguageRegistry.addName(necro_skin, "Necromancer's Cloth");
-
+		
 		GameRegistry.addRecipe(new ItemStack(necro_skin, 1), new Object[] {
 				"BWB", "WLW", "BWB", 'W', Items.spider_eye, 'B', Items.bone,
 				'L', Items.leather });
@@ -169,12 +155,11 @@ public class mod_RpgPlus {
 			boolean found = false;
 			Field fallbackfield = null;
 			Potion[] potionTypes = null;
-			for (Field f : Potion.class.getDeclaredFields()) {
+			for (Field f : Potion.class.getDeclaredFields())
 				try {
 					if ((fallbackfield != null)
-							&& (f.getType() == Potion[].class)) {
+							&& (f.getType() == Potion[].class))
 						fallbackfield = f;
-					}
 					if (f.getName().equals("potionTypes")
 							|| f.getName().equals("a")
 							|| f.getName().equals("field_76425_a")) {
@@ -196,7 +181,6 @@ public class mod_RpgPlus {
 							.println("Severe error, please report this to the mod author:");
 					System.err.println(e);
 				}
-			}
 			try {
 				if ((fallbackfield != null) && !found) {
 					Field modfield = Field.class.getDeclaredField("modifiers");
@@ -218,17 +202,15 @@ public class mod_RpgPlus {
 		}
 
 		for (int pos = 32; pos < Potion.potionTypes.length; pos++) {
-			if (Potion.potionTypes[pos] == null) {
+			if (Potion.potionTypes[pos] == null)
 				if (decomposePotion == null) {
 					decomposePotion = new DecomposePotion(pos);
 					Potion.potionTypes[pos] = decomposePotion;
 				} else if (masochismPotion == null) {
 					masochismPotion = new MasochismPotion(pos);
 					Potion.potionTypes[pos] = masochismPotion;
-				} else {
+				} else
 					break;
-				}
-			}
 
 			RPGEventHooks.negativeEffects.add(2);
 			RPGEventHooks.negativeEffects.add(4);
@@ -309,9 +291,8 @@ public class mod_RpgPlus {
 				necro_weapon, necroHood, necroChestplate, necroLeggings,
 				necroBoots, palaHelm, palaChest, palaLeggings, palaBoots,
 				necro_skin, pala_steel };
-
-		for (int i = 0; i < allItems.length; i++) {
-
+		
+		for (int i = 0; i < allItems.length; i++)
 			if (allItems[i] != null) {
 
 				String itemName = allItems[i].getUnlocalizedName().substring(
@@ -320,20 +301,17 @@ public class mod_RpgPlus {
 				String itemNameCropped = itemName.substring(itemName
 						.indexOf(".") + 1);
 
-				if ((allItems[i] == necro_skin) || (allItems[i] == pala_steel)) {
+				if ((allItems[i] == necro_skin) || (allItems[i] == pala_steel))
 					allItems[i].setTextureName("minecraft:" + itemNameCropped);
-				} else {
+				else
 					allItems[i].setTextureName(mod_RpgInventory.name + ":"
 							+ itemNameCropped);
-				}
 
 				GameRegistry
 						.registerItem(allItems[i],
 								allItems[i].getUnlocalizedName(),
 								mod_RpgInventory.name);
-			} else {
+			} else
 				System.out.println("Item is null !" + i);
-			}
-		}
 	}
 }

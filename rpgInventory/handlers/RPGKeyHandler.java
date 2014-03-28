@@ -102,16 +102,15 @@ public class RPGKeyHandler {
 		Entity Return = null;
 		float par1 = 1.0F;
 		try {
-			if (mc.renderViewEntity != null) {
+			if (mc.renderViewEntity != null)
 				if (mc.theWorld != null) {
 					double var2 = distance;
 					mc.objectMouseOver = mc.renderViewEntity.rayTrace(distance,
 							1);
 					double var4 = var2;
 					Vec3 var6 = mc.renderViewEntity.getPosition(1);
-					if (mc.objectMouseOver != null) {
+					if (mc.objectMouseOver != null)
 						var4 = mc.objectMouseOver.hitVec.distanceTo(var6);
-					}
 					Vec3 var7 = mc.renderViewEntity.getLook(par1);
 					Vec3 var8 = var6.addVector(var7.xCoord * var2, var7.yCoord
 							* var2, var7.zCoord * var2);
@@ -148,13 +147,11 @@ public class RPGKeyHandler {
 								}
 							}
 							if ((Return != null)
-									&& (Return instanceof EntityLivingBase)) {
+									&& (Return instanceof EntityLivingBase))
 								return (EntityLivingBase) Return;
-							}
 						}
 					}
 				}
-			}
 		} catch (Throwable e) {
 		}
 
@@ -169,9 +166,8 @@ public class RPGKeyHandler {
 			GuiScreen guiscreen = mc.currentScreen;
 			if (keySpecial.isPressed()) {
 				ItemStack item = mc.thePlayer.getCurrentEquippedItem();
-				if ((guiscreen == null) && !(item == null)) {
+				if ((guiscreen == null) && !(item == null))
 					specialAbility(item);
-				}
 			} else if (keyInventory.isPressed()) {
 
 				System.out.println("send packet keyhandler open inventory");

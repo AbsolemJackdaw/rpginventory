@@ -27,16 +27,13 @@ public class GoldBlockSlot extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack) {
-		if (par1ItemStack != null) {
-			if (par1ItemStack.getItem() instanceof ItemBlock) {
+		if (par1ItemStack != null)
+			if (par1ItemStack.getItem() instanceof ItemBlock)
 				if (((ItemBlock) par1ItemStack.getItem()).field_150939_a /*
 																		 * getBlock(
 																		 * )
-																		 */== Blocks.gold_block) {
+																		 */== Blocks.gold_block)
 					return true;
-				}
-			}
-		}
 		return false;
 	}
 

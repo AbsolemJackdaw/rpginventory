@@ -34,7 +34,7 @@ public class ButtonInventory extends GuiButton {
 	@Override
 	public boolean mousePressed(Minecraft par1Minecraft, int par2, int par3) {
 
-		if ((par2 >= this.xPosition) && (par2 <= (this.xPosition + this.width))) {
+		if ((par2 >= this.xPosition) && (par2 <= (this.xPosition + this.width)))
 			if ((par3 >= this.yPosition)
 					&& (par3 <= (this.yPosition + this.height))) {
 
@@ -52,15 +52,13 @@ public class ButtonInventory extends GuiButton {
 					// } catch (IOException e) {
 					// e.printStackTrace();
 					// }
-				} else if (this.displayString.equals("Close")) {
+				} else if (this.displayString.equals("Close"))
 					// player.closeScreen();
 					player.openContainer = player.inventoryContainer;
-				}
 				// Minecraft.getMinecraft().getSoundHandler().playSoundFX("random.click",
 				// 1.0F, 1.0F);
 				return false;
 			}
-		}
 		return super.mousePressed(par1Minecraft, par2, par3);
 	}
 

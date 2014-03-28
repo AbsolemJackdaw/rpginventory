@@ -31,13 +31,11 @@ public class ItemElementalStaff extends ItemRpgSword {
 	public void addInformation(ItemStack stack, EntityPlayer p1, List list,
 			boolean yesno) {
 		NBTTagCompound nbt = stack.getTagCompound();
-		if (nbt == null) {
+		if (nbt == null)
 			stack.setTagCompound(baseNBT());
-		}
 		nbt = stack.getTagCompound();
-		if (nbt.getBoolean("ReCharging")) {
+		if (nbt.getBoolean("ReCharging"))
 			list.add("Recharging");
-		}
 		list.add("Overflow: " + Math.floor(nbt.getFloat("EnergyCharge")) + "/"
 				+ this.maxUse);
 	}
@@ -92,13 +90,11 @@ public class ItemElementalStaff extends ItemRpgSword {
 			EntityPlayer p) {
 		if (mod_RpgInventory.playerClass.contains(mod_RpgMageSet.CLASSARCHMAGE)
 				|| mod_RpgInventory.developers.contains(p.getDisplayName()
-						.toLowerCase())) {
-			if (p.isUsingItem()) {
+						.toLowerCase()))
+			if (p.isUsingItem())
 				p.stopUsingItem();
-			} else {
+			else
 				p.setItemInUse(is, this.getMaxItemUseDuration(is));
-			}
-		}
 		return is;
 	}
 
@@ -112,15 +108,13 @@ public class ItemElementalStaff extends ItemRpgSword {
 	public void onUpdate(ItemStack stack, World w, Entity e, int par4,
 			boolean par5) {
 		NBTTagCompound nbt = stack.getTagCompound();
-		if (nbt == null) {
+		if (nbt == null)
 			stack.setTagCompound(baseNBT());
-		}
 		nbt = stack.getTagCompound();
-		if (nbt.getBoolean("ReCharging")) {
+		if (nbt.getBoolean("ReCharging"))
 			nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge") - 0.05F);
-		} else {
+		else
 			nbt.setFloat("EnergyCharge", nbt.getFloat("EnergyCharge") - 0.025F);
-		}
 
 		if (nbt.getFloat("EnergyCharge") <= 0) {
 			nbt.setBoolean("ReCharging", false);
@@ -145,7 +139,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 	public void onUsingTick(ItemStack stack, EntityPlayer p, int count) {
 		int time = this.getMaxItemUseDuration(stack) - count;
 		NBTTagCompound nbt = stack.getTagCompound();
-		if (!p.worldObj.isRemote) {
+		if (!p.worldObj.isRemote)
 			if ((nbt.getFloat("EnergyCharge") < this.maxUse)
 					&& !nbt.getBoolean("ReCharging")) {
 				float var7 = time / 20.0F;
@@ -157,18 +151,15 @@ public class ItemElementalStaff extends ItemRpgSword {
 						p.worldObj, p, var7 * 2, this.type, limit);
 				p.worldObj.spawnEntityInWorld(var9);
 				if (!mod_RpgInventory.developers.contains(p.getDisplayName()
-						.toLowerCase())) {
+						.toLowerCase()))
 					nbt.setFloat("EnergyCharge",
 							nbt.getFloat("EnergyCharge") + 1.0F);
-				}
 			} else {
-				if (!nbt.getBoolean("ReCharging")) {
+				if (!nbt.getBoolean("ReCharging"))
 					stack.damageItem(5, p);
-				}
 				nbt.setBoolean("ReCharging", true);
 				p.stopUsingItem();
 			}
-		}
 		stack.setTagCompound(nbt);
 	}
 }

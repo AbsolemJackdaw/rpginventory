@@ -24,9 +24,8 @@ public class SlotMold extends Slot {
 	 */
 	@Override
 	public ItemStack decrStackSize(int par1) {
-		if (this.getHasStack()) {
+		if (this.getHasStack())
 			this.field_75228_b += Math.min(par1, this.getStack().stackSize);
-		}
 		return super.decrStackSize(par1);
 	}
 
@@ -60,14 +59,13 @@ public class SlotMold extends Slot {
 			int var2 = this.field_75228_b;
 			float var3 = 0;
 			int var4;
-			if (var3 == 0.0F) {
+			if (var3 == 0.0F)
 				var2 = 0;
-			} else if (var3 < 1.0F) {
+			else if (var3 < 1.0F) {
 				var4 = MathHelper.floor_float(var2 * var3);
 				if ((var4 < MathHelper.ceiling_float_int(var2 * var3))
-						&& ((float) Math.random() < ((var2 * var3) - var4))) {
+						&& ((float) Math.random() < ((var2 * var3) - var4)))
 					++var4;
-				}
 				var2 = var4;
 			}
 			while (var2 > 0) {

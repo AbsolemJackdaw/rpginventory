@@ -41,18 +41,15 @@ public class PlayerRpgInventory implements IInventory,
 			player.registerExtendedProperties(EXT_PROP_NAME,
 					new PlayerRpgInventory(player));
 			FMLLog.getLogger().info("Player properties registered");
-		} else {
+		} else
 			System.out.println("NOPE. player was null");
-		}
 	}
 
 	// PacketInventory pa = new PacketInventory();
 
 	public PlayerRpgInventory(EntityPlayer p) {
-		if (p != null) {
+		if (p != null)
 			player = p;
-		}
-		// classSets = new LinkedList();//EnumSet.noneOf(EnumRpgClass.class);
 	}
 
 	@Override
@@ -64,12 +61,11 @@ public class PlayerRpgInventory implements IInventory,
 		System.out.println("send packet here for closed inventory");
 		// PacketInventory.sendPacket(player, this);
 
-		if (!player.worldObj.isRemote) {
+		if (!player.worldObj.isRemote)
 			PacketInventory.sendPacket((EntityPlayerMP) player, this);
-			// PacketInventory pack = new PacketInventory();
-			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			// pipe.sendTo(pack, (EntityPlayerMP) player);
-		}
+		// PacketInventory pack = new PacketInventory();
+		// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+		// pipe.sendTo(pack, (EntityPlayerMP) player);
 	}
 
 	/**
@@ -89,16 +85,14 @@ public class PlayerRpgInventory implements IInventory,
 			} else {
 				var3 = armorSlots[par1].splitStack(par2);
 
-				if (armorSlots[par1].stackSize == 0) {
+				if (armorSlots[par1].stackSize == 0)
 					armorSlots[par1] = null;
-				}
 
 				// onInventoryChanged();
 				return var3;
 			}
-		} else {
+		} else
 			return null;
-		}
 	}
 
 	/**
@@ -107,25 +101,22 @@ public class PlayerRpgInventory implements IInventory,
 	public void dropJewels(EntityPlayer player) {
 		PlayerRpgInventory rpg = this;// props.getInventory();
 		int var1;
-		for (var1 = 0; var1 < rpg.armorSlots.length; ++var1) {
+		for (var1 = 0; var1 < rpg.armorSlots.length; ++var1)
 			if (rpg.armorSlots[var1] != null) {
 				player.dropPlayerItemWithRandomChoice(rpg.armorSlots[var1],
 						true);
 				rpg.armorSlots[var1] = null;
 			}
-		}
 	}
 
 	/**
 	 * Returns a slot index in main inventory containing a specific itemID
 	 */
 	private int findJewel(Item par1) {
-		for (int var2 = 0; var2 < armorSlots.length; ++var2) {
+		for (int var2 = 0; var2 < armorSlots.length; ++var2)
 			if ((armorSlots[var2] != null)
-					&& (armorSlots[var2].getItem() == par1)) {
+					&& (armorSlots[var2].getItem() == par1))
 				return var2;
-			}
-		}
 
 		return -1;
 	}
@@ -199,9 +190,8 @@ public class PlayerRpgInventory implements IInventory,
 
 	@Override
 	public ItemStack getStackInSlot(int par1) {
-		if ((par1 >= 0) && (par1 < armorSlots.length)) {
+		if ((par1 >= 0) && (par1 < armorSlots.length))
 			return armorSlots[par1];
-		}
 		return null;
 	}
 
@@ -217,12 +207,11 @@ public class PlayerRpgInventory implements IInventory,
 		System.out.println("fill packet here slotclosed");
 		// PacketInventory.sendPacket(player, this);
 
-		if (!player.worldObj.isRemote) {
+		if (!player.worldObj.isRemote)
 			PacketInventory.sendPacket((EntityPlayerMP) player, this);
-			// PacketInventory pack = new PacketInventory();
-			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			// pipe.sendTo(pack, (EntityPlayerMP) player);
-		}
+		// PacketInventory pack = new PacketInventory();
+		// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+		// pipe.sendTo(pack, (EntityPlayerMP) player);
 		return null;
 	}
 
@@ -236,9 +225,8 @@ public class PlayerRpgInventory implements IInventory,
 		// if (EnumRpgClass.getPlayerClasses(player).contains(rpgenum)) {
 		// return true;
 		// }
-		if (rpgenum.equals(mod_RpgInventory.playerClass)) {
+		if (rpgenum.equals(mod_RpgInventory.playerClass))
 			return true;
-		}
 		return false;
 	}
 
@@ -257,41 +245,33 @@ public class PlayerRpgInventory implements IInventory,
 			ItemRpgInvArmor tmp = (ItemRpgInvArmor) itemstack.getItem();
 			switch (i) {
 			case 0:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.NECKLACE) {
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.NECKLACE)
 					return true;
-				}
 				return false;
 			case 1:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.SHIELD) {
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.SHIELD)
 					return true;
-				}
 				return false;
 			case 2:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CLOAK) {
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CLOAK)
 					return true;
-				}
 				return false;
 			case 3:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.GLOVES) {
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.GLOVES)
 					return true;
-				}
 				return false;
 			case 4:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING) {
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING)
 					return true;
-				}
 				return false;
 			case 5:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING) {
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING)
 					return true;
-				}
 				return false;
 			case 6:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CRYSTAL) {
-					if (itemstack.getItemDamage() > 0) {
+				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CRYSTAL)
+					if (itemstack.getItemDamage() > 0)
 						return true;
-					}
-				}
 				return false;
 			default:
 				// System.out.println("Unknown RPG Inventory type:" +
@@ -363,15 +343,8 @@ public class PlayerRpgInventory implements IInventory,
 			// System.out.println("send packet here updated as unclean");
 			// PacketInventory.sendPacket(player, this);
 
-			if (!player.worldObj.isRemote) {
+			if (!player.worldObj.isRemote)
 				PacketInventory.sendPacket((EntityPlayerMP) player, this);
-
-				// PacketInventory pack = new PacketInventory();
-				// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-				// pipe.sendTo(pack, (EntityPlayerMP) player);
-			}
-			// mod_RpgInventory.PIPELINE.sendTo(new PacketInventory(player,
-			// this), (EntityPlayerMP) player);
 
 			EntityPlayer player = MinecraftServer.getServer()
 					.getConfigurationManager()
@@ -408,43 +381,36 @@ public class PlayerRpgInventory implements IInventory,
 			if (((getNecklace() != null) && (getNecklace().getItem() == mod_RpgInventory.neckdia))
 					|| ((getRing1() != null) && (getRing1().getItem() == mod_RpgInventory.ringdia))
 					|| ((getRing2() != null) && (getRing2().getItem() == mod_RpgInventory.ringdia))
-					|| ((getGloves() != null) && (getGloves().getItem() == mod_RpgInventory.glovesdia))) {
+					|| ((getGloves() != null) && (getGloves().getItem() == mod_RpgInventory.glovesdia)))
 				addtoticks[2] = true;
-			}
 
 			if (addtoticks[0]) {
 				if (!RPGEventHooks.ArcherRepairTick.containsKey(player
-						.getCommandSenderName())) {
+						.getCommandSenderName()))
 					RPGEventHooks.ArcherRepairTick.put(
 							player.getCommandSenderName(), 0);
-				}
-			} else {
+			} else
 				// keep the cooldown hashmap clean
 				RPGEventHooks.ArcherRepairTick.remove(player
 						.getCommandSenderName());
-			}
 
 			if (addtoticks[1]) {
 				if (!RPGEventHooks.HealerTick.containsKey(player
-						.getCommandSenderName())) {
+						.getCommandSenderName()))
 					RPGEventHooks.HealerTick.put(player.getCommandSenderName(),
 							0);
-				}
-			} else {
+			} else
 				// keep the cooldown hashmap clean
 				RPGEventHooks.HealerTick.remove(player.getCommandSenderName());
-			}
 
 			if (addtoticks[2]) {
 				if (!RPGEventHooks.DiamondTick.containsKey(player
-						.getCommandSenderName())) {
+						.getCommandSenderName()))
 					RPGEventHooks.DiamondTick.put(
 							player.getCommandSenderName(), 0);
-				}
-			} else {
+			} else
 				// keep the cooldown hashmap clean
 				RPGEventHooks.DiamondTick.remove(player.getCommandSenderName());
-			}
 		} catch (Throwable ex) {
 		}
 	}
@@ -459,10 +425,9 @@ public class PlayerRpgInventory implements IInventory,
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
 
-			if ((b0 >= 0) && (b0 < this.getSizeInventory())) {
+			if ((b0 >= 0) && (b0 < this.getSizeInventory()))
 				this.setInventorySlotContents(b0,
 						ItemStack.loadItemStackFromNBT(nbttagcompound1));
-			}
 		}
 	}
 
@@ -490,14 +455,13 @@ public class PlayerRpgInventory implements IInventory,
 	public void writeToNBT(NBTTagCompound tagcompound) {
 		NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < this.getSizeInventory(); ++i) {
+		for (int i = 0; i < this.getSizeInventory(); ++i)
 			if (this.getStackInSlot(i) != null) {
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
 				this.getStackInSlot(i).writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-		}
 		// We're storing our items in a custom tag list using our 'tagName' from
 		// above
 		// to prevent potential conflicts

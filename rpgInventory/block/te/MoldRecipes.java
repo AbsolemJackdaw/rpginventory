@@ -63,15 +63,12 @@ public class MoldRecipes {
 		// ItemStack[] comboBreakdown = { Items.copy(), Items2.copy() };
 
 		if (mold != null) {
-			if (mold == mod_RpgInventory.colmold) {
+			if (mold == mod_RpgInventory.colmold)
 				necklaceCombination.put(p, result);
-			}
-			if (mold == mod_RpgInventory.wantmold) {
+			if (mold == mod_RpgInventory.wantmold)
 				gloveCombination.put(p, result);
-			}
-			if (mold == mod_RpgInventory.ringmold) {
+			if (mold == mod_RpgInventory.ringmold)
 				ringCombination.put(p, result);
-			}
 		}
 		// Item moldUsed = mold;
 		// breakdownList.put(stack, comboBreakdown);
@@ -99,18 +96,14 @@ public class MoldRecipes {
 
 	public ItemStack getSmeltingResult(Item mineral, Item mold) {
 
-		if (mold == mod_RpgInventory.colmold) {
+		if (mold == mod_RpgInventory.colmold)
 			// System.out.println("mold recognized");
 			return necklaceCombination.get(mineral);
-		}
-
-		else if (mold == mod_RpgInventory.wantmold) {
+		else if (mold == mod_RpgInventory.wantmold)
 			return gloveCombination.get(mineral);
-		}
-
-		else if (mold == mod_RpgInventory.ringmold) {
+		else if (mold == mod_RpgInventory.ringmold)
 			return ringCombination.get(mineral);
-		} else {
+		else {
 			System.out.println("mold wasnt recognized");
 			return null;
 		}

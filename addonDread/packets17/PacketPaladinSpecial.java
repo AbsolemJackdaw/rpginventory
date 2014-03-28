@@ -53,17 +53,14 @@ public class PacketPaladinSpecial extends RpgPlusAbstractPacket {
 		inv.markDirty();
 
 		if (!mod_RpgInventory.developers.contains(player.getDisplayName()
-				.toLowerCase()) || (weapon == null)) {
+				.toLowerCase()) || (weapon == null))
 			if (!mod_RpgInventory.playerClass
-					.contains(mod_RpgPlus.CLASSPALADIN)) {
+					.contains(mod_RpgPlus.CLASSPALADIN))
 				return;
-			}
-		}
 
 		if (!CommonTickHandler.globalCooldownMap.containsKey(player
-				.getDisplayName())) {
+				.getDisplayName()))
 			CommonTickHandler.globalCooldownMap.put(player.getDisplayName(), 0);
-		}
 		if (CommonTickHandler.globalCooldownMap.get(player.getDisplayName()) <= 0) {
 			CommonTickHandler.globalCooldownMap
 					.put(player.getDisplayName(), (mod_RpgInventory.donators
@@ -79,20 +76,17 @@ public class PacketPaladinSpecial extends RpgPlusAbstractPacket {
 				// delete the item
 				player.renderBrokenItemStack(weapon);
 				player.setCurrentItemOrArmor(0, (ItemStack) null);
-			} else {
-				if (!mod_RpgInventory.developers.contains(player
-						.getDisplayName().toLowerCase())) {
-					weapon.damageItem(3, player);
-				}
-			}
+			} else if (!mod_RpgInventory.developers.contains(player
+					.getDisplayName().toLowerCase()))
+				weapon.damageItem(3, player);
 			float rad = 6.0f;
 			AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
 					player.posX - rad, player.posY - rad, player.posZ - rad,
 					player.posX + rad, player.posY + rad, player.posZ + rad);
 			List<EntityLiving> entl = player.worldObj.getEntitiesWithinAABB(
 					EntityLiving.class, pool);
-			if ((entl != null) && (entl.size() > 0)) {
-				for (EntityLiving el : entl) {
+			if ((entl != null) && (entl.size() > 0))
+				for (EntityLiving el : entl)
 					if (el != null) {
 						double dist = player.getDistanceSqToEntity(el);
 						double potstrength = 1.0D - (Math.sqrt(dist) / 4.0D);
@@ -101,14 +95,11 @@ public class PacketPaladinSpecial extends RpgPlusAbstractPacket {
 										.getDisplayName()) ? 5 : 2),
 								potstrength * 2);
 					}
-				}
-			}
-		} else {
+		} else
 			player.addChatMessage(new ChatComponentText(
 					"You must wait for energy to replenish, left: "
 							+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
 									.get(player.getDisplayName()) / 20))
 							+ " seconds"));
-		}
 	}
 }

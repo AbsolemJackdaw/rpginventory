@@ -30,12 +30,10 @@ public class ItemArcherArmor extends AbstractArmor {
 			String type) {
 		if ((itemstack.getItem() == mod_addonBase.archerboots)
 				|| (itemstack.getItem() == mod_addonBase.archerchest)
-				|| (itemstack.getItem() == mod_addonBase.archerhood)) {
+				|| (itemstack.getItem() == mod_addonBase.archerhood))
 			return "armor:arch_1.png";
-		}
-		if (itemstack.getItem() == mod_addonBase.archerpants) {
+		if (itemstack.getItem() == mod_addonBase.archerpants)
 			return "armor:arch_2.png";
-		}
 		return super.getArmorTexture(itemstack, entity, slot, type);
 	}
 }

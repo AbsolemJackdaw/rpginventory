@@ -47,17 +47,14 @@ public class PacketTeleport extends RpgRBAbstractPacket {
 			ItemStack dagger = player.getCurrentEquippedItem();
 
 			if (!mod_RpgInventory.developers.contains(player.getDisplayName()
-					.toLowerCase())) {
+					.toLowerCase()))
 				if (!mod_RpgInventory.playerClass
-						.contains(mod_RpgRB.CLASSROGUE)) {
+						.contains(mod_RpgRB.CLASSROGUE))
 					return;
-				}
-			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(player
-					.getDisplayName())) {
+					.getDisplayName()))
 				CommonTickHandler.globalCooldownMap.put(
 						player.getDisplayName(), 0);
-			}
 			if (CommonTickHandler.globalCooldownMap
 					.get(player.getDisplayName()) <= 0) {
 				CommonTickHandler.globalCooldownMap.put(
@@ -70,12 +67,9 @@ public class PacketTeleport extends RpgRBAbstractPacket {
 							player);
 					player.renderBrokenItemStack(dagger);
 					player.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else {
-					if (!mod_RpgInventory.developers.contains(player
-							.getDisplayName().toLowerCase())) {
-						dagger.damageItem(3, player);
-					}
-				}
+				} else if (!mod_RpgInventory.developers.contains(player
+						.getDisplayName().toLowerCase()))
+					dagger.damageItem(3, player);
 				player.worldObj.spawnEntityInWorld(new EntityTeleportStone(
 						player.worldObj, player));
 				double d0 = rand.nextGaussian() * 0.02D;
@@ -91,13 +85,12 @@ public class PacketTeleport extends RpgRBAbstractPacket {
 								(player.posZ + (rand.nextFloat() * player.width * 2.0F))
 										- player.width, d0, d1, d2);
 
-			} else {
+			} else
 				player.addChatMessage(new ChatComponentText(
 						"You must wait for energy to replenish, left: "
 								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
 										.get(player.getDisplayName()) / 20))
 								+ " seconds"));
-			}
 		}
 	}
 }

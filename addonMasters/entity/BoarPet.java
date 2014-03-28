@@ -104,11 +104,10 @@ public class BoarPet extends BMPetImpl {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (getLevel() <= 200) {
+		if (getLevel() <= 200)
 			petSize = 0.5F + (((getLevel()) / 200.0F) * 1.5F);
-		} else {
+		else
 			petSize = 2.0F;
-		}
 	}
 
 	// @Override

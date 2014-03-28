@@ -75,15 +75,13 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 				new CustomMinionEntitySelector(player)));
 		// they tend to wander off sometimes if they get too excited, but they
 		// will snap back to the player if they wander too far.
-		if (!MinionRegistry.playerMinions.containsKey(player.getDisplayName())) {
+		if (!MinionRegistry.playerMinions.containsKey(player.getDisplayName()))
 			MinionRegistry.playerMinions.put(player.getDisplayName(),
 					new ArrayList<IMinion>());
-		}
 		List<IMinion> list = MinionRegistry.playerMinions.get(player
 				.getDisplayName());
-		if (!list.contains(this)) {
+		if (!list.contains(this))
 			list.add(this);
-		}
 	}
 
 	@Override
@@ -97,9 +95,8 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 		Entity var3 = par1DamageSource.getEntity();
 
 		if ((var3 != null) && !(var3 instanceof EntityPlayer)
-				&& !(var3 instanceof EntityArrow)) {
+				&& !(var3 instanceof EntityArrow))
 			par2 = (par2 + 1) / 2;
-		}
 
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
@@ -130,9 +127,8 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 				PathEntity var2 = this.worldObj.getPathEntityToEntity(this,
 						this.player, 16.0F, true, false, false, true);
 				this.setPathToEntity(var2);
-			} else {
+			} else
 				this.setPathToEntity((PathEntity) null);
-			}
 		}
 	}
 
@@ -158,12 +154,11 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 	@Override
 	public void Harvest() {
 		this.damageEntity(DamageSource.magic, this.getHealth());
-		if ((player.getHealth() + 2) <= player.getMaxHealth()) {
+		if ((player.getHealth() + 2) <= player.getMaxHealth())
 			player.heal(mod_RpgInventory.donators.contains(getMaster()
 					.getDisplayName()) ? 2 : 1);
-		} else {
+		else
 			player.setHealth(player.getMaxHealth());
-		}
 	}
 
 	@Override
@@ -195,16 +190,14 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
-		if (player != null) {
+		if (player != null)
 			if (MinionRegistry.playerMinions.containsKey(player
 					.getDisplayName())) {
 				List<IMinion> list = MinionRegistry.playerMinions.get(player
 						.getDisplayName());
-				if (list.contains(this)) {
+				if (list.contains(this))
 					list.remove(this);
-				}
 			}
-		}
 		super.onDeath(par1DamageSource);
 	}
 

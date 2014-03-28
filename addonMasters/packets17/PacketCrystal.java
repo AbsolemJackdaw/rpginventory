@@ -43,11 +43,11 @@ public class PacketCrystal extends RpgRBAbstractPacket {
 	@Override
 	public void handleServerSide(EntityPlayer player) {
 
-		if (entityid == 0) {
+		if (entityid == 0)
 			player.attackEntityFrom(DamageSource.magic, 1);
-		} else {
+		else {
 			Entity e = player.worldObj.getEntityByID(entityid);
-			if (e != null) {
+			if (e != null)
 				if (e instanceof EntityPig) {
 					ItemStack is = new ItemStack(mod_RpgRB.crystal, 1, 1);
 					e.entityDropItem(is, 0.5F);
@@ -62,7 +62,6 @@ public class PacketCrystal extends RpgRBAbstractPacket {
 					e.entityDropItem(is, 0.5F);
 					e.setDead();
 				}
-			}
 		}
 	}
 }

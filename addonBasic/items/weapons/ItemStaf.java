@@ -51,9 +51,8 @@ public class ItemStaf extends ItemRpgSword {
 		// exception for archmage : this should be evaded any time, but I don't
 		// have a choice here.
 		if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSMAGE)
-				|| mod_RpgInventory.playerClass.contains("archMage")) {
+				|| mod_RpgInventory.playerClass.contains("archMage"))
 			p.setItemInUse(is, this.getMaxItemUseDuration(is));
-		}
 		return is;
 	}
 
@@ -81,11 +80,10 @@ public class ItemStaf extends ItemRpgSword {
 										* p.width * 2.0F))
 										- p.width, var2, var4, var6);
 				int heal = time / 50;
-				if ((p.getHealth() + heal) <= p.getMaxHealth()) {
+				if ((p.getHealth() + heal) <= p.getMaxHealth())
 					p.heal(heal);
-				} else {
+				else
 					p.setHealth(p.getMaxHealth());
-				}
 			}
 			if (time > 100) {
 				// p.spawnExplosionParticle();
@@ -105,11 +103,10 @@ public class ItemStaf extends ItemRpgSword {
 										* p.width * 2.0F))
 										- p.width, var2, var4, var6);
 				int heal = time / 30;
-				if ((p.getHealth() + heal) <= p.getMaxHealth()) {
+				if ((p.getHealth() + heal) <= p.getMaxHealth())
 					p.heal(heal);
-				} else {
+				else
 					p.setHealth(p.getMaxHealth());
-				}
 			}
 		}
 	}

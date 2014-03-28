@@ -20,50 +20,40 @@ public class ItemRpgInventoryItem extends ItemRpgInvArmor {
 			String resourcelocation) {
 		super(par4, maxDamage, name, resourcelocation);
 
-		if (this.equals(mod_addonBase.talisman)) {
+		if (this.equals(mod_addonBase.talisman))
 			isMantle = true;
-		}
 	}
 
 	@Override
 	public String boundArmorClass() {
-		if (this.equals(mod_addonBase.berserkerShield)) {
+		if (this.equals(mod_addonBase.berserkerShield))
 			return mod_RpgInventory.CLASSBERSERKER;
-		}
-		if (this.equals(mod_addonBase.archerShield)) {
+		if (this.equals(mod_addonBase.archerShield))
 			return mod_RpgInventory.CLASSARCHER;
-		}
-		if (this.equals(mod_addonBase.talisman)) {
+		if (this.equals(mod_addonBase.talisman))
 			return mod_RpgInventory.CLASSMAGE;
-		}
 		return super.boundArmorClass();
 	}
 
 	@Override
 	public MainShield getShieldModel() {
-		if (this.equals(mod_addonBase.berserkerShield)) {
+		if (this.equals(mod_addonBase.berserkerShield))
 			return it;
-		}
-		if (this.equals(mod_addonBase.archerShield)) {
+		if (this.equals(mod_addonBase.archerShield))
 			return arch;
-		}
-		if (this.equals(mod_addonBase.talisman)) {
+		if (this.equals(mod_addonBase.talisman))
 			return book;
-		}
 		return super.getShieldModel();
 	}
 
 	@Override
 	public String shieldClass() {
-		if (this.equals(mod_addonBase.berserkerShield)) {
+		if (this.equals(mod_addonBase.berserkerShield))
 			return mod_RpgInventory.CLASSBERSERKERSHIELD;
-		}
-		if (this.equals(mod_addonBase.archerShield)) {
+		if (this.equals(mod_addonBase.archerShield))
 			return mod_RpgInventory.CLASSARCHERSHIELD;
-		}
-		if (this.equals(mod_addonBase.talisman)) {
+		if (this.equals(mod_addonBase.talisman))
 			return mod_RpgInventory.CLASSMAGESHIELD;
-		}
 		return super.shieldClass();
 	}
 }

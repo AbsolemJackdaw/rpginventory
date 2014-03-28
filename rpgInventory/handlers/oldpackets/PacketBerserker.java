@@ -36,21 +36,18 @@ public class PacketBerserker {
 			if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 					.toLowerCase())) {
 				if ((item1 == null) || (var31 == null) || (var21 == null)
-						|| (var11 == null) || (var01 == null)) {
+						|| (var11 == null) || (var01 == null))
 					return;
-				}
 				if ((item1.getItem() != mod_addonBase.hammer)
 						|| (var31.getItem() != mod_addonBase.berserkerHood)
 						|| (var21.getItem() != mod_addonBase.berserkerChest)
 						|| (var11.getItem() != mod_addonBase.berserkerLegs)
-						|| (var01.getItem() != mod_addonBase.berserkerBoots)) {
+						|| (var01.getItem() != mod_addonBase.berserkerBoots))
 					return;
-				}
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(p
-					.getDisplayName())) {
+					.getDisplayName()))
 				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
-			}
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				CommonTickHandler.globalCooldownMap
 						.put(p.getDisplayName(), (mod_RpgInventory.donators
@@ -59,29 +56,24 @@ public class PacketBerserker {
 					// Trigger item break stuff
 					// Only damage what is left
 					if (!mod_RpgInventory.developers.contains(p
-							.getDisplayName().toLowerCase())) {
+							.getDisplayName().toLowerCase()))
 						item1.damageItem(
 								item1.getMaxDamage() - item1.getItemDamage(), p);
-					}
 					// Do the break item stuff
 					p.renderBrokenItemStack(item1);
 					// delete the item
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else {
-					if (!mod_RpgInventory.developers.contains(p
-							.getDisplayName().toLowerCase())) {
-						item1.damageItem(3, p);
-					}
-				}
+				} else if (!mod_RpgInventory.developers.contains(p
+						.getDisplayName().toLowerCase()))
+					item1.damageItem(3, p);
 
 				float range = 4.0f;
 				if (mod_RpgInventory.developers.contains(p.getDisplayName()
-						.toLowerCase())) {
+						.toLowerCase()))
 					range = 8.0f;
-				} else {
+				else
 					range = mod_RpgInventory.donators.contains(p
 							.getDisplayName()) ? 5.5f : 4.0f;
-				}
 
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
 						p.posX - range, p.posY - range, p.posZ - range,
@@ -89,8 +81,8 @@ public class PacketBerserker {
 
 				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABB(
 						EntityLivingBase.class, pool);
-				if ((entl != null) && (entl.size() > 0)) {
-					for (EntityLivingBase el : entl) {
+				if ((entl != null) && (entl.size() > 0))
+					for (EntityLivingBase el : entl)
 						if ((el != null) && (el != p)) {
 							try {
 								double xdir = el.posX - p.posX;
@@ -126,15 +118,12 @@ public class PacketBerserker {
 									mod_RpgInventory.donators.contains(p
 											.getDisplayName()) ? 10 : 8);
 						}
-					}
-				}
-			} else {
+			} else
 				p.addChatMessage(new ChatComponentText(
 						"You must wait for energy to replenish, left: "
 								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
 										.get(p.getDisplayName()) / 20))
 								+ " seconds"));
-			}
 		}
 	}
 }

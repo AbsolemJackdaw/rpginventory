@@ -15,12 +15,10 @@ public class ItemNecroPaladinMats extends ItemMats {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack is, int par2) {
-		if (is.getItem() == mod_RpgPlus.necro_skin) {
+		if (is.getItem() == mod_RpgPlus.necro_skin)
 			return 0xee0e1d;
-		}
-		if (is.getItem() == mod_RpgPlus.pala_steel) {
+		if (is.getItem() == mod_RpgPlus.pala_steel)
 			return 0xf9f925;
-		}
 		return 16777215;
 	}
 }

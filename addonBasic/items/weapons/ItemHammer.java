@@ -28,31 +28,24 @@ public class ItemHammer extends ItemRpgSword {
 		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 
 		if (mod_RpgInventory.playerClass
-				.contains(mod_RpgInventory.CLASSBERSERKER)) {
+				.contains(mod_RpgInventory.CLASSBERSERKER))
 			if (mod_RpgInventory.playerClass
 					.contains(mod_RpgInventory.CLASSBERSERKERSHIELD)) {
 				if ((player.getFoodStats().getFoodLevel() < 6)
-						|| (player.getHealth() < 6)) {
+						|| (player.getHealth() < 6))
 					player.addPotionEffect(new PotionEffect(
 							Potion.damageBoost.id, 200, 1));
-				} else if ((player.getFoodStats().getFoodLevel() < 3)
-						|| (player.getHealth() < 3)) {
+				else if ((player.getFoodStats().getFoodLevel() < 3)
+						|| (player.getHealth() < 3))
 					player.addPotionEffect(new PotionEffect(
 							Potion.damageBoost.id, 200, 2));
-				}
-			} else {
-				if ((player.getFoodStats().getFoodLevel() < 4)
-						|| (player.getHealth() < 4)) {
-
-					player.addPotionEffect(new PotionEffect(
-							Potion.damageBoost.id, 200, 1));
-				}
-			}
-		}
+			} else if ((player.getFoodStats().getFoodLevel() < 4)
+					|| (player.getHealth() < 4))
+				player.addPotionEffect(new PotionEffect(Potion.damageBoost.id,
+						200, 1));
 		par1ItemStack.damageItem(1, player);
-		if (par1ItemStack.getItemDamage() > par1ItemStack.getMaxDamage()) {
+		if (par1ItemStack.getItemDamage() > par1ItemStack.getMaxDamage())
 			par1ItemStack = null;
-		}
 		return par1ItemStack;
 	}
 }

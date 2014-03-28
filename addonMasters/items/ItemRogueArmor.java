@@ -24,18 +24,16 @@ public class ItemRogueArmor extends AbstractArmor {
 	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
 			int armorSlot) {
 
-		if (stack != null) {
+		if (stack != null)
 			if (stack.getItem() instanceof ItemArmor) {
 
 				int type = ((ItemArmor) stack.getItem()).armorType;
 
-				if ((type == 1) || (type == 3)) {
+				if ((type == 1) || (type == 3))
 					armorModel = mod_RpgRB.proxy.getArmorModel(0);
-				} else {
+				else
 					armorModel = mod_RpgRB.proxy.getArmorModel(1);
-				}
 			}
-		}
 
 	}
 
@@ -44,12 +42,10 @@ public class ItemRogueArmor extends AbstractArmor {
 			String type) {
 		if ((itemstack.getItem() == mod_RpgRB.rogueHood)
 				|| (itemstack.getItem() == mod_RpgRB.rogueChest)
-				|| (itemstack.getItem() == mod_RpgRB.rogueBoots)) {
+				|| (itemstack.getItem() == mod_RpgRB.rogueBoots))
 			return "armor:rogue_1.png";
-		}
-		if (itemstack.getItem() == mod_RpgRB.rogueLegs) {
+		if (itemstack.getItem() == mod_RpgRB.rogueLegs)
 			return "armor:rogue_2.png";
-		}
 		return super.getArmorTexture(itemstack, entity, slot, type);
 	}
 

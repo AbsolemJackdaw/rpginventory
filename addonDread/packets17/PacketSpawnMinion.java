@@ -47,10 +47,9 @@ public class PacketSpawnMinion extends RpgPlusAbstractPacket {
 				&& mod_RpgInventory.playerClass
 						.contains(mod_RpgPlus.CLASSNECRO)) {
 			if (!CommonTickHandlerRpgPlus.rpgPluscooldownMap.containsKey(player
-					.getDisplayName())) {
+					.getDisplayName()))
 				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(
 						player.getDisplayName(), 0);
-			}
 			if (CommonTickHandlerRpgPlus.rpgPluscooldownMap.get(player
 					.getDisplayName()) <= 0) {
 				// 2 second cooldown
@@ -68,9 +67,8 @@ public class PacketSpawnMinion extends RpgPlusAbstractPacket {
 					// delete the item
 					player.renderBrokenItemStack(weapon);
 					player.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else {
+				} else
 					weapon.damageItem(2, player);
-				}
 				World world = player.worldObj;
 				if (mod_RpgInventory.playerClass
 						.contains(mod_RpgPlus.CLASSNECROSHIELD)) {
@@ -84,25 +82,21 @@ public class PacketSpawnMinion extends RpgPlusAbstractPacket {
 							var4.setOwner(player.getDisplayName());
 						}
 					}
-				} else {
-					if (!world.isRemote) {
-						EntityMinionZ var4 = new EntityMinionZ(world, player);
-						if (var4 != null) {
-							var4.setPosition(player.posX, player.posY,
-									player.posZ);
-							world.spawnEntityInWorld(var4);
-							var4.setTamed(true);
-							var4.setOwner(player.getDisplayName());
-						}
+				} else if (!world.isRemote) {
+					EntityMinionZ var4 = new EntityMinionZ(world, player);
+					if (var4 != null) {
+						var4.setPosition(player.posX, player.posY, player.posZ);
+						world.spawnEntityInWorld(var4);
+						var4.setTamed(true);
+						var4.setOwner(player.getDisplayName());
 					}
 				}
-			} else {
+			} else
 				player.addChatMessage(new ChatComponentText(
 						"You must wait for energy to replenish, left: "
 								+ Math.floor(1 + (CommonTickHandlerRpgPlus.rpgPluscooldownMap
 										.get(player.getDisplayName()) / 20))
 								+ " seconds"));
-			}
 		}
 	}
 }

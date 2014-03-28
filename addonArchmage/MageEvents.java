@@ -17,7 +17,7 @@ public class MageEvents {
 			if (evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer p = (EntityPlayer) evt.entityLiving;
 				ItemStack weapon = p.getCurrentEquippedItem();
-				if (weapon != null) {
+				if (weapon != null)
 					/* ==== ARCHMAGE EFFECTS ==== */
 					if (mod_RpgInventory.playerClass
 							.contains(mod_RpgMageSet.CLASSARCHMAGESHIELD)
@@ -25,37 +25,30 @@ public class MageEvents {
 									.getDisplayName().toLowerCase())) {
 						if (weapon.getItem().equals(mod_RpgMageSet.fireStaff)
 								|| weapon.getItem().equals(
-										mod_RpgMageSet.ultimateStaff)) {
+										mod_RpgMageSet.ultimateStaff))
 							if (p.isBurning()) {
-								if (p.getHealth() < 6) {
+								if (p.getHealth() < 6)
 									p.setHealth(mod_RpgInventory.donators
 											.contains(p.getDisplayName()) ? 8
 											: 6);
-								}
 								p.extinguish();
 							}
-						}
 						if (weapon.getItem().equals(mod_RpgMageSet.windStaff)
 								|| weapon.getItem().equals(
-										mod_RpgMageSet.ultimateStaff)) {
+										mod_RpgMageSet.ultimateStaff))
 							p.fallDistance = 0; // negates fall damage
-						}
 						if (weapon.getItem().equals(mod_RpgMageSet.frostStaff)
 								|| weapon.getItem().equals(
-										mod_RpgMageSet.ultimateStaff)) {
-							if (p.getAir() < 20) {
+										mod_RpgMageSet.ultimateStaff))
+							if (p.getAir() < 20)
 								p.setAir(20); // you can not drown !
-							}
-						}
 						if (weapon.getItem().equals(mod_RpgMageSet.earthStaff)
 								|| weapon.getItem().equals(
-										mod_RpgMageSet.ultimateStaff)) {
+										mod_RpgMageSet.ultimateStaff))
 							p.curePotionEffects(new ItemStack(
 									Items.milk_bucket, 1)); // cure all negative
 															// potion effects
-						}
 					}
-				}
 			}
 
 		} catch (Exception e) {

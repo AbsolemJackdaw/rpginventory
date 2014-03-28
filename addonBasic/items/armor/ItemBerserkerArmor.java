@@ -21,19 +21,16 @@ public class ItemBerserkerArmor extends AbstractArmor {
 	@Override
 	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
 			int armorSlot) {
-		if (stack != null) {
+		if (stack != null)
 			if (stack.getItem() instanceof AbstractArmor) {
 
 				int type = ((AbstractArmor) stack.getItem()).armorType;
 
-				if ((type == 1) || (type == 3)) {
+				if ((type == 1) || (type == 3))
 					armorModel = mod_addonBase.proxy.getArmorModel(3);
-
-				} else {
+				else
 					armorModel = mod_addonBase.proxy.getArmorModel(2);
-				}
 			}
-		}
 	}
 
 	@Override
@@ -42,12 +39,10 @@ public class ItemBerserkerArmor extends AbstractArmor {
 
 		if ((itemstack.getItem() == mod_addonBase.berserkerHood)
 				|| (itemstack.getItem() == mod_addonBase.berserkerChest)
-				|| (itemstack.getItem() == mod_addonBase.berserkerBoots)) {
+				|| (itemstack.getItem() == mod_addonBase.berserkerBoots))
 			return "armor:berserk_1.png";
-		}
-		if (itemstack.getItem() == mod_addonBase.berserkerLegs) {
+		if (itemstack.getItem() == mod_addonBase.berserkerLegs)
 			return "armor:berserk_2.png";
-		}
 		return null;
 	}
 }

@@ -45,15 +45,13 @@ public class PacketNecroSpecial extends RpgPlusAbstractPacket {
 	public void handleServerSide(EntityPlayer player) {
 		if (weapon.getItem().equals(mod_RpgPlus.necro_weapon)
 				&& mod_RpgInventory.playerClass
-						.contains(mod_RpgPlus.CLASSNECRO)) {
+						.contains(mod_RpgPlus.CLASSNECRO))
 			if (MinionRegistry.playerMinions.containsKey(player
 					.getDisplayName())) {
 				List<IMinion> list = MinionRegistry.playerMinions.get(player
 						.getDisplayName());
-				for (IMinion minion : list) {
+				for (IMinion minion : list)
 					minion.Harvest();
-				}
 			}
-		}
 	}
 }

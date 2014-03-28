@@ -47,10 +47,9 @@ public class RpgRBPacketPipeline17 extends
 		byte discriminator = payload.readByte();
 		Class<? extends RpgRBAbstractPacket> clazz = this.packets
 				.get(discriminator);
-		if (clazz == null) {
+		if (clazz == null)
 			throw new NullPointerException(
 					"No packet registered for discriminator: " + discriminator);
-		}
 
 		RpgRBAbstractPacket pkt = clazz.newInstance();
 		pkt.decodeInto(ctx, payload.slice());
@@ -81,10 +80,9 @@ public class RpgRBPacketPipeline17 extends
 			List<Object> out) throws Exception {
 		ByteBuf buffer = Unpooled.buffer();
 		Class<? extends RpgRBAbstractPacket> clazz = msg.getClass();
-		if (!this.packets.contains(msg.getClass())) {
+		if (!this.packets.contains(msg.getClass()))
 			throw new NullPointerException("No Packet Registered for: "
 					+ msg.getClass().getCanonicalName());
-		}
 
 		byte discriminator = (byte) this.packets.indexOf(clazz);
 		buffer.writeByte(discriminator);
@@ -112,9 +110,8 @@ public class RpgRBPacketPipeline17 extends
 	// Ensures that packet discriminators are common between server and client
 	// by using logical sorting
 	public void postInitialise() {
-		if (this.isPostInitialised) {
+		if (this.isPostInitialised)
 			return;
-		}
 
 		this.isPostInitialised = true;
 		Collections.sort(this.packets,
@@ -127,10 +124,9 @@ public class RpgRBPacketPipeline17 extends
 						int com = String.CASE_INSENSITIVE_ORDER.compare(
 								clazz1.getCanonicalName(),
 								clazz2.getCanonicalName());
-						if (com == 0) {
+						if (com == 0)
 							com = clazz1.getCanonicalName().compareTo(
 									clazz2.getCanonicalName());
-						}
 
 						return com;
 					}

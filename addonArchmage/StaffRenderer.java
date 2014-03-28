@@ -26,10 +26,9 @@ public class StaffRenderer extends RpgItemRenderer {
 		Minecraft mc = Minecraft.getMinecraft();
 		mc.renderEngine.bindTexture(new ResourceLocation(
 				"subaraki:weapons/ElementalStaff.png"));
-		if (item != null) {
+		if (item != null)
 			try {
-				if (item.getItem() instanceof ItemElementalStaff) {
-
+				if (item.getItem() instanceof ItemElementalStaff)
 					switch (((ItemElementalStaff) item.getItem()).type) {
 					case 1:/* fire */
 					{
@@ -90,23 +89,19 @@ public class StaffRenderer extends RpgItemRenderer {
 					}
 						break;
 					}
-				} else {
+				else
 					GL11.glColor4f(0, 0.2f, 0.7f, 1F);
-				}
 			} catch (Exception e) {
 			}
-		}
 
-		if (this.step > 1000) {
+		if (this.step > 1000)
 			this.step = 0;
-		}
 		rotate += 0.001f;
 		GL11.glScalef(2F, 2F, 2F);
 		GL11.glTranslatef(0.0F, 0.355F, -0.015F);
-		for (float var1 = 0f; var1 < 0.5f; var1 += 0.1F) {
+		for (float var1 = 0f; var1 < 0.5f; var1 += 0.1F)
 			swordmodel
 					.sphere(p, var1 + rotate, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-		}
 	}
 
 	public Color getColor(double d, double e, double f, int phase1, int phase2,

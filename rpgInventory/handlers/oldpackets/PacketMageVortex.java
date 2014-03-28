@@ -37,21 +37,18 @@ public class PacketMageVortex {
 			if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 					.toLowerCase())) {
 				if ((wand == null) || (hat == null) || (chest == null)
-						|| (legs == null) || (boots == null)) {
+						|| (legs == null) || (boots == null))
 					return;
-				}
 				if ((wand.getItem() != mod_RpgInventory.wand)
 						|| (hat.getItem() != mod_RpgInventory.magehood)
 						|| (chest.getItem() != mod_RpgInventory.magegown)
 						|| (legs.getItem() != mod_RpgInventory.magepants)
-						|| (boots.getItem() != mod_RpgInventory.mageboots)) {
+						|| (boots.getItem() != mod_RpgInventory.mageboots))
 					return;
-				}
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(p
-					.getDisplayName())) {
+					.getDisplayName()))
 				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
-			}
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(),
 						7 * 20);
@@ -64,13 +61,10 @@ public class PacketMageVortex {
 					p.renderBrokenItemStack(wand);
 					// delete the item
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else {
-					if (!mod_RpgInventory.developers.contains(p
-							.getDisplayName().toLowerCase())) {
-						wand.damageItem(mod_RpgInventory.donators.contains(p
-								.getDisplayName()) ? 1 : 3, p);
-					}
-				}
+				} else if (!mod_RpgInventory.developers.contains(p
+						.getDisplayName().toLowerCase()))
+					wand.damageItem(mod_RpgInventory.donators.contains(p
+							.getDisplayName()) ? 1 : 3, p);
 				float f = mod_RpgInventory.donators
 						.contains(p.getDisplayName()) ? 20.0f : 10.0f;
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
@@ -79,18 +73,17 @@ public class PacketMageVortex {
 				List<EntityLivingBase> entl = p.worldObj
 						.getEntitiesWithinAABBExcludingEntity(p, pool);
 
-				if ((entl != null) && (entl.size() > 0)) {
-					for (Entity el : entl) {
+				if ((entl != null) && (entl.size() > 0))
+					for (Entity el : entl)
 						if ((el != null) && (el != p)) {
 
 							int var4;
 
 							var4 = 10;
-							if (entl instanceof EntityLivingBase) {
+							if (entl instanceof EntityLivingBase)
 								var4 += EnchantmentHelper.getKnockbackModifier(
 										p, (EntityLivingBase) el);
-							}
-							if (var4 > 0) {
+							if (var4 > 0)
 								try {
 									Vec3 posPlayer = Vec3.createVectorHelper(
 											el.posX, el.posY, el.posZ);
@@ -116,17 +109,13 @@ public class PacketMageVortex {
 													: 1));
 								} catch (Throwable ex) {
 								}
-							}
 						}
-					}
-				}
-			} else {
+			} else
 				p.addChatMessage(new ChatComponentText(
 						"You must wait for energy to replenish, left: "
 								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
 										.get(p.getDisplayName()) / 20))
 								+ " seconds"));
-			}
 		}
 	}
 }

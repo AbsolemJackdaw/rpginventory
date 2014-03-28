@@ -21,9 +21,8 @@ public class RpgKeyHandlerRB extends RPGKeyHandler {
 			GuiScreen guiscreen = mc.currentScreen;
 			if (keySpecial.isPressed()) {
 				ItemStack item = mc.thePlayer.getCurrentEquippedItem();
-				if ((guiscreen == null) && !(item == null)) {
+				if ((guiscreen == null) && !(item == null))
 					specialAbility(item);
-				}
 			}
 		} catch (Throwable e) {
 		}

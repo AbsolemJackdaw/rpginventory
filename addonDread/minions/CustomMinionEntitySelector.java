@@ -29,16 +29,13 @@ public class CustomMinionEntitySelector implements IEntitySelector {
 		// Never attack the owner, even if he attacks them.
 
 		if (var1 != owner) {
-			if (var1 instanceof EntityTameable) {
-				if (((EntityTameable) var1).getOwner() != owner) {
+			if (var1 instanceof EntityTameable)
+				if (((EntityTameable) var1).getOwner() != owner)
 					return true;
-				} else {
+				else
 					return false;
-				}
-			}
-			if (var1 instanceof IMob) {
+			if (var1 instanceof IMob)
 				return true;
-			}
 		}
 		return false;
 	}

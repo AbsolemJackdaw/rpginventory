@@ -24,12 +24,10 @@ public class ItemMageARmor extends AbstractArmor {
 			int armorSlot) {
 
 		int type = ((ItemArmor) stack.getItem()).armorType;
-		if ((type == 1) || (type == 3)) {
+		if ((type == 1) || (type == 3))
 			armorModel = mod_RpgMageSet.proxy.getArmorModel(0);
-
-		} else {
+		else
 			armorModel = mod_RpgMageSet.proxy.getArmorModel(1);
-		}
 
 	}
 
@@ -38,12 +36,10 @@ public class ItemMageARmor extends AbstractArmor {
 			String type) {
 		if ((itemstack.getItem() == mod_RpgMageSet.archmageHood)
 				|| (itemstack.getItem() == mod_RpgMageSet.archmageChest)
-				|| (itemstack.getItem() == mod_RpgMageSet.archMageBoots)) {
+				|| (itemstack.getItem() == mod_RpgMageSet.archMageBoots))
 			return "armor:archMage_1.png";
-		}
-		if (itemstack.getItem() == mod_RpgMageSet.archmageLegs) {
+		if (itemstack.getItem() == mod_RpgMageSet.archmageLegs)
 			return "armor:archMage_2.png";
-		}
 		return super.getArmorTexture(itemstack, entity, slot, type);
 	}
 

@@ -25,11 +25,10 @@ public class PacketInventory {
 
 			out.writeInt(ClientPacketHandler.INVENTORY);
 
-			for (int i = 0; i < inv.getSizeInventory(); i++) {
+			for (int i = 0; i < inv.getSizeInventory(); i++)
 				// if(inv.armorSlots[i] != null)
 				// CompressedStreamTools.write(inv.armorSlots[i].getTagCompound(),out);
 				ByteBufUtils.writeItemStack(buf, inv.armorSlots[i]);
-			}
 
 			// ByteBufUtils.writeItemStack(inv.armorSlots[0], out);
 			// Packet.writeItemStack(inv.armorSlots[1], out);
@@ -38,10 +37,9 @@ public class PacketInventory {
 			// Packet.writeItemStack(inv.armorSlots[4], out);
 			// Packet.writeItemStack(inv.armorSlots[5], out);
 			// Packet.writeItemStack(inv.armorSlots[6], out);
-			if (!player.worldObj.isRemote) {
+			if (!player.worldObj.isRemote)
 				mod_RpgInventory.Channel.sendTo(new FMLProxyPacket(buf,
 						"RpgInv"), player);
-			}
 
 			// PacketDispatcher.sendPacketToPlayer(new Packet250CustomPayload(
 			// "RpgInv", out.toByteArray()), (Player) player);
@@ -65,18 +63,17 @@ public class PacketInventory {
 			out.writeInt(ServerPacketHandler.SMP_INVENTORY_SYNC);
 			out.writeUTF(player.getDisplayName());
 
-			for (int i = 0; i < inv.getSizeInventory(); i++) {
+			for (int i = 0; i < inv.getSizeInventory(); i++)
 				ByteBufUtils.writeItemStack(buf, inv.armorSlots[i]);
-				// CompressedStreamTools.write(inv.armorSlots[i].getTagCompound(),
-				// out);
-				// Packet.writeItemStack(inv.armorSlots[0], out);
-				// Packet.writeItemStack(inv.armorSlots[1], out);
-				// Packet.writeItemStack(inv.armorSlots[2], out);
-				// Packet.writeItemStack(inv.armorSlots[3], out);
-				// Packet.writeItemStack(inv.armorSlots[4], out);
-				// Packet.writeItemStack(inv.armorSlots[5], out);
-				// Packet.writeItemStack(inv.armorSlots[6], out);
-			}
+			// CompressedStreamTools.write(inv.armorSlots[i].getTagCompound(),
+			// out);
+			// Packet.writeItemStack(inv.armorSlots[0], out);
+			// Packet.writeItemStack(inv.armorSlots[1], out);
+			// Packet.writeItemStack(inv.armorSlots[2], out);
+			// Packet.writeItemStack(inv.armorSlots[3], out);
+			// Packet.writeItemStack(inv.armorSlots[4], out);
+			// Packet.writeItemStack(inv.armorSlots[5], out);
+			// Packet.writeItemStack(inv.armorSlots[6], out);
 
 			if (!player.worldObj.isRemote) {
 

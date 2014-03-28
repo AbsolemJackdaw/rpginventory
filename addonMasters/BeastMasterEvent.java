@@ -19,7 +19,7 @@ public class BeastMasterEvent {
 			if ((!evt.entityLiving.worldObj.isRemote)
 					&& (evt.entityLiving != null) && (evt.source != null)
 					&& (evt.source.getSourceOfDamage() != null)
-					&& (evt.source.getSourceOfDamage() instanceof IPet)) {
+					&& (evt.source.getSourceOfDamage() instanceof IPet))
 				if (evt.entityLiving instanceof EntityLiving) {
 					EntityLiving corpse = (EntityLiving) evt.entityLiving;
 					EntityLivingBase murderer = (EntityLiving) evt.source
@@ -37,7 +37,6 @@ public class BeastMasterEvent {
 								corpse.posZ, partialXP));
 					}
 				}
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
