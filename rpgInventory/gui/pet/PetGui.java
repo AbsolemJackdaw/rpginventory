@@ -21,11 +21,12 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import rpgAddonMasters.entity.BMPetImpl;
-import rpgAddonMasters.entity.BoarPet;
-import rpgAddonMasters.entity.BullPet;
-import rpgAddonMasters.entity.IPet;
-import rpgAddonMasters.entity.SpiderPet;
+import addonMasters.entity.BMPetImpl;
+import addonMasters.entity.BoarPet;
+import addonMasters.entity.BullPet;
+import addonMasters.entity.IPet;
+import addonMasters.entity.SpiderPet;
+
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 
 public class PetGui extends GuiScreen {
