@@ -124,10 +124,11 @@ public class RpgGui extends GuiContainer {
 
 		this.buttonList.add(new GuiButton(0, posX + 130, posY + 1, 50, 20,
 				"Back"));
-//		if (mod_RpgInventory.hasRogue == true) {
-//			this.buttonList.add(new GuiButton(1, posX + 130, posY + 22, 50, 20,
-//					"Pet"));
-//		}
+
+		// if (mod_RpgInventory.hasRogue == true) {
+		// this.buttonList.add(new GuiButton(1, posX + 130, posY + 22, 50, 20,
+		// "Pet"));
+		// }
 
 	}
 }

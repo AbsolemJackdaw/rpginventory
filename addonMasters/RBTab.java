@@ -20,6 +20,6 @@ public class RBTab extends CreativeTabs {
 
 	@Override
 	public String getTranslatedTabLabel() {
-		return "Rogue/BeastMaster Armoury";
+		return this.getTabLabel();
 	}
 }

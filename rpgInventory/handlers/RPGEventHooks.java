@@ -418,47 +418,47 @@ public class RPGEventHooks {
 				EntityPlayer p = (EntityPlayer) evt.entityLiving;
 				if (p != null) {
 
-					//TODO place potion effects under addonDread
-//					if ((p.getActivePotionEffects() != null)
-//							&& (p.getActivePotionEffects().size() > 0)) {
-//						PotionEffect decompose = p
-//								.getActivePotionEffect(mod_RpgInventory.decomposePotion);
-//						PotionEffect machicism = p
-//								.getActivePotionEffect(mod_RpgInventory.masochismPotion);
-//						if ((decompose != null) && (machicism != null)) {
-//							p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
-//							p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
-//							CustomPotionList.remove(p.getCommandSenderName());
-//						} else {
-//							if (decompose != null) {
-//								if (decompose.getDuration() == 0) {
-//									p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
-//									CustomPotionList.remove(p
-//											.getCommandSenderName());
-//								} else {
-//									if (!CustomPotionList.containsKey(p
-//											.getCommandSenderName())) {
-//										CustomPotionList.put(
-//												p.getCommandSenderName(),
-//												decompose.getDuration());
-//									}
-//								}
-//							} else if (machicism != null) {
-//								if (machicism.getDuration() == 0) {
-//									p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
-//									CustomPotionList.remove(p
-//											.getCommandSenderName());
-//								} else {
-//									if (!CustomPotionList.containsKey(p
-//											.getCommandSenderName())) {
-//										CustomPotionList.put(
-//												p.getCommandSenderName(),
-//												machicism.getDuration());
-//									}
-//								}
-//							}
-//						}
-//					}
+					// TODO place potion effects under addonDread
+					// if ((p.getActivePotionEffects() != null)
+					// && (p.getActivePotionEffects().size() > 0)) {
+					// PotionEffect decompose = p
+					// .getActivePotionEffect(mod_RpgInventory.decomposePotion);
+					// PotionEffect machicism = p
+					// .getActivePotionEffect(mod_RpgInventory.masochismPotion);
+					// if ((decompose != null) && (machicism != null)) {
+					// p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
+					// p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
+					// CustomPotionList.remove(p.getCommandSenderName());
+					// } else {
+					// if (decompose != null) {
+					// if (decompose.getDuration() == 0) {
+					// p.removePotionEffect(mod_RpgInventory.decomposePotion.id);
+					// CustomPotionList.remove(p
+					// .getCommandSenderName());
+					// } else {
+					// if (!CustomPotionList.containsKey(p
+					// .getCommandSenderName())) {
+					// CustomPotionList.put(
+					// p.getCommandSenderName(),
+					// decompose.getDuration());
+					// }
+					// }
+					// } else if (machicism != null) {
+					// if (machicism.getDuration() == 0) {
+					// p.removePotionEffect(mod_RpgInventory.masochismPotion.id);
+					// CustomPotionList.remove(p
+					// .getCommandSenderName());
+					// } else {
+					// if (!CustomPotionList.containsKey(p
+					// .getCommandSenderName())) {
+					// CustomPotionList.put(
+					// p.getCommandSenderName(),
+					// machicism.getDuration());
+					// }
+					// }
+					// }
+					// }
+					// }
 
 					PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 

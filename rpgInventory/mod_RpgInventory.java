@@ -68,7 +68,7 @@ public class mod_RpgInventory {
 	}
 
 	public static MoldRecipes recipes;
-	
+
 	public static final String name = "rpginventorymod";
 	public static final String ID = "Rpg Inventory";
 
@@ -94,12 +94,12 @@ public class mod_RpgInventory {
 	public static Item
 	/* ====jewels==== */
 	neckgold, neckdia, neckem, necklap, glovesbutter, glovesdia, glovesem,
-	gloveslap, ringgold, ringdia, ringem, ringlap,
-	/* ====cloaks==== */
-	cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen,
-	cloakBlue,
-	/* ====molds==== */
-	colmold, ringmold, wantmold;
+			gloveslap, ringgold, ringdia, ringem, ringlap,
+			/* ====cloaks==== */
+			cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen,
+			cloakBlue,
+			/* ====molds==== */
+			colmold, ringmold, wantmold;
 
 	public Item[] allItems;
 
@@ -110,7 +110,6 @@ public class mod_RpgInventory {
 	public static List<Integer> rpvInvIDs = new ArrayList();
 
 	private static int uniqueID = 0;
-	
 
 	public static CreativeTabs tab;
 
@@ -170,7 +169,7 @@ public class mod_RpgInventory {
 	public void load(FMLInitializationEvent event) {
 
 		recipes = new MoldRecipes();
-		
+
 		// PIPELINE.initialise();
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("RpgInv");
 		proxy.load();
@@ -182,8 +181,6 @@ public class mod_RpgInventory {
 		developers.add("artix_all_mighty");
 		developers.add("rich1051414");
 		developers.add("darkhax");
-
-		
 
 		proxy.registerRenderInformation();
 
@@ -200,8 +197,8 @@ public class mod_RpgInventory {
 
 		LanguageRegistry.addName(forgeBlock, "Mold Forge");
 
-		LanguageRegistry.addName(cloakRed, "Red Cape");
-		LanguageRegistry.addName(cloakYellow, "Yellow Cape");
+//		LanguageRegistry.addName(cloakRed, "Red Cape");
+//		LanguageRegistry.addName(cloakYellow, "Yellow Cape");
 		LanguageRegistry.addName(cloakGreen, "Green Cape");
 		LanguageRegistry.addName(cloakBlue, "Blue Cape");
 		LanguageRegistry.addName(cloakSub, "Black Cape");
@@ -230,33 +227,33 @@ public class mod_RpgInventory {
 
 		// CLOAK
 		GameRegistry.addRecipe(new ItemStack(cloak, 1), new Object[] { "SS",
-			"II", "II", 'I', Blocks.wool, 'S', Items.string });
+				"II", "II", 'I', Blocks.wool, 'S', Items.string });
 		GameRegistry.addRecipe(new ItemStack(cloakI, 1), new Object[] { "PPP",
-			"PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.potionitem, 1, 8206) });
+				"PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.potionitem, 1, 8206) });
 		GameRegistry.addRecipe(new ItemStack(cloakI, 1), new Object[] { "PPP",
-			"PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.potionitem, 1, 8270) });
+				"PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.potionitem, 1, 8270) });
 
 		GameRegistry.addRecipe(new ItemStack(cloakRed, 1), new Object[] {
-			"PPP", "PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.dye, 1, 1) });
+				"PPP", "PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.dye, 1, 1) });
 		GameRegistry.addRecipe(new ItemStack(cloakYellow, 1), new Object[] {
-			"PPP", "PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.dye, 1, 11) });
+				"PPP", "PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.dye, 1, 11) });
 		GameRegistry.addRecipe(new ItemStack(cloakGreen, 1), new Object[] {
-			"PPP", "PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.dye, 1, 2) });
+				"PPP", "PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.dye, 1, 2) });
 		GameRegistry.addRecipe(new ItemStack(cloakBlue, 1), new Object[] {
-			"PPP", "PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.dye, 1, 12) });
+				"PPP", "PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.dye, 1, 12) });
 		GameRegistry.addRecipe(new ItemStack(cloakSub, 1), new Object[] {
-			"PPP", "PCP", "PPP", 'C', cloak, 'P',
-			new ItemStack(Items.dye, 1, 0) });
+				"PPP", "PCP", "PPP", 'C', cloak, 'P',
+				new ItemStack(Items.dye, 1, 0) });
 
 		GameRegistry.addRecipe(new ItemStack(forgeBlock, 1), new Object[] {
-			"BBB", "BOB", "BBB", 'B', Blocks.brick_block, 'O',
-			Blocks.obsidian });
+				"BBB", "BOB", "BBB", 'B', Blocks.brick_block, 'O',
+				Blocks.obsidian });
 
 		// DONE ?
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
@@ -272,8 +269,6 @@ public class mod_RpgInventory {
 				getUniqueID(), this, 250, 1, true);
 
 		ClientProxy.renderHandler();
-
-		
 
 	}
 
@@ -305,18 +300,18 @@ public class mod_RpgInventory {
 				"subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold")
 				.setCreativeTab(tab);
 		neckdia = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckDia.png")
-		.setUnlocalizedName("neckDia").setCreativeTab(tab);
+				.setUnlocalizedName("neckDia").setCreativeTab(tab);
 		neckem = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckEm.png")
-		.setUnlocalizedName("neckEm").setCreativeTab(tab);
+				.setUnlocalizedName("neckEm").setCreativeTab(tab);
 		necklap = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckLap.png")
-		.setUnlocalizedName("neckLap").setCreativeTab(tab);
+				.setUnlocalizedName("neckLap").setCreativeTab(tab);
 
 		ringgold = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
 				"ringGold").setCreativeTab(tab);
 		ringdia = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
 				"ringDia").setCreativeTab(tab);
 		ringem = new ItemRpgInvArmor(4, -1, "", "")
-		.setUnlocalizedName("ringEm").setCreativeTab(tab);
+				.setUnlocalizedName("ringEm").setCreativeTab(tab);
 		ringlap = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
 				"ringLap").setCreativeTab(tab);
 
@@ -327,20 +322,20 @@ public class mod_RpgInventory {
 				"subaraki:jewels/GloveDia.png").setUnlocalizedName("gloveDia")
 				.setCreativeTab(tab);
 		glovesem = new ItemRpgInvArmor(3, -1, "", "subaraki:jewels/GloveEm.png")
-		.setUnlocalizedName("gloveEm").setCreativeTab(tab);
+				.setUnlocalizedName("gloveEm").setCreativeTab(tab);
 		gloveslap = new ItemRpgInvArmor(3, -1, "",
 				"subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap")
 				.setCreativeTab(tab);
 
 		cloak = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/GreyCape.png")
-		.setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
+				.setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
 		cloakI = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/GreyCape.png")
-		.setFull3D().setUnlocalizedName("i.capeGrey")
-		.setCreativeTab(tab);
+				.setFull3D().setUnlocalizedName("i.capeGrey")
+				.setCreativeTab(tab);
 
 		cloakRed = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/RedCape.png")
-		.setFull3D().setUnlocalizedName("r.capeGrey")
-		.setCreativeTab(tab);
+				.setFull3D().setUnlocalizedName("r.capeGrey")
+				.setCreativeTab(tab);
 
 		cloakYellow = new ItemRpgInvArmor(2, -1, "",
 				"subaraki:capes/GoldCape.png").setFull3D()
@@ -350,11 +345,11 @@ public class mod_RpgInventory {
 				"subaraki:capes/GreenCape.png").setFull3D()
 				.setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
 		cloakBlue = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/SkyCape.png")
-		.setFull3D().setUnlocalizedName("b.capeGrey")
-		.setCreativeTab(tab);
+				.setFull3D().setUnlocalizedName("b.capeGrey")
+				.setCreativeTab(tab);
 		cloakSub = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/BlaCape.png")
-		.setFull3D().setUnlocalizedName("s.capeGrey")
-		.setCreativeTab(tab);
+				.setFull3D().setUnlocalizedName("s.capeGrey")
+				.setCreativeTab(tab);
 
 		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(
 				tab);
@@ -363,9 +358,10 @@ public class mod_RpgInventory {
 		wantmold = new ItemMold().setUnlocalizedName("moldGlove")
 				.setCreativeTab(tab);
 
-		forgeBlock = new BlockForge(Material.rock).setHardness(5f).setBlockName("MoldForge").setCreativeTab(tab);
+		forgeBlock = new BlockForge(Material.rock).setHardness(5f)
+				.setBlockName("MoldForge").setCreativeTab(tab);
 		GameRegistry.registerBlock(forgeBlock, "MoldForge");
-		
+
 		allItems = new Item[] { neckgold, neckdia, neckem, necklap,
 				glovesbutter, glovesdia, glovesem, gloveslap, ringgold,
 				ringdia, ringem, ringlap, cloak, cloakI, cloakSub, cloakRed,
@@ -378,14 +374,16 @@ public class mod_RpgInventory {
 				String itemName = allItems[i].getUnlocalizedName().substring(
 						allItems[i].getUnlocalizedName().indexOf(".") + 1);
 
-				String itemNameCropped = itemName.substring(itemName.indexOf(".") + 1);
+				String itemNameCropped = itemName.substring(itemName
+						.indexOf(".") + 1);
 
-				allItems[i].setTextureName(mod_RpgInventory.name + ":" + itemNameCropped);
+				allItems[i].setTextureName(mod_RpgInventory.name + ":"
+						+ itemNameCropped);
 
 				GameRegistry
-				.registerItem(allItems[i],
-						allItems[i].getUnlocalizedName(),
-						mod_RpgInventory.name);
+						.registerItem(allItems[i],
+								allItems[i].getUnlocalizedName(),
+								mod_RpgInventory.name);
 
 			} else {
 				System.out.println("Item is null !" + i);

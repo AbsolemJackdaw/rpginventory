@@ -158,9 +158,11 @@ public class mod_RpgMageSet {
 				String itemName = allItems[i].getUnlocalizedName().substring(
 						allItems[i].getUnlocalizedName().indexOf(".") + 1);
 
-				String itemNameCropped = itemName.substring(itemName.indexOf(".") + 1);
+				String itemNameCropped = itemName.substring(itemName
+						.indexOf(".") + 1);
 
-				allItems[i].setTextureName(mod_RpgInventory.name + ":" + itemNameCropped);
+				allItems[i].setTextureName(mod_RpgInventory.name + ":"
+						+ itemNameCropped);
 
 				GameRegistry.registerItem(allItems[i],
 						allItems[i].getUnlocalizedName(), name);

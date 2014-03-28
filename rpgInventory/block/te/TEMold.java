@@ -1,7 +1,6 @@
 package rpgInventory.block.te;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockMobSpawner;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -24,13 +23,14 @@ public class TEMold extends TileEntity implements IInventory {
 		if (par0ItemStack == null) {
 			return 0;
 		} else {
-			Item var1 = Items.apple; //making sure its not null
+			Item var1 = Items.apple; // making sure its not null
 			Block var2 = Blocks.stone;
 
-			if(par0ItemStack.getItem() != null)
+			if (par0ItemStack.getItem() != null) {
 				var1 = par0ItemStack.getItem();
-			else
+			} else {
 				var2 = ((ItemBlock) par0ItemStack.getItem()).field_150939_a;
+			}
 
 			if (var1 == Items.coal) {
 				return 100;
@@ -91,7 +91,7 @@ public class TEMold extends TileEntity implements IInventory {
 		return false;
 	}
 
-	/**0 fuel, 1 gold block, 2 mold, 3 mineral, 4 result*/
+	/** 0 fuel, 1 gold block, 2 mold, 3 mineral, 4 result */
 	private ItemStack[] moldforgeItemStacks;
 	/**
 	 * The number of ticks that the furnace will keep burning
@@ -133,32 +133,43 @@ public class TEMold extends TileEntity implements IInventory {
 		ItemStack mineral = null;
 		ItemStack mold = null;
 
-		//				System.out.println(moldforgeItemStacks[3]);
+		// System.out.println(moldforgeItemStacks[3]);
 		if (moldforgeItemStacks[1] != null) {
-			if ((moldforgeItemStacks[2] != null)&& (moldforgeItemStacks[3] != null)) {
+			if ((moldforgeItemStacks[2] != null)
+					&& (moldforgeItemStacks[3] != null)) {
 				mold = moldforgeItemStacks[2];
 				mineral = moldforgeItemStacks[3];
-				if(mineral != null)
-					if(mineral.getItem() instanceof ItemDye){
-						if(mineral.getItemDamage() == 4)
-							result = mod_RpgInventory.recipes.getSmeltingResult(mineral.getItem(), mold.getItem());
-					}else{
-						result = mod_RpgInventory.recipes.getSmeltingResult(mineral.getItem(), mold.getItem());
+				if (mineral != null) {
+					if (mineral.getItem() instanceof ItemDye) {
+						if (mineral.getItemDamage() == 4) {
+							result = mod_RpgInventory.recipes
+									.getSmeltingResult(mineral.getItem(),
+											mold.getItem());
+						}
+					} else {
+						result = mod_RpgInventory.recipes.getSmeltingResult(
+								mineral.getItem(), mold.getItem());
 					}
+				}
 			}
 
 			if ((result == null) && (moldforgeItemStacks[2] != null)
 					&& (moldforgeItemStacks[3] != null)) {
 				mold = moldforgeItemStacks[2];
 				mineral = moldforgeItemStacks[3];
-				if(mineral != null)
-					if(mineral.getItem() instanceof ItemDye){
-						if(mineral.getItemDamage() == 4)
-							result = mod_RpgInventory.recipes.getSmeltingResult(mineral.getItem(), mold.getItem());
-					}else{
-						result = mod_RpgInventory.recipes.getSmeltingResult(mineral.getItem(), mold.getItem());
+				if (mineral != null) {
+					if (mineral.getItem() instanceof ItemDye) {
+						if (mineral.getItemDamage() == 4) {
+							result = mod_RpgInventory.recipes
+									.getSmeltingResult(mineral.getItem(),
+											mold.getItem());
+						}
+					} else {
+						result = mod_RpgInventory.recipes.getSmeltingResult(
+								mineral.getItem(), mold.getItem());
 					}
-				//								System.out.println(mold + " " +mineral +" " + result);
+					// System.out.println(mold + " " +mineral +" " + result);
+				}
 
 			}
 		}
@@ -293,11 +304,12 @@ public class TEMold extends TileEntity implements IInventory {
 				mineral = moldforgeItemStacks[3];
 			}
 
-			ItemStack stack = mod_RpgInventory.recipes.getSmeltingResult(mineral.getItem(),
-					mold.getItem());
+			ItemStack stack = mod_RpgInventory.recipes.getSmeltingResult(
+					mineral.getItem(), mold.getItem());
 
 			if (stack == null) {
-				stack = mod_RpgInventory.recipes.getSmeltingResult(mineral.getItem(), mold.getItem());
+				stack = mod_RpgInventory.recipes.getSmeltingResult(
+						mineral.getItem(), mold.getItem());
 			}
 
 			if (moldforgeItemStacks[4] == null) {
@@ -368,7 +380,8 @@ public class TEMold extends TileEntity implements IInventory {
 		boolean var1 = this.goldBurnTime > 0;
 		boolean var2 = false;
 
-		//		System.out.println(isBurning() + " "+ canSmelt() +blockMetadata + " " + goldBurnTime);
+		// System.out.println(isBurning() + " "+ canSmelt() +blockMetadata + " "
+		// + goldBurnTime);
 
 		if (goldBurnTime > 0) {
 			goldBurnTime -= 1;
@@ -418,13 +431,12 @@ public class TEMold extends TileEntity implements IInventory {
 			markDirty();
 		}
 
-
 		Block b = worldObj.getBlock(xCoord, yCoord, zCoord);
-		if(b instanceof BlockForge){
-			BlockForge f = (BlockForge)b;
-			if(isBurning()){
+		if (b instanceof BlockForge) {
+			BlockForge f = (BlockForge) b;
+			if (isBurning()) {
 				f.isBurning = true;
-			}else{
+			} else {
 				f.isBurning = false;
 			}
 		}

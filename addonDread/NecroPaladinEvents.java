@@ -98,7 +98,7 @@ public class NecroPaladinEvents {
 						.contains(mod_RpgPlus.CLASSNECRO)) {
 					if (p.getActivePotionEffect(Potion.regeneration) != null) {
 						p.addPotionEffect(new PotionEffect(
-								mod_RpgInventory.decomposePotion.id, p
+								mod_RpgPlus.decomposePotion.id, p
 										.getActivePotionEffect(
 												Potion.regeneration)
 										.getDuration() * 2, p
@@ -109,7 +109,7 @@ public class NecroPaladinEvents {
 					}
 					if (p.getActivePotionEffect(Potion.poison) != null) {
 						p.addPotionEffect(new PotionEffect(
-								mod_RpgInventory.masochismPotion.id, p
+								mod_RpgPlus.masochismPotion.id, p
 										.getActivePotionEffect(Potion.poison)
 										.getDuration() / 2, p
 										.getActivePotionEffect(Potion.poison)

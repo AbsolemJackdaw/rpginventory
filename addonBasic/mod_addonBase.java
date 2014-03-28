@@ -73,7 +73,7 @@ public class mod_addonBase {
 			animalskin, tanHide, magecloth,
 			/* ====shields==== */
 			archerShield, berserkerShield, talisman;
-	
+
 	private String[][] recipePatterns;
 	private Object[][] recipeItems;
 
@@ -278,7 +278,8 @@ public class mod_addonBase {
 				String itemName = allItems[i].getUnlocalizedName().substring(
 						allItems[i].getUnlocalizedName().indexOf(".") + 1);
 
-				String itemNameCropped = itemName.substring(itemName.indexOf(".") + 1);
+				String itemNameCropped = itemName.substring(itemName
+						.indexOf(".") + 1);
 
 				if ((allItems[i] == rageSeed) || (allItems[i] == animalskin)
 						|| (allItems[i] == tanHide)
@@ -287,7 +288,7 @@ public class mod_addonBase {
 					allItems[i].setTextureName("minecraft:" + itemNameCropped);
 				} else {
 					allItems[i].setTextureName(mod_RpgInventory.name + ":"
-							+ name);
+							+ itemNameCropped);
 				}
 
 				GameRegistry

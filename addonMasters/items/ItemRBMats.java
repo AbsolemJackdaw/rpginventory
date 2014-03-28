@@ -24,12 +24,4 @@ public class ItemRBMats extends ItemMats {
 		}
 		return 16777215;
 	}
-
-	@Override
-	public Item setTextureName(String s) {
-		String itemName = getUnlocalizedName().substring(
-				getUnlocalizedName().indexOf(".") + 1);
-		this.iconString = "rpginventorymod:" + itemName;
-		return this;
-	}
 }
