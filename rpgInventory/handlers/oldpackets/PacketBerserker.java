@@ -5,6 +5,8 @@ import io.netty.buffer.ByteBufInputStream;
 
 import java.util.List;
 
+import addonBasic.mod_addonBase;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,6 +19,15 @@ import rpgInventory.handlers.CommonTickHandler;
 
 public class PacketBerserker {
 
+	// TODO move packet
+
+	/*
+	 * MOVE PACKET TO API
+	 * 
+	 */
+
+
+	/**Move packet to API*/
 	public PacketBerserker(World world, EntityPlayer p,	ByteBufInputStream dis) {
 		if (!world.isRemote) {
 			// System.out.println("Hammer time!");
@@ -32,11 +43,11 @@ public class PacketBerserker {
 						|| (var11 == null) || (var01 == null)) {
 					return;
 				}
-				if ((item1.getItem() != mod_RpgInventory.hammer)
-						|| (var31.getItem() != mod_RpgInventory.berserkerHood)
-						|| (var21.getItem() != mod_RpgInventory.berserkerChest)
-						|| (var11.getItem() != mod_RpgInventory.berserkerLegs)
-						|| (var01.getItem() != mod_RpgInventory.berserkerBoots)) {
+				if ((item1.getItem() != mod_addonBase.hammer)
+						|| (var31.getItem() != mod_addonBase.berserkerHood)
+						|| (var21.getItem() != mod_addonBase.berserkerChest)
+						|| (var11.getItem() != mod_addonBase.berserkerLegs)
+						|| (var01.getItem() != mod_addonBase.berserkerBoots)) {
 					return;
 				}
 			}
@@ -46,8 +57,8 @@ public class PacketBerserker {
 			}
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				CommonTickHandler.globalCooldownMap
-						.put(p.getDisplayName(), (mod_RpgInventory.donators
-								.contains(p.getDisplayName()) ? 6 : 7) * 20);
+				.put(p.getDisplayName(), (mod_RpgInventory.donators
+						.contains(p.getDisplayName()) ? 6 : 7) * 20);
 				if ((item1.getItemDamage() + 3) >= item1.getMaxDamage()) {
 					// Trigger item break stuff
 					// Only damage what is left
@@ -102,15 +113,15 @@ public class PacketBerserker {
 											* (mod_RpgInventory.donators
 													.contains(p
 															.getDisplayName()) ? 2.2f
-													: 1.5F);
+																	: 1.5F);
 									el.motionY = mod_RpgInventory.donators
 											.contains(p.getDisplayName()) ? 2.2f
-											: 3F;
+													: 3F;
 									el.motionZ = zdir
 											* (mod_RpgInventory.donators
 													.contains(p
 															.getDisplayName()) ? 2.2f
-													: 3F);
+																	: 3F);
 								}
 							} catch (Throwable ex) {
 							}
@@ -128,4 +139,4 @@ public class PacketBerserker {
 			}
 		}
 	}
- }
+}

@@ -45,7 +45,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 // RpgRBPacketHandler.class))
 public class mod_RpgRB {
 
-	@SidedProxy(serverSide = "rpgRogueBeast.RBCommonProxy", clientSide = "rpgRogueBeast.RBClientProxy")
+	@SidedProxy(serverSide = "addonMasters.RBCommonProxy", clientSide = "addonMasters.RBClientProxy")
 	public static RBCommonProxy proxy;
 	public static CreativeTabs tab;
 

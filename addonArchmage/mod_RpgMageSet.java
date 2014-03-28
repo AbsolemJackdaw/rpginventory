@@ -1,6 +1,5 @@
 package addonArchmage;
 
-import addonArchmage.weapons.ItemElementalStaff;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -10,8 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.config.RpgConfig;
+import addonArchmage.weapons.ItemElementalStaff;
+import addonBasic.mod_addonBase;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -21,7 +22,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-//@Mod(modid = mod_RpgMageSet.id, name = mod_RpgMageSet.id, version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
+@Mod(modid = mod_RpgMageSet.id, name = mod_RpgMageSet.id, version = "RpgInv8.4", dependencies = "required-after:RpgBase")
 
 // @NetworkMod(clientSideRequired = true, serverSideRequired = false,
 // clientPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgMSPacket" },
@@ -37,7 +38,7 @@ public class mod_RpgMageSet {
 	public static String CLASSARCHMAGE = "archMage";
 	public static String CLASSARCHMAGESHIELD = "shieldedArchMage";
 
-	@SidedProxy(serverSide = "rpgMage.MSCommonProxy", clientSide = "rpgMage.MSClientProxy")
+	@SidedProxy(serverSide = "addonArchmage.MSCommonProxy", clientSide = "addonArchmage.MSClientProxy")
 	public static MSCommonProxy proxy;
 
 	public static CreativeTabs tab;
@@ -56,8 +57,6 @@ public class mod_RpgMageSet {
 
 		FMLLog.info("Rpg++ ArchMage Installed. Renderers can be Used");
 
-
-
 		LanguageRegistry.addName(fireStaff, "Fire Staff");
 		LanguageRegistry.addName(frostStaff, "Frost Staff");
 		LanguageRegistry.addName(earthStaff, "Earth Staff");
@@ -74,30 +73,30 @@ public class mod_RpgMageSet {
 			Items.nether_star });
 		GameRegistry.addRecipe(new ItemStack(windStaff), new Object[] { "III",
 			"DSD", "III", 'I', Items.feather, 'D', Items.diamond, 'S',
-			mod_RpgInventory.staf });
+			mod_addonBase.staf });
 		GameRegistry.addRecipe(new ItemStack(frostStaff), new Object[] { "III",
 			"DSD", "III", 'I', Blocks.ice, 'D', Items.diamond, 'S',
-			mod_RpgInventory.staf });
+			mod_addonBase.staf });
 		GameRegistry.addRecipe(new ItemStack(earthStaff), new Object[] { "III",
 			"DSD", "III", 'I', Blocks.grass, 'D', Items.diamond, 'S',
-			mod_RpgInventory.staf });
+			mod_addonBase.staf });
 		GameRegistry.addRecipe(new ItemStack(fireStaff), new Object[] { "III",
 			"DSD", "III", 'I', Items.blaze_powder, 'D', Items.diamond, 'S',
-			mod_RpgInventory.staf });
+			mod_addonBase.staf });
 		GameRegistry.addRecipe(new ItemStack(archBook), new Object[] { "III",
 			"IBI", " I ", 'I', new ItemStack(Items.dye, 1, 4), 'B',
 			Items.book });
 		GameRegistry.addRecipe(new ItemStack(archMageBoots), new Object[] {
-			"III", "IBI", "III", 'B', mod_RpgInventory.mageboots, 'I',
+			"III", "IBI", "III", 'B', mod_addonBase.mageboots, 'I',
 			Items.gold_nugget });
 		GameRegistry.addRecipe(new ItemStack(archmageLegs), new Object[] {
-			"III", "IBI", "III", 'B', mod_RpgInventory.magepants, 'I',
+			"III", "IBI", "III", 'B', mod_addonBase.magepants, 'I',
 			Items.gold_nugget });
 		GameRegistry.addRecipe(new ItemStack(archmageChest), new Object[] {
-			"III", "IBI", "III", 'B', mod_RpgInventory.magegown, 'I',
+			"III", "IBI", "III", 'B', mod_addonBase.magegown, 'I',
 			Items.gold_nugget });
 		GameRegistry.addRecipe(new ItemStack(archmageHood), new Object[] {
-			"III", "IBI", "III", 'B', mod_RpgInventory.magehood, 'I',
+			"III", "IBI", "III", 'B', mod_addonBase.magehood, 'I',
 			Items.gold_nugget });
 
 

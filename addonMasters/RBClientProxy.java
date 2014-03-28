@@ -1,5 +1,6 @@
 package addonMasters;
 
+import addonBasic.models.item.ModelRogueArmor;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
 import addonMasters.entity.EntityPetXP;
@@ -18,7 +19,6 @@ import net.minecraft.init.Items;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.models.armor.ModelRogueArmor;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class RBClientProxy extends RBCommonProxy {

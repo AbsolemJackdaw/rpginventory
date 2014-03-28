@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.utils.AbstractArmor;
+import addonBasic.mod_addonBase;
 
 public class ItemBerserkerArmor extends AbstractArmor {
 
@@ -26,10 +27,10 @@ public class ItemBerserkerArmor extends AbstractArmor {
 				int type = ((AbstractArmor) stack.getItem()).armorType;
 
 				if ((type == 1) || (type == 3)) {
-					armorModel = mod_RpgInventory.proxy.getArmorModel(3);
+					armorModel = mod_addonBase.proxy.getArmorModel(3);
 
 				} else {
-					armorModel = mod_RpgInventory.proxy.getArmorModel(2);
+					armorModel = mod_addonBase.proxy.getArmorModel(2);
 				}
 			}
 		}
@@ -39,12 +40,12 @@ public class ItemBerserkerArmor extends AbstractArmor {
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
 
-		if ((itemstack.getItem() == mod_RpgInventory.berserkerHood)
-				|| (itemstack.getItem() == mod_RpgInventory.berserkerChest)
-				|| (itemstack.getItem() == mod_RpgInventory.berserkerBoots)) {
+		if ((itemstack.getItem() == mod_addonBase.berserkerHood)
+				|| (itemstack.getItem() == mod_addonBase.berserkerChest)
+				|| (itemstack.getItem() == mod_addonBase.berserkerBoots)) {
 			return "armor:berserk_1.png";
 		}
-		if (itemstack.getItem() == mod_RpgInventory.berserkerLegs) {
+		if (itemstack.getItem() == mod_addonBase.berserkerLegs) {
 			return "armor:berserk_2.png";
 		}
 		return null;

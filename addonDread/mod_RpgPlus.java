@@ -72,7 +72,7 @@ public class mod_RpgPlus {
 			/* ====leathers/skins==== */
 			necro_skin, pala_steel;
 
-	@SidedProxy(serverSide = "rpgNecroPaladin.CommonProxyRpgplus", clientSide = "rpgNecroPaladin.ClientProxyRpgPlus")
+	@SidedProxy(serverSide = "addonDread.CommonProxyRpgplus", clientSide = "addonDread.ClientProxyRpgPlus")
 	public static CommonProxyRpgplus proxy;
 
 	public static CreativeTabs tab;

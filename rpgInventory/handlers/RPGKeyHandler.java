@@ -85,11 +85,14 @@ public class RPGKeyHandler {
 	public RPGKeyHandler(KeyBinding[] k, boolean[] b) {
 		// super(bindKeys, reps);
 		super();
-
-		abilityMap.put(mod_RpgInventory.staf, MAGE1);
-		abilityMap.put(mod_RpgInventory.hammer, BERSERKER);
-		abilityMap.put(mod_RpgInventory.elfbow, ARCHER);
-		abilityMap.put(mod_RpgInventory.wand, MAGE2);
+		
+		//TODO place this elsewhere. the bow and magestaff ar no longer part of rpg inventory
+//		abilityMap.put(mod_RpgInventory.staf, MAGE1);
+//		abilityMap.put(mod_RpgInventory.hammer, BERSERKER);
+//		abilityMap.put(mod_RpgInventory.elfbow, ARCHER);
+//		abilityMap.put(mod_RpgInventory.wand, MAGE2);
+		
+		
 		// abilityMap.put(mod_RpgInventory.daggers.itemID, 14);
 		// 14 used in another packet !
 	}
@@ -243,21 +246,24 @@ public class RPGKeyHandler {
 			DataOutputStream outputStream = new DataOutputStream(bytes);
 			try {
 				outputStream.writeInt(i);
-				if (item.getItem() == mod_RpgInventory.elfbow) {
-					EntityLivingBase target = isTargetingEntity(
-							Minecraft.getMinecraft().thePlayer,
-							mod_RpgInventory.donators.contains(Minecraft
-									.getMinecraft().thePlayer
-									.getCommandSenderName()) ? 60 : 40);
-					if (target != null) {
-						outputStream.writeBoolean(false);
-						outputStream.writeInt((int) Math.floor(target.posX));
-						outputStream.writeInt((int) Math.floor(target.posY));
-						outputStream.writeInt((int) Math.floor(target.posZ));
-					} else {
-						outputStream.writeBoolean(true);
-					}
-				}
+				
+				//TODO place this elsewhere. the bow and mage staff are no longer part of rpg inventory
+				
+//				if (item.getItem() == mod_RpgInventory.elfbow) {
+//					EntityLivingBase target = isTargetingEntity(
+//							Minecraft.getMinecraft().thePlayer,
+//							mod_RpgInventory.donators.contains(Minecraft
+//									.getMinecraft().thePlayer
+//									.getCommandSenderName()) ? 60 : 40);
+//					if (target != null) {
+//						outputStream.writeBoolean(false);
+//						outputStream.writeInt((int) Math.floor(target.posX));
+//						outputStream.writeInt((int) Math.floor(target.posY));
+//						outputStream.writeInt((int) Math.floor(target.posZ));
+//					} else {
+//						outputStream.writeBoolean(true);
+//					}
+//				}
 				
 				
 				// TODO sendpacket

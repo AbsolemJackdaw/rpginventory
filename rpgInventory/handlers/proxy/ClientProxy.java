@@ -26,8 +26,6 @@ import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.gui.BookGui;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.ClientPacketHandler;
-import rpgInventory.models.armor.ModelBerserkerArmor;
-import rpgInventory.models.armor.ModelMageArmor;
 import rpgInventory.models.shields.IronThorn;
 import rpgInventory.models.shields.ModelShield;
 import rpgInventory.models.shields.bookMage;
@@ -50,16 +48,7 @@ public class ClientProxy extends CommonProxy {
 	public static int sphereID;
 	public static boolean firstUpdate = false;
 
-	private static final ModelMageArmor armorMageChest = new ModelMageArmor(
-			1.0f);
-
-	private static final ModelMageArmor armorMage = new ModelMageArmor(0.5f);
-
-	private static final ModelBerserkerArmor armorBerserkChest = new ModelBerserkerArmor(
-			1.0f);
-
-	private static final ModelBerserkerArmor armorBerserk = new ModelBerserkerArmor(
-			0.5f);
+	
 
 	@SideOnly(Side.CLIENT)
 	public static void renderHandler() {
@@ -68,22 +57,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
 	}
 
-	@Override
-	public ModelBiped getArmorModel(int id) {
-		switch (id) {
-		case 0:
-			return armorMage;
-		case 1:
-			return armorMageChest;
-		case 2:
-			return armorBerserk;
-		case 3:
-			return armorBerserkChest;
-		default:
-			break;
-		}
-		return armorMage;
-	}
+	
 
 	@Override
 	public int getSphereID() {
@@ -163,28 +137,7 @@ public class ClientProxy extends CommonProxy {
 		// Tell LWJGL that we are done creating our list.
 		GL11.glEndList();
 
-		if (RpgConfig.instance.render3D == true) {
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgInventory.claymore, new ClaymoreRenderer());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.hammer,
-					new HammerRender());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.wand,
-					new SoulSphereRender());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.staf,
-					new StafRender());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgInventory.elfbow,
-					new BowRender());
-
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgInventory.berserkerShield, new BerserkerShield(
-							new IronThorn(), "subaraki:jewels/IronThorn.png"));
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgInventory.archerShield, new ArcherShield(
-							new ModelShield(), "subaraki:jewels/Shield1.png"));
-			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgInventory.talisman, new BookRenderer(new bookMage(),
-							"subaraki:jewels/mageShield.png"));
-		}
+		
 	}
 
 	@Override

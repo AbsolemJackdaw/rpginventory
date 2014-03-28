@@ -2,6 +2,8 @@ package addonBasic.items.weapons;
 
 import java.util.Random;
 
+import addonBasic.mod_addonBase;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,10 +54,10 @@ public class ItemMageSphere extends ItemRpgWeapon {
 			Item item2 = var31.getItem();
 			Item item3 = var30.getItem();
 
-			if (item.equals(mod_RpgInventory.magehood)
-					&& item1.equals(mod_RpgInventory.magegown)
-					&& item2.equals(mod_RpgInventory.magepants)
-					&& item3.equals(mod_RpgInventory.mageboots)) {
+			if (item.equals(mod_addonBase.magehood)
+					&& item1.equals(mod_addonBase.magegown)
+					&& item2.equals(mod_addonBase.magepants)
+					&& item3.equals(mod_addonBase.mageboots)) {
 				int k = Item.itemRand.nextInt(5);
 				switch (k) {
 				case 0:
@@ -91,10 +93,10 @@ public class ItemMageSphere extends ItemRpgWeapon {
 			Item item2 = var31.getItem();
 			Item item3 = var30.getItem();
 
-			if (item.equals(mod_RpgInventory.magehood)
-					&& item1.equals(mod_RpgInventory.magegown)
-					&& item2.equals(mod_RpgInventory.magepants)
-					&& item3.equals(mod_RpgInventory.mageboots)) {
+			if (item.equals(mod_addonBase.magehood)
+					&& item1.equals(mod_addonBase.magegown)
+					&& item2.equals(mod_addonBase.magepants)
+					&& item3.equals(mod_addonBase.mageboots)) {
 				if (par3EntityPlayer.inventory.hasItem(Items.blaze_powder)
 						|| mod_RpgInventory.donators.contains(par3EntityPlayer
 								.getCommandSenderName())) {
@@ -135,10 +137,10 @@ public class ItemMageSphere extends ItemRpgWeapon {
 			Item item2 = var31.getItem();
 			Item item3 = var30.getItem();
 
-			if (item.equals(mod_RpgInventory.magehood)
-					&& item1.equals(mod_RpgInventory.magegown)
-					&& item2.equals(mod_RpgInventory.magepants)
-					&& item3.equals(mod_RpgInventory.mageboots)) {
+			if (item.equals(mod_addonBase.magehood)
+					&& item1.equals(mod_addonBase.magegown)
+					&& item2.equals(mod_addonBase.magepants)
+					&& item3.equals(mod_addonBase.mageboots)) {
 
 				if ((RpgConfig.instance.useSpell == true)
 						&& par2EntityPlayer.inventory

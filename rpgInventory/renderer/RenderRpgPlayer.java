@@ -48,7 +48,7 @@ public class RenderRpgPlayer {
 						.toLowerCase().contains("archmage")) {
 					renderMantle(evt.entityPlayer, 1);
 				}
-				if (shield.getItem().equals(mod_RpgInventory.talisman)) {
+				if (((ItemRpgInvArmor)shield.getItem()).isMantle) {
 					renderMantle(evt.entityPlayer, 0);
 				}
 			}

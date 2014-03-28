@@ -30,11 +30,8 @@ public class ItemRpgInvArmor extends Item {
 	 */
 	public int armorType;
 
-	private IronThorn it = new IronThorn();
-
-	private ModelShield arch = new ModelShield();
-
-	private bookMage book = new bookMage();
+	public boolean isMantle;
+	
 	private ResourceLocation TEXTURE;
 
 	/**
@@ -122,15 +119,7 @@ public class ItemRpgInvArmor extends Item {
 	 * armor and can be used by anyone (like Vanilla Shields)
 	 */
 	public String boundArmorClass() {
-		if (this.equals(mod_RpgInventory.berserkerShield)) {
-			return mod_RpgInventory.CLASSBERSERKER;
-		}
-		if (this.equals(mod_RpgInventory.archerShield)) {
-			return mod_RpgInventory.CLASSARCHER;
-		}
-		if (this.equals(mod_RpgInventory.talisman)) {
-			return mod_RpgInventory.CLASSMAGE;
-		}
+		
 		return "none";
 	}
 
@@ -165,15 +154,7 @@ public class ItemRpgInvArmor extends Item {
 	}
 
 	public MainShield getShieldModel() {
-		if (this.equals(mod_RpgInventory.berserkerShield)) {
-			return it;
-		}
-		if (this.equals(mod_RpgInventory.archerShield)) {
-			return arch;
-		}
-		if (this.equals(mod_RpgInventory.talisman)) {
-			return book;
-		}
+		
 		return new MainShield();
 	}
 
@@ -228,15 +209,7 @@ public class ItemRpgInvArmor extends Item {
 	 * Only works if the shield finds the matching class with boundArmorClass()
 	 */
 	public String shieldClass() {
-		if (this.equals(mod_RpgInventory.berserkerShield)) {
-			return mod_RpgInventory.CLASSBERSERKERSHIELD;
-		}
-		if (this.equals(mod_RpgInventory.archerShield)) {
-			return mod_RpgInventory.CLASSARCHERSHIELD;
-		}
-		if (this.equals(mod_RpgInventory.talisman)) {
-			return mod_RpgInventory.CLASSMAGESHIELD;
-		}
+		
 		return "none";
 	}
 }

@@ -1,5 +1,6 @@
 package addonBasic.items.armor;
 
+import addonBasic.mod_addonBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -27,12 +28,12 @@ public class ItemArcherArmor extends AbstractArmor {
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
-		if ((itemstack.getItem() == mod_RpgInventory.archerboots)
-				|| (itemstack.getItem() == mod_RpgInventory.archerchest)
-				|| (itemstack.getItem() == mod_RpgInventory.archerhood)) {
+		if ((itemstack.getItem() == mod_addonBase.archerboots)
+				|| (itemstack.getItem() == mod_addonBase.archerchest)
+				|| (itemstack.getItem() == mod_addonBase.archerhood)) {
 			return "armor:arch_1.png";
 		}
-		if (itemstack.getItem() == mod_RpgInventory.archerpants) {
+		if (itemstack.getItem() == mod_addonBase.archerpants) {
 			return "armor:arch_2.png";
 		}
 		return super.getArmorTexture(itemstack, entity, slot, type);

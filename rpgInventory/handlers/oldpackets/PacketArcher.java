@@ -5,6 +5,8 @@ import io.netty.buffer.ByteBufInputStream;
 import java.io.IOException;
 import java.util.Random;
 
+import addonBasic.mod_addonBase;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
@@ -20,6 +22,15 @@ public class PacketArcher {
 	private double yy;
 	private double zz;
 
+	// TODO move packet
+	
+	/*
+	 * MOVE PACKET TO API
+	 * 
+	 */
+	
+	
+	/**Move packet to API*/
 	public PacketArcher(ByteBufInputStream dis, EntityPlayer p, World world) {
 		if (!world.isRemote) {
 			boolean self = false;
@@ -50,11 +61,11 @@ public class PacketArcher {
 						|| (middle2 == null) || (bottom == null)) {
 					return;
 				}
-				if ((bow.getItem() != mod_RpgInventory.elfbow)
-						|| (top.getItem() != mod_RpgInventory.archerhood)
-						|| (middle.getItem() != mod_RpgInventory.archerchest)
-						|| (middle2.getItem() != mod_RpgInventory.archerpants)
-						|| (bottom.getItem() != mod_RpgInventory.archerboots)) {
+				if ((bow.getItem() != mod_addonBase.elfbow)
+						|| (top.getItem() != mod_addonBase.archerhood)
+						|| (middle.getItem() != mod_addonBase.archerchest)
+						|| (middle2.getItem() != mod_addonBase.archerpants)
+						|| (bottom.getItem() != mod_addonBase.archerboots)) {
 					return;
 				}
 			}

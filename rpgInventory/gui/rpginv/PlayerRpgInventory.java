@@ -382,26 +382,29 @@ IExtendedEntityProperties {
 			// updated
 			// properly.
 			boolean addtoticks[] = new boolean[3];
-			if (mod_RpgInventory.playerClass
-					.contains(mod_RpgInventory.CLASSARCHERSHIELD)) {
-				if ((player.inventory.getCurrentItem() != null)
-						&& (player.inventory.getCurrentItem().getItem() != null)) {
-					if (player.inventory.getCurrentItem().getItem()
-							.equals(mod_RpgInventory.elfbow)
-							|| (player.inventory.getCurrentItem().getItem() instanceof ItemBow)) {
-						addtoticks[0] = true;
-					}
-				}
-			} else if (mod_RpgInventory.playerClass
-					.contains(mod_RpgInventory.CLASSMAGESHIELD)) {
-				if (player.getCurrentEquippedItem() != null) {
-					if (player.getCurrentEquippedItem().getItem()
-							.equals(mod_RpgInventory.staf)) {
-						addtoticks[1] = true;
-					}
-				}
-
-			}
+			
+			//TODO place this elsewhere. the bow and magestaff ar no longer part of rpg inventory
+//			if (mod_RpgInventory.playerClass
+//					.contains(mod_RpgInventory.CLASSARCHERSHIELD)) {
+//				if ((player.inventory.getCurrentItem() != null)
+//						&& (player.inventory.getCurrentItem().getItem() != null)) {
+//					if (player.inventory.getCurrentItem().getItem()
+//							.equals(mod_RpgInventory.elfbow)
+//							|| (player.inventory.getCurrentItem().getItem() instanceof ItemBow)) {
+//						addtoticks[0] = true;
+//					}
+//				}
+//			} else if (mod_RpgInventory.playerClass
+//					.contains(mod_RpgInventory.CLASSMAGESHIELD)) {
+//				if (player.getCurrentEquippedItem() != null) {
+//					if (player.getCurrentEquippedItem().getItem()
+//							.equals(mod_RpgInventory.staf)) {
+//						addtoticks[1] = true;
+//					}
+//				}
+//			}
+			
+			
 			if (((getNecklace() != null) && (getNecklace().getItem() == mod_RpgInventory.neckdia))
 					|| ((getRing1() != null) && (getRing1().getItem() == mod_RpgInventory.ringdia))
 					|| ((getRing2() != null) && (getRing2().getItem() == mod_RpgInventory.ringdia))

@@ -1,5 +1,6 @@
 package addonBasic.items.weapons;
 
+import addonBasic.mod_addonBase;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,7 +42,7 @@ public class ItemArcherBow extends Item {
 		// Now it gets called, added a hook in our custom renderer.
 		if (stack == usingItem) {
 			if ((usingItem != null)
-					&& (usingItem.getItem() == mod_RpgInventory.elfbow)) {
+					&& (usingItem.getItem() == mod_addonBase.elfbow)) {
 				if (useRemaining > 21) {
 					return IconArray[3];
 				} else if (useRemaining > 14) {
@@ -156,11 +157,11 @@ public class ItemArcherBow extends Item {
 			Item item2 = var1.getItem();
 			Item item3 = var0.getItem();
 
-			if (item.equals(mod_RpgInventory.archerhood)
-					&& item1.equals(mod_RpgInventory.archerchest)
-					&& item2.equals(mod_RpgInventory.archerpants)
-					&& item3.equals(mod_RpgInventory.archerboots)) {
-				boolean flag = ((shield != null) && (shield.getItem() == mod_RpgInventory.archerShield))
+			if (item.equals(mod_addonBase.archerhood)
+					&& item1.equals(mod_addonBase.archerchest)
+					&& item2.equals(mod_addonBase.archerpants)
+					&& item3.equals(mod_addonBase.archerboots)) {
+				boolean flag = ((shield != null) && (shield.getItem() == mod_addonBase.archerShield))
 						|| player.capabilities.isCreativeMode;
 				if (player.inventory.hasItem(Items.arrow) || flag) {
 

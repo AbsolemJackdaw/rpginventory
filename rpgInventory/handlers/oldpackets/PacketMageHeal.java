@@ -16,6 +16,15 @@ import rpgInventory.handlers.CommonTickHandler;
 
 public class PacketMageHeal {
 
+	// TODO move packet
+
+	/*
+	 * MOVE PACKET TO API
+	 * 
+	 */
+
+
+	/**Move packet to API*/
 	public PacketMageHeal(ByteBufInputStream dis, EntityPlayer p, World world) {
 
 		if (!world.isRemote) {
@@ -76,7 +85,7 @@ public class PacketMageHeal {
 							Potion.heal.affectEntity((EntityLivingBase) p,
 									el, (mod_RpgInventory.donators.contains(p
 											.getDisplayName()) ? 4 : 2),
-									potstrength);
+											potstrength);
 						}
 					}
 				}
@@ -87,4 +96,4 @@ public class PacketMageHeal {
 			}
 		}
 	}
- }
+}

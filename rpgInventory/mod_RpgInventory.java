@@ -46,7 +46,6 @@ import rpgInventory.handlers.proxy.ClientProxy;
 import rpgInventory.handlers.proxy.CommonProxy;
 import rpgInventory.item.ItemMold;
 import rpgInventory.item.ItemRageFood;
-import rpgInventory.item.ItemRpg;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.richUtil.potions.DecomposePotion;
 import rpgInventory.richUtil.potions.MasochismPotion;
@@ -85,8 +84,8 @@ public class mod_RpgInventory {
 		public static final int CRYSTAL = 5;
 	}
 
-	protected static final String name = "rpginventorymod";
-	protected static final String ID = "Rpg Inventory";
+	public static final String name = "rpginventorymod";
+	public static final String ID = "Rpg Inventory";
 
 	protected static final String version = "1.7.2";
 	public static String CLASSARCHER = "archer";
@@ -101,7 +100,7 @@ public class mod_RpgInventory {
 	public static String playerClass = "none";
 	public static mod_RpgInventory instance;
 
-//	public static final PacketPipeline17 PIPELINE = new PacketPipeline17();
+	//	public static final PacketPipeline17 PIPELINE = new PacketPipeline17();
 	public static FMLEventChannel Channel;
 
 	@SidedProxy(serverSide = "rpgInventory.handlers.proxy.CommonProxy", clientSide = "rpgInventory.handlers.proxy.ClientProxy")
@@ -110,24 +109,12 @@ public class mod_RpgInventory {
 	public static Item
 	/* ====jewels==== */
 	neckgold, neckdia, neckem, necklap, glovesbutter, glovesdia, glovesem,
-			gloveslap, ringgold, ringdia, ringem, ringlap,
-			/* ====shields==== */
-			archerShield, berserkerShield, talisman,
-			/* ====cloaks==== */
-			cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen,
-			cloakBlue,
-			/* ====weapons==== */
-			elfbow, claymore, hammer, wand, staf,
-			/* ====extra items==== */
-			rageSeed, wizardBook,
-			/* ====armor==== */
-			magehood, magegown, magepants, mageboots, archerhood, archerchest,
-			archerpants, archerboots, berserkerHood, berserkerChest,
-			berserkerLegs, berserkerBoots,
-			/* ====leathers/skins==== */
-			animalskin, tanHide, magecloth,
-			/* ====molds==== */
-			colmold, ringmold, wantmold;
+	gloveslap, ringgold, ringdia, ringem, ringlap,
+	/* ====cloaks==== */
+	cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen,
+	cloakBlue,
+	/* ====molds==== */
+	colmold, ringmold, wantmold;
 
 	public Item[] allItems;
 
@@ -136,9 +123,6 @@ public class mod_RpgInventory {
 	public static List<String> developers = new ArrayList<String>();
 
 	public static List<Integer> rpvInvIDs = new ArrayList();
-	private String[][] recipePatterns;
-
-	private Object[][] recipeItems;
 	public static boolean hasRpg;
 	public static boolean hasShields;
 	public static boolean hasRogue;
@@ -150,18 +134,7 @@ public class mod_RpgInventory {
 
 	public static Potion masochismPotion;
 
-	public final ArmorMaterial mage = EnumHelper.addArmorMaterial("mage", 20,
-			new int[] { 2, 2, 2, 1 }, 5);
-
-	public final ArmorMaterial archer = EnumHelper.addArmorMaterial("archer",
-			20, new int[] { 2, 3, 2, 2 }, 5);
-	public final ArmorMaterial berserker = EnumHelper.addArmorMaterial(
-			"berserker", 20, new int[] { 2, 4, 3, 2 }, 5);
-	ToolMaterial clay = EnumHelper
-			.addToolMaterial("claymore", 0, 750, 5F, 6, 0);
-
-	ToolMaterial stone = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 5F,
-			4, 0);
+	
 	public static CreativeTabs tab;
 
 	public static ArrayList<String> donators = new ArrayList<String>();
@@ -219,9 +192,9 @@ public class mod_RpgInventory {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 
-//		PIPELINE.initialise();
+		//		PIPELINE.initialise();
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("RpgInv");
-    	proxy.load();
+		proxy.load();
 
 		setDonators();
 		// GameRegistry.registerPlayerTracker(new OnPlayerLogin(version, name));
@@ -257,7 +230,7 @@ public class mod_RpgInventory {
 		developers.add("darkhax");
 
 		forgeBlock = new BlockForge(Material.rock).setHardness(5f)
-		/* .setUnlocalizedName("MoldForge") */.setCreativeTab(tab);
+				/* .setUnlocalizedName("MoldForge") */.setCreativeTab(tab);
 
 		proxy.registerRenderInformation();
 
@@ -296,137 +269,48 @@ public class mod_RpgInventory {
 		LanguageRegistry.addName(ringem, "Buffed Ring");
 		LanguageRegistry.addName(ringlap, "Strength Ring");
 
-		LanguageRegistry.addName(archerShield, "Small Archer Shield");
-		LanguageRegistry.addName(berserkerShield, "Berserker's Iron Thorn");
-		LanguageRegistry.addName(talisman, "Aura Shield");
-
 		LanguageRegistry.addName(cloak, "Cloak");
 		LanguageRegistry.addName(cloakI, "Invisibility Cloak");
 
-		LanguageRegistry.addName(magehood, "Mage Hood");
-		LanguageRegistry.addName(magegown, "Mage Gown");
-		LanguageRegistry.addName(magepants, "Mage Under Gown");
-		LanguageRegistry.addName(mageboots, "Mage Shoes");
-
-		LanguageRegistry.addName(archerhood, "Archer Hood");
-		LanguageRegistry.addName(archerchest, "Archer Chest");
-		LanguageRegistry.addName(archerpants, "Archer Leggings");
-		LanguageRegistry.addName(archerboots, "Archer Boots");
-
-		LanguageRegistry.addName(berserkerHood, "Berserker's Head Protection");
-		LanguageRegistry.addName(berserkerChest, "Berserker's Body Protection");
-		LanguageRegistry.addName(berserkerLegs, "Berserker's Leg Protection");
-		LanguageRegistry.addName(berserkerBoots, "Berserker's Feet Protection");
-
-		LanguageRegistry.addName(wand, "Soul Sphere");
-		LanguageRegistry.addName(claymore, "Berserker Claymore");
-		LanguageRegistry.addName(elfbow, "Birch Bow");
-
-		LanguageRegistry.addName(animalskin, "Animal Skin");
-		LanguageRegistry.addName(tanHide, "Tanned Hide");
-		LanguageRegistry.addName(magecloth, "Mage Cloth");
-
-		LanguageRegistry.addName(wizardBook, "Wizard's Knowledge, Volume I");
-		LanguageRegistry.addName(hammer, "Rage Breaker");
-		LanguageRegistry.addName(staf, "Lunar Staff");
-		LanguageRegistry.addName(rageSeed, "Rage Seeds");
+		
 
 		LanguageRegistry.addName(colmold, "Necklace Mold");
 		LanguageRegistry.addName(ringmold, "Ring Mold");
 		LanguageRegistry.addName(wantmold, "Glove Mold");
 
-		MinecraftForge.addGrassSeed(new ItemStack(rageSeed, 1), 1);
-
-		// SKINS
-		GameRegistry.addRecipe(new ItemStack(animalskin, 1), new Object[] {
-				"WWW", "WLW", "WWW", 'W', new ItemStack(Blocks.wool, 1, 12),
-				'L', Items.leather });
-		GameRegistry.addShapelessRecipe(new ItemStack(tanHide, 1),
-				new Object[] { Items.leather, Items.string, Items.string,
-						Items.string, Items.string });
-		GameRegistry.addRecipe(new ItemStack(magecloth, 1), new Object[] {
-				"WWW", "WLW", "WWW", 'W', new ItemStack(Items.dye, 1, 4), 'L',
-				Items.leather });
-		// WEAPONRY
-		GameRegistry.addRecipe(new ItemStack(elfbow, 1), new Object[] { "EPP",
-				"P S", "PS ", 'E', Items.emerald, 'S', Items.string, 'P',
-				new ItemStack(Blocks.log, 1, 2) });
-		GameRegistry.addRecipe(new ItemStack(wand, 1), new Object[] { "GGG",
-				"GLG", "GGG", 'L', Blocks.lapis_block, 'G', Items.gold_ingot });
-		GameRegistry.addRecipe(new ItemStack(staf, 1), new Object[] { " ML",
-				" SM", "S  ", 'M', Items.speckled_melon, 'S', Items.stick, 'L',
-				new ItemStack(Items.dye, 1, 4) });
-		GameRegistry.addRecipe(new ItemStack(claymore, 1), new Object[] {
-				" S ", " S ", "LIL", 'I', Items.iron_ingot, 'S', Blocks.stone,
-				'L', Items.leather });
-		GameRegistry.addRecipe(new ItemStack(hammer, 1), new Object[] { "SSS",
-				"LI ", "LI ", 'I', Items.iron_ingot, 'S', Blocks.iron_block,
-				'L', Items.leather });
-
-		// SHIELDS
-		GameRegistry.addRecipe(new ItemStack(archerShield, 1), new Object[] {
-				"WWW", "WBW", " W ", 'W', Items.iron_ingot, 'B', Blocks.log });
-		GameRegistry.addRecipe(new ItemStack(berserkerShield, 1), new Object[] {
-				"WWW", "WBW", " W ", 'W', Items.iron_ingot, 'B',
-				Blocks.iron_block });
-		GameRegistry.addRecipe(new ItemStack(talisman, 1), new Object[] {
-				"WWW", "WBW", " W ", 'W', new ItemStack(Items.dye, 1, 4), 'B',
-				Blocks.lapis_block });
+		
 
 		// CLOAK
 		GameRegistry.addRecipe(new ItemStack(cloak, 1), new Object[] { "SS",
-				"II", "II", 'I', Blocks.wool, 'S', Items.string });
+			"II", "II", 'I', Blocks.wool, 'S', Items.string });
 		GameRegistry.addRecipe(new ItemStack(cloakI, 1), new Object[] { "PPP",
-				"PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.potionitem, 1, 8206) });
+			"PCP", "PPP", 'C', cloak, 'P',
+			new ItemStack(Items.potionitem, 1, 8206) });
 		GameRegistry.addRecipe(new ItemStack(cloakI, 1), new Object[] { "PPP",
-				"PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.potionitem, 1, 8270) });
+			"PCP", "PPP", 'C', cloak, 'P',
+			new ItemStack(Items.potionitem, 1, 8270) });
 
 		GameRegistry.addRecipe(new ItemStack(cloakRed, 1), new Object[] {
-				"PPP", "PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.dye, 1, 1) });
+			"PPP", "PCP", "PPP", 'C', cloak, 'P',
+			new ItemStack(Items.dye, 1, 1) });
 		GameRegistry.addRecipe(new ItemStack(cloakYellow, 1), new Object[] {
-				"PPP", "PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.dye, 1, 11) });
+			"PPP", "PCP", "PPP", 'C', cloak, 'P',
+			new ItemStack(Items.dye, 1, 11) });
 		GameRegistry.addRecipe(new ItemStack(cloakGreen, 1), new Object[] {
-				"PPP", "PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.dye, 1, 2) });
+			"PPP", "PCP", "PPP", 'C', cloak, 'P',
+			new ItemStack(Items.dye, 1, 2) });
 		GameRegistry.addRecipe(new ItemStack(cloakBlue, 1), new Object[] {
-				"PPP", "PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.dye, 1, 12) });
+			"PPP", "PCP", "PPP", 'C', cloak, 'P',
+			new ItemStack(Items.dye, 1, 12) });
 		GameRegistry.addRecipe(new ItemStack(cloakSub, 1), new Object[] {
-				"PPP", "PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.dye, 1, 0) });
+			"PPP", "PCP", "PPP", 'C', cloak, 'P',
+			new ItemStack(Items.dye, 1, 0) });
 
 		GameRegistry.addRecipe(new ItemStack(forgeBlock, 1), new Object[] {
-				"BBB", "BOB", "BBB", 'B', Blocks.brick_block, 'O',
-				Blocks.obsidian });
+			"BBB", "BOB", "BBB", 'B', Blocks.brick_block, 'O',
+			Blocks.obsidian });
 
-		// MageBook
-		GameRegistry
-				.addShapelessRecipe(new ItemStack(wizardBook, 1), new Object[] {
-						magecloth, Items.paper, Items.paper, Items.paper });
-
-		// ARMOR
-		recipePatterns = new String[][] { { "XXX", "X X" },
-				{ "X X", "XXX", "XXX" }, { "XXX", "X X", "X X" },
-				{ "X X", "X X" } };
-		recipeItems = new Object[][] { { animalskin, tanHide, magecloth },
-				{ berserkerHood, archerhood, magehood },
-				{ berserkerChest, archerchest, magegown },
-				{ berserkerLegs, archerpants, magepants },
-				{ berserkerBoots, archerboots, mageboots } };
-
-		for (int var2 = 0; var2 < this.recipeItems[0].length; ++var2) {
-			Object var3 = this.recipeItems[0][var2];
-
-			for (int var4 = 0; var4 < (this.recipeItems.length - 1); ++var4) {
-				Item var5 = (Item) this.recipeItems[var4 + 1][var2];
-				GameRegistry.addRecipe(new ItemStack(var5), new Object[] {
-						this.recipePatterns[var4], 'X', var3 });
-			}
-		}
+		
 
 		// DONE ?
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
@@ -473,7 +357,7 @@ public class mod_RpgInventory {
 					}
 				} catch (Exception e) {
 					System.err
-							.println("Severe error, please report this to the mod author:");
+					.println("Severe error, please report this to the mod author:");
 					System.err.println(e);
 				}
 			}
@@ -492,7 +376,7 @@ public class mod_RpgInventory {
 				}
 			} catch (Exception ex) {
 				System.err
-						.println("Severe error, please report this to the mod author:");
+				.println("Severe error, please report this to the mod author:");
 				System.err.println(ex);
 			}
 		}
@@ -530,7 +414,7 @@ public class mod_RpgInventory {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt) {
-//		PIPELINE.postInitialise();
+		//		PIPELINE.postInitialise();
 
 		proxy.registerLate();
 		// All mods should be initialized now, check what potion effects are
@@ -551,18 +435,18 @@ public class mod_RpgInventory {
 				"subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold")
 				.setCreativeTab(tab);
 		neckdia = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckDia.png")
-				.setUnlocalizedName("neckDia").setCreativeTab(tab);
+		.setUnlocalizedName("neckDia").setCreativeTab(tab);
 		neckem = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckEm.png")
-				.setUnlocalizedName("neckEm").setCreativeTab(tab);
+		.setUnlocalizedName("neckEm").setCreativeTab(tab);
 		necklap = new ItemRpgInvArmor(0, -1, "", "subaraki:jewels/NeckLap.png")
-				.setUnlocalizedName("neckLap").setCreativeTab(tab);
+		.setUnlocalizedName("neckLap").setCreativeTab(tab);
 
 		ringgold = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
 				"ringGold").setCreativeTab(tab);
 		ringdia = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
 				"ringDia").setCreativeTab(tab);
 		ringem = new ItemRpgInvArmor(4, -1, "", "")
-				.setUnlocalizedName("ringEm").setCreativeTab(tab);
+		.setUnlocalizedName("ringEm").setCreativeTab(tab);
 		ringlap = new ItemRpgInvArmor(4, -1, "", "").setUnlocalizedName(
 				"ringLap").setCreativeTab(tab);
 
@@ -573,83 +457,23 @@ public class mod_RpgInventory {
 				"subaraki:jewels/GloveDia.png").setUnlocalizedName("gloveDia")
 				.setCreativeTab(tab);
 		glovesem = new ItemRpgInvArmor(3, -1, "", "subaraki:jewels/GloveEm.png")
-				.setUnlocalizedName("gloveEm").setCreativeTab(tab);
+		.setUnlocalizedName("gloveEm").setCreativeTab(tab);
 		gloveslap = new ItemRpgInvArmor(3, -1, "",
 				"subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap")
 				.setCreativeTab(tab);
 
-		archerShield = new ItemRpgInvArmor(1, 200, "",
-				"subaraki:jewels/Shield1.png").setUnlocalizedName(
-				"shieldArcher").setCreativeTab(tab);
-		berserkerShield = new ItemRpgInvArmor(1, 350, "",
-				"subaraki:jewels/IronThorn.png").setUnlocalizedName(
-				"shieldBerserker").setCreativeTab(tab);
-		talisman = new ItemRpgInvArmor(1, 200, "",
-				"subaraki:jewels/mageShield.png").setUnlocalizedName(
-				"shieldMage").setCreativeTab(tab);
+		
 
 		cloak = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/GreyCape.png")
-				.setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
+		.setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
 		cloakI = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/GreyCape.png")
-				.setFull3D().setUnlocalizedName("i.capeGrey")
-				.setCreativeTab(tab);
+		.setFull3D().setUnlocalizedName("i.capeGrey")
+		.setCreativeTab(tab);
 
-		magehood = new ItemMageArmor(mage, 4, 0).setUnlocalizedName("mage1")
-				.setCreativeTab(tab);
-		magegown = new ItemMageArmor(mage, 4, 1).setUnlocalizedName("mage2")
-				.setCreativeTab(tab);
-		magepants = new ItemMageArmor(mage, 4, 2).setUnlocalizedName("mage3")
-				.setCreativeTab(tab);
-		mageboots = new ItemMageArmor(mage, 4, 3).setUnlocalizedName("mage4")
-				.setCreativeTab(tab);
-
-		archerhood = new ItemArcherArmor(archer, 4, 0).setUnlocalizedName(
-				"archer1").setCreativeTab(tab);
-		archerchest = new ItemArcherArmor(archer, 4, 1).setUnlocalizedName(
-				"archer2").setCreativeTab(tab);
-		archerpants = new ItemArcherArmor(archer, 4, 2).setUnlocalizedName(
-				"archer3").setCreativeTab(tab);
-		archerboots = new ItemArcherArmor(archer, 4, 3).setUnlocalizedName(
-				"archer4").setCreativeTab(tab);
-
-		berserkerHood = new ItemBerserkerArmor(berserker, 4, 0)
-				.setUnlocalizedName("berserk1").setCreativeTab(tab);
-		berserkerChest = new ItemBerserkerArmor(berserker, 4, 1)
-				.setUnlocalizedName("berserk2").setCreativeTab(tab);
-		berserkerLegs = new ItemBerserkerArmor(berserker, 4, 2)
-				.setUnlocalizedName("berserk3").setCreativeTab(tab);
-		berserkerBoots = new ItemBerserkerArmor(berserker, 4, 3)
-				.setUnlocalizedName("berserk4").setCreativeTab(tab);
-
-		claymore = new ItemClaymore(clay).setFull3D().setMaxDamage(1024)
-				.setUnlocalizedName("claymore").setCreativeTab(tab);
-		wand = new ItemMageSphere().setFull3D().setMaxDamage(400)
-				.setUnlocalizedName("soulsphere").setCreativeTab(tab);
-		elfbow = new ItemArcherBow().setFull3D().setMaxDamage(350)
-				.setUnlocalizedName("elmBow").setCreativeTab(tab);
-
-		animalskin = new ItemRpg().setUnlocalizedName("a.leather")
-				.setCreativeTab(tab);
-		tanHide = new ItemRpg().setUnlocalizedName("t.leather").setCreativeTab(
-				tab);
-		magecloth = new ItemRpg().setUnlocalizedName("m.leather")
-				.setCreativeTab(tab);
-
-		wizardBook = new ItemRpg().setUnlocalizedName("a.book_normal")
-				.setCreativeTab(tab);
-
-		hammer = new ItemHammer(stone).setMaxDamage(750)
-				.setUnlocalizedName("rageBreaker").setCreativeTab(tab);
-		staf = new ItemStaf().setMaxStackSize(1).setMaxDamage(1500)
-				.setUnlocalizedName("lunarStaff").setCreativeTab(tab);
-
-		rageSeed = new ItemRageFood(0, 0f, false).setAlwaysEdible()
-				.setUnlocalizedName("r.seeds_melon").setMaxStackSize(8)
-				.setCreativeTab(tab);
-
+		
 		cloakRed = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/RedCape.png")
-				.setFull3D().setUnlocalizedName("r.capeGrey")
-				.setCreativeTab(tab);
+		.setFull3D().setUnlocalizedName("r.capeGrey")
+		.setCreativeTab(tab);
 
 		cloakYellow = new ItemRpgInvArmor(2, -1, "",
 				"subaraki:capes/GoldCape.png").setFull3D()
@@ -659,11 +483,11 @@ public class mod_RpgInventory {
 				"subaraki:capes/GreenCape.png").setFull3D()
 				.setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
 		cloakBlue = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/SkyCape.png")
-				.setFull3D().setUnlocalizedName("b.capeGrey")
-				.setCreativeTab(tab);
+		.setFull3D().setUnlocalizedName("b.capeGrey")
+		.setCreativeTab(tab);
 		cloakSub = new ItemRpgInvArmor(2, -1, "", "subaraki:capes/BlaCape.png")
-				.setFull3D().setUnlocalizedName("s.capeGrey")
-				.setCreativeTab(tab);
+		.setFull3D().setUnlocalizedName("s.capeGrey")
+		.setCreativeTab(tab);
 
 		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(
 				tab);
@@ -674,13 +498,8 @@ public class mod_RpgInventory {
 
 		allItems = new Item[] { neckgold, neckdia, neckem, necklap,
 				glovesbutter, glovesdia, glovesem, gloveslap, ringgold,
-				ringdia, ringem, ringlap, archerShield, berserkerShield,
-				talisman, cloak, cloakI, cloakSub, cloakRed, cloakYellow,
-				cloakGreen, cloakBlue, elfbow, claymore, hammer, wand, staf,
-				rageSeed, wizardBook, magehood, magegown, magepants, mageboots,
-				archerhood, archerchest, archerpants, archerboots,
-				berserkerHood, berserkerChest, berserkerLegs, berserkerBoots,
-				animalskin, tanHide, magecloth, colmold, ringmold, wantmold };
+				ringdia, ringem, ringlap, cloak, cloakI, cloakSub, cloakRed, cloakYellow,
+				cloakGreen, cloakBlue, colmold, ringmold, wantmold };
 
 		// DONE
 		for (int i = 0; i < allItems.length; i++) {
@@ -695,20 +514,15 @@ public class mod_RpgInventory {
 				// System.out.println(name + " "
 				// + allItems[i].getUnlocalizedName());
 
-				if ((allItems[i] == rageSeed) || (allItems[i] == animalskin)
-						|| (allItems[i] == tanHide)
-						|| (allItems[i] == magecloth)
-						|| (allItems[i] == wizardBook)) {
-					allItems[i].setTextureName("minecraft:" + name);
-				} else {
+				
 					allItems[i].setTextureName(mod_RpgInventory.name + ":"
 							+ name);
-				}
+				
 
 				GameRegistry
-						.registerItem(allItems[i],
-								allItems[i].getUnlocalizedName(),
-								mod_RpgInventory.name);
+				.registerItem(allItems[i],
+						allItems[i].getUnlocalizedName(),
+						mod_RpgInventory.name);
 				// System.out.println("Registered Item " + i + "/n" +
 				// allItems[i]);
 			} else {

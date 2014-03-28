@@ -1,4 +1,4 @@
-package rpgInventory.models.armor;
+package addonBasic.models.item;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;

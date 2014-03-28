@@ -22,10 +22,6 @@ public class CommonProxy {
 		player.inventory.consumeInventoryItem(itemID);
 	}
 
-	public ModelBiped getArmorModel(int id) {
-		return null;
-	}
-
 	public int getSphereID() {
 		return 0;
 	}
