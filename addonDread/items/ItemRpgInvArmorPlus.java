@@ -43,5 +43,4 @@ public class ItemRpgInvArmorPlus extends ItemRpgInvArmor {
 			return mod_RpgPlus.CLASSPALADINSHIELD;
 		return super.shieldClass();
 	}
-
 }

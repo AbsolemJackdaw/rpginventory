@@ -40,8 +40,8 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 	public MainShield getShieldModel() {
 		if (this.equals(mod_RpgRB.beastShield))
 			return lion;
-		// if(this.equals(mod_RpgRB.daggers))
-		// return dagger;
+		if(this.equals(mod_RpgRB.daggers))
+			return dagger;
 		return super.getShieldModel();
 	}
 
@@ -61,27 +61,27 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 					.contains(mod_RpgRB.CLASSROGUESHIELDED))
 				par2EntityLiving.addPotionEffect(new PotionEffect(
 						Potion.poison.id, mod_RpgInventory.donators
-								.contains(((EntityPlayer) par3EntityLiving)
-										.getDisplayName()) ? 80 : 60, 1));
+						.contains(((EntityPlayer) par3EntityLiving)
+								.getDisplayName()) ? 80 : 60, 1));
 			else if (mod_RpgInventory.playerClass
 					.contains(mod_RpgRB.CLASSROGUE)) {
 				par2EntityLiving.addPotionEffect(new PotionEffect(
 						Potion.poison.id, mod_RpgInventory.donators
-								.contains(((EntityPlayer) par3EntityLiving)
-										.getDisplayName()) ? 40 : 30, 0));
+						.contains(((EntityPlayer) par3EntityLiving)
+								.getDisplayName()) ? 40 : 30, 0));
 				if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime())
 					par2EntityLiving
-							.attackEntityFrom(
-									DamageSource
-											.causePlayerDamage((EntityPlayer) par3EntityLiving),
-									10);
+					.attackEntityFrom(
+							DamageSource
+							.causePlayerDamage((EntityPlayer) par3EntityLiving),
+							10);
 			}
 			if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime())
 				par2EntityLiving
-						.attackEntityFrom(
-								DamageSource
-										.causePlayerDamage((EntityPlayer) par3EntityLiving),
-								10);
+				.attackEntityFrom(
+						DamageSource
+						.causePlayerDamage((EntityPlayer) par3EntityLiving),
+						10);
 			else
 				par2EntityLiving.attackEntityFrom(DamageSource
 						.causePlayerDamage((EntityPlayer) par3EntityLiving), 6);

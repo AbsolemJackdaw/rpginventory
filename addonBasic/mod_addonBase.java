@@ -12,6 +12,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import addonBasic.items.ItemRpg;
+import addonBasic.items.armor.ItemAddonShields;
 import addonBasic.items.armor.ItemArcherArmor;
 import addonBasic.items.armor.ItemBerserkerArmor;
 import addonBasic.items.armor.ItemMageArmor;
@@ -182,13 +183,13 @@ public class mod_addonBase {
 		tab = new AddonTab(CreativeTabs.getNextID(),
 				"Mage Archer Berserker Addon");
 
-		archerShield = new ItemRpgInvArmor(1, 200, "",
+		archerShield = new ItemAddonShields(1, 200, "",
 				"subaraki:jewels/Shield1.png").setUnlocalizedName(
 						"shieldArcher").setCreativeTab(tab);
-		berserkerShield = new ItemRpgInvArmor(1, 350, "",
+		berserkerShield = new ItemAddonShields(1, 350, "",
 				"subaraki:jewels/IronThorn.png").setUnlocalizedName(
 						"shieldBerserker").setCreativeTab(tab);
-		talisman = new ItemRpgInvArmor(1, 200, "",
+		talisman = new ItemAddonShields(1, 200, "",
 				"subaraki:jewels/mageShield.png").setUnlocalizedName(
 						"shieldMage").setCreativeTab(tab);
 
