@@ -4,20 +4,19 @@
  */
 package rpgInventory.gui;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-
-import java.io.IOException;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.entity.player.EntityPlayer;
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.handlers.packets.ServerPacketHandler;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.entity.player.EntityPlayer;
+import rpgInventory.handlers.packets.ServerPacketHandler;
+import rpgInventory.mod_RpgInventory;
+
+import java.io.IOException;
 
 /**
  * 
@@ -59,9 +58,12 @@ public class ButtonInventory extends GuiButton {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				else if (this.displayString.equals("Close"))
-					// player.closeScreen();
-					player.openContainer = player.inventoryContainer;
+				else if (this.displayString.equals("Close")) {
+                    // player.closeScreen();
+//                    player.openContainer = player.inventoryContainer;
+                    Minecraft.getMinecraft().currentScreen = null;
+                    Minecraft.getMinecraft().setIngameFocus();
+                }
 				// Minecraft.getMinecraft().getSoundHandler().playSoundFX("random.click",
 				// 1.0F, 1.0F);
 				return false;
