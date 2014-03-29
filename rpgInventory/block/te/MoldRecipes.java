@@ -14,9 +14,6 @@ public class MoldRecipes {
 	private static Map<Item, ItemStack> gloveCombination = new HashMap<Item, ItemStack>();
 	private static Map<Item, ItemStack> ringCombination = new HashMap<Item, ItemStack>();
 
-	// private Map<ItemStack, ItemStack[]> breakdownList = new
-	// HashMap<ItemStack, ItemStack[]>();
-
 	// private Map exp = new HashMap();
 
 	public MoldRecipes() {

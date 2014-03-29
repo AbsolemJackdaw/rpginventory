@@ -7,7 +7,7 @@ import rpgInventory.mod_RpgInventory;
 import rpgInventory.block.te.MoldRecipes;
 import rpgInventory.block.te.slot.SlotMineral;
 
-public class RegisterUtils {
+public class RpgRegistry {
 
 	
 	public static void addForgeMoldRecipe(Item mold, Item mineral, ItemStack result){

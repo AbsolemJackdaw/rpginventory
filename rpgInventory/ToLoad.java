@@ -6,19 +6,19 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import rpgInventory.block.te.MoldRecipes;
 import rpgInventory.block.te.slot.SlotMineral;
-import rpgInventory.utils.RegisterUtils;
+import rpgInventory.utils.RpgRegistry;
 
 public class ToLoad {
 
 	public static void loadMoldRecipes(){
 		
 
-		RegisterUtils.addForgeMoldMineral(Items.apple);
+		RpgRegistry.addForgeMoldMineral(Items.apple);
 		
-		RegisterUtils.addForgeMoldRecipe(mod_RpgInventory.ringmold, Items.gold_ingot, new ItemStack(mod_RpgInventory.ringgold));
-		RegisterUtils.addForgeMoldRecipe(mod_RpgInventory.ringmold, Items.diamond, new ItemStack(mod_RpgInventory.ringdia));
-		RegisterUtils.addForgeMoldRecipe(mod_RpgInventory.ringmold, Items.dye, new ItemStack(mod_RpgInventory.ringlap));
-		RegisterUtils.addForgeMoldRecipe(mod_RpgInventory.ringmold, Items.emerald, new ItemStack(mod_RpgInventory.ringem));
+		RpgRegistry.addForgeMoldRecipe(mod_RpgInventory.ringmold, Items.gold_ingot, new ItemStack(mod_RpgInventory.ringgold));
+		RpgRegistry.addForgeMoldRecipe(mod_RpgInventory.ringmold, Items.diamond, new ItemStack(mod_RpgInventory.ringdia));
+		RpgRegistry.addForgeMoldRecipe(mod_RpgInventory.ringmold, Items.dye, new ItemStack(mod_RpgInventory.ringlap));
+		RpgRegistry.addForgeMoldRecipe(mod_RpgInventory.ringmold, Items.emerald, new ItemStack(mod_RpgInventory.ringem));
 
 		MoldRecipes.addRecipe(mod_RpgInventory.colmold, Items.gold_ingot, new ItemStack(
 				mod_RpgInventory.neckgold), 0.7F);

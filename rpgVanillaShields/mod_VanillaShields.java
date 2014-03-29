@@ -39,10 +39,6 @@ public class mod_VanillaShields {
 
 		FMLLog.info("Rpg++ Vanilla Shields is installed. Renderers can be Used");
 
-		LanguageRegistry.addName(shieldWood, "Wooden Shield");
-		LanguageRegistry.addName(shieldIron, "Iron Shield");
-		LanguageRegistry.addName(shieldGold, "Golden Shield");
-		LanguageRegistry.addName(shieldDiamond, "Diamond Shield");
 		shieldWood.setCreativeTab(tab);
 		shieldIron.setCreativeTab(tab);
 		shieldGold.setCreativeTab(tab);
