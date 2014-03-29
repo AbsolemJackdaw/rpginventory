@@ -20,9 +20,9 @@ import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.gui.rpginv.RpgGui;
 import rpgInventory.item.armor.ItemRpgInvArmor;
-import rpgInventory.models.jewels.GloveLeft;
-import rpgInventory.models.jewels.GloveRight;
-import rpgInventory.models.jewels.ModelNecklace;
+import rpgInventory.models.GloveLeft;
+import rpgInventory.models.GloveRight;
+import rpgInventory.models.ModelNecklace;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class RenderRpgPlayer {
@@ -47,7 +47,7 @@ public class RenderRpgPlayer {
 				if (((ItemRpgInvArmor) shield.getItem()).shieldClass()
 						.toLowerCase().contains("archmage"))
 					renderMantle(evt.entityPlayer, 1);
-				
+
 				if (((ItemRpgInvArmor) shield.getItem()).isMantle())
 					renderMantle(evt.entityPlayer, 0);
 			}

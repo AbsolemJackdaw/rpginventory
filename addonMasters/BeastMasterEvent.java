@@ -14,7 +14,7 @@ public class BeastMasterEvent {
 
 	@SubscribeEvent
 	public void DeathEvent(LivingDeathEvent evt) {
-//		System.out.println("events");
+		// System.out.println("events");
 
 		/* ====PET EXP==== */
 		try {

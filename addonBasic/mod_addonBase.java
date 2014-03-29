@@ -53,14 +53,13 @@ public class mod_addonBase {
 
 	}
 
-	
 	public static String CLASSARCHER = "archer";
 	public static String CLASSBERSERKER = "berserker";
 	public static String CLASSMAGE = "basicMage";
 	public static String CLASSARCHERSHIELD = "shieldedArcher";
 	public static String CLASSBERSERKERSHIELD = "shieldedBerserker";
 	public static String CLASSMAGESHIELD = "shieldedBasicMage";
-	
+
 	public static final String id = "RpgBase";
 
 	public static final String name = "Berserker, Mage and Archer Patch";
@@ -168,7 +167,7 @@ public class mod_addonBase {
 						this.recipePatterns[var4], 'X', var3 });
 			}
 		}
-		
+
 		FMLCommonHandler.instance().bus().register(new CommonTickHandler());
 		MinecraftForge.EVENT_BUS.register(new BaseaddonEventHooks());
 	}

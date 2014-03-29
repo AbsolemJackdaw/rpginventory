@@ -1,4 +1,4 @@
-package rpgInventory.renderer.items.shields;
+package rpgInventory.renderer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;

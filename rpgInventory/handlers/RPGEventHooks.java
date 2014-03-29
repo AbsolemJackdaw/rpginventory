@@ -11,14 +11,8 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -45,8 +39,7 @@ public class RPGEventHooks {
 
 	@SubscribeEvent
 	public void BreakSpeed(PlayerEvent.BreakSpeed evt) {
-		
-			
+
 		/*
 		 * Increases Block-breaking speed while wearing emerald ring (right
 		 * slot)
@@ -90,10 +83,10 @@ public class RPGEventHooks {
 
 				PlayerRpgInventory inv = PlayerRpgInventory
 						.get((EntityPlayer) evt.entityLiving);
-				//				if (mod_RpgInventory.playerClass
-				//						.contains(mod_RpgInventory.CLASSBERSERKER))
-				//					player.worldObj.newExplosion(player, player.posX,
-				//							player.posY, player.posZ, 20, false, false);
+				// if (mod_RpgInventory.playerClass
+				// .contains(mod_RpgInventory.CLASSBERSERKER))
+				// player.worldObj.newExplosion(player, player.posX,
+				// player.posY, player.posZ, 20, false, false);
 			}
 
 		} catch (Throwable e) {
@@ -144,13 +137,13 @@ public class RPGEventHooks {
 					if ((ringa != null)
 							&& ringa.getItem().equals(mod_RpgInventory.ringlap))
 						damagebonus += mod_RpgInventory.donators
-						.contains(((EntityPlayer) damager)
-								.getCommandSenderName()) ? 0.2f : 0.1F;
+								.contains(((EntityPlayer) damager)
+										.getCommandSenderName()) ? 0.2f : 0.1F;
 					if ((ringb != null)
 							&& ringb.getItem().equals(mod_RpgInventory.ringlap))
 						damagebonus += mod_RpgInventory.donators
-						.contains(((EntityPlayer) damager)
-								.getCommandSenderName()) ? 0.2f : 0.1F;
+								.contains(((EntityPlayer) damager)
+										.getCommandSenderName()) ? 0.2f : 0.1F;
 					if ((gloves != null)
 							&& gloves.getItem().equals(
 									mod_RpgInventory.gloveslap))
@@ -199,9 +192,9 @@ public class RPGEventHooks {
 						evt.ammount -= 1;
 					else
 						evt.ammount -= MathHelper
-						.floor_float(evt.ammount
-								* (mod_RpgInventory.donators.contains(player
-										.getCommandSenderName()) ? 0.3f
+								.floor_float(evt.ammount
+										* (mod_RpgInventory.donators.contains(player
+												.getCommandSenderName()) ? 0.3f
 												: 0.2F));
 			}
 		} catch (Throwable e) {
@@ -223,12 +216,12 @@ public class RPGEventHooks {
 
 	@SubscribeEvent
 	public void PlayerUpdate(PlayerEvent.LivingUpdateEvent evt) {
-		
+
 		/* ====UPDATING INVENTORY==== */
 		try {
 			if (evt.entityLiving instanceof EntityPlayer)
 				PlayerRpgInventory.get((EntityPlayer) evt.entityLiving)
-				.markDirty();
+						.markDirty();
 		} catch (Throwable ex) {
 		}
 
@@ -236,7 +229,6 @@ public class RPGEventHooks {
 			if (evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer p = (EntityPlayer) evt.entityLiving;
 				if (p != null) {
-
 
 					PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
@@ -265,8 +257,6 @@ public class RPGEventHooks {
 							LapisTick.put(p.getCommandSenderName(), 60);
 					} else
 						LapisTick.remove(p.getCommandSenderName());
-
-					
 
 					/* ==== EMERALD WATER BREATHING ==== */
 					if ((neck != null)
@@ -342,8 +332,6 @@ public class RPGEventHooks {
 					// p.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()
 					// + (double)speedboost){
 					//
-
-
 
 					/* ==== Invisibility Cloak==== */
 					ItemStack cloak = inv.getCloak();

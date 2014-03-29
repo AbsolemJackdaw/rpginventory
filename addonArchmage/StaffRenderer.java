@@ -8,9 +8,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 
-import rpgInventory.models.weapons.ModelStaf;
-import rpgInventory.renderer.items.weapons.RpgItemRenderer;
 import addonArchmage.weapons.ItemElementalStaff;
+import addonBasic.models.weapons.ModelStaf;
+import addonBasic.renderer.weapons.RpgItemRenderer;
 
 public class StaffRenderer extends RpgItemRenderer {
 

@@ -1,7 +1,7 @@
 package rpgVanillaShields;
 
 import rpgInventory.item.armor.ItemRpgInvArmor;
-import rpgInventory.models.shields.MainShield;
+import rpgInventory.models.MainShield;
 
 public class ItemRpgInvShields extends ItemRpgInvArmor {
 

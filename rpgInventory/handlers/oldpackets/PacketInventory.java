@@ -56,10 +56,9 @@ public class PacketInventory {
 
 		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 
-		ByteBuf buf = Unpooled.buffer();
-		ByteBufOutputStream out = new ByteBufOutputStream(buf);
-
 		try {
+			ByteBuf buf = Unpooled.buffer();
+			ByteBufOutputStream out = new ByteBufOutputStream(buf);
 			out.writeInt(ServerPacketHandler.SMP_INVENTORY_SYNC);
 			out.writeUTF(player.getDisplayName());
 
@@ -86,6 +85,7 @@ public class PacketInventory {
 				// player,
 				// new Packet250CustomPayload("RpgInv", out
 				// .toByteArray()));
+				out.close();
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

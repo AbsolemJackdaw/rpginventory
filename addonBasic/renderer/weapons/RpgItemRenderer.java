@@ -1,4 +1,4 @@
-package rpgInventory.renderer.items.weapons;
+package addonBasic.renderer.weapons;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureManager;

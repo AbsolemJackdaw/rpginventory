@@ -4,7 +4,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import rpgInventory.mod_RpgInventory;
 import rpgInventory.utils.AbstractArmor;
 import addonBasic.mod_addonBase;
 

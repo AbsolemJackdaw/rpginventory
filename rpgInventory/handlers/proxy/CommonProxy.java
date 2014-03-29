@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.ServerPacketHandler;
 
 public class CommonProxy {
@@ -30,9 +29,6 @@ public class CommonProxy {
 	}
 
 	public void openGUI(EntityPlayer player, int id) {
-	}
-
-	public void openGUI(EntityPlayer player, PlayerRpgInventory inv) {
 	}
 
 	public void playerLevel(EntityPlayer player, int amount) {

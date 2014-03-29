@@ -384,16 +384,16 @@ public class PlayerRpgInventory implements IInventory,
 					|| ((getGloves() != null) && (getGloves().getItem() == mod_RpgInventory.glovesdia)))
 				addtoticks[2] = true;
 
-			//TODO move to baseAddon
-//			if (addtoticks[0]) {
-//				if (!RPGEventHooks.ArcherRepairTick.containsKey(player
-//						.getCommandSenderName()))
-//					RPGEventHooks.ArcherRepairTick.put(
-//							player.getCommandSenderName(), 0);
-//			} else
-//				// keep the cooldown hashmap clean
-//				RPGEventHooks.ArcherRepairTick.remove(player
-//						.getCommandSenderName());
+			// TODO move to baseAddon
+			// if (addtoticks[0]) {
+			// if (!RPGEventHooks.ArcherRepairTick.containsKey(player
+			// .getCommandSenderName()))
+			// RPGEventHooks.ArcherRepairTick.put(
+			// player.getCommandSenderName(), 0);
+			// } else
+			// // keep the cooldown hashmap clean
+			// RPGEventHooks.ArcherRepairTick.remove(player
+			// .getCommandSenderName());
 
 			if (addtoticks[1]) {
 				if (!RPGEventHooks.HealerTick.containsKey(player

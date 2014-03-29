@@ -1,4 +1,4 @@
-package rpgInventory.renderer.items.weapons;
+package addonBasic.renderer.weapons;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import rpgInventory.models.weapons.ModelHammer;
+import addonBasic.models.weapons.ModelHammer;
 
 public class HammerRender extends RpgItemRenderer {
 

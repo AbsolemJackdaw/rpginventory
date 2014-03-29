@@ -95,7 +95,6 @@ public class mod_RpgPlus {
 				"Rpg++ Necromancer and Paladin is installed. Renderers can be Used",
 				1);
 
-		
 		GameRegistry.addRecipe(new ItemStack(necro_skin, 1), new Object[] {
 				"BWB", "WLW", "BWB", 'W', Items.spider_eye, 'B', Items.bone,
 				'L', Items.leather });
@@ -149,9 +148,10 @@ public class mod_RpgPlus {
 		pala_steel.setCreativeTab(tab);
 
 		MinecraftForge.EVENT_BUS.register(new NecroPaladinEvents());
-		FMLCommonHandler.instance().bus().register(new CommonTickHandlerRpgPlus());
+		FMLCommonHandler.instance().bus()
+				.register(new CommonTickHandlerRpgPlus());
 		MinecraftForge.EVENT_BUS.register(new DreadEventHooks());
-		
+
 		// hack to increase the number of potion types allowed
 
 		if (Potion.potionTypes.length < 256) {
@@ -294,7 +294,7 @@ public class mod_RpgPlus {
 				necro_weapon, necroHood, necroChestplate, necroLeggings,
 				necroBoots, palaHelm, palaChest, palaLeggings, palaBoots,
 				necro_skin, pala_steel };
-		
+
 		for (int i = 0; i < allItems.length; i++)
 			if (allItems[i] != null) {
 

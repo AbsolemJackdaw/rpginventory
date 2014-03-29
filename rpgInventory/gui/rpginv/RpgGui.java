@@ -70,7 +70,7 @@ public class RpgGui extends GuiContainer {
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		if (button.id == 0)
 			mod_RpgInventory.proxy.openGUI(p, 1);
-		
+
 	}
 
 	@Override

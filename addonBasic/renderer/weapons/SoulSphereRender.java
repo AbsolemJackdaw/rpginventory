@@ -1,4 +1,4 @@
-package rpgInventory.renderer.items.weapons;
+package addonBasic.renderer.weapons;
 
 import java.util.Random;
 
@@ -9,11 +9,10 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import addonBasic.mod_addonBase;
-
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.models.weapons.ModelSoulSphere;
+import addonBasic.mod_addonBase;
+import addonBasic.models.weapons.ModelSoulSphere;
 
 public class SoulSphereRender extends RpgItemRenderer {
 

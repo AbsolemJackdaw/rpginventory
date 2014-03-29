@@ -7,9 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.DamageSource;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.oldpackets.PacketInventory;
@@ -36,9 +34,9 @@ public class CommonTickHandler /* implements ITickHandler */{
 
 	public void dropJewels(EntityPlayer player) {
 
-
-		if (FMLCommonHandler.instance().getEffectiveSide().isServer()){
-			if (!player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
+		if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+			if (!player.worldObj.getGameRules().getGameRuleBooleanValue(
+					"keepInventory"))
 				return;
 
 			PlayerRpgInventory rpg = PlayerRpgInventory.get(player);
@@ -74,27 +72,23 @@ public class CommonTickHandler /* implements ITickHandler */{
 				if (!player.worldObj.getGameRules().getGameRuleBooleanValue(
 						"keepInventory"))
 					dropJewels(player);
-			if (countdown == 0) {
+			if (countdown == 0)
 				//
 				// PacketInventory.sendServerPacket(player);
 				PacketInventory.sendServerPacket(player);
-				// TODO
-				// PacketInventory pack = new PacketInventory();
-				// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-				// pipe.sendToServer(pack);
-
-				//System.out.println("fill packet here");
-			}
+			// TODO
+			// PacketInventory pack = new PacketInventory();
+			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
+			// pipe.sendToServer(pack);
 		}
 
 		countdown--;
 		if (countdown < 0)
 			countdown = 20;
-		//	}
+		// }
 		//
-		//	@SubscribeEvent
-		//	public void tickStart(TickEvent.ServerTickEvent ev) {
-
+		// @SubscribeEvent
+		// public void tickStart(TickEvent.ServerTickEvent ev) {
 
 		for (String username : RPGEventHooks.DiamondTick.keySet())
 			try {
@@ -118,19 +112,19 @@ public class CommonTickHandler /* implements ITickHandler */{
 							.getCommandSenderName()) ? 65 : 75;
 					if ((rpginv.getNecklace() != null)
 							&& rpginv.getNecklace().getItem()
-							.equals(mod_RpgInventory.neckdia))
+									.equals(mod_RpgInventory.neckdia))
 						delay -= 10;
 					if ((rpginv.getGloves() != null)
 							&& rpginv.getGloves().getItem()
-							.equals(mod_RpgInventory.glovesdia))
+									.equals(mod_RpgInventory.glovesdia))
 						delay -= 10;
 					if ((rpginv.getRing1() != null)
 							&& rpginv.getRing1().getItem()
-							.equals(mod_RpgInventory.ringdia))
+									.equals(mod_RpgInventory.ringdia))
 						delay -= 10;
 					if ((rpginv.getRing2() != null)
 							&& rpginv.getRing2().getItem()
-							.equals(mod_RpgInventory.ringdia))
+									.equals(mod_RpgInventory.ringdia))
 						delay -= 10;
 					RPGEventHooks.DiamondTick.put(
 							player.getCommandSenderName(), delay);
@@ -175,19 +169,19 @@ public class CommonTickHandler /* implements ITickHandler */{
 					int heal = 0;
 					if ((rpginv.getNecklace() != null)
 							&& rpginv.getNecklace().getItem()
-							.equals(mod_RpgInventory.necklap))
+									.equals(mod_RpgInventory.necklap))
 						heal++;
 					if ((rpginv.getGloves() != null)
 							&& rpginv.getGloves().getItem()
-							.equals(mod_RpgInventory.gloveslap))
+									.equals(mod_RpgInventory.gloveslap))
 						heal++;
 					if ((rpginv.getRing1() != null)
 							&& rpginv.getRing1().getItem()
-							.equals(mod_RpgInventory.ringlap))
+									.equals(mod_RpgInventory.ringlap))
 						heal++;
 					if ((rpginv.getRing2() != null)
 							&& rpginv.getRing2().getItem()
-							.equals(mod_RpgInventory.ringlap))
+									.equals(mod_RpgInventory.ringlap))
 						heal++;
 
 					if (player.getCurrentEquippedItem() != null) {
@@ -202,7 +196,7 @@ public class CommonTickHandler /* implements ITickHandler */{
 									countDownLapis = mod_RpgInventory.donators
 											.contains(player
 													.getCommandSenderName()) ? 15 * 20
-															: lapisTimer;
+											: lapisTimer;
 								}
 					}
 				}

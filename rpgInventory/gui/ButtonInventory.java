@@ -4,11 +4,12 @@
  */
 package rpgInventory.gui;
 
-import java.io.IOException;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
+
+import java.io.IOException;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,8 +27,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ButtonInventory extends GuiButton {
 
 	private EntityPlayer player;
-	
-	public ButtonInventory(int par1, int par2, int par3, int x, int y, String par4Str) {
+
+	public ButtonInventory(int par1, int par2, int par3, int x, int y,
+			String par4Str) {
 		super(par1, par2, par3, par4Str);
 		player = Minecraft.getMinecraft().thePlayer;
 		this.width = x;
@@ -43,35 +45,20 @@ public class ButtonInventory extends GuiButton {
 			if ((par3 >= this.yPosition)
 					&& (par3 <= (this.yPosition + this.height))) {
 
-				if (this.displayString.equals("Rpg Inventory")) {
-
-
-					/*Open Rpg Inventory gui*/
+				if (this.displayString.equals("Rpg Inventory"))
+					/* Open Rpg Inventory gui */
 					try {
 						ByteBuf buf = Unpooled.buffer();
 						ByteBufOutputStream out = new ByteBufOutputStream(buf);
 						out.writeInt(ServerPacketHandler.OPENRPGINV);
-						mod_RpgInventory.Channel.sendToServer(new FMLProxyPacket(buf,
-								"RpgInv"));
-						
+						mod_RpgInventory.Channel
+								.sendToServer(new FMLProxyPacket(buf, "RpgInv"));
+
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				
-//					ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-//					DataOutputStream outputStream = new DataOutputStream(bytes);
-					// try {
-					// outputStream.writeInt(1);
-					// Packet250CustomPayload packet = new
-					// Packet250CustomPayload(
-					// "RpgInv", bytes.toByteArray());
-					// PacketDispatcher.sendPacketToServer(packet);
-					// // System.out.println("Packet send");
-					// } catch (IOException e) {
-					// e.printStackTrace();
-					// }
-				} else if (this.displayString.equals("Close"))
+				else if (this.displayString.equals("Close"))
 					// player.closeScreen();
 					player.openContainer = player.inventoryContainer;
 				// Minecraft.getMinecraft().getSoundHandler().playSoundFX("random.click",

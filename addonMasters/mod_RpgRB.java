@@ -77,8 +77,6 @@ public class mod_RpgRB {
 
 		FMLLog.info("Rpg++ Rogue and BeastMaster Installed. Renderers can be Used");
 
-		
-
 		GameRegistry.addRecipe(new ItemStack(daggers, 1), new Object[] { " ei",
 				"eie", "se ", 'i', Items.iron_ingot, 'e', Items.spider_eye,
 				's', Items.stick });
@@ -213,7 +211,8 @@ public class mod_RpgRB {
 				.setUnlocalizedName("tangledBrench");
 		PetXPBottle = new PetExpPotion().setUnlocalizedName("PetXPBottle");
 
-		crystal = new ItemCrystal(ITEMTYPE.CRYSTAL, -1, "").setUnlocalizedName("petCrystal");
+		crystal = new ItemCrystal(ITEMTYPE.CRYSTAL, -1, "")
+				.setUnlocalizedName("petCrystal");
 
 		LanguageRegistry.addName(daggers, "Rogue Daggers");
 		LanguageRegistry.addName(rogueLeather, "Rogue Leather");
@@ -237,8 +236,7 @@ public class mod_RpgRB {
 		LanguageRegistry.addName(new ItemStack(crystal, 1, 1), "Boar");
 		LanguageRegistry.addName(new ItemStack(crystal, 1, 2), "Spider");
 		LanguageRegistry.addName(new ItemStack(crystal, 1, 3), "Bull");
-		
-		
+
 		allItems = new Item[] { beastShield, daggers, beastAxe, beastHood,
 				beastChest, beastLegs, beastBoots, rogueHood, rogueChest,
 				rogueLegs, rogueBoots, rogueLeather, beastLeather, crystal,

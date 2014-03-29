@@ -1,12 +1,15 @@
 package addonMasters;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.entity.RenderXPOrb;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.config.RpgConfig;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import addonBasic.models.item.ModelRogueArmor;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
@@ -46,6 +49,12 @@ public class RBClientProxy extends RBCommonProxy {
 			break;
 		}
 		return null;
+	}
+
+	@Override
+	public void openGUI(EntityPlayer p1, PlayerRpgInventory inv) {
+		Minecraft.getMinecraft().displayGuiScreen(
+				new addonMasters.PetGui(p1, inv));
 	}
 
 	@Override

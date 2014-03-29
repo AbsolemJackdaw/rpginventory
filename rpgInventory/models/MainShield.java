@@ -1,4 +1,4 @@
-package rpgInventory.models.shields;
+package rpgInventory.models;
 
 import java.util.ArrayList;
 

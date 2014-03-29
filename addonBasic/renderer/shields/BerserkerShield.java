@@ -1,8 +1,10 @@
-package rpgInventory.renderer.items.shields;
+package addonBasic.renderer.shields;
 
 import net.minecraft.client.model.ModelBase;
 
 import org.lwjgl.opengl.GL11;
+
+import rpgInventory.renderer.ShieldRenderer;
 
 public class BerserkerShield extends ShieldRenderer {
 

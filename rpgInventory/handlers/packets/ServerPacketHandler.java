@@ -5,11 +5,6 @@ import io.netty.buffer.ByteBufInputStream;
 
 import java.io.IOException;
 
-import addonBasic.packets.PacketArcher;
-import addonBasic.packets.PacketBerserker;
-import addonBasic.packets.PacketMageHeal;
-import addonBasic.packets.PacketMageVortex;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
@@ -25,10 +20,6 @@ import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 public class ServerPacketHandler {
 
 	public static final int OPENRPGINV = 1;
-	public static final int MAGE1 = 3;
-	public static final int BERSERKER = 4;
-	public static final int ARCHER = 5;
-	public static final int MAGE2 = 7;
 	public static final int INVENTORY = 15;
 	public static final int SMP_INVENTORY_SYNC = 20;
 
@@ -52,19 +43,6 @@ public class ServerPacketHandler {
 			case OPENRPGINV:
 				FMLNetworkHandler.openGui(p, mod_RpgInventory.instance, 1,
 						world, x, y, z);
-				break;
-
-			case MAGE1:
-				new PacketMageHeal(dis, p, world);
-				break;
-			case BERSERKER:
-				new PacketBerserker(world, p, dis);
-				break;
-			case ARCHER:
-				new PacketArcher(dis, p, world);
-				break;
-			case MAGE2:
-				new PacketMageVortex(dis, world, p);
 				break;
 
 			case SMP_INVENTORY_SYNC:

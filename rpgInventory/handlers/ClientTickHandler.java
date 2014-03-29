@@ -85,7 +85,7 @@ public class ClientTickHandler /* implements ITickHandler */{
 									.get(player).getShield().getItem())
 									.shieldClass();
 				}
-			
+
 		}
 
 		// This will only inject our buttons into the existing GuiInventory
@@ -121,8 +121,14 @@ public class ClientTickHandler /* implements ITickHandler */{
 								int offsety = 93;
 								int posX = (Minecraft.getMinecraft().currentScreen.width) / 2;
 								int posY = (Minecraft.getMinecraft().currentScreen.height) / 2;
-								currentButtons.add(new ButtonInventory(currentButtons.size() + 1, posX- offsetx, posY + offsety, 80, 20, "Rpg Inventory"));
-								currentButtons.add(new ButtonInventory(currentButtons.size() + 1,((posX - offsetx) + 80 + 15), posY+ offsety,80,20, "Close"));
+								currentButtons.add(new ButtonInventory(
+										currentButtons.size() + 1, posX
+												- offsetx, posY + offsety, 80,
+										20, "Rpg Inventory"));
+								currentButtons.add(new ButtonInventory(
+										currentButtons.size() + 1,
+										((posX - offsetx) + 80 + 15), posY
+												+ offsety, 80, 20, "Close"));
 							}
 						} catch (Exception e) {
 							System.err

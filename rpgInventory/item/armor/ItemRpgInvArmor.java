@@ -2,8 +2,6 @@ package rpgInventory.item.armor;
 
 import java.util.List;
 
-import com.sun.org.glassfish.gmbal.ParameterNames;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -13,7 +11,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.models.shields.MainShield;
+import rpgInventory.models.MainShield;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -23,26 +21,26 @@ public class ItemRpgInvArmor extends Item {
 	 * Holds the 'base' maxDamage that each armorType have.
 	 */
 	private final int[] maxDamageArray = new int[] { 30, 20, 50, 20, 30, 30 };
-	
+
 	public static final int NECKLACE = 0;
 	public static final int SHIELD = 1;
 	public static final int CLOAK = 2;
 	public static final int GLOVES = 3;
 	public static final int RING = 4;
-	
+
 	/**
 	 * Stores the armor type: 0 is necklace, 2 is cloak, 1 is shield, 3 is
 	 * gloves, 4 are rings
 	 */
 	public int armorType;
-	
+
 	private ResourceLocation TEXTURE;
 
 	/**
 	 * second string : name, isn't used.
 	 * 
-	 * @params ItemID ArmorType (aka shield,gloves, cloak, ... ) 
-	 * the maximum damage this item can take. only used for shields name is unused
+	 * @params ItemID ArmorType (aka shield,gloves, cloak, ... ) the maximum
+	 *         damage this item can take. only used for shields name is unused
 	 *         location for texture
 	 */
 	public ItemRpgInvArmor(int par4, int maxDamage, String name,
@@ -55,13 +53,6 @@ public class ItemRpgInvArmor extends Item {
 		TEXTURE = new ResourceLocation(resourcelocation);
 	}
 
-
-	
-	public boolean isMantle(){
-		return false;
-	}
-	
-	
 	/**
 	 * allows items to add custom lines of information to the mouseover
 	 * description
@@ -78,8 +69,7 @@ public class ItemRpgInvArmor extends Item {
 
 		if (stack.getItem() == mod_RpgInventory.neckem) {
 			list.add(StatCollector.translateToLocal("Water Breathing"));
-			list.add(StatCollector
-					.translateToLocal("x2"));
+			list.add(StatCollector.translateToLocal("x2"));
 		}
 
 		if (stack.getItem() == mod_RpgInventory.glovesem) {
@@ -173,6 +163,10 @@ public class ItemRpgInvArmor extends Item {
 	public boolean hasEffect(ItemStack par1ItemStack) {
 		if (par1ItemStack.getItem() == mod_RpgInventory.cloakI)
 			return true;
+		return false;
+	}
+
+	public boolean isMantle() {
 		return false;
 	}
 

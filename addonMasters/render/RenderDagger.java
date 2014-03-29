@@ -3,10 +3,11 @@ package addonMasters.render;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 
 import org.lwjgl.opengl.GL11;
 
-import rpgInventory.renderer.items.weapons.RpgItemRenderer;
+import addonBasic.renderer.weapons.RpgItemRenderer;
 import addonMasters.models.ModelDaggerR;
 
 public class RenderDagger extends RpgItemRenderer {

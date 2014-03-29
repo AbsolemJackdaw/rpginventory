@@ -1,8 +1,7 @@
 package addonBasic.items;
 
-import rpgInventory.mod_RpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
-import rpgInventory.models.shields.MainShield;
+import rpgInventory.models.MainShield;
 import addonBasic.mod_addonBase;
 import addonBasic.models.item.IronThorn;
 import addonBasic.models.item.ModelShield;
@@ -19,11 +18,6 @@ public class ItemRpgInventoryItem extends ItemRpgInvArmor {
 	public ItemRpgInventoryItem(int par4, int maxDamage, String name,
 			String resourcelocation) {
 		super(par4, maxDamage, name, resourcelocation);
-	}
-	
-	@Override
-	public boolean isMantle() {
-		return this.equals(mod_addonBase.talisman) ? true : false;
 	}
 
 	@Override
@@ -46,6 +40,11 @@ public class ItemRpgInventoryItem extends ItemRpgInvArmor {
 		if (this.equals(mod_addonBase.talisman))
 			return book;
 		return super.getShieldModel();
+	}
+
+	@Override
+	public boolean isMantle() {
+		return this.equals(mod_addonBase.talisman) ? true : false;
 	}
 
 	@Override

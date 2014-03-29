@@ -1,8 +1,8 @@
 package addonBasic.models.item;
 
-import rpgInventory.models.shields.MainShield;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import rpgInventory.models.MainShield;
 
 public class IronThorn extends MainShield {
 	// fields

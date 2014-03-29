@@ -3,19 +3,19 @@ package addonBasic;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.renderer.items.shields.ArcherShield;
-import rpgInventory.renderer.items.shields.BerserkerShield;
-import rpgInventory.renderer.items.shields.BookRenderer;
-import rpgInventory.renderer.items.weapons.BowRender;
-import rpgInventory.renderer.items.weapons.ClaymoreRenderer;
-import rpgInventory.renderer.items.weapons.HammerRender;
-import rpgInventory.renderer.items.weapons.SoulSphereRender;
-import rpgInventory.renderer.items.weapons.StafRender;
 import addonBasic.models.item.IronThorn;
 import addonBasic.models.item.ModelBerserkerArmor;
 import addonBasic.models.item.ModelMageArmor;
 import addonBasic.models.item.ModelShield;
 import addonBasic.models.item.bookMage;
+import addonBasic.renderer.shields.ArcherShield;
+import addonBasic.renderer.shields.BerserkerShield;
+import addonBasic.renderer.shields.BookRenderer;
+import addonBasic.renderer.weapons.BowRender;
+import addonBasic.renderer.weapons.ClaymoreRenderer;
+import addonBasic.renderer.weapons.HammerRender;
+import addonBasic.renderer.weapons.SoulSphereRender;
+import addonBasic.renderer.weapons.StafRender;
 
 public class ClientAddonProxy extends CommonAddonProxy {
 

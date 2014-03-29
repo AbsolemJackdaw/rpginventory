@@ -7,7 +7,6 @@ import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.client.particle.EntityLargeExplodeFX;
-import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -17,15 +16,11 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.Sphere;
 
-import addonBasic.EntityHellArrow;
-
 import rpgInventory.CapeRenderer;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.BookGui;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.ClientPacketHandler;
 import rpgInventory.renderer.RenderRpgPlayer;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -70,12 +65,6 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void openGUI(EntityPlayer p1, PlayerRpgInventory inv) {
-		Minecraft.getMinecraft().displayGuiScreen(
-				new addonMasters.PetGui(p1, inv));
-	}
-
-	@Override
 	public void registerLate() {
 		// TickRegistry.registerTickHandler(new ClientTickHandler(),
 		// Side.CLIENT);
@@ -86,13 +75,6 @@ public class ClientProxy extends CommonProxy {
 		// MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
 
 		// TextureIDs.init();
-
-		// DONE keyhandlers to event bus
-		// KeyBindingRegistry.registerKeyBinding(new RPGKeyHandler(
-		// IKeyHandler.bindKeys, IKeyHandler.reps));
-
-		RenderingRegistry.registerEntityRenderingHandler(EntityHellArrow.class,
-				new RenderArrow());
 
 		Sphere sphere = new Sphere();
 		// GLU_POINT will render it as dots.

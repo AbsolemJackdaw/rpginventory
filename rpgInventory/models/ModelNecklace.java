@@ -1,4 +1,4 @@
-package rpgInventory.models.jewels;
+package rpgInventory.models;
 
 import java.util.ArrayList;
 

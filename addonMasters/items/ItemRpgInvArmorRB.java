@@ -9,7 +9,7 @@ import net.minecraft.util.DamageSource;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
-import rpgInventory.models.shields.MainShield;
+import rpgInventory.models.MainShield;
 import addonMasters.mod_RpgRB;
 import addonMasters.models.LionHead;
 import addonMasters.models.ModelDaggerL;

@@ -8,7 +8,7 @@ package addonDread.models;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import rpgInventory.models.shields.MainShield;
+import rpgInventory.models.MainShield;
 
 public class PalaShield extends MainShield {
 	// fields

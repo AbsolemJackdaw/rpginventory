@@ -6,7 +6,7 @@ import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import rpgInventory.models.shields.MainShield;
+import rpgInventory.models.MainShield;
 
 public class bookMage extends MainShield {
 	ModelRenderer Shape1;

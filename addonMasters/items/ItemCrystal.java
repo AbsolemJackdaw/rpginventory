@@ -18,7 +18,7 @@ public class ItemCrystal extends ItemRpgInvArmor {
 	public static final String[] pets = new String[] { "Empty Crystal", "Boar",
 			"Spider", "Bull" };
 
-	public ItemCrystal( int armorType, int maxDamage, String name) {
+	public ItemCrystal(int armorType, int maxDamage, String name) {
 		super(armorType, maxDamage, name, "");
 		this.setHasSubtypes(true);
 		// Max stack size MUST be 1!

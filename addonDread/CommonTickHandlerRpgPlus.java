@@ -14,8 +14,7 @@ public class CommonTickHandlerRpgPlus /* implements ITickHandler */{
 	public void tickEnd(TickEvent.ServerTickEvent ev) {
 
 		/*
-		 *Manage cooldown map
-		 *used for spawning minions 
+		 * Manage cooldown mapused for spawning minions
 		 */
 		for (Entry<String, Integer> entry : rpgPluscooldownMap.entrySet())
 			if (entry.getValue() > 0)

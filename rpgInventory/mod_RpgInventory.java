@@ -8,8 +8,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import addonBasic.EntityHellArrow;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -44,9 +42,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = mod_RpgInventory.name, name = mod_RpgInventory.ID, version = mod_RpgInventory.version)
 // @NetworkMod(clientSideRequired = true, serverSideRequired = true,
@@ -228,9 +224,6 @@ public class mod_RpgInventory {
 
 		MinecraftForge.EVENT_BUS.register(new RPGEventHooks());
 
-		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow",
-				getUniqueID(), this, 250, 1, true);
-
 		ClientProxy.renderHandler();
 
 	}
@@ -262,21 +255,24 @@ public class mod_RpgInventory {
 		neckgold = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, "",
 				"subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold")
 				.setCreativeTab(tab);
-		neckdia = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, "", "subaraki:jewels/NeckDia.png")
-				.setUnlocalizedName("neckDia").setCreativeTab(tab);
-		neckem = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, "", "subaraki:jewels/NeckEm.png")
-				.setUnlocalizedName("neckEm").setCreativeTab(tab);
-		necklap = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, "", "subaraki:jewels/NeckLap.png")
-				.setUnlocalizedName("neckLap").setCreativeTab(tab);
+		neckdia = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, "",
+				"subaraki:jewels/NeckDia.png").setUnlocalizedName("neckDia")
+				.setCreativeTab(tab);
+		neckem = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, "",
+				"subaraki:jewels/NeckEm.png").setUnlocalizedName("neckEm")
+				.setCreativeTab(tab);
+		necklap = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, "",
+				"subaraki:jewels/NeckLap.png").setUnlocalizedName("neckLap")
+				.setCreativeTab(tab);
 
-		ringgold = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "").setUnlocalizedName(
-				"ringGold").setCreativeTab(tab);
-		ringdia = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "").setUnlocalizedName(
-				"ringDia").setCreativeTab(tab);
+		ringgold = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "")
+				.setUnlocalizedName("ringGold").setCreativeTab(tab);
+		ringdia = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "")
+				.setUnlocalizedName("ringDia").setCreativeTab(tab);
 		ringem = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "")
 				.setUnlocalizedName("ringEm").setCreativeTab(tab);
-		ringlap = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "").setUnlocalizedName(
-				"ringLap").setCreativeTab(tab);
+		ringlap = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "")
+				.setUnlocalizedName("ringLap").setCreativeTab(tab);
 
 		glovesbutter = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, "",
 				"subaraki:jewels/Glove.png").setUnlocalizedName("gloveGold")
@@ -284,21 +280,23 @@ public class mod_RpgInventory {
 		glovesdia = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, "",
 				"subaraki:jewels/GloveDia.png").setUnlocalizedName("gloveDia")
 				.setCreativeTab(tab);
-		glovesem = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, "", "subaraki:jewels/GloveEm.png")
-				.setUnlocalizedName("gloveEm").setCreativeTab(tab);
+		glovesem = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, "",
+				"subaraki:jewels/GloveEm.png").setUnlocalizedName("gloveEm")
+				.setCreativeTab(tab);
 		gloveslap = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, "",
 				"subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap")
 				.setCreativeTab(tab);
 
-		cloak = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "", "subaraki:capes/GreyCape.png")
-				.setFull3D().setUnlocalizedName("capeGrey").setCreativeTab(tab);
-		cloakI = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "", "subaraki:capes/GreyCape.png")
-				.setFull3D().setUnlocalizedName("i.capeGrey")
-				.setCreativeTab(tab);
+		cloak = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
+				"subaraki:capes/GreyCape.png").setFull3D()
+				.setUnlocalizedName("capeGrey").setCreativeTab(tab);
+		cloakI = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
+				"subaraki:capes/GreyCape.png").setFull3D()
+				.setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
 
-		cloakRed = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "", "subaraki:capes/RedCape.png")
-				.setFull3D().setUnlocalizedName("r.capeGrey")
-				.setCreativeTab(tab);
+		cloakRed = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
+				"subaraki:capes/RedCape.png").setFull3D()
+				.setUnlocalizedName("r.capeGrey").setCreativeTab(tab);
 
 		cloakYellow = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
 				"subaraki:capes/GoldCape.png").setFull3D()
@@ -307,12 +305,12 @@ public class mod_RpgInventory {
 		cloakGreen = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
 				"subaraki:capes/GreenCape.png").setFull3D()
 				.setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
-		cloakBlue = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "", "subaraki:capes/SkyCape.png")
-				.setFull3D().setUnlocalizedName("b.capeGrey")
-				.setCreativeTab(tab);
-		cloakSub = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "", "subaraki:capes/BlaCape.png")
-				.setFull3D().setUnlocalizedName("s.capeGrey")
-				.setCreativeTab(tab);
+		cloakBlue = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
+				"subaraki:capes/SkyCape.png").setFull3D()
+				.setUnlocalizedName("b.capeGrey").setCreativeTab(tab);
+		cloakSub = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
+				"subaraki:capes/BlaCape.png").setFull3D()
+				.setUnlocalizedName("s.capeGrey").setCreativeTab(tab);
 
 		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(
 				tab);

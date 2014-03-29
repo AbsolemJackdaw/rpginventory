@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBase;
 
 import org.lwjgl.opengl.GL11;
 
-import rpgInventory.renderer.items.shields.ShieldRenderer;
+import rpgInventory.renderer.ShieldRenderer;
 
 public class LionHeadRenderer extends ShieldRenderer {
 

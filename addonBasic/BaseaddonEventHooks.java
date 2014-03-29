@@ -2,8 +2,6 @@ package addonBasic;
 
 import java.util.Map;
 
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -16,9 +14,27 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import rpgInventory.mod_RpgInventory;
+import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class BaseaddonEventHooks {
+
+	public void damageItem(ItemStack item, PlayerRpgInventory inv,
+			EntityPlayer p, int slot, int amount) {
+		if (mod_RpgInventory.developers.contains(p.getCommandSenderName()
+				.toLowerCase()))
+			return;
+		try {
+			if ((item.getItemDamage() + amount) >= item.getMaxDamage())
+				// Trigger item break stuff
+				item = null;
+			else
+				item.damageItem(amount, p);
+			inv.setInventorySlotContents(slot, item);
+		} catch (Throwable e) {
+		}
+	}
 
 	@SubscribeEvent
 	public void PlayerDamage(LivingHurtEvent evt) {
@@ -32,14 +48,11 @@ public class BaseaddonEventHooks {
 							.get((EntityPlayer) damager);
 					ItemStack weapon = ((EntityPlayer) damager)
 							.getCurrentEquippedItem();
-					if (weapon != null) {
-						if (weapon.getItem() == mod_addonBase.hammer) {
+					if (weapon != null)
+						if (weapon.getItem() == mod_addonBase.hammer)
 							if (mod_RpgInventory.playerClass
-									.contains(mod_addonBase.CLASSBERSERKER)) {
+									.contains(mod_addonBase.CLASSBERSERKER))
 								evt.ammount += 4;
-							}
-						}
-					}
 					if (mod_RpgInventory.playerClass
 							.contains(mod_addonBase.CLASSBERSERKER))
 						// hit harder with both hands 'free'
@@ -47,9 +60,8 @@ public class BaseaddonEventHooks {
 								.contains(mod_addonBase.CLASSBERSERKERSHIELD))
 							evt.ammount += 2;
 				}
-		}catch(Throwable e){
+		} catch (Throwable e) {
 		}
-
 
 		try {
 			if ((evt.entityLiving != null)
@@ -77,7 +89,7 @@ public class BaseaddonEventHooks {
 														.getSourceOfDamage()).shootingEntity;
 									if (evt.source.getSourceOfDamage() instanceof EntityLivingBase)
 										damagedealer = (EntityLivingBase) evt.source
-										.getSourceOfDamage();
+												.getSourceOfDamage();
 								}
 							if (damagedealer != null)
 								if (damagedealer.isEntityUndead())
@@ -103,7 +115,7 @@ public class BaseaddonEventHooks {
 											}
 									if (evt.source.getSourceOfDamage() instanceof EntityLivingBase)
 										damagedealer = (EntityLivingBase) evt.source
-										.getSourceOfDamage();
+												.getSourceOfDamage();
 								}
 							if (damageReduction < 0.70F)
 								if (damagedealer != null) {
@@ -115,11 +127,11 @@ public class BaseaddonEventHooks {
 								}
 							if (evt.source.isFireDamage())
 								evt.ammount += MathHelper
-								.floor_float((evt.ammount) * 0.10F);
+										.floor_float((evt.ammount) * 0.10F);
 							else
 								evt.ammount -= MathHelper
-								.floor_float((evt.ammount)
-										* damageReduction);
+										.floor_float((evt.ammount)
+												* damageReduction);
 							damageItem(shield, inv, player, 1, 1);
 						}
 					} else if (mod_RpgInventory.playerClass
@@ -141,7 +153,6 @@ public class BaseaddonEventHooks {
 		}
 	}
 
-
 	@SubscribeEvent
 	public void PlayerUpdate(PlayerEvent.LivingUpdateEvent evt) {
 
@@ -156,18 +167,20 @@ public class BaseaddonEventHooks {
 					// classes match
 
 					/* ==== Something about the archer .__. ==== */
-					if (CommonTickHandler.ArcherRepairTick.containsKey(p.getCommandSenderName()))
+					if (CommonTickHandler.ArcherRepairTick.containsKey(p
+							.getCommandSenderName()))
 						if (mod_RpgInventory.playerClass
 								.contains(mod_addonBase.CLASSARCHER))
 							p.jumpMovementFactor = 0.09F;
 						else {
-							CommonTickHandler.ArcherRepairTick.remove(p.getCommandSenderName());
+							CommonTickHandler.ArcherRepairTick.remove(p
+									.getCommandSenderName());
 							p.jumpMovementFactor = 0.02F;
 						}
 
 					ItemStack weapon = p.getCurrentEquippedItem();
-					if (weapon != null) {
-						if (weapon.getItem() == mod_addonBase.hammer) {
+					if (weapon != null)
+						if (weapon.getItem() == mod_addonBase.hammer)
 							if (mod_RpgInventory.playerClass
 									.contains(mod_addonBase.CLASSBERSERKERSHIELD)) {
 								if (((p.getFoodStats().getFoodLevel() < 4) || (p
@@ -196,13 +209,10 @@ public class BaseaddonEventHooks {
 								tmp.remove(Enchantment.knockback.effectId);
 								EnchantmentHelper.setEnchantments(tmp, weapon);
 							}
-						}
-					}
 				}
 			}
 		} catch (Exception e) {
 		}
-
 
 		try {
 			if (evt.entityLiving instanceof EntityPlayer) {
@@ -228,23 +238,6 @@ public class BaseaddonEventHooks {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
-	}
-
-
-	public void damageItem(ItemStack item, PlayerRpgInventory inv,
-			EntityPlayer p, int slot, int amount) {
-		if (mod_RpgInventory.developers.contains(p.getCommandSenderName()
-				.toLowerCase()))
-			return;
-		try {
-			if ((item.getItemDamage() + amount) >= item.getMaxDamage())
-				// Trigger item break stuff
-				item = null;
-			else
-				item.damageItem(amount, p);
-			inv.setInventorySlotContents(slot, item);
-		} catch (Throwable e) {
 		}
 	}
 }

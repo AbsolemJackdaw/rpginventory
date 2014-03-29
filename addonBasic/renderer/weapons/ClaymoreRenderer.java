@@ -1,4 +1,4 @@
-package rpgInventory.renderer.items.weapons;
+package addonBasic.renderer.weapons;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import rpgInventory.models.weapons.ModelClaymore;
+import addonBasic.models.weapons.ModelClaymore;
 
 public class ClaymoreRenderer extends RpgItemRenderer {
 

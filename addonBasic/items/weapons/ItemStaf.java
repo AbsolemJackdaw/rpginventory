@@ -2,8 +2,6 @@ package addonBasic.items.weapons;
 
 import java.util.List;
 
-import addonBasic.mod_addonBase;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +11,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import addonBasic.mod_addonBase;
 
 public class ItemStaf extends ItemRpgSword {
 

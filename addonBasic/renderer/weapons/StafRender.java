@@ -1,4 +1,4 @@
-package rpgInventory.renderer.items.weapons;
+package addonBasic.renderer.weapons;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 
-import rpgInventory.models.weapons.ModelStaf;
+import addonBasic.models.weapons.ModelStaf;
 
 public class StafRender extends RpgItemRenderer {
 

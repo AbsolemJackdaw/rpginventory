@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgContainer;
 import rpgInventory.gui.rpginv.RpgGui;
 import cpw.mods.fml.relauncher.Side;
@@ -19,8 +18,9 @@ public class ButtonPetGui extends GuiButton {
 
 	private EntityPlayer player;
 	private GuiScreen gui;
-	
-	public ButtonPetGui(int par1, int par2, int par3, int x, int y, GuiScreen gui, String par4Str) {
+
+	public ButtonPetGui(int par1, int par2, int par3, int x, int y,
+			GuiScreen gui, String par4Str) {
 		super(par1, par2, par3, par4Str);
 		player = Minecraft.getMinecraft().thePlayer;
 		this.width = x;
@@ -37,11 +37,11 @@ public class ButtonPetGui extends GuiButton {
 			if ((par3 >= this.yPosition)
 					&& (par3 <= (this.yPosition + this.height))) {
 				EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-				PlayerRpgContainer container = ((PlayerRpgContainer)((RpgGui)gui).inventorySlots) ;
-				//todo send packet
+				PlayerRpgContainer container = ((PlayerRpgContainer) ((RpgGui) gui).inventorySlots);
+				// todo send packet
 				if (container.inventory.getCrystal() != null)
 					if (container.inventory.getCrystal().getItemDamage() > 0)
-						mod_RpgInventory.proxy.openGUI(p, container.inventory);
+						mod_RpgRB.proxy.openGUI(p, container.inventory);
 
 				return false;
 			}
