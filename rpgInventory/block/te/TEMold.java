@@ -118,36 +118,38 @@ public class TEMold extends TileEntity implements IInventory {
 
 		ItemStack mineral = null;
 		ItemStack mold = null;
+		ItemStack block = null;
 
 		// System.out.println(moldforgeItemStacks[3]);
 		if (moldforgeItemStacks[1] != null) {
 			if ((moldforgeItemStacks[2] != null)
-					&& (moldforgeItemStacks[3] != null)) {
+					&& (moldforgeItemStacks[3] != null)
+					&& (moldforgeItemStacks[1] != null)) {
 				mold = moldforgeItemStacks[2];
 				mineral = moldforgeItemStacks[3];
-				if (mineral != null)
-					if (mineral.getItem() instanceof ItemDye) {
-						if (mineral.getItemDamage() == 4)
-							result = MoldRecipes.getSmeltingResult(mineral.getItem(),
-											mold.getItem());
-					} else
-						result = MoldRecipes.getSmeltingResult(
-								mineral.getItem(), mold.getItem());
+				block = moldforgeItemStacks[1];
+						if (mineral != null)
+							if (mineral.getItem() instanceof ItemDye) {
+								if (mineral.getItemDamage() == 4)
+									result = MoldRecipes.getSmeltingResult(mineral.getItem(),mold.getItem(), Block.getBlockFromItem(block.getItem()));
+							} else
+								result = MoldRecipes.getSmeltingResult(mineral.getItem(), mold.getItem(), Block.getBlockFromItem(block.getItem()));
 			}
 
 			if ((result == null) && (moldforgeItemStacks[2] != null)
-					&& (moldforgeItemStacks[3] != null)) {
+					&& (moldforgeItemStacks[3] != null)&& (moldforgeItemStacks[1] != null)) {
 				mold = moldforgeItemStacks[2];
 				mineral = moldforgeItemStacks[3];
+				block = moldforgeItemStacks[1];
 				if (mineral != null)
 					if (mineral.getItem() instanceof ItemDye) {
 						if (mineral.getItemDamage() == 4)
 							result = MoldRecipes
-									.getSmeltingResult(mineral.getItem(),
-											mold.getItem());
+							.getSmeltingResult(mineral.getItem(),
+									mold.getItem(),Block.getBlockFromItem(block.getItem()));
 					} else
 						result = MoldRecipes.getSmeltingResult(
-								mineral.getItem(), mold.getItem());
+								mineral.getItem(), mold.getItem(),Block.getBlockFromItem(block.getItem()));
 
 			}
 		}
@@ -267,19 +269,22 @@ public class TEMold extends TileEntity implements IInventory {
 		if (canSmelt()) {
 			ItemStack mineral = null;
 			ItemStack mold = null;
+			ItemStack block = null;
 
 			if ((moldforgeItemStacks[2] != null)
-					&& (moldforgeItemStacks[3] != null)) {
+					&& (moldforgeItemStacks[3] != null)
+					&& (moldforgeItemStacks[1] != null)) {
 				mold = moldforgeItemStacks[2];
 				mineral = moldforgeItemStacks[3];
+				block = moldforgeItemStacks[1];
 			}
 
 			ItemStack stack = MoldRecipes.getSmeltingResult(
-					mineral.getItem(), mold.getItem());
+					mineral.getItem(), mold.getItem(),Block.getBlockFromItem(block.getItem()));
 
 			if (stack == null)
 				stack = MoldRecipes.getSmeltingResult(
-						mineral.getItem(), mold.getItem());
+						mineral.getItem(), mold.getItem(),Block.getBlockFromItem(block.getItem()));
 
 			if (moldforgeItemStacks[4] == null)
 				moldforgeItemStacks[4] = stack.copy();

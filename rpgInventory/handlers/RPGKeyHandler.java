@@ -180,7 +180,7 @@ public class RPGKeyHandler {
 				out.writeInt(ServerPacketHandler.OPENRPGINV);
 				mod_RpgInventory.Channel.sendToServer(new FMLProxyPacket(buf,
 						"RpgInv"));
-
+				out.close();
 				// PacketOpenInventory pack = new PacketOpenInventory();
 				// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
 				// pipe.sendToServer(pack);

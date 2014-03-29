@@ -1,6 +1,7 @@
 package addonBasic;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
 import addonBasic.models.item.IronThorn;
@@ -16,6 +17,7 @@ import addonBasic.renderer.weapons.ClaymoreRenderer;
 import addonBasic.renderer.weapons.HammerRender;
 import addonBasic.renderer.weapons.SoulSphereRender;
 import addonBasic.renderer.weapons.StafRender;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientAddonProxy extends CommonAddonProxy {
 
@@ -70,6 +72,9 @@ public class ClientAddonProxy extends CommonAddonProxy {
 			MinecraftForgeClient.registerItemRenderer(mod_addonBase.talisman,
 					new BookRenderer(new bookMage(),
 							"subaraki:jewels/mageShield.png"));
+			
+			RenderingRegistry.registerEntityRenderingHandler(EntityHellArrow.class,
+					new RenderArrow());
 		}
 	}
 

@@ -8,6 +8,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import rpgInventory.block.te.slot.GoldBlockSlot;
 import rpgInventory.block.te.slot.MoldSlot;
 import rpgInventory.block.te.slot.SlotFuel;
 import rpgInventory.block.te.slot.SlotMineral;

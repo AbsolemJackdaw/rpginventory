@@ -14,8 +14,6 @@ import net.minecraft.item.ItemStack;
 
 public class SlotMineral extends Slot {
 
-	//	private static Item[] allowedItems = new Item[]{Items.gold_ingot, Items.emerald, Items.diamond};
-
 	private static ArrayList<Item> allItems = new ArrayList<Item>();
 
 	public SlotMineral(IInventory par1IInventory, int par2, int par3, int par4) {
@@ -45,6 +43,12 @@ public class SlotMineral extends Slot {
 
 
 	public static void addAllowedItem(Item item){
+		
+		//If the item is already in the list, no need to put it in there again
+		for(Item i : allItems){
+			if(i.equals(item))
+				return;
+		}
 		allItems.add(item);
 	}
 }

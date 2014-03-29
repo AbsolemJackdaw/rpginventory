@@ -54,6 +54,7 @@ public class ButtonInventory extends GuiButton {
 						mod_RpgInventory.Channel
 								.sendToServer(new FMLProxyPacket(buf, "RpgInv"));
 
+						out.close();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

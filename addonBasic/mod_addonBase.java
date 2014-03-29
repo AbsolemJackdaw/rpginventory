@@ -27,6 +27,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -74,12 +75,12 @@ public class mod_addonBase {
 	rageSeed, wizardBook,
 	/* ====armor==== */
 	magehood, magegown, magepants, mageboots, archerhood, archerchest,
-			archerpants, archerboots, berserkerHood, berserkerChest,
-			berserkerLegs, berserkerBoots,
-			/* ====leathers/skins==== */
-			animalskin, tanHide, magecloth,
-			/* ====shields==== */
-			archerShield, berserkerShield, talisman;
+	archerpants, archerboots, berserkerHood, berserkerChest,
+	berserkerLegs, berserkerBoots,
+	/* ====leathers/skins==== */
+	animalskin, tanHide, magecloth,
+	/* ====shields==== */
+	archerShield, berserkerShield, talisman;
 
 	private String[][] recipePatterns;
 	private Object[][] recipeItems;
@@ -109,44 +110,44 @@ public class mod_addonBase {
 
 		// SKINS
 		GameRegistry.addRecipe(new ItemStack(animalskin, 1), new Object[] {
-				"WWW", "WLW", "WWW", 'W', new ItemStack(Blocks.wool, 1, 12),
-				'L', Items.leather });
+			"WWW", "WLW", "WWW", 'W', new ItemStack(Blocks.wool, 1, 12),
+			'L', Items.leather });
 		GameRegistry.addShapelessRecipe(new ItemStack(tanHide, 1),
 				new Object[] { Items.leather, Items.string, Items.string,
-						Items.string, Items.string });
+			Items.string, Items.string });
 		GameRegistry.addRecipe(new ItemStack(magecloth, 1), new Object[] {
-				"WWW", "WLW", "WWW", 'W', new ItemStack(Items.dye, 1, 4), 'L',
-				Items.leather });
+			"WWW", "WLW", "WWW", 'W', new ItemStack(Items.dye, 1, 4), 'L',
+			Items.leather });
 		// WEAPONRY
 		GameRegistry.addRecipe(new ItemStack(elfbow, 1), new Object[] { "EPP",
-				"P S", "PS ", 'E', Items.emerald, 'S', Items.string, 'P',
-				new ItemStack(Blocks.log, 1, 2) });
+			"P S", "PS ", 'E', Items.emerald, 'S', Items.string, 'P',
+			new ItemStack(Blocks.log, 1, 2) });
 		GameRegistry.addRecipe(new ItemStack(wand, 1), new Object[] { "GGG",
-				"GLG", "GGG", 'L', Blocks.lapis_block, 'G', Items.gold_ingot });
+			"GLG", "GGG", 'L', Blocks.lapis_block, 'G', Items.gold_ingot });
 		GameRegistry.addRecipe(new ItemStack(staf, 1), new Object[] { " ML",
-				" SM", "S  ", 'M', Items.speckled_melon, 'S', Items.stick, 'L',
-				new ItemStack(Items.dye, 1, 4) });
+			" SM", "S  ", 'M', Items.speckled_melon, 'S', Items.stick, 'L',
+			new ItemStack(Items.dye, 1, 4) });
 		GameRegistry.addRecipe(new ItemStack(claymore, 1), new Object[] {
-				" S ", " S ", "LIL", 'I', Items.iron_ingot, 'S', Blocks.stone,
-				'L', Items.leather });
+			" S ", " S ", "LIL", 'I', Items.iron_ingot, 'S', Blocks.stone,
+			'L', Items.leather });
 		GameRegistry.addRecipe(new ItemStack(hammer, 1), new Object[] { "SSS",
-				"LI ", "LI ", 'I', Items.iron_ingot, 'S', Blocks.iron_block,
-				'L', Items.leather });
+			"LI ", "LI ", 'I', Items.iron_ingot, 'S', Blocks.iron_block,
+			'L', Items.leather });
 
 		// SHIELDS
 		GameRegistry.addRecipe(new ItemStack(archerShield, 1), new Object[] {
-				"WWW", "WBW", " W ", 'W', Items.iron_ingot, 'B', Blocks.log });
+			"WWW", "WBW", " W ", 'W', Items.iron_ingot, 'B', Blocks.log });
 		GameRegistry.addRecipe(new ItemStack(berserkerShield, 1), new Object[] {
-				"WWW", "WBW", " W ", 'W', Items.iron_ingot, 'B',
-				Blocks.iron_block });
+			"WWW", "WBW", " W ", 'W', Items.iron_ingot, 'B',
+			Blocks.iron_block });
 		GameRegistry.addRecipe(new ItemStack(talisman, 1), new Object[] {
-				"WWW", "WBW", " W ", 'W', new ItemStack(Items.dye, 1, 4), 'B',
-				Blocks.lapis_block });
+			"WWW", "WBW", " W ", 'W', new ItemStack(Items.dye, 1, 4), 'B',
+			Blocks.lapis_block });
 
 		// MageBook
 		GameRegistry
-				.addShapelessRecipe(new ItemStack(wizardBook, 1), new Object[] {
-						magecloth, Items.paper, Items.paper, Items.paper });
+		.addShapelessRecipe(new ItemStack(wizardBook, 1), new Object[] {
+			magecloth, Items.paper, Items.paper, Items.paper });
 
 		// ARMOR
 		recipePatterns = new String[][] { { "XXX", "X X" },
@@ -164,9 +165,12 @@ public class mod_addonBase {
 			for (int var4 = 0; var4 < (this.recipeItems.length - 1); ++var4) {
 				Item var5 = (Item) this.recipeItems[var4 + 1][var2];
 				GameRegistry.addRecipe(new ItemStack(var5), new Object[] {
-						this.recipePatterns[var4], 'X', var3 });
+					this.recipePatterns[var4], 'X', var3 });
 			}
 		}
+
+		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow",
+				EntityRegistry.findGlobalUniqueEntityId(), this, 250, 1, true);
 
 		FMLCommonHandler.instance().bus().register(new CommonTickHandler());
 		MinecraftForge.EVENT_BUS.register(new BaseaddonEventHooks());
@@ -180,13 +184,13 @@ public class mod_addonBase {
 
 		archerShield = new ItemRpgInvArmor(1, 200, "",
 				"subaraki:jewels/Shield1.png").setUnlocalizedName(
-				"shieldArcher").setCreativeTab(tab);
+						"shieldArcher").setCreativeTab(tab);
 		berserkerShield = new ItemRpgInvArmor(1, 350, "",
 				"subaraki:jewels/IronThorn.png").setUnlocalizedName(
-				"shieldBerserker").setCreativeTab(tab);
+						"shieldBerserker").setCreativeTab(tab);
 		talisman = new ItemRpgInvArmor(1, 200, "",
 				"subaraki:jewels/mageShield.png").setUnlocalizedName(
-				"shieldMage").setCreativeTab(tab);
+						"shieldMage").setCreativeTab(tab);
 
 		magehood = new ItemMageArmor(mage, 4, 0).setUnlocalizedName("mage1")
 				.setCreativeTab(tab);
@@ -207,13 +211,13 @@ public class mod_addonBase {
 				"archer4").setCreativeTab(tab);
 
 		berserkerHood = new ItemBerserkerArmor(berserker, 4, 0)
-				.setUnlocalizedName("berserk1").setCreativeTab(tab);
+		.setUnlocalizedName("berserk1").setCreativeTab(tab);
 		berserkerChest = new ItemBerserkerArmor(berserker, 4, 1)
-				.setUnlocalizedName("berserk2").setCreativeTab(tab);
+		.setUnlocalizedName("berserk2").setCreativeTab(tab);
 		berserkerLegs = new ItemBerserkerArmor(berserker, 4, 2)
-				.setUnlocalizedName("berserk3").setCreativeTab(tab);
+		.setUnlocalizedName("berserk3").setCreativeTab(tab);
 		berserkerBoots = new ItemBerserkerArmor(berserker, 4, 3)
-				.setUnlocalizedName("berserk4").setCreativeTab(tab);
+		.setUnlocalizedName("berserk4").setCreativeTab(tab);
 
 		claymore = new ItemClaymore(clay).setFull3D().setMaxDamage(1024)
 				.setUnlocalizedName("claymore").setCreativeTab(tab);
@@ -267,9 +271,9 @@ public class mod_addonBase {
 							+ itemNameCropped);
 
 				GameRegistry
-						.registerItem(allItems[i],
-								allItems[i].getUnlocalizedName(),
-								mod_RpgInventory.name);
+				.registerItem(allItems[i],
+						allItems[i].getUnlocalizedName(),
+						mod_RpgInventory.name);
 			} else
 				System.out.println("Item is null !" + i);
 	}

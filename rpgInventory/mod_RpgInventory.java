@@ -271,9 +271,9 @@ public class mod_RpgInventory {
 				"subaraki:capes/BlaCape.png").setFull3D()
 				.setUnlocalizedName("s.capeGrey").setCreativeTab(tab);
 
-		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(
+		colmold = (ItemMold)new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(
 				tab);
-		ringmold = new ItemMold().setUnlocalizedName("moldRing")
+		ringmold = (ItemMold)new ItemMold().setUnlocalizedName("moldRing")
 				.setCreativeTab(tab);
 		wantmold = new ItemMold().setUnlocalizedName("moldGlove")
 				.setCreativeTab(tab);
