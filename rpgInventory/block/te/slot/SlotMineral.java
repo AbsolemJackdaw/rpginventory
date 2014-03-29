@@ -4,31 +4,47 @@
  */
 package rpgInventory.block.te.slot;
 
+import java.util.ArrayList;
+
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class SlotMineral extends Slot {
 
+	//	private static Item[] allowedItems = new Item[]{Items.gold_ingot, Items.emerald, Items.diamond};
+
+	private static ArrayList<Item> allItems = new ArrayList<Item>();
+
 	public SlotMineral(IInventory par1IInventory, int par2, int par3, int par4) {
 		super(par1IInventory, par2, par3, par4);
+		allItems.add(Items.gold_ingot);
+		allItems.add(Items.emerald);
+		allItems.add(Items.diamond);
 	}
 
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack) {
 		if (par1ItemStack != null) {
-			if (par1ItemStack.getItem() == Items.gold_ingot)
-				return true;
-			if (par1ItemStack.getItem() == Items.emerald)
-				return true;
-			if (par1ItemStack.getItem() == Items.diamond)
-				return true;
-			if (par1ItemStack.getItem() == Items.dye)
+
+			if (par1ItemStack.getItem() == Items.dye){
 				if (par1ItemStack.getItemDamage() == 4)
 					return true;
+			}
+
+			for(Item i : allItems){
+				if(par1ItemStack.getItem().equals(i)){
+					return true;
+				}
+			}
 		}
 		return false;
 	}
 
+
+	public static void addAllowedItem(Item item){
+		allItems.add(item);
+	}
 }

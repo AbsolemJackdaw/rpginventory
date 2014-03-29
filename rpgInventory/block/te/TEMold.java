@@ -128,11 +128,10 @@ public class TEMold extends TileEntity implements IInventory {
 				if (mineral != null)
 					if (mineral.getItem() instanceof ItemDye) {
 						if (mineral.getItemDamage() == 4)
-							result = mod_RpgInventory.recipes
-									.getSmeltingResult(mineral.getItem(),
+							result = MoldRecipes.getSmeltingResult(mineral.getItem(),
 											mold.getItem());
 					} else
-						result = mod_RpgInventory.recipes.getSmeltingResult(
+						result = MoldRecipes.getSmeltingResult(
 								mineral.getItem(), mold.getItem());
 			}
 
@@ -143,11 +142,11 @@ public class TEMold extends TileEntity implements IInventory {
 				if (mineral != null)
 					if (mineral.getItem() instanceof ItemDye) {
 						if (mineral.getItemDamage() == 4)
-							result = mod_RpgInventory.recipes
+							result = MoldRecipes
 									.getSmeltingResult(mineral.getItem(),
 											mold.getItem());
 					} else
-						result = mod_RpgInventory.recipes.getSmeltingResult(
+						result = MoldRecipes.getSmeltingResult(
 								mineral.getItem(), mold.getItem());
 
 			}
@@ -275,11 +274,11 @@ public class TEMold extends TileEntity implements IInventory {
 				mineral = moldforgeItemStacks[3];
 			}
 
-			ItemStack stack = mod_RpgInventory.recipes.getSmeltingResult(
+			ItemStack stack = MoldRecipes.getSmeltingResult(
 					mineral.getItem(), mold.getItem());
 
 			if (stack == null)
-				stack = mod_RpgInventory.recipes.getSmeltingResult(
+				stack = MoldRecipes.getSmeltingResult(
 						mineral.getItem(), mold.getItem());
 
 			if (moldforgeItemStacks[4] == null)

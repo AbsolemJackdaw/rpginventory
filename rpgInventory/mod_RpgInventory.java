@@ -11,15 +11,12 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.block.BlockForge;
-import rpgInventory.block.te.MoldRecipes;
 import rpgInventory.block.te.TEMold;
 import rpgInventory.gui.RpgInventoryTab;
 import rpgInventory.handlers.ClientTickHandler;
@@ -45,13 +42,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = mod_RpgInventory.name, name = mod_RpgInventory.ID, version = mod_RpgInventory.version)
-// @NetworkMod(clientSideRequired = true, serverSideRequired = true,
-// clientPacketHandlerSpec =
-// @SidedPacketHandler(channels = {"RpgInv"}, packetHandler =
-// RpgPacketHandler.class),
-// serverPacketHandlerSpec =
-// @SidedPacketHandler(channels = {"RpgInv"}, packetHandler =
-// RpgPacketHandler.class))
 public class mod_RpgInventory {
 
 	public static class ITEMTYPE {
@@ -63,8 +53,6 @@ public class mod_RpgInventory {
 		public static final int RING = 4;
 		public static final int CRYSTAL = 5;
 	}
-
-	public static MoldRecipes recipes;
 
 	public static final String name = "rpginventorymod";
 	public static final String ID = "Rpg Inventory";
@@ -83,12 +71,12 @@ public class mod_RpgInventory {
 	public static Item
 	/* ====jewels==== */
 	neckgold, neckdia, neckem, necklap, glovesbutter, glovesdia, glovesem,
-			gloveslap, ringgold, ringdia, ringem, ringlap,
-			/* ====cloaks==== */
-			cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen,
-			cloakBlue,
-			/* ====molds==== */
-			colmold, ringmold, wantmold;
+	gloveslap, ringgold, ringdia, ringem, ringlap,
+	/* ====cloaks==== */
+	cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen,
+	cloakBlue,
+	/* ====molds==== */
+	colmold, ringmold, wantmold;
 
 	public Item[] allItems;
 
@@ -157,7 +145,8 @@ public class mod_RpgInventory {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 
-		recipes = new MoldRecipes();
+		ToLoad.loadMoldRecipes();
+		ToLoad.loadGameRecipes();
 
 		// PIPELINE.initialise();
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("RpgInv");
@@ -183,36 +172,6 @@ public class mod_RpgInventory {
 				"Gloves Mold");
 
 		GameRegistry.registerTileEntity(TEMold.class, "temold");
-
-		// CLOAK
-		GameRegistry.addRecipe(new ItemStack(cloak, 1), new Object[] { "SS",
-				"II", "II", 'I', Blocks.wool, 'S', Items.string });
-		GameRegistry.addRecipe(new ItemStack(cloakI, 1), new Object[] { "PPP",
-				"PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.potionitem, 1, 8206) });
-		GameRegistry.addRecipe(new ItemStack(cloakI, 1), new Object[] { "PPP",
-				"PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.potionitem, 1, 8270) });
-
-		GameRegistry.addRecipe(new ItemStack(cloakRed, 1), new Object[] {
-				"PPP", "PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.dye, 1, 1) });
-		GameRegistry.addRecipe(new ItemStack(cloakYellow, 1), new Object[] {
-				"PPP", "PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.dye, 1, 11) });
-		GameRegistry.addRecipe(new ItemStack(cloakGreen, 1), new Object[] {
-				"PPP", "PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.dye, 1, 2) });
-		GameRegistry.addRecipe(new ItemStack(cloakBlue, 1), new Object[] {
-				"PPP", "PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.dye, 1, 12) });
-		GameRegistry.addRecipe(new ItemStack(cloakSub, 1), new Object[] {
-				"PPP", "PCP", "PPP", 'C', cloak, 'P',
-				new ItemStack(Items.dye, 1, 0) });
-
-		GameRegistry.addRecipe(new ItemStack(forgeBlock, 1), new Object[] {
-				"BBB", "BOB", "BBB", 'B', Blocks.brick_block, 'O',
-				Blocks.obsidian });
 
 		// DONE ?
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
@@ -266,13 +225,13 @@ public class mod_RpgInventory {
 				.setCreativeTab(tab);
 
 		ringgold = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "")
-				.setUnlocalizedName("ringGold").setCreativeTab(tab);
+		.setUnlocalizedName("ringGold").setCreativeTab(tab);
 		ringdia = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "")
-				.setUnlocalizedName("ringDia").setCreativeTab(tab);
+		.setUnlocalizedName("ringDia").setCreativeTab(tab);
 		ringem = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "")
-				.setUnlocalizedName("ringEm").setCreativeTab(tab);
+		.setUnlocalizedName("ringEm").setCreativeTab(tab);
 		ringlap = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "")
-				.setUnlocalizedName("ringLap").setCreativeTab(tab);
+		.setUnlocalizedName("ringLap").setCreativeTab(tab);
 
 		glovesbutter = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, "",
 				"subaraki:jewels/Glove.png").setUnlocalizedName("gloveGold")
@@ -341,18 +300,13 @@ public class mod_RpgInventory {
 						+ itemNameCropped);
 
 				GameRegistry
-						.registerItem(allItems[i],
-								allItems[i].getUnlocalizedName(),
-								mod_RpgInventory.name);
+				.registerItem(allItems[i],
+						allItems[i].getUnlocalizedName(),
+						mod_RpgInventory.name);
 
 			} else
 				System.out.println("Item is null !" + i);
 	}
-
-	// @SideOnly(Side.CLIENT)
-	// private void registerClientEvents(){
-	// MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
-	// }
 
 	@EventHandler
 	public void serverLoad(FMLServerStartingEvent e) {
