@@ -3,6 +3,7 @@ package rpgInventory;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import rpgInventory.block.te.MoldRecipes;
 import rpgInventory.block.te.slot.SlotMineral;
@@ -13,7 +14,12 @@ public class ToLoad {
 
 	public static void loadMoldRecipes(){
 
-
+		RpgRegistry.addFuel(new ItemStack(Items.coal), 100);
+		RpgRegistry.addFuel(new ItemStack(Items.lava_bucket), 3200);
+		RpgRegistry.addFuel(new ItemStack(Items.blaze_rod), 1600);
+		RpgRegistry.addFuel(new ItemStack(Blocks.coal_block), 800);
+		
+		
 		RpgRegistry.addForgeMoldMineral(Items.apple);
 
 		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.ringmold, Items.gold_ingot, Blocks.gold_block, new ItemStack(mod_RpgInventory.ringgold));
@@ -32,6 +38,16 @@ public class ToLoad {
 		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.wantmold, Items.emerald,Blocks.gold_block, new ItemStack(mod_RpgInventory.glovesem));
 
 		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.colmold, Items.apple, Blocks.gold_block, new ItemStack(Items.golden_apple));	
+		
+		
+		RpgRegistry.addCatalistBlock(Blocks.iron_block);
+		RpgRegistry.addForgeMoldMineral(Item.getItemFromBlock(Blocks.coal_block));
+		
+		RpgRegistry.addForgeMoldRecipe(mod_RpgInventory.glovesbutter, Item.getItemFromBlock(Blocks.coal_block), Blocks.iron_block, new ItemStack(mod_RpgInventory.wantmold));
+		RpgRegistry.addForgeMoldRecipe(mod_RpgInventory.ringgold, Item.getItemFromBlock(Blocks.coal_block), Blocks.iron_block, new ItemStack(mod_RpgInventory.ringmold));
+		RpgRegistry.addForgeMoldRecipe(mod_RpgInventory.neckgold, Item.getItemFromBlock(Blocks.coal_block), Blocks.iron_block, new ItemStack(mod_RpgInventory.colmold));
+
+		
 	}
 
 

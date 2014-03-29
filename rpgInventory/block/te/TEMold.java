@@ -1,47 +1,78 @@
 package rpgInventory.block.te;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import addonBasic.items.ItemRpgInventoryItem;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import rpgInventory.mod_RpgInventory;
 import rpgInventory.block.BlockForge;
 import rpgInventory.item.ItemMold;
+import rpgInventory.item.armor.ItemRpgInvArmor;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TEMold extends TileEntity implements IInventory {
+
+
+	private static Map<Item,Integer> toBurn = new HashMap<Item, Integer>();
+	private static Map<Block,Integer> BlocktoBurn = new HashMap<Block, Integer>();
+
+	public static void addFuelBlock(Block b, int time){
+		for(Block c : BlocktoBurn.keySet()){
+			if(BlocktoBurn.containsKey(c))
+				return;
+		}
+		BlocktoBurn.put(b, time);
+	}
+
+	public static void addFuelItem(Item i, int time){
+		for(Item c : toBurn.keySet()){
+			if(toBurn.containsKey(i))
+				return;
+		}
+		toBurn.put(i, time);
+	}
 
 	public static int getItemTime(ItemStack par0ItemStack) {
 		if (par0ItemStack == null)
 			return 0;
 		else {
 			Item var1 = Items.apple; // making sure its not null
-			Block var2 = Blocks.stone;
 
 			if (par0ItemStack.getItem() != null)
 				var1 = par0ItemStack.getItem();
-			else
-				var2 = ((ItemBlock) par0ItemStack.getItem()).field_150939_a;
 
-			if (var1 == Items.coal)
-				return 100;
-			if (var1 == Items.lava_bucket)
-				return 3200;
-			if (var1 == Items.blaze_rod)
-				return 1600;
+			for(Item i : toBurn.keySet()){
+				if(var1 == i){
+					return toBurn.get(i);
+				}
+			}
+			for(Block b : BlocktoBurn.keySet()){
+				if(var1 == Item.getItemFromBlock(b)){
+					return toBurn.get(b);
+				}
+			}
 
-			if (var2 == Blocks.coal_block)
-				return 1600;
+			//			if (var1 == Items.coal)
+			//				return 100;
+			//			if (var1 == Items.lava_bucket)
+			//				return 3200;
+			//			if (var1 == Items.blaze_rod)
+			//				return 1600;
+			//			if (var1 == Item.getItemFromBlock(Blocks.coal_block))
+			//				return 800;
 
-			return GameRegistry.getFuelValue(par0ItemStack);
+			return 0;
 		}
 	}
 
@@ -128,12 +159,12 @@ public class TEMold extends TileEntity implements IInventory {
 				mold = moldforgeItemStacks[2];
 				mineral = moldforgeItemStacks[3];
 				block = moldforgeItemStacks[1];
-						if (mineral != null)
-							if (mineral.getItem() instanceof ItemDye) {
-								if (mineral.getItemDamage() == 4)
-									result = MoldRecipes.getSmeltingResult(mineral.getItem(),mold.getItem(), Block.getBlockFromItem(block.getItem()));
-							} else
-								result = MoldRecipes.getSmeltingResult(mineral.getItem(), mold.getItem(), Block.getBlockFromItem(block.getItem()));
+				if (mineral != null)
+					if (mineral.getItem() instanceof ItemDye) {
+						if (mineral.getItemDamage() == 4)
+							result = MoldRecipes.getSmeltingResult(mineral.getItem(),mold.getItem(), Block.getBlockFromItem(block.getItem()));
+					} else
+						result = MoldRecipes.getSmeltingResult(mineral.getItem(), mold.getItem(), Block.getBlockFromItem(block.getItem()));
 			}
 
 			if ((result == null) && (moldforgeItemStacks[2] != null)
@@ -180,14 +211,15 @@ public class TEMold extends TileEntity implements IInventory {
 	public ItemStack decrStackSize(int slot, int amt) {
 		ItemStack stack = getStackInSlot(slot);
 
-		if (stack != null)
-			if (stack.stackSize <= amt)
+		if (stack != null){
+			if(stack.stackSize <= amt)
 				setInventorySlotContents(slot, null);
 			else {
 				stack = stack.splitStack(amt);
 				if (stack.stackSize == 0)
 					setInventorySlotContents(slot, null);
 			}
+		}
 		return stack;
 	}
 
@@ -295,8 +327,8 @@ public class TEMold extends TileEntity implements IInventory {
 			else
 				moldforgeItemStacks[3] = null;
 			if (moldforgeItemStacks[2].stackSize > 1)
-				--moldforgeItemStacks[2].stackSize;
-			else
+					--moldforgeItemStacks[2].stackSize;
+			else if(!(moldforgeItemStacks[2].getItem() instanceof ItemRpgInvArmor))
 				moldforgeItemStacks[2] = null;
 			if (moldforgeItemStacks[1].stackSize > 1)
 				--moldforgeItemStacks[1].stackSize;

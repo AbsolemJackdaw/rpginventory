@@ -4,10 +4,12 @@
  */
 package rpgInventory.block.te.slot;
 
+import addonBasic.items.ItemRpgInventoryItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import rpgInventory.item.ItemMold;
+import rpgInventory.item.armor.ItemRpgInvArmor;
 
 /**
  * 
@@ -27,7 +29,7 @@ public class MoldSlot extends Slot {
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack) {
 		if (par1ItemStack != null)
-			if (par1ItemStack.getItem() instanceof ItemMold)
+			if (par1ItemStack.getItem() instanceof ItemMold || par1ItemStack.getItem() instanceof ItemRpgInvArmor)
 				return true;
 		return false;
 	}

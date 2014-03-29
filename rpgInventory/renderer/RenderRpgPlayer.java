@@ -3,14 +3,20 @@ package rpgInventory.renderer;
 import java.lang.reflect.Field;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 
 import org.lwjgl.opengl.GL11;
@@ -35,6 +41,96 @@ public class RenderRpgPlayer {
 	ModelBiped main;
 
 	float rotation = 0;
+
+
+	@SubscribeEvent
+	public void PlayerFPRenderer(RenderHandEvent e){
+
+		ItemStack shield = PlayerRpgInventory.get(mc.thePlayer).getShield();
+		if (shield != null){
+
+			float par1 = e.partialTicks;
+			int par2 = e.renderPass;
+
+			if (mc.entityRenderer.debugViewDirection <= 0)
+			{
+				GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
+				GL11.glMatrixMode(GL11.GL_PROJECTION);
+				GL11.glLoadIdentity();
+				float f1 = 0.07F;
+
+				if (this.mc.gameSettings.anaglyph)
+				{
+					GL11.glTranslatef((float)(-(par2 * 2 - 1)) * f1, 0.0F, 0.0F);
+				}
+
+				GL11.glMatrixMode(GL11.GL_MODELVIEW);
+				GL11.glLoadIdentity();
+
+				if (this.mc.gameSettings.anaglyph)
+				{
+					GL11.glTranslatef((float)(par2 * 2 - 1) * 0.1F, 0.0F, 0.0F);
+				}
+
+				GL11.glPushMatrix();
+				hurtCameraEffect(par1);
+
+				if (this.mc.gameSettings.viewBobbing)
+				{
+					setupViewBobbing(par1);
+				}
+
+				if (this.mc.gameSettings.thirdPersonView == 0 && !this.mc.renderViewEntity.isPlayerSleeping() && !this.mc.gameSettings.hideGUI && !this.mc.playerController.enableEverythingIsScrewedUpMode())
+				{
+					mc.entityRenderer.enableLightmap((double)par1);
+					mc.renderEngine.bindTexture(((ItemRpgInvArmor) shield.getItem()).getTexture());
+					renderFPShield((ItemRpgInvArmor) shield.getItem(), par1);
+					mc.entityRenderer.disableLightmap((double)par1);
+				}
+
+				GL11.glPopMatrix();
+			}
+		}
+	}
+
+	private void hurtCameraEffect(float par1)
+	{
+		EntityLivingBase entitylivingbase = this.mc.renderViewEntity;
+		float f1 = (float)entitylivingbase.hurtTime - par1;
+		float f2;
+
+		if (entitylivingbase.getHealth() <= 0.0F)
+		{
+			f2 = (float)entitylivingbase.deathTime + par1;
+			GL11.glRotatef(40.0F - 8000.0F / (f2 + 200.0F), 0.0F, 0.0F, 1.0F);
+		}
+
+		if (f1 >= 0.0F)
+		{
+			f1 /= (float)entitylivingbase.maxHurtTime;
+			f1 = MathHelper.sin(f1 * f1 * f1 * f1 * (float)Math.PI);
+			f2 = entitylivingbase.attackedAtYaw;
+			GL11.glRotatef(-f2, 0.0F, 1.0F, 0.0F);
+			GL11.glRotatef(-f1 * 14.0F, 0.0F, 0.0F, 1.0F);
+			GL11.glRotatef(f2, 0.0F, 1.0F, 0.0F);
+		}
+	}
+
+	private void setupViewBobbing(float par1)
+	{
+		if (this.mc.renderViewEntity instanceof EntityPlayer)
+		{
+			EntityPlayer entityplayer = (EntityPlayer)this.mc.renderViewEntity;
+			float f1 = entityplayer.distanceWalkedModified - entityplayer.prevDistanceWalkedModified;
+			float f2 = -(entityplayer.distanceWalkedModified + f1 * par1);
+			float f3 = entityplayer.prevCameraYaw + (entityplayer.cameraYaw - entityplayer.prevCameraYaw) * par1;
+			float f4 = entityplayer.prevCameraPitch + (entityplayer.cameraPitch - entityplayer.prevCameraPitch) * par1;
+			GL11.glTranslatef(MathHelper.sin(f2 * (float)Math.PI) * f3 * 0.5F, -Math.abs(MathHelper.cos(f2 * (float)Math.PI) * f3), 0.0F);
+			GL11.glRotatef(MathHelper.sin(f2 * (float)Math.PI) * f3 * 3.0F, 0.0F, 0.0F, 1.0F);
+			GL11.glRotatef(Math.abs(MathHelper.cos(f2 * (float)Math.PI - 0.2F) * f3) * 5.0F, 1.0F, 0.0F, 0.0F);
+			GL11.glRotatef(f4, 1.0F, 0.0F, 0.0F);
+		}
+	}
 
 	@SubscribeEvent
 	public void PlayerPrerenderer(RenderPlayerEvent.Post evt) {
@@ -68,19 +164,19 @@ public class RenderRpgPlayer {
 		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
 			System.out
-					.println("Something went wrong accesing the modelbipedmain ! Index 1");
+			.println("Something went wrong accesing the modelbipedmain ! Index 1");
 		} catch (SecurityException e) {
 			e.printStackTrace();
 			System.out
-					.println("Something went wrong accesing the modelbipedmain ! Index 2");
+			.println("Something went wrong accesing the modelbipedmain ! Index 2");
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			System.out
-					.println("Something went wrong accesing the modelbipedmain ! Index 3");
+			.println("Something went wrong accesing the modelbipedmain ! Index 3");
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 			System.out
-					.println("Something went wrong accesing the modelbipedmain ! Index 4");
+			.println("Something went wrong accesing the modelbipedmain ! Index 4");
 		}
 
 		// all fields get set to public when
@@ -108,16 +204,22 @@ public class RenderRpgPlayer {
 			renderNecklace(evt.entityPlayer);
 		}
 
+
 		/* ===== RENDERING SHIELDS===== */
 		ItemStack shield = PlayerRpgInventory.get(player).getShield();
 		if (shield != null) {
+
+
 			mc.renderEngine.bindTexture(((ItemRpgInvArmor) shield.getItem())
 					.getTexture());
+
 
 			renderShield((ItemRpgInvArmor) shield.getItem());
 		}
 
 	}
+
+
 
 	private void rendercape(EntityPlayer player, ItemStack cloak,
 			float partialTick) {
@@ -234,7 +336,7 @@ public class RenderRpgPlayer {
 		if (player == Minecraft.getMinecraft().thePlayer) {
 			if (!(((Minecraft.getMinecraft().currentScreen instanceof GuiInventory)
 					|| (Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) || (Minecraft
-						.getMinecraft().currentScreen instanceof RpgGui)) && (RenderManager.instance.playerViewY == 180.0F))) {
+							.getMinecraft().currentScreen instanceof RpgGui)) && (RenderManager.instance.playerViewY == 180.0F))) {
 
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glDisable(GL11.GL_LIGHTING);
@@ -294,6 +396,58 @@ public class RenderRpgPlayer {
 		} catch (Exception e) {
 		}
 
+		armor.getShieldModel().renderShield(0.0625f);
+		GL11.glPopMatrix();
+	}
+
+	float i = 0;
+	private void renderFPShield(ItemRpgInvArmor armor, float par1) {
+		GL11.glPushMatrix();
+
+		//		if(main != null)
+		//			for (int i = 0; i < armor.getShieldModel().parts.size(); i++) {
+		//				armor.getShieldModel().parts.get(i).rotateAngleX = main.bipedLeftArm.rotateAngleX;
+		//				armor.getShieldModel().parts.get(i).rotateAngleY = main.bipedLeftArm.rotateAngleY;
+		//				armor.getShieldModel().parts.get(i).rotateAngleZ = main.bipedLeftArm.rotateAngleZ;
+		//				armor.getShieldModel().parts.get(i).rotationPointX = main.bipedLeftArm.rotationPointX;
+		//				armor.getShieldModel().parts.get(i).rotationPointY = main.bipedLeftArm.rotationPointY;
+		//				armor.getShieldModel().parts.get(i).rotationPointZ = main.bipedLeftArm.rotationPointZ;
+		//			}
+		//		try {
+		//			if (armor.shieldClass().contains("vanilla"))
+		//				armor.getShieldModel().parts.get(64 - 1).rotateAngleZ = main.bipedLeftArm.rotateAngleZ + 0.356f;
+		//		} catch (Exception e) {
+		//		} mains is always null at this point :/
+
+
+		float f1 = 1.0f;
+		EntityClientPlayerMP entityclientplayermp = this.mc.thePlayer;
+		float f2 = entityclientplayermp.prevRotationPitch + (entityclientplayermp.rotationPitch - entityclientplayermp.prevRotationPitch) * par1;
+		GL11.glPushMatrix();
+		GL11.glRotatef(f2, 1.0F, 0.0F, 0.0F);
+		GL11.glRotatef(entityclientplayermp.prevRotationYaw + (entityclientplayermp.rotationYaw - entityclientplayermp.prevRotationYaw) * par1, 0.0F, 1.0F, 0.0F);
+		RenderHelper.enableStandardItemLighting();
+		GL11.glPopMatrix();
+		EntityPlayerSP entityplayersp = (EntityPlayerSP)entityclientplayermp;
+		float f3 = entityplayersp.prevRenderArmPitch + (entityplayersp.renderArmPitch - entityplayersp.prevRenderArmPitch) * par1;
+		float f4 = entityplayersp.prevRenderArmYaw + (entityplayersp.renderArmYaw - entityplayersp.prevRenderArmYaw) * par1;
+		GL11.glRotatef((entityclientplayermp.rotationPitch - f3) * 0.1F, 1.0F, 0.0F, 0.0F);
+		GL11.glRotatef((entityclientplayermp.rotationYaw - f4) * 0.1F, 0.0F, 1.0F, 0.0F);
+		
+		
+		float f = 0.8f;
+		GL11.glScalef(f, f+0.5f, f);
+
+		if(i < 360){
+			GL11.glRotatef(-90, 0, 1, 0);
+			GL11.glRotatef(180, 1, 0, 0);
+			GL11.glRotatef(0, 0, 0, 1);
+		}
+		else i =0f;
+
+		//		GL11.glRotatef(180f, 1, 0, 0);
+
+		GL11.glTranslated(0f, 0.5f, -1.1f);
 		armor.getShieldModel().renderShield(0.0625f);
 		GL11.glPopMatrix();
 	}

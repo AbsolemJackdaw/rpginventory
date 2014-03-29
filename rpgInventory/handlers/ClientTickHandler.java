@@ -10,10 +10,14 @@ import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+
+import org.lwjgl.opengl.GL11;
+
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.ButtonInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
+import rpgInventory.models.MainShield;
 import rpgInventory.utils.AbstractArmor;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -44,13 +48,13 @@ public class ClientTickHandler /* implements ITickHandler */{
 						mod_RpgInventory.playerClass = "none";
 					}
 				} else // if there is one item that is no AbstractArmor, skip
-						// the
-				// setting of the playerclass
-				if (!(is.getItem() instanceof AbstractArmor)
-						&& (PlayerRpgInventory.get(player).getShield() == null)) {
-					skip = true;
-					mod_RpgInventory.playerClass = "none";
-				}
+					// the
+					// setting of the playerclass
+					if (!(is.getItem() instanceof AbstractArmor)
+							&& (PlayerRpgInventory.get(player).getShield() == null)) {
+						skip = true;
+						mod_RpgInventory.playerClass = "none";
+					}
 			if (!skip)
 				if ((player.inventory.getStackInSlot(HELM) != null)
 						&& ((player.inventory.getStackInSlot(HELM).getItem()) instanceof AbstractArmor)
@@ -72,14 +76,14 @@ public class ClientTickHandler /* implements ITickHandler */{
 								.getShield().getItem()).boundArmorClass()
 								.equals(classname))
 							mod_RpgInventory.playerClass = classname
-									+ ((ItemRpgInvArmor) PlayerRpgInventory
-											.get(player).getShield().getItem())
-											.shieldClass();
+							+ ((ItemRpgInvArmor) PlayerRpgInventory
+									.get(player).getShield().getItem())
+									.shieldClass();
 				} else {
 					mod_RpgInventory.playerClass = "none";
 					if (((ItemRpgInvArmor) PlayerRpgInventory.get(player)
 							.getShield().getItem()).boundArmorClass().equals(
-							"none"))
+									"none"))
 						if (PlayerRpgInventory.get(player).getShield() != null)
 							mod_RpgInventory.playerClass = ((ItemRpgInvArmor) PlayerRpgInventory
 									.get(player).getShield().getItem())
@@ -123,16 +127,16 @@ public class ClientTickHandler /* implements ITickHandler */{
 								int posY = (Minecraft.getMinecraft().currentScreen.height) / 2;
 								currentButtons.add(new ButtonInventory(
 										currentButtons.size() + 1, posX
-												- offsetx, posY + offsety, 80,
+										- offsetx, posY + offsety, 80,
 										20, "Rpg Inventory"));
 								currentButtons.add(new ButtonInventory(
 										currentButtons.size() + 1,
 										((posX - offsetx) + 80 + 15), posY
-												+ offsety, 80, 20, "Close"));
+										+ offsety, 80, 20, "Close"));
 							}
 						} catch (Exception e) {
 							System.err
-									.println("Severe error, please report this to the mod author:");
+							.println("Severe error, please report this to the mod author:");
 							System.err.println(e);
 						}
 					}
@@ -141,5 +145,35 @@ public class ClientTickHandler /* implements ITickHandler */{
 				added = false;
 		} else
 			added = false;
+
+		/*Rendering first person shields ! :D*/
+		try {
+//			EntityPlayer p = Minecraft.getMinecraft().thePlayer;
+//			PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+//			Minecraft mc = Minecraft.getMinecraft();
+//            if (mc.gameSettings.thirdPersonView == 0 && !mc.renderViewEntity.isPlayerSleeping() && !mc.gameSettings.hideGUI
+//            		&& !mc.playerController.enableEverythingIsScrewedUpMode()){
+//
+//				ItemRpgInvArmor shield = null;
+//				if(inv.getShield() != null){
+//					shield = (ItemRpgInvArmor) inv.getShield().getItem();
+//					MainShield model = shield.getShieldModel();	
+//					if(model != null){
+////						System.out.println("rendering");
+//						GL11.glPushMatrix();
+//						GL11.glScalef(20f, 20f, 20f);
+////						GL11.glRotatef(90f, 1, 0, 0);
+//						GL11.glTranslatef(-10f, 0f, 0f);
+//						model.renderShield(0.0625f);
+//						GL11.glPopMatrix();
+//					}
+//				}
+//			}
+
+
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 }

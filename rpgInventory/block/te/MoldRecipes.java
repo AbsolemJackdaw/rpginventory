@@ -6,20 +6,19 @@ import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import rpgInventory.item.ItemMold;
 
 public class MoldRecipes {
 
-	private static Map<Item, ItemStack> necklaceCombination = new HashMap<Item, ItemStack>();
-	private static Map<Item, ItemStack> gloveCombination = new HashMap<Item, ItemStack>();
-	private static Map<Item, ItemStack> ringCombination = new HashMap<Item, ItemStack>();
+//	private static Map<Item, ItemStack> necklaceCombination = new HashMap<Item, ItemStack>();
+//	private static Map<Item, ItemStack> gloveCombination = new HashMap<Item, ItemStack>();
+//	private static Map<Item, ItemStack> ringCombination = new HashMap<Item, ItemStack>();
 
 
 	//ItemStack = result
 	//Item paired with hashmap = mold
 	//Block = Block to be molten
 	//Item paired with block is the mineral
-	public static Map<HashMap<ItemMold,HashMap<Block,Item>>, ItemStack> test = new HashMap<HashMap<ItemMold, HashMap<Block,Item>>, ItemStack>();
+	public static Map<HashMap<Item,HashMap<Block,Item>>, ItemStack> test = new HashMap<HashMap<Item, HashMap<Block,Item>>, ItemStack>();
 	
 	// private Map exp = new HashMap();
 
@@ -27,13 +26,13 @@ public class MoldRecipes {
 		
 	}
 	
-	public static void addRecipe(ItemMold mold, Item mineral, ItemStack result, Block catalist){
+	public static void addRecipe(Item mold, Item mineral, ItemStack result, Block catalist){
 		Map<Block,Item> a = new HashMap<Block, Item>();
-		Map<ItemMold,HashMap<Block,Item>> b = new HashMap<ItemMold,HashMap<Block,Item>>();
+		Map<Item,HashMap<Block,Item>> b = new HashMap<Item,HashMap<Block,Item>>();
 		a.put(catalist, mineral);
 		b.put(mold, (HashMap<Block, Item>) a);
 		
-		test.put((HashMap<ItemMold, HashMap<Block, Item>>) b, result);
+		test.put((HashMap<Item, HashMap<Block, Item>>) b, result);
 	}
 	
 	public static ItemStack getSmeltingResult(Item mineral, Item mold, Block catalist){
