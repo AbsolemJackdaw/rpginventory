@@ -27,11 +27,6 @@ public class ClientTickHandler /* implements ITickHandler */{
 	public static final int CHEST = 38;
 	public static final int HELM = 39;
 
-	// @Override
-	// public String getLabel() {
-	// return "rpgInventory";
-	// }
-
 	@SubscribeEvent
 	public void tickEnd(TickEvent.ClientTickEvent ev) {
 
@@ -90,6 +85,7 @@ public class ClientTickHandler /* implements ITickHandler */{
 									.get(player).getShield().getItem())
 									.shieldClass();
 				}
+			
 		}
 
 		// This will only inject our buttons into the existing GuiInventory
@@ -125,14 +121,8 @@ public class ClientTickHandler /* implements ITickHandler */{
 								int offsety = 93;
 								int posX = (Minecraft.getMinecraft().currentScreen.width) / 2;
 								int posY = (Minecraft.getMinecraft().currentScreen.height) / 2;
-								currentButtons.add(new ButtonInventory(
-										currentButtons.size() + 1, posX
-												- offsetx, posY + offsety,
-										"Rpg Inventory"));
-								currentButtons.add(new ButtonInventory(
-										currentButtons.size() + 1,
-										(posX - offsetx) + 80 + 15, posY
-												+ offsety, "Close"));
+								currentButtons.add(new ButtonInventory(currentButtons.size() + 1, posX- offsetx, posY + offsety, 80, 20, "Rpg Inventory"));
+								currentButtons.add(new ButtonInventory(currentButtons.size() + 1,((posX - offsetx) + 80 + 15), posY+ offsety,80,20, "Close"));
 							}
 						} catch (Exception e) {
 							System.err
@@ -146,14 +136,4 @@ public class ClientTickHandler /* implements ITickHandler */{
 		} else
 			added = false;
 	}
-
-	// old code. preserve for later hints tips and tricks
-	// @Override
-	// public EnumSet<TickType> ticks() {
-	// return EnumSet.of(TickType.CLIENT);
-	// }
-	//
-	// @Override
-	// public void tickStart(EnumSet<TickType> type, Object... tickData) {
-	// }
 }

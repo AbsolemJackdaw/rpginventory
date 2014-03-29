@@ -14,6 +14,8 @@ public class BeastMasterEvent {
 
 	@SubscribeEvent
 	public void DeathEvent(LivingDeathEvent evt) {
+//		System.out.println("events");
+
 		/* ====PET EXP==== */
 		try {
 			if ((!evt.entityLiving.worldObj.isRemote)

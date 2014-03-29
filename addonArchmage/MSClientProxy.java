@@ -3,10 +3,10 @@ package addonArchmage;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.models.shields.bookMage;
 import rpgInventory.renderer.items.shields.BookRenderer;
 import addonArchmage.weapons.RenderElementalBlock;
 import addonBasic.models.item.ModelMageArmor;
+import addonBasic.models.item.bookMage;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class MSClientProxy extends MSCommonProxy {

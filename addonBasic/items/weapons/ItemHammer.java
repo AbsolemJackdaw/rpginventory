@@ -2,6 +2,8 @@ package addonBasic.items.weapons;
 
 import java.util.Random;
 
+import addonBasic.mod_addonBase;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -28,9 +30,9 @@ public class ItemHammer extends ItemRpgSword {
 		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 
 		if (mod_RpgInventory.playerClass
-				.contains(mod_RpgInventory.CLASSBERSERKER))
+				.contains(mod_addonBase.CLASSBERSERKER))
 			if (mod_RpgInventory.playerClass
-					.contains(mod_RpgInventory.CLASSBERSERKERSHIELD)) {
+					.contains(mod_addonBase.CLASSBERSERKERSHIELD)) {
 				if ((player.getFoodStats().getFoodLevel() < 6)
 						|| (player.getHealth() < 6))
 					player.addPotionEffect(new PotionEffect(

@@ -15,7 +15,7 @@ public class ItemBerserkerArmor extends AbstractArmor {
 
 	@Override
 	public String armorClassName() {
-		return mod_RpgInventory.CLASSBERSERKER;
+		return mod_addonBase.CLASSBERSERKER;
 	}
 
 	@Override

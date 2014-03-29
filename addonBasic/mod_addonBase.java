@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.item.ItemRageFood;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import addonBasic.items.ItemRpg;
 import addonBasic.items.armor.ItemArcherArmor;
@@ -21,13 +20,14 @@ import addonBasic.items.weapons.ItemClaymore;
 import addonBasic.items.weapons.ItemHammer;
 import addonBasic.items.weapons.ItemMageSphere;
 import addonBasic.items.weapons.ItemStaf;
+import addonDread.items.ItemRageFood;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -53,6 +53,14 @@ public class mod_addonBase {
 
 	}
 
+	
+	public static String CLASSARCHER = "archer";
+	public static String CLASSBERSERKER = "berserker";
+	public static String CLASSMAGE = "basicMage";
+	public static String CLASSARCHERSHIELD = "shieldedArcher";
+	public static String CLASSBERSERKERSHIELD = "shieldedBerserker";
+	public static String CLASSMAGESHIELD = "shieldedBasicMage";
+	
 	public static final String id = "RpgBase";
 
 	public static final String name = "Berserker, Mage and Archer Patch";
@@ -97,38 +105,6 @@ public class mod_addonBase {
 	public void load(FMLInitializationEvent evt) {
 
 		proxy.registerRenderInformation();
-
-		LanguageRegistry.addName(archerShield, "Small Archer Shield");
-		LanguageRegistry.addName(berserkerShield, "Berserker's Iron Thorn");
-		LanguageRegistry.addName(talisman, "Aura Shield");
-
-		LanguageRegistry.addName(magehood, "Mage Hood");
-		LanguageRegistry.addName(magegown, "Mage Gown");
-		LanguageRegistry.addName(magepants, "Mage Under Gown");
-		LanguageRegistry.addName(mageboots, "Mage Shoes");
-
-		LanguageRegistry.addName(archerhood, "Archer Hood");
-		LanguageRegistry.addName(archerchest, "Archer Chest");
-		LanguageRegistry.addName(archerpants, "Archer Leggings");
-		LanguageRegistry.addName(archerboots, "Archer Boots");
-
-		LanguageRegistry.addName(berserkerHood, "Berserker's Head Protection");
-		LanguageRegistry.addName(berserkerChest, "Berserker's Body Protection");
-		LanguageRegistry.addName(berserkerLegs, "Berserker's Leg Protection");
-		LanguageRegistry.addName(berserkerBoots, "Berserker's Feet Protection");
-
-		LanguageRegistry.addName(wand, "Soul Sphere");
-		LanguageRegistry.addName(claymore, "Berserker Claymore");
-		LanguageRegistry.addName(elfbow, "Birch Bow");
-
-		LanguageRegistry.addName(animalskin, "Animal Skin");
-		LanguageRegistry.addName(tanHide, "Tanned Hide");
-		LanguageRegistry.addName(magecloth, "Mage Cloth");
-
-		LanguageRegistry.addName(wizardBook, "Wizard's Knowledge, Volume I");
-		LanguageRegistry.addName(hammer, "Rage Breaker");
-		LanguageRegistry.addName(staf, "Lunar Staff");
-		LanguageRegistry.addName(rageSeed, "Rage Seeds");
 
 		MinecraftForge.addGrassSeed(new ItemStack(rageSeed, 1), 1);
 
@@ -192,7 +168,9 @@ public class mod_addonBase {
 						this.recipePatterns[var4], 'X', var3 });
 			}
 		}
-
+		
+		FMLCommonHandler.instance().bus().register(new CommonTickHandler());
+		MinecraftForge.EVENT_BUS.register(new BaseaddonEventHooks());
 	}
 
 	@EventHandler

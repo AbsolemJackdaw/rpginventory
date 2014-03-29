@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import addonBasic.EntityHellArrow;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,7 +23,6 @@ import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.block.BlockForge;
 import rpgInventory.block.te.MoldRecipes;
 import rpgInventory.block.te.TEMold;
-import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.gui.RpgInventoryTab;
 import rpgInventory.handlers.ClientTickHandler;
 import rpgInventory.handlers.CommonTickHandler;
@@ -73,14 +74,6 @@ public class mod_RpgInventory {
 	public static final String ID = "Rpg Inventory";
 
 	protected static final String version = "1.7.2";
-	public static String CLASSARCHER = "archer";
-	public static String CLASSBERSERKER = "berserker";
-
-	public static String CLASSMAGE = "basicMage";
-	public static String CLASSARCHERSHIELD = "shieldedArcher";
-	public static String CLASSBERSERKERSHIELD = "shieldedBerserker";
-
-	public static String CLASSMAGESHIELD = "shieldedBasicMage";
 
 	public static String playerClass = "none";
 	public static mod_RpgInventory instance;
@@ -228,8 +221,8 @@ public class mod_RpgInventory {
 		// DONE ?
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
-		MinecraftForge.EVENT_BUS.register(new CommonTickHandler());
-		MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
+		FMLCommonHandler.instance().bus().register(new CommonTickHandler());
+		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 
 		FMLCommonHandler.instance().bus().register(new RPGKeyHandler());
 

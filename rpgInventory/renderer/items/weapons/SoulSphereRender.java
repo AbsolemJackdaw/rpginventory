@@ -9,6 +9,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import addonBasic.mod_addonBase;
+
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.models.weapons.ModelSoulSphere;
@@ -43,7 +45,7 @@ public class SoulSphereRender extends RpgItemRenderer {
 
 				if (mod_RpgInventory.playerClass.contains("archMage")
 						|| mod_RpgInventory.playerClass
-								.contains(mod_RpgInventory.CLASSMAGE)) {
+								.contains(mod_addonBase.CLASSMAGE)) {
 					swordmodel.renderFloatingShpere((Entity) data[1], turn,
 							0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 					swordmodel.renderFloatingShpere((Entity) data[1],
@@ -71,7 +73,7 @@ public class SoulSphereRender extends RpgItemRenderer {
 
 				if (mod_RpgInventory.playerClass.contains("archMage")
 						|| mod_RpgInventory.playerClass
-								.contains(mod_RpgInventory.CLASSMAGE)) {
+								.contains(mod_addonBase.CLASSMAGE)) {
 					swordmodel.renderFloatingShpere((Entity) data[1], turn,
 							0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 					swordmodel.renderFloatingShpere((Entity) data[1],

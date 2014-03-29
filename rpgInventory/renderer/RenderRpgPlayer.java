@@ -47,7 +47,8 @@ public class RenderRpgPlayer {
 				if (((ItemRpgInvArmor) shield.getItem()).shieldClass()
 						.toLowerCase().contains("archmage"))
 					renderMantle(evt.entityPlayer, 1);
-				if (((ItemRpgInvArmor) shield.getItem()).isMantle)
+				
+				if (((ItemRpgInvArmor) shield.getItem()).isMantle())
 					renderMantle(evt.entityPlayer, 0);
 			}
 	}

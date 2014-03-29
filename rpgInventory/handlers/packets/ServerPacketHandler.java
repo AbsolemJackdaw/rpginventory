@@ -5,16 +5,17 @@ import io.netty.buffer.ByteBufInputStream;
 
 import java.io.IOException;
 
+import addonBasic.packets.PacketArcher;
+import addonBasic.packets.PacketBerserker;
+import addonBasic.packets.PacketMageHeal;
+import addonBasic.packets.PacketMageVortex;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.oldpackets.PacketArcher;
-import rpgInventory.handlers.oldpackets.PacketBerserker;
-import rpgInventory.handlers.oldpackets.PacketMageHeal;
-import rpgInventory.handlers.oldpackets.PacketMageVortex;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.ByteBufUtils;

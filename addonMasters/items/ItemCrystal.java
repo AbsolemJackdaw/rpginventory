@@ -1,4 +1,4 @@
-package rpgInventory.item;
+package addonMasters.items;
 
 import java.util.List;
 
@@ -120,13 +120,5 @@ public class ItemCrystal extends ItemRpgInvArmor {
 	public Item setTextureName(String s) {
 		this.iconString = "rpginventorymod:petcrystal";
 		return this;
-	}
-	
-	String[] names = new String[]{"Pet", "Boar", "Spider","Bull"};
-	@Override
-	public String getUnlocalizedName(ItemStack par1ItemStack) {
-	
-		
-		return names[par1ItemStack.getItemDamage()] + super.getUnlocalizedName(par1ItemStack);
 	}
 }

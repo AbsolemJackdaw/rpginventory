@@ -1,8 +1,10 @@
-package rpgInventory.handlers.oldpackets;
+package addonBasic.packets;
 
 import io.netty.buffer.ByteBufInputStream;
 
 import java.util.List;
+
+import addonBasic.mod_addonBase;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,11 +38,11 @@ public class PacketMageHeal {
 				if ((item == null) || (var3 == null) || (var2 == null)
 						|| (var1 == null) || (var0 == null))
 					return;
-				if ((item.getItem() != mod_RpgInventory.staf)
-						|| (var3.getItem() != mod_RpgInventory.magehood)
-						|| (var2.getItem() != mod_RpgInventory.magegown)
-						|| (var1.getItem() != mod_RpgInventory.magepants)
-						|| (var0.getItem() != mod_RpgInventory.mageboots))
+				if ((item.getItem() != mod_addonBase.staf)
+						|| (var3.getItem() != mod_addonBase.magehood)
+						|| (var2.getItem() != mod_addonBase.magegown)
+						|| (var1.getItem() != mod_addonBase.magepants)
+						|| (var0.getItem() != mod_addonBase.mageboots))
 					return;
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(p

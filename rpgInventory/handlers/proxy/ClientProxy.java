@@ -17,9 +17,10 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.Sphere;
 
+import addonBasic.EntityHellArrow;
+
 import rpgInventory.CapeRenderer;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.gui.BookGui;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.ClientPacketHandler;
@@ -71,7 +72,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void openGUI(EntityPlayer p1, PlayerRpgInventory inv) {
 		Minecraft.getMinecraft().displayGuiScreen(
-				new rpgInventory.gui.pet.PetGui(p1, inv));
+				new addonMasters.PetGui(p1, inv));
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class ItemMageArmor extends AbstractArmor {
 
 	@Override
 	public String armorClassName() {
-		return mod_RpgInventory.CLASSMAGE;
+		return mod_addonBase.CLASSMAGE;
 	}
 
 	@Override

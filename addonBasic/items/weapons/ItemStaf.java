@@ -2,6 +2,8 @@ package addonBasic.items.weapons;
 
 import java.util.List;
 
+import addonBasic.mod_addonBase;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
@@ -50,7 +52,7 @@ public class ItemStaf extends ItemRpgSword {
 
 		// exception for archmage : this should be evaded any time, but I don't
 		// have a choice here.
-		if (mod_RpgInventory.playerClass.contains(mod_RpgInventory.CLASSMAGE)
+		if (mod_RpgInventory.playerClass.contains(mod_addonBase.CLASSMAGE)
 				|| mod_RpgInventory.playerClass.contains("archMage"))
 			p.setItemInUse(is, this.getMaxItemUseDuration(is));
 		return is;

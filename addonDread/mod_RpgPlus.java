@@ -16,8 +16,6 @@ import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.handlers.RPGEventHooks;
-import rpgInventory.richUtil.potions.DecomposePotion;
-import rpgInventory.richUtil.potions.MasochismPotion;
 import addonDread.items.ItemGrandSword;
 import addonDread.items.ItemNecroArmor;
 import addonDread.items.ItemNecroPaladinMats;
@@ -26,6 +24,9 @@ import addonDread.items.ItemPaladinArmor;
 import addonDread.items.ItemRpgInvArmorPlus;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
+import addonDread.richutils.potions.DecomposePotion;
+import addonDread.richutils.potions.MasochismPotion;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -148,7 +149,9 @@ public class mod_RpgPlus {
 		pala_steel.setCreativeTab(tab);
 
 		MinecraftForge.EVENT_BUS.register(new NecroPaladinEvents());
-
+		FMLCommonHandler.instance().bus().register(new CommonTickHandlerRpgPlus());
+		MinecraftForge.EVENT_BUS.register(new DreadEventHooks());
+		
 		// hack to increase the number of potion types allowed
 
 		if (Potion.potionTypes.length < 256) {

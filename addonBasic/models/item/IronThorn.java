@@ -1,5 +1,6 @@
-package rpgInventory.models.shields;
+package addonBasic.models.item;
 
+import rpgInventory.models.shields.MainShield;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 

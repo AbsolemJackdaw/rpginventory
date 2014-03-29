@@ -1,4 +1,4 @@
-package rpgInventory.item;
+package addonDread.items;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;

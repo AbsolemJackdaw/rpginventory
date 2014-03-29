@@ -10,27 +10,16 @@ public class CommonTickHandlerRpgPlus /* implements ITickHandler */{
 
 	public static HashMap<String, Integer> rpgPluscooldownMap = new HashMap();
 
-	// @Override
-	// public String getLabel() {
-	// return "RpgInventoryServ";
-	// }
-
 	@SubscribeEvent
 	public void tickEnd(TickEvent.ServerTickEvent ev) {
+
+		/*
+		 *Manage cooldown map
+		 *used for spawning minions 
+		 */
 		for (Entry<String, Integer> entry : rpgPluscooldownMap.entrySet())
 			if (entry.getValue() > 0)
 				entry.setValue(entry.getValue() - 1);
-	}
 
-	// /**
-	// * called upon player's death. Will drop Jewels in the world
-	// */
-	// @Override
-	// public EnumSet<TickType> ticks() {
-	// return EnumSet.of(TickType.SERVER);
-	// }
-	//
-	// @Override
-	// public void tickStart(EnumSet<TickType> type, Object... tickData) {
-	// }
+	}
 }

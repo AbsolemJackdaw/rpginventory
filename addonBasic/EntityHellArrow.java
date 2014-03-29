@@ -1,4 +1,4 @@
-package rpgInventory.entity;
+package addonBasic;
 
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.MathHelper;

@@ -1,8 +1,10 @@
-package rpgInventory.handlers.oldpackets;
+package addonBasic.packets;
 
 import io.netty.buffer.ByteBufInputStream;
 
 import java.util.List;
+
+import addonBasic.mod_addonBase;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -39,11 +41,11 @@ public class PacketMageVortex {
 				if ((wand == null) || (hat == null) || (chest == null)
 						|| (legs == null) || (boots == null))
 					return;
-				if ((wand.getItem() != mod_RpgInventory.wand)
-						|| (hat.getItem() != mod_RpgInventory.magehood)
-						|| (chest.getItem() != mod_RpgInventory.magegown)
-						|| (legs.getItem() != mod_RpgInventory.magepants)
-						|| (boots.getItem() != mod_RpgInventory.mageboots))
+				if ((wand.getItem() != mod_addonBase.wand)
+						|| (hat.getItem() != mod_addonBase.magehood)
+						|| (chest.getItem() != mod_addonBase.magegown)
+						|| (legs.getItem() != mod_addonBase.magepants)
+						|| (boots.getItem() != mod_addonBase.mageboots))
 					return;
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(p

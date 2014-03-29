@@ -1,4 +1,4 @@
-package rpgInventory.gui.pet;
+package addonMasters;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

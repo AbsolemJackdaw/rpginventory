@@ -4,12 +4,17 @@
  */
 package rpgInventory.gui;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
+import java.io.IOException;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
+import rpgInventory.mod_RpgInventory;
+import rpgInventory.handlers.packets.ServerPacketHandler;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -21,12 +26,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ButtonInventory extends GuiButton {
 
 	private EntityPlayer player;
-
-	public ButtonInventory(int par1, int par2, int par3, String par4Str) {
+	
+	public ButtonInventory(int par1, int par2, int par3, int x, int y, String par4Str) {
 		super(par1, par2, par3, par4Str);
 		player = Minecraft.getMinecraft().thePlayer;
-		this.width = 80;
-		this.height = 20;
+		this.width = x;
+		this.height = y;
 		this.field_146123_n /* drawButton boolean */= true;
 		this.enabled = true;
 	}
@@ -40,8 +45,22 @@ public class ButtonInventory extends GuiButton {
 
 				if (this.displayString.equals("Rpg Inventory")) {
 
-					ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-					DataOutputStream outputStream = new DataOutputStream(bytes);
+
+					/*Open Rpg Inventory gui*/
+					try {
+						ByteBuf buf = Unpooled.buffer();
+						ByteBufOutputStream out = new ByteBufOutputStream(buf);
+						out.writeInt(ServerPacketHandler.OPENRPGINV);
+						mod_RpgInventory.Channel.sendToServer(new FMLProxyPacket(buf,
+								"RpgInv"));
+						
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
+//					ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+//					DataOutputStream outputStream = new DataOutputStream(bytes);
 					// try {
 					// outputStream.writeInt(1);
 					// Packet250CustomPayload packet = new

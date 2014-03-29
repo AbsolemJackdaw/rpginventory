@@ -15,7 +15,7 @@ public class ItemArcherArmor extends AbstractArmor {
 
 	@Override
 	public String armorClassName() {
-		return mod_RpgInventory.CLASSARCHER;
+		return mod_addonBase.CLASSARCHER;
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package addonArchmage;
 
+import addonBasic.models.item.bookMage;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.shields.MainShield;
-import rpgInventory.models.shields.bookMage;
 
 public class ItemMageShield extends ItemRpgInvArmor {
 

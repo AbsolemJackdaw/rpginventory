@@ -3,9 +3,6 @@ package addonBasic;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.models.shields.IronThorn;
-import rpgInventory.models.shields.ModelShield;
-import rpgInventory.models.shields.bookMage;
 import rpgInventory.renderer.items.shields.ArcherShield;
 import rpgInventory.renderer.items.shields.BerserkerShield;
 import rpgInventory.renderer.items.shields.BookRenderer;
@@ -14,8 +11,11 @@ import rpgInventory.renderer.items.weapons.ClaymoreRenderer;
 import rpgInventory.renderer.items.weapons.HammerRender;
 import rpgInventory.renderer.items.weapons.SoulSphereRender;
 import rpgInventory.renderer.items.weapons.StafRender;
+import addonBasic.models.item.IronThorn;
 import addonBasic.models.item.ModelBerserkerArmor;
 import addonBasic.models.item.ModelMageArmor;
+import addonBasic.models.item.ModelShield;
+import addonBasic.models.item.bookMage;
 
 public class ClientAddonProxy extends CommonAddonProxy {
 

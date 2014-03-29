@@ -1,9 +1,12 @@
-package rpgInventory.handlers.oldpackets;
+package addonBasic.packets;
 
 import io.netty.buffer.ByteBufInputStream;
 
 import java.io.IOException;
 import java.util.Random;
+
+import addonBasic.EntityHellArrow;
+import addonBasic.mod_addonBase;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,9 +14,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.entity.EntityHellArrow;
 import rpgInventory.handlers.CommonTickHandler;
-import addonBasic.mod_addonBase;
 
 public class PacketArcher {
 

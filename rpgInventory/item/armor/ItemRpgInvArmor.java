@@ -35,9 +35,7 @@ public class ItemRpgInvArmor extends Item {
 	 * gloves, 4 are rings
 	 */
 	public int armorType;
-
-	public boolean isMantle;
-
+	
 	private ResourceLocation TEXTURE;
 
 	/**
@@ -57,6 +55,13 @@ public class ItemRpgInvArmor extends Item {
 		TEXTURE = new ResourceLocation(resourcelocation);
 	}
 
+
+	
+	public boolean isMantle(){
+		return false;
+	}
+	
+	
 	/**
 	 * allows items to add custom lines of information to the mouseover
 	 * description

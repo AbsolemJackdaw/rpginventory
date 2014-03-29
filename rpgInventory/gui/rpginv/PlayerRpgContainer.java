@@ -12,7 +12,7 @@ import rpgInventory.item.armor.ItemRpgInvArmor;
 
 public class PlayerRpgContainer extends Container {
 
-	PlayerRpgInventory inventory;
+	public PlayerRpgInventory inventory;
 
 	public PlayerRpgContainer(EntityPlayer player, PlayerRpgInventory inv) {
 		if (inv == null)

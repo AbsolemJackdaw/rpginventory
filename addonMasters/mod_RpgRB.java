@@ -12,8 +12,6 @@ import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.mod_RpgInventory.ITEMTYPE;
 import rpgInventory.config.RpgConfig;
-import rpgInventory.item.ItemCandy;
-import rpgInventory.item.ItemCrystal;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
 import addonMasters.entity.EntityPetXP;
@@ -21,11 +19,14 @@ import addonMasters.entity.EntityTeleportStone;
 import addonMasters.entity.SpiderPet;
 import addonMasters.items.ItemBeastAxe;
 import addonMasters.items.ItemBeastMasterArmor;
+import addonMasters.items.ItemCandy;
+import addonMasters.items.ItemCrystal;
 import addonMasters.items.ItemRBMats;
 import addonMasters.items.ItemRBMats2;
 import addonMasters.items.ItemRogueArmor;
 import addonMasters.items.ItemRpgInvArmorRB;
 import addonMasters.items.PetExpPotion;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -166,6 +167,7 @@ public class mod_RpgRB {
 				80, 1, true);
 
 		MinecraftForge.EVENT_BUS.register(new BeastMasterEvent());
+		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 	}
 
 	@EventHandler

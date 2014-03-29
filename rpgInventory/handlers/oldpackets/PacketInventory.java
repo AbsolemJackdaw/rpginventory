@@ -75,7 +75,7 @@ public class PacketInventory {
 			// Packet.writeItemStack(inv.armorSlots[5], out);
 			// Packet.writeItemStack(inv.armorSlots[6], out);
 
-			if (!player.worldObj.isRemote) {
+			if (player.worldObj.isRemote) {
 
 				TargetPoint point = new TargetPoint(player.dimension,
 						player.posX, player.posY, player.posZ, 60);

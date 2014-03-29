@@ -1,8 +1,10 @@
-package rpgInventory.handlers.oldpackets;
+package addonBasic.packets;
 
 import io.netty.buffer.ByteBufInputStream;
 
 import java.util.List;
+
+import addonBasic.mod_addonBase;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +15,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.CommonTickHandler;
-import addonBasic.mod_addonBase;
 
 public class PacketBerserker {
 
