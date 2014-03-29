@@ -66,35 +66,35 @@ public class mod_RpgMageSet {
 		// LanguageRegistry.addName(archMageBoots, "Arch Mage Boots");
 
 		GameRegistry.addShapelessRecipe(new ItemStack(ultimateStaff),
-				new Object[] { windStaff, earthStaff, frostStaff, fireStaff,
-						Items.nether_star });
-		GameRegistry.addRecipe(new ItemStack(windStaff), new Object[] { "III",
-				"DSD", "III", 'I', Items.feather, 'D', Items.diamond, 'S',
-				mod_addonBase.staf });
-		GameRegistry.addRecipe(new ItemStack(frostStaff), new Object[] { "III",
-				"DSD", "III", 'I', Blocks.ice, 'D', Items.diamond, 'S',
-				mod_addonBase.staf });
-		GameRegistry.addRecipe(new ItemStack(earthStaff), new Object[] { "III",
-				"DSD", "III", 'I', Blocks.grass, 'D', Items.diamond, 'S',
-				mod_addonBase.staf });
-		GameRegistry.addRecipe(new ItemStack(fireStaff), new Object[] { "III",
-				"DSD", "III", 'I', Items.blaze_powder, 'D', Items.diamond, 'S',
-				mod_addonBase.staf });
-		GameRegistry.addRecipe(new ItemStack(archBook), new Object[] { "III",
-				"IBI", " I ", 'I', new ItemStack(Items.dye, 1, 4), 'B',
-				Items.book });
-		GameRegistry.addRecipe(new ItemStack(archMageBoots), new Object[] {
-				"III", "IBI", "III", 'B', mod_addonBase.mageboots, 'I',
-				Items.gold_nugget });
-		GameRegistry.addRecipe(new ItemStack(archmageLegs), new Object[] {
-				"III", "IBI", "III", 'B', mod_addonBase.magepants, 'I',
-				Items.gold_nugget });
-		GameRegistry.addRecipe(new ItemStack(archmageChest), new Object[] {
-				"III", "IBI", "III", 'B', mod_addonBase.magegown, 'I',
-				Items.gold_nugget });
-		GameRegistry.addRecipe(new ItemStack(archmageHood), new Object[] {
+                windStaff, earthStaff, frostStaff, fireStaff,
+                Items.nether_star);
+		GameRegistry.addRecipe(new ItemStack(windStaff),
+                "III", "DSD", "III", 'I', Items.feather, 'D', Items.diamond, 'S',
+                mod_addonBase.staf);
+		GameRegistry.addRecipe(new ItemStack(frostStaff),
+                "III", "DSD", "III", 'I', Blocks.ice, 'D', Items.diamond, 'S',
+                mod_addonBase.staf);
+		GameRegistry.addRecipe(new ItemStack(earthStaff),
+                "III", "DSD", "III", 'I', Blocks.grass, 'D', Items.diamond, 'S',
+                mod_addonBase.staf);
+		GameRegistry.addRecipe(new ItemStack(fireStaff),
+                "III", "DSD", "III", 'I', Items.blaze_powder, 'D', Items.diamond, 'S',
+                mod_addonBase.staf);
+		GameRegistry.addRecipe(new ItemStack(archBook),
+                "III", "IBI", " I ", 'I', new ItemStack(Items.dye, 1, 4), 'B',
+                Items.book);
+		GameRegistry.addRecipe(new ItemStack(archMageBoots),
+                "III", "IBI", "III", 'B', mod_addonBase.mageboots, 'I',
+                Items.gold_nugget);
+		GameRegistry.addRecipe(new ItemStack(archmageLegs),
+                "III", "IBI", "III", 'B', mod_addonBase.magepants, 'I',
+                Items.gold_nugget);
+		GameRegistry.addRecipe(new ItemStack(archmageChest),
+                "III", "IBI", "III", 'B', mod_addonBase.magegown, 'I',
+                Items.gold_nugget);
+		GameRegistry.addRecipe(new ItemStack(archmageHood),
 				"III", "IBI", "III", 'B', mod_addonBase.magehood, 'I',
-				Items.gold_nugget });
+				Items.gold_nugget );
 
 		// EntityRegistry.registerGlobalEntityID(EntityElementalBlocks.class,
 		// "Elemental", EntityRegistry.findGlobalUniqueEntityId());
