@@ -10,9 +10,7 @@ public class ItemMageShield extends ItemRpgInvArmor {
 
 	public ItemMageShield(int par4, int maxDamage, String name,
 			String resourcelocation) {
-
 		super(par4, maxDamage, name, resourcelocation);
-
 	}
 
 	@Override
@@ -30,5 +28,10 @@ public class ItemMageShield extends ItemRpgInvArmor {
 	@Override
 	public String shieldClass() {
 		return mod_RpgMageSet.CLASSARCHMAGESHIELD;
+	}
+
+	@Override
+	public String getMantleTexture() {
+		return "subaraki:jewels/magemantle.png";
 	}
 }

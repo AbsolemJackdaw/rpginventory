@@ -197,4 +197,8 @@ public class ItemRpgInvArmor extends Item {
 
 		return "none";
 	}
+
+	public String getMantleTexture() {
+		return "";
+	}
 }

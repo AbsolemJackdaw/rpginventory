@@ -1,5 +1,9 @@
 package addonMasters.items;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.Arrays;
@@ -22,7 +26,9 @@ import rpgInventory.mod_RpgInventory;
 import rpgInventory.richUtil.Targetting;
 import addonBasic.items.weapons.ItemRpgSword;
 import addonMasters.mod_RpgRB;
+import addonMasters.packets.RBServerPacketHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class ItemBeastAxe extends ItemRpgSword {
 
@@ -42,7 +48,7 @@ public class ItemBeastAxe extends ItemRpgSword {
 		return (par2Block != null)
 				&& ((par2Block.getMaterial() == Material.wood)
 						|| (par2Block.getMaterial() == Material.plants) || (par2Block
-						.getMaterial() == Material.vine)) ? true : false;
+								.getMaterial() == Material.vine)) ? true : false;
 	}
 
 	// public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
@@ -57,8 +63,8 @@ public class ItemBeastAxe extends ItemRpgSword {
 	public boolean hitEntity(ItemStack par1ItemStack,
 			EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving) {
 		par2EntityLiving
-				.attackEntityFrom(DamageSource
-						.causePlayerDamage((EntityPlayer) par3EntityLiving), 6);
+		.attackEntityFrom(DamageSource
+				.causePlayerDamage((EntityPlayer) par3EntityLiving), 6);
 		return false;
 	}
 
@@ -86,7 +92,7 @@ public class ItemBeastAxe extends ItemRpgSword {
 			if ((world != null)
 					&& world.isRemote
 					&& FMLCommonHandler.instance().getEffectiveSide()
-							.isClient()) {
+					.isClient()) {
 				Minecraft mc = Minecraft.getMinecraft();
 				// Truer Randomization
 				rng = new Random(rng.nextLong() + System.currentTimeMillis());
@@ -110,37 +116,29 @@ public class ItemBeastAxe extends ItemRpgSword {
 							.getDisplayName()) ? 0.50F : 0.80F)) {
 						mod_RpgInventory.proxy.spawnCharmParticle(world, el,
 								rng, true);
-						ByteArrayOutputStream bos = new ByteArrayOutputStream();
-						DataOutputStream dos = new DataOutputStream(bos);
 						try {
-							dos.writeInt(11);
-							dos.writeInt(el.getEntityId());
-						} catch (Throwable ex) {
+							ByteBuf buf = Unpooled.buffer();
+							ByteBufOutputStream out = new ByteBufOutputStream(buf);
+							out.writeInt(RBServerPacketHandler.CRYSTAL);
+							out.writeInt(el.getEntityId());
+							mod_RpgRB.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
+							out.close();
+						} catch (Exception e) {
 						}
-
-						// TODO
-						System.out.println("send packet here");
-						// Packet250CustomPayload pcp = new
-						// Packet250CustomPayload(
-						// "RpgRBPacket", bos.toByteArray());
-						// PacketDispatcher.sendPacketToServer(pcp);
 					} else {
-						mod_RpgInventory.proxy.spawnCharmParticle(world, el,
-								rng, false);
-						ByteArrayOutputStream bos = new ByteArrayOutputStream();
-						DataOutputStream dos = new DataOutputStream(bos);
-						try {
-							dos.writeInt(11);
-							dos.writeInt(0);
-						} catch (Throwable ex) {
+						try{
+							mod_RpgInventory.proxy.spawnCharmParticle(world, el,
+									rng, false);
+							ByteBuf buf = Unpooled.buffer();
+							ByteBufOutputStream out = new ByteBufOutputStream(buf);
+							out.writeInt(RBServerPacketHandler.CRYSTAL);
+							out.writeInt(0);
+							mod_RpgRB.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
+							out.close();
 						}
+						catch(Throwable e){
 
-						// TODO
-						System.out.println("send packet here");
-						// Packet250CustomPayload pcp = new
-						// Packet250CustomPayload(
-						// "RpgInv", bos.toByteArray());
-						// PacketDispatcher.sendPacketToServer(pcp);
+						}
 					}
 				}
 			}

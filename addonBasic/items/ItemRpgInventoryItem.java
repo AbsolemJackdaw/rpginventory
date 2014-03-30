@@ -57,4 +57,9 @@ public class ItemRpgInventoryItem extends ItemRpgInvArmor {
 			return mod_addonBase.CLASSMAGESHIELD;
 		return super.shieldClass();
 	}
+	
+	@Override
+	public String getMantleTexture() {
+		return "subaraki:jewels/talisman.png";
+	}
 }

@@ -1,10 +1,11 @@
 package addonMasters;
 
-import java.lang.reflect.Field;
+import java.util.List;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import addonMasters.entity.EntityPetXP;
 import addonMasters.entity.IPet;
@@ -27,10 +28,18 @@ public class BeastMasterEvent {
 					EntityLivingBase murderer = (EntityLiving) evt.source
 							.getSourceOfDamage();
 
-					Field f = corpse.getClass().getField("experienceValue");
-					f.setAccessible(true);
-					int totalXP = f.getInt(corpse);
+					float f = 2.0f;
+					AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
+							murderer.posX - f, murderer.posY - f, murderer.posZ - f, murderer.posX + f,murderer.posY + f, murderer.posZ + f);
 
+					List<EntityXPOrb> a = corpse.worldObj.getEntitiesWithinAABB(EntityXPOrb.class, pool);
+					
+					int totalXP = 0;
+
+					for(EntityXPOrb orb : a){
+						totalXP += orb.getXpValue();
+					}
+					System.out.println(totalXP);
 					while (totalXP > 0) {
 						int partialXP = EntityXPOrb.getXPSplit(totalXP);
 						totalXP -= partialXP;

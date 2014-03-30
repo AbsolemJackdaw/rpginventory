@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.mod_RpgInventory;
-import rpgInventory.item.armor.ItemRpgInvArmor;
+import rpgInventory.utils.RpgUtility;
 import addonBasic.items.ItemRpg;
 import addonBasic.items.armor.ItemAddonShields;
 import addonBasic.items.armor.ItemArcherArmor;
@@ -21,6 +21,7 @@ import addonBasic.items.weapons.ItemClaymore;
 import addonBasic.items.weapons.ItemHammer;
 import addonBasic.items.weapons.ItemMageSphere;
 import addonBasic.items.weapons.ItemStaf;
+import addonBasic.packets.ServerPacketHandler;
 import addonDread.items.ItemRageFood;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -28,6 +29,8 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.FMLEventChannel;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -63,9 +66,11 @@ public class mod_addonBase {
 	public static String CLASSMAGESHIELD = "shieldedBasicMage";
 
 	public static final String id = "RpgBase";
-
 	public static final String name = "Berserker, Mage and Archer Patch";
 
+	public static FMLEventChannel Channel;
+
+	
 	public static CreativeTabs tab;
 	public Item[] allItems;
 
@@ -105,6 +110,7 @@ public class mod_addonBase {
 	@EventHandler
 	public void load(FMLInitializationEvent evt) {
 
+		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("BaseAddon");
 		proxy.registerRenderInformation();
 
 		MinecraftForge.addGrassSeed(new ItemStack(rageSeed, 1), 1);
@@ -170,6 +176,13 @@ public class mod_addonBase {
 			}
 		}
 
+		RpgUtility.registerAbilityWeapon(staf, ServerPacketHandler.MAGE1);
+		RpgUtility.registerAbilityWeapon(hammer, ServerPacketHandler.BERSERKER);
+		RpgUtility.registerAbilityWeapon(elfbow, ServerPacketHandler.ARCHER);
+		RpgUtility.registerAbilityWeapon(wand, ServerPacketHandler.MAGE2);
+		
+		RpgUtility.registerSpecialAbility(new KeyHandler());
+		
 		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow",
 				EntityRegistry.findGlobalUniqueEntityId(), this, 250, 1, true);
 

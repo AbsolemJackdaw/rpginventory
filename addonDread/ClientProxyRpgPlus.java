@@ -3,12 +3,14 @@ package addonDread;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
+import addonBasic.mod_addonBase;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
 import addonDread.models.ModelNecroArmor;
 import addonDread.models.ModelPaladinArmor;
 import addonDread.models.NecroShield;
 import addonDread.models.PalaShield;
+import addonDread.packets.DreadClientPacketHandler;
 import addonDread.render.GrandSwordRender;
 import addonDread.render.NecroRenderer;
 import addonDread.render.NecroShieldRenderer;
@@ -47,6 +49,10 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 
 	@Override
 	public void registerRenderInformation() {
+		
+		mod_RpgPlus.Channel.register(new DreadClientPacketHandler());
+
+		
 		if (RpgConfig.instance.render3D) {
 			MinecraftForgeClient.registerItemRenderer(mod_RpgPlus.necro_weapon,
 					new NecroRenderer());

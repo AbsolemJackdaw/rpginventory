@@ -8,44 +8,44 @@ import net.minecraft.item.ItemStack;
 import rpgInventory.block.te.MoldRecipes;
 import rpgInventory.block.te.slot.SlotMineral;
 import rpgInventory.item.ItemMold;
-import rpgInventory.utils.RpgRegistry;
+import rpgInventory.utils.RpgUtility;
 
 public class ToLoad {
 
 	public static void loadMoldRecipes(){
 
-		RpgRegistry.addFuel(new ItemStack(Items.coal), 100);
-		RpgRegistry.addFuel(new ItemStack(Items.lava_bucket), 3200);
-		RpgRegistry.addFuel(new ItemStack(Items.blaze_rod), 1600);
-		RpgRegistry.addFuel(new ItemStack(Blocks.coal_block), 800);
+		RpgUtility.addFuel(new ItemStack(Items.coal), 100);
+		RpgUtility.addFuel(new ItemStack(Items.lava_bucket), 3200);
+		RpgUtility.addFuel(new ItemStack(Items.blaze_rod), 1600);
+		RpgUtility.addFuel(new ItemStack(Blocks.coal_block), 800);
 		
 		
-		RpgRegistry.addForgeMoldMineral(Items.apple);
+		RpgUtility.addForgeMoldMineral(Items.apple);
 
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.ringmold, Items.gold_ingot, Blocks.gold_block, new ItemStack(mod_RpgInventory.ringgold));
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.ringmold, Items.diamond,Blocks.gold_block, new ItemStack(mod_RpgInventory.ringdia));
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.ringmold, Items.dye, Blocks.gold_block,new ItemStack(mod_RpgInventory.ringlap));
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.ringmold, Items.emerald,Blocks.gold_block, new ItemStack(mod_RpgInventory.ringem));
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.ringmold, Items.gold_ingot, Blocks.gold_block, new ItemStack(mod_RpgInventory.ringgold));
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.ringmold, Items.diamond,Blocks.gold_block, new ItemStack(mod_RpgInventory.ringdia));
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.ringmold, Items.dye, Blocks.gold_block,new ItemStack(mod_RpgInventory.ringlap));
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.ringmold, Items.emerald,Blocks.gold_block, new ItemStack(mod_RpgInventory.ringem));
 
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.colmold, Items.gold_ingot, Blocks.gold_block, new ItemStack(mod_RpgInventory.neckgold));
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.colmold, Items.diamond,Blocks.gold_block, new ItemStack(mod_RpgInventory.neckdia));
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.colmold, Items.dye, Blocks.gold_block,new ItemStack(mod_RpgInventory.necklap));
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.colmold, Items.emerald,Blocks.gold_block, new ItemStack(mod_RpgInventory.neckem));
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.colmold, Items.gold_ingot, Blocks.gold_block, new ItemStack(mod_RpgInventory.neckgold));
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.colmold, Items.diamond,Blocks.gold_block, new ItemStack(mod_RpgInventory.neckdia));
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.colmold, Items.dye, Blocks.gold_block,new ItemStack(mod_RpgInventory.necklap));
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.colmold, Items.emerald,Blocks.gold_block, new ItemStack(mod_RpgInventory.neckem));
 
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.wantmold, Items.gold_ingot, Blocks.gold_block, new ItemStack(mod_RpgInventory.glovesbutter));
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.wantmold, Items.diamond,Blocks.gold_block, new ItemStack(mod_RpgInventory.glovesdia));
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.wantmold, Items.dye, Blocks.gold_block,new ItemStack(mod_RpgInventory.gloveslap));
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.wantmold, Items.emerald,Blocks.gold_block, new ItemStack(mod_RpgInventory.glovesem));
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.wantmold, Items.gold_ingot, Blocks.gold_block, new ItemStack(mod_RpgInventory.glovesbutter));
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.wantmold, Items.diamond,Blocks.gold_block, new ItemStack(mod_RpgInventory.glovesdia));
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.wantmold, Items.dye, Blocks.gold_block,new ItemStack(mod_RpgInventory.gloveslap));
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.wantmold, Items.emerald,Blocks.gold_block, new ItemStack(mod_RpgInventory.glovesem));
 
-		RpgRegistry.addForgeMoldRecipe((ItemMold) mod_RpgInventory.colmold, Items.apple, Blocks.gold_block, new ItemStack(Items.golden_apple));	
+		RpgUtility.addForgeMoldRecipe((ItemMold) mod_RpgInventory.colmold, Items.apple, Blocks.gold_block, new ItemStack(Items.golden_apple));	
 		
 		
-		RpgRegistry.addCatalistBlock(Blocks.iron_block);
-		RpgRegistry.addForgeMoldMineral(Item.getItemFromBlock(Blocks.coal_block));
+		RpgUtility.addCatalistBlock(Blocks.iron_block);
+		RpgUtility.addForgeMoldMineral(Item.getItemFromBlock(Blocks.coal_block));
 		
-		RpgRegistry.addForgeMoldRecipe(mod_RpgInventory.glovesbutter, Item.getItemFromBlock(Blocks.coal_block), Blocks.iron_block, new ItemStack(mod_RpgInventory.wantmold));
-		RpgRegistry.addForgeMoldRecipe(mod_RpgInventory.ringgold, Item.getItemFromBlock(Blocks.coal_block), Blocks.iron_block, new ItemStack(mod_RpgInventory.ringmold));
-		RpgRegistry.addForgeMoldRecipe(mod_RpgInventory.neckgold, Item.getItemFromBlock(Blocks.coal_block), Blocks.iron_block, new ItemStack(mod_RpgInventory.colmold));
+		RpgUtility.addForgeMoldRecipe(mod_RpgInventory.glovesbutter, Item.getItemFromBlock(Blocks.coal_block), Blocks.iron_block, new ItemStack(mod_RpgInventory.wantmold));
+		RpgUtility.addForgeMoldRecipe(mod_RpgInventory.ringgold, Item.getItemFromBlock(Blocks.coal_block), Blocks.iron_block, new ItemStack(mod_RpgInventory.ringmold));
+		RpgUtility.addForgeMoldRecipe(mod_RpgInventory.neckgold, Item.getItemFromBlock(Blocks.coal_block), Blocks.iron_block, new ItemStack(mod_RpgInventory.colmold));
 
 		
 	}

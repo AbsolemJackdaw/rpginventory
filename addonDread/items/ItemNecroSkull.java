@@ -1,7 +1,9 @@
 package addonDread.items;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+
 import java.io.IOException;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -24,8 +26,9 @@ import addonDread.mod_RpgPlus;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
 import addonDread.minions.IMinion;
-import addonDread.packets17.RpgPlusPacketPipeline17;
+import addonDread.packets.DreadServerPacketHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class ItemNecroSkull extends ItemRpgWeapon {
 
@@ -54,7 +57,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 				if (weapon != null)
 					if (weapon.getItem().equals(mod_RpgPlus.necro_weapon)
 							&& mod_RpgInventory.playerClass
-									.contains(mod_RpgPlus.CLASSNECRO)) {
+							.contains(mod_RpgPlus.CLASSNECRO)) {
 
 						if ((weapon.getItemDamage() + 2) >= weapon
 								.getMaxDamage()) {
@@ -103,7 +106,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 											.getDisplayName()) ? 6 : 4);
 							mob.addPotionEffect(new PotionEffect(
 									Potion.wither.id, mod_RpgInventory.donators
-											.contains(p.getDisplayName()) ? 60
+									.contains(p.getDisplayName()) ? 60
 											: 40, 1));
 						} else
 							mob.heal(3);
@@ -118,16 +121,13 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 	public ItemStack onItemRightClick(ItemStack is, World world,
 			EntityPlayer player) {
 		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			DataOutputStream dos = new DataOutputStream(bos);
+
+			ByteBuf buf = Unpooled.buffer();
+			ByteBufOutputStream out =new ByteBufOutputStream(buf);
 			try {
-				// TODO sendpacket
-				System.out
-						.println("send packet here necroSkull spawning entity");
-				dos.writeInt(RpgPlusPacketPipeline17.WEAPONIDS.SKULLRCLICK);
-				// Packet250CustomPayload packet = new Packet250CustomPayload(
-				// "RpgPlusPlus", bos.toByteArray());
-				// PacketDispatcher.sendPacketToServer(packet);
+				out.writeInt(DreadServerPacketHandler.SKULLRCLICK);
+				mod_RpgPlus.Channel.sendToServer(new FMLProxyPacket(buf, "DreadPacket"));
+				out.close();
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}

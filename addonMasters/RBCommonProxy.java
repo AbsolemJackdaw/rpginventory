@@ -4,9 +4,11 @@
  */
 package addonMasters;
 
+import addonMasters.packets.RBServerPacketHandler;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.packets.ServerPacketHandler;
 
 public class RBCommonProxy {
 
@@ -15,11 +17,10 @@ public class RBCommonProxy {
 	}
 
 	public void openGUI(EntityPlayer p, PlayerRpgInventory inventory) {
-		// TODO Auto-generated method stub
 
 	}
 
 	public void registerRendering() {
-
+		mod_RpgRB.Channel.register(new RBServerPacketHandler());
 	}
 }

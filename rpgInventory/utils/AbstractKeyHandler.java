@@ -16,25 +16,22 @@
 //import net.minecraft.client.gui.inventory.GuiInventory;
 //import net.minecraft.client.settings.KeyBinding;
 //import net.minecraft.item.ItemStack;
-//import net.minecraft.network.packet.Packet250CustomPayload;
 //
 //import org.lwjgl.input.Keyboard;
 //
-//import cpw.mods.fml.client.registry.KeyBindingRegistry;
-//import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
-//import cpw.mods.fml.common.TickType;
-//import cpw.mods.fml.common.network.PacketDispatcher;
+//public class AbstractKeyHandler {
 //
-//public class AbstractKeyHandler extends KeyBindingRegistry.KeyHandler {
-//
-//	protected static KeyBinding keyInventory = new KeyBinding("RPG Inventory Key", Keyboard.KEY_END);
-//	protected static KeyBinding keySpecial = new KeyBinding("RPG Special Ability", Keyboard.KEY_F);
+//	protected static KeyBinding keyInventory = new KeyBinding("RPG Inventory Key", Keyboard.KEY_END, "Rpg Inventory");
+//	protected static KeyBinding keySpecial = new KeyBinding("RPG Special Ability", Keyboard.KEY_F, "");
+//	
 //	public static boolean [] reps = new boolean[]{false, false};
 //
 //	public static KeyBinding[] bindKeys = new KeyBinding[]{keyInventory, keySpecial};
 //
 //	public static boolean hasRegistered = false;
 //
+//	public static List<KeyBinding> registeredKeyBinds = new ArrayList();
+//	
 //	public AbstractKeyHandler(KeyBinding[] keyBindings, boolean[] repeatings) {
 //		super(registeredKeyBinds.toArray(new KeyBinding[registeredKeyBinds.size()]), new boolean[registeredKeyBinds.size()]);
 //	}
@@ -64,17 +61,6 @@
 ////			}
 ////		}
 ////	}
-//
-//	@Override
-//	public String getLabel() {
-//		return "Rpg Inventory KeyHandler";
-//	}
-//
-//	@Override
-//	public void keyDown(EnumSet<TickType> types, KeyBinding kb,
-//			boolean tickEnd, boolean isRepeat) {
-//
-//	}
 //
 //
 //	/**this method gets called when pressed the special ability button. use this to add your*/

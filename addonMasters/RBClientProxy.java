@@ -19,6 +19,8 @@ import addonMasters.entity.SpiderPet;
 import addonMasters.entity.renderers.RenderPet;
 import addonMasters.models.LionHead;
 import addonMasters.models.ModelBeastArmor;
+import addonMasters.packets.RBClientPacketHandler;
+import addonMasters.packets.RBServerPacketHandler;
 import addonMasters.render.AxeRender;
 import addonMasters.render.LionHeadRenderer;
 import addonMasters.render.RenderDagger;
@@ -59,6 +61,9 @@ public class RBClientProxy extends RBCommonProxy {
 
 	@Override
 	public void registerRendering() {
+		mod_RpgRB.Channel.register(new RBClientPacketHandler());
+
+		
 		if (RpgConfig.instance.render3D == true) {
 			MinecraftForgeClient.registerItemRenderer(mod_RpgRB.beastAxe,
 					new AxeRender());

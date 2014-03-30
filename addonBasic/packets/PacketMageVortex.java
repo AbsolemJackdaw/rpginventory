@@ -68,9 +68,7 @@ public class PacketMageVortex {
 							.getDisplayName()) ? 1 : 3, p);
 				float f = mod_RpgInventory.donators
 						.contains(p.getDisplayName()) ? 20.0f : 10.0f;
-				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
-						p.posX - f, p.posY - f, p.posZ - f, p.posX + f,
-						p.posY + f, p.posZ + f);
+				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - f, p.posY - f, p.posZ - f, p.posX + f,p.posY + f, p.posZ + f);
 				List<EntityLivingBase> entl = p.worldObj
 						.getEntitiesWithinAABBExcludingEntity(p, pool);
 

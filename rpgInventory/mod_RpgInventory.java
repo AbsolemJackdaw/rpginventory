@@ -91,6 +91,7 @@ public class mod_RpgInventory {
 	public static CreativeTabs tab;
 
 	public static ArrayList<String> donators = new ArrayList<String>();
+	public static final String channelName = "RpgInv";
 
 	public mod_RpgInventory() {
 		instance = this;
@@ -148,7 +149,6 @@ public class mod_RpgInventory {
 		ToLoad.loadMoldRecipes();
 		ToLoad.loadGameRecipes();
 
-		// PIPELINE.initialise();
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("RpgInv");
 		proxy.load();
 

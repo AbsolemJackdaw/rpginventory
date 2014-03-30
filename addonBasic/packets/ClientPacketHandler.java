@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ClientCustomPacketEvent;
 
-public class ClientPacketHandler {
+public class ClientPacketHandler extends ServerPacketHandler{
 
 	public static final int MAGE1 = 3;
 	public static final int BERSERKER = 4;
@@ -17,7 +17,7 @@ public class ClientPacketHandler {
 
 	@SubscribeEvent
 	public void onClientPacket(ClientCustomPacketEvent event) {
-
+		
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
 		ByteBuf buf = event.packet.payload();

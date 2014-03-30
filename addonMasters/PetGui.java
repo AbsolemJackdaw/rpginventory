@@ -1,5 +1,9 @@
 package addonMasters;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.logging.Level;
@@ -21,12 +25,17 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+
+import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.packets.ServerPacketHandler;
 import addonMasters.entity.BMPetImpl;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
 import addonMasters.entity.IPet;
 import addonMasters.entity.SpiderPet;
+import addonMasters.packets.RBServerPacketHandler;
 
 public class PetGui extends GuiScreen {
 
@@ -78,19 +87,14 @@ public class PetGui extends GuiScreen {
 		if (guibutton.id == BACK_BUTTON) {
 			this.mc.thePlayer.closeScreen();
 
-			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-			DataOutputStream outputStream = new DataOutputStream(bytes);
-			// TODO
-			System.out.println("todo : send packet");
-
-			// try {
-			// outputStream.writeInt(RpgPacketHandler.OPENRPGINV);
-			// Packet250CustomPayload packet = new Packet250CustomPayload(
-			// "RpgInv", bytes.toByteArray());
-			// PacketDispatcher.sendPacketToServer(packet);
-			// } catch (IOException e) {
-			// e.printStackTrace();
-			// }
+			try {
+				ByteBuf buf = Unpooled.buffer();
+				ByteBufOutputStream out = new ByteBufOutputStream(buf);
+				out.writeInt(ServerPacketHandler.OPENRPGINV);
+				mod_RpgInventory.Channel.sendToServer(new FMLProxyPacket(buf,mod_RpgInventory.channelName));
+				out.close();
+			} catch (Exception e) {
+			}
 		}
 		if (guibutton.id == IMBUE_BUTTON)
 			// levelInfo = "Imbue to next level : " + (PetLevel/2) +
@@ -293,7 +297,7 @@ public class PetGui extends GuiScreen {
 					.newInstance(p.worldObj);
 		} catch (Throwable ex) {
 			Logger.getLogger(PetGui.class.getName())
-					.log(Level.SEVERE, null, ex);
+			.log(Level.SEVERE, null, ex);
 		}
 	}
 
@@ -317,25 +321,25 @@ public class PetGui extends GuiScreen {
 
 	public void sendChanges() {
 
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		DataOutputStream dos = new DataOutputStream(bos);
+
 		try {
-			// dos.writeInt(RpgRBPacketHandler.PETGUI);
-			// dos.writeUTF(new String(PetName.getBytes("UTF-8"), "UTF-8"));
-			// dos.writeShort(PetLevel);
-			// dos.writeShort(currentHP);
-			// dos.writeShort(totalHP);
-			// dos.writeShort(petAtk);
-			// dos.writeShort(playerLevelsLost);
-			// dos.writeShort(petLevelsAdded);
-			// dos.writeShort(petcandyConsumed);
+			try {
+				ByteBuf buf = Unpooled.buffer();
+				ByteBufOutputStream out = new ByteBufOutputStream(buf);
+				out.writeInt(RBServerPacketHandler.PETGUI);
+				out.writeUTF(new String(PetName.getBytes("UTF-8"), "UTF-8"));
+				out.writeShort(PetLevel);
+				out.writeShort(currentHP);
+				out.writeShort(totalHP);
+				out.writeShort(petAtk);
+				out.writeShort(playerLevelsLost);
+				out.writeShort(petLevelsAdded);
+				out.writeShort(petcandyConsumed);
 
-			// TODO
-
-			System.out.println("todo : send packet");
-
-			// PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(
-			// "RpgRBPacket", bos.toByteArray()));
+				mod_RpgRB.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
+				out.close();
+			} catch (Exception e) {
+			}
 		} catch (Throwable ex) {
 			ex.printStackTrace();
 		}

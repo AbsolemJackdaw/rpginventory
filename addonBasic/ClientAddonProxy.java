@@ -9,6 +9,7 @@ import addonBasic.models.item.ModelBerserkerArmor;
 import addonBasic.models.item.ModelMageArmor;
 import addonBasic.models.item.ModelShield;
 import addonBasic.models.item.bookMage;
+import addonBasic.packets.ClientPacketHandler;
 import addonBasic.renderer.shields.ArcherShield;
 import addonBasic.renderer.shields.BerserkerShield;
 import addonBasic.renderer.shields.BookRenderer;
@@ -51,6 +52,8 @@ public class ClientAddonProxy extends CommonAddonProxy {
 
 	@Override
 	public void registerRenderInformation() {
+		mod_addonBase.Channel.register(new ClientPacketHandler());
+		
 		if (RpgConfig.instance.render3D == true) {
 			MinecraftForgeClient.registerItemRenderer(mod_addonBase.claymore,
 					new ClaymoreRenderer());

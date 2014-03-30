@@ -12,6 +12,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.mod_RpgInventory.ITEMTYPE;
 import rpgInventory.config.RpgConfig;
+import rpgInventory.utils.RpgUtility;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
 import addonMasters.entity.EntityPetXP;
@@ -33,16 +34,13 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.FMLEventChannel;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "RPGRB", name = "Rogue Beastmaster Addon", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
-// @NetworkMod(clientSideRequired = true, serverSideRequired = false,
-// clientPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgRBPacket" },
-// packetHandler = RpgRBPacketHandler.class), serverPacketHandlerSpec =
-// @SidedPacketHandler(channels = { "RpgRBPacket" }, packetHandler =
-// RpgRBPacketHandler.class))
 public class mod_RpgRB {
 
 	@SidedProxy(serverSide = "addonMasters.RBCommonProxy", clientSide = "addonMasters.RBClientProxy")
@@ -71,9 +69,16 @@ public class mod_RpgRB {
 
 	ToolMaterial BeastAxeMaterial = EnumHelper.addToolMaterial("BeastAxe", 4,
 			1280, 6.0F, 3, 22);
+	
+	public static FMLEventChannel Channel;
 
+	
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("R_BChannel");
+		
+		RpgUtility.registerSpecialAbility(new WeaponAbility());
+		RpgUtility.registerAbilityWeapon(daggers);
 
 		FMLLog.info("Rpg++ Rogue and BeastMaster Installed. Renderers can be Used");
 

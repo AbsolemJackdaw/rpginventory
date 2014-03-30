@@ -17,14 +17,9 @@ import addonBasic.mod_addonBase;
 
 public class PacketBerserker {
 
-	// TODO move packet
-
-	/*
-	 * MOVE PACKET TO API
-	 */
-
-	/** Move packet to API */
 	public PacketBerserker(World world, EntityPlayer p, ByteBufInputStream dis) {
+
+
 		if (!world.isRemote) {
 			// System.out.println("Hammer time!");
 			ItemStack item1 = p.getCurrentEquippedItem();
@@ -87,10 +82,7 @@ public class PacketBerserker {
 							try {
 								double xdir = el.posX - p.posX;
 								double zdir = el.posZ - p.posZ;
-
-								p.worldObj.spawnParticle("flame", el.posX,
-										el.posY, el.posZ, 0, 1, 0);
-
+													            
 								if (mod_RpgInventory.developers.contains(p
 										.getDisplayName().toLowerCase())) {
 									el.motionX = xdir * 3F;
@@ -110,7 +102,7 @@ public class PacketBerserker {
 													.contains(p
 															.getDisplayName()) ? 2.2f
 													: 3F);
-								}
+									}
 							} catch (Throwable ex) {
 							}
 							el.attackEntityFrom(DamageSource
@@ -124,6 +116,6 @@ public class PacketBerserker {
 								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
 										.get(p.getDisplayName()) / 20))
 								+ " seconds"));
-		}
+		}		
 	}
 }

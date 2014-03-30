@@ -36,7 +36,6 @@ public class VanillaEvents {
 			Entity damager = evt.source.getSourceOfDamage();
 			if (damager != null)
 				if (damager instanceof EntityPlayer)
-					System.out.println("taken damage");
 
 					try {
 						/* DAMAGING AND REDUCING DAMAGE / VANILLA SHIELDS */

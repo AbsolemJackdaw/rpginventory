@@ -8,8 +8,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -31,16 +29,15 @@ import org.lwjgl.input.Keyboard;
 
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.handlers.packets.ServerPacketHandler;
+import rpgInventory.utils.ISpecialAbility;
+import rpgInventory.utils.RpgUtility;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
-public class RPGKeyHandler {
+public class RPGKeyHandler implements ISpecialAbility{
 
-	protected static Map<Item, Integer> abilityMap = new HashMap();
-
-	// public static List<KeyBinding> registeredKeyBinds = new ArrayList();
 
 	protected static KeyBinding keyInventory = new KeyBinding(
 			"RPG Inventory Key", Keyboard.KEY_END, "rpginventorymod");
@@ -49,27 +46,10 @@ public class RPGKeyHandler {
 			"RPG Special Ability", Keyboard.KEY_F, "rpginventorymod");
 
 	public static final int OPENRPGINV = 1;
-	public static final int MAGE1 = 3;
-	public static final int BERSERKER = 4;
-	public static final int ARCHER = 5;
-	public static final int MAGE2 = 7;
 	public static final int INVENTORY = 15;
 	public static final int SMP_INVENTORY_SYNC = 20;
 
-	// public static void registerKeyhandler(IKeyHandler keyhandler,
-	// KeyBinding[] keyBindings, boolean[] repeatings) {
-	// for (KeyBinding thisKB : keyBindings) {
-	// if (!registeredKeyBinds.contains(thisKB)) {
-	// registeredKeyBinds.add(thisKB);
-	// }
-	// List<IKeyHandler> keylist = keyHandlers.get(thisKB);
-	// if (keylist == null) {
-	// keylist = new ArrayList();
-	// keyHandlers.put(thisKB, keylist);
-	// }
-	// keylist.add(keyhandler);
-	// }
-	// }
+
 
 	public RPGKeyHandler() {
 		super();
@@ -85,15 +65,6 @@ public class RPGKeyHandler {
 		// super(bindKeys, reps);
 		super();
 
-		// TODO place this elsewhere. the bow and magestaff ar no longer part of
-		// rpg inventory
-		// abilityMap.put(mod_RpgInventory.staf, MAGE1);
-		// abilityMap.put(mod_RpgInventory.hammer, BERSERKER);
-		// abilityMap.put(mod_RpgInventory.elfbow, ARCHER);
-		// abilityMap.put(mod_RpgInventory.wand, MAGE2);
-
-		// abilityMap.put(mod_RpgInventory.daggers.itemID, 14);
-		// 14 used in another packet !
 	}
 
 	public EntityLivingBase isTargetingEntity(EntityPlayer player,
@@ -122,7 +93,7 @@ public class RPGKeyHandler {
 											var7.xCoord * var2,
 											var7.yCoord * var2,
 											var7.zCoord * var2).expand(var9,
-											var9, var9));
+													var9, var9));
 					double var11 = var4;
 					for (int var13 = 0; var13 < var10.size(); ++var13) {
 						Entity var14 = (Entity) var10.get(var13);
@@ -165,118 +136,78 @@ public class RPGKeyHandler {
 			Minecraft mc = Minecraft.getMinecraft();
 			GuiScreen guiscreen = mc.currentScreen;
 			if (keySpecial.isPressed()) {
+
 				ItemStack item = mc.thePlayer.getCurrentEquippedItem();
-				if ((guiscreen == null) && !(item == null))
-					specialAbility(item);
+				if ((guiscreen == null) && !(item == null)){
+
+					for(Item i : abilityMap.keySet()){
+						if(item.getItem().equals(i)){
+							specialAbility(item);
+							System.out.println(RpgUtility.allAbilities);
+							for(int c =0; c < RpgUtility.allAbilities.size(); c++)
+								RpgUtility.allAbilities.get(c).specialAbility(item);
+						}
+					}
+				}
 			} else if (keyInventory.isPressed()) {
-
-				System.out.println("send packet keyhandler open inventory");
-				// System.out.println((guiscreen instanceof GuiInventory));
-
-				// EntityPlayer p = mc.thePlayer;
-
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(ServerPacketHandler.OPENRPGINV);
 				mod_RpgInventory.Channel.sendToServer(new FMLProxyPacket(buf,
 						"RpgInv"));
 				out.close();
-				// PacketOpenInventory pack = new PacketOpenInventory();
-				// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-				// pipe.sendToServer(pack);
-
-				// pipe.sendToAll(pack);
 			}
-			//
-			// if ((guiscreen instanceof GuiInventory)
-			// || (guiscreen instanceof GuiContainerCreative)) {
-			// int i = 1;
-			// ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-			// ObjectOutput out;
-			// DataOutputStream outputStream = new DataOutputStream(bytes);
-			//
-			// // PacketInventory pack = new PacketInventory(p,
-			// PlayerRpgInventory.get(mc.thePlayer));
-			// // PacketPipeline17 p7 = new PacketPipeline17();
-			// // p7.sendTo(pack, (EntityPlayerMP) pack.player);
-			//
-			//
-			// try {
-			// outputStream.writeInt(i);
-			//
-			//
-			// System.out
-			// .println("send packet keyhandler open inventory");
-			// // Packet250CustomPayload packet = new
-			// // Packet250CustomPayload(
-			// // "RpgInv", bytes.toByteArray());
-			// // PacketDispatcher.sendPacketToServer(packet);
-			// // System.out.println("Packet send");
-			// } catch (IOException e) {
-			// e.printStackTrace();
-			// }
-			// // System.out.println("opened rpg gui");
-			// }
-			// }
-			// }
 		} catch (Throwable e) {
 		}
 	}
 
-	// @Override
+	@Override
 	public void specialAbility(ItemStack item) {
+		//no special abilities here .. .3.
 
-		// List<IKeyHandler> keyhandlers = keyHandlers.get(kb);
-
-		// if ((keyhandlers != null) && (keyhandlers.size() > 0)) {
-		// for (IKeyHandler thisKH : keyhandlers) {
-		// thisKH.specialAbility(kb, item);
-		// }
-		// }
-
-		if (abilityMap.containsKey(item.getItem())) {
-
-			int i = abilityMap.get(item.getItem());
-			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-			DataOutputStream outputStream = new DataOutputStream(bytes);
-			try {
-				outputStream.writeInt(i);
-
-				// TODO place this elsewhere. the bow and mage staff are no
-				// longer part of rpg inventory
-
-				// if (item.getItem() == mod_RpgInventory.elfbow) {
-				// EntityLivingBase target = isTargetingEntity(
-				// Minecraft.getMinecraft().thePlayer,
-				// mod_RpgInventory.donators.contains(Minecraft
-				// .getMinecraft().thePlayer
-				// .getCommandSenderName()) ? 60 : 40);
-				// if (target != null) {
-				// outputStream.writeBoolean(false);
-				// outputStream.writeInt((int) Math.floor(target.posX));
-				// outputStream.writeInt((int) Math.floor(target.posY));
-				// outputStream.writeInt((int) Math.floor(target.posZ));
-				// } else {
-				// outputStream.writeBoolean(true);
-				// }
-				// }
-
-				// TODO sendpacket
-				// Packet250CustomPayload packet = new Packet250CustomPayload(
-				// "RpgInv", bytes.toByteArray());
-				// PacketDispatcher.sendPacketToServer(packet);
-
-				System.out.println("todo : send packet");
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		//		if (abilityMap.containsKey(item.getItem())) {
+		//
+		//			int i = abilityMap.get(item.getItem());
+		//
+		//			try {
+		//				ByteBuf buf = Unpooled.buffer();
+		//				ByteBufOutputStream out = new ByteBufOutputStream(buf);
+		//				out.writeInt(i);
+		//				mod_RpgInventory.Channel.sendToServer(new FMLProxyPacket(buf,
+		//						"RpgInv"));
+		//				out.close();
+		//
+		//			} catch (IOException e) {
+		//				// TODO Auto-generated catch block
+		//				e.printStackTrace();
+		//			}
+		//
+		//
+		//			// TODO place this elsewhere. the bow and mage staff are no
+		//			// longer part of rpg inventory
+		//
+		//			// if (item.getItem() == mod_RpgInventory.elfbow) {
+		//			// EntityLivingBase target = isTargetingEntity(
+		//			// Minecraft.getMinecraft().thePlayer,
+		//			// mod_RpgInventory.donators.contains(Minecraft
+		//			// .getMinecraft().thePlayer
+		//			// .getCommandSenderName()) ? 60 : 40);
+		//			// if (target != null) {
+		//			// outputStream.writeBoolean(false);
+		//			// outputStream.writeInt((int) Math.floor(target.posX));
+		//			// outputStream.writeInt((int) Math.floor(target.posY));
+		//			// outputStream.writeInt((int) Math.floor(target.posZ));
+		//			// } else {
+		//			// outputStream.writeBoolean(true);
+		//			// }
+		//			// }
+		//
+		//			// TODO sendpacket
+		//			// Packet250CustomPayload packet = new Packet250CustomPayload(
+		//			// "RpgInv", bytes.toByteArray());
+		//			// PacketDispatcher.sendPacketToServer(packet);
+		//
+		//			System.out.println("todo : send packet");
+		//		}
 	}
-
-	// @Override
-	// public EnumSet<TickType> ticks() {
-	// return EnumSet.of(TickType.CLIENT);
-	// }
-
 }

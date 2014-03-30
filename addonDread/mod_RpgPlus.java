@@ -16,6 +16,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.handlers.RPGEventHooks;
+import rpgInventory.utils.RpgUtility;
 import addonDread.items.ItemGrandSword;
 import addonDread.items.ItemNecroArmor;
 import addonDread.items.ItemNecroPaladinMats;
@@ -34,6 +35,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.FMLEventChannel;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -85,6 +88,8 @@ public class mod_RpgPlus {
 
 	@SidedProxy(serverSide = "addonDread.CommonProxyRpgplus", clientSide = "addonDread.ClientProxyRpgPlus")
 	public static CommonProxyRpgplus proxy;
+
+	public static FMLEventChannel Channel;
 
 	public static CreativeTabs tab;
 
@@ -225,6 +230,13 @@ public class mod_RpgPlus {
 			RPGEventHooks.negativeEffects.add(20);
 			RPGEventHooks.negativeEffects.add(decomposePotion.id);
 		}
+		
+		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("DreadPacket");
+		RpgUtility.registerAbilityWeapon(necro_weapon);
+		RpgUtility.registerAbilityWeapon(pala_weapon);
+		RpgUtility.registerSpecialAbility(new SpecialAbility());
+		
+		
 	}
 
 	@EventHandler
