@@ -112,7 +112,8 @@ public class mod_addonBase {
 
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("BaseAddon");
 		proxy.registerRenderInformation();
-
+		mod_addonBase.Channel.register(new ServerPacketHandler());
+		
 		MinecraftForge.addGrassSeed(new ItemStack(rageSeed, 1), 1);
 
 		// SKINS
@@ -181,7 +182,7 @@ public class mod_addonBase {
 		RpgUtility.registerAbilityWeapon(elfbow, ServerPacketHandler.ARCHER);
 		RpgUtility.registerAbilityWeapon(wand, ServerPacketHandler.MAGE2);
 		
-		RpgUtility.registerSpecialAbility(new KeyHandler());
+
 		
 		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow",
 				EntityRegistry.findGlobalUniqueEntityId(), this, 250, 1, true);

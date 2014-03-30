@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBufInputStream;
 
 import java.io.IOException;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
@@ -26,6 +27,9 @@ public class ServerPacketHandler {
 	@SubscribeEvent
 	public void onServerPacket(ServerCustomPacketEvent event) {
 
+		if(!event.packet.channel().equals("RpgInv"))
+			return;
+		
 		EntityPlayerMP p = ((NetHandlerPlayServer) event.handler).playerEntity;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
 		ByteBuf buf = event.packet.payload();
@@ -46,28 +50,14 @@ public class ServerPacketHandler {
 				break;
 
 			case SMP_INVENTORY_SYNC:
-				String otherPlayerName = dis.readUTF();
-				EntityPlayer other = world
-						.getPlayerEntityByName(otherPlayerName);
-
-				for (int i = 0; i < PlayerRpgInventory.get(other)
-						.getSizeInventory(); i++)
-					PlayerRpgInventory.get(other).setInventorySlotContents(i,
-							ByteBufUtils.readItemStack(buf));
-				// PlayerRpgInventory.get(other).setInventorySlotContents(0,
-				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
-				// PlayerRpgInventory.get(other).setInventorySlotContents(1,
-				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
-				// PlayerRpgInventory.get(other).setInventorySlotContents(2,
-				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
-				// PlayerRpgInventory.get(other).setInventorySlotContents(3,
-				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
-				// PlayerRpgInventory.get(other).setInventorySlotContents(4,
-				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
-				// PlayerRpgInventory.get(other).setInventorySlotContents(5,
-				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
-				// PlayerRpgInventory.get(other).setInventorySlotContents(6,
-				// ItemStack.loadItemStackFromNBT(CompressedStreamTools.read(dis)));
+//				String otherPlayerName = dis.readUTF();
+//				EntityPlayer other = world.getPlayerEntityByName(otherPlayerName);
+//				System.out.println(other);
+//				for (int i = 0; i < PlayerRpgInventory.get(other)
+//						.getSizeInventory(); i++)
+//					PlayerRpgInventory.get(other).setInventorySlotContents(i,
+//							ByteBufUtils.readItemStack(buf));
+				
 				break;
 
 			default:
@@ -78,7 +68,8 @@ public class ServerPacketHandler {
 			}
 			dis.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println("Server packet exception");
 		}
 	}
 }

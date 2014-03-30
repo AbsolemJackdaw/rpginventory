@@ -73,9 +73,10 @@ public class CommonTickHandler /* implements ITickHandler */{
 						"keepInventory"))
 					dropJewels(player);
 			if (countdown == 0)
+				continue;
 				//
 				// PacketInventory.sendServerPacket(player);
-				PacketInventory.sendServerPacket(player);
+				//PacketInventory.sendServerPacket(player);
 			// TODO
 			// PacketInventory pack = new PacketInventory();
 			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;

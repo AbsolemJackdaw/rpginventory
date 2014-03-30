@@ -17,27 +17,24 @@ public class PacketSpawnMinion {
 
 	public PacketSpawnMinion(ItemStack weapon, ByteBufInputStream dis,
 			PlayerRpgInventory inv, EntityPlayer p) {
-		try {
-			dis.close();
-		} catch (Throwable ex) {
-			ex.printStackTrace();
-		}
+		
+		System.out.println(CommonTickHandlerRpgPlus.rpgPluscooldownMap + " " +mod_RpgInventory.playerClass);
 
-		if (weapon.getItem().equals(mod_RpgPlus.necro_weapon)
-				&& mod_RpgInventory.playerClass
-						.contains(mod_RpgPlus.CLASSNECRO)) {
-			if (!CommonTickHandlerRpgPlus.rpgPluscooldownMap.containsKey(p
-					.getDisplayName())) {
+		
+		if (weapon.getItem().equals(mod_RpgPlus.necro_weapon)) {
+			if (!CommonTickHandlerRpgPlus.rpgPluscooldownMap.containsKey(p.getDisplayName())) {
 				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(
 						p.getDisplayName(), 0);
 			}
+			
+			
 			if (CommonTickHandlerRpgPlus.rpgPluscooldownMap.get(p
 					.getDisplayName()) <= 0) {
 				// 2 second cooldown
 				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(p
 						.getDisplayName(), 20 * (mod_RpgInventory.donators
 						.contains(p.getDisplayName()) ? 1 : 2));
-				// System.out.println("SpawnMob");
+				 
 				// Allow staff/hammer to perform one last aoe then break the
 				// weapon if its damaged enough.
 				if ((weapon.getItemDamage() + 2) >= weapon.getMaxDamage()) {

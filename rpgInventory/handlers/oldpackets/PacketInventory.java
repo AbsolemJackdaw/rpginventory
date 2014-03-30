@@ -18,36 +18,20 @@ public class PacketInventory {
 	/** Destined for the owner of the inventory */
 	public static void sendPacket(EntityPlayerMP player, PlayerRpgInventory inv) {
 
-		ByteBuf buf = Unpooled.buffer();
-		ByteBufOutputStream out = new ByteBufOutputStream(buf);
 
 		try {
-
+			ByteBuf buf = Unpooled.buffer();
+			ByteBufOutputStream out = new ByteBufOutputStream(buf);
 			out.writeInt(ClientPacketHandler.INVENTORY);
 
 			for (int i = 0; i < inv.getSizeInventory(); i++)
-				// if(inv.armorSlots[i] != null)
-				// CompressedStreamTools.write(inv.armorSlots[i].getTagCompound(),out);
 				ByteBufUtils.writeItemStack(buf, inv.armorSlots[i]);
 
-			// ByteBufUtils.writeItemStack(inv.armorSlots[0], out);
-			// Packet.writeItemStack(inv.armorSlots[1], out);
-			// Packet.writeItemStack(inv.armorSlots[2], out);
-			// Packet.writeItemStack(inv.armorSlots[3], out);
-			// Packet.writeItemStack(inv.armorSlots[4], out);
-			// Packet.writeItemStack(inv.armorSlots[5], out);
-			// Packet.writeItemStack(inv.armorSlots[6], out);
 			if (!player.worldObj.isRemote)
 				mod_RpgInventory.Channel.sendTo(new FMLProxyPacket(buf,
 						"RpgInv"), player);
-
-			// PacketDispatcher.sendPacketToPlayer(new Packet250CustomPayload(
-			// "RpgInv", out.toByteArray()), (Player) player);
-
 			out.close();
 		} catch (Exception ex) {
-			// ex.printStackTrace();
-			// System.out.println("caught exception while processing inventory packet");
 		}
 	}
 
@@ -60,35 +44,19 @@ public class PacketInventory {
 			ByteBuf buf = Unpooled.buffer();
 			ByteBufOutputStream out = new ByteBufOutputStream(buf);
 			out.writeInt(ServerPacketHandler.SMP_INVENTORY_SYNC);
-			out.writeUTF(player.getDisplayName());
+			out.writeUTF(player.getCommandSenderName());
 
 			for (int i = 0; i < inv.getSizeInventory(); i++)
 				ByteBufUtils.writeItemStack(buf, inv.armorSlots[i]);
-			// CompressedStreamTools.write(inv.armorSlots[i].getTagCompound(),
-			// out);
-			// Packet.writeItemStack(inv.armorSlots[0], out);
-			// Packet.writeItemStack(inv.armorSlots[1], out);
-			// Packet.writeItemStack(inv.armorSlots[2], out);
-			// Packet.writeItemStack(inv.armorSlots[3], out);
-			// Packet.writeItemStack(inv.armorSlots[4], out);
-			// Packet.writeItemStack(inv.armorSlots[5], out);
-			// Packet.writeItemStack(inv.armorSlots[6], out);
 
-			if (player.worldObj.isRemote) {
+			TargetPoint point = new TargetPoint(player.dimension,
+					player.posX, player.posY, player.posZ, 60);
 
-				TargetPoint point = new TargetPoint(player.dimension,
-						player.posX, player.posY, player.posZ, 60);
-				mod_RpgInventory.Channel.sendToAllAround(new FMLProxyPacket(
-						buf, "RpgInv"), point);
-				// ((WorldServer) player.worldObj).getEntityTracker()
-				// .sendPacketToAllPlayersTrackingEntity(
-				// player,
-				// new Packet250CustomPayload("RpgInv", out
-				// .toByteArray()));
-				out.close();
-			}
+			mod_RpgInventory.Channel.sendToAllAround(new FMLProxyPacket(buf,"RpgInv"), point);
+
+			out.close();
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 		}
 	}
 }

@@ -17,7 +17,7 @@ public class WeaponAbility implements ISpecialAbility {
 
 	@Override
 	public void specialAbility(ItemStack item) {
-		System.out.println("poof");
+
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 
 		if(RpgUtility.canSpecial(p, mod_RpgRB.daggers)){

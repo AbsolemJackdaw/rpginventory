@@ -3,6 +3,7 @@ package addonDread;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
+import rpgInventory.utils.RpgUtility;
 import addonBasic.mod_addonBase;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
@@ -51,6 +52,7 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 	public void registerRenderInformation() {
 		
 		mod_RpgPlus.Channel.register(new DreadClientPacketHandler());
+		RpgUtility.registerSpecialAbility(new SpecialAbility());
 
 		
 		if (RpgConfig.instance.render3D) {

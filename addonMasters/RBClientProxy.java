@@ -10,6 +10,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.utils.RpgUtility;
 import addonBasic.models.item.ModelRogueArmor;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
@@ -25,6 +26,7 @@ import addonMasters.render.AxeRender;
 import addonMasters.render.LionHeadRenderer;
 import addonMasters.render.RenderDagger;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class RBClientProxy extends RBCommonProxy {
 
@@ -93,6 +95,10 @@ public class RBClientProxy extends RBCommonProxy {
 		MinecraftForge.EVENT_BUS.register(new SoundManager());
 
 		MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
+		
+		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+		RpgUtility.registerSpecialAbility(new WeaponAbility());
+
 		// TickRegistry.registerTickHandler(new ClientTickHandler(),
 		// Side.CLIENT);
 

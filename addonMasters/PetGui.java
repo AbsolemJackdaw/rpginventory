@@ -135,9 +135,13 @@ public class PetGui extends GuiScreen {
 
 	@Override
 	public void drawScreen(int i, int j, float f) {
+
+		
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		drawDefaultBackground();
+
+//
 		try {
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.mc.renderEngine.bindTexture(new ResourceLocation(
 					"rpginventorymod:textures/gui/petgui.png"));
 			int posX = (this.width - xSizeOfTexture) / 2;
@@ -147,6 +151,8 @@ public class PetGui extends GuiScreen {
 		} finally {
 			textfield.drawTextBox();
 		}
+		super.drawScreen(i, j, f);
+
 		drawString(fontRendererObj, Name + ": " + PetName,
 				(this.width / 2) - 20, (this.height / 2) - 79, 0xffffff);
 		drawString(fontRendererObj, petStats, (this.width / 2) - 85,
@@ -160,35 +166,30 @@ public class PetGui extends GuiScreen {
 
 		drawString(fontRendererObj, info, (this.width / 2) - 85,
 				(this.height / 2) + 45, 0xff00ff);
-		// Shadow
+//		// Shadow
 		fontRendererObj.drawSplitString(saddle, ((this.width / 2) - 80) + 1,
 				(this.height / 2) + 55 + 1, xSizeOfTexture - 9, 0x444444);
-		// text
+//		// text
 		fontRendererObj.drawSplitString(saddle, (this.width / 2) - 80,
 				(this.height / 2) + 55, xSizeOfTexture - 10, 0xffffff);
-		// drawString(fontRendererObj, saddle, this.width / 2 - 80, this.height
-		// / 2
-		// + 55, 0xffffff);
-		// Shadow
+//		// drawString(fontRendererObj, saddle, this.width / 2 - 80, this.height
+//		// / 2
+//		// + 55, 0xffffff);
+//		// Shadow
 		fontRendererObj.drawSplitString(levelInfo, (this.width / 2) + 95 + 1,
 				(this.height / 2) + 65 + 1,
 				(this.width - ((this.width / 2) + 95)) + 1, 0x444444);
-		// text
+//		// text
 		fontRendererObj.drawSplitString(levelInfo, (this.width / 2) + 95,
 				(this.height / 2) + 65, this.width - ((this.width / 2) + 95),
 				0xffffff);
-		// drawString(fontRendererObj, levelInfo, this.width / 2 + 95,
-		// this.height
-		// / 2 + 65, 0xffffff);
-		// drawString(fontRendererObj, levelInfo2, this.width / 2 + 95,
-		// this.height
-		// / 2 + 75, 0xffffff);
+
 		if (PetLevel >= 200) {
 			PetLevel = 200;
 			drawString(fontRendererObj, "Maxed out.", (this.width / 2) - 30,
 					this.height / 2, 0x00ff00);
 		}
-		super.drawScreen(i, j, f);
+		
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslatef((this.width / 2) - 52, (this.height / 2) - 23, 40);

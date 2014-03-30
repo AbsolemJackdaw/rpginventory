@@ -19,8 +19,11 @@ import org.lwjgl.util.glu.Sphere;
 import rpgInventory.CapeRenderer;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.BookGui;
+import rpgInventory.handlers.ClientTickHandler;
+import rpgInventory.handlers.RPGKeyHandler;
 import rpgInventory.handlers.packets.ClientPacketHandler;
 import rpgInventory.renderer.RenderRpgPlayer;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -45,6 +48,9 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void load() {
 		mod_RpgInventory.Channel.register(new ClientPacketHandler());
+		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+		FMLCommonHandler.instance().bus().register(new RPGKeyHandler());
+
 	}
 
 	@Override

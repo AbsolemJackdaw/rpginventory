@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -26,6 +27,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,6 +37,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
@@ -156,23 +159,27 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
 	}
 
-	// This is so you can't accidently hurt your pet while riding him.
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-				.setBaseValue(10.0D);
+		.setBaseValue(10.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-				.setBaseValue(0.22499999403953552D);
+		.setBaseValue(0.22499999403953552D);
 		// this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.22499999403953552D);
 
 	}
+	// This is so you can't accidently hurt your pet while riding him.
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
+		if(par1Entity instanceof EntityLiving){
+			EntityLiving el = (EntityLiving) par1Entity;
+			el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)getOwner()), getAttackDamage());
+		}		
 		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this),
-				getAttackDamage());
+				0);
 	}
 
 	@Override
@@ -257,7 +264,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			player = this.worldObj.getPlayerEntityByName(this.getOwnerName());
 		else
 			player = MinecraftServer.getServer().getConfigurationManager()
-					.getPlayerForUsername(this.getOwnerName());
+			.getPlayerForUsername(this.getOwnerName());
 		return player;
 	}
 
@@ -332,9 +339,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 						// if (!par1EntityPlayer.capabilities.isCreativeMode) {
 						if (--var2.stackSize == 0)
 							par1EntityPlayer.inventory
-									.setInventorySlotContents(
-											par1EntityPlayer.inventory.currentItem,
-											(ItemStack) null);
+							.setInventorySlotContents(
+									par1EntityPlayer.inventory.currentItem,
+									(ItemStack) null);
 						// }
 						if (!worldObj.isRemote)
 							this.heal(var3.func_150905_g(var2));
@@ -349,9 +356,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 						// }
 						if (var2.stackSize <= 0)
 							par1EntityPlayer.inventory
-									.setInventorySlotContents(
-											par1EntityPlayer.inventory.currentItem,
-											(ItemStack) null);
+							.setInventorySlotContents(
+									par1EntityPlayer.inventory.currentItem,
+									(ItemStack) null);
 					}
 				if ((par1EntityPlayer.getCurrentEquippedItem() != null)
 						&& (par1EntityPlayer.getCurrentEquippedItem().getItem() == mod_RpgRB.petCandy)) {
@@ -373,10 +380,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		return true;
 	}
 
-	// public float getMaxHealth(){
-	// return this.getMaxHealth();
-	// }
-
 	@Override
 	public boolean isDead() {
 		// Required! must chain up this check or will return false even when
@@ -390,14 +393,14 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	}
 
 	public void jump(Boolean flag) { // boolean. true = 2.5-high jump. false =
-										// normal jump.
+		// normal jump.
 		if (onGround && (jumpTicks == 0)) {
 			super.jump();
 			if (flag)
 				motionY += (jumpHeight() / 200) * getLevel(); // makes mount
-																// jump higher.
-																// Do not use
-																// big values!
+			// jump higher.
+			// Do not use
+			// big values!
 			jumpTicks = 10;
 		}
 	}
@@ -517,19 +520,22 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
 	@Override
 	public void onLivingUpdate() {
-		if (!worldObj.isRemote) {
-			EntityPlayer player = (EntityPlayer) getOwner();
-			if (((player == null) || !mod_RpgInventory.playerClass
-					.contains(mod_RpgRB.CLASSBEASTMASTER))) {
-				try {
-					PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 
-					inv.setInventorySlotContents(6, writePetToItemStack());
-				} catch (Throwable ex) {
+		EntityPlayer player = (EntityPlayer) getOwner();
+		if(!mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSBEASTMASTER))
+			if (!worldObj.isRemote) {
+				if (((player == null))) {
+					try {
+						PlayerRpgInventory inv = PlayerRpgInventory.get(player);
+						inv.setInventorySlotContents(6, writePetToItemStack());
+					} catch (Throwable ex) {
+					}
+					this.setDead();
+					return;
 				}
-				this.setDead();
-				return;
 			}
+
+		if (!worldObj.isRemote) {
 			if ((!IPet.playersWithActivePets.containsKey(this.getOwnerName()) || (this.dimension != getOwner().dimension))) {
 				this.setDead();
 				return;
@@ -557,7 +563,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			setSize(getBaseWidth()
 					+ ((levelcheck / 200.0F) * (1.0F + getBaseWidth())),
 					getBaseHeight()
-							+ ((levelcheck / 200.0F) * (1.0F + getBaseHeight())));
+					+ ((levelcheck / 200.0F) * (1.0F + getBaseHeight())));
 		}
 
 		if (sprintToggleTimer > 0)
@@ -565,15 +571,35 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			sprintToggleTimer--;
 		if (jumpTicks > 0)
 			jumpTicks--;
-		List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(
-				EntityPetXP.class, boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
-		if ((xps != null) && (xps.size() > 0))
+		
+		List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
+		if ((xps != null) && (xps.size() > 0)){
 			if (--xpThrottle <= 0)
 				for (EntityPetXP xp : xps) {
 					xpThrottle = 5;
 					this.giveXP(xp.getXpValue());
 					xp.setDead();
 				}
+		}
+
+
+		List<EntityXPOrb> a = this.worldObj.getEntitiesWithinAABB(EntityXPOrb.class,  boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
+//		System.out.println(a);
+		int totalXP = 0;
+
+		for(EntityXPOrb orb : a){
+			totalXP += orb.getXpValue();
+			orb.setDead();
+		}
+//		System.out.println(totalXP);
+		while (totalXP > 0 && !worldObj.isRemote) {
+			int partialXP = EntityXPOrb.getXPSplit(totalXP);
+			totalXP -= partialXP;
+			giveXP(partialXP);
+//			this.worldObj.spawnEntityInWorld(new EntityPetXP(
+//					this.worldObj, this.posX, this.posY,
+//					this.posZ, partialXP));
+		}
 		super.onLivingUpdate();
 
 	}
@@ -615,8 +641,17 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
 	public abstract int regenDelay();
 
+
+	@Override
+	public void onDeath(DamageSource par1DamageSource) {
+		System.out.println("oh noes i died");
+
+		super.onDeath(par1DamageSource);
+	}
 	@Override
 	public void setDead() {
+		System.out.println("oh noes i got killed");
+
 		if (IPet.playersWithActivePets.containsKey(this.getOwnerName())) {
 			PlayerRpgInventory inv = PlayerRpgInventory
 					.get((EntityPlayer) getOwner());
@@ -677,7 +712,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		par1NBTTagCompound.setInteger("XpTotal",
 				this.dataWatcher.getWatchableObjectInt(TOTALXP));
 		par1NBTTagCompound
-				.setInteger("prevTicksExisted", this.prevTicksExisted);
+		.setInteger("prevTicksExisted", this.prevTicksExisted);
 		par1NBTTagCompound.setBoolean("Saddle", this.getSaddled());
 	}
 

@@ -31,10 +31,8 @@ public class KeyHandler implements ISpecialAbility {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(ClientPacketHandler.BERSERKER);
-				//				if(!p.worldObj.isRemote)
 				mod_addonBase.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
 				out.close();
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

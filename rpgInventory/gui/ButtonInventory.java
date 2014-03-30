@@ -55,7 +55,6 @@ public class ButtonInventory extends GuiButton {
 
 						out.close();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				else if (this.displayString.equals("Close")) {

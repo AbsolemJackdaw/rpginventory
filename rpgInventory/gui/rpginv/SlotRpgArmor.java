@@ -86,7 +86,7 @@ class SlotRpgArmor extends Slot {
 		// TODO
 		// PacketInventory.sendPacket(player, (PlayerRpgInventory)
 		// this.inventory);
-
+//		PacketInventory.sendServerPacket(player);
 		if (!player.worldObj.isRemote) {
 			PacketInventory.sendPacket((EntityPlayerMP) player,
 					PlayerRpgInventory.get(player));

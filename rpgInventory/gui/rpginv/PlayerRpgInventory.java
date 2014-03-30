@@ -58,9 +58,11 @@ public class PlayerRpgInventory implements IInventory,
 		// props.addEntry(this);
 
 		// TODO
-		System.out.println("send packet here for closed inventory");
+		//System.out.println("send packet here for closed inventory");
 		// PacketInventory.sendPacket(player, this);
-
+		
+		//PacketInventory.sendServerPacket(player);
+		
 		if (!player.worldObj.isRemote)
 			PacketInventory.sendPacket((EntityPlayerMP) player, this);
 		// PacketInventory pack = new PacketInventory();
@@ -204,9 +206,10 @@ public class PlayerRpgInventory implements IInventory,
 	public ItemStack getStackInSlotOnClosing(int par1) {
 		// mod_RpgInventory.proxy.addEntry(playername, this);
 		// TODO
-		System.out.println("fill packet here slotclosed");
+		//System.out.println("fill packet here slotclosed");
 		// PacketInventory.sendPacket(player, this);
-
+		//PacketInventory.sendServerPacket(player);
+		
 		if (!player.worldObj.isRemote)
 			PacketInventory.sendPacket((EntityPlayerMP) player, this);
 		// PacketInventory pack = new PacketInventory();
@@ -337,6 +340,9 @@ public class PlayerRpgInventory implements IInventory,
 	@Override
 	// onInventoryChanged
 	public void markDirty() {
+		
+		//PacketInventory.sendServerPacket(player);
+		
 		try {
 
 			// TODO

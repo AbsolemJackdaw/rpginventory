@@ -26,71 +26,11 @@ public class ClientTickHandler /* implements ITickHandler */{
 
 	boolean added = false;
 
-	public static final int BOOTS = 36;
-	public static final int LEGS = 37;
-	public static final int CHEST = 38;
-	public static final int HELM = 39;
-
 	@SubscribeEvent
 	public void tickEnd(TickEvent.ClientTickEvent ev) {
 
-		/**
-		 * This checks wether the player wears class armor, and a shield, or
-		 * just a shield (like vanilla shields)
-		 */
-		if (Minecraft.getMinecraft().thePlayer != null) {
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			boolean skip = false;
-			for (ItemStack is : player.inventory.armorInventory)
-				if (is == null) {
-					if (PlayerRpgInventory.get(player).getShield() == null) {
-						skip = true;
-						mod_RpgInventory.playerClass = "none";
-					}
-				} else // if there is one item that is no AbstractArmor, skip
-					// the
-					// setting of the playerclass
-					if (!(is.getItem() instanceof AbstractArmor)
-							&& (PlayerRpgInventory.get(player).getShield() == null)) {
-						skip = true;
-						mod_RpgInventory.playerClass = "none";
-					}
-			if (!skip)
-				if ((player.inventory.getStackInSlot(HELM) != null)
-						&& ((player.inventory.getStackInSlot(HELM).getItem()) instanceof AbstractArmor)
-						&& (player.inventory.getStackInSlot(CHEST) != null)
-						&& ((player.inventory.getStackInSlot(CHEST).getItem()) instanceof AbstractArmor)
-						&& (player.inventory.getStackInSlot(LEGS) != null)
-						&& ((player.inventory.getStackInSlot(LEGS).getItem()) instanceof AbstractArmor)
-						&& (player.inventory.getStackInSlot(BOOTS) != null)
-						&& ((player.inventory.getStackInSlot(BOOTS).getItem()) instanceof AbstractArmor)) {
+//		System.out.println(""+ mod_RpgInventory.playerClass);
 
-					// this could be any piece of armor, given
-					String classname = ((AbstractArmor) player.inventory
-							.getStackInSlot(HELM).getItem()).armorClassName();
-
-					mod_RpgInventory.playerClass = classname;
-
-					if (PlayerRpgInventory.get(player).getShield() != null)
-						if (((ItemRpgInvArmor) PlayerRpgInventory.get(player)
-								.getShield().getItem()).boundArmorClass()
-								.equals(classname))
-							mod_RpgInventory.playerClass = classname
-							+ ((ItemRpgInvArmor) PlayerRpgInventory
-									.get(player).getShield().getItem())
-									.shieldClass();
-				} else {
-					mod_RpgInventory.playerClass = "none";
-					if (((ItemRpgInvArmor) PlayerRpgInventory.get(player)
-							.getShield().getItem()).boundArmorClass().equals(
-									"none"))
-						if (PlayerRpgInventory.get(player).getShield() != null)
-							mod_RpgInventory.playerClass = ((ItemRpgInvArmor) PlayerRpgInventory
-									.get(player).getShield().getItem())
-									.shieldClass();
-				}
-
-		}
 
 		// This will only inject our buttons into the existing GuiInventory
 		// object.
@@ -147,7 +87,7 @@ public class ClientTickHandler /* implements ITickHandler */{
 			added = false;
 
 		/*Rendering first person shields ! :D*/
-		try {
+//		try {
 //			EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 //			PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 //			Minecraft mc = Minecraft.getMinecraft();
@@ -172,8 +112,8 @@ public class ClientTickHandler /* implements ITickHandler */{
 
 
 
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+//		} catch (Exception e) {
+//			 TODO: handle exception
+//		}
 	}
 }

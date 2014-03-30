@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
+import rpgInventory.utils.RpgUtility;
 import addonBasic.models.item.IronThorn;
 import addonBasic.models.item.ModelBerserkerArmor;
 import addonBasic.models.item.ModelMageArmor;
@@ -53,6 +54,8 @@ public class ClientAddonProxy extends CommonAddonProxy {
 	@Override
 	public void registerRenderInformation() {
 		mod_addonBase.Channel.register(new ClientPacketHandler());
+		RpgUtility.registerSpecialAbility(new KeyHandler());
+		
 		
 		if (RpgConfig.instance.render3D == true) {
 			MinecraftForgeClient.registerItemRenderer(mod_addonBase.claymore,

@@ -2,11 +2,14 @@ package rpgInventory.handlers.proxy;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import rpgInventory.mod_RpgInventory;
+import rpgInventory.handlers.CommonTickHandler;
 import rpgInventory.handlers.packets.ServerPacketHandler;
 
 public class CommonProxy {
@@ -25,7 +28,7 @@ public class CommonProxy {
 	}
 
 	public void load() {
-		mod_RpgInventory.Channel.register(new ServerPacketHandler());
+
 	}
 
 	public void openGUI(EntityPlayer player, int id) {

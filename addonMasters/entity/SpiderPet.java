@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -50,6 +51,15 @@ public class SpiderPet extends BMPetImpl {
 		// this.getNavigator().setSpeed(this.moveSpeed);
 		// Spider Cant Swim
 		this.getNavigator().setCanSwim(false);
+	}
+	
+	
+	@Override
+	protected void attackEntity(Entity par1Entity, float par2) {
+		if(par1Entity instanceof EntityLiving){
+			EntityLiving el = (EntityLiving) par1Entity;
+			el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)getOwner()), par2);
+		}
 	}
 
 	@Override

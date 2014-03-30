@@ -14,7 +14,6 @@ public class CommonProxyRpgplus {
 		// tick registered both sides behind an EFFECTIVE check
 		// So integrated server will register too.
 		
-		mod_RpgPlus.Channel.register(new DreadServerPacketHandler());
 
 	}
 

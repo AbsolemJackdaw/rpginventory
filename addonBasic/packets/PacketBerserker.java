@@ -20,8 +20,8 @@ public class PacketBerserker {
 	public PacketBerserker(World world, EntityPlayer p, ByteBufInputStream dis) {
 
 
-		if (!world.isRemote) {
-			// System.out.println("Hammer time!");
+		
+			 System.out.println("Hammer time!");
 			ItemStack item1 = p.getCurrentEquippedItem();
 			ItemStack var31 = p.inventory.armorItemInSlot(3);
 			ItemStack var21 = p.inventory.armorItemInSlot(2);
@@ -116,6 +116,6 @@ public class PacketBerserker {
 								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
 										.get(p.getDisplayName()) / 20))
 								+ " seconds"));
-		}		
+			
 	}
 }

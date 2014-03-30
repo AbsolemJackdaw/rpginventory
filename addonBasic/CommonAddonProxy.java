@@ -16,7 +16,7 @@ public class CommonAddonProxy {
 	}
 
 	public void registerRenderInformation() {
-		mod_addonBase.Channel.register(new ServerPacketHandler());
+		
 	}
 
 }

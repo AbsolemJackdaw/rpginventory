@@ -45,12 +45,7 @@ public class RPGKeyHandler implements ISpecialAbility{
 	protected static KeyBinding keySpecial = new KeyBinding(
 			"RPG Special Ability", Keyboard.KEY_F, "rpginventorymod");
 
-	public static final int OPENRPGINV = 1;
-	public static final int INVENTORY = 15;
-	public static final int SMP_INVENTORY_SYNC = 20;
-
-
-
+	
 	public RPGKeyHandler() {
 		super();
 

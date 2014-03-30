@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,10 +26,16 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
+import rpgInventory.utils.AbstractArmor;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class RPGEventHooks {
 
+	public static final int BOOTS = 36;
+	public static final int LEGS = 37;
+	public static final int CHEST = 38;
+	public static final int HELM = 39;
+	
 	public static Map<String, Integer> HealerTick = new ConcurrentHashMap();
 	public static Map<String, Integer> DiamondTick = new ConcurrentHashMap();
 	public static Map<String, Integer> LapisTick = new ConcurrentHashMap();
@@ -222,12 +229,14 @@ public class RPGEventHooks {
 			if (evt.entityLiving instanceof EntityPlayer)
 				PlayerRpgInventory.get((EntityPlayer) evt.entityLiving)
 						.markDirty();
+			
 		} catch (Throwable ex) {
 		}
 
 		try {
 			if (evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer p = (EntityPlayer) evt.entityLiving;
+				
 				if (p != null) {
 
 					PlayerRpgInventory inv = PlayerRpgInventory.get(p);
@@ -341,7 +350,69 @@ public class RPGEventHooks {
 									Potion.invisibility.id, 20, 1));
 				}
 			}
+			
+			
 		} catch (Throwable ex) {
+		}
+		
+		
+//		System.out.println("reading this ... ");
+		
+		/**
+		 * This checks wether the player wears class armor, and a shield, or
+		 * just a shield (like vanilla shields)
+		 */
+		if (evt.entity instanceof EntityPlayer) {
+//			System.out.println("reading ...");
+
+			EntityPlayer player = (EntityPlayer)evt.entityLiving;
+			boolean skip = false;
+			for (ItemStack is : player.inventory.armorInventory)
+				if (is == null) {
+					if (PlayerRpgInventory.get(player).getShield() == null) {
+						skip = true;
+						mod_RpgInventory.playerClass = "none";
+					}
+				} else // if there is one item that is no AbstractArmor, skip the setting of the playerclass
+					if (!(is.getItem() instanceof AbstractArmor)&& (PlayerRpgInventory.get(player).getShield() == null)) {
+						skip = true;
+						mod_RpgInventory.playerClass = "none";
+					}
+			if (!skip)
+				if ((player.inventory.getStackInSlot(HELM) != null)
+						&& ((player.inventory.getStackInSlot(HELM).getItem()) instanceof AbstractArmor)
+						&& (player.inventory.getStackInSlot(CHEST) != null)
+						&& ((player.inventory.getStackInSlot(CHEST).getItem()) instanceof AbstractArmor)
+						&& (player.inventory.getStackInSlot(LEGS) != null)
+						&& ((player.inventory.getStackInSlot(LEGS).getItem()) instanceof AbstractArmor)
+						&& (player.inventory.getStackInSlot(BOOTS) != null)
+						&& ((player.inventory.getStackInSlot(BOOTS).getItem()) instanceof AbstractArmor)) {
+
+					// this could be any piece of armor, given
+					String classname = ((AbstractArmor) player.inventory
+							.getStackInSlot(HELM).getItem()).armorClassName();
+
+					mod_RpgInventory.playerClass = classname;
+
+					if (PlayerRpgInventory.get(player).getShield() != null)
+						if (((ItemRpgInvArmor) PlayerRpgInventory.get(player)
+								.getShield().getItem()).boundArmorClass()
+								.equals(classname))
+							mod_RpgInventory.playerClass = classname
+							+ ((ItemRpgInvArmor) PlayerRpgInventory
+									.get(player).getShield().getItem())
+									.shieldClass();
+				} else {
+					mod_RpgInventory.playerClass = "none";
+					if (((ItemRpgInvArmor) PlayerRpgInventory.get(player)
+							.getShield().getItem()).boundArmorClass().equals(
+									"none"))
+						if (PlayerRpgInventory.get(player).getShield() != null)
+							mod_RpgInventory.playerClass = ((ItemRpgInvArmor) PlayerRpgInventory
+									.get(player).getShield().getItem())
+									.shieldClass();
+				}
+
 		}
 	}
 }

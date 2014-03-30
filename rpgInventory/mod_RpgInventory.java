@@ -24,6 +24,7 @@ import rpgInventory.handlers.CommonTickHandler;
 import rpgInventory.handlers.GuiHandler;
 import rpgInventory.handlers.RPGEventHooks;
 import rpgInventory.handlers.RPGKeyHandler;
+import rpgInventory.handlers.packets.ServerPacketHandler;
 import rpgInventory.handlers.proxy.ClientProxy;
 import rpgInventory.handlers.proxy.CommonProxy;
 import rpgInventory.item.ItemMold;
@@ -59,6 +60,7 @@ public class mod_RpgInventory {
 
 	protected static final String version = "1.7.2";
 
+	/**Check this on clientside only !*/
 	public static String playerClass = "none";
 	public static mod_RpgInventory instance;
 
@@ -151,6 +153,8 @@ public class mod_RpgInventory {
 
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("RpgInv");
 		proxy.load();
+		FMLCommonHandler.instance().bus().register(new CommonTickHandler());
+		mod_RpgInventory.Channel.register(new ServerPacketHandler());
 
 		setDonators();
 		// GameRegistry.registerPlayerTracker(new OnPlayerLogin(version, name));
@@ -175,11 +179,6 @@ public class mod_RpgInventory {
 
 		// DONE ?
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-
-		FMLCommonHandler.instance().bus().register(new CommonTickHandler());
-		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
-
-		FMLCommonHandler.instance().bus().register(new RPGKeyHandler());
 
 		MinecraftForge.EVENT_BUS.register(new RPGEventHooks());
 

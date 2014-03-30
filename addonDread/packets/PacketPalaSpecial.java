@@ -1,14 +1,11 @@
 package addonDread.packets;
 
-import ibxm.Player;
 import io.netty.buffer.ByteBufInputStream;
 
-import java.io.DataInputStream;
 import java.util.List;
 
-import addonDread.mod_RpgPlus;
-
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -17,6 +14,7 @@ import net.minecraft.util.ChatComponentText;
 import rpgInventory.mod_RpgInventory;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.CommonTickHandler;
+import addonDread.mod_RpgPlus;
 
 public class PacketPalaSpecial {
 
@@ -27,10 +25,11 @@ public class PacketPalaSpecial {
 			ex.printStackTrace();
 		}
 		inv.markDirty();
+		
 
 		if (!mod_RpgInventory.developers.contains(p.getDisplayName()
 				.toLowerCase()) || (weapon == null)) {
-			if (!mod_RpgInventory.playerClass
+			if (!mod_RpgInventory.playerClass.toLowerCase()
 					.contains(mod_RpgPlus.CLASSPALADIN)) {
 				return;
 			}
@@ -60,19 +59,24 @@ public class PacketPalaSpecial {
 					weapon.damageItem(3, p);
 				}
 			}
+			
 			float rad = 6.0f;
 			AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
 					p.posX - rad, p.posY - rad, p.posZ - rad, p.posX + rad,
 					p.posY + rad, p.posZ + rad);
-			List<EntityLiving> entl = p.worldObj.getEntitiesWithinAABB(
-					EntityLiving.class, pool);
+			List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABB(
+					EntityLivingBase.class, pool);
+			
+			System.out.println("heal" + entl);
+			
 			if ((entl != null) && (entl.size() > 0)) {
-				for (EntityLiving el : entl) {
+				for (EntityLivingBase el : entl) {
 					if (el != null) {
 						double dist = (p.getDistanceSqToEntity(el));
 						double potstrength = 1.0D - (Math.sqrt(dist) / 4.0D);
 						Potion.heal.affectEntity(p, el,(mod_RpgInventory.donators.contains(p.getCommandSenderName()) ? 5 : 2),
 								potstrength * 2);
+
 					}
 				}
 			}

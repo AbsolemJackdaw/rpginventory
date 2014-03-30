@@ -120,18 +120,20 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world,
 			EntityPlayer player) {
-		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
 
-			ByteBuf buf = Unpooled.buffer();
-			ByteBufOutputStream out =new ByteBufOutputStream(buf);
+		if(mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO))
 			try {
+				ByteBuf buf = Unpooled.buffer();
+				ByteBufOutputStream out =new ByteBufOutputStream(buf);
 				out.writeInt(DreadServerPacketHandler.SKULLRCLICK);
 				mod_RpgPlus.Channel.sendToServer(new FMLProxyPacket(buf, "DreadPacket"));
 				out.close();
+
 			} catch (IOException ex) {
 				ex.printStackTrace();
+				System.out.println("skull");
+
 			}
-		}
 		return is;
 	}
 

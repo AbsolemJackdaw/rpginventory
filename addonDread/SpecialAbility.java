@@ -20,7 +20,6 @@ public class SpecialAbility implements ISpecialAbility {
 
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 
-		System.out.println("paf");
 		if(RpgUtility.canSpecial(p, mod_RpgPlus.necro_weapon)){
 			try {
 				ByteBuf buf = Unpooled.buffer();

@@ -17,6 +17,10 @@ public class ClientPacketHandler extends ServerPacketHandler{
 
 	@SubscribeEvent
 	public void onClientPacket(ClientCustomPacketEvent event) {
+		System.out.println(event.packet.channel());
+
+		if(!event.packet.channel().equals("BaseAddon"))
+			return;
 		
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());

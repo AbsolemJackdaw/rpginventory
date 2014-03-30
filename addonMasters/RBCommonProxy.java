@@ -21,6 +21,5 @@ public class RBCommonProxy {
 	}
 
 	public void registerRendering() {
-		mod_RpgRB.Channel.register(new RBServerPacketHandler());
 	}
 }

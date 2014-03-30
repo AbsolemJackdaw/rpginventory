@@ -25,6 +25,9 @@ public class ClientPacketHandler extends ServerPacketHandler {
 	@SubscribeEvent
 	public void onClientPacket(ClientCustomPacketEvent event) {
 
+		if(!event.packet.channel().equals("RpgInv"))
+			return;
+		
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
 		ByteBuf buf = event.packet.payload();
@@ -52,7 +55,16 @@ public class ClientPacketHandler extends ServerPacketHandler {
 					PlayerRpgInventory.get(p).setInventorySlotContents(i,
 							ByteBufUtils.readItemStack(buf));
 				break;
+			case SMP_INVENTORY_SYNC:
+				String otherPlayerName = dis.readUTF();
+				EntityPlayer other = world.getPlayerEntityByName(otherPlayerName);
 
+				for (int i = 0; i < PlayerRpgInventory.get(other)
+						.getSizeInventory(); i++)
+					PlayerRpgInventory.get(other).setInventorySlotContents(i,
+							ByteBufUtils.readItemStack(buf));
+				break;
+				
 			default:
 				FMLLog.getLogger().info(
 						"[SEVERE] Client:  RpgInventory Send Unused packet !! Packet ID "
@@ -61,7 +73,8 @@ public class ClientPacketHandler extends ServerPacketHandler {
 			}
 			dis.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println("Client packet exception");
 		}
 	}
 

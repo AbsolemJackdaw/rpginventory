@@ -27,6 +27,7 @@ import addonMasters.items.ItemRBMats2;
 import addonMasters.items.ItemRogueArmor;
 import addonMasters.items.ItemRpgInvArmorRB;
 import addonMasters.items.PetExpPotion;
+import addonMasters.packets.RBServerPacketHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -75,9 +76,10 @@ public class mod_RpgRB {
 	
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("R_BChannel");
 		
-		RpgUtility.registerSpecialAbility(new WeaponAbility());
+		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("R_BChannel");
+		mod_RpgRB.Channel.register(new RBServerPacketHandler());
+
 		RpgUtility.registerAbilityWeapon(daggers);
 
 		FMLLog.info("Rpg++ Rogue and BeastMaster Installed. Renderers can be Used");
@@ -170,7 +172,7 @@ public class mod_RpgRB {
 				80, 1, true);
 
 		MinecraftForge.EVENT_BUS.register(new BeastMasterEvent());
-		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+
 	}
 
 	@EventHandler
