@@ -35,7 +35,7 @@ public class RPGEventHooks {
 	public static final int LEGS = 37;
 	public static final int CHEST = 38;
 	public static final int HELM = 39;
-	
+
 	public static Map<String, Integer> HealerTick = new ConcurrentHashMap();
 	public static Map<String, Integer> DiamondTick = new ConcurrentHashMap();
 	public static Map<String, Integer> LapisTick = new ConcurrentHashMap();
@@ -124,42 +124,44 @@ public class RPGEventHooks {
 	@SubscribeEvent
 	public void PlayerDamage(LivingHurtEvent evt) {
 
-		try {
-			/* ADDING EXTRA DAMAGE TO CLASS ARMOR COMBINATIONS */
-			Entity damager = evt.source.getSourceOfDamage();
-			if (damager != null)
-				if (damager instanceof EntityPlayer) {
-					float damagebonus = 0.0F;
-					PlayerRpgInventory inv = PlayerRpgInventory
-							.get((EntityPlayer) damager);
 
-					/* ==== LAPIS BONUS ATTACK==== */
-					ItemStack neck = inv.getNecklace();
-					ItemStack ringa = inv.getRing1();
-					ItemStack ringb = inv.getRing2();
-					ItemStack gloves = inv.getGloves();
-					if ((neck != null)
-							&& neck.getItem().equals(RpgInventoryMod.necklap))
-						damagebonus += 0.3F;
-					if ((ringa != null)
-							&& ringa.getItem().equals(RpgInventoryMod.ringlap))
-						damagebonus += RpgInventoryMod.donators
-								.contains(((EntityPlayer) damager)
-										.getCommandSenderName()) ? 0.2f : 0.1F;
-					if ((ringb != null)
-							&& ringb.getItem().equals(RpgInventoryMod.ringlap))
-						damagebonus += RpgInventoryMod.donators
-								.contains(((EntityPlayer) damager)
-										.getCommandSenderName()) ? 0.2f : 0.1F;
-					if ((gloves != null)
-							&& gloves.getItem().equals(
-									RpgInventoryMod.gloveslap))
-						damagebonus += 0.2F;
-					evt.ammount += MathHelper.floor_float(damagebonus
-							* (evt.ammount));
-				}
-		} catch (Throwable e) {
-		}
+		/* ADDING EXTRA DAMAGE TO CLASS ARMOR COMBINATIONS */
+		Entity damager = evt.source.getSourceOfDamage();
+		if (damager != null)
+			if (damager instanceof EntityPlayer) {
+				float damagebonus = 0.0F;
+				PlayerRpgInventory inv = PlayerRpgInventory
+						.get((EntityPlayer) damager);
+
+				/* ==== LAPIS BONUS ATTACK==== */
+				ItemStack neck = inv.getNecklace();
+				ItemStack ringa = inv.getRing1();
+				ItemStack ringb = inv.getRing2();
+				ItemStack gloves = inv.getGloves();
+				if ((neck != null)
+						&& neck.getItem().equals(RpgInventoryMod.necklap))
+					damagebonus += 0.3F;
+				if ((ringa != null)
+						&& ringa.getItem().equals(RpgInventoryMod.ringlap))
+					damagebonus += RpgInventoryMod.donators
+					.contains(((EntityPlayer) damager)
+							.getCommandSenderName()) ? 0.2f : 0.1F;
+				if ((ringb != null)
+						&& ringb.getItem().equals(RpgInventoryMod.ringlap))
+					damagebonus += RpgInventoryMod.donators
+					.contains(((EntityPlayer) damager)
+							.getCommandSenderName()) ? 0.2f : 0.1F;
+				if ((gloves != null)
+						&& gloves.getItem().equals(
+								RpgInventoryMod.gloveslap))
+					damagebonus += 0.2F;
+				System.out.println(evt.ammount + "+ ("+evt.ammount+ "*" + damagebonus+")");
+				evt.ammount += MathHelper.floor_float(damagebonus
+						* (evt.ammount));
+				
+				System.out.println(evt.ammount);
+			}
+
 		try {
 			/* DAMAGING AND REDUCING DAMAGE FOR SHIELDS */
 			if ((evt.entityLiving != null)
@@ -171,16 +173,23 @@ public class RPGEventHooks {
 				ItemStack shield = inv.getShield();
 				if (shield != null) {
 
-					if (((ItemRpgInvArmor) inv.getShield().getItem())
-							.boundArmorClass().equals(
-									RpgInventoryMod.playerClass))
+					System.out.println(((ItemRpgInvArmor) inv.getShield().getItem())
+							.boundArmorClass() + ((ItemRpgInvArmor) inv.getShield().getItem())
+							.shieldClass());
+					System.out.println(RpgInventoryMod.playerClass);
+					if ((((ItemRpgInvArmor) inv.getShield().getItem()).boundArmorClass() + ((ItemRpgInvArmor) inv.getShield().getItem()).shieldClass())
+							.equals(RpgInventoryMod.playerClass))
 						vanillaReduction += 0.6f;
 
 					if (vanillaReduction > 1f) {
 						damageReduction = 1f + (vanillaReduction - 1f);
 						vanillaReduction = 0;
 					}
+					System.out.println("1reduced : " + damageReduction + "\n2damage taken "+ evt.ammount);
+
 					evt.ammount -= damageReduction;
+
+					System.out.println("3total damage recieved" + evt.ammount);
 					// MathHelper.floor_float(((float) evt.ammount) *
 					// damageReduction);
 					damageItem(shield, inv, player, 1, 1);
@@ -199,9 +208,9 @@ public class RPGEventHooks {
 						evt.ammount -= 1;
 					else
 						evt.ammount -= MathHelper
-								.floor_float(evt.ammount
-										* (RpgInventoryMod.donators.contains(player
-												.getCommandSenderName()) ? 0.3f
+						.floor_float(evt.ammount
+								* (RpgInventoryMod.donators.contains(player
+										.getCommandSenderName()) ? 0.3f
 												: 0.2F));
 			}
 		} catch (Throwable e) {
@@ -228,15 +237,15 @@ public class RPGEventHooks {
 		try {
 			if (evt.entityLiving instanceof EntityPlayer)
 				PlayerRpgInventory.get((EntityPlayer) evt.entityLiving)
-						.markDirty();
-			
+				.markDirty();
+
 		} catch (Throwable ex) {
 		}
 
 		try {
 			if (evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer p = (EntityPlayer) evt.entityLiving;
-				
+
 				if (p != null) {
 
 					PlayerRpgInventory inv = PlayerRpgInventory.get(p);
@@ -350,20 +359,20 @@ public class RPGEventHooks {
 									Potion.invisibility.id, 20, 1));
 				}
 			}
-			
-			
+
+
 		} catch (Throwable ex) {
 		}
-		
-		
-//		System.out.println("reading this ... ");
-		
+
+
+		//		System.out.println("reading this ... ");
+
 		/**
 		 * This checks wether the player wears class armor, and a shield, or
 		 * just a shield (like vanilla shields)
 		 */
 		if (evt.entity instanceof EntityPlayer) {
-//			System.out.println("reading ...");
+			//			System.out.println("reading ...");
 
 			EntityPlayer player = (EntityPlayer)evt.entityLiving;
 			boolean skip = false;
