@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.models.MainShield;
 import cpw.mods.fml.relauncher.Side;
@@ -60,34 +60,34 @@ public class ItemRpgInvArmor extends Item {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer p1, List list,
 			boolean yesno) {
-		if (stack.getItem() == mod_RpgInventory.ringem) {
+		if (stack.getItem() == RpgInventoryMod.ringem) {
 			list.add(StatCollector
 					.translateToLocal("Left: Dispell Negative Effects"));
 			list.add(StatCollector
 					.translateToLocal("Right: Increased Mining Speed x4"));
 		}
 
-		if (stack.getItem() == mod_RpgInventory.neckem) {
+		if (stack.getItem() == RpgInventoryMod.neckem) {
 			list.add(StatCollector.translateToLocal("Water Breathing"));
 			list.add(StatCollector.translateToLocal("x2"));
 		}
 
-		if (stack.getItem() == mod_RpgInventory.glovesem) {
+		if (stack.getItem() == RpgInventoryMod.glovesem) {
 			list.add(StatCollector.translateToLocal("Resistance"));
 			list.add(StatCollector
 					.translateToLocal("Reduces damage taken by 20%"));
 		}
 
-		if ((stack.getItem() == mod_RpgInventory.ringdia)
-				|| (stack.getItem() == mod_RpgInventory.glovesdia)
-				|| (stack.getItem() == mod_RpgInventory.neckdia)) {
+		if ((stack.getItem() == RpgInventoryMod.ringdia)
+				|| (stack.getItem() == RpgInventoryMod.glovesdia)
+				|| (stack.getItem() == RpgInventoryMod.neckdia)) {
 			list.add(StatCollector.translateToLocal("Healing"));
 			list.add(StatCollector.translateToLocal("+15% Heal Speed"));
 		}
 
-		if ((stack.getItem() == mod_RpgInventory.ringgold)
-				|| (stack.getItem() == mod_RpgInventory.glovesbutter)
-				|| (stack.getItem() == mod_RpgInventory.neckgold))
+		if ((stack.getItem() == RpgInventoryMod.ringgold)
+				|| (stack.getItem() == RpgInventoryMod.glovesbutter)
+				|| (stack.getItem() == RpgInventoryMod.neckgold))
 			list.add(StatCollector.translateToLocal("Speed + 12.5%"));
 		// if (stack.getItem() == mod_RpgInventory.ringgold){
 		// list.add(StatCollector.translateToLocal("Jump +0.5 Block height"));
@@ -95,15 +95,15 @@ public class ItemRpgInvArmor extends Item {
 		// list.add(StatCollector.translateToLocal("Jump +0.25 Block height"));
 		// }
 
-		if ((stack.getItem() == mod_RpgInventory.ringlap)
-				|| (stack.getItem() == mod_RpgInventory.gloveslap)
-				|| (stack.getItem() == mod_RpgInventory.necklap)) {
+		if ((stack.getItem() == RpgInventoryMod.ringlap)
+				|| (stack.getItem() == RpgInventoryMod.gloveslap)
+				|| (stack.getItem() == RpgInventoryMod.necklap)) {
 			list.add(StatCollector.translateToLocal("Strength"));
-			if (stack.getItem() == mod_RpgInventory.ringlap)
+			if (stack.getItem() == RpgInventoryMod.ringlap)
 				list.add(StatCollector.translateToLocal("+0.5"));
-			if (stack.getItem() == mod_RpgInventory.gloveslap)
+			if (stack.getItem() == RpgInventoryMod.gloveslap)
 				list.add(StatCollector.translateToLocal("+1"));
-			if (stack.getItem() == mod_RpgInventory.necklap)
+			if (stack.getItem() == RpgInventoryMod.necklap)
 				list.add(StatCollector.translateToLocal("+1.5"));
 			list.add(StatCollector
 					.translateToLocal("-1 Dmg on Held Weapon every 20s"));
@@ -123,15 +123,15 @@ public class ItemRpgInvArmor extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
-		if (par1ItemStack.getItem() == mod_RpgInventory.cloakRed)
+		if (par1ItemStack.getItem() == RpgInventoryMod.cloakRed)
 			return 0xd2120e;
-		if (par1ItemStack.getItem() == mod_RpgInventory.cloakGreen)
+		if (par1ItemStack.getItem() == RpgInventoryMod.cloakGreen)
 			return 0x0fb15d;
-		if (par1ItemStack.getItem() == mod_RpgInventory.cloakYellow)
+		if (par1ItemStack.getItem() == RpgInventoryMod.cloakYellow)
 			return 0xf7cd09;
-		if (par1ItemStack.getItem() == mod_RpgInventory.cloakSub)
+		if (par1ItemStack.getItem() == RpgInventoryMod.cloakSub)
 			return 0x440001;
-		if (par1ItemStack.getItem() == mod_RpgInventory.cloakBlue)
+		if (par1ItemStack.getItem() == RpgInventoryMod.cloakBlue)
 			return 0x291ef6;
 
 		return 0xffffff;
@@ -161,7 +161,7 @@ public class ItemRpgInvArmor extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack) {
-		if (par1ItemStack.getItem() == mod_RpgInventory.cloakI)
+		if (par1ItemStack.getItem() == RpgInventoryMod.cloakI)
 			return true;
 		return false;
 	}

@@ -2,7 +2,7 @@ package addonBasic.items;
 
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.MainShield;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 import addonBasic.models.item.IronThorn;
 import addonBasic.models.item.ModelShield;
 import addonBasic.models.item.bookMage;
@@ -22,39 +22,39 @@ public class ItemRpgInventoryItem extends ItemRpgInvArmor {
 
 	@Override
 	public String boundArmorClass() {
-		if (this.equals(mod_addonBase.berserkerShield))
-			return mod_addonBase.CLASSBERSERKER;
-		if (this.equals(mod_addonBase.archerShield))
-			return mod_addonBase.CLASSARCHER;
-		if (this.equals(mod_addonBase.talisman))
-			return mod_addonBase.CLASSMAGE;
+		if (this.equals(RpgBaseAddon.berserkerShield))
+			return RpgBaseAddon.CLASSBERSERKER;
+		if (this.equals(RpgBaseAddon.archerShield))
+			return RpgBaseAddon.CLASSARCHER;
+		if (this.equals(RpgBaseAddon.talisman))
+			return RpgBaseAddon.CLASSMAGE;
 		return super.boundArmorClass();
 	}
 
 	@Override
 	public MainShield getShieldModel() {
-		if (this.equals(mod_addonBase.berserkerShield))
+		if (this.equals(RpgBaseAddon.berserkerShield))
 			return it;
-		if (this.equals(mod_addonBase.archerShield))
+		if (this.equals(RpgBaseAddon.archerShield))
 			return arch;
-		if (this.equals(mod_addonBase.talisman))
+		if (this.equals(RpgBaseAddon.talisman))
 			return book;
 		return super.getShieldModel();
 	}
 
 	@Override
 	public boolean isMantle() {
-		return this.equals(mod_addonBase.talisman) ? true : false;
+		return this.equals(RpgBaseAddon.talisman) ? true : false;
 	}
 
 	@Override
 	public String shieldClass() {
-		if (this.equals(mod_addonBase.berserkerShield))
-			return mod_addonBase.CLASSBERSERKERSHIELD;
-		if (this.equals(mod_addonBase.archerShield))
-			return mod_addonBase.CLASSARCHERSHIELD;
-		if (this.equals(mod_addonBase.talisman))
-			return mod_addonBase.CLASSMAGESHIELD;
+		if (this.equals(RpgBaseAddon.berserkerShield))
+			return RpgBaseAddon.CLASSBERSERKERSHIELD;
+		if (this.equals(RpgBaseAddon.archerShield))
+			return RpgBaseAddon.CLASSARCHERSHIELD;
+		if (this.equals(RpgBaseAddon.talisman))
+			return RpgBaseAddon.CLASSMAGESHIELD;
 		return super.shieldClass();
 	}
 	

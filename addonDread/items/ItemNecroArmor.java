@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import rpgInventory.utils.AbstractArmor;
-import addonDread.mod_RpgPlus;
+import addonDread.RpgDreadAddon;
 
 public class ItemNecroArmor extends AbstractArmor {
 
@@ -16,7 +16,7 @@ public class ItemNecroArmor extends AbstractArmor {
 
 	@Override
 	public String armorClassName() {
-		return mod_RpgPlus.CLASSNECRO;
+		return RpgDreadAddon.CLASSNECRO;
 	}
 
 	@Override
@@ -29,9 +29,9 @@ public class ItemNecroArmor extends AbstractArmor {
 				int type = ((ItemArmor) stack.getItem()).armorType;
 
 				if ((type == 1) || (type == 3))
-					armorModel = mod_RpgPlus.proxy.getArmorModel(0);
+					armorModel = RpgDreadAddon.proxy.getArmorModel(0);
 				else
-					armorModel = mod_RpgPlus.proxy.getArmorModel(1);
+					armorModel = RpgDreadAddon.proxy.getArmorModel(1);
 			}
 	}
 
@@ -39,11 +39,11 @@ public class ItemNecroArmor extends AbstractArmor {
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
 
-		if ((itemstack.getItem() == mod_RpgPlus.necroHood)
-				|| (itemstack.getItem() == mod_RpgPlus.necroChestplate)
-				|| (itemstack.getItem() == mod_RpgPlus.necroBoots))
+		if ((itemstack.getItem() == RpgDreadAddon.necroHood)
+				|| (itemstack.getItem() == RpgDreadAddon.necroChestplate)
+				|| (itemstack.getItem() == RpgDreadAddon.necroBoots))
 			return "armor:necro_1.png";
-		if (itemstack.getItem() == mod_RpgPlus.necroLeggings)
+		if (itemstack.getItem() == RpgDreadAddon.necroLeggings)
 			return "armor:necro_2.png";
 		return null;
 	}

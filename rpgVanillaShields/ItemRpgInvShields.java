@@ -21,10 +21,10 @@ public class ItemRpgInvShields extends ItemRpgInvArmor {
 	@Override
 	public MainShield getShieldModel() {
 
-		if (this.equals(mod_VanillaShields.shieldDiamond)
-				|| this.equals(mod_VanillaShields.shieldGold)
-				|| this.equals(mod_VanillaShields.shieldIron)
-				|| this.equals(mod_VanillaShields.shieldWood))
+		if (this.equals(RpgVanillaShields.shieldDiamond)
+				|| this.equals(RpgVanillaShields.shieldGold)
+				|| this.equals(RpgVanillaShields.shieldIron)
+				|| this.equals(RpgVanillaShields.shieldWood))
 			return van;
 
 		return new MainShield();
@@ -32,14 +32,14 @@ public class ItemRpgInvShields extends ItemRpgInvArmor {
 
 	@Override
 	public String shieldClass() {
-		if (this.equals(mod_VanillaShields.shieldWood))
-			return mod_VanillaShields.WOODENSHIELD;
-		if (this.equals(mod_VanillaShields.shieldIron))
-			return mod_VanillaShields.IRONSHIELD;
-		if (this.equals(mod_VanillaShields.shieldGold))
-			return mod_VanillaShields.GOLDENSHIELD;
-		if (this.equals(mod_VanillaShields.shieldDiamond))
-			return mod_VanillaShields.DIAMONDSHIELD;
+		if (this.equals(RpgVanillaShields.shieldWood))
+			return RpgVanillaShields.WOODENSHIELD;
+		if (this.equals(RpgVanillaShields.shieldIron))
+			return RpgVanillaShields.IRONSHIELD;
+		if (this.equals(RpgVanillaShields.shieldGold))
+			return RpgVanillaShields.GOLDENSHIELD;
+		if (this.equals(RpgVanillaShields.shieldDiamond))
+			return RpgVanillaShields.DIAMONDSHIELD;
 		return super.shieldClass();
 	}
 

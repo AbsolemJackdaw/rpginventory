@@ -27,7 +27,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.ServerPacketHandler;
 import addonMasters.entity.BMPetImpl;
@@ -91,7 +91,7 @@ public class PetGui extends GuiScreen {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(ServerPacketHandler.OPENRPGINV);
-				mod_RpgInventory.Channel.sendToServer(new FMLProxyPacket(buf,mod_RpgInventory.channelName));
+				RpgInventoryMod.Channel.sendToServer(new FMLProxyPacket(buf,RpgInventoryMod.channelName));
 				out.close();
 			} catch (Exception e) {
 			}
@@ -337,7 +337,7 @@ public class PetGui extends GuiScreen {
 				out.writeShort(petLevelsAdded);
 				out.writeShort(petcandyConsumed);
 
-				mod_RpgRB.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
+				RpgMastersAddon.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
 				out.close();
 			} catch (Exception e) {
 			}

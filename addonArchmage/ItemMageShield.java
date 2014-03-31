@@ -15,19 +15,19 @@ public class ItemMageShield extends ItemRpgInvArmor {
 
 	@Override
 	public String boundArmorClass() {
-		return mod_RpgMageSet.CLASSARCHMAGE;
+		return RpgArchmageAddon.CLASSARCHMAGE;
 	}
 
 	@Override
 	public MainShield getShieldModel() {
-		if (this.equals(mod_RpgMageSet.archBook))
+		if (this.equals(RpgArchmageAddon.archBook))
 			return book;
 		return super.getShieldModel();
 	}
 
 	@Override
 	public String shieldClass() {
-		return mod_RpgMageSet.CLASSARCHMAGESHIELD;
+		return RpgArchmageAddon.CLASSARCHMAGESHIELD;
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -69,7 +69,7 @@ public class RpgGui extends GuiContainer {
 	public void actionPerformed(GuiButton button) {
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		if (button.id == 0)
-			mod_RpgInventory.proxy.openGUI(p, 1);
+			RpgInventoryMod.proxy.openGUI(p, 1);
 
 	}
 

@@ -22,7 +22,7 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.CapeRenderer;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.gui.rpginv.RpgGui;
 import rpgInventory.item.armor.ItemRpgInvArmor;
@@ -236,12 +236,12 @@ public class RenderRpgPlayer {
 			float partialTick) {
 		float var11;
 		if ((cloak != null) && !player.getHideCape())
-			if ((cloak.getItem() == mod_RpgInventory.cloak)
-					|| (cloak.getItem() == mod_RpgInventory.cloakYellow)
-					|| (cloak.getItem() == mod_RpgInventory.cloakRed)
-					|| (cloak.getItem() == mod_RpgInventory.cloakBlue)
-					|| (cloak.getItem() == mod_RpgInventory.cloakGreen)
-					|| (cloak.getItem() == mod_RpgInventory.cloakSub)) {
+			if ((cloak.getItem() == RpgInventoryMod.cloak)
+					|| (cloak.getItem() == RpgInventoryMod.cloakYellow)
+					|| (cloak.getItem() == RpgInventoryMod.cloakRed)
+					|| (cloak.getItem() == RpgInventoryMod.cloakBlue)
+					|| (cloak.getItem() == RpgInventoryMod.cloakGreen)
+					|| (cloak.getItem() == RpgInventoryMod.cloakSub)) {
 				GL11.glPushMatrix();
 
 				mc.renderEngine.bindTexture(((ItemRpgInvArmor) cloak.getItem())
@@ -250,7 +250,7 @@ public class RenderRpgPlayer {
 				/**
 				 * Dev Capes
 				 */
-				if (cloak.getItem() == mod_RpgInventory.cloak)
+				if (cloak.getItem() == RpgInventoryMod.cloak)
 					if (CapeRenderer.capes != null)
 						if (CapeRenderer.playersWithCapes.contains(player
 								.getCommandSenderName()))
@@ -353,7 +353,7 @@ public class RenderRpgPlayer {
 				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 				GL11.glRotatef(rotation, 1F, 1F, 1F);
-				GL11.glCallList(mod_RpgInventory.proxy.getSphereID());
+				GL11.glCallList(RpgInventoryMod.proxy.getSphereID());
 
 			}
 		} else {
@@ -361,7 +361,7 @@ public class RenderRpgPlayer {
 			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 			GL11.glRotatef(rotation, 1F, 1F, 1F);
-			GL11.glCallList(mod_RpgInventory.proxy.getSphereID());
+			GL11.glCallList(RpgInventoryMod.proxy.getSphereID());
 		}
 		GL11.glColor4f(1, 1, 1, 1);
 		GL11.glPopMatrix();

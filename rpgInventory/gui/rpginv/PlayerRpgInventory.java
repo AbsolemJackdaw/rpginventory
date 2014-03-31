@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.RPGEventHooks;
 import rpgInventory.handlers.oldpackets.PacketInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
@@ -228,7 +228,7 @@ public class PlayerRpgInventory implements IInventory,
 		// if (EnumRpgClass.getPlayerClasses(player).contains(rpgenum)) {
 		// return true;
 		// }
-		if (rpgenum.equals(mod_RpgInventory.playerClass))
+		if (rpgenum.equals(RpgInventoryMod.playerClass))
 			return true;
 		return false;
 	}
@@ -248,31 +248,31 @@ public class PlayerRpgInventory implements IInventory,
 			ItemRpgInvArmor tmp = (ItemRpgInvArmor) itemstack.getItem();
 			switch (i) {
 			case 0:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.NECKLACE)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.NECKLACE)
 					return true;
 				return false;
 			case 1:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.SHIELD)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.SHIELD)
 					return true;
 				return false;
 			case 2:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CLOAK)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.CLOAK)
 					return true;
 				return false;
 			case 3:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.GLOVES)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.GLOVES)
 					return true;
 				return false;
 			case 4:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.RING)
 					return true;
 				return false;
 			case 5:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.RING)
 					return true;
 				return false;
 			case 6:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CRYSTAL)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.CRYSTAL)
 					if (itemstack.getItemDamage() > 0)
 						return true;
 				return false;
@@ -384,10 +384,10 @@ public class PlayerRpgInventory implements IInventory,
 			// }
 			// }
 
-			if (((getNecklace() != null) && (getNecklace().getItem() == mod_RpgInventory.neckdia))
-					|| ((getRing1() != null) && (getRing1().getItem() == mod_RpgInventory.ringdia))
-					|| ((getRing2() != null) && (getRing2().getItem() == mod_RpgInventory.ringdia))
-					|| ((getGloves() != null) && (getGloves().getItem() == mod_RpgInventory.glovesdia)))
+			if (((getNecklace() != null) && (getNecklace().getItem() == RpgInventoryMod.neckdia))
+					|| ((getRing1() != null) && (getRing1().getItem() == RpgInventoryMod.ringdia))
+					|| ((getRing2() != null) && (getRing2().getItem() == RpgInventoryMod.ringdia))
+					|| ((getGloves() != null) && (getGloves().getItem() == RpgInventoryMod.glovesdia)))
 				addtoticks[2] = true;
 
 			// TODO move to baseAddon

@@ -37,17 +37,17 @@ public class MSClientProxy extends MSCommonProxy {
 
 		if (RpgConfig.instance.render3D) {
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgMageSet.frostStaff, new StaffRenderer());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgMageSet.fireStaff,
+					RpgArchmageAddon.frostStaff, new StaffRenderer());
+			MinecraftForgeClient.registerItemRenderer(RpgArchmageAddon.fireStaff,
 					new StaffRenderer());
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgMageSet.earthStaff, new StaffRenderer());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgMageSet.windStaff,
+					RpgArchmageAddon.earthStaff, new StaffRenderer());
+			MinecraftForgeClient.registerItemRenderer(RpgArchmageAddon.windStaff,
 					new StaffRenderer());
 			MinecraftForgeClient.registerItemRenderer(
-					mod_RpgMageSet.ultimateStaff, new StaffRenderer());
+					RpgArchmageAddon.ultimateStaff, new StaffRenderer());
 
-			MinecraftForgeClient.registerItemRenderer(mod_RpgMageSet.archBook,
+			MinecraftForgeClient.registerItemRenderer(RpgArchmageAddon.archBook,
 					new BookRenderer(new bookMage(),
 							"subaraki:jewels/archMageShield.png"));
 		}

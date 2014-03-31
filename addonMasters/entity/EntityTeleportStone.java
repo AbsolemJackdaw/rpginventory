@@ -12,9 +12,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import addonMasters.mod_RpgRB;
+import addonMasters.RpgMastersAddon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -51,12 +51,12 @@ public class EntityTeleportStone extends EntityThrowable {
 						.get((EntityPlayer) getThrower());
 
 				if ((inv.getShield() != null)
-						&& (inv.getShield().getItem() == mod_RpgRB.daggers))
+						&& (inv.getShield().getItem() == RpgMastersAddon.daggers))
 					if (par1MovingObjectPosition.entityHit instanceof EntityPlayer) {
 						EntityPlayer player = (EntityPlayer) par1MovingObjectPosition.entityHit;
 						player.addPotionEffect(new PotionEffect(
 								Potion.blindness.id,
-								mod_RpgInventory.donators.contains(player
+								RpgInventoryMod.donators.contains(player
 										.getDisplayName()) ? 5 * 20 : 3 * 20, 2));
 					}
 			}

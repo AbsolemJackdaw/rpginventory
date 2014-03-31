@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBufInputStream;
 
 import java.io.DataInputStream;
 
-import addonMasters.mod_RpgRB;
+import addonMasters.RpgMastersAddon;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -50,7 +50,7 @@ public class PacketPetGui {
 			nbtCrystal.setTag("RPGPetInfo", nbtPet);
 
 			p.addExperienceLevel(-playerLevelsLost);
-			ItemStack newcrystal = new ItemStack(mod_RpgRB.crystal, 1,
+			ItemStack newcrystal = new ItemStack(RpgMastersAddon.crystal, 1,
 					crystal.getItemDamage());
 			newcrystal.setTagCompound(nbtCrystal);
 			newcrystal.setStackDisplayName(petname);

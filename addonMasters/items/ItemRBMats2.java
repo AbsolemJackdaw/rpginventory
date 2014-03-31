@@ -8,9 +8,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import addonMasters.mod_RpgRB;
+import addonMasters.RpgMastersAddon;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
 import addonMasters.entity.IPet;
@@ -48,10 +48,10 @@ public class ItemRBMats2 extends Item {
 		//			player.addChatMessage(new ChatComponentText("walla"));
 
 //		
-		System.out.println(mod_RpgInventory.playerClass);
+		System.out.println(RpgInventoryMod.playerClass);
 		
 			if (!world.isRemote && (player.ridingEntity == null) ){
-				if (mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSBEASTMASTER)){
+				if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER)){
 				System.out.println("2");
 
 				try {

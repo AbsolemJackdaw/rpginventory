@@ -9,9 +9,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.CommonTickHandler;
-import addonMasters.mod_RpgRB;
+import addonMasters.RpgMastersAddon;
 import addonMasters.entity.EntityTeleportStone;
 
 public class PacketTeleport {
@@ -22,10 +22,10 @@ public class PacketTeleport {
 		if (!world.isRemote) {
 			ItemStack dagger = p.getCurrentEquippedItem();
 
-			if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+			if (!RpgInventoryMod.developers.contains(p.getDisplayName()
 					.toLowerCase())) {
-				if (!mod_RpgInventory.playerClass
-						.contains(mod_RpgRB.CLASSROGUE)) {
+				if (!RpgInventoryMod.playerClass
+						.contains(RpgMastersAddon.CLASSROGUE)) {
 					return;
 				}
 			}
@@ -35,7 +35,7 @@ public class PacketTeleport {
 			}
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				CommonTickHandler.globalCooldownMap
-						.put(p.getDisplayName(), (mod_RpgInventory.donators
+						.put(p.getDisplayName(), (RpgInventoryMod.donators
 								.contains(p.getDisplayName()) ? 3 : 5) * 20);
 				if ((dagger.getItemDamage() + 3) >= dagger.getMaxDamage()) {
 					dagger.damageItem(
@@ -43,7 +43,7 @@ public class PacketTeleport {
 					p.renderBrokenItemStack(dagger);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
-					if (!mod_RpgInventory.developers.contains(p
+					if (!RpgInventoryMod.developers.contains(p
 							.getDisplayName().toLowerCase())) {
 						dagger.damageItem(3, p);
 					}

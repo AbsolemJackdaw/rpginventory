@@ -15,7 +15,7 @@ public class RBTab extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
-		return mod_RpgRB.beastAxe;
+		return RpgMastersAddon.beastAxe;
 	}
 
 	@Override

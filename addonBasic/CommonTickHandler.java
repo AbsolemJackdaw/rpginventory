@@ -34,7 +34,7 @@ public class CommonTickHandler {
 					if (player.getCurrentEquippedItem() != null)
 						if ((player.getCurrentEquippedItem().getItem() instanceof ItemBow)
 								|| player.getCurrentEquippedItem().getItem()
-										.equals(mod_addonBase.elfbow))
+										.equals(RpgBaseAddon.elfbow))
 							if (!player.isUsingItem()) {
 								ArcherRepairTick.put(
 										player.getCommandSenderName(), 60);
@@ -67,7 +67,7 @@ public class CommonTickHandler {
 
 					if (player.getCurrentEquippedItem() != null)
 						if (player.getCurrentEquippedItem().getItem()
-								.equals(mod_addonBase.staf))
+								.equals(RpgBaseAddon.staf))
 							if (player.isUsingItem()) {
 								RPGEventHooks.HealerTick.put(
 										player.getCommandSenderName(), 30);

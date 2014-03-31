@@ -10,9 +10,9 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import addonArchmage.EntityElementalBlock;
-import addonArchmage.mod_RpgMageSet;
+import addonArchmage.RpgArchmageAddon;
 import addonBasic.items.weapons.ItemRpgSword;
 
 public class ItemElementalStaff extends ItemRpgSword {
@@ -88,8 +88,8 @@ public class ItemElementalStaff extends ItemRpgSword {
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World par2World,
 			EntityPlayer p) {
-		if (mod_RpgInventory.playerClass.contains(mod_RpgMageSet.CLASSARCHMAGE)
-				|| mod_RpgInventory.developers.contains(p.getDisplayName()
+		if (RpgInventoryMod.playerClass.contains(RpgArchmageAddon.CLASSARCHMAGE)
+				|| RpgInventoryMod.developers.contains(p.getDisplayName()
 						.toLowerCase()))
 			if (p.isUsingItem())
 				p.stopUsingItem();
@@ -150,7 +150,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 				EntityElementalBlock var9 = new EntityElementalBlock(
 						p.worldObj, p, var7 * 2, this.type, limit);
 				p.worldObj.spawnEntityInWorld(var9);
-				if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+				if (!RpgInventoryMod.developers.contains(p.getDisplayName()
 						.toLowerCase()))
 					nbt.setFloat("EnergyCharge",
 							nbt.getFloat("EnergyCharge") + 1.0F);

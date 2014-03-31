@@ -6,9 +6,9 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import addonDread.mod_RpgPlus;
+import addonDread.RpgDreadAddon;
 import addonDread.minions.IMinion;
 import addonDread.minions.MinionRegistry;
 
@@ -23,8 +23,8 @@ public class PacketNecroSpecial {
 		}
 
 		System.out.println("paf");
-		if (weapon.getItem().equals(mod_RpgPlus.necro_weapon)
-				&& mod_RpgInventory.playerClass	.contains(mod_RpgPlus.CLASSNECRO)) {
+		if (weapon.getItem().equals(RpgDreadAddon.necro_weapon)
+				&& RpgInventoryMod.playerClass	.contains(RpgDreadAddon.CLASSNECRO)) {
 			if (MinionRegistry.playerMinions.containsKey(p.getDisplayName())) {
 				List<IMinion> list = MinionRegistry.playerMinions.get(p
 						.getDisplayName());

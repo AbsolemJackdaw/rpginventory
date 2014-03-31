@@ -14,7 +14,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 
 public class ItemClaymore extends ItemRpgWeapon {
 
@@ -72,10 +72,10 @@ public class ItemClaymore extends ItemRpgWeapon {
 			Item item2 = var1.getItem();
 			Item item3 = var0.getItem();
 
-			if (item.equals(mod_addonBase.berserkerHood)
-					&& item1.equals(mod_addonBase.berserkerChest)
-					&& item2.equals(mod_addonBase.berserkerLegs)
-					&& item3.equals(mod_addonBase.berserkerBoots)) {
+			if (item.equals(RpgBaseAddon.berserkerHood)
+					&& item1.equals(RpgBaseAddon.berserkerChest)
+					&& item2.equals(RpgBaseAddon.berserkerLegs)
+					&& item3.equals(RpgBaseAddon.berserkerBoots)) {
 				par2World.playSoundEffect(par3EntityPlayer.posX,
 						par3EntityPlayer.posY, par3EntityPlayer.posZ,
 						"ambient.weather.thunder", 100.0F,

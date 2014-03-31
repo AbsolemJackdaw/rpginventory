@@ -3,7 +3,7 @@ package addonMasters;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 import addonBasic.packets.ClientPacketHandler;
 import addonMasters.packets.RBServerPacketHandler;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
@@ -20,12 +20,12 @@ public class WeaponAbility implements ISpecialAbility {
 
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 
-		if(RpgUtility.canSpecial(p, mod_RpgRB.daggers)){
+		if(RpgUtility.canSpecial(p, RpgMastersAddon.daggers)){
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(RBServerPacketHandler.TELEPORT);
-				mod_RpgRB.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
+				RpgMastersAddon.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
 				out.close();
 			} catch (Exception e) {
 			}

@@ -9,9 +9,9 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 import addonBasic.models.weapons.ModelSoulSphere;
 
 public class SoulSphereRender extends RpgItemRenderer {
@@ -42,9 +42,9 @@ public class SoulSphereRender extends RpgItemRenderer {
 				EntityPlayer p = (EntityPlayer) data[1];
 				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
-				if (mod_RpgInventory.playerClass.contains("archMage")
-						|| mod_RpgInventory.playerClass
-								.contains(mod_addonBase.CLASSMAGE)) {
+				if (RpgInventoryMod.playerClass.contains("archMage")
+						|| RpgInventoryMod.playerClass
+								.contains(RpgBaseAddon.CLASSMAGE)) {
 					swordmodel.renderFloatingShpere((Entity) data[1], turn,
 							0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 					swordmodel.renderFloatingShpere((Entity) data[1],
@@ -70,9 +70,9 @@ public class SoulSphereRender extends RpgItemRenderer {
 				EntityPlayer p = (EntityPlayer) data[1];
 				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
-				if (mod_RpgInventory.playerClass.contains("archMage")
-						|| mod_RpgInventory.playerClass
-								.contains(mod_addonBase.CLASSMAGE)) {
+				if (RpgInventoryMod.playerClass.contains("archMage")
+						|| RpgInventoryMod.playerClass
+								.contains(RpgBaseAddon.CLASSMAGE)) {
 					swordmodel.renderFloatingShpere((Entity) data[1], turn,
 							0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 					swordmodel.renderFloatingShpere((Entity) data[1],

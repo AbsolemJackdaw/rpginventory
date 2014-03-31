@@ -17,7 +17,7 @@ import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.Sphere;
 
 import rpgInventory.CapeRenderer;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.BookGui;
 import rpgInventory.handlers.ClientTickHandler;
 import rpgInventory.handlers.RPGKeyHandler;
@@ -47,7 +47,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void load() {
-		mod_RpgInventory.Channel.register(new ClientPacketHandler());
+		RpgInventoryMod.Channel.register(new ClientPacketHandler());
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 		FMLCommonHandler.instance().bus().register(new RPGKeyHandler());
 

@@ -11,9 +11,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.CommonTickHandler;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 
 public class PacketBerserker {
 
@@ -28,16 +28,16 @@ public class PacketBerserker {
 			ItemStack var11 = p.inventory.armorItemInSlot(1);
 			ItemStack var01 = p.inventory.armorItemInSlot(0);
 
-			if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+			if (!RpgInventoryMod.developers.contains(p.getDisplayName()
 					.toLowerCase())) {
 				if ((item1 == null) || (var31 == null) || (var21 == null)
 						|| (var11 == null) || (var01 == null))
 					return;
-				if ((item1.getItem() != mod_addonBase.hammer)
-						|| (var31.getItem() != mod_addonBase.berserkerHood)
-						|| (var21.getItem() != mod_addonBase.berserkerChest)
-						|| (var11.getItem() != mod_addonBase.berserkerLegs)
-						|| (var01.getItem() != mod_addonBase.berserkerBoots))
+				if ((item1.getItem() != RpgBaseAddon.hammer)
+						|| (var31.getItem() != RpgBaseAddon.berserkerHood)
+						|| (var21.getItem() != RpgBaseAddon.berserkerChest)
+						|| (var11.getItem() != RpgBaseAddon.berserkerLegs)
+						|| (var01.getItem() != RpgBaseAddon.berserkerBoots))
 					return;
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(p
@@ -45,12 +45,12 @@ public class PacketBerserker {
 				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				CommonTickHandler.globalCooldownMap
-						.put(p.getDisplayName(), (mod_RpgInventory.donators
+						.put(p.getDisplayName(), (RpgInventoryMod.donators
 								.contains(p.getDisplayName()) ? 6 : 7) * 20);
 				if ((item1.getItemDamage() + 3) >= item1.getMaxDamage()) {
 					// Trigger item break stuff
 					// Only damage what is left
-					if (!mod_RpgInventory.developers.contains(p
+					if (!RpgInventoryMod.developers.contains(p
 							.getDisplayName().toLowerCase()))
 						item1.damageItem(
 								item1.getMaxDamage() - item1.getItemDamage(), p);
@@ -58,16 +58,16 @@ public class PacketBerserker {
 					p.renderBrokenItemStack(item1);
 					// delete the item
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else if (!mod_RpgInventory.developers.contains(p
+				} else if (!RpgInventoryMod.developers.contains(p
 						.getDisplayName().toLowerCase()))
 					item1.damageItem(3, p);
 
 				float range = 4.0f;
-				if (mod_RpgInventory.developers.contains(p.getDisplayName()
+				if (RpgInventoryMod.developers.contains(p.getDisplayName()
 						.toLowerCase()))
 					range = 8.0f;
 				else
-					range = mod_RpgInventory.donators.contains(p
+					range = RpgInventoryMod.donators.contains(p
 							.getDisplayName()) ? 5.5f : 4.0f;
 
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
@@ -83,22 +83,22 @@ public class PacketBerserker {
 								double xdir = el.posX - p.posX;
 								double zdir = el.posZ - p.posZ;
 													            
-								if (mod_RpgInventory.developers.contains(p
+								if (RpgInventoryMod.developers.contains(p
 										.getDisplayName().toLowerCase())) {
 									el.motionX = xdir * 3F;
 									el.motionY = 3F;
 									el.motionZ = zdir * 3F;
 								} else {
 									el.motionX = xdir
-											* (mod_RpgInventory.donators
+											* (RpgInventoryMod.donators
 													.contains(p
 															.getDisplayName()) ? 2.2f
 													: 1.5F);
-									el.motionY = mod_RpgInventory.donators
+									el.motionY = RpgInventoryMod.donators
 											.contains(p.getDisplayName()) ? 2.2f
 											: 3F;
 									el.motionZ = zdir
-											* (mod_RpgInventory.donators
+											* (RpgInventoryMod.donators
 													.contains(p
 															.getDisplayName()) ? 2.2f
 													: 3F);
@@ -107,7 +107,7 @@ public class PacketBerserker {
 							}
 							el.attackEntityFrom(DamageSource
 									.causePlayerDamage(p),
-									mod_RpgInventory.donators.contains(p
+									RpgInventoryMod.donators.contains(p
 											.getDisplayName()) ? 10 : 8);
 						}
 			} else

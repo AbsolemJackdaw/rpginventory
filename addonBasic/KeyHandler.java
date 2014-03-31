@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.utils.ISpecialAbility;
 import rpgInventory.utils.RpgUtility;
 import addonBasic.packets.ClientPacketHandler;
@@ -26,25 +26,25 @@ public class KeyHandler implements ISpecialAbility {
 
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 
-		if(RpgUtility.canSpecial(p, mod_addonBase.hammer)){			
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.hammer)){			
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(ClientPacketHandler.BERSERKER);
-				mod_addonBase.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
+				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
 				out.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
-		if(RpgUtility.canSpecial(p, mod_addonBase.wand)){			
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.wand)){			
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(ClientPacketHandler.MAGE2);
 				//				if(!p.worldObj.isRemote)
-				mod_addonBase.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
+				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
 				out.close();
 
 			} catch (Exception e) {
@@ -53,13 +53,13 @@ public class KeyHandler implements ISpecialAbility {
 		}
 
 
-		if(RpgUtility.canSpecial(p, mod_addonBase.staf)){			
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.staf)){			
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(ClientPacketHandler.MAGE1);
 				//				if(!p.worldObj.isRemote)
-				mod_addonBase.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
+				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
 				out.close();
 
 			} catch (Exception e) {
@@ -67,7 +67,7 @@ public class KeyHandler implements ISpecialAbility {
 			}
 		}
 
-		if(RpgUtility.canSpecial(p, mod_addonBase.elfbow)){			
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.elfbow)){			
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -75,7 +75,7 @@ public class KeyHandler implements ISpecialAbility {
 
 				EntityLivingBase target = isTargetingEntity(
 						Minecraft.getMinecraft().thePlayer,
-						mod_RpgInventory.donators.contains(Minecraft
+						RpgInventoryMod.donators.contains(Minecraft
 								.getMinecraft().thePlayer
 								.getCommandSenderName()) ? 60 : 40);
 				if (target != null) {
@@ -83,7 +83,7 @@ public class KeyHandler implements ISpecialAbility {
 					out.writeInt((int) Math.floor(target.posX));
 					out.writeInt((int) Math.floor(target.posY));
 					out.writeInt((int) Math.floor(target.posZ));
-					mod_addonBase.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
+					RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
 					out.close();
 				}
 				} catch (Exception e) {

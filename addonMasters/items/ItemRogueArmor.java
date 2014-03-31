@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import rpgInventory.utils.AbstractArmor;
-import addonMasters.mod_RpgRB;
+import addonMasters.RpgMastersAddon;
 
 public class ItemRogueArmor extends AbstractArmor {
 
@@ -17,7 +17,7 @@ public class ItemRogueArmor extends AbstractArmor {
 
 	@Override
 	public String armorClassName() {
-		return mod_RpgRB.CLASSROGUE;
+		return RpgMastersAddon.CLASSROGUE;
 	}
 
 	@Override
@@ -30,9 +30,9 @@ public class ItemRogueArmor extends AbstractArmor {
 				int type = ((ItemArmor) stack.getItem()).armorType;
 
 				if ((type == 1) || (type == 3))
-					armorModel = mod_RpgRB.proxy.getArmorModel(0);
+					armorModel = RpgMastersAddon.proxy.getArmorModel(0);
 				else
-					armorModel = mod_RpgRB.proxy.getArmorModel(1);
+					armorModel = RpgMastersAddon.proxy.getArmorModel(1);
 			}
 
 	}
@@ -40,11 +40,11 @@ public class ItemRogueArmor extends AbstractArmor {
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
-		if ((itemstack.getItem() == mod_RpgRB.rogueHood)
-				|| (itemstack.getItem() == mod_RpgRB.rogueChest)
-				|| (itemstack.getItem() == mod_RpgRB.rogueBoots))
+		if ((itemstack.getItem() == RpgMastersAddon.rogueHood)
+				|| (itemstack.getItem() == RpgMastersAddon.rogueChest)
+				|| (itemstack.getItem() == RpgMastersAddon.rogueBoots))
 			return "armor:rogue_1.png";
-		if (itemstack.getItem() == mod_RpgRB.rogueLegs)
+		if (itemstack.getItem() == RpgMastersAddon.rogueLegs)
 			return "armor:rogue_2.png";
 		return super.getArmorTexture(itemstack, entity, slot, type);
 	}

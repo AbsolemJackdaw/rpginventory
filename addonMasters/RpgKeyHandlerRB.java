@@ -31,7 +31,7 @@ public class RpgKeyHandlerRB extends RPGKeyHandler {
 	@Override
 	public void specialAbility(ItemStack item) {
 		try {
-			if (item.getItem().equals(mod_RpgRB.daggers)) {
+			if (item.getItem().equals(RpgMastersAddon.daggers)) {
 				ByteArrayOutputStream bt = new ByteArrayOutputStream();
 				DataOutputStream out = new DataOutputStream(bt);
 				try {

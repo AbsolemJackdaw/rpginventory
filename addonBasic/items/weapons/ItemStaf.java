@@ -9,9 +9,9 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 
 public class ItemStaf extends ItemRpgSword {
 
@@ -51,8 +51,8 @@ public class ItemStaf extends ItemRpgSword {
 
 		// exception for archmage : this should be evaded any time, but I don't
 		// have a choice here.
-		if (mod_RpgInventory.playerClass.contains(mod_addonBase.CLASSMAGE)
-				|| mod_RpgInventory.playerClass.contains("archMage"))
+		if (RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSMAGE)
+				|| RpgInventoryMod.playerClass.contains("archMage"))
 			p.setItemInUse(is, this.getMaxItemUseDuration(is));
 		return is;
 	}

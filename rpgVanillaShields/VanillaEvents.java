@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -14,7 +14,7 @@ public class VanillaEvents {
 
 	public void damageItem(ItemStack item, PlayerRpgInventory inv,
 			EntityPlayer p, int slot, int amount) {
-		if (mod_RpgInventory.developers.contains(p.getDisplayName()
+		if (RpgInventoryMod.developers.contains(p.getDisplayName()
 				.toLowerCase()))
 			return;
 		try {
@@ -51,19 +51,19 @@ public class VanillaEvents {
 							if ((shield != null)
 									&& (shield.getItem() instanceof ItemRpgInvShields)) {
 
-								if (mod_RpgInventory.playerClass
-										.contains(mod_VanillaShields.WOODENSHIELD))
+								if (RpgInventoryMod.playerClass
+										.contains(RpgVanillaShields.WOODENSHIELD))
 									vanillaReduction += 0.27f;
-								else if (mod_RpgInventory.playerClass
-										.contains(mod_VanillaShields.IRONSHIELD))
+								else if (RpgInventoryMod.playerClass
+										.contains(RpgVanillaShields.IRONSHIELD))
 									vanillaReduction += 0.4f;
-								else if (mod_RpgInventory.playerClass
-										.contains(mod_VanillaShields.GOLDENSHIELD))
+								else if (RpgInventoryMod.playerClass
+										.contains(RpgVanillaShields.GOLDENSHIELD))
 									vanillaReduction += 0.7f;
-								else if (mod_RpgInventory.playerClass
-										.contains(mod_VanillaShields.DIAMONDSHIELD))
+								else if (RpgInventoryMod.playerClass
+										.contains(RpgVanillaShields.DIAMONDSHIELD))
 									vanillaReduction += 1.50f;
-								vanillaReduction += mod_RpgInventory.donators
+								vanillaReduction += RpgInventoryMod.donators
 										.contains(player.getCommandSenderName()) ? 0.20f
 										: 0;
 								if (vanillaReduction > 1f) {

@@ -8,9 +8,9 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import addonArchmage.weapons.ItemElementalStaff;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -21,13 +21,13 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = mod_RpgMageSet.id, name = mod_RpgMageSet.id, version = "RpgInv8.4", dependencies = "required-after:RpgBase")
+@Mod(modid = RpgArchmageAddon.id, name = RpgArchmageAddon.id, version = "RpgInv8.4", dependencies = "required-after:RpgBase")
 // @NetworkMod(clientSideRequired = true, serverSideRequired = false,
 // clientPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgMSPacket" },
 // packetHandler = RpgMSPacketHandler.class), serverPacketHandlerSpec =
 // @SidedPacketHandler(channels = { "RpgMSPacket" }, packetHandler =
 // RpgMSPacketHandler.class))
-public class mod_RpgMageSet {
+public class RpgArchmageAddon {
 
 	public static final String name = "RPGMS";
 	public static final String id = "RpgInv Mage Addon";
@@ -70,36 +70,36 @@ public class mod_RpgMageSet {
                 Items.nether_star);
 		GameRegistry.addRecipe(new ItemStack(windStaff),
                 "III", "DSD", "III", 'I', Items.feather, 'D', Items.diamond, 'S',
-                mod_addonBase.staf);
+                RpgBaseAddon.staf);
 		GameRegistry.addRecipe(new ItemStack(frostStaff),
                 "III", "DSD", "III", 'I', Blocks.ice, 'D', Items.diamond, 'S',
-                mod_addonBase.staf);
+                RpgBaseAddon.staf);
 		GameRegistry.addRecipe(new ItemStack(earthStaff),
                 "III", "DSD", "III", 'I', Blocks.grass, 'D', Items.diamond, 'S',
-                mod_addonBase.staf);
+                RpgBaseAddon.staf);
 		GameRegistry.addRecipe(new ItemStack(fireStaff),
                 "III", "DSD", "III", 'I', Items.blaze_powder, 'D', Items.diamond, 'S',
-                mod_addonBase.staf);
+                RpgBaseAddon.staf);
 		GameRegistry.addRecipe(new ItemStack(archBook),
                 "III", "IBI", " I ", 'I', new ItemStack(Items.dye, 1, 4), 'B',
                 Items.book);
 		GameRegistry.addRecipe(new ItemStack(archMageBoots),
-                "III", "IBI", "III", 'B', mod_addonBase.mageboots, 'I',
+                "III", "IBI", "III", 'B', RpgBaseAddon.mageboots, 'I',
                 Items.gold_nugget);
 		GameRegistry.addRecipe(new ItemStack(archmageLegs),
-                "III", "IBI", "III", 'B', mod_addonBase.magepants, 'I',
+                "III", "IBI", "III", 'B', RpgBaseAddon.magepants, 'I',
                 Items.gold_nugget);
 		GameRegistry.addRecipe(new ItemStack(archmageChest),
-                "III", "IBI", "III", 'B', mod_addonBase.magegown, 'I',
+                "III", "IBI", "III", 'B', RpgBaseAddon.magegown, 'I',
                 Items.gold_nugget);
 		GameRegistry.addRecipe(new ItemStack(archmageHood),
-				"III", "IBI", "III", 'B', mod_addonBase.magehood, 'I',
+				"III", "IBI", "III", 'B', RpgBaseAddon.magehood, 'I',
 				Items.gold_nugget );
 
 		// EntityRegistry.registerGlobalEntityID(EntityElementalBlocks.class,
 		// "Elemental", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityElementalBlock.class,
-				"Elemental", mod_RpgInventory.instance.getUniqueID(), this,
+				"Elemental", RpgInventoryMod.instance.getUniqueID(), this,
 				250, 1, true);
 		LanguageRegistry.instance().addStringLocalization(
 				"entity.EntityElementalBlock.name", "MageElemental");
@@ -160,7 +160,7 @@ public class mod_RpgMageSet {
 				String itemNameCropped = itemName.substring(itemName
 						.indexOf(".") + 1);
 
-				allItems[i].setTextureName(mod_RpgInventory.name + ":"
+				allItems[i].setTextureName(RpgInventoryMod.name + ":"
 						+ itemNameCropped);
 
 				GameRegistry.registerItem(allItems[i],

@@ -11,9 +11,9 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.CommonTickHandler;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 
 public class PacketMageHeal {
 
@@ -32,16 +32,16 @@ public class PacketMageHeal {
 			ItemStack var2 = p.inventory.armorItemInSlot(2);
 			ItemStack var1 = p.inventory.armorItemInSlot(1);
 			ItemStack var0 = p.inventory.armorItemInSlot(0);
-			if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+			if (!RpgInventoryMod.developers.contains(p.getDisplayName()
 					.toLowerCase())) {
 				if ((item == null) || (var3 == null) || (var2 == null)
 						|| (var1 == null) || (var0 == null))
 					return;
-				if ((item.getItem() != mod_addonBase.staf)
-						|| (var3.getItem() != mod_addonBase.magehood)
-						|| (var2.getItem() != mod_addonBase.magegown)
-						|| (var1.getItem() != mod_addonBase.magepants)
-						|| (var0.getItem() != mod_addonBase.mageboots))
+				if ((item.getItem() != RpgBaseAddon.staf)
+						|| (var3.getItem() != RpgBaseAddon.magehood)
+						|| (var2.getItem() != RpgBaseAddon.magegown)
+						|| (var1.getItem() != RpgBaseAddon.magepants)
+						|| (var0.getItem() != RpgBaseAddon.mageboots))
 					return;
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(p
@@ -60,7 +60,7 @@ public class PacketMageHeal {
 					// delete the item
 					p.renderBrokenItemStack(item);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else if (!mod_RpgInventory.developers.contains(p
+				} else if (!RpgInventoryMod.developers.contains(p
 						.getDisplayName().toLowerCase()))
 					item.damageItem(3, p);
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
@@ -72,10 +72,10 @@ public class PacketMageHeal {
 					for (EntityLivingBase el : entl)
 						if (el != null) {
 							double dist = p.getDistanceSqToEntity(el);
-							double potstrength = 1.0D - (Math.sqrt(dist) / (mod_RpgInventory.donators
+							double potstrength = 1.0D - (Math.sqrt(dist) / (RpgInventoryMod.donators
 									.contains(p.getDisplayName()) ? 6.0D : 4.0D));
 							Potion.heal.affectEntity(p, el,
-									(mod_RpgInventory.donators.contains(p
+									(RpgInventoryMod.donators.contains(p
 											.getDisplayName()) ? 4 : 2),
 									potstrength);
 						}

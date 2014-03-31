@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import rpgInventory.utils.AbstractArmor;
-import addonDread.mod_RpgPlus;
+import addonDread.RpgDreadAddon;
 
 public class ItemPaladinArmor extends AbstractArmor {
 
@@ -16,7 +16,7 @@ public class ItemPaladinArmor extends AbstractArmor {
 	@Override
 	public String armorClassName() {
 		// TODO Auto-generated method stub
-		return mod_RpgPlus.CLASSPALADIN;
+		return RpgDreadAddon.CLASSPALADIN;
 	}
 
 	@Override
@@ -28,9 +28,9 @@ public class ItemPaladinArmor extends AbstractArmor {
 				int type = ((ItemArmor) stack.getItem()).armorType;
 
 				if ((type == 1) || (type == 3))
-					armorModel = mod_RpgPlus.proxy.getArmorModel(2);
+					armorModel = RpgDreadAddon.proxy.getArmorModel(2);
 				else
-					armorModel = mod_RpgPlus.proxy.getArmorModel(3);
+					armorModel = RpgDreadAddon.proxy.getArmorModel(3);
 			}
 	}
 
@@ -38,11 +38,11 @@ public class ItemPaladinArmor extends AbstractArmor {
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
 
-		if ((itemstack.getItem() == mod_RpgPlus.palaHelm)
-				|| (itemstack.getItem() == mod_RpgPlus.palaChest)
-				|| (itemstack.getItem() == mod_RpgPlus.palaBoots))
+		if ((itemstack.getItem() == RpgDreadAddon.palaHelm)
+				|| (itemstack.getItem() == RpgDreadAddon.palaChest)
+				|| (itemstack.getItem() == RpgDreadAddon.palaBoots))
 			return "armor:pal_1.png";
-		if (itemstack.getItem() == mod_RpgPlus.palaLeggings)
+		if (itemstack.getItem() == RpgDreadAddon.palaLeggings)
 			return "armor:pal_2.png";
 		return null;
 	}

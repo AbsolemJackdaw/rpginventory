@@ -17,9 +17,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.config.RpgConfig;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 
 public class ItemMageSphere extends ItemRpgWeapon {
 
@@ -53,10 +53,10 @@ public class ItemMageSphere extends ItemRpgWeapon {
 			Item item2 = var31.getItem();
 			Item item3 = var30.getItem();
 
-			if (item.equals(mod_addonBase.magehood)
-					&& item1.equals(mod_addonBase.magegown)
-					&& item2.equals(mod_addonBase.magepants)
-					&& item3.equals(mod_addonBase.mageboots)) {
+			if (item.equals(RpgBaseAddon.magehood)
+					&& item1.equals(RpgBaseAddon.magegown)
+					&& item2.equals(RpgBaseAddon.magepants)
+					&& item3.equals(RpgBaseAddon.mageboots)) {
 				int k = Item.itemRand.nextInt(5);
 				switch (k) {
 				case 0:
@@ -92,12 +92,12 @@ public class ItemMageSphere extends ItemRpgWeapon {
 			Item item2 = var31.getItem();
 			Item item3 = var30.getItem();
 
-			if (item.equals(mod_addonBase.magehood)
-					&& item1.equals(mod_addonBase.magegown)
-					&& item2.equals(mod_addonBase.magepants)
-					&& item3.equals(mod_addonBase.mageboots))
+			if (item.equals(RpgBaseAddon.magehood)
+					&& item1.equals(RpgBaseAddon.magegown)
+					&& item2.equals(RpgBaseAddon.magepants)
+					&& item3.equals(RpgBaseAddon.mageboots))
 				if (par3EntityPlayer.inventory.hasItem(Items.blaze_powder)
-						|| mod_RpgInventory.donators.contains(par3EntityPlayer
+						|| RpgInventoryMod.donators.contains(par3EntityPlayer
 								.getCommandSenderName())) {
 
 					Vec3 look = par3EntityPlayer.getLookVec();
@@ -134,10 +134,10 @@ public class ItemMageSphere extends ItemRpgWeapon {
 			Item item2 = var31.getItem();
 			Item item3 = var30.getItem();
 
-			if (item.equals(mod_addonBase.magehood)
-					&& item1.equals(mod_addonBase.magegown)
-					&& item2.equals(mod_addonBase.magepants)
-					&& item3.equals(mod_addonBase.mageboots)) {
+			if (item.equals(RpgBaseAddon.magehood)
+					&& item1.equals(RpgBaseAddon.magegown)
+					&& item2.equals(RpgBaseAddon.magepants)
+					&& item3.equals(RpgBaseAddon.mageboots)) {
 
 				if ((RpgConfig.instance.useSpell == true)
 						&& par2EntityPlayer.inventory
@@ -202,7 +202,7 @@ public class ItemMageSphere extends ItemRpgWeapon {
 									Blocks.lapis_block);
 							par1ItemStack
 									.damageItem(
-											mod_RpgInventory.donators.contains(par2EntityPlayer
+											RpgInventoryMod.donators.contains(par2EntityPlayer
 													.getCommandSenderName()) ? 50
 													: 151, par2EntityPlayer);
 						}

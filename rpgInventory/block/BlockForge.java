@@ -16,7 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.block.te.TEMold;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -44,7 +44,7 @@ public class BlockForge extends BlockContainer {
 
 	public BlockForge(Material par2Material) {
 		super(par2Material);
-		this.setCreativeTab(mod_RpgInventory.tab);
+		this.setCreativeTab(RpgInventoryMod.tab);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class BlockForge extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int i2, float a, float b, float c) {
-		FMLNetworkHandler.openGui(player, mod_RpgInventory.instance, 2, world,
+		FMLNetworkHandler.openGui(player, RpgInventoryMod.instance, 2, world,
 				x, y, z);
 		return true;
 	}

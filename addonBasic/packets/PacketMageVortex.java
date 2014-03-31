@@ -14,9 +14,9 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.CommonTickHandler;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 
 public class PacketMageVortex {
 
@@ -35,16 +35,16 @@ public class PacketMageVortex {
 			ItemStack legs = p.inventory.armorItemInSlot(1);
 			ItemStack boots = p.inventory.armorItemInSlot(0);
 
-			if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+			if (!RpgInventoryMod.developers.contains(p.getDisplayName()
 					.toLowerCase())) {
 				if ((wand == null) || (hat == null) || (chest == null)
 						|| (legs == null) || (boots == null))
 					return;
-				if ((wand.getItem() != mod_addonBase.wand)
-						|| (hat.getItem() != mod_addonBase.magehood)
-						|| (chest.getItem() != mod_addonBase.magegown)
-						|| (legs.getItem() != mod_addonBase.magepants)
-						|| (boots.getItem() != mod_addonBase.mageboots))
+				if ((wand.getItem() != RpgBaseAddon.wand)
+						|| (hat.getItem() != RpgBaseAddon.magehood)
+						|| (chest.getItem() != RpgBaseAddon.magegown)
+						|| (legs.getItem() != RpgBaseAddon.magepants)
+						|| (boots.getItem() != RpgBaseAddon.mageboots))
 					return;
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(p
@@ -62,11 +62,11 @@ public class PacketMageVortex {
 					p.renderBrokenItemStack(wand);
 					// delete the item
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else if (!mod_RpgInventory.developers.contains(p
+				} else if (!RpgInventoryMod.developers.contains(p
 						.getDisplayName().toLowerCase()))
-					wand.damageItem(mod_RpgInventory.donators.contains(p
+					wand.damageItem(RpgInventoryMod.donators.contains(p
 							.getDisplayName()) ? 1 : 3, p);
-				float f = mod_RpgInventory.donators
+				float f = RpgInventoryMod.donators
 						.contains(p.getDisplayName()) ? 20.0f : 10.0f;
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - f, p.posY - f, p.posZ - f, p.posX + f,p.posY + f, p.posZ + f);
 				List<EntityLivingBase> entl = p.worldObj
@@ -102,7 +102,7 @@ public class PacketMageVortex {
 											posFinal.zCoord * 4);
 									el.attackEntityFrom(
 											DamageSource.causePlayerDamage(p),
-											(mod_RpgInventory.donators
+											(RpgInventoryMod.donators
 													.contains(p
 															.getDisplayName()) ? 3
 													: 1));

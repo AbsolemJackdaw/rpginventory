@@ -5,7 +5,7 @@ import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.ClientPacketHandler;
 import rpgInventory.handlers.packets.ServerPacketHandler;
@@ -28,7 +28,7 @@ public class PacketInventory {
 				ByteBufUtils.writeItemStack(buf, inv.armorSlots[i]);
 
 			if (!player.worldObj.isRemote)
-				mod_RpgInventory.Channel.sendTo(new FMLProxyPacket(buf,
+				RpgInventoryMod.Channel.sendTo(new FMLProxyPacket(buf,
 						"RpgInv"), player);
 			out.close();
 		} catch (Exception ex) {
@@ -52,7 +52,7 @@ public class PacketInventory {
 			TargetPoint point = new TargetPoint(player.dimension,
 					player.posX, player.posY, player.posZ, 60);
 
-			mod_RpgInventory.Channel.sendToAllAround(new FMLProxyPacket(buf,"RpgInv"), point);
+			RpgInventoryMod.Channel.sendToAllAround(new FMLProxyPacket(buf,"RpgInv"), point);
 
 			out.close();
 		} catch (Exception ex) {

@@ -2,7 +2,7 @@ package addonDread.items;
 
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.MainShield;
-import addonDread.mod_RpgPlus;
+import addonDread.RpgDreadAddon;
 import addonDread.models.NecroShield;
 import addonDread.models.PalaShield;
 
@@ -19,28 +19,28 @@ public class ItemRpgInvArmorPlus extends ItemRpgInvArmor {
 	@Override
 	public String boundArmorClass() {
 
-		if (this.equals(mod_RpgPlus.necro_shield))
-			return mod_RpgPlus.CLASSNECRO;
-		if (this.equals(mod_RpgPlus.pala_shield))
-			return mod_RpgPlus.CLASSPALADIN;
+		if (this.equals(RpgDreadAddon.necro_shield))
+			return RpgDreadAddon.CLASSNECRO;
+		if (this.equals(RpgDreadAddon.pala_shield))
+			return RpgDreadAddon.CLASSPALADIN;
 		return super.boundArmorClass();
 	}
 
 	@Override
 	public MainShield getShieldModel() {
-		if (this.equals(mod_RpgPlus.necro_shield))
+		if (this.equals(RpgDreadAddon.necro_shield))
 			return nec;
-		if (this.equals(mod_RpgPlus.pala_shield))
+		if (this.equals(RpgDreadAddon.pala_shield))
 			return pala;
 		return super.getShieldModel();
 	}
 
 	@Override
 	public String shieldClass() {
-		if (this.equals(mod_RpgPlus.necro_shield))
-			return mod_RpgPlus.CLASSNECROSHIELD;
-		if (this.equals(mod_RpgPlus.pala_shield))
-			return mod_RpgPlus.CLASSPALADINSHIELD;
+		if (this.equals(RpgDreadAddon.necro_shield))
+			return RpgDreadAddon.CLASSNECROSHIELD;
+		if (this.equals(RpgDreadAddon.pala_shield))
+			return RpgDreadAddon.CLASSPALADINSHIELD;
 		return super.shieldClass();
 	}
 }

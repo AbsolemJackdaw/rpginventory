@@ -2,7 +2,7 @@ package rpgInventory.gui;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -15,7 +15,7 @@ public class RpgInventoryTab extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
-		return mod_RpgInventory.ringem;
+		return RpgInventoryMod.ringem;
 	}
 
 	@Override

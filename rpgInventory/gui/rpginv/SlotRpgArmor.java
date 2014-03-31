@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.oldpackets.PacketInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 
@@ -43,31 +43,31 @@ class SlotRpgArmor extends Slot {
 			ItemRpgInvArmor tmp = (ItemRpgInvArmor) par1ItemStack.getItem();
 			switch (slotIndex) {
 			case 0:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.NECKLACE)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.NECKLACE)
 					return true;
 				return false;
 			case 1:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.SHIELD)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.SHIELD)
 					return true;
 				return false;
 			case 2:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CLOAK)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.CLOAK)
 					return true;
 				return false;
 			case 3:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.GLOVES)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.GLOVES)
 					return true;
 				return false;
 			case 4:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.RING)
 					return true;
 				return false;
 			case 5:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.RING)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.RING)
 					return true;
 				return false;
 			case 6:
-				if (tmp.armorType == mod_RpgInventory.ITEMTYPE.CRYSTAL)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.CRYSTAL)
 					if (par1ItemStack.getItemDamage() > 0)
 						return true;
 				return false;

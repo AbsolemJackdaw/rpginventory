@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.utils.RpgUtility;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
 import addonDread.models.ModelNecroArmor;
@@ -51,21 +51,21 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 	@Override
 	public void registerRenderInformation() {
 		
-		mod_RpgPlus.Channel.register(new DreadClientPacketHandler());
+		RpgDreadAddon.Channel.register(new DreadClientPacketHandler());
 		RpgUtility.registerSpecialAbility(new SpecialAbility());
 
 		
 		if (RpgConfig.instance.render3D) {
-			MinecraftForgeClient.registerItemRenderer(mod_RpgPlus.necro_weapon,
+			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.necro_weapon,
 					new NecroRenderer());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgPlus.pala_weapon,
+			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.pala_weapon,
 					new GrandSwordRender());
 
-			MinecraftForgeClient.registerItemRenderer(mod_RpgPlus.necro_shield,
+			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.necro_shield,
 					new NecroShieldRenderer(new NecroShield(),
 							"subaraki:jewels/NecroShield.png"));
 
-			MinecraftForgeClient.registerItemRenderer(mod_RpgPlus.pala_shield,
+			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.pala_shield,
 					new PalaRenderer(new PalaShield(),
 							"subaraki:jewels/PaladinShield.png"));
 		}

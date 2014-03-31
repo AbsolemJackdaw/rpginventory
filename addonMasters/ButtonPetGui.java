@@ -41,7 +41,7 @@ public class ButtonPetGui extends GuiButton {
 				// todo send packet
 				if (container.inventory.getCrystal() != null)
 					if (container.inventory.getCrystal().getItemDamage() > 0)
-						mod_RpgRB.proxy.openGUI(p, container.inventory);
+						RpgMastersAddon.proxy.openGUI(p, container.inventory);
 
 				return false;
 			}

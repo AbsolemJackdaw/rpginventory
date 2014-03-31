@@ -6,7 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -18,7 +18,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "VanillaShields", name = "Vanilla Shields Mod", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
 // @NetworkMod(clientSideRequired = true, serverSideRequired = false)
-public class mod_VanillaShields {
+public class RpgVanillaShields {
 
 	@SidedProxy(serverSide = "rpgVanillaShields.CommonProxy", clientSide = "rpgVanillaShields.ClientProxy")
 	public static CommonProxy proxy;
@@ -89,13 +89,13 @@ public class mod_VanillaShields {
 				String itemNameCropped = itemName.substring(itemName
 						.indexOf(".") + 1);
 
-				allItems[i].setTextureName(mod_RpgInventory.name + ":"
+				allItems[i].setTextureName(RpgInventoryMod.name + ":"
 						+ itemNameCropped);
 
 				GameRegistry
 						.registerItem(allItems[i],
 								allItems[i].getUnlocalizedName(),
-								mod_RpgInventory.name);
+								RpgInventoryMod.name);
 			} else
 				System.out.println("Item is null !" + i);
 	}

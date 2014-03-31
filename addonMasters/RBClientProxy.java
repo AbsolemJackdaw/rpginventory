@@ -63,16 +63,16 @@ public class RBClientProxy extends RBCommonProxy {
 
 	@Override
 	public void registerRendering() {
-		mod_RpgRB.Channel.register(new RBClientPacketHandler());
+		RpgMastersAddon.Channel.register(new RBClientPacketHandler());
 
 		
 		if (RpgConfig.instance.render3D == true) {
-			MinecraftForgeClient.registerItemRenderer(mod_RpgRB.beastAxe,
+			MinecraftForgeClient.registerItemRenderer(RpgMastersAddon.beastAxe,
 					new AxeRender());
-			MinecraftForgeClient.registerItemRenderer(mod_RpgRB.daggers,
+			MinecraftForgeClient.registerItemRenderer(RpgMastersAddon.daggers,
 					new RenderDagger());
 
-			MinecraftForgeClient.registerItemRenderer(mod_RpgRB.beastShield,
+			MinecraftForgeClient.registerItemRenderer(RpgMastersAddon.beastShield,
 					new LionHeadRenderer(new LionHead(),
 							"subaraki:jewels/lion.png"));
 		}

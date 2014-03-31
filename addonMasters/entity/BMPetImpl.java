@@ -42,9 +42,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import addonMasters.mod_RpgRB;
+import addonMasters.RpgMastersAddon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -80,7 +80,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 5.0F, 2.0F));
 		this.tasks.addTask(6, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(8, new EntityAITempt(this, 0.5D, mod_RpgRB.whistle,
+		this.tasks.addTask(8, new EntityAITempt(this, 0.5D, RpgMastersAddon.whistle,
 				false));
 		this.tasks.addTask(9, new EntityAIWatchClosest(this,
 				EntityLivingBase.class, 8.0F));
@@ -361,7 +361,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 									(ItemStack) null);
 					}
 				if ((par1EntityPlayer.getCurrentEquippedItem() != null)
-						&& (par1EntityPlayer.getCurrentEquippedItem().getItem() == mod_RpgRB.petCandy)) {
+						&& (par1EntityPlayer.getCurrentEquippedItem().getItem() == RpgMastersAddon.petCandy)) {
 					addExperienceLevel(1);
 					par1EntityPlayer.getCurrentEquippedItem().stackSize--;
 				}
@@ -522,7 +522,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	public void onLivingUpdate() {
 
 		EntityPlayer player = (EntityPlayer) getOwner();
-		if(!mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSBEASTMASTER))
+		if(!RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER))
 			if (!worldObj.isRemote) {
 				if (((player == null))) {
 					try {
@@ -657,7 +657,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 					.get((EntityPlayer) getOwner());
 
 			ItemStack itemizedPet = writePetToItemStack(new ItemStack(
-					mod_RpgRB.crystal));
+					RpgMastersAddon.crystal));
 			inv.setInventorySlotContents(6, itemizedPet);
 			IPet.playersWithActivePets.remove(this.getOwnerName());
 		}
@@ -730,7 +730,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		itemstacknbt.setFloat("PetMaxHealth", getMaxHealth());
 		itemstacknbt.setFloat("PetHealth", getHealth());
 		itemstacknbt.setBoolean("isSaddled", getSaddled());
-		ItemStack newIteamstack = new ItemStack(mod_RpgRB.crystal, 1, getType());
+		ItemStack newIteamstack = new ItemStack(RpgMastersAddon.crystal, 1, getType());
 		newIteamstack.setTagCompound(itemstacknbt);
 		newIteamstack.setStackDisplayName(getEntityName());
 		return newIteamstack;

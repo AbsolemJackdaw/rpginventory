@@ -13,9 +13,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -42,7 +42,7 @@ public class ItemArcherBow extends Item {
 		// Now it gets called, added a hook in our custom renderer.
 		if (stack == usingItem)
 			if ((usingItem != null)
-					&& (usingItem.getItem() == mod_addonBase.elfbow))
+					&& (usingItem.getItem() == RpgBaseAddon.elfbow))
 				if (useRemaining > 21)
 					return IconArray[3];
 				else if (useRemaining > 14)
@@ -152,18 +152,18 @@ public class ItemArcherBow extends Item {
 			Item item2 = var1.getItem();
 			Item item3 = var0.getItem();
 
-			if (item.equals(mod_addonBase.archerhood)
-					&& item1.equals(mod_addonBase.archerchest)
-					&& item2.equals(mod_addonBase.archerpants)
-					&& item3.equals(mod_addonBase.archerboots)) {
-				boolean flag = ((shield != null) && (shield.getItem() == mod_addonBase.archerShield))
+			if (item.equals(RpgBaseAddon.archerhood)
+					&& item1.equals(RpgBaseAddon.archerchest)
+					&& item2.equals(RpgBaseAddon.archerpants)
+					&& item3.equals(RpgBaseAddon.archerboots)) {
+				boolean flag = ((shield != null) && (shield.getItem() == RpgBaseAddon.archerShield))
 						|| player.capabilities.isCreativeMode;
 				if (player.inventory.hasItem(Items.arrow) || flag) {
 
 					float f = j / 20.0F;
 					f = ((f * f) + (f * 2.0F)) / 3.0F;
 
-					if (f < (mod_RpgInventory.donators.contains(player
+					if (f < (RpgInventoryMod.donators.contains(player
 							.getCommandSenderName()) ? 0.2d : 0.5D))
 						return;
 
@@ -172,7 +172,7 @@ public class ItemArcherBow extends Item {
 
 					EntityArrow entityarrow = new EntityArrow(par2World,
 							player, f * 2.0F);
-					boolean crit = mod_RpgInventory.donators.contains(player
+					boolean crit = RpgInventoryMod.donators.contains(player
 							.getCommandSenderName()) ? true : false;
 					entityarrow.setIsCritical(crit);
 
@@ -181,9 +181,9 @@ public class ItemArcherBow extends Item {
 
 					entityarrow.setDamage(entityarrow.getDamage()
 							+ (flag ? 2D : 1D));
-					entityarrow.setKnockbackStrength(mod_RpgInventory.donators
+					entityarrow.setKnockbackStrength(RpgInventoryMod.donators
 							.contains(player.getCommandSenderName()) ? 2 : 1);
-					entityarrow.setFire(mod_RpgInventory.donators
+					entityarrow.setFire(RpgInventoryMod.donators
 							.contains(player.getCommandSenderName()) ? 10 : 5);
 
 					if (flag)
@@ -192,7 +192,7 @@ public class ItemArcherBow extends Item {
 						player.inventory.consumeInventoryItem(Items.arrow);
 					if (!par2World.isRemote) {
 						par2World.spawnEntityInWorld(entityarrow);
-						if (mod_RpgInventory.donators.contains(player
+						if (RpgInventoryMod.donators.contains(player
 								.getCommandSenderName()))
 							par2World.spawnEntityInWorld(new EntityArrow(
 									par2World, player, f * 2.0f));

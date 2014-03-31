@@ -42,8 +42,8 @@ import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = mod_RpgInventory.name, name = mod_RpgInventory.ID, version = mod_RpgInventory.version)
-public class mod_RpgInventory {
+@Mod(modid = RpgInventoryMod.name, name = RpgInventoryMod.ID, version = RpgInventoryMod.version)
+public class RpgInventoryMod {
 
 	public static class ITEMTYPE {
 
@@ -62,7 +62,7 @@ public class mod_RpgInventory {
 
 	/**Check this on clientside only !*/
 	public static String playerClass = "none";
-	public static mod_RpgInventory instance;
+	public static RpgInventoryMod instance;
 
 	// public static final PacketPipeline17 PIPELINE = new PacketPipeline17();
 	public static FMLEventChannel Channel;
@@ -95,7 +95,7 @@ public class mod_RpgInventory {
 	public static ArrayList<String> donators = new ArrayList<String>();
 	public static final String channelName = "RpgInv";
 
-	public mod_RpgInventory() {
+	public RpgInventoryMod() {
 		instance = this;
 	}
 
@@ -154,7 +154,7 @@ public class mod_RpgInventory {
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("RpgInv");
 		proxy.load();
 		FMLCommonHandler.instance().bus().register(new CommonTickHandler());
-		mod_RpgInventory.Channel.register(new ServerPacketHandler());
+		RpgInventoryMod.Channel.register(new ServerPacketHandler());
 
 		setDonators();
 		// GameRegistry.registerPlayerTracker(new OnPlayerLogin(version, name));
@@ -166,13 +166,13 @@ public class mod_RpgInventory {
 
 		proxy.registerRenderInformation();
 
-		addChestLoot(new ItemStack(mod_RpgInventory.colmold), 1, 1, 20,
+		addChestLoot(new ItemStack(RpgInventoryMod.colmold), 1, 1, 20,
 				"Necklace Mold");
-		addChestLoot(new ItemStack(mod_RpgInventory.ringmold), 1, 1, 10,
+		addChestLoot(new ItemStack(RpgInventoryMod.ringmold), 1, 1, 10,
 				"Ring Mold");
-		addChestLoot(new ItemStack(mod_RpgInventory.wantmold), 1, 1, 20,
+		addChestLoot(new ItemStack(RpgInventoryMod.wantmold), 1, 1, 20,
 				"Gloves Mold");
-		addRareLoot(new ItemStack(mod_RpgInventory.cloakI), 1, 1, 1,
+		addRareLoot(new ItemStack(RpgInventoryMod.cloakI), 1, 1, 1,
 				"Gloves Mold");
 
 		GameRegistry.registerTileEntity(TEMold.class, "temold");
@@ -295,13 +295,13 @@ public class mod_RpgInventory {
 				String itemNameCropped = itemName.substring(itemName
 						.indexOf(".") + 1);
 
-				allItems[i].setTextureName(mod_RpgInventory.name + ":"
+				allItems[i].setTextureName(RpgInventoryMod.name + ":"
 						+ itemNameCropped);
 
 				GameRegistry
 				.registerItem(allItems[i],
 						allItems[i].getUnlocalizedName(),
-						mod_RpgInventory.name);
+						RpgInventoryMod.name);
 
 			} else
 				System.out.println("Item is null !" + i);

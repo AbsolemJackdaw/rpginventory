@@ -22,16 +22,16 @@ public class DreadEventHooks {
 					if ((p.getActivePotionEffects() != null)
 							&& (p.getActivePotionEffects().size() > 0)) {
 						PotionEffect decompose = p
-								.getActivePotionEffect(mod_RpgPlus.decomposePotion);
+								.getActivePotionEffect(RpgDreadAddon.decomposePotion);
 						PotionEffect machicism = p
-								.getActivePotionEffect(mod_RpgPlus.masochismPotion);
+								.getActivePotionEffect(RpgDreadAddon.masochismPotion);
 						if ((decompose != null) && (machicism != null)) {
-							p.removePotionEffect(mod_RpgPlus.decomposePotion.id);
-							p.removePotionEffect(mod_RpgPlus.masochismPotion.id);
+							p.removePotionEffect(RpgDreadAddon.decomposePotion.id);
+							p.removePotionEffect(RpgDreadAddon.masochismPotion.id);
 							CustomPotionList.remove(p.getCommandSenderName());
 						} else if (decompose != null) {
 							if (decompose.getDuration() == 0) {
-								p.removePotionEffect(mod_RpgPlus.decomposePotion.id);
+								p.removePotionEffect(RpgDreadAddon.decomposePotion.id);
 								CustomPotionList.remove(p
 										.getCommandSenderName());
 							} else if (!CustomPotionList.containsKey(p
@@ -40,7 +40,7 @@ public class DreadEventHooks {
 										decompose.getDuration());
 						} else if (machicism != null)
 							if (machicism.getDuration() == 0) {
-								p.removePotionEffect(mod_RpgPlus.masochismPotion.id);
+								p.removePotionEffect(RpgDreadAddon.masochismPotion.id);
 								CustomPotionList.remove(p
 										.getCommandSenderName());
 							} else if (!CustomPotionList.containsKey(p

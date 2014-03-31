@@ -27,7 +27,7 @@ import net.minecraft.util.Vec3;
 
 import org.lwjgl.input.Keyboard;
 
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.packets.ServerPacketHandler;
 import rpgInventory.utils.ISpecialAbility;
 import rpgInventory.utils.RpgUtility;
@@ -148,7 +148,7 @@ public class RPGKeyHandler implements ISpecialAbility{
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(ServerPacketHandler.OPENRPGINV);
-				mod_RpgInventory.Channel.sendToServer(new FMLProxyPacket(buf,
+				RpgInventoryMod.Channel.sendToServer(new FMLProxyPacket(buf,
 						"RpgInv"));
 				out.close();
 			}

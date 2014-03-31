@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.handlers.RPGEventHooks;
 import rpgInventory.utils.RpgUtility;
@@ -48,7 +48,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 // packetHandler = RpgPlusPacketHandler.class), serverPacketHandlerSpec =
 // @SidedPacketHandler(channels = { "RpgPlusPlus" }, packetHandler =
 // RpgPlusPacketHandler.class))
-public class mod_RpgPlus {
+public class RpgDreadAddon {
 
 	public static String CLASSNECRO = "necro";
 	public static String CLASSNECROSHIELD = "shieldedNecro";
@@ -234,7 +234,7 @@ public class mod_RpgPlus {
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("DreadPacket");
 		RpgUtility.registerAbilityWeapon(necro_weapon);
 		RpgUtility.registerAbilityWeapon(pala_weapon);
-		mod_RpgPlus.Channel.register(new DreadServerPacketHandler());
+		RpgDreadAddon.Channel.register(new DreadServerPacketHandler());
 
 		
 	}
@@ -319,13 +319,13 @@ public class mod_RpgPlus {
 				if ((allItems[i] == necro_skin) || (allItems[i] == pala_steel))
 					allItems[i].setTextureName("minecraft:" + itemNameCropped);
 				else
-					allItems[i].setTextureName(mod_RpgInventory.name + ":"
+					allItems[i].setTextureName(RpgInventoryMod.name + ":"
 							+ itemNameCropped);
 
 				GameRegistry
 						.registerItem(allItems[i],
 								allItems[i].getUnlocalizedName(),
-								mod_RpgInventory.name);
+								RpgInventoryMod.name);
 			} else
 				System.out.println("Item is null !" + i);
 	}

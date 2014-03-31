@@ -14,7 +14,7 @@ public class ShieldTab extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
-		return mod_VanillaShields.shieldDiamond;
+		return RpgVanillaShields.shieldDiamond;
 	}
 
 	@Override

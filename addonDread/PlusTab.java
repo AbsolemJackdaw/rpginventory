@@ -14,7 +14,7 @@ public class PlusTab extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
-		return mod_RpgPlus.necro_weapon;
+		return RpgDreadAddon.necro_weapon;
 	}
 
 	@Override

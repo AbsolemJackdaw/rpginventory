@@ -19,10 +19,10 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import addonBasic.items.weapons.ItemRpgWeapon;
-import addonDread.mod_RpgPlus;
+import addonDread.RpgDreadAddon;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
 import addonDread.minions.IMinion;
@@ -55,9 +55,9 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
 				if (weapon != null)
-					if (weapon.getItem().equals(mod_RpgPlus.necro_weapon)
-							&& mod_RpgInventory.playerClass
-							.contains(mod_RpgPlus.CLASSNECRO)) {
+					if (weapon.getItem().equals(RpgDreadAddon.necro_weapon)
+							&& RpgInventoryMod.playerClass
+							.contains(RpgDreadAddon.CLASSNECRO)) {
 
 						if ((weapon.getItemDamage() + 2) >= weapon
 								.getMaxDamage()) {
@@ -102,10 +102,10 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 
 						} else if (!(mob instanceof IMinion)) {
 							mob.attackEntityFrom(DamageSource.wither,
-									mod_RpgInventory.donators.contains(p
+									RpgInventoryMod.donators.contains(p
 											.getDisplayName()) ? 6 : 4);
 							mob.addPotionEffect(new PotionEffect(
-									Potion.wither.id, mod_RpgInventory.donators
+									Potion.wither.id, RpgInventoryMod.donators
 									.contains(p.getDisplayName()) ? 60
 											: 40, 1));
 						} else
@@ -121,12 +121,12 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 	public ItemStack onItemRightClick(ItemStack is, World world,
 			EntityPlayer player) {
 
-		if(mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO))
+		if(RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSNECRO))
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out =new ByteBufOutputStream(buf);
 				out.writeInt(DreadServerPacketHandler.SKULLRCLICK);
-				mod_RpgPlus.Channel.sendToServer(new FMLProxyPacket(buf, "DreadPacket"));
+				RpgDreadAddon.Channel.sendToServer(new FMLProxyPacket(buf, "DreadPacket"));
 				out.close();
 
 			} catch (IOException ex) {
@@ -144,7 +144,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 
 		ItemStack weapon = p.getCurrentEquippedItem();
 
-		if (mod_RpgInventory.playerClass.contains(mod_RpgPlus.CLASSNECRO))
+		if (RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSNECRO))
 			if (entity instanceof IMinion) {
 				if ((weapon.getItemDamage() + 2) >= weapon.getMaxDamage()) {
 					// Trigger item break stuff
@@ -155,7 +155,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 					p.renderBrokenItemStack(weapon);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else
-					weapon.damageItem(mod_RpgInventory.donators.contains(p
+					weapon.damageItem(RpgInventoryMod.donators.contains(p
 							.getDisplayName()) ? 1 : 2, p);
 				((EntityLiving) entity).heal(3);
 				return true;

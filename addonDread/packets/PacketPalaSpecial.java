@@ -11,10 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.CommonTickHandler;
-import addonDread.mod_RpgPlus;
+import addonDread.RpgDreadAddon;
 
 public class PacketPalaSpecial {
 
@@ -27,10 +27,10 @@ public class PacketPalaSpecial {
 		inv.markDirty();
 		
 
-		if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+		if (!RpgInventoryMod.developers.contains(p.getDisplayName()
 				.toLowerCase()) || (weapon == null)) {
-			if (!mod_RpgInventory.playerClass.toLowerCase()
-					.contains(mod_RpgPlus.CLASSPALADIN)) {
+			if (!RpgInventoryMod.playerClass.toLowerCase()
+					.contains(RpgDreadAddon.CLASSPALADIN)) {
 				return;
 			}
 		}
@@ -41,7 +41,7 @@ public class PacketPalaSpecial {
 		}
 		if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 			CommonTickHandler.globalCooldownMap.put(p.getDisplayName(),
-					(mod_RpgInventory.donators.contains(p.getDisplayName()) ? 5
+					(RpgInventoryMod.donators.contains(p.getDisplayName()) ? 5
 							: 7) * 20);
 			// System.out.println("Healing time!");
 			// Allow staff/hammer to perform one last aoe then break the weapon
@@ -54,7 +54,7 @@ public class PacketPalaSpecial {
 				p.renderBrokenItemStack(weapon);
 				p.setCurrentItemOrArmor(0, (ItemStack) null);
 			} else {
-				if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+				if (!RpgInventoryMod.developers.contains(p.getDisplayName()
 						.toLowerCase())) {
 					weapon.damageItem(3, p);
 				}
@@ -74,7 +74,7 @@ public class PacketPalaSpecial {
 					if (el != null) {
 						double dist = (p.getDistanceSqToEntity(el));
 						double potstrength = 1.0D - (Math.sqrt(dist) / 4.0D);
-						Potion.heal.affectEntity(p, el,(mod_RpgInventory.donators.contains(p.getCommandSenderName()) ? 5 : 2),
+						Potion.heal.affectEntity(p, el,(RpgInventoryMod.donators.contains(p.getCommandSenderName()) ? 5 : 2),
 								potstrength * 2);
 
 					}

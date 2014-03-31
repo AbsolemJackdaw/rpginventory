@@ -9,7 +9,7 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.utils.RpgUtility;
 import addonBasic.items.ItemRpg;
 import addonBasic.items.armor.ItemAddonShields;
@@ -36,8 +36,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = mod_addonBase.id, name = mod_addonBase.name, version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
-public class mod_addonBase {
+@Mod(modid = RpgBaseAddon.id, name = RpgBaseAddon.name, version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
+public class RpgBaseAddon {
 
 	private class AddonTab extends CreativeTabs {
 
@@ -112,7 +112,7 @@ public class mod_addonBase {
 
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("BaseAddon");
 		proxy.registerRenderInformation();
-		mod_addonBase.Channel.register(new ServerPacketHandler());
+		RpgBaseAddon.Channel.register(new ServerPacketHandler());
 		
 		MinecraftForge.addGrassSeed(new ItemStack(rageSeed, 1), 1);
 
@@ -282,13 +282,13 @@ public class mod_addonBase {
 						|| (allItems[i] == wizardBook))
 					allItems[i].setTextureName("minecraft:" + itemNameCropped);
 				else
-					allItems[i].setTextureName(mod_RpgInventory.name + ":"
+					allItems[i].setTextureName(RpgInventoryMod.name + ":"
 							+ itemNameCropped);
 
 				GameRegistry
 				.registerItem(allItems[i],
 						allItems[i].getUnlocalizedName(),
-						mod_RpgInventory.name);
+						RpgInventoryMod.name);
 			} else
 				System.out.println("Item is null !" + i);
 	}

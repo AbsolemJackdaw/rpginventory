@@ -16,7 +16,7 @@ public class ItemMageARmor extends AbstractArmor {
 
 	@Override
 	public String armorClassName() {
-		return mod_RpgMageSet.CLASSARCHMAGE;
+		return RpgArchmageAddon.CLASSARCHMAGE;
 	}
 
 	@Override
@@ -25,20 +25,20 @@ public class ItemMageARmor extends AbstractArmor {
 
 		int type = ((ItemArmor) stack.getItem()).armorType;
 		if ((type == 1) || (type == 3))
-			armorModel = mod_RpgMageSet.proxy.getArmorModel(0);
+			armorModel = RpgArchmageAddon.proxy.getArmorModel(0);
 		else
-			armorModel = mod_RpgMageSet.proxy.getArmorModel(1);
+			armorModel = RpgArchmageAddon.proxy.getArmorModel(1);
 
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
-		if ((itemstack.getItem() == mod_RpgMageSet.archmageHood)
-				|| (itemstack.getItem() == mod_RpgMageSet.archmageChest)
-				|| (itemstack.getItem() == mod_RpgMageSet.archMageBoots))
+		if ((itemstack.getItem() == RpgArchmageAddon.archmageHood)
+				|| (itemstack.getItem() == RpgArchmageAddon.archmageChest)
+				|| (itemstack.getItem() == RpgArchmageAddon.archMageBoots))
 			return "armor:archMage_1.png";
-		if (itemstack.getItem() == mod_RpgMageSet.archmageLegs)
+		if (itemstack.getItem() == RpgArchmageAddon.archmageLegs)
 			return "armor:archMage_2.png";
 		return super.getArmorTexture(itemstack, entity, slot, type);
 	}

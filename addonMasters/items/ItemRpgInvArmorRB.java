@@ -6,11 +6,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.MainShield;
-import addonMasters.mod_RpgRB;
+import addonMasters.RpgMastersAddon;
 import addonMasters.models.LionHead;
 import addonMasters.models.ModelDaggerL;
 
@@ -29,18 +29,18 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 	@Override
 	public String boundArmorClass() {
 
-		if (this.equals(mod_RpgRB.beastShield))
-			return mod_RpgRB.CLASSBEASTMASTER;
-		if (this.equals(mod_RpgRB.daggers))
-			return mod_RpgRB.CLASSROGUE;
+		if (this.equals(RpgMastersAddon.beastShield))
+			return RpgMastersAddon.CLASSBEASTMASTER;
+		if (this.equals(RpgMastersAddon.daggers))
+			return RpgMastersAddon.CLASSROGUE;
 		return super.boundArmorClass();
 	}
 
 	@Override
 	public MainShield getShieldModel() {
-		if (this.equals(mod_RpgRB.beastShield))
+		if (this.equals(RpgMastersAddon.beastShield))
 			return lion;
-		if(this.equals(mod_RpgRB.daggers))
+		if(this.equals(RpgMastersAddon.daggers))
 			return dagger;
 		return super.getShieldModel();
 	}
@@ -56,17 +56,17 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 		// par3EntityLiving).getDisplayName());
 
 		if (((EntityPlayer) par3EntityLiving).getCurrentEquippedItem()
-				.getItem() == mod_RpgRB.daggers) {
-			if (mod_RpgInventory.playerClass
-					.contains(mod_RpgRB.CLASSROGUESHIELDED))
+				.getItem() == RpgMastersAddon.daggers) {
+			if (RpgInventoryMod.playerClass
+					.contains(RpgMastersAddon.CLASSROGUESHIELDED))
 				par2EntityLiving.addPotionEffect(new PotionEffect(
-						Potion.poison.id, mod_RpgInventory.donators
+						Potion.poison.id, RpgInventoryMod.donators
 						.contains(((EntityPlayer) par3EntityLiving)
 								.getDisplayName()) ? 80 : 60, 1));
-			else if (mod_RpgInventory.playerClass
-					.contains(mod_RpgRB.CLASSROGUE)) {
+			else if (RpgInventoryMod.playerClass
+					.contains(RpgMastersAddon.CLASSROGUE)) {
 				par2EntityLiving.addPotionEffect(new PotionEffect(
-						Potion.poison.id, mod_RpgInventory.donators
+						Potion.poison.id, RpgInventoryMod.donators
 						.contains(((EntityPlayer) par3EntityLiving)
 								.getDisplayName()) ? 40 : 30, 0));
 				if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime())
@@ -91,10 +91,10 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 
 	@Override
 	public String shieldClass() {
-		if (this.equals(mod_RpgRB.beastShield))
-			return mod_RpgRB.CLASSBEASTMASTERSHIELDED;
-		if (this.equals(mod_RpgRB.daggers))
-			return mod_RpgRB.CLASSROGUESHIELDED;
+		if (this.equals(RpgMastersAddon.beastShield))
+			return RpgMastersAddon.CLASSBEASTMASTERSHIELDED;
+		if (this.equals(RpgMastersAddon.daggers))
+			return RpgMastersAddon.CLASSROGUESHIELDED;
 		return super.shieldClass();
 	}
 

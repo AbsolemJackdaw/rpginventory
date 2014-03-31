@@ -10,10 +10,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.CommonTickHandler;
 import addonBasic.EntityHellArrow;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 
 public class PacketArcher {
 
@@ -52,16 +52,16 @@ public class PacketArcher {
 			ItemStack middle = p.inventory.armorItemInSlot(2);
 			ItemStack middle2 = p.inventory.armorItemInSlot(1);
 			ItemStack bottom = p.inventory.armorItemInSlot(0);
-			if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+			if (!RpgInventoryMod.developers.contains(p.getDisplayName()
 					.toLowerCase())) {
 				if ((bow == null) || (top == null) || (middle == null)
 						|| (middle2 == null) || (bottom == null))
 					return;
-				if ((bow.getItem() != mod_addonBase.elfbow)
-						|| (top.getItem() != mod_addonBase.archerhood)
-						|| (middle.getItem() != mod_addonBase.archerchest)
-						|| (middle2.getItem() != mod_addonBase.archerpants)
-						|| (bottom.getItem() != mod_addonBase.archerboots))
+				if ((bow.getItem() != RpgBaseAddon.elfbow)
+						|| (top.getItem() != RpgBaseAddon.archerhood)
+						|| (middle.getItem() != RpgBaseAddon.archerchest)
+						|| (middle2.getItem() != RpgBaseAddon.archerpants)
+						|| (bottom.getItem() != RpgBaseAddon.archerboots))
 					return;
 			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(p
@@ -70,7 +70,7 @@ public class PacketArcher {
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(),
 						30 * 20);
-				if (!mod_RpgInventory.developers.contains(p.getDisplayName()
+				if (!RpgInventoryMod.developers.contains(p.getDisplayName()
 						.toLowerCase()))
 					bow.damageItem(10, p);
 				for (int x1 = -10; x1 < 10; x1++)

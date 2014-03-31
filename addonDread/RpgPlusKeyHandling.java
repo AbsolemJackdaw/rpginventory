@@ -32,7 +32,7 @@ public class RpgPlusKeyHandling extends RPGKeyHandler {
 	public void specialAbility(ItemStack item) {
 
 		try {
-			if (item.getItem().equals(mod_RpgPlus.necro_weapon)) {
+			if (item.getItem().equals(RpgDreadAddon.necro_weapon)) {
 				ByteArrayOutputStream bt = new ByteArrayOutputStream();
 				DataOutputStream out = new DataOutputStream(bt);
 				try {
@@ -51,7 +51,7 @@ public class RpgPlusKeyHandling extends RPGKeyHandler {
 		} catch (Throwable e) {
 		}
 		try {
-			if (item.getItem().equals(mod_RpgPlus.pala_weapon)) {
+			if (item.getItem().equals(RpgDreadAddon.pala_weapon)) {
 				ByteArrayOutputStream bt = new ByteArrayOutputStream();
 				DataOutputStream out = new DataOutputStream(bt);
 				try {

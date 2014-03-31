@@ -10,7 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -45,7 +45,7 @@ public class ServerPacketHandler {
 			int guiId = dis.readInt();
 			switch (guiId) {
 			case OPENRPGINV:
-				FMLNetworkHandler.openGui(p, mod_RpgInventory.instance, 1,
+				FMLNetworkHandler.openGui(p, RpgInventoryMod.instance, 1,
 						world, x, y, z);
 				break;
 

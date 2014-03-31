@@ -5,7 +5,7 @@ import io.netty.buffer.ByteBufInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import addonMasters.mod_RpgRB;
+import addonMasters.RpgMastersAddon;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -30,16 +30,16 @@ public class PacketCrystal {
 				Entity e = p.worldObj.getEntityByID(entityid);
 				if (e != null) {
 					if (e instanceof EntityPig) {
-						ItemStack is = new ItemStack(mod_RpgRB.crystal, 1, 1);
+						ItemStack is = new ItemStack(RpgMastersAddon.crystal, 1, 1);
 						e.entityDropItem(is, 0.5F);
 						e.setDead();
 					} else if ((e instanceof EntitySpider)
 							|| (e instanceof EntityCaveSpider)) {
-						ItemStack is = new ItemStack(mod_RpgRB.crystal, 1, 2);
+						ItemStack is = new ItemStack(RpgMastersAddon.crystal, 1, 2);
 						e.entityDropItem(is, 0.5F);
 						e.setDead();
 					} else if (e instanceof EntityCow) {
-						ItemStack is = new ItemStack(mod_RpgRB.crystal, 1, 3);
+						ItemStack is = new ItemStack(RpgMastersAddon.crystal, 1, 3);
 						e.entityDropItem(is, 0.5F);
 						e.setDead();
 					}

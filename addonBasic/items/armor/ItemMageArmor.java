@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import rpgInventory.utils.AbstractArmor;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 
 public class ItemMageArmor extends AbstractArmor {
 
@@ -15,7 +15,7 @@ public class ItemMageArmor extends AbstractArmor {
 
 	@Override
 	public String armorClassName() {
-		return mod_addonBase.CLASSMAGE;
+		return RpgBaseAddon.CLASSMAGE;
 	}
 
 	@Override
@@ -27,20 +27,20 @@ public class ItemMageArmor extends AbstractArmor {
 				int type = ((ItemArmor) stack.getItem()).armorType;
 
 				if ((type == 1) || (type == 3))
-					armorModel = mod_addonBase.proxy.getArmorModel(1);
+					armorModel = RpgBaseAddon.proxy.getArmorModel(1);
 				else
-					armorModel = mod_addonBase.proxy.getArmorModel(0);
+					armorModel = RpgBaseAddon.proxy.getArmorModel(0);
 			}
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
-		if ((itemstack.getItem() == mod_addonBase.magehood)
-				|| (itemstack.getItem() == mod_addonBase.magegown)
-				|| (itemstack.getItem() == mod_addonBase.mageboots))
+		if ((itemstack.getItem() == RpgBaseAddon.magehood)
+				|| (itemstack.getItem() == RpgBaseAddon.magegown)
+				|| (itemstack.getItem() == RpgBaseAddon.mageboots))
 			return "armor:mage_1.png";
-		if (itemstack.getItem() == mod_addonBase.magepants)
+		if (itemstack.getItem() == RpgBaseAddon.magepants)
 			return "armor:mage_2.png";
 		return super.getArmorTexture(itemstack, entity, slot, type);
 	}

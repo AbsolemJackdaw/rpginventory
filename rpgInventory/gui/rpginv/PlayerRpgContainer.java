@@ -8,7 +8,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.oldpackets.PacketInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 
@@ -97,7 +97,7 @@ public class PlayerRpgContainer extends Container {
 			if ((tmp1 != null) && (tmp1.getItem() instanceof ItemRpgInvArmor)) {
 				ItemRpgInvArmor tmp = (ItemRpgInvArmor) tmp1.getItem();
 				switch (tmp.armorType) {
-				case mod_RpgInventory.ITEMTYPE.NECKLACE:
+				case RpgInventoryMod.ITEMTYPE.NECKLACE:
 					if (((SlotRpgArmor) this.getSlot(0)).getStack() != null)
 						return null;
 					player.inventory.setItemStack(player.inventory
@@ -105,7 +105,7 @@ public class PlayerRpgContainer extends Container {
 					player.inventory.setInventorySlotContents(slotnumber - 7,
 							null);
 					this.slotClick(0, 0, 0, player);
-				case mod_RpgInventory.ITEMTYPE.SHIELD:
+				case RpgInventoryMod.ITEMTYPE.SHIELD:
 					if (((SlotRpgArmor) this.getSlot(1)).getStack() != null)
 						return null;
 					player.inventory.setItemStack(player.inventory
@@ -113,7 +113,7 @@ public class PlayerRpgContainer extends Container {
 					player.inventory.setInventorySlotContents(slotnumber - 7,
 							null);
 					this.slotClick(1, 0, 0, player);
-				case mod_RpgInventory.ITEMTYPE.CLOAK:
+				case RpgInventoryMod.ITEMTYPE.CLOAK:
 					if (((SlotRpgArmor) this.getSlot(2)).getStack() != null)
 						return null;
 					player.inventory.setItemStack(player.inventory
@@ -121,7 +121,7 @@ public class PlayerRpgContainer extends Container {
 					player.inventory.setInventorySlotContents(slotnumber - 7,
 							null);
 					this.slotClick(2, 0, 0, player);
-				case mod_RpgInventory.ITEMTYPE.GLOVES:
+				case RpgInventoryMod.ITEMTYPE.GLOVES:
 					if (((SlotRpgArmor) this.getSlot(3)).getStack() != null)
 						return null;
 					player.inventory.setItemStack(player.inventory
@@ -129,7 +129,7 @@ public class PlayerRpgContainer extends Container {
 					player.inventory.setInventorySlotContents(slotnumber - 7,
 							null);
 					this.slotClick(3, 0, 0, player);
-				case mod_RpgInventory.ITEMTYPE.RING:
+				case RpgInventoryMod.ITEMTYPE.RING:
 					if ((((SlotRpgArmor) this.getSlot(4)).getStack() != null)
 							&& (((SlotRpgArmor) this.getSlot(5)).getStack() != null))
 						return null;
@@ -141,7 +141,7 @@ public class PlayerRpgContainer extends Container {
 						this.slotClick(4, 0, 0, player);
 					else
 						this.slotClick(5, 0, 0, player);
-				case mod_RpgInventory.ITEMTYPE.CRYSTAL:
+				case RpgInventoryMod.ITEMTYPE.CRYSTAL:
 					// System.out.println(tmp1.getItemDamage());
 					if (((SlotRpgArmor) this.getSlot(6)).getStack() != null)
 						return null;

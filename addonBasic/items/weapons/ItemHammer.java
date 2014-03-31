@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import addonBasic.mod_addonBase;
+import addonBasic.RpgBaseAddon;
 
 public class ItemHammer extends ItemRpgSword {
 
@@ -28,9 +28,9 @@ public class ItemHammer extends ItemRpgSword {
 			EntityPlayer player) {
 		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 
-		if (mod_RpgInventory.playerClass.contains(mod_addonBase.CLASSBERSERKER))
-			if (mod_RpgInventory.playerClass
-					.contains(mod_addonBase.CLASSBERSERKERSHIELD)) {
+		if (RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSBERSERKER))
+			if (RpgInventoryMod.playerClass
+					.contains(RpgBaseAddon.CLASSBERSERKERSHIELD)) {
 				if ((player.getFoodStats().getFoodLevel() < 6)
 						|| (player.getHealth() < 6))
 					player.addPotionEffect(new PotionEffect(

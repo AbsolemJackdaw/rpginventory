@@ -23,7 +23,7 @@ import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.utils.AbstractArmor;
@@ -57,7 +57,7 @@ public class RPGEventHooks {
 						.get(evt.entityPlayer);
 				ItemStack ringa = inv.getRing1();
 				if ((ringa != null)
-						&& ringa.getItem().equals(mod_RpgInventory.ringem))
+						&& ringa.getItem().equals(RpgInventoryMod.ringem))
 					evt.newSpeed = evt.originalSpeed * 4;
 			}
 		} catch (Throwable e) {
@@ -66,7 +66,7 @@ public class RPGEventHooks {
 
 	public void damageItem(ItemStack item, PlayerRpgInventory inv,
 			EntityPlayer p, int slot, int amount) {
-		if (mod_RpgInventory.developers.contains(p.getCommandSenderName()
+		if (RpgInventoryMod.developers.contains(p.getCommandSenderName()
 				.toLowerCase()))
 			return;
 		try {
@@ -139,21 +139,21 @@ public class RPGEventHooks {
 					ItemStack ringb = inv.getRing2();
 					ItemStack gloves = inv.getGloves();
 					if ((neck != null)
-							&& neck.getItem().equals(mod_RpgInventory.necklap))
+							&& neck.getItem().equals(RpgInventoryMod.necklap))
 						damagebonus += 0.3F;
 					if ((ringa != null)
-							&& ringa.getItem().equals(mod_RpgInventory.ringlap))
-						damagebonus += mod_RpgInventory.donators
+							&& ringa.getItem().equals(RpgInventoryMod.ringlap))
+						damagebonus += RpgInventoryMod.donators
 								.contains(((EntityPlayer) damager)
 										.getCommandSenderName()) ? 0.2f : 0.1F;
 					if ((ringb != null)
-							&& ringb.getItem().equals(mod_RpgInventory.ringlap))
-						damagebonus += mod_RpgInventory.donators
+							&& ringb.getItem().equals(RpgInventoryMod.ringlap))
+						damagebonus += RpgInventoryMod.donators
 								.contains(((EntityPlayer) damager)
 										.getCommandSenderName()) ? 0.2f : 0.1F;
 					if ((gloves != null)
 							&& gloves.getItem().equals(
-									mod_RpgInventory.gloveslap))
+									RpgInventoryMod.gloveslap))
 						damagebonus += 0.2F;
 					evt.ammount += MathHelper.floor_float(damagebonus
 							* (evt.ammount));
@@ -173,7 +173,7 @@ public class RPGEventHooks {
 
 					if (((ItemRpgInvArmor) inv.getShield().getItem())
 							.boundArmorClass().equals(
-									mod_RpgInventory.playerClass))
+									RpgInventoryMod.playerClass))
 						vanillaReduction += 0.6f;
 
 					if (vanillaReduction > 1f) {
@@ -194,13 +194,13 @@ public class RPGEventHooks {
 				EntityPlayer player = (EntityPlayer) evt.entityLiving;
 				PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 				if ((inv.getGloves() != null)
-						&& (inv.getGloves().getItem() == mod_RpgInventory.glovesem))
+						&& (inv.getGloves().getItem() == RpgInventoryMod.glovesem))
 					if ((evt.ammount * 0.2F) < 1)
 						evt.ammount -= 1;
 					else
 						evt.ammount -= MathHelper
 								.floor_float(evt.ammount
-										* (mod_RpgInventory.donators.contains(player
+										* (RpgInventoryMod.donators.contains(player
 												.getCommandSenderName()) ? 0.3f
 												: 0.2F));
 			}
@@ -249,17 +249,17 @@ public class RPGEventHooks {
 					/* ====LAPIS WEAPON HEALING==== */
 					boolean armorheal = false;
 					if ((neck != null)
-							&& neck.getItem().equals(mod_RpgInventory.necklap))
+							&& neck.getItem().equals(RpgInventoryMod.necklap))
 						armorheal = true;
 					if ((ringa != null)
-							&& ringa.getItem().equals(mod_RpgInventory.ringlap))
+							&& ringa.getItem().equals(RpgInventoryMod.ringlap))
 						armorheal = true;
 					if ((ringb != null)
-							&& ringb.getItem().equals(mod_RpgInventory.ringlap))
+							&& ringb.getItem().equals(RpgInventoryMod.ringlap))
 						armorheal = true;
 					if ((gloves != null)
 							&& gloves.getItem().equals(
-									mod_RpgInventory.gloveslap))
+									RpgInventoryMod.gloveslap))
 						armorheal = true;
 					if (armorheal) {
 						if (!LapisTick.containsKey(p.getCommandSenderName()))
@@ -269,7 +269,7 @@ public class RPGEventHooks {
 
 					/* ==== EMERALD WATER BREATHING ==== */
 					if ((neck != null)
-							&& neck.getItem().equals(mod_RpgInventory.neckem)) {
+							&& neck.getItem().equals(RpgInventoryMod.neckem)) {
 						boolean flag = (p instanceof EntityPlayer)
 								&& p.capabilities.disableDamage;
 
@@ -302,7 +302,7 @@ public class RPGEventHooks {
 					/* ==== EMERALD CURE ==== */
 					// works
 					if ((ringb != null)
-							&& ringb.getItem().equals(mod_RpgInventory.ringem))
+							&& ringb.getItem().equals(RpgInventoryMod.ringem))
 						for (Integer id : negativeEffects)
 							p.removePotionEffect(id);
 
@@ -311,26 +311,26 @@ public class RPGEventHooks {
 					int goldenItems = 0;
 
 					if ((neck != null)
-							&& (neck.getItem() == mod_RpgInventory.neckgold)) {
-						speedboost += mod_RpgInventory.donators.contains(p
+							&& (neck.getItem() == RpgInventoryMod.neckgold)) {
+						speedboost += RpgInventoryMod.donators.contains(p
 								.getCommandSenderName()) ? 0.02f : 0.0125f;
 						goldenItems += 1;
 					}
 					if ((ringa != null)
-							&& (ringa.getItem() == mod_RpgInventory.ringgold)) {
-						speedboost += mod_RpgInventory.donators.contains(p
+							&& (ringa.getItem() == RpgInventoryMod.ringgold)) {
+						speedboost += RpgInventoryMod.donators.contains(p
 								.getCommandSenderName()) ? 0.02f : 0.0125f;
 						goldenItems += 1;
 					}
 					if ((ringb != null)
-							&& (ringb.getItem() == mod_RpgInventory.ringgold)) {
-						speedboost += mod_RpgInventory.donators.contains(p
+							&& (ringb.getItem() == RpgInventoryMod.ringgold)) {
+						speedboost += RpgInventoryMod.donators.contains(p
 								.getCommandSenderName()) ? 0.02f : 0.0125f;
 						goldenItems += 1;
 					}
 					if ((gloves != null)
-							&& (gloves.getItem() == mod_RpgInventory.glovesbutter)) {
-						speedboost += mod_RpgInventory.donators.contains(p
+							&& (gloves.getItem() == RpgInventoryMod.glovesbutter)) {
+						speedboost += RpgInventoryMod.donators.contains(p
 								.getCommandSenderName()) ? 0.02f : 0.0125f;
 						goldenItems += 1;
 					}
@@ -345,7 +345,7 @@ public class RPGEventHooks {
 					/* ==== Invisibility Cloak==== */
 					ItemStack cloak = inv.getCloak();
 					if (cloak != null)
-						if (cloak.getItem() == mod_RpgInventory.cloakI)
+						if (cloak.getItem() == RpgInventoryMod.cloakI)
 							p.addPotionEffect(new PotionEffect(
 									Potion.invisibility.id, 20, 1));
 				}
@@ -371,12 +371,12 @@ public class RPGEventHooks {
 				if (is == null) {
 					if (PlayerRpgInventory.get(player).getShield() == null) {
 						skip = true;
-						mod_RpgInventory.playerClass = "none";
+						RpgInventoryMod.playerClass = "none";
 					}
 				} else // if there is one item that is no AbstractArmor, skip the setting of the playerclass
 					if (!(is.getItem() instanceof AbstractArmor)&& (PlayerRpgInventory.get(player).getShield() == null)) {
 						skip = true;
-						mod_RpgInventory.playerClass = "none";
+						RpgInventoryMod.playerClass = "none";
 					}
 			if (!skip)
 				if ((player.inventory.getStackInSlot(HELM) != null)
@@ -392,23 +392,23 @@ public class RPGEventHooks {
 					String classname = ((AbstractArmor) player.inventory
 							.getStackInSlot(HELM).getItem()).armorClassName();
 
-					mod_RpgInventory.playerClass = classname;
+					RpgInventoryMod.playerClass = classname;
 
 					if (PlayerRpgInventory.get(player).getShield() != null)
 						if (((ItemRpgInvArmor) PlayerRpgInventory.get(player)
 								.getShield().getItem()).boundArmorClass()
 								.equals(classname))
-							mod_RpgInventory.playerClass = classname
+							RpgInventoryMod.playerClass = classname
 							+ ((ItemRpgInvArmor) PlayerRpgInventory
 									.get(player).getShield().getItem())
 									.shieldClass();
 				} else {
-					mod_RpgInventory.playerClass = "none";
+					RpgInventoryMod.playerClass = "none";
 					if (((ItemRpgInvArmor) PlayerRpgInventory.get(player)
 							.getShield().getItem()).boundArmorClass().equals(
 									"none"))
 						if (PlayerRpgInventory.get(player).getShield() != null)
-							mod_RpgInventory.playerClass = ((ItemRpgInvArmor) PlayerRpgInventory
+							RpgInventoryMod.playerClass = ((ItemRpgInvArmor) PlayerRpgInventory
 									.get(player).getShield().getItem())
 									.shieldClass();
 				}

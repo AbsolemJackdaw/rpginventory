@@ -9,8 +9,8 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
-import rpgInventory.mod_RpgInventory;
-import rpgInventory.mod_RpgInventory.ITEMTYPE;
+import rpgInventory.RpgInventoryMod;
+import rpgInventory.RpgInventoryMod.ITEMTYPE;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.utils.RpgUtility;
 import addonMasters.entity.BoarPet;
@@ -42,7 +42,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "RPGRB", name = "Rogue Beastmaster Addon", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
-public class mod_RpgRB {
+public class RpgMastersAddon {
 
 	@SidedProxy(serverSide = "addonMasters.RBCommonProxy", clientSide = "addonMasters.RBClientProxy")
 	public static RBCommonProxy proxy;
@@ -78,7 +78,7 @@ public class mod_RpgRB {
 	public void load(FMLInitializationEvent event) {
 		
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("R_BChannel");
-		mod_RpgRB.Channel.register(new RBServerPacketHandler());
+		RpgMastersAddon.Channel.register(new RBServerPacketHandler());
 
 		RpgUtility.registerAbilityWeapon(daggers);
 
@@ -119,9 +119,9 @@ public class mod_RpgRB {
 						this.recipePatterns[var4], 'X', var3 });
 			}
 		}
-		mod_RpgInventory.instance.addChestLoot(new ItemStack(PetXPBottle), 1,
+		RpgInventoryMod.instance.addChestLoot(new ItemStack(PetXPBottle), 1,
 				1, 40, "Pet Drinks");
-		mod_RpgInventory.instance.addCandyChestLoot(new ItemStack(petCandy), 1,
+		RpgInventoryMod.instance.addCandyChestLoot(new ItemStack(petCandy), 1,
 				6, 20, "Easter Egg");
 
 		daggers.setCreativeTab(tab);
@@ -160,15 +160,15 @@ public class mod_RpgRB {
 		EntityRegistry.registerGlobalEntityID(EntityTeleportStone.class,
 				"TelePortStone", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(BullPet.class, "BullPet",
-				mod_RpgInventory.instance.getUniqueID(), this, 80, 1, true);
+				RpgInventoryMod.instance.getUniqueID(), this, 80, 1, true);
 		EntityRegistry.registerModEntity(SpiderPet.class, "SpiderPet",
-				mod_RpgInventory.instance.getUniqueID(), this, 80, 1, true);
+				RpgInventoryMod.instance.getUniqueID(), this, 80, 1, true);
 		EntityRegistry.registerModEntity(BoarPet.class, "BoarPet",
-				mod_RpgInventory.instance.getUniqueID(), this, 80, 1, true);
+				RpgInventoryMod.instance.getUniqueID(), this, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityPetXP.class, "PetXP",
-				mod_RpgInventory.instance.getUniqueID(), this, 80, 1, true);
+				RpgInventoryMod.instance.getUniqueID(), this, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityTeleportStone.class,
-				"TelePortStone", mod_RpgInventory.instance.getUniqueID(), this,
+				"TelePortStone", RpgInventoryMod.instance.getUniqueID(), this,
 				80, 1, true);
 
 		MinecraftForge.EVENT_BUS.register(new BeastMasterEvent());
@@ -262,13 +262,13 @@ public class mod_RpgRB {
 						|| (allItems[i] == beastLeather))
 					allItems[i].setTextureName("minecraft:" + itemNameCropped);
 				else
-					allItems[i].setTextureName(mod_RpgInventory.name + ":"
+					allItems[i].setTextureName(RpgInventoryMod.name + ":"
 							+ itemNameCropped);
 
 				GameRegistry
 						.registerItem(allItems[i],
 								allItems[i].getUnlocalizedName(),
-								mod_RpgInventory.name);
+								RpgInventoryMod.name);
 			} else
 				System.out.println("Item is null !" + i);
 	}

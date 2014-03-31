@@ -14,7 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import rpgInventory.handlers.packets.ServerPacketHandler;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 
 import java.io.IOException;
 
@@ -50,7 +50,7 @@ public class ButtonInventory extends GuiButton {
 						ByteBuf buf = Unpooled.buffer();
 						ByteBufOutputStream out = new ByteBufOutputStream(buf);
 						out.writeInt(ServerPacketHandler.OPENRPGINV);
-						mod_RpgInventory.Channel
+						RpgInventoryMod.Channel
 								.sendToServer(new FMLProxyPacket(buf, "RpgInv"));
 
 						out.close();

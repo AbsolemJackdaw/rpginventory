@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.Tessellator;
 
 import org.lwjgl.opengl.GL11;
 
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 
 /**
  * 
@@ -32,7 +32,7 @@ public class ModelSphere extends ModelBox {
 
 	@Override
 	public void render(Tessellator par1Tessellator, float par2) {
-		GL11.glCallList(mod_RpgInventory.proxy.getSphereID());
+		GL11.glCallList(RpgInventoryMod.proxy.getSphereID());
 	}
 
 	public ModelSphere setModelName(String par1Str) {

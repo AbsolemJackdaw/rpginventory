@@ -6,10 +6,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import addonDread.CommonTickHandlerRpgPlus;
-import addonDread.mod_RpgPlus;
+import addonDread.RpgDreadAddon;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
 
@@ -18,10 +18,10 @@ public class PacketSpawnMinion {
 	public PacketSpawnMinion(ItemStack weapon, ByteBufInputStream dis,
 			PlayerRpgInventory inv, EntityPlayer p) {
 		
-		System.out.println(CommonTickHandlerRpgPlus.rpgPluscooldownMap + " " +mod_RpgInventory.playerClass);
+		System.out.println(CommonTickHandlerRpgPlus.rpgPluscooldownMap + " " +RpgInventoryMod.playerClass);
 
 		
-		if (weapon.getItem().equals(mod_RpgPlus.necro_weapon)) {
+		if (weapon.getItem().equals(RpgDreadAddon.necro_weapon)) {
 			if (!CommonTickHandlerRpgPlus.rpgPluscooldownMap.containsKey(p.getDisplayName())) {
 				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(
 						p.getDisplayName(), 0);
@@ -32,7 +32,7 @@ public class PacketSpawnMinion {
 					.getDisplayName()) <= 0) {
 				// 2 second cooldown
 				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(p
-						.getDisplayName(), 20 * (mod_RpgInventory.donators
+						.getDisplayName(), 20 * (RpgInventoryMod.donators
 						.contains(p.getDisplayName()) ? 1 : 2));
 				 
 				// Allow staff/hammer to perform one last aoe then break the
@@ -49,8 +49,8 @@ public class PacketSpawnMinion {
 					weapon.damageItem(2, p);
 				}
 				World world = p.worldObj;
-				if (mod_RpgInventory.playerClass
-						.contains(mod_RpgPlus.CLASSNECROSHIELD)) {
+				if (RpgInventoryMod.playerClass
+						.contains(RpgDreadAddon.CLASSNECROSHIELD)) {
 					if (!world.isRemote) {
 						EntityMinionS var4 = new EntityMinionS(world, p);
 						if (var4 != null) {

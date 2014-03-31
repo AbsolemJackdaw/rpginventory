@@ -14,7 +14,7 @@ public class MageTab extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
-		return mod_RpgMageSet.archmageHood;
+		return RpgArchmageAddon.archmageHood;
 	}
 
 	@Override

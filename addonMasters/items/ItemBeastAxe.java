@@ -22,10 +22,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import rpgInventory.mod_RpgInventory;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.richUtil.Targetting;
 import addonBasic.items.weapons.ItemRpgSword;
-import addonMasters.mod_RpgRB;
+import addonMasters.RpgMastersAddon;
 import addonMasters.packets.RBServerPacketHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
@@ -87,7 +87,7 @@ public class ItemBeastAxe extends ItemRpgSword {
 
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-		if (mod_RpgInventory.playerClass.contains(mod_RpgRB.CLASSBEASTMASTER)) {
+		if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER)) {
 			World world = player != null ? player.worldObj : null;
 			if ((world != null)
 					&& world.isRemote
@@ -107,33 +107,33 @@ public class ItemBeastAxe extends ItemRpgSword {
 
 				if (particleTime >= 7) {
 					particleTime = 0;
-					mod_RpgInventory.proxy.spawnParticle(world, el, rng);
+					RpgInventoryMod.proxy.spawnParticle(world, el, rng);
 				}
 				if (charmTime >= 100) {
 					charmTime = 0;
 					float num = rng.nextFloat();
-					if (num > (mod_RpgInventory.donators.contains(player
+					if (num > (RpgInventoryMod.donators.contains(player
 							.getDisplayName()) ? 0.50F : 0.80F)) {
-						mod_RpgInventory.proxy.spawnCharmParticle(world, el,
+						RpgInventoryMod.proxy.spawnCharmParticle(world, el,
 								rng, true);
 						try {
 							ByteBuf buf = Unpooled.buffer();
 							ByteBufOutputStream out = new ByteBufOutputStream(buf);
 							out.writeInt(RBServerPacketHandler.CRYSTAL);
 							out.writeInt(el.getEntityId());
-							mod_RpgRB.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
+							RpgMastersAddon.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
 							out.close();
 						} catch (Exception e) {
 						}
 					} else {
 						try{
-							mod_RpgInventory.proxy.spawnCharmParticle(world, el,
+							RpgInventoryMod.proxy.spawnCharmParticle(world, el,
 									rng, false);
 							ByteBuf buf = Unpooled.buffer();
 							ByteBufOutputStream out = new ByteBufOutputStream(buf);
 							out.writeInt(RBServerPacketHandler.CRYSTAL);
 							out.writeInt(0);
-							mod_RpgRB.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
+							RpgMastersAddon.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
 							out.close();
 						}
 						catch(Throwable e){
