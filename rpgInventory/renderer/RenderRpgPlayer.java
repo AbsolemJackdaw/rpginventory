@@ -29,6 +29,7 @@ import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.GloveLeft;
 import rpgInventory.models.GloveRight;
 import rpgInventory.models.ModelNecklace;
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
@@ -169,8 +170,8 @@ public class RenderRpgPlayer {
 		if(main == null){
 			try {
 
-				Field f = ReflectionHelper.findField(evt.renderer.getClass(), "modelBipedMain");
-				main = ReflectionHelper.getPrivateValue(RenderPlayer.class, evt.renderer, "modelBipedMain");
+//				Field f = ObfuscationReflectionHelper.findField(evt.renderer.getClass(), "modelBipedMain");
+				main = ObfuscationReflectionHelper.getPrivateValue(RenderPlayer.class, evt.renderer, "modelBipedMain");
 				//			if(RpgInventoryMod.isDev){
 				//				f = evt.renderer.getClass().getDeclaredField("modelBipedMain");
 				//				f.setAccessible(true);
