@@ -138,7 +138,7 @@ public class RPGKeyHandler implements ISpecialAbility{
 					for(Item i : abilityMap.keySet()){
 						if(item.getItem().equals(i)){
 							specialAbility(item);
-							System.out.println(RpgUtility.allAbilities);
+//							System.out.println(RpgUtility.allAbilities);
 							for(int c =0; c < RpgUtility.allAbilities.size(); c++)
 								RpgUtility.allAbilities.get(c).specialAbility(item);
 						}
@@ -202,7 +202,6 @@ public class RPGKeyHandler implements ISpecialAbility{
 		//			// "RpgInv", bytes.toByteArray());
 		//			// PacketDispatcher.sendPacketToServer(packet);
 		//
-		//			System.out.println("todo : send packet");
 		//		}
 	}
 }

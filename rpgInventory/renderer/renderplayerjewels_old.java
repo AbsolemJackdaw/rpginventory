@@ -311,7 +311,6 @@ package rpgInventory.renderer;
 //				GL11.glRotatef(this.modelBipedMain.bipedBody.rotateAngleY * 50, 0.0F, 1.0F, 0.0F);
 //				GL11.glRotatef(this.modelBipedMain.bipedBody.rotateAngleZ * 50, 0.0F, 0.0F, 1.0F);
 //
-//				//System.out.println(chest);
 //				if (chest != null) {
 //					GL11.glTranslatef(0F, 0F, -0.06F);
 //				} else {

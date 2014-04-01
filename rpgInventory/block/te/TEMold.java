@@ -151,7 +151,6 @@ public class TEMold extends TileEntity implements IInventory {
 		ItemStack mold = null;
 		ItemStack block = null;
 
-		// System.out.println(moldforgeItemStacks[3]);
 		if (moldforgeItemStacks[1] != null) {
 			if ((moldforgeItemStacks[2] != null)
 					&& (moldforgeItemStacks[3] != null)
@@ -378,7 +377,6 @@ public class TEMold extends TileEntity implements IInventory {
 		boolean var1 = this.goldBurnTime > 0;
 		boolean var2 = false;
 
-		// System.out.println(isBurning() + " "+ canSmelt() +blockMetadata + " "
 		// + goldBurnTime);
 
 		if (goldBurnTime > 0)

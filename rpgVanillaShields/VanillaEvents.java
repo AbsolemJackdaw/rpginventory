@@ -71,14 +71,9 @@ public class VanillaEvents {
 					damageReduction = 1f + (vanillaReduction - 1f);
 					vanillaReduction = 0;
 				}
-				System.out.println("1reduced : " + damageReduction + "\n2damage taken "+ evt.ammount);
 
 				evt.ammount -= damageReduction;
 
-				System.out.println("3total damage recieved" + evt.ammount);
-
-				// MathHelper.floor_float(((float) evt.ammount)
-				// * damageReduction);
 				damageItem(shield, inv, player, 1, 1);
 			}
 		}

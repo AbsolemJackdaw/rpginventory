@@ -48,7 +48,6 @@ public class ClientPacketHandler extends ServerPacketHandler {
 				break;
 
 			case INVENTORY:
-				// System.out.println("recieved");
 
 				for (int i = 0; i < PlayerRpgInventory.get(p)
 						.getSizeInventory(); i++)
@@ -74,7 +73,6 @@ public class ClientPacketHandler extends ServerPacketHandler {
 			dis.close();
 		} catch (IOException e) {
 //			e.printStackTrace();
-			System.out.println("Client packet exception");
 		}
 	}
 

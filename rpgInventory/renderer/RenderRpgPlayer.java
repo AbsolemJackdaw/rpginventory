@@ -11,6 +11,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -30,6 +31,7 @@ import rpgInventory.models.GloveLeft;
 import rpgInventory.models.GloveRight;
 import rpgInventory.models.ModelNecklace;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class RenderRpgPlayer {
 
@@ -160,23 +162,40 @@ public class RenderRpgPlayer {
 
 		EntityPlayer player = evt.entityPlayer;
 		EntityPlayer p = evt.entityPlayer;
-//			p.worldObj.spawnParticle("portal", p.posX + (p.worldObj.rand.nextDouble() - 0.5D) * (double)p.width, p.posY + p.worldObj.rand.nextDouble() * (double)p.height - 0.25D, p.posZ + (p.worldObj.rand.nextDouble() - 0.5D) * (double)p.width, 
-//            		(p.worldObj.rand.nextDouble() - 0.5D) * 2.0D, -p.worldObj.rand.nextDouble(), (p.worldObj.rand.nextDouble() - 0.5D) * 2.0D);
+		//			p.worldObj.spawnParticle("portal", p.posX + (p.worldObj.rand.nextDouble() - 0.5D) * (double)p.width, p.posY + p.worldObj.rand.nextDouble() * (double)p.height - 0.25D, p.posZ + (p.worldObj.rand.nextDouble() - 0.5D) * (double)p.width, 
+		//            		(p.worldObj.rand.nextDouble() - 0.5D) * 2.0D, -p.worldObj.rand.nextDouble(), (p.worldObj.rand.nextDouble() - 0.5D) * 2.0D);
 
-			
 
-		Field f = null;
+
+
 		try {
 
-			f = evt.renderer.getClass().getDeclaredField("modelBipedMain");
-			f.setAccessible(true);
-			main = (ModelBiped) f.get(evt.renderer);
+			Field f = ReflectionHelper.findField(evt.renderer.getClass(), "modelBipedMain");
+			main = ReflectionHelper.getPrivateValue(RenderPlayer.class, evt.renderer, "modelBipedMain");
+			//			if(RpgInventoryMod.isDev){
+			//				f = evt.renderer.getClass().getDeclaredField("modelBipedMain");
+			//				f.setAccessible(true);
+			//			}else
+			//				for(Field f : evt.renderer.getClass().getDeclaredFields()){ 
+			//					if(f.equals("field_77109_a") || f.equals("modelBipedMain")){
+			//						f.setAccessible(true);
+			//						main = (ModelBiped) f.get(evt.renderer);
+			//					}
+			//				}
 
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-			System.out
-			.println("Something went wrong accesing the modelbipedmain ! Index 1");
-		} catch (SecurityException e) {
+			//			try {
+			//				main = evt.renderer.modelBipedMain:
+			//			} catch (Exception e) {
+			//				// TODO: handle exception
+			//			}
+
+		}
+		//		catch (NoSuchFieldException e) {
+		//			e.printStackTrace();
+		//			System.out
+		//			.println("Something went wrong accesing the modelbipedmain ! Index 1");
+		//		}
+		catch (SecurityException e) {
 			e.printStackTrace();
 			System.out
 			.println("Something went wrong accesing the modelbipedmain ! Index 2");
@@ -184,11 +203,12 @@ public class RenderRpgPlayer {
 			e.printStackTrace();
 			System.out
 			.println("Something went wrong accesing the modelbipedmain ! Index 3");
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-			System.out
-			.println("Something went wrong accesing the modelbipedmain ! Index 4");
 		}
+		//		catch (IllegalAccessException e) {
+		//			e.printStackTrace();
+		//			System.out
+		//			.println("Something went wrong accesing the modelbipedmain ! Index 4");
+		//		}
 
 		// all fields get set to public when
 		// forge compiles them
@@ -224,8 +244,8 @@ public class RenderRpgPlayer {
 			mc.renderEngine.bindTexture(((ItemRpgInvArmor) shield.getItem())
 					.getTexture());
 
-
-			renderShield((ItemRpgInvArmor) shield.getItem());
+			if(main != null && (ItemRpgInvArmor) shield.getItem() != null)
+				renderShield((ItemRpgInvArmor) shield.getItem());
 		}
 
 	}

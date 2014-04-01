@@ -95,6 +95,5 @@
 //		newcrystal.setStackDisplayName(petName);
 //		inv.setInventorySlotContents(6, newcrystal);
 //
-//		System.out.println("Send packet here");
 //	}
 //}

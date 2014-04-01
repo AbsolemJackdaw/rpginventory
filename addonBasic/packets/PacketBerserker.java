@@ -21,7 +21,7 @@ public class PacketBerserker {
 
 
 		
-			 System.out.println("Hammer time!");
+			 //System.out.println("Hammer time!");
 			ItemStack item1 = p.getCurrentEquippedItem();
 			ItemStack var31 = p.inventory.armorItemInSlot(3);
 			ItemStack var21 = p.inventory.armorItemInSlot(2);

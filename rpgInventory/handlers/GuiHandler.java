@@ -27,7 +27,6 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
-		// System.out.println("SERVER READ CONTAINER" + ID);
 		if (ID == 1) {
 			PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 			return new PlayerRpgContainer(player, inv);

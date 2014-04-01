@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 
 import java.util.List;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -20,7 +19,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntityElementalBlock extends EntityThrowable implements
-		IEntityAdditionalSpawnData {
+IEntityAdditionalSpawnData {
 
 	private EntityLivingBase shootingEntity;
 	public String owner;
@@ -53,7 +52,6 @@ public class EntityElementalBlock extends EntityThrowable implements
 		this.sizeLimit = sizeLimit;
 		this.type = type;
 		this.noClip = true;
-		// this.owner = e.getEntityName(); TODO
 		this.shootingEntity = e;
 
 	}
@@ -83,14 +81,13 @@ public class EntityElementalBlock extends EntityThrowable implements
 			this.onImpact(pos);
 			this.setDead();
 		}
-		// System.out.println);
 		this.setSize(this.getRadius(), this.getRadius());
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		this.owner = nbt.getString("creator");
+		//this.owner = nbt.getString("creator");
 		this.size = nbt.getInteger("size_");
 		this.sizeLimit = nbt.getInteger("sizeLimit_");
 
@@ -102,17 +99,27 @@ public class EntityElementalBlock extends EntityThrowable implements
 		this.type = data.readInt();
 		this.step = data.readInt();
 		this.sizeLimit = data.readInt();
-		// this.owner = data.readUTF();
-		// TODO
+		//this.owner = data.readBytes(owner.getBytes()).toString();
+	}
+
+	@Override
+	public void writeSpawnData(ByteBuf data) {
+		data.writeInt(this.size);
+		data.writeInt(this.type);
+		data.writeInt(this.step);
+		data.writeInt(this.sizeLimit);
 	}
 
 	public void specialAttack(MovingObjectPosition var1, int type) {
-		EntityLivingBase p = this.worldObj.getPlayerEntityByName(this.owner);
+
+		EntityLivingBase p = this.getThrower();
+
 		if (p == null) {
-			/* Omg my boss is not in world... */
 			this.setDead();
 			return;
 		}
+
+
 		switch (type) {
 		case 1:
 			AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
@@ -122,10 +129,10 @@ public class EntityElementalBlock extends EntityThrowable implements
 					var1.hitVec.xCoord + getRadius(),
 					var1.hitVec.yCoord + getRadius(),
 					var1.hitVec.zCoord + this.size);
-			List<EntityLiving> entl = this.worldObj.getEntitiesWithinAABB(
-					EntityLiving.class, pool);
+			List<EntityLivingBase> entl = this.worldObj.getEntitiesWithinAABB(
+					EntityLivingBase.class, pool);
 			if ((entl != null) && (entl.size() > 0))
-				for (EntityLiving el : entl)
+				for (EntityLivingBase el : entl)
 					if ((el != null) && (el != p)) {
 						el.setFire(30);
 						if (this.getThrower() instanceof EntityPlayer) {
@@ -139,15 +146,15 @@ public class EntityElementalBlock extends EntityThrowable implements
 					}
 			if (var1.typeOfHit == MovingObjectType.BLOCK) {
 			} else if (var1.typeOfHit == MovingObjectType.ENTITY) {
-				if (!(var1.entityHit instanceof EntityLiving))
+				if (!(var1.entityHit instanceof EntityLivingBase))
 					break;
 				if (var1.entityHit == p)
 					break;
 				var1.entityHit.setFire(30);
 				if (p instanceof EntityPlayer) {
 					var1.entityHit
-							.attackEntityFrom(DamageSource
-									.causePlayerDamage((EntityPlayer) p), 1);
+					.attackEntityFrom(DamageSource
+							.causePlayerDamage((EntityPlayer) p), 1);
 					var1.entityHit.attackEntityFrom(DamageSource.onFire, 2);
 				} else
 					var1.entityHit.attackEntityFrom(DamageSource.onFire, 2);
@@ -162,10 +169,10 @@ public class EntityElementalBlock extends EntityThrowable implements
 						var1.hitVec.xCoord + getRadius(),
 						var1.hitVec.yCoord + getRadius(),
 						var1.hitVec.zCoord + this.size);
-				List<EntityLiving> entl1 = this.worldObj.getEntitiesWithinAABB(
-						EntityLiving.class, pool1);
+				List<EntityLivingBase> entl1 = this.worldObj.getEntitiesWithinAABB(
+						EntityLivingBase.class, pool1);
 				if ((entl1 != null) && (entl1.size() > 0))
-					for (EntityLiving el : entl1)
+					for (EntityLivingBase el : entl1)
 						if ((el != null) && (el != p)) {
 							if (el.isEntityUndead()) {
 								el.addPotionEffect(new PotionEffect(
@@ -191,8 +198,8 @@ public class EntityElementalBlock extends EntityThrowable implements
 				} else if (var1.typeOfHit == MovingObjectType.ENTITY) {
 					if (var1.entityHit == p)
 						break;
-					if (var1.entityHit instanceof EntityLiving) {
-						EntityLiving el = (EntityLiving) var1.entityHit;
+					if (var1.entityHit instanceof EntityLivingBase) {
+						EntityLivingBase el = (EntityLivingBase) var1.entityHit;
 						if (el.isEntityUndead()) {
 							if (!worldObj.isRemote) {
 								el.addPotionEffect(new PotionEffect(
@@ -228,9 +235,9 @@ public class EntityElementalBlock extends EntityThrowable implements
 					var1.hitVec.yCoord + getRadius(),
 					var1.hitVec.zCoord + this.size);
 			entl = this.worldObj
-					.getEntitiesWithinAABB(EntityLiving.class, pool);
+					.getEntitiesWithinAABB(EntityLivingBase.class, pool);
 			if ((entl != null) && (entl.size() > 0))
-				for (EntityLiving el : entl)
+				for (EntityLivingBase el : entl)
 					if ((el != null) && (el != p)) {
 						if (p instanceof EntityPlayer)
 							el.attackEntityFrom(DamageSource
@@ -242,9 +249,9 @@ public class EntityElementalBlock extends EntityThrowable implements
 									Potion.blindness.id, 120, 2));
 					}
 			if (var1.typeOfHit == MovingObjectType.ENTITY) {
-				if (!(var1.entityHit instanceof EntityLiving))
+				if (!(var1.entityHit instanceof EntityLivingBase))
 					break;
-				EntityLiving el = (EntityLiving) var1.entityHit;
+				EntityLivingBase el = (EntityLivingBase) var1.entityHit;
 				if ((el != null) && (el != p)) {
 					if (p instanceof EntityPlayer)
 						el.attackEntityFrom(DamageSource
@@ -267,9 +274,9 @@ public class EntityElementalBlock extends EntityThrowable implements
 					var1.hitVec.yCoord + getRadius(),
 					var1.hitVec.zCoord + this.size);
 			entl = this.worldObj
-					.getEntitiesWithinAABB(EntityLiving.class, pool);
+					.getEntitiesWithinAABB(EntityLivingBase.class, pool);
 			if ((entl != null) && (entl.size() > 0))
-				for (EntityLiving el : entl)
+				for (EntityLivingBase el : entl)
 					if ((el != null) && (el != p))
 						try {
 							double xdir = el.posX - this.getThrower().posX;
@@ -280,9 +287,9 @@ public class EntityElementalBlock extends EntityThrowable implements
 						} catch (Throwable ex) {
 						}
 			if (var1.typeOfHit == MovingObjectType.ENTITY) {
-				if (!(var1.entityHit instanceof EntityLiving))
+				if (!(var1.entityHit instanceof EntityLivingBase))
 					break;
-				EntityLiving el = (EntityLiving) var1.entityHit;
+				EntityLivingBase el = (EntityLivingBase) var1.entityHit;
 				if ((el != null) && (el != p))
 					try {
 						double xdir = el.posX - this.getThrower().posX;
@@ -294,25 +301,29 @@ public class EntityElementalBlock extends EntityThrowable implements
 					}
 			}
 
-			if (p != null)
-				if ((p.getDistanceToEntity(this) < 3)
-						&& ((p.rotationPitch > 70) && (p.rotationPitch < 110))) {
-					double ydir = p.posY - this.posY;
-					p.motionX = p.motionX * 5F;
-					p.motionY = ydir * 0.5F;
-					p.motionZ = p.motionZ * 5F;
-					if (p.motionX < -5)
-						p.motionX = -4;
-					if (p.motionX > 5)
-						p.motionX = 4;
-					if (p.motionY < -5)
-						p.motionY = -4;
-					if (p.motionY > 5)
-						p.motionY = 4;
-					if (p.motionZ < -5)
-						p.motionZ = -4;
-					if (p.motionZ > 5)
-						p.motionZ = 4;
+			if (p != null && p instanceof EntityPlayer){
+
+				EntityPlayer pl = (EntityPlayer)p;
+				if ((pl.getDistanceToEntity(this) < 3) && ((pl.rotationPitch > 70) && (pl.rotationPitch < 110))) {
+					System.out.println("wee");
+					//this prints ... odd.
+					double ydir = pl.posY - this.posY;
+					pl.motionX = pl.motionX * 5F;
+					pl.motionY = ydir * 0.5F;
+					pl.motionZ = pl.motionZ * 5F;
+					if (pl.motionX < -5)
+						pl.motionX = -4;
+					if (pl.motionX > 5)
+						pl.motionX = 4;
+					if (pl.motionY < -5)
+						pl.motionY = -4;
+					if (pl.motionY > 5)
+						pl.motionY = 4;
+					if (pl.motionZ < -5)
+						pl.motionZ = -4;
+					if (pl.motionZ > 5)
+						pl.motionZ = 4;
+				}
 				}
 			break;
 		case 5:
@@ -327,14 +338,6 @@ public class EntityElementalBlock extends EntityThrowable implements
 		this.setDead();
 	}
 
-	@Override
-	public void writeSpawnData(ByteBuf data) {
-		data.writeInt(this.size);
-		data.writeInt(this.type);
-		data.writeInt(this.step);
-		data.writeInt(this.sizeLimit);
-		// data.writeUTF(this.owner);
-	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
@@ -342,6 +345,5 @@ public class EntityElementalBlock extends EntityThrowable implements
 		nbt.setString("creator", this.owner);
 		nbt.setInteger("size_", this.size);
 		nbt.setInteger("sizeLimit_", this.sizeLimit);
-
 	}
 }

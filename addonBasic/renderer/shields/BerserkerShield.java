@@ -37,7 +37,6 @@ public class BerserkerShield extends ShieldRenderer {
 	public void renderInventory() {
 		GL11.glRotatef(90, 0f, 1f, 0f);
 		GL11.glTranslatef(-0.5f, -0.5f, 0f);
-//		System.out.println("shield");
 	}
 
 	@Override

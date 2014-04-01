@@ -46,7 +46,6 @@ public class PacketArcher {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			// System.out.println(self + " " + xx + " " + yy + " " + zz);
 			ItemStack bow = p.getCurrentEquippedItem();
 			ItemStack top = p.inventory.armorItemInSlot(3);
 			ItemStack middle = p.inventory.armorItemInSlot(2);
@@ -78,7 +77,6 @@ public class PacketArcher {
 
 						Vec3 posStart = Vec3.createVectorHelper(xx, yy, zz);
 						Vec3 posArrow = posStart.addVector(x1, 0, z1);
-						// System.out.println(posArrow);
 						Double dist = posStart.distanceTo(posArrow);
 						if (dist < 10)
 							if (self) {

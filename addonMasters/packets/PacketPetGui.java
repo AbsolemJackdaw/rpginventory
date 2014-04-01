@@ -56,9 +56,6 @@ public class PacketPetGui {
 			newcrystal.setStackDisplayName(petname);
 			inv.setInventorySlotContents(6, newcrystal);
 			
-			System.out.println("Send packet here");
-			//TODO
-//			PacketInventory.sendPacket(p, inv);
 		} catch (Throwable ex) {
 		}
 	}

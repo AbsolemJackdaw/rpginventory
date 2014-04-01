@@ -91,11 +91,9 @@
 //						outputStream.writeInt(i);
 //						Packet250CustomPayload packet = new Packet250CustomPayload("RpgInv", bytes.toByteArray());
 //						PacketDispatcher.sendPacketToServer(packet);
-//						//System.out.println("Packet send");
 //					} catch (IOException e) {
 //						e.printStackTrace();
 //					}
-//					//System.out.println("opened rpg gui");
 //				}
 //			}
 //		} catch (Throwable e) {

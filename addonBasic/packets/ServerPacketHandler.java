@@ -17,8 +17,6 @@ public class ServerPacketHandler {
 
 	@SubscribeEvent
 	public void onServerPacket(ServerCustomPacketEvent event) {
-
-		System.out.println(event.packet.channel());
 		
 		if(!event.packet.channel().equals("BaseAddon"))
 			return;

@@ -19,7 +19,6 @@ public class PlayerTracker /* implements IPlayerTracker */{
 	@SubscribeEvent
 	public void onPlayerChangedDimension(PlayerChangedDimensionEvent e) {
 		// TODO
-		//System.out.println("send packet here dimension");
 		//PacketInventory.sendServerPacket(e.player);
 		if (!e.player.worldObj.isRemote)
 			PacketInventory.sendPacket((EntityPlayerMP) e.player,
@@ -34,7 +33,6 @@ public class PlayerTracker /* implements IPlayerTracker */{
 	@SubscribeEvent
 	public void onPlayerLogin(PlayerLoggedInEvent e) {
 		// TODO
-		//System.out.println("send packet here login");
 	//	PacketInventory.sendServerPacket(e.player);
 
 		if (!e.player.worldObj.isRemote)
@@ -56,7 +54,6 @@ public class PlayerTracker /* implements IPlayerTracker */{
 	public void onPlayerRespawn(PlayerRespawnEvent e) {
 
 		// TODO
-		//System.out.println("send packet here respawn");
 		// PacketInventory.sendPacket(e.player,
 		//PacketInventory.sendServerPacket(e.player);
 

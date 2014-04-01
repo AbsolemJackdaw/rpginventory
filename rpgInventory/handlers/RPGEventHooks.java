@@ -155,11 +155,9 @@ public class RPGEventHooks {
 						&& gloves.getItem().equals(
 								RpgInventoryMod.gloveslap))
 					damagebonus += 0.2F;
-				System.out.println(evt.ammount + "+ ("+evt.ammount+ "*" + damagebonus+")");
 				evt.ammount += MathHelper.floor_float(damagebonus
 						* (evt.ammount));
-				
-				System.out.println(evt.ammount);
+
 			}
 
 		try {
@@ -173,10 +171,6 @@ public class RPGEventHooks {
 				ItemStack shield = inv.getShield();
 				if (shield != null) {
 
-					System.out.println(((ItemRpgInvArmor) inv.getShield().getItem())
-							.boundArmorClass() + ((ItemRpgInvArmor) inv.getShield().getItem())
-							.shieldClass());
-					System.out.println(RpgInventoryMod.playerClass);
 					if ((((ItemRpgInvArmor) inv.getShield().getItem()).boundArmorClass() + ((ItemRpgInvArmor) inv.getShield().getItem()).shieldClass())
 							.equals(RpgInventoryMod.playerClass))
 						vanillaReduction += 0.6f;
@@ -185,11 +179,9 @@ public class RPGEventHooks {
 						damageReduction = 1f + (vanillaReduction - 1f);
 						vanillaReduction = 0;
 					}
-					System.out.println("1reduced : " + damageReduction + "\n2damage taken "+ evt.ammount);
 
 					evt.ammount -= damageReduction;
 
-					System.out.println("3total damage recieved" + evt.ammount);
 					// MathHelper.floor_float(((float) evt.ammount) *
 					// damageReduction);
 					damageItem(shield, inv, player, 1, 1);
@@ -365,14 +357,11 @@ public class RPGEventHooks {
 		}
 
 
-		//		System.out.println("reading this ... ");
-
 		/**
 		 * This checks wether the player wears class armor, and a shield, or
 		 * just a shield (like vanilla shields)
 		 */
 		if (evt.entity instanceof EntityPlayer) {
-			//			System.out.println("reading ...");
 
 			EntityPlayer player = (EntityPlayer)evt.entityLiving;
 			boolean skip = false;

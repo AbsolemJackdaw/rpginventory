@@ -74,7 +74,6 @@ public class MoldRecipes {
 //		else if (mold == mod_RpgInventory.ringmold)
 //			return ringCombination.get(mineral);
 //		else {
-//			System.out.println("mold wasnt recognized");
 //			return null;
 //		}
 //	}

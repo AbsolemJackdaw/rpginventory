@@ -50,7 +50,6 @@ public class CommonTickHandler /* implements ITickHandler */{
 					rpg.setInventorySlotContents(var1, null);
 				}
 			player.inventory.dropAllItems();
-			// System.out.println("JEWELS DROPPED!");
 		}
 	}
 

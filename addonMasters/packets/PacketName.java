@@ -15,32 +15,28 @@ public class PacketName {
 
 	public PacketName(DataInputStream dis, EntityPlayer p) {
 
+		String newName;
 		try {
-			String newName = dis.readUTF();
+			newName = dis.readUTF();
 			setPetName(p, newName);
 		} catch (IOException e) {
 			e.printStackTrace();
-			// System.out.println("nameRecievingFailed");
 		}
 	}
 
 	public void setPetName(EntityPlayer p, String newName) {
-		try {
-			// System.out.println(newName);
-			ItemStack petCrystal = PlayerRpgInventory.get(p).getCrystal();
-			BMPetImpl thePet = null;
-			if (IPet.playersWithActivePets.containsKey(p.getDisplayName())) {
-				thePet = (BMPetImpl) IPet.playersWithActivePets.get(
-						p.getDisplayName()).getPet();
-			}
-			if ((thePet != null) && !((EntityLiving) thePet).isDead) {
-				thePet.setName(newName);
-			}
-			petCrystal.getTagCompound().setString("PetName", newName);
-			((NBTTagCompound) petCrystal.getTagCompound().getTag("RPGPetInfo"))
-					.setString("Name", newName);
-		} catch (Throwable e) {
-			e.printStackTrace();
+
+		ItemStack petCrystal = PlayerRpgInventory.get(p).getCrystal();
+		BMPetImpl thePet = null;
+		if (IPet.playersWithActivePets.containsKey(p.getDisplayName())) {
+			thePet = (BMPetImpl) IPet.playersWithActivePets.get(
+					p.getDisplayName()).getPet();
 		}
+		if ((thePet != null) && !((EntityLiving) thePet).isDead) {
+			thePet.setName(newName);
+		}
+		petCrystal.getTagCompound().setString("PetName", newName);
+		((NBTTagCompound) petCrystal.getTagCompound().getTag("RPGPetInfo"))
+		.setString("Name", newName);
 	}
- }
+}

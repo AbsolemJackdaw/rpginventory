@@ -35,7 +35,6 @@ public class ClientTickHandler {
 				// Packet250CustomPayload(
 				// "RpgRBPacket", out.toByteArray()));
 
-				// System.out.println("todo : send packet");
 
 				// This will only inject our buttons into the existing
 				// GuiInventory
@@ -64,7 +63,7 @@ public class ClientTickHandler {
 								// on
 								// release.
 								if (f.getName().equals("buttonList")
-										|| f.getName().equals("field_73887_h")) {
+										|| f.getName().equals("field_146292_n")) {
 									Field modfield = Field.class
 											.getDeclaredField("modifiers");
 									modfield.setAccessible(true);
@@ -84,7 +83,6 @@ public class ClientTickHandler {
 											currentButtons.size() + 1,
 											posX + 42, posY - 60, 50, 20, gui,
 											"Pet Gui"));
-									System.out.println("added pet button");
 								}
 							} catch (Exception e) {
 								System.err

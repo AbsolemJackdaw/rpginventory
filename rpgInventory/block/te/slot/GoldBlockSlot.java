@@ -18,11 +18,11 @@ import net.minecraft.item.ItemStack;
 
 public class GoldBlockSlot extends Slot {
 
-	private static ArrayList<Block> allBlocks = new ArrayList<Block>();
+	private static ArrayList<Item> allBlocks = new ArrayList<Item>();
 
 	public GoldBlockSlot(IInventory par1IInventory, int par2, int par3, int par4) {
 		super(par1IInventory, par2, par3, par4);
-		allBlocks.add(Blocks.gold_block);
+		allBlocks.add(Item.getItemFromBlock(Blocks.gold_block));
 	}
 
 	@Override
@@ -34,15 +34,14 @@ public class GoldBlockSlot extends Slot {
 	public boolean isItemValid(ItemStack par1ItemStack) {
 		if (par1ItemStack != null)
 			if (par1ItemStack.getItem() instanceof ItemBlock)
-				for(Block b : allBlocks)
-					if (((ItemBlock) par1ItemStack.getItem()).field_150939_a /*getBlock*/== b)
+				for(Item b : allBlocks)
+					if (par1ItemStack.getItem().equals(b))
 						return true;
 		return false;
 	}
 
-	public static void addCatalist(Block b){
-		//If the item is already in the list, no need to put it in there again
-		for(Block b2 : allBlocks){
+	public static void addCatalist(Item b){
+		for(Item b2 : allBlocks){
 			if(b2.equals(b))
 				return;
 		}

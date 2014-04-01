@@ -584,14 +584,12 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
 
 		List<EntityXPOrb> a = this.worldObj.getEntitiesWithinAABB(EntityXPOrb.class,  boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
-//		System.out.println(a);
 		int totalXP = 0;
 
 		for(EntityXPOrb orb : a){
 			totalXP += orb.getXpValue();
 			orb.setDead();
 		}
-//		System.out.println(totalXP);
 		while (totalXP > 0 && !worldObj.isRemote) {
 			int partialXP = EntityXPOrb.getXPSplit(totalXP);
 			totalXP -= partialXP;
@@ -644,13 +642,11 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
-		System.out.println("oh noes i died");
 
 		super.onDeath(par1DamageSource);
 	}
 	@Override
 	public void setDead() {
-		System.out.println("oh noes i got killed");
 
 		if (IPet.playersWithActivePets.containsKey(this.getOwnerName())) {
 			PlayerRpgInventory inv = PlayerRpgInventory

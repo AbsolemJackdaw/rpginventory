@@ -29,12 +29,24 @@ public class RpgUtility {
 		MoldRecipes.addRecipe(mold, mineral, result, catalist );
 	}
 
+	/**add an item that can be fused to form a jewel */
 	public static void addForgeMoldMineral(Item i){
 		SlotMineral.addAllowedItem(i);
 	}
-
+	
+	/**add a block that can be fused to form a jewel */
+	public static void addForgeMoldMineral(Block b){
+		SlotMineral.addAllowedItem(Item.getItemFromBlock(b));
+	}
+	
+	/**add a block that can be used to be molten in the mold*/
 	public static void addCatalistBlock(Block b){
-		GoldBlockSlot.addCatalist(b);
+		GoldBlockSlot.addCatalist(Item.getItemFromBlock(b));
+	}
+	
+	/**add an item that can be used to be molten in the mold*/
+	public static void addCatalistBlock(Item i){
+		GoldBlockSlot.addCatalist(i);
 	}
 
 	/**ItemStack : item or block to burn
@@ -53,16 +65,25 @@ public class RpgUtility {
 		}
 	}
 
+	/**Register a class that implements ISpecialAbility. Registering that class here will allow you to hook up to the "F" special ability key*/
 	public static void registerSpecialAbility(ISpecialAbility keyhandler) {
 		allAbilities.add(keyhandler);
 	}
 	
+	/**Register the weapon you want to use your special ability with here. If you don't, your ISpecalAbility will not be fired*/
 	public static void registerAbilityWeapon(Item item){
 		if(item == null)
 			return;
 		ISpecialAbility.abilityMap.put(item, 0);
 	}
 	
+	/**use this to check if the player can launch the special attack.*/	
+	public static boolean canSpecial(Item specialWeapon){
+		
+		return true;
+	}
+	
+	@Deprecated
 	public static boolean canSpecial(EntityPlayer p, Item specialWeapon){
 		ItemStack stack = p.getCurrentEquippedItem();
 		if(stack != null){

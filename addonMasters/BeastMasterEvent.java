@@ -13,7 +13,6 @@ public class BeastMasterEvent {
 
 	@SubscribeEvent
 	public void someEvent(EntityJoinWorldEvent e){
-		//		System.out.println(e.entity);
 		if(e.entity instanceof EntityXPOrb && !(e.entity instanceof EntityPetXP)){
 			EntityXPOrb orb = (EntityXPOrb) e.entity;
 			List<BMPetImpl> pets = orb.worldObj.getEntitiesWithinAABB(BMPetImpl.class, orb.boundingBox.expand(3d, 3d, 3d));
@@ -21,7 +20,7 @@ public class BeastMasterEvent {
 				orb.worldObj.spawnEntityInWorld(new EntityPetXP(
 						orb.worldObj, orb.posX, orb.posY,
 						orb.posZ, orb.getXpValue()));
-				System.out.println("a pet was detected");
+//				System.out.println("a pet was detected");
 			}
 		}
 	}
@@ -43,13 +42,11 @@ public class BeastMasterEvent {
 	//							murderer.posX - f, murderer.posY - f, murderer.posZ - f, murderer.posX + f,murderer.posY + f, murderer.posZ + f);
 	//
 	//					List<EntityXPOrb> a = corpse.worldObj.getEntitiesWithinAABB(EntityXPOrb.class, pool);
-	//					System.out.println(a);
 	//					int totalXP = 0;
 	//
 	//					for(EntityXPOrb orb : a){
 	//						totalXP += orb.getXpValue();
 	//					}
-	//					System.out.println(totalXP);
 	//					while (totalXP > 0) {
 	//						int partialXP = EntityXPOrb.getXPSplit(totalXP);
 	//						totalXP -= partialXP;

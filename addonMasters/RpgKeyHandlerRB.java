@@ -38,7 +38,6 @@ public class RpgKeyHandlerRB extends RPGKeyHandler {
 					out.writeInt(14);
 
 					// TODO
-					System.out.println();
 					// Packet250CustomPayload packet = new
 					// Packet250CustomPayload(
 					// "RpgRBPacket", bt.toByteArray());

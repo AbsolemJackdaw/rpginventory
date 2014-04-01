@@ -29,7 +29,6 @@ public class ClientTickHandler /* implements ITickHandler */{
 	@SubscribeEvent
 	public void tickEnd(TickEvent.ClientTickEvent ev) {
 
-//		System.out.println(""+ mod_RpgInventory.playerClass);
 
 
 		// This will only inject our buttons into the existing GuiInventory
@@ -54,7 +53,7 @@ public class ClientTickHandler /* implements ITickHandler */{
 							// This adds compatibility when developing AND on
 							// release.
 							if (f.getName().equals("buttonList")
-									|| f.getName().equals("field_73887_h")) {
+									|| f.getName().equals("field_146292_n")) {
 								Field modfield = Field.class
 										.getDeclaredField("modifiers");
 								modfield.setAccessible(true);
@@ -85,35 +84,5 @@ public class ClientTickHandler /* implements ITickHandler */{
 				added = false;
 		} else
 			added = false;
-
-		/*Rendering first person shields ! :D*/
-//		try {
-//			EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-//			PlayerRpgInventory inv = PlayerRpgInventory.get(p);
-//			Minecraft mc = Minecraft.getMinecraft();
-//            if (mc.gameSettings.thirdPersonView == 0 && !mc.renderViewEntity.isPlayerSleeping() && !mc.gameSettings.hideGUI
-//            		&& !mc.playerController.enableEverythingIsScrewedUpMode()){
-//
-//				ItemRpgInvArmor shield = null;
-//				if(inv.getShield() != null){
-//					shield = (ItemRpgInvArmor) inv.getShield().getItem();
-//					MainShield model = shield.getShieldModel();	
-//					if(model != null){
-////						System.out.println("rendering");
-//						GL11.glPushMatrix();
-//						GL11.glScalef(20f, 20f, 20f);
-////						GL11.glRotatef(90f, 1, 0, 0);
-//						GL11.glTranslatef(-10f, 0f, 0f);
-//						model.renderShield(0.0625f);
-//						GL11.glPopMatrix();
-//					}
-//				}
-//			}
-
-
-
-//		} catch (Exception e) {
-//			 TODO: handle exception
-//		}
 	}
 }

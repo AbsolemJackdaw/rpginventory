@@ -52,7 +52,6 @@ public class ServerPacketHandler {
 			case SMP_INVENTORY_SYNC:
 //				String otherPlayerName = dis.readUTF();
 //				EntityPlayer other = world.getPlayerEntityByName(otherPlayerName);
-//				System.out.println(other);
 //				for (int i = 0; i < PlayerRpgInventory.get(other)
 //						.getSizeInventory(); i++)
 //					PlayerRpgInventory.get(other).setInventorySlotContents(i,

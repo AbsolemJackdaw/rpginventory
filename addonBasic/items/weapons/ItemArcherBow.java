@@ -218,7 +218,6 @@ public class ItemArcherBow extends Item {
 
 		for (int i = 0; i < this.IconArray.length; ++i) {
 			String prefix = "rpginventorymod:";
-			// System.out.println("rpginventorymod" + ":" + ItemNameArray[i]);
 			this.IconArray[i] = par1IconRegister.registerIcon(prefix
 					+ ItemNameArray[i]);
 		}

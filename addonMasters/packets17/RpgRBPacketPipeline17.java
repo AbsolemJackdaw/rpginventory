@@ -147,21 +147,18 @@
 //	public boolean registerPacket(Class<? extends RpgRBAbstractPacket> clazz) {
 //		if (this.packets.size() > 256) {
 //
-//			System.out.println("Too many packets registered !! Aborting ...");
 //
 //			return false;
 //		}
 //
 //		if (this.packets.contains(clazz)) {
 //
-//			System.out.println("Packet already registered !! Aborting ...");
 //
 //			return false;
 //		}
 //
 //		if (this.isPostInitialised) {
 //
-//			System.out.println("Packet was not initialized !! Aborting ...");
 //
 //			return false;
 //		}

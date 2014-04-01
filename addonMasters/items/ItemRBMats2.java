@@ -29,30 +29,8 @@ public class ItemRBMats2 extends Item {
 		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 		ItemStack stack = inv.getCrystal();
 
-		//				if(!world.isRemote){
-		//					SpiderPet pig = new SpiderPet(player.worldObj , player, stack );
-		//					pig.setPosition(player.posX, player.posY, player.posZ);
-		//					pig.setOwner(player.getCommandSenderName());
-		//					pig.setTamed(true);
-		//					pig.setName("James");
-		//					pig.setLevel(20);
-		//					pig.setHealth(100);
-		//					pig.setSaddled(true);
-		//					pig.setWorld(world);
-		//					pig.setLocationAndAngles(player.posX, player.posY, player.posZ, 0, 0);
-		//					player.worldObj.spawnEntityInWorld(pig);
-		//					IPet.playersWithActivePets.put(player.getDisplayName(), new PetID(
-		//							pig.dimension, pig.getEntityId()));
-		//				}
-
-		//			player.addChatMessage(new ChatComponentText("walla"));
-
-//		
-		System.out.println(RpgInventoryMod.playerClass);
-		
-			if (!world.isRemote && (player.ridingEntity == null) ){
-				if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER)){
-				System.out.println("2");
+		if (!world.isRemote && (player.ridingEntity == null) ){
+			if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER)){
 
 				try {
 					if (stack != null)
@@ -67,7 +45,6 @@ public class ItemRBMats2 extends Item {
 								stack = ((IPet) e).writePetToItemStack();
 								inv.setInventorySlotContents(6, stack);
 								e.setDead();
-								System.out.println("Put Away");
 								return whistle;
 							}
 							// pet is not in the world
@@ -103,17 +80,14 @@ public class ItemRBMats2 extends Item {
 								spider.setOwner(player.getDisplayName());
 								spider.setTamed(true);
 								IPet.playersWithActivePets.put(player.getDisplayName(), new PetID(
-																	spider.dimension, spider.getEntityId()));
+										spider.dimension, spider.getEntityId()));
 								if(stack.stackTagCompound != null){
 									spider.setName(stack.stackTagCompound.getString("PetName"));
 									spider.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
 									spider.setHealth(stack.stackTagCompound.getFloat("PetHealth"));
 									if (spider.getHealth() <= 0) 
 										spider.setHealth(1);
-								}
-								
-									System.out.println("[INFO] ~ Pet was freshly spawned. This is normal, unless your pet is not new.");
-								
+								}								
 								if(!world.isRemote)
 									world.spawnEntityInWorld(spider);
 

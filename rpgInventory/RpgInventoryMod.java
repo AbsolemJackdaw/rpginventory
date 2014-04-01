@@ -93,6 +93,9 @@ public class RpgInventoryMod {
 	public static CreativeTabs tab;
 
 	public static ArrayList<String> donators = new ArrayList<String>();
+	/**this boolean gets manually changed by the creator before obfuscating the mod to false
+	 * this field is used for Reflection */
+	public static boolean isDev;
 	public static final String channelName = "RpgInv";
 
 	public RpgInventoryMod() {
@@ -148,6 +151,9 @@ public class RpgInventoryMod {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 
+		
+		isDev = true;
+		
 		ToLoad.loadMoldRecipes();
 		ToLoad.loadGameRecipes();
 

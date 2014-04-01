@@ -72,8 +72,6 @@ class SlotRpgArmor extends Slot {
 						return true;
 				return false;
 			default:
-				// System.out.println("Unknown RPG Inventory type:" +
-				// slotIndex);
 				return false;
 			}
 		}

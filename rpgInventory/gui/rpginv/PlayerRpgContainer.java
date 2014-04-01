@@ -63,7 +63,6 @@ public class PlayerRpgContainer extends Container {
 		if (!par1EntityPlayer.worldObj.isRemote) {
 			PacketInventory.sendPacket((EntityPlayerMP) par1EntityPlayer,
 					this.inventory);
-			//System.out.println("complete packet here closing inventory");
 		}
 
 		super.onContainerClosed(par1EntityPlayer);
@@ -84,7 +83,6 @@ public class PlayerRpgContainer extends Container {
 		if (!par4EntityPlayer.worldObj.isRemote) {
 			PacketInventory.sendPacket((EntityPlayerMP) par4EntityPlayer,
 					this.inventory);
-//			System.out.println("complete packet send from clickslot");
 		}
 		return rv;
 	}
@@ -142,7 +140,6 @@ public class PlayerRpgContainer extends Container {
 					else
 						this.slotClick(5, 0, 0, player);
 				case RpgInventoryMod.ITEMTYPE.CRYSTAL:
-					// System.out.println(tmp1.getItemDamage());
 					if (((SlotRpgArmor) this.getSlot(6)).getStack() != null)
 						return null;
 					if (tmp1.getItemDamage() == 0)

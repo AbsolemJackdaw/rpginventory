@@ -41,8 +41,7 @@ public class PlayerRpgInventory implements IInventory,
 			player.registerExtendedProperties(EXT_PROP_NAME,
 					new PlayerRpgInventory(player));
 			FMLLog.getLogger().info("Player properties registered");
-		} else
-			System.out.println("NOPE. player was null");
+		}
 	}
 
 	// PacketInventory pa = new PacketInventory();
@@ -58,7 +57,6 @@ public class PlayerRpgInventory implements IInventory,
 		// props.addEntry(this);
 
 		// TODO
-		//System.out.println("send packet here for closed inventory");
 		// PacketInventory.sendPacket(player, this);
 		
 		//PacketInventory.sendServerPacket(player);
@@ -206,7 +204,6 @@ public class PlayerRpgInventory implements IInventory,
 	public ItemStack getStackInSlotOnClosing(int par1) {
 		// mod_RpgInventory.proxy.addEntry(playername, this);
 		// TODO
-		//System.out.println("fill packet here slotclosed");
 		// PacketInventory.sendPacket(player, this);
 		//PacketInventory.sendServerPacket(player);
 		
@@ -277,7 +274,6 @@ public class PlayerRpgInventory implements IInventory,
 						return true;
 				return false;
 			default:
-				// System.out.println("Unknown RPG Inventory type:" +
 				// slotIndex);
 				return false;
 			}
@@ -346,7 +342,6 @@ public class PlayerRpgInventory implements IInventory,
 		try {
 
 			// TODO
-			// System.out.println("send packet here updated as unclean");
 			// PacketInventory.sendPacket(player, this);
 
 			if (!player.worldObj.isRemote)
@@ -451,7 +446,6 @@ public class PlayerRpgInventory implements IInventory,
 		// TODO
 		// if (!player.worldObj.isRemote) {
 		// PacketInventory.sendPacket((EntityPlayerMP) player, this);
-		// System.out.println("fill packet here slot content set remotely");
 
 		// PacketInventory pack = new PacketInventory();
 		// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
