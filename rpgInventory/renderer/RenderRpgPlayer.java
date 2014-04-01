@@ -8,7 +8,6 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -167,43 +166,46 @@ public class RenderRpgPlayer {
 
 
 
+		if(main == null){
+			try {
 
-		try {
+				Field f = ReflectionHelper.findField(evt.renderer.getClass(), "modelBipedMain");
+				main = ReflectionHelper.getPrivateValue(RenderPlayer.class, evt.renderer, "modelBipedMain");
+				//			if(RpgInventoryMod.isDev){
+				//				f = evt.renderer.getClass().getDeclaredField("modelBipedMain");
+				//				f.setAccessible(true);
+				//			}else
+				//				for(Field f : evt.renderer.getClass().getDeclaredFields()){ 
+				//					if(f.equals("field_77109_a") || f.equals("modelBipedMain")){
+				//						f.setAccessible(true);
+				//						main = (ModelBiped) f.get(evt.renderer);
+				//					}
+				//				}
 
-			Field f = ReflectionHelper.findField(evt.renderer.getClass(), "modelBipedMain");
-			main = ReflectionHelper.getPrivateValue(RenderPlayer.class, evt.renderer, "modelBipedMain");
-			//			if(RpgInventoryMod.isDev){
-			//				f = evt.renderer.getClass().getDeclaredField("modelBipedMain");
-			//				f.setAccessible(true);
-			//			}else
-			//				for(Field f : evt.renderer.getClass().getDeclaredFields()){ 
-			//					if(f.equals("field_77109_a") || f.equals("modelBipedMain")){
-			//						f.setAccessible(true);
-			//						main = (ModelBiped) f.get(evt.renderer);
-			//					}
-			//				}
+				//			try {
+				//				main = evt.renderer.modelBipedMain:
+				//			} catch (Exception e) {
+				//				// TODO: handle exception
+				//			}
 
-			//			try {
-			//				main = evt.renderer.modelBipedMain:
-			//			} catch (Exception e) {
-			//				// TODO: handle exception
-			//			}
-
+			}
+			//		catch (NoSuchFieldException e) {
+			//			e.printStackTrace();
+			//			System.out
+			//			.println("Something went wrong accesing the modelbipedmain ! Index 1");
+			//		}
+			catch (SecurityException e) {
+				e.printStackTrace();
+				System.out
+				.println("Something went wrong accesing the modelbipedmain ! Index 2");
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+				System.out
+				.println("Something went wrong accesing the modelbipedmain ! Index 3");
+			}
 		}
-		//		catch (NoSuchFieldException e) {
-		//			e.printStackTrace();
-		//			System.out
-		//			.println("Something went wrong accesing the modelbipedmain ! Index 1");
-		//		}
-		catch (SecurityException e) {
-			e.printStackTrace();
-			System.out
-			.println("Something went wrong accesing the modelbipedmain ! Index 2");
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-			System.out
-			.println("Something went wrong accesing the modelbipedmain ! Index 3");
-		}
+
+
 		//		catch (IllegalAccessException e) {
 		//			e.printStackTrace();
 		//			System.out
