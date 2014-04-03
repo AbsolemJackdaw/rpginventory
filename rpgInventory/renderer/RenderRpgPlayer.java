@@ -161,12 +161,9 @@ public class RenderRpgPlayer {
 
 		if(main == null){
 			RenderPlayer r = (RenderPlayer)evt.renderer;
-//			main = r.modelBipedMain;
+			//yay, my pull request :3 modelBipedMain got set to public
+			main = r.modelBipedMain;
 		}
-
-		// all fields get set to public when
-		// forge compiles them
-		// or they used to. that's why this worked before :)
 
 		/* ===== RENDERING CLOAK===== */
 		ItemStack cloak = PlayerRpgInventory.get(player).getCloak();
@@ -204,8 +201,6 @@ public class RenderRpgPlayer {
 
 	}
 
-
-
 	private void rendercape(EntityPlayer player, ItemStack cloak,
 			float partialTick) {
 		float var11;
@@ -230,8 +225,8 @@ public class RenderRpgPlayer {
 								.getCommandSenderName()))
 							mc.renderEngine.bindTexture(CapeRenderer
 									.getLocationCape(player
-											.getCommandSenderName()));// new
-				// ResourceLocation("subaraki/playerCapes/"+player.username+".png"));
+											.getCommandSenderName()));
+				new ResourceLocation("subaraki/playerCapes/"+player.getDisplayName()+".png");
 
 				GL11.glTranslatef(0.0F, 0.0F, 0.125F);
 				double var22 = (player.field_71091_bM + ((player.field_71094_bP - player.field_71091_bM) * partialTick))
