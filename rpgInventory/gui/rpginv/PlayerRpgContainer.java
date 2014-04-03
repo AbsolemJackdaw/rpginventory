@@ -1,7 +1,5 @@
 package rpgInventory.gui.rpginv;
 
-import addonMasters.ClientTickHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;

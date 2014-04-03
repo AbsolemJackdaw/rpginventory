@@ -3,8 +3,6 @@ package rpgInventory.block.te;
 import java.util.HashMap;
 import java.util.Map;
 
-import addonBasic.items.ItemRpgInventoryItem;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -19,7 +17,6 @@ import net.minecraft.tileentity.TileEntity;
 import rpgInventory.block.BlockForge;
 import rpgInventory.item.ItemMold;
 import rpgInventory.item.armor.ItemRpgInvArmor;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TEMold extends TileEntity implements IInventory {
 

@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.renderer.RpgItemRenderer;
 import addonBasic.RpgBaseAddon;
 import addonBasic.models.weapons.ModelSoulSphere;
 

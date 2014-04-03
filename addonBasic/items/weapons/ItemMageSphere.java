@@ -19,6 +19,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.config.RpgConfig;
+import rpgInventory.item.ItemRpgWeapon;
 import addonBasic.RpgBaseAddon;
 
 public class ItemMageSphere extends ItemRpgWeapon {

@@ -7,6 +7,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import rpgInventory.renderer.RpgItemRenderer;
+
 import addonBasic.items.weapons.ItemArcherBow;
 import addonBasic.models.weapons.ModelBow;
 

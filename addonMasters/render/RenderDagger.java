@@ -7,7 +7,7 @@ import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 
 import org.lwjgl.opengl.GL11;
 
-import addonBasic.renderer.weapons.RpgItemRenderer;
+import rpgInventory.renderer.RpgItemRenderer;
 import addonMasters.models.ModelDaggerR;
 
 public class RenderDagger extends RpgItemRenderer {

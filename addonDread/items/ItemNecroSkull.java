@@ -14,6 +14,7 @@ import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -21,13 +22,12 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import addonBasic.items.weapons.ItemRpgWeapon;
+import rpgInventory.item.ItemRpgWeapon;
 import addonDread.RpgDreadAddon;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
 import addonDread.minions.IMinion;
 import addonDread.packets.DreadServerPacketHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class ItemNecroSkull extends ItemRpgWeapon {

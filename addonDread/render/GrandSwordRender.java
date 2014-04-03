@@ -6,7 +6,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import addonBasic.renderer.weapons.RpgItemRenderer;
+import rpgInventory.renderer.RpgItemRenderer;
+
 import addonDread.models.GrandSword;
 
 public class GrandSwordRender extends RpgItemRenderer {

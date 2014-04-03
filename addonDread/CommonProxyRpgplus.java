@@ -1,8 +1,6 @@
 package addonDread;
 
 import net.minecraft.client.model.ModelBiped;
-import addonBasic.RpgBaseAddon;
-import addonDread.packets.DreadServerPacketHandler;
 
 public class CommonProxyRpgplus {
 

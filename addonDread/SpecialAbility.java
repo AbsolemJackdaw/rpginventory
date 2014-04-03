@@ -8,7 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import rpgInventory.utils.ISpecialAbility;
 import rpgInventory.utils.RpgUtility;
-import addonBasic.RpgBaseAddon;
 import addonDread.packets.DreadServerPacketHandler;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 

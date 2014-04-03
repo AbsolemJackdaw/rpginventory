@@ -4,7 +4,6 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
 import rpgInventory.utils.RpgUtility;
-import addonBasic.RpgBaseAddon;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
 import addonDread.models.ModelNecroArmor;
