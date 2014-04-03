@@ -1,7 +1,5 @@
 package rpgInventory.renderer;
 
-import java.lang.reflect.Field;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -29,9 +27,7 @@ import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.GloveLeft;
 import rpgInventory.models.GloveRight;
 import rpgInventory.models.ModelNecklace;
-import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class RenderRpgPlayer {
 
@@ -162,56 +158,11 @@ public class RenderRpgPlayer {
 
 		EntityPlayer player = evt.entityPlayer;
 		EntityPlayer p = evt.entityPlayer;
-		//			p.worldObj.spawnParticle("portal", p.posX + (p.worldObj.rand.nextDouble() - 0.5D) * (double)p.width, p.posY + p.worldObj.rand.nextDouble() * (double)p.height - 0.25D, p.posZ + (p.worldObj.rand.nextDouble() - 0.5D) * (double)p.width, 
-		//            		(p.worldObj.rand.nextDouble() - 0.5D) * 2.0D, -p.worldObj.rand.nextDouble(), (p.worldObj.rand.nextDouble() - 0.5D) * 2.0D);
-
-
 
 		if(main == null){
-			try {
-
-//				Field f = ObfuscationReflectionHelper.findField(evt.renderer.getClass(), "modelBipedMain");
-				main = ObfuscationReflectionHelper.getPrivateValue(RenderPlayer.class, evt.renderer, "modelBipedMain");
-				//			if(RpgInventoryMod.isDev){
-				//				f = evt.renderer.getClass().getDeclaredField("modelBipedMain");
-				//				f.setAccessible(true);
-				//			}else
-				//				for(Field f : evt.renderer.getClass().getDeclaredFields()){ 
-				//					if(f.equals("field_77109_a") || f.equals("modelBipedMain")){
-				//						f.setAccessible(true);
-				//						main = (ModelBiped) f.get(evt.renderer);
-				//					}
-				//				}
-
-				//			try {
-				//				main = evt.renderer.modelBipedMain:
-				//			} catch (Exception e) {
-				//				// TODO: handle exception
-				//			}
-
-			}
-			//		catch (NoSuchFieldException e) {
-			//			e.printStackTrace();
-			//			System.out
-			//			.println("Something went wrong accesing the modelbipedmain ! Index 1");
-			//		}
-			catch (SecurityException e) {
-				e.printStackTrace();
-				System.out
-				.println("Something went wrong accesing the modelbipedmain ! Index 2");
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-				System.out
-				.println("Something went wrong accesing the modelbipedmain ! Index 3");
-			}
+			RenderPlayer r = (RenderPlayer)evt.renderer;
+//			main = r.modelBipedMain;
 		}
-
-
-		//		catch (IllegalAccessException e) {
-		//			e.printStackTrace();
-		//			System.out
-		//			.println("Something went wrong accesing the modelbipedmain ! Index 4");
-		//		}
 
 		// all fields get set to public when
 		// forge compiles them
