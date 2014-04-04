@@ -47,10 +47,10 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void load() {
+		
 		RpgInventoryMod.Channel.register(new ClientPacketHandler());
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 		FMLCommonHandler.instance().bus().register(new RPGKeyHandler());
-
 	}
 
 	@Override
@@ -72,15 +72,10 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerLate() {
-		// TickRegistry.registerTickHandler(new ClientTickHandler(),
-		// Side.CLIENT);
 	}
 
 	@Override
 	public void registerRenderInformation() {
-		// MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
-
-		// TextureIDs.init();
 
 		Sphere sphere = new Sphere();
 		// GLU_POINT will render it as dots.

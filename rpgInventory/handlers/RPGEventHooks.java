@@ -90,10 +90,6 @@ public class RPGEventHooks {
 
 				PlayerRpgInventory inv = PlayerRpgInventory
 						.get((EntityPlayer) evt.entityLiving);
-				// if (mod_RpgInventory.playerClass
-				// .contains(mod_RpgInventory.CLASSBERSERKER))
-				// player.worldObj.newExplosion(player, player.posX,
-				// player.posY, player.posZ, 20, false, false);
 			}
 
 		} catch (Throwable e) {
@@ -336,12 +332,6 @@ public class RPGEventHooks {
 						goldenItems += 1;
 					}
 					p.capabilities.setPlayerWalkSpeed(0.1f + speedboost);
-
-					// if(p.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()
-					// !=
-					// p.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()
-					// + (double)speedboost){
-					//
 
 					/* ==== Invisibility Cloak==== */
 					ItemStack cloak = inv.getCloak();

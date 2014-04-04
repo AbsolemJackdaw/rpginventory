@@ -76,8 +76,6 @@ public class PlayerRpgContainer extends Container {
 			EntityPlayer par4EntityPlayer) {
 		ItemStack rv = super.slotClick(par1, par2, par3, par4EntityPlayer);
 		
-		//PacketInventory.sendServerPacket(par4EntityPlayer);
-		
 		if (!par4EntityPlayer.worldObj.isRemote) {
 			PacketInventory.sendPacket((EntityPlayerMP) par4EntityPlayer,
 					this.inventory);

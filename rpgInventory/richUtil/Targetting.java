@@ -20,6 +20,10 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class Targetting {
 
+	
+	/**@params parDistance : distance of blocks to check
+	 * return the entity you are looking at. null if no entity is looked at within parDistance blocks
+	 * */
 	@SideOnly(Side.CLIENT)
 	public static EntityLivingBase isTargetingLivingEntity(double parDistance) {
 		net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft

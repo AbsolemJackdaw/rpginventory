@@ -80,10 +80,8 @@ public class RenderRpgPlayer {
 
 				if (this.mc.gameSettings.thirdPersonView == 0 && !this.mc.renderViewEntity.isPlayerSleeping() && !this.mc.gameSettings.hideGUI && !this.mc.playerController.enableEverythingIsScrewedUpMode())
 				{
-					//mc.entityRenderer.enableLightmap((double)par1);
 					mc.renderEngine.bindTexture(((ItemRpgInvArmor) shield.getItem()).getTexture());
 					renderFPShield((ItemRpgInvArmor) shield.getItem(), par1);
-					//mc.entityRenderer.disableLightmap((double)par1);
 				}
 
 				GL11.glPopMatrix();
@@ -124,15 +122,6 @@ public class RenderRpgPlayer {
 			float f3 = entityplayer.prevCameraYaw + (entityplayer.cameraYaw - entityplayer.prevCameraYaw) * par1;
 			float f4 = entityplayer.prevCameraPitch + (entityplayer.cameraPitch - entityplayer.prevCameraPitch) * par1;
 			GL11.glTranslatef(-MathHelper.cos(f2 * (float)Math.PI) * f3 * 0.3F, -Math.abs(MathHelper.cos(f2 * (float)Math.PI) * f3), 0.0F);
-			//			GL11.glRotatef(MathHelper.sin(f2 * (float)Math.PI) * f3 * 3.0F, 0.0F, 0.0F, 1.0F);
-			//			GL11.glRotatef(Math.abs(MathHelper.cos(f2 * (float)Math.PI - 0.2F) * f3) * 5.0F, 1.0F, 0.0F, 0.0F);
-			//			GL11.glRotatef(f4, 1.0F, 0.0F, 0.0F);
-
-			//original
-			//			GL11.glTranslatef(MathHelper.sin(f2 * (float)Math.PI) * f3 * 0.5F, -Math.abs(MathHelper.cos(f2 * (float)Math.PI) * f3), 0.0F);
-			//			GL11.glRotatef(MathHelper.sin(f2 * (float)Math.PI) * f3 * 3.0F, 0.0F, 0.0F, 1.0F);
-			//			GL11.glRotatef(Math.abs(MathHelper.cos(f2 * (float)Math.PI - 0.2F) * f3) * 5.0F, 1.0F, 0.0F, 0.0F);
-			//			GL11.glRotatef(f4, 1.0F, 0.0F, 0.0F);
 		}
 	}
 
@@ -141,8 +130,6 @@ public class RenderRpgPlayer {
 		/* ===== RENDERING SHIELDS===== */
 		ItemStack shield = PlayerRpgInventory.get(evt.entityPlayer).getShield();
 		if (shield != null)
-			// this is an exception towards all other rendering.
-			// I do not have a hook for it yet, but I hope I soon will.
 			if (shield.getItem() instanceof ItemRpgInvArmor) {
 				if (((ItemRpgInvArmor) shield.getItem()).shieldClass()
 						.toLowerCase().contains("archmage"))
@@ -380,22 +367,6 @@ public class RenderRpgPlayer {
 	float i = 0;
 	private void renderFPShield(ItemRpgInvArmor armor, float par1) {
 		GL11.glPushMatrix();
-
-		//		if(main != null)
-		//			for (int i = 0; i < armor.getShieldModel().parts.size(); i++) {
-		//				armor.getShieldModel().parts.get(i).rotateAngleX = main.bipedLeftArm.rotateAngleX;
-		//				armor.getShieldModel().parts.get(i).rotateAngleY = main.bipedLeftArm.rotateAngleY;
-		//				armor.getShieldModel().parts.get(i).rotateAngleZ = main.bipedLeftArm.rotateAngleZ;
-		//				armor.getShieldModel().parts.get(i).rotationPointX = main.bipedLeftArm.rotationPointX;
-		//				armor.getShieldModel().parts.get(i).rotationPointY = main.bipedLeftArm.rotationPointY;
-		//				armor.getShieldModel().parts.get(i).rotationPointZ = main.bipedLeftArm.rotationPointZ;
-		//			}
-		//		try {
-		//			if (armor.shieldClass().contains("vanilla"))
-		//				armor.getShieldModel().parts.get(64 - 1).rotateAngleZ = main.bipedLeftArm.rotateAngleZ + 0.356f;
-		//		} catch (Exception e) {
-		//		} mains is always null at this point :/
-
 
 		float f1 = 1.0f;
 		EntityClientPlayerMP entityclientplayermp = this.mc.thePlayer;

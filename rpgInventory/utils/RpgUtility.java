@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -79,8 +80,7 @@ public class RpgUtility {
 	
 	/**use this to check if the player can launch the special attack.*/	
 	public static boolean canSpecial(Item specialWeapon){
-		
-		return true;
+		return canSpecial(Minecraft.getMinecraft().thePlayer, specialWeapon);
 	}
 	
 	@Deprecated

@@ -80,21 +80,7 @@ class SlotRpgArmor extends Slot {
 
 	@Override
 	public void onSlotChanged() {
-
-		// TODO
-		// PacketInventory.sendPacket(player, (PlayerRpgInventory)
-		// this.inventory);
-//		PacketInventory.sendServerPacket(player);
-		if (!player.worldObj.isRemote) {
-			PacketInventory.sendPacket((EntityPlayerMP) player,
-					PlayerRpgInventory.get(player));
-			System.out.println("send packet here onslotchanged");
-
-			// PacketInventory pack = new PacketInventory();
-			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			// pipe.sendTo(pack, (EntityPlayerMP) player);
-		}
-
+		PacketInventory.sendServerPacket(player);
 		super.onSlotChanged();
 	}
 

@@ -30,7 +30,6 @@ public class ClientTickHandler /* implements ITickHandler */{
 	public void tickEnd(TickEvent.ClientTickEvent ev) {
 
 
-
 		// This will only inject our buttons into the existing GuiInventory
 		// object.
 		// The button prevents calls to the parent GUI if clicked, and calls our

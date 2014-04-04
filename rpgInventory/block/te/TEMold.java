@@ -22,14 +22,10 @@ public class TEMold extends TileEntity implements IInventory {
 
 
 	private static Map<Item,Integer> toBurn = new HashMap<Item, Integer>();
-	private static Map<Block,Integer> BlocktoBurn = new HashMap<Block, Integer>();
 
 	public static void addFuelBlock(Block b, int time){
-		for(Block c : BlocktoBurn.keySet()){
-			if(BlocktoBurn.containsKey(c))
-				return;
-		}
-		BlocktoBurn.put(b, time);
+		Item i = Item.getItemFromBlock(b);
+		addFuelItem(i, time);
 	}
 
 	public static void addFuelItem(Item i, int time){
@@ -54,21 +50,6 @@ public class TEMold extends TileEntity implements IInventory {
 					return toBurn.get(i);
 				}
 			}
-			for(Block b : BlocktoBurn.keySet()){
-				if(var1 == Item.getItemFromBlock(b)){
-					return toBurn.get(b);
-				}
-			}
-
-			//			if (var1 == Items.coal)
-			//				return 100;
-			//			if (var1 == Items.lava_bucket)
-			//				return 3200;
-			//			if (var1 == Items.blaze_rod)
-			//				return 1600;
-			//			if (var1 == Item.getItemFromBlock(Blocks.coal_block))
-			//				return 800;
-
 			return 0;
 		}
 	}
@@ -323,7 +304,7 @@ public class TEMold extends TileEntity implements IInventory {
 			else
 				moldforgeItemStacks[3] = null;
 			if (moldforgeItemStacks[2].stackSize > 1)
-					--moldforgeItemStacks[2].stackSize;
+				--moldforgeItemStacks[2].stackSize;
 			else if(!(moldforgeItemStacks[2].getItem() instanceof ItemRpgInvArmor))
 				moldforgeItemStacks[2] = null;
 			if (moldforgeItemStacks[1].stackSize > 1)
@@ -417,7 +398,6 @@ public class TEMold extends TileEntity implements IInventory {
 		}
 
 		if (var2)
-			// this.onInventoryChanged();
 			markDirty();
 
 		Block b = worldObj.getBlock(xCoord, yCoord, zCoord);

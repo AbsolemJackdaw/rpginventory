@@ -14,55 +14,33 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
  * 
  * @author AbrarSyed
  */
-public class PlayerTracker /* implements IPlayerTracker */{
+public class PlayerTracker{
 
 	@SubscribeEvent
 	public void onPlayerChangedDimension(PlayerChangedDimensionEvent e) {
-		// TODO
-		//PacketInventory.sendServerPacket(e.player);
 		if (!e.player.worldObj.isRemote)
 			PacketInventory.sendPacket((EntityPlayerMP) e.player,
 					PlayerRpgInventory.get(e.player));
-		// PacketInventory pack = new PacketInventory();
-		// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-		// pipe.sendTo(pack, (EntityPlayerMP) e.player);
-		// PacketInventory.sendPacket(e.player,
 		PlayerRpgInventory.get(e.player);
 	}
 
 	@SubscribeEvent
 	public void onPlayerLogin(PlayerLoggedInEvent e) {
-		// TODO
-	//	PacketInventory.sendServerPacket(e.player);
-
 		if (!e.player.worldObj.isRemote)
-			// PacketInventory pack = new PacketInventory();
-			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			// pipe.sendTo(pack, (EntityPlayerMP) e.player);
 			PacketInventory.sendPacket((EntityPlayerMP) e.player,
 					PlayerRpgInventory.get(e.player));
-		// PacketInventory.sendPacket(e.player,
 		PlayerRpgInventory.get(e.player);
 	}
 
 	@SubscribeEvent
 	public void onPlayerLogout(PlayerLoggedOutEvent e) {
-		// write the Inventory and then remove it from Ram.
 	}
 
 	@SubscribeEvent
 	public void onPlayerRespawn(PlayerRespawnEvent e) {
-
-		// TODO
-		// PacketInventory.sendPacket(e.player,
-		//PacketInventory.sendServerPacket(e.player);
-
 		if (!e.player.worldObj.isRemote)
 			PacketInventory.sendPacket((EntityPlayerMP) e.player,
 					PlayerRpgInventory.get(e.player));
-		// PacketInventory pack = new PacketInventory();
-		// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-		// pipe.sendTo(pack, (EntityPlayerMP) e.player);
 		PlayerRpgInventory.get(e.player);
 	}
 }

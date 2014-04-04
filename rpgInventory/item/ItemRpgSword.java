@@ -13,11 +13,4 @@ public class ItemRpgSword extends ItemSword {
 		this.maxStackSize = 1;
 	}
 
-	// @Override
-	// public Item setTextureName(String s) {
-	// String itemName = getUnlocalizedName().substring(
-	// getUnlocalizedName().indexOf(".") + 1);
-	// this.iconString = "rpginventorymod:" + itemName;
-	// return this;
-	// }
 }

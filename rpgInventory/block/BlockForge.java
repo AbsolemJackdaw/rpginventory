@@ -24,11 +24,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockForge extends BlockContainer {
 
-	// private static boolean keepInventory = true;
-
-	// TEXTURES
-	// public static IIcon temoldOvenBottom;
-	// public static IIcon temoldOvenTop;
 	public static IIcon temoldOvenSide;
 
 	public static IIcon temoldOvenFront;

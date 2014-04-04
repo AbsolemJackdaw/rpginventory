@@ -83,36 +83,8 @@ public class MoldContainer extends Container {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotnumber) {
 		super.transferStackInSlot(player, slotnumber);
-		/*
-		 * ItemStack itemstack = null; Slot slot =
-		 * (Slot)inventorySlots.get(slotnumber);
-		 * 
-		 * if (slot != null && slot.getHasStack()) { ItemStack itemstack1 =
-		 * slot.getStack(); itemstack = itemstack1.copy();
-		 * 
-		 * if (slotnumber <= 4) { if (!mergeItemStack(itemstack1, 5, 32, true))
-		 * { return null; } slot.onSlotChange(itemstack1, itemstack); } else if
-		 * (slotnumber >4) { if (TEMold.isItemFuel(itemstack1)) { if
-		 * (!mergeItemStack(itemstack1, 0, 1, false)) { return null; } }
-		 * if(TEMold.isGoldBlock(itemstack1)){ if (!mergeItemStack(itemstack1,
-		 * 1, 2, false)) { return null; } } if(TEMold.isMold(itemstack1)){ if
-		 * (!mergeItemStack(itemstack1, 2, 3, false)) { return null; }
-		 * }if(TEMold.isMineral(itemstack1)){ if (!mergeItemStack(itemstack1, 3,
-		 * 4, false)) { return null; } } else if (!mergeItemStack(itemstack1, 5,
-		 * 32, false)) { return null; } }
-		 * 
-		 * else if (slotnumber > 4 && slotnumber < 32) { if
-		 * (!mergeItemStack(itemstack1, 32, 41, false)) { return null; } } else
-		 * if (slotnumber >= 32 && slotnumber < 41 &&
-		 * !mergeItemStack(itemstack1, 5, 32, false)) { return null; }
-		 * 
-		 * if (itemstack1.stackSize == 0) { slot.putStack(null); } else {
-		 * slot.onSlotChanged(); }
-		 * 
-		 * if (itemstack1.stackSize == itemstack.stackSize) { return null; }
-		 * 
-		 * slot.onPickupFromSlot(player, itemstack); }
-		 */
+	
+		//TODO transfer clicking
 
 		return null;
 	}

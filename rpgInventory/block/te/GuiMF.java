@@ -36,10 +36,7 @@ public class GuiMF extends GuiContainer {
 
 		if (forgeInventory.isBurning()) {
 			int burn = forgeInventory.getTimeRemainingScaled(33);
-			drawTexturedModalRect(j + 33, k + 58/*-burn+33*/, 176, 0/*
-																		 * 33-burn
-																		 */,
-					45, burn);
+			drawTexturedModalRect(j + 33, k + 58/*-burn+33*/, 176, 0/* * 33-burn*/,45, burn);
 		}
 
 		int update = forgeInventory.getProgressScaled(60);

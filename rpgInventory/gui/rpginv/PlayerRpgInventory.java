@@ -44,8 +44,6 @@ public class PlayerRpgInventory implements IInventory,
 		}
 	}
 
-	// PacketInventory pa = new PacketInventory();
-
 	public PlayerRpgInventory(EntityPlayer p) {
 		if (p != null)
 			player = p;
@@ -53,19 +51,8 @@ public class PlayerRpgInventory implements IInventory,
 
 	@Override
 	public void closeInventory() {
-		// ExtendedPlayer props = ExtendedPlayer.get(player);
-		// props.addEntry(this);
-
-		// TODO
-		// PacketInventory.sendPacket(player, this);
-		
-		//PacketInventory.sendServerPacket(player);
-		
 		if (!player.worldObj.isRemote)
 			PacketInventory.sendPacket((EntityPlayerMP) player, this);
-		// PacketInventory pack = new PacketInventory();
-		// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-		// pipe.sendTo(pack, (EntityPlayerMP) player);
 	}
 
 	/**
@@ -80,15 +67,14 @@ public class PlayerRpgInventory implements IInventory,
 			if (armorSlots[par1].stackSize <= par2) {
 				var3 = armorSlots[par1];
 				armorSlots[par1] = null;
-				// onInventoryChanged();
+				markDirty();
 				return var3;
 			} else {
 				var3 = armorSlots[par1].splitStack(par2);
 
 				if (armorSlots[par1].stackSize == 0)
 					armorSlots[par1] = null;
-
-				// onInventoryChanged();
+				markDirty();
 				return var3;
 			}
 		} else
@@ -202,29 +188,13 @@ public class PlayerRpgInventory implements IInventory,
 	 */
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
-		// mod_RpgInventory.proxy.addEntry(playername, this);
-		// TODO
-		// PacketInventory.sendPacket(player, this);
-		//PacketInventory.sendServerPacket(player);
-		
 		if (!player.worldObj.isRemote)
 			PacketInventory.sendPacket((EntityPlayerMP) player, this);
-		// PacketInventory pack = new PacketInventory();
-		// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-		// pipe.sendTo(pack, (EntityPlayerMP) player);
 		return null;
 	}
 
-	// @Override
-	// public boolean isInventoryNameLocalized() {
-	// return false;
-	// }
-
 	/* =====INVENTORY===== */
 	public boolean hasClass(String rpgenum) {
-		// if (EnumRpgClass.getPlayerClasses(player).contains(rpgenum)) {
-		// return true;
-		// }
 		if (rpgenum.equals(RpgInventoryMod.playerClass))
 			return true;
 		return false;
@@ -281,44 +251,6 @@ public class PlayerRpgInventory implements IInventory,
 		return false;
 	}
 
-	// /**
-	// * Writes the inventory out as a list of compound tags. This is where the
-	// * slot indices are used (+100 for armor, +80 for crafting).
-	// */
-	// public NBTTagCompound writeToNBT(NBTTagCompound par1NBTTagCompound) {
-	// NBTTagList var2 = new NBTTagList();
-	// for (int var3 = 0; var3 < armorSlots.length; ++var3) {
-	// if (armorSlots[var3] != null) {
-	// NBTTagCompound compoundSlot = new NBTTagCompound();
-	// compoundSlot.setByte("SlotNum", (byte) var3);
-	// armorSlots[var3].writeToNBT(compoundSlot);
-	// var2.appendTag(compoundSlot);
-	// }
-	// }
-	// par1NBTTagCompound.setTag("Slot", var2);
-	// return par1NBTTagCompound;
-	// }
-	//
-	// /**
-	// * Reads from the given tag list and fills the slots in the inventory with
-	// * the correct items.
-	// */
-	// public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
-	// NBTTagList var2 = par1NBTTagCompound.getTagList("Slot");
-	// armorSlots = new ItemStack[getSizeInventory()];
-	// for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
-	// NBTTagCompound compoundSlot = (NBTTagCompound) var2.tagAt(var3);
-	// byte var5 = compoundSlot.getByte("SlotNum");
-	// if (var5 >= 0 && var5 < armorSlots.length) {
-	// try {
-	// armorSlots[var5] = ItemStack.loadItemStackFromNBT(compoundSlot);
-	// } catch (Throwable ex) {
-	// ex.printStackTrace();
-	// }
-	// }
-	// }
-	// }
-
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 		EntityPlayer player = MinecraftServer.getServer()
@@ -341,8 +273,7 @@ public class PlayerRpgInventory implements IInventory,
 		
 		try {
 
-			// TODO
-			// PacketInventory.sendPacket(player, this);
+			// TODO send packet
 
 			if (!player.worldObj.isRemote)
 				PacketInventory.sendPacket((EntityPlayerMP) player, this);
@@ -350,10 +281,6 @@ public class PlayerRpgInventory implements IInventory,
 			EntityPlayer player = MinecraftServer.getServer()
 					.getConfigurationManager()
 					.getPlayerForUsername(this.player.getCommandSenderName());
-			// classSets = EnumRpgClass.getPlayerClasses(player);
-			// this to-do is done ! moved that line ^ to eventhooks so it gets
-			// updated
-			// properly.
 			boolean addtoticks[] = new boolean[3];
 
 			// TODO place this elsewhere. the bow and magestaff ar no longer
@@ -443,14 +370,8 @@ public class PlayerRpgInventory implements IInventory,
 
 		this.armorSlots[par1] = par2ItemStack;
 
-		// TODO
-		// if (!player.worldObj.isRemote) {
-		// PacketInventory.sendPacket((EntityPlayerMP) player, this);
-
-		// PacketInventory pack = new PacketInventory();
-		// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-		// pipe.sendTo(pack, (EntityPlayerMP) player);
-		// }
+		// TODO send packet
+		
 	}
 
 	public void writeToNBT(NBTTagCompound tagcompound) {

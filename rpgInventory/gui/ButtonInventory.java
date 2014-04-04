@@ -51,20 +51,15 @@ public class ButtonInventory extends GuiButton {
 						ByteBufOutputStream out = new ByteBufOutputStream(buf);
 						out.writeInt(ServerPacketHandler.OPENRPGINV);
 						RpgInventoryMod.Channel
-								.sendToServer(new FMLProxyPacket(buf, "RpgInv"));
+						.sendToServer(new FMLProxyPacket(buf, "RpgInv"));
 
 						out.close();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				else if (this.displayString.equals("Close")) {
-                    // player.closeScreen();
-//                    player.openContainer = player.inventoryContainer;
-                    Minecraft.getMinecraft().currentScreen = null;
-                    Minecraft.getMinecraft().setIngameFocus();
-                }
-				// Minecraft.getMinecraft().getSoundHandler().playSoundFX("random.click",
-				// 1.0F, 1.0F);
+					Minecraft.getMinecraft().thePlayer.closeScreen();
+				}
 				return false;
 			}
 		return super.mousePressed(par1Minecraft, par2, par3);

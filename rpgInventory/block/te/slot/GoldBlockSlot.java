@@ -14,8 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-
-
 public class GoldBlockSlot extends Slot {
 
 	private static ArrayList<Item> allBlocks = new ArrayList<Item>();

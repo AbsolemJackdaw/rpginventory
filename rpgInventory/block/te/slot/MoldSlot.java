@@ -10,10 +10,7 @@ import net.minecraft.item.ItemStack;
 import rpgInventory.item.ItemMold;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 
-/**
- * 
- * @author Home
- */
+
 public class MoldSlot extends Slot {
 
 	public MoldSlot(IInventory par1IInventory, int par2, int par3, int par4) {

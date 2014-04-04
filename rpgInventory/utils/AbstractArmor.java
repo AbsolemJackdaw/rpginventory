@@ -27,8 +27,7 @@ public abstract class AbstractArmor extends ItemArmor {
 
 	/**
 	 * Called to set the 3D armor model. set models here, not in
-	 * getArmorModel(...) !
-	 */
+	 * getArmorModel(...) !*/
 	@SideOnly(Side.CLIENT)
 	protected abstract void get3DArmorModel(EntityLivingBase elb,
 			ItemStack stack, int armorSlot);

@@ -56,7 +56,6 @@ public class PacketInventory {
 
 			out.close();
 		} catch (Exception ex) {
-			//ex.printStackTrace();
 		}
 	}
 }

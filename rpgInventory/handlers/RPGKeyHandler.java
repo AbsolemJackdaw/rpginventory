@@ -48,12 +48,8 @@ public class RPGKeyHandler implements ISpecialAbility{
 	
 	public RPGKeyHandler() {
 		super();
-
 		ClientRegistry.registerKeyBinding(keyInventory);
 		ClientRegistry.registerKeyBinding(keySpecial);
-
-		// registeredKeyBinds.toArray(new KeyBinding[registeredKeyBinds
-		// .size()]), new boolean[registeredKeyBinds.size()]
 	}
 
 	public RPGKeyHandler(KeyBinding[] k, boolean[] b) {
@@ -138,7 +134,6 @@ public class RPGKeyHandler implements ISpecialAbility{
 					for(Item i : abilityMap.keySet()){
 						if(item.getItem().equals(i)){
 							specialAbility(item);
-//							System.out.println(RpgUtility.allAbilities);
 							for(int c =0; c < RpgUtility.allAbilities.size(); c++)
 								RpgUtility.allAbilities.get(c).specialAbility(item);
 						}

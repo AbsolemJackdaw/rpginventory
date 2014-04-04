@@ -72,7 +72,6 @@ public class ClientPacketHandler extends ServerPacketHandler {
 			}
 			dis.close();
 		} catch (IOException e) {
-//			e.printStackTrace();
 		}
 	}
 

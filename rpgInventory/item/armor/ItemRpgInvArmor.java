@@ -30,7 +30,7 @@ public class ItemRpgInvArmor extends Item {
 
 	/**
 	 * Stores the armor type: 0 is necklace, 2 is cloak, 1 is shield, 3 is
-	 * gloves, 4 are rings
+	 * gloves, 4 are rings. types can be found at RpgInventoryMod.ITEMTYPES.xxx
 	 */
 	public int armorType;
 
@@ -39,9 +39,10 @@ public class ItemRpgInvArmor extends Item {
 	/**
 	 * second string : name, isn't used.
 	 * 
-	 * @params ItemID ArmorType (aka shield,gloves, cloak, ... ) the maximum
-	 *         damage this item can take. only used for shields name is unused
-	 *         location for texture
+	 * ItemID ArmorType (aka shield,gloves, cloak, ... ) 
+	 * the maximum damage this item can take. only used for shields
+	 * name is unused
+	 * location for texture
 	 */
 	public ItemRpgInvArmor(int par4, int maxDamage, String name,
 			String resourcelocation) {
@@ -89,11 +90,6 @@ public class ItemRpgInvArmor extends Item {
 				|| (stack.getItem() == RpgInventoryMod.glovesbutter)
 				|| (stack.getItem() == RpgInventoryMod.neckgold))
 			list.add(StatCollector.translateToLocal("Speed + 12.5%"));
-		// if (stack.getItem() == mod_RpgInventory.ringgold){
-		// list.add(StatCollector.translateToLocal("Jump +0.5 Block height"));
-		// }else{
-		// list.add(StatCollector.translateToLocal("Jump +0.25 Block height"));
-		// }
 
 		if ((stack.getItem() == RpgInventoryMod.ringlap)
 				|| (stack.getItem() == RpgInventoryMod.gloveslap)
@@ -181,8 +177,8 @@ public class ItemRpgInvArmor extends Item {
 				if (inv.isItemValidForSlot(i, par1ItemStack)) {
 					inv.setInventorySlotContents(i, par1ItemStack);
 					par3EntityPlayer.destroyCurrentEquippedItem();
-					break;// break, or rightclicking a ring will set both ring
-							// slots.
+					break;
+					// break, or right-clicking a ring will set both ring slots.
 				}
 
 		return super.onItemRightClick(par1ItemStack, par2World,
