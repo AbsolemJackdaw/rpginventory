@@ -211,9 +211,9 @@ public class RpgMastersAddon {
 
 		whistle = new ItemRBMats2().setUnlocalizedName("whistle");
 
-		petCandy = new ItemCandy(RpgConfig.instance.candy)
+		petCandy = new ItemCandy(0)
 				.setUnlocalizedName("petCandy");
-		tangledBrench = new ItemCandy(RpgConfig.instance.brench)
+		tangledBrench = new ItemCandy(0)
 				.setUnlocalizedName("tangledBrench");
 		PetXPBottle = new PetExpPotion().setUnlocalizedName("PetXPBottle");
 

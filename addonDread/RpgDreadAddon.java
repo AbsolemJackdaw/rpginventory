@@ -293,13 +293,13 @@ public class RpgDreadAddon {
 		pala_shield = new ItemRpgInvArmorPlus(1, 450, "pala",
 				"subaraki:jewels/PaladinShield.png")
 				.setUnlocalizedName("shieldPaladin");
-		pala_weapon = new ItemGrandSword(RpgConfig.instance.pala_weaponID,
+		pala_weapon = new ItemGrandSword(0,
 				PalaToolMaterial).setFull3D()
 				.setUnlocalizedName("paladinPride");
 
-		necro_skin = new ItemNecroPaladinMats(RpgConfig.instance.necro_skinID)
+		necro_skin = new ItemNecroPaladinMats(0)
 				.setUnlocalizedName("n.leather");
-		pala_steel = new ItemNecroPaladinMats(RpgConfig.instance.pala_steelID)
+		pala_steel = new ItemNecroPaladinMats(0)
 				.setUnlocalizedName("p.iron_ingot");
 
 		allItems = new Item[] { pala_shield, necro_shield, pala_weapon,
