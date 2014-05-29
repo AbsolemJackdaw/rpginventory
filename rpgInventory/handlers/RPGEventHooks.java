@@ -52,24 +52,10 @@ public class RPGEventHooks {
 
 		if (evt.entityPlayer.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")){
 
-			for(int i =0; i < 7 ; i++){
-				System.out.println(i);
-				System.out.println(PlayerRpgInventory.get(evt.entityPlayer).getStackInSlot(i));
-				System.out.println(PlayerRpgInventory.get(evt.original).getStackInSlot(i));
-
-			}
-
+			//TODO cant register twice you asshat
 			evt.entityPlayer.registerExtendedProperties(PlayerRpgInventory.EXT_PROP_NAME, 
 					evt.original.getExtendedProperties(PlayerRpgInventory.EXT_PROP_NAME));
 			
-			System.out.println("registered");
-
-			for(int i =0; i < 7 ; i++){
-				System.out.println(i);
-				System.out.println(PlayerRpgInventory.get(evt.entityPlayer).getStackInSlot(i));
-				System.out.println(PlayerRpgInventory.get(evt.original).getStackInSlot(i));
-
-			}
 		}
 	}
 
