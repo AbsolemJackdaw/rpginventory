@@ -11,7 +11,6 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,10 +22,12 @@ import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.Clone;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.utils.AbstractArmor;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class RPGEventHooks {
@@ -43,6 +44,34 @@ public class RPGEventHooks {
 	Random rand = new Random();
 
 	float vanillaReduction = 0f;
+
+
+
+	@SubscribeEvent
+	public void onClone(Clone evt){
+
+		if (evt.entityPlayer.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")){
+
+			for(int i =0; i < 7 ; i++){
+				System.out.println(i);
+				System.out.println(PlayerRpgInventory.get(evt.entityPlayer).getStackInSlot(i));
+				System.out.println(PlayerRpgInventory.get(evt.original).getStackInSlot(i));
+
+			}
+
+			evt.entityPlayer.registerExtendedProperties(PlayerRpgInventory.EXT_PROP_NAME, 
+					evt.original.getExtendedProperties(PlayerRpgInventory.EXT_PROP_NAME));
+			
+			System.out.println("registered");
+
+			for(int i =0; i < 7 ; i++){
+				System.out.println(i);
+				System.out.println(PlayerRpgInventory.get(evt.entityPlayer).getStackInSlot(i));
+				System.out.println(PlayerRpgInventory.get(evt.original).getStackInSlot(i));
+
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public void BreakSpeed(PlayerEvent.BreakSpeed evt) {
@@ -80,20 +109,38 @@ public class RPGEventHooks {
 		}
 	}
 
+	public void dropJewels(EntityPlayer player) {
+
+		System.out.println("drop");
+		if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+
+			PlayerRpgInventory rpg = PlayerRpgInventory.get(player);
+			int var1;
+
+			player.inventory.dropAllItems();
+
+			for (var1 = 0; var1 < rpg.armorSlots.length; ++var1){
+
+				if (rpg.getStackInSlot(var1) != null) {
+					player.inventory.setInventorySlotContents(
+							player.inventory.getFirstEmptyStack(),
+							rpg.getStackInSlot(var1));
+					rpg.setInventorySlotContents(var1, null);
+				}
+			}
+			player.inventory.dropAllItems();
+		}
+	}
+
 	@SubscribeEvent
 	public void DeathEvent(LivingDeathEvent evt) {
-		/* ====PET EXP==== */
-		try {
 
-			if (evt.entityLiving instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) evt.entityLiving;
-
-				PlayerRpgInventory inv = PlayerRpgInventory
-						.get((EntityPlayer) evt.entityLiving);
-			}
-
-		} catch (Throwable e) {
+		if(evt.entityLiving instanceof EntityPlayer){
+			EntityPlayer player = (EntityPlayer)evt.entityLiving;
+			if (!player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
+				dropJewels(player);	
 		}
+
 	}
 
 	protected int decreaseAirSupply(int par1) {
@@ -112,8 +159,6 @@ public class RPGEventHooks {
 		 */
 		if ((event.entity instanceof EntityPlayer)
 				&& (PlayerRpgInventory.get((EntityPlayer) event.entity) == null))
-			// This is how extended properties are registered using our
-			// convenient method from earlier
 			PlayerRpgInventory.register((EntityPlayer) event.entity);
 	}
 
@@ -222,130 +267,120 @@ public class RPGEventHooks {
 	public void PlayerUpdate(PlayerEvent.LivingUpdateEvent evt) {
 
 		/* ====UPDATING INVENTORY==== */
-		try {
-			if (evt.entityLiving instanceof EntityPlayer)
-				PlayerRpgInventory.get((EntityPlayer) evt.entityLiving)
-				.markDirty();
+		if (evt.entityLiving instanceof EntityPlayer)
+			PlayerRpgInventory.get((EntityPlayer) evt.entityLiving)
+			.markDirty();
 
-		} catch (Throwable ex) {
-		}
+		if (evt.entityLiving instanceof EntityPlayer) {
+			EntityPlayer p = (EntityPlayer) evt.entityLiving;
 
-		try {
-			if (evt.entityLiving instanceof EntityPlayer) {
-				EntityPlayer p = (EntityPlayer) evt.entityLiving;
+			if (p != null) {
 
-				if (p != null) {
+				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
-					PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+				ItemStack neck = inv.getNecklace();
+				ItemStack ringa = inv.getRing1();
+				ItemStack ringb = inv.getRing2();
+				ItemStack gloves = inv.getGloves();
 
-					ItemStack neck = inv.getNecklace();
-					ItemStack ringa = inv.getRing1();
-					ItemStack ringb = inv.getRing2();
-					ItemStack gloves = inv.getGloves();
+				/* ====LAPIS WEAPON HEALING==== */
+				boolean armorheal = false;
+				if ((neck != null)
+						&& neck.getItem().equals(RpgInventoryMod.necklap))
+					armorheal = true;
+				if ((ringa != null)
+						&& ringa.getItem().equals(RpgInventoryMod.ringlap))
+					armorheal = true;
+				if ((ringb != null)
+						&& ringb.getItem().equals(RpgInventoryMod.ringlap))
+					armorheal = true;
+				if ((gloves != null)
+						&& gloves.getItem().equals(
+								RpgInventoryMod.gloveslap))
+					armorheal = true;
+				if (armorheal) {
+					if (!LapisTick.containsKey(p.getCommandSenderName()))
+						LapisTick.put(p.getCommandSenderName(), 60);
+				} else
+					LapisTick.remove(p.getCommandSenderName());
 
-					/* ====LAPIS WEAPON HEALING==== */
-					boolean armorheal = false;
-					if ((neck != null)
-							&& neck.getItem().equals(RpgInventoryMod.necklap))
-						armorheal = true;
-					if ((ringa != null)
-							&& ringa.getItem().equals(RpgInventoryMod.ringlap))
-						armorheal = true;
-					if ((ringb != null)
-							&& ringb.getItem().equals(RpgInventoryMod.ringlap))
-						armorheal = true;
-					if ((gloves != null)
-							&& gloves.getItem().equals(
-									RpgInventoryMod.gloveslap))
-						armorheal = true;
-					if (armorheal) {
-						if (!LapisTick.containsKey(p.getCommandSenderName()))
-							LapisTick.put(p.getCommandSenderName(), 60);
-					} else
-						LapisTick.remove(p.getCommandSenderName());
+				/* ==== EMERALD WATER BREATHING ==== */
+				if ((neck != null)
+						&& neck.getItem().equals(RpgInventoryMod.neckem)) {
+					boolean flag = (p instanceof EntityPlayer)
+							&& p.capabilities.disableDamage;
 
-					/* ==== EMERALD WATER BREATHING ==== */
-					if ((neck != null)
-							&& neck.getItem().equals(RpgInventoryMod.neckem)) {
-						boolean flag = (p instanceof EntityPlayer)
-								&& p.capabilities.disableDamage;
+					if (p.isEntityAlive()
+							&& p.isInsideOfMaterial(Material.water)
+							&& !flag) {
+						p.setAir(decreaseAirSupply(p.getAir() + 1));
 
-						if (p.isEntityAlive()
-								&& p.isInsideOfMaterial(Material.water)
-								&& !flag) {
-							p.setAir(decreaseAirSupply(p.getAir() + 1));
+						if (p.getAir() == -20) {
+							p.setAir(0);
 
-							if (p.getAir() == -20) {
-								p.setAir(0);
-
-								for (int i = 0; i < 8; ++i) {
-									float f = this.rand.nextFloat()
-											- this.rand.nextFloat();
-									float f1 = this.rand.nextFloat()
-											- this.rand.nextFloat();
-									float f2 = this.rand.nextFloat()
-											- this.rand.nextFloat();
-									p.worldObj.spawnParticle("bubble", p.posX
-											+ f, p.posY + f1, p.posZ + f2,
-											p.motionX, p.motionY, p.motionZ);
-								}
-								p.attackEntityFrom(DamageSource.drown, 1);
+							for (int i = 0; i < 8; ++i) {
+								float f = this.rand.nextFloat()
+										- this.rand.nextFloat();
+								float f1 = this.rand.nextFloat()
+										- this.rand.nextFloat();
+								float f2 = this.rand.nextFloat()
+										- this.rand.nextFloat();
+								p.worldObj.spawnParticle("bubble", p.posX
+										+ f, p.posY + f1, p.posZ + f2,
+										p.motionX, p.motionY, p.motionZ);
 							}
-							p.extinguish();
-						} else
-							p.setAir(300);
-					}
-
-					/* ==== EMERALD CURE ==== */
-					// works
-					if ((ringb != null)
-							&& ringb.getItem().equals(RpgInventoryMod.ringem))
-						for (Integer id : negativeEffects)
-							p.removePotionEffect(id);
-
-					/* ==== SPEED BOOST GOLD JEWELS ==== */
-					float speedboost = 0;
-					int goldenItems = 0;
-
-					if ((neck != null)
-							&& (neck.getItem() == RpgInventoryMod.neckgold)) {
-						speedboost += RpgInventoryMod.donators.contains(p
-								.getCommandSenderName()) ? 0.02f : 0.0125f;
-						goldenItems += 1;
-					}
-					if ((ringa != null)
-							&& (ringa.getItem() == RpgInventoryMod.ringgold)) {
-						speedboost += RpgInventoryMod.donators.contains(p
-								.getCommandSenderName()) ? 0.02f : 0.0125f;
-						goldenItems += 1;
-					}
-					if ((ringb != null)
-							&& (ringb.getItem() == RpgInventoryMod.ringgold)) {
-						speedboost += RpgInventoryMod.donators.contains(p
-								.getCommandSenderName()) ? 0.02f : 0.0125f;
-						goldenItems += 1;
-					}
-					if ((gloves != null)
-							&& (gloves.getItem() == RpgInventoryMod.glovesbutter)) {
-						speedboost += RpgInventoryMod.donators.contains(p
-								.getCommandSenderName()) ? 0.02f : 0.0125f;
-						goldenItems += 1;
-					}
-					p.capabilities.setPlayerWalkSpeed(0.1f + speedboost);
-
-					/* ==== Invisibility Cloak==== */
-					ItemStack cloak = inv.getCloak();
-					if (cloak != null)
-						if (cloak.getItem() == RpgInventoryMod.cloakI)
-							p.addPotionEffect(new PotionEffect(
-									Potion.invisibility.id, 20, 1));
+							p.attackEntityFrom(DamageSource.drown, 1);
+						}
+						p.extinguish();
+					} else
+						p.setAir(300);
 				}
+
+				/* ==== EMERALD CURE ==== */
+				// works
+				if ((ringb != null)
+						&& ringb.getItem().equals(RpgInventoryMod.ringem))
+					for (Integer id : negativeEffects)
+						p.removePotionEffect(id);
+
+				/* ==== SPEED BOOST GOLD JEWELS ==== */
+				float speedboost = 0;
+				int goldenItems = 0;
+
+				if ((neck != null)
+						&& (neck.getItem() == RpgInventoryMod.neckgold)) {
+					speedboost += RpgInventoryMod.donators.contains(p
+							.getCommandSenderName()) ? 0.02f : 0.0125f;
+					goldenItems += 1;
+				}
+				if ((ringa != null)
+						&& (ringa.getItem() == RpgInventoryMod.ringgold)) {
+					speedboost += RpgInventoryMod.donators.contains(p
+							.getCommandSenderName()) ? 0.02f : 0.0125f;
+					goldenItems += 1;
+				}
+				if ((ringb != null)
+						&& (ringb.getItem() == RpgInventoryMod.ringgold)) {
+					speedboost += RpgInventoryMod.donators.contains(p
+							.getCommandSenderName()) ? 0.02f : 0.0125f;
+					goldenItems += 1;
+				}
+				if ((gloves != null)
+						&& (gloves.getItem() == RpgInventoryMod.glovesbutter)) {
+					speedboost += RpgInventoryMod.donators.contains(p
+							.getCommandSenderName()) ? 0.02f : 0.0125f;
+					goldenItems += 1;
+				}
+				p.capabilities.setPlayerWalkSpeed(0.1f + speedboost);
+
+				/* ==== Invisibility Cloak==== */
+				ItemStack cloak = inv.getCloak();
+				if (cloak != null)
+					if (cloak.getItem() == RpgInventoryMod.cloakI)
+						p.addPotionEffect(new PotionEffect(
+								Potion.invisibility.id, 20, 1));
 			}
-
-
-		} catch (Throwable ex) {
 		}
-
 
 		/**
 		 * This checks wether the player wears class armor, and a shield, or

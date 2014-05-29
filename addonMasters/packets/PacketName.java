@@ -28,13 +28,11 @@ public class PacketName {
 
 		ItemStack petCrystal = PlayerRpgInventory.get(p).getCrystal();
 		BMPetImpl thePet = null;
-		if (IPet.playersWithActivePets.containsKey(p.getDisplayName())) {
+		if (IPet.playersWithActivePets.containsKey(p.getDisplayName()))
 			thePet = (BMPetImpl) IPet.playersWithActivePets.get(
 					p.getDisplayName()).getPet();
-		}
-		if ((thePet != null) && !((EntityLiving) thePet).isDead) {
+		if ((thePet != null) && !((EntityLiving) thePet).isDead)
 			thePet.setName(newName);
-		}
 		petCrystal.getTagCompound().setString("PetName", newName);
 		((NBTTagCompound) petCrystal.getTagCompound().getTag("RPGPetInfo"))
 		.setString("Name", newName);

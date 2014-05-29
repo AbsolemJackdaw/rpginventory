@@ -1,15 +1,11 @@
 package addonMasters.packets;
 
 import io.netty.buffer.ByteBufInputStream;
-
-import java.io.DataInputStream;
-
-import addonMasters.RpgMastersAddon;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import addonMasters.RpgMastersAddon;
 
 public class PacketPetGui {
 
@@ -55,7 +51,7 @@ public class PacketPetGui {
 			newcrystal.setTagCompound(nbtCrystal);
 			newcrystal.setStackDisplayName(petname);
 			inv.setInventorySlotContents(6, newcrystal);
-			
+
 		} catch (Throwable ex) {
 		}
 	}

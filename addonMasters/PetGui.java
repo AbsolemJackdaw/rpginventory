@@ -4,8 +4,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,8 +23,6 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
-
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.ServerPacketHandler;
@@ -36,6 +32,7 @@ import addonMasters.entity.BullPet;
 import addonMasters.entity.IPet;
 import addonMasters.entity.SpiderPet;
 import addonMasters.packets.RBServerPacketHandler;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class PetGui extends GuiScreen {
 
@@ -136,7 +133,7 @@ public class PetGui extends GuiScreen {
 	@Override
 	public void drawScreen(int i, int j, float f) {
 
-		
+
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		drawDefaultBackground();
 
@@ -189,7 +186,7 @@ public class PetGui extends GuiScreen {
 			drawString(fontRendererObj, "Maxed out.", (this.width / 2) - 30,
 					this.height / 2, 0x00ff00);
 		}
-		
+
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslatef((this.width / 2) - 52, (this.height / 2) - 23, 40);

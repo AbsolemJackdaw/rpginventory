@@ -55,8 +55,8 @@ public class ClientAddonProxy extends CommonAddonProxy {
 	public void registerRenderInformation() {
 		RpgBaseAddon.Channel.register(new ClientPacketHandler());
 		RpgUtility.registerSpecialAbility(new KeyHandler());
-		
-		
+
+
 		if (RpgConfig.instance.render3D == true) {
 			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.claymore,
 					new ClaymoreRenderer());
@@ -78,7 +78,7 @@ public class ClientAddonProxy extends CommonAddonProxy {
 			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.talisman,
 					new BookRenderer(new bookMage(),
 							"subaraki:jewels/mageShield.png"));
-			
+
 			RenderingRegistry.registerEntityRenderingHandler(EntityHellArrow.class,
 					new RenderArrow());
 		}

@@ -11,8 +11,6 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
 /**
  * To catch login/Logouts for reading/writing the Inventory
- * 
- * @author AbrarSyed
  */
 public class PlayerTracker{
 

@@ -29,10 +29,9 @@ public class TEMold extends TileEntity implements IInventory {
 	}
 
 	public static void addFuelItem(Item i, int time){
-		for(Item c : toBurn.keySet()){
+		for(Item c : toBurn.keySet())
 			if(toBurn.containsKey(i))
 				return;
-		}
 		toBurn.put(i, time);
 	}
 
@@ -45,11 +44,9 @@ public class TEMold extends TileEntity implements IInventory {
 			if (par0ItemStack.getItem() != null)
 				var1 = par0ItemStack.getItem();
 
-			for(Item i : toBurn.keySet()){
-				if(var1 == i){
+			for(Item i : toBurn.keySet())
+				if(var1 == i)
 					return toBurn.get(i);
-				}
-			}
 			return 0;
 		}
 	}
@@ -188,7 +185,7 @@ public class TEMold extends TileEntity implements IInventory {
 	public ItemStack decrStackSize(int slot, int amt) {
 		ItemStack stack = getStackInSlot(slot);
 
-		if (stack != null){
+		if (stack != null)
 			if(stack.stackSize <= amt)
 				setInventorySlotContents(slot, null);
 			else {
@@ -196,7 +193,6 @@ public class TEMold extends TileEntity implements IInventory {
 				if (stack.stackSize == 0)
 					setInventorySlotContents(slot, null);
 			}
-		}
 		return stack;
 	}
 

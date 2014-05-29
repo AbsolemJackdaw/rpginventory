@@ -9,7 +9,7 @@ import java.io.File;
 import net.minecraftforge.common.config.Configuration;
 
 /**
- * 
+ *
  * @author Home
  */
 public class RpgConfig {

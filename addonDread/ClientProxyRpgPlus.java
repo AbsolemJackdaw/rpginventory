@@ -49,11 +49,11 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 
 	@Override
 	public void registerRenderInformation() {
-		
+
 		RpgDreadAddon.Channel.register(new DreadClientPacketHandler());
 		RpgUtility.registerSpecialAbility(new SpecialAbility());
 
-		
+
 		if (RpgConfig.instance.render3D) {
 			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.necro_weapon,
 					new NecroRenderer());

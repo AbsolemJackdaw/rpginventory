@@ -36,7 +36,7 @@ public class ClientProxy extends CommonProxy {
 	@SideOnly(Side.CLIENT)
 	public static void renderHandler() {
 
-		new CapeRenderer();
+//		new CapeRenderer();
 		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
 	}
 
@@ -47,7 +47,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void load() {
-		
+
 		RpgInventoryMod.Channel.register(new ClientPacketHandler());
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 		FMLCommonHandler.instance().bus().register(new RPGKeyHandler());

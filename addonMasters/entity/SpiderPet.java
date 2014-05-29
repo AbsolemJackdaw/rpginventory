@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import addonMasters.entity.models.ModelSpiderB;
 
 /**
- * 
+ *
  * @author Home
  */
 public class SpiderPet extends BMPetImpl {
@@ -52,8 +52,8 @@ public class SpiderPet extends BMPetImpl {
 		// Spider Cant Swim
 		this.getNavigator().setCanSwim(false);
 	}
-	
-	
+
+
 	@Override
 	protected void attackEntity(Entity par1Entity, float par2) {
 		if(par1Entity instanceof EntityLiving){

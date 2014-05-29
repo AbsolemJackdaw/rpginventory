@@ -1,6 +1,5 @@
 package rpgVanillaShields;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -41,7 +40,7 @@ public class VanillaEvents {
 
 		/* DAMAGING AND REDUCING DAMAGE / VANILLA SHIELDS */
 		if ((evt.entityLiving != null)
-				&& (evt.entityLiving instanceof EntityPlayer) && evt.source!=DamageSource.starve) {
+				&& (evt.entityLiving instanceof EntityPlayer) && (evt.source!=DamageSource.starve)) {
 
 			float damageReduction = 0.0F;
 			EntityPlayer player = (EntityPlayer) evt.entityLiving;

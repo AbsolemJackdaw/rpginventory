@@ -83,7 +83,7 @@ public class MoldContainer extends Container {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotnumber) {
 		super.transferStackInSlot(player, slotnumber);
-	
+
 		//TODO transfer clicking
 
 		return null;

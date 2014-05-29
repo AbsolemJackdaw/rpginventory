@@ -24,14 +24,12 @@ public class PacketNecroSpecial {
 
 		System.out.println("paf");
 		if (weapon.getItem().equals(RpgDreadAddon.necro_weapon)
-				&& RpgInventoryMod.playerClass	.contains(RpgDreadAddon.CLASSNECRO)) {
+				&& RpgInventoryMod.playerClass	.contains(RpgDreadAddon.CLASSNECRO))
 			if (MinionRegistry.playerMinions.containsKey(p.getDisplayName())) {
 				List<IMinion> list = MinionRegistry.playerMinions.get(p
 						.getDisplayName());
-				for (IMinion minion : list) {
+				for (IMinion minion : list)
 					minion.Harvest();
-				}
 			}
-		}
 	}
  }

@@ -19,11 +19,9 @@ import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.block.BlockForge;
 import rpgInventory.block.te.TEMold;
 import rpgInventory.gui.RpgInventoryTab;
-import rpgInventory.handlers.ClientTickHandler;
 import rpgInventory.handlers.CommonTickHandler;
 import rpgInventory.handlers.GuiHandler;
 import rpgInventory.handlers.RPGEventHooks;
-import rpgInventory.handlers.RPGKeyHandler;
 import rpgInventory.handlers.packets.ServerPacketHandler;
 import rpgInventory.handlers.proxy.ClientProxy;
 import rpgInventory.handlers.proxy.CommonProxy;
@@ -60,11 +58,9 @@ public class RpgInventoryMod {
 
 	protected static final String version = "1.7.2";
 
-	/**Check this on clientside only !*/
 	public static String playerClass = "none";
 	public static RpgInventoryMod instance;
 
-	// public static final PacketPipeline17 PIPELINE = new PacketPipeline17();
 	public static FMLEventChannel Channel;
 
 	@SidedProxy(serverSide = "rpgInventory.handlers.proxy.CommonProxy", clientSide = "rpgInventory.handlers.proxy.ClientProxy")
@@ -151,9 +147,9 @@ public class RpgInventoryMod {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 
-		
+
 		isDev = true;
-		
+
 		ToLoad.loadMoldRecipes();
 		ToLoad.loadGameRecipes();
 
@@ -276,9 +272,9 @@ public class RpgInventoryMod {
 				"subaraki:capes/BlaCape.png").setFull3D()
 				.setUnlocalizedName("s.capeGrey").setCreativeTab(tab);
 
-		colmold = (ItemMold)new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(
+		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(
 				tab);
-		ringmold = (ItemMold)new ItemMold().setUnlocalizedName("moldRing")
+		ringmold = new ItemMold().setUnlocalizedName("moldRing")
 				.setCreativeTab(tab);
 		wantmold = new ItemMold().setUnlocalizedName("moldGlove")
 				.setCreativeTab(tab);

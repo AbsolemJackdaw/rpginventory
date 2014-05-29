@@ -27,7 +27,7 @@ public class ClientPacketHandler extends ServerPacketHandler {
 
 		if(!event.packet.channel().equals("RpgInv"))
 			return;
-		
+
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
 		ByteBuf buf = event.packet.payload();
@@ -63,7 +63,7 @@ public class ClientPacketHandler extends ServerPacketHandler {
 					PlayerRpgInventory.get(other).setInventorySlotContents(i,
 							ByteBufUtils.readItemStack(buf));
 				break;
-				
+
 			default:
 				FMLLog.getLogger().info(
 						"[SEVERE] Client:  RpgInventory Send Unused packet !! Packet ID "

@@ -32,6 +32,11 @@ public class ItemRpgInventoryItem extends ItemRpgInvArmor {
 	}
 
 	@Override
+	public String getMantleTexture() {
+		return "subaraki:jewels/talisman.png";
+	}
+
+	@Override
 	public MainShield getShieldModel() {
 		if (this.equals(RpgBaseAddon.berserkerShield))
 			return it;
@@ -44,7 +49,10 @@ public class ItemRpgInventoryItem extends ItemRpgInvArmor {
 
 	@Override
 	public boolean isMantle() {
-		return this.equals(RpgBaseAddon.talisman) ? true : false;
+
+		if(this.equals(RpgBaseAddon.talisman))
+			return true;
+		return false;
 	}
 
 	@Override
@@ -56,10 +64,5 @@ public class ItemRpgInventoryItem extends ItemRpgInvArmor {
 		if (this.equals(RpgBaseAddon.talisman))
 			return RpgBaseAddon.CLASSMAGESHIELD;
 		return super.shieldClass();
-	}
-	
-	@Override
-	public String getMantleTexture() {
-		return "subaraki:jewels/talisman.png";
 	}
 }

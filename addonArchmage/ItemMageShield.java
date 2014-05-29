@@ -19,6 +19,11 @@ public class ItemMageShield extends ItemRpgInvArmor {
 	}
 
 	@Override
+	public String getMantleTexture() {
+		return "subaraki:jewels/magemantle.png";
+	}
+
+	@Override
 	public MainShield getShieldModel() {
 		if (this.equals(RpgArchmageAddon.archBook))
 			return book;
@@ -26,12 +31,12 @@ public class ItemMageShield extends ItemRpgInvArmor {
 	}
 
 	@Override
-	public String shieldClass() {
-		return RpgArchmageAddon.CLASSARCHMAGESHIELD;
+	public boolean isMantle() {
+		return true;
 	}
 
 	@Override
-	public String getMantleTexture() {
-		return "subaraki:jewels/magemantle.png";
+	public String shieldClass() {
+		return RpgArchmageAddon.CLASSARCHMAGESHIELD;
 	}
 }

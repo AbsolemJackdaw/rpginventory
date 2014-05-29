@@ -31,7 +31,7 @@ public class DreadClientPacketHandler extends DreadServerPacketHandler{
 			ItemStack weapon = p.getCurrentEquippedItem();
 			PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
-			if (inv != null) {
+			if (inv != null)
 				switch (weaponID) {
 				case SKULLRCLICK:
 					new PacketSpawnMinion(weapon, dis, inv, p);
@@ -45,7 +45,6 @@ public class DreadClientPacketHandler extends DreadServerPacketHandler{
 				default:
 					break;
 				}
-			}
 		} catch (Exception e) {
 		}
 	}

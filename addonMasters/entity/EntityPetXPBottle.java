@@ -11,7 +11,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 /**
- * 
+ *
  * @author Richard Smith <rich1051414@gmail.com>
  */
 public class EntityPetXPBottle extends EntityExpBottle {

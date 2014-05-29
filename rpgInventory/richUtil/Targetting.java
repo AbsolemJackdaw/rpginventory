@@ -15,12 +15,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
- * 
+ *
  * @author Richard Smith <rich1051414@gmail.com>
  */
 public class Targetting {
 
-	
+
 	/**@params parDistance : distance of blocks to check
 	 * return the entity you are looking at. null if no entity is looked at within parDistance blocks
 	 * */

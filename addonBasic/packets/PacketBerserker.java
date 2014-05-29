@@ -20,7 +20,7 @@ public class PacketBerserker {
 	public PacketBerserker(World world, EntityPlayer p, ByteBufInputStream dis) {
 
 
-		
+
 			 //System.out.println("Hammer time!");
 			ItemStack item1 = p.getCurrentEquippedItem();
 			ItemStack var31 = p.inventory.armorItemInSlot(3);
@@ -82,7 +82,7 @@ public class PacketBerserker {
 							try {
 								double xdir = el.posX - p.posX;
 								double zdir = el.posZ - p.posZ;
-													            
+
 								if (RpgInventoryMod.developers.contains(p
 										.getDisplayName().toLowerCase())) {
 									el.motionX = xdir * 3F;
@@ -116,6 +116,6 @@ public class PacketBerserker {
 								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
 										.get(p.getDisplayName()) / 20))
 								+ " seconds"));
-			
+
 	}
 }

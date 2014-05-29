@@ -16,7 +16,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 /**
- * 
+ *
  * @author Home
  */
 public class EntityPetXP extends EntityXPOrb {

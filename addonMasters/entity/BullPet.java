@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import addonMasters.entity.models.ModelBull;
 
 /**
- * 
+ *
  * @author Home
  */
 public class BullPet extends BMPetImpl {

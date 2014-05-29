@@ -34,6 +34,10 @@ public class PlayerRpgInventory implements IInventory,
 		return (PlayerRpgInventory) p.getExtendedProperties(EXT_PROP_NAME);
 	}
 
+	private static String getSaveKey(EntityPlayer player) {
+		return player.getDisplayName() + ":" + EXT_PROP_NAME;
+	}
+	
 	/* =====SAVING ENTITY DATA ===== */
 
 	public static final void register(EntityPlayer player) {
@@ -268,9 +272,9 @@ public class PlayerRpgInventory implements IInventory,
 	@Override
 	// onInventoryChanged
 	public void markDirty() {
-		
+
 		//PacketInventory.sendServerPacket(player);
-		
+
 		try {
 
 			// TODO send packet
@@ -371,7 +375,7 @@ public class PlayerRpgInventory implements IInventory,
 		this.armorSlots[par1] = par2ItemStack;
 
 		// TODO send packet
-		
+
 	}
 
 	public void writeToNBT(NBTTagCompound tagcompound) {

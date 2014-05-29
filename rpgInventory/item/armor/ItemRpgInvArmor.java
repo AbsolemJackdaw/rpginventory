@@ -38,8 +38,8 @@ public class ItemRpgInvArmor extends Item {
 
 	/**
 	 * second string : name, isn't used.
-	 * 
-	 * ItemID ArmorType (aka shield,gloves, cloak, ... ) 
+	 *
+	 * ItemID ArmorType (aka shield,gloves, cloak, ... )
 	 * the maximum damage this item can take. only used for shields
 	 * name is unused
 	 * location for texture
@@ -133,6 +133,10 @@ public class ItemRpgInvArmor extends Item {
 		return 0xffffff;
 	}
 
+	public String getMantleTexture() {
+		return "";
+	}
+
 	/**
 	 * Returns the 'max damage' factor array for the armor, each piece of armor
 	 * have a durability factor (that gets multiplied by armor material factor)
@@ -192,9 +196,5 @@ public class ItemRpgInvArmor extends Item {
 	public String shieldClass() {
 
 		return "none";
-	}
-
-	public String getMantleTexture() {
-		return "";
 	}
 }

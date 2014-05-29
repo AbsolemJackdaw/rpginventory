@@ -10,7 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
- * 
+ *
  * @author Richard Smith
  */
 @SideOnly(Side.CLIENT)

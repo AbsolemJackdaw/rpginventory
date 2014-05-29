@@ -25,7 +25,7 @@ public class MoldSlot extends Slot {
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack) {
 		if (par1ItemStack != null)
-			if (par1ItemStack.getItem() instanceof ItemMold || par1ItemStack.getItem() instanceof ItemRpgInvArmor)
+			if ((par1ItemStack.getItem() instanceof ItemMold) || (par1ItemStack.getItem() instanceof ItemRpgInvArmor))
 				return true;
 		return false;
 	}

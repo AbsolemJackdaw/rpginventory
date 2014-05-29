@@ -3,7 +3,6 @@ package addonBasic;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.packets.ServerPacketHandler;
 
 public class CommonAddonProxy {
 
@@ -16,7 +15,7 @@ public class CommonAddonProxy {
 	}
 
 	public void registerRenderInformation() {
-		
+
 	}
 
 }

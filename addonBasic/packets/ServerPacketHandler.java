@@ -17,15 +17,15 @@ public class ServerPacketHandler {
 
 	@SubscribeEvent
 	public void onServerPacket(ServerCustomPacketEvent event) {
-		
+
 		if(!event.packet.channel().equals("BaseAddon"))
 			return;
-		
+
 		EntityPlayerMP p = ((NetHandlerPlayServer) event.handler).playerEntity;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
 		ByteBuf buf = event.packet.payload();
-		
-	
+
+
 		World world = p.worldObj;
 
 		int x = (int) p.posX;

@@ -1,10 +1,11 @@
 package addonBasic;
 
-import java.util.List;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
+
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,77 +22,6 @@ import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class KeyHandler implements ISpecialAbility {
 
-	@Override
-	public void specialAbility(ItemStack item) {
-
-		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.hammer)){			
-			try {
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-				out.writeInt(ClientPacketHandler.BERSERKER);
-				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
-				out.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.wand)){			
-			try {
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-				out.writeInt(ClientPacketHandler.MAGE2);
-				//				if(!p.worldObj.isRemote)
-				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
-				out.close();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.staf)){			
-			try {
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-				out.writeInt(ClientPacketHandler.MAGE1);
-				//				if(!p.worldObj.isRemote)
-				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
-				out.close();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.elfbow)){			
-			try {
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-				out.writeInt(ClientPacketHandler.ARCHER);
-
-				EntityLivingBase target = isTargetingEntity(
-						Minecraft.getMinecraft().thePlayer,
-						RpgInventoryMod.donators.contains(Minecraft
-								.getMinecraft().thePlayer
-								.getCommandSenderName()) ? 60 : 40);
-				if (target != null) {
-					out.writeBoolean(false);
-					out.writeInt((int) Math.floor(target.posX));
-					out.writeInt((int) Math.floor(target.posY));
-					out.writeInt((int) Math.floor(target.posZ));
-					RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
-					out.close();
-				}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		}
-	}
-	
 	public EntityLivingBase isTargetingEntity(EntityPlayer player,
 			float distance) {
 		Minecraft mc = Minecraft.getMinecraft();
@@ -152,6 +82,73 @@ public class KeyHandler implements ISpecialAbility {
 		}
 
 		return null;
+	}
+
+	@Override
+	public void specialAbility(ItemStack item) {
+
+		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
+
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.hammer))
+			try {
+				ByteBuf buf = Unpooled.buffer();
+				ByteBufOutputStream out = new ByteBufOutputStream(buf);
+				out.writeInt(ClientPacketHandler.BERSERKER);
+				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
+				out.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.wand))
+			try {
+				ByteBuf buf = Unpooled.buffer();
+				ByteBufOutputStream out = new ByteBufOutputStream(buf);
+				out.writeInt(ClientPacketHandler.MAGE2);
+				//				if(!p.worldObj.isRemote)
+				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
+				out.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.staf))
+			try {
+				ByteBuf buf = Unpooled.buffer();
+				ByteBufOutputStream out = new ByteBufOutputStream(buf);
+				out.writeInt(ClientPacketHandler.MAGE1);
+				//				if(!p.worldObj.isRemote)
+				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
+				out.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.elfbow))
+			try {
+				ByteBuf buf = Unpooled.buffer();
+				ByteBufOutputStream out = new ByteBufOutputStream(buf);
+				out.writeInt(ClientPacketHandler.ARCHER);
+
+				EntityLivingBase target = isTargetingEntity(
+						Minecraft.getMinecraft().thePlayer,
+						RpgInventoryMod.donators.contains(Minecraft
+								.getMinecraft().thePlayer
+								.getCommandSenderName()) ? 60 : 40);
+				if (target != null) {
+					out.writeBoolean(false);
+					out.writeInt((int) Math.floor(target.posX));
+					out.writeInt((int) Math.floor(target.posY));
+					out.writeInt((int) Math.floor(target.posZ));
+					RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
+					out.close();
+				}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 	}
 
 }

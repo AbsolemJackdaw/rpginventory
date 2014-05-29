@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import addonMasters.entity.EntityPetXPBottle;
 
 /**
- * 
+ *
  * @author Richard Smith <rich1051414@gmail.com>
  */
 public class PetExpPotion extends ItemExpBottle {

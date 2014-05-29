@@ -10,12 +10,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.oldpackets.PacketInventory;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 
-public class CommonTickHandler /* implements ITickHandler */{
+public class CommonTickHandler{
 
 	/*
 	 * WARNING NAMES OF METHODS TICKEND AND TICKSTART ARE OF NO IMPORTANCE i
@@ -32,29 +31,11 @@ public class CommonTickHandler /* implements ITickHandler */{
 	private final int lapisTimer = 20 * 20;
 	private int countDownLapis = lapisTimer;
 
-	public void dropJewels(EntityPlayer player) {
-
-		if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-			if (!player.worldObj.getGameRules().getGameRuleBooleanValue(
-					"keepInventory"))
-				return;
-
-			PlayerRpgInventory rpg = PlayerRpgInventory.get(player);
-			int var1;
-			player.inventory.dropAllItems();
-			for (var1 = 0; var1 < rpg.armorSlots.length; ++var1)
-				if (rpg.getStackInSlot(var1) != null) {
-					player.inventory.setInventorySlotContents(
-							player.inventory.getFirstEmptyStack(),
-							rpg.getStackInSlot(var1));
-					rpg.setInventorySlotContents(var1, null);
-				}
-			player.inventory.dropAllItems();
-		}
-	}
-
 	@SubscribeEvent
 	public void tickEnd(TickEvent.ServerTickEvent ev) {
+
+		List<EntityPlayer> players = MinecraftServer.getServer()
+				.getConfigurationManager().playerEntityList;
 
 		for (Entry<String, Integer> entry : globalCooldownMap.entrySet()) {
 			if (entry.getValue() > 0)
@@ -64,31 +45,18 @@ public class CommonTickHandler /* implements ITickHandler */{
 				entry.setValue(0);
 		}
 
-		List<EntityPlayer> players = MinecraftServer.getServer()
-				.getConfigurationManager().playerEntityList;
+
 		for (EntityPlayer player : players) {
-			if ((player.getHealth() <= 0) || player.isDead)
-				if (!player.worldObj.getGameRules().getGameRuleBooleanValue(
-						"keepInventory"))
-					dropJewels(player);
+
 			if (countdown == 0)
 				continue;
-				//
-				// PacketInventory.sendServerPacket(player);
-				//PacketInventory.sendServerPacket(player);
-			// TODO
-			// PacketInventory pack = new PacketInventory();
-			// PacketPipeline17 pipe = mod_RpgInventory.PIPELINE;
-			// pipe.sendToServer(pack);
+
+			//TODO send info to other players in packets
 		}
 
 		countdown--;
 		if (countdown < 0)
 			countdown = 20;
-		// }
-		//
-		// @SubscribeEvent
-		// public void tickStart(TickEvent.ServerTickEvent ev) {
 
 		for (String username : RPGEventHooks.DiamondTick.keySet())
 			try {
@@ -112,19 +80,19 @@ public class CommonTickHandler /* implements ITickHandler */{
 							.getCommandSenderName()) ? 65 : 75;
 					if ((rpginv.getNecklace() != null)
 							&& rpginv.getNecklace().getItem()
-									.equals(RpgInventoryMod.neckdia))
+							.equals(RpgInventoryMod.neckdia))
 						delay -= 10;
 					if ((rpginv.getGloves() != null)
 							&& rpginv.getGloves().getItem()
-									.equals(RpgInventoryMod.glovesdia))
+							.equals(RpgInventoryMod.glovesdia))
 						delay -= 10;
 					if ((rpginv.getRing1() != null)
 							&& rpginv.getRing1().getItem()
-									.equals(RpgInventoryMod.ringdia))
+							.equals(RpgInventoryMod.ringdia))
 						delay -= 10;
 					if ((rpginv.getRing2() != null)
 							&& rpginv.getRing2().getItem()
-									.equals(RpgInventoryMod.ringdia))
+							.equals(RpgInventoryMod.ringdia))
 						delay -= 10;
 					RPGEventHooks.DiamondTick.put(
 							player.getCommandSenderName(), delay);
@@ -169,19 +137,19 @@ public class CommonTickHandler /* implements ITickHandler */{
 					int heal = 0;
 					if ((rpginv.getNecklace() != null)
 							&& rpginv.getNecklace().getItem()
-									.equals(RpgInventoryMod.necklap))
+							.equals(RpgInventoryMod.necklap))
 						heal++;
 					if ((rpginv.getGloves() != null)
 							&& rpginv.getGloves().getItem()
-									.equals(RpgInventoryMod.gloveslap))
+							.equals(RpgInventoryMod.gloveslap))
 						heal++;
 					if ((rpginv.getRing1() != null)
 							&& rpginv.getRing1().getItem()
-									.equals(RpgInventoryMod.ringlap))
+							.equals(RpgInventoryMod.ringlap))
 						heal++;
 					if ((rpginv.getRing2() != null)
 							&& rpginv.getRing2().getItem()
-									.equals(RpgInventoryMod.ringlap))
+							.equals(RpgInventoryMod.ringlap))
 						heal++;
 
 					if (player.getCurrentEquippedItem() != null) {
@@ -196,7 +164,7 @@ public class CommonTickHandler /* implements ITickHandler */{
 									countDownLapis = RpgInventoryMod.donators
 											.contains(player
 													.getCommandSenderName()) ? 15 * 20
-											: lapisTimer;
+															: lapisTimer;
 								}
 					}
 				}

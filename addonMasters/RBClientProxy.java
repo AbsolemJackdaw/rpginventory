@@ -64,7 +64,7 @@ public class RBClientProxy extends RBCommonProxy {
 	public void registerRendering() {
 		RpgMastersAddon.Channel.register(new RBClientPacketHandler());
 
-		
+
 		if (RpgConfig.instance.render3D == true) {
 			MinecraftForgeClient.registerItemRenderer(RpgMastersAddon.beastAxe,
 					new AxeRender());
@@ -94,7 +94,7 @@ public class RBClientProxy extends RBCommonProxy {
 		MinecraftForge.EVENT_BUS.register(new SoundManager());
 
 		MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
-		
+
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 		RpgUtility.registerSpecialAbility(new WeaponAbility());
 

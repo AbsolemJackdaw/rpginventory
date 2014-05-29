@@ -7,7 +7,7 @@ package addonDread.richutils.potions;
 import net.minecraft.potion.Potion;
 
 /**
- * 
+ *
  * @author Home
  */
 public class DecomposePotion extends Potion {

@@ -17,7 +17,6 @@ import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -124,7 +123,7 @@ public class ItemBeastAxe extends ItemRpgSword {
 							out.close();
 						} catch (Exception e) {
 						}
-					} else {
+					} else
 						try{
 							RpgInventoryMod.proxy.spawnCharmParticle(world, el,
 									rng, false);
@@ -138,7 +137,6 @@ public class ItemBeastAxe extends ItemRpgSword {
 						catch(Throwable e){
 
 						}
-					}
 				}
 			}
 		}

@@ -1,12 +1,9 @@
 package addonMasters.items;
 
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
@@ -14,8 +11,8 @@ import addonMasters.RpgMastersAddon;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
 import addonMasters.entity.IPet;
-import addonMasters.entity.SpiderPet;
 import addonMasters.entity.IPet.PetID;
+import addonMasters.entity.SpiderPet;
 
 public class ItemRBMats2 extends Item {
 
@@ -29,9 +26,8 @@ public class ItemRBMats2 extends Item {
 		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 		ItemStack stack = inv.getCrystal();
 
-		if (!world.isRemote && (player.ridingEntity == null) ){
-			if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER)){
-
+		if (!world.isRemote && (player.ridingEntity == null) )
+			if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER))
 				try {
 					if (stack != null)
 						// Pet is in the world.
@@ -85,9 +81,9 @@ public class ItemRBMats2 extends Item {
 									spider.setName(stack.stackTagCompound.getString("PetName"));
 									spider.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
 									spider.setHealth(stack.stackTagCompound.getFloat("PetHealth"));
-									if (spider.getHealth() <= 0) 
+									if (spider.getHealth() <= 0)
 										spider.setHealth(1);
-								}								
+								}
 								if(!world.isRemote)
 									world.spawnEntityInWorld(spider);
 
@@ -117,8 +113,6 @@ public class ItemRBMats2 extends Item {
 				} catch (Throwable ex) {
 					ex.printStackTrace();
 				}
-			}
-		}
 		return whistle;
 
 	}

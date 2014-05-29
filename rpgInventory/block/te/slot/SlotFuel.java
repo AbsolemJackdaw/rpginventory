@@ -4,7 +4,6 @@
  */
 package rpgInventory.block.te.slot;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -27,7 +26,7 @@ public class SlotFuel extends Slot {
 		if ((par1ItemStack.getItem() == Items.coal)
 				|| par1ItemStack.getItem().equals(Items.lava_bucket)
 				|| par1ItemStack.getItem().equals(Items.blaze_rod)
-				|| Item.getItemFromBlock(Blocks.coal_block) == par1ItemStack.getItem())
+				|| (Item.getItemFromBlock(Blocks.coal_block) == par1ItemStack.getItem()))
 			return true;
 		else
 			return false;

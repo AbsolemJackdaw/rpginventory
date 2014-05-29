@@ -12,7 +12,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
 /**
- * 
+ *
  * @author Richard Smith <rich1051414@gmail.com>
  */
 public interface IPet {
@@ -55,25 +55,25 @@ public interface IPet {
 	public static HashMap<String, PetID> playersWithActivePets = new HashMap();
 
 	/**
-	 * 
+	 *
 	 * @return Returns the pet type(item damage) for this pet.
 	 */
 	public void addExperienceLevel(int numLevels);
 
 	/**
-	 * 
+	 *
 	 * @return Returns the current health. not max.
 	 */
 	public float getHP();
 
 	/**
-	 * 
+	 *
 	 * @return The current level of this pet.
 	 */
 	public int getLevel();
 
 	/**
-	 * 
+	 *
 	 * @return How large this pet should be. This returns the scale factor.
 	 */
 	public float getPetSize();
@@ -84,7 +84,7 @@ public interface IPet {
 	public boolean getSaddled();
 
 	/**
-	 * 
+	 *
 	 * @return The total xp this mob has.
 	 */
 	public int getTotalXP();
@@ -92,10 +92,10 @@ public interface IPet {
 	public int getType();
 
 	/**
-	 * 
+	 *
 	 * @param amount
 	 *            The amount of xp to give to this pet.
-	 * 
+	 *
 	 */
 	public void giveXP(int amount);
 
@@ -104,10 +104,10 @@ public interface IPet {
 	public void setLevel(int level);
 
 	/**
-	 * 
+	 *
 	 * @param name
 	 *            The name to attempt to set as the pets name.
-	 * 
+	 *
 	 */
 	public void setName(String name);
 
@@ -122,10 +122,10 @@ public interface IPet {
 	 * <em>Deprecated!</em> Use the other version, the new method will
 	 * automatically set the correct damage values and item type information for
 	 * simplicity.
-	 * 
+	 *
 	 * <s>Writes the pet's information to the provided ItemStack</s> Functions
 	 * exactly like writePetToItemStack()
-	 * 
+	 *
 	 * @param is
 	 *            The itemStack to save the pet to.
 	 * @return The ItemStack with the pet written to it.

@@ -8,7 +8,6 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import rpgInventory.renderer.RpgItemRenderer;
-
 import addonBasic.models.weapons.ModelHammer;
 
 public class HammerRender extends RpgItemRenderer {

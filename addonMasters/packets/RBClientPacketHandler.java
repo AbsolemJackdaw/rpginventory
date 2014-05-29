@@ -1,12 +1,8 @@
 package addonMasters.packets;
 
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.oldpackets.PacketInventory;
-import addonMasters.entity.IPet;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
@@ -43,7 +39,7 @@ public class RBClientPacketHandler extends RBServerPacketHandler {
 			case CRYSTAL:
 				new PacketCrystal(dis, p);
 				break;
-				
+
 			case STOREPET:
 				//server side
 //				PlayerRpgInventory inv = PlayerRpgInventory.get(p);

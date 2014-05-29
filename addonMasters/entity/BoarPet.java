@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import addonMasters.entity.models.ModelBoar;
 
 /**
- * 
+ *
  * @author Home
  */
 public class BoarPet extends BMPetImpl {

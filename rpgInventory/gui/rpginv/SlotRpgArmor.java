@@ -1,7 +1,6 @@
 package rpgInventory.gui.rpginv;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import rpgInventory.RpgInventoryMod;

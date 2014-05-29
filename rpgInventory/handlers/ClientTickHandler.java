@@ -8,17 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-
-import org.lwjgl.opengl.GL11;
-
-import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.ButtonInventory;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.item.armor.ItemRpgInvArmor;
-import rpgInventory.models.MainShield;
-import rpgInventory.utils.AbstractArmor;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 

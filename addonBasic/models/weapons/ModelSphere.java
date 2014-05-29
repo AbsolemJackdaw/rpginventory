@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 import rpgInventory.RpgInventoryMod;
 
 /**
- * 
+ *
  * @author Home
  */
 public class ModelSphere extends ModelBox {

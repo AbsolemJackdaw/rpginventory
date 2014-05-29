@@ -11,6 +11,7 @@ public class ItemRageFood extends ItemFood {
 		super(par2, par3, par4);
 	}
 
+
 	@Override
 	public void onFoodEaten(ItemStack par1ItemStack, World par2World,
 			EntityPlayer p) {

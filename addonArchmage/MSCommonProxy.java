@@ -7,7 +7,7 @@ package addonArchmage;
 import net.minecraft.client.model.ModelBiped;
 
 /**
- * 
+ *
  * @author Home
  */
 public class MSCommonProxy {

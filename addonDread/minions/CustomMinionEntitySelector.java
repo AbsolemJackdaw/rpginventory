@@ -11,7 +11,7 @@ import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
- * 
+ *
  * @author Home
  */
 public class CustomMinionEntitySelector implements IEntitySelector {

@@ -1,7 +1,6 @@
 package addonMasters.packets;
 
 import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
 
 import java.util.Random;
 
@@ -17,22 +16,19 @@ import addonMasters.entity.EntityTeleportStone;
 public class PacketTeleport {
 
 	public PacketTeleport(World world, EntityPlayer p, ByteBufInputStream dis) {
-		
+
 		Random rand = world.rand;
 		if (!world.isRemote) {
 			ItemStack dagger = p.getCurrentEquippedItem();
 
 			if (!RpgInventoryMod.developers.contains(p.getDisplayName()
-					.toLowerCase())) {
+					.toLowerCase()))
 				if (!RpgInventoryMod.playerClass
-						.contains(RpgMastersAddon.CLASSROGUE)) {
+						.contains(RpgMastersAddon.CLASSROGUE))
 					return;
-				}
-			}
 			if (!CommonTickHandler.globalCooldownMap.containsKey(p
-					.getDisplayName())) {
+					.getDisplayName()))
 				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
-			}
 			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				CommonTickHandler.globalCooldownMap
 						.put(p.getDisplayName(), (RpgInventoryMod.donators
@@ -42,12 +38,9 @@ public class PacketTeleport {
 							dagger.getMaxDamage() - dagger.getItemDamage(), p);
 					p.renderBrokenItemStack(dagger);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else {
-					if (!RpgInventoryMod.developers.contains(p
-							.getDisplayName().toLowerCase())) {
-						dagger.damageItem(3, p);
-					}
-				}
+				} else if (!RpgInventoryMod.developers.contains(p
+						.getDisplayName().toLowerCase()))
+					dagger.damageItem(3, p);
 				p.worldObj.spawnEntityInWorld(new EntityTeleportStone(
 						p.worldObj, p));
 				double d0 = rand.nextGaussian() * 0.02D;
@@ -60,11 +53,10 @@ public class PacketTeleport {
 						(p.posZ + (rand.nextFloat() * p.width * 2.0F))
 								- p.width, d0, d1, d2);
 
-			} else {
+			} else
 				p.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
 						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
 								.get(p.getDisplayName()) / 20)) + " seconds"));
-			}
 		}
 	}
  }

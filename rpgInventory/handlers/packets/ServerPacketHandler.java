@@ -5,16 +5,12 @@ import io.netty.buffer.ByteBufInputStream;
 
 import java.io.IOException;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 
@@ -29,7 +25,7 @@ public class ServerPacketHandler {
 
 		if(!event.packet.channel().equals("RpgInv"))
 			return;
-		
+
 		EntityPlayerMP p = ((NetHandlerPlayServer) event.handler).playerEntity;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
 		ByteBuf buf = event.packet.payload();
@@ -56,7 +52,7 @@ public class ServerPacketHandler {
 //						.getSizeInventory(); i++)
 //					PlayerRpgInventory.get(other).setInventorySlotContents(i,
 //							ByteBufUtils.readItemStack(buf));
-				
+
 				break;
 
 			default:

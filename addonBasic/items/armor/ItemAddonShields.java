@@ -6,7 +6,6 @@ import addonBasic.RpgBaseAddon;
 import addonBasic.models.item.IronThorn;
 import addonBasic.models.item.ModelShield;
 import addonBasic.models.item.bookMage;
-import addonBasic.renderer.shields.ArcherShield;
 
 public class ItemAddonShields extends ItemRpgInvArmor{
 
@@ -42,7 +41,13 @@ public class ItemAddonShields extends ItemRpgInvArmor{
 			return bm;
 		return super.getShieldModel();
 	}
-	
+
+	@Override
+	public boolean isMantle() {
+		// TODO Auto-generated method stub
+		return this.equals(RpgBaseAddon.talisman);
+	}
+
 	@Override
 	public String shieldClass() {
 		if(this.equals(RpgBaseAddon.berserkerShield))
@@ -52,11 +57,5 @@ public class ItemAddonShields extends ItemRpgInvArmor{
 		if(this.equals(RpgBaseAddon.talisman))
 			return RpgBaseAddon.CLASSMAGESHIELD;
 		return super.shieldClass();
-	}
-	
-	@Override
-	public boolean isMantle() {
-		// TODO Auto-generated method stub
-		return this.equals(RpgBaseAddon.talisman);
 	}
 }

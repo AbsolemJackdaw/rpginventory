@@ -1,12 +1,8 @@
 package addonDread.render;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -26,13 +22,11 @@ public class RenderMinionS extends RenderBiped {
 		super(new ModelDeath(), 0.5F);
 	}
 
-	/**
-	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-	 */
-	protected ResourceLocation getEntityTexture(EntityMinionS par1EntityCow)
-	{
-		return skeletonTexture;
-	}
+	@Override
+	protected void func_82422_c()
+    {
+        GL11.glTranslatef(0.09375F, 0.1875F, 0.0F);
+    }
 
 	/**
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
@@ -44,9 +38,18 @@ public class RenderMinionS extends RenderBiped {
 	}
 
 	/**
+	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+	 */
+	protected ResourceLocation getEntityTexture(EntityMinionS par1EntityCow)
+	{
+		return skeletonTexture;
+	}
+
+	/**
 	 * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
 	 * entityLiving, partialTickTime
 	 */
+	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
 		this.preRenderCallback((EntityMinionS)par1EntityLivingBase, par2);
@@ -57,9 +60,4 @@ public class RenderMinionS extends RenderBiped {
 		GL11.glScalef(0.8F, 0.8F, 0.8F);
 
 	}
-	
-	protected void func_82422_c()
-    {
-        GL11.glTranslatef(0.09375F, 0.1875F, 0.0F);
-    }
 }

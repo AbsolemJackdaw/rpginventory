@@ -7,7 +7,7 @@ package addonDread.minions;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
- * 
+ *
  * @author Home
  */
 public interface IMinion {

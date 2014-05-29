@@ -15,31 +15,30 @@ public class MoldRecipes {
 	//Block = Block to be molten
 	//Item paired with block is the mineral
 	public static Map<HashMap<Item,HashMap<Block,Item>>, ItemStack> test = new HashMap<HashMap<Item, HashMap<Block,Item>>, ItemStack>();
-	
-	public MoldRecipes() {
-		
-	}
-	
+
 	public static void addRecipe(Item mold, Item mineral, ItemStack result, Block catalist){
 		Map<Block,Item> a = new HashMap<Block, Item>();
 		Map<Item,HashMap<Block,Item>> b = new HashMap<Item,HashMap<Block,Item>>();
 		a.put(catalist, mineral);
 		b.put(mold, (HashMap<Block, Item>) a);
-		
+
 		test.put((HashMap<Item, HashMap<Block, Item>>) b, result);
 	}
-	
+
 	public static ItemStack getSmeltingResult(Item mineral, Item mold, Block catalist){
 		Map<Block,Item> a = new HashMap<Block, Item>();
 		Map<Item,HashMap<Block,Item>> b = new HashMap<Item,HashMap<Block,Item>>();
 		a.put(catalist, mineral);
 		b.put(mold, (HashMap<Block, Item>) a);
-		
-		if(test.containsKey(b)){
+
+		if(test.containsKey(b))
 			return test.get(b);
-		}
-		
+
 		return null;
-		
+
+	}
+
+	public MoldRecipes() {
+
 	}
 }

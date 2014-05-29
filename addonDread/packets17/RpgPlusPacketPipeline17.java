@@ -28,7 +28,7 @@
 ///**
 // * Packet pipeline class. Directs all registered packet data to be handled by
 // * the packets themselves.
-// * 
+// *
 // * @author sirgingalot some code from: cpw
 // */
 //@ChannelHandler.Sharable
@@ -143,10 +143,10 @@
 //	/**
 //	 * Register your packet with the pipeline. Discriminators are automatically
 //	 * set.
-//	 * 
+//	 *
 //	 * @param clazz
 //	 *            the class to register
-//	 * 
+//	 *
 //	 * @return whether registration was successful. Failure may occur if 256
 //	 *         packets have been registered or if the registry already contains
 //	 *         this packet
@@ -182,7 +182,7 @@
 //	 * <p/>
 //	 * Adapted from CPW's code in
 //	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-//	 * 
+//	 *
 //	 * @param message
 //	 *            The message to send
 //	 * @param player
@@ -202,7 +202,7 @@
 //	 * <p/>
 //	 * Adapted from CPW's code in
 //	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-//	 * 
+//	 *
 //	 * @param message
 //	 *            The message to send
 //	 */
@@ -218,7 +218,7 @@
 //	 * <p/>
 //	 * Adapted from CPW's code in
 //	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-//	 * 
+//	 *
 //	 * @param message
 //	 *            The message to send
 //	 * @param point
@@ -241,7 +241,7 @@
 //	 * <p/>
 //	 * Adapted from CPW's code in
 //	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-//	 * 
+//	 *
 //	 * @param message
 //	 *            The message to send
 //	 * @param dimensionId
@@ -262,7 +262,7 @@
 //	 * <p/>
 //	 * Adapted from CPW's code in
 //	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-//	 * 
+//	 *
 //	 * @param message
 //	 *            The message to send
 //	 */

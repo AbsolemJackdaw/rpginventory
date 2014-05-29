@@ -4,22 +4,23 @@
  */
 package rpgInventory.gui;
 
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.entity.player.EntityPlayer;
-import rpgInventory.handlers.packets.ServerPacketHandler;
-import rpgInventory.RpgInventoryMod;
 
 import java.io.IOException;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.entity.player.EntityPlayer;
+import rpgInventory.RpgInventoryMod;
+import rpgInventory.handlers.packets.ServerPacketHandler;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 /**
- * 
+ *
  * @author Richard Smith
  */
 @SideOnly(Side.CLIENT)
@@ -57,9 +58,8 @@ public class ButtonInventory extends GuiButton {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-				else if (this.displayString.equals("Close")) {
+				else if (this.displayString.equals("Close"))
 					Minecraft.getMinecraft().thePlayer.closeScreen();
-				}
 				return false;
 			}
 		return super.mousePressed(par1Minecraft, par2, par3);

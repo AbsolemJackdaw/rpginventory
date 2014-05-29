@@ -6,7 +6,6 @@ package rpgInventory.block.te.slot;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -17,6 +16,13 @@ import net.minecraft.item.ItemStack;
 public class GoldBlockSlot extends Slot {
 
 	private static ArrayList<Item> allBlocks = new ArrayList<Item>();
+
+	public static void addCatalist(Item b){
+		for(Item b2 : allBlocks)
+			if(b2.equals(b))
+				return;
+		allBlocks.add(b);
+	}
 
 	public GoldBlockSlot(IInventory par1IInventory, int par2, int par3, int par4) {
 		super(par1IInventory, par2, par3, par4);
@@ -36,14 +42,6 @@ public class GoldBlockSlot extends Slot {
 					if (par1ItemStack.getItem().equals(b))
 						return true;
 		return false;
-	}
-
-	public static void addCatalist(Item b){
-		for(Item b2 : allBlocks){
-			if(b2.equals(b))
-				return;
-		}
-		allBlocks.add(b);
 	}
 
 }

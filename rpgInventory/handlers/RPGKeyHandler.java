@@ -1,17 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package rpgInventory.handlers;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -45,7 +38,7 @@ public class RPGKeyHandler implements ISpecialAbility{
 	protected static KeyBinding keySpecial = new KeyBinding(
 			"RPG Special Ability", Keyboard.KEY_F, "rpginventorymod");
 
-	
+
 	public RPGKeyHandler() {
 		super();
 		ClientRegistry.registerKeyBinding(keyInventory);
@@ -129,16 +122,13 @@ public class RPGKeyHandler implements ISpecialAbility{
 			if (keySpecial.isPressed()) {
 
 				ItemStack item = mc.thePlayer.getCurrentEquippedItem();
-				if ((guiscreen == null) && !(item == null)){
-
-					for(Item i : abilityMap.keySet()){
+				if ((guiscreen == null) && !(item == null))
+					for(Item i : abilityMap.keySet())
 						if(item.getItem().equals(i)){
 							specialAbility(item);
 							for(int c =0; c < RpgUtility.allAbilities.size(); c++)
 								RpgUtility.allAbilities.get(c).specialAbility(item);
 						}
-					}
-				}
 			} else if (keyInventory.isPressed()) {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -154,49 +144,5 @@ public class RPGKeyHandler implements ISpecialAbility{
 	@Override
 	public void specialAbility(ItemStack item) {
 		//no special abilities here .. .3.
-
-		//		if (abilityMap.containsKey(item.getItem())) {
-		//
-		//			int i = abilityMap.get(item.getItem());
-		//
-		//			try {
-		//				ByteBuf buf = Unpooled.buffer();
-		//				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-		//				out.writeInt(i);
-		//				mod_RpgInventory.Channel.sendToServer(new FMLProxyPacket(buf,
-		//						"RpgInv"));
-		//				out.close();
-		//
-		//			} catch (IOException e) {
-		//				// TODO Auto-generated catch block
-		//				e.printStackTrace();
-		//			}
-		//
-		//
-		//			// TODO place this elsewhere. the bow and mage staff are no
-		//			// longer part of rpg inventory
-		//
-		//			// if (item.getItem() == mod_RpgInventory.elfbow) {
-		//			// EntityLivingBase target = isTargetingEntity(
-		//			// Minecraft.getMinecraft().thePlayer,
-		//			// mod_RpgInventory.donators.contains(Minecraft
-		//			// .getMinecraft().thePlayer
-		//			// .getCommandSenderName()) ? 60 : 40);
-		//			// if (target != null) {
-		//			// outputStream.writeBoolean(false);
-		//			// outputStream.writeInt((int) Math.floor(target.posX));
-		//			// outputStream.writeInt((int) Math.floor(target.posY));
-		//			// outputStream.writeInt((int) Math.floor(target.posZ));
-		//			// } else {
-		//			// outputStream.writeBoolean(true);
-		//			// }
-		//			// }
-		//
-		//			// TODO sendpacket
-		//			// Packet250CustomPayload packet = new Packet250CustomPayload(
-		//			// "RpgInv", bytes.toByteArray());
-		//			// PacketDispatcher.sendPacketToServer(packet);
-		//
-		//		}
 	}
 }

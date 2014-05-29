@@ -11,7 +11,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.RpgInventoryMod.ITEMTYPE;
-import rpgInventory.config.RpgConfig;
 import rpgInventory.utils.RpgUtility;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
@@ -69,13 +68,13 @@ public class RpgMastersAddon {
 
 	ToolMaterial BeastAxeMaterial = EnumHelper.addToolMaterial("BeastAxe", 4,
 			1280, 6.0F, 3, 22);
-	
+
 	public static FMLEventChannel Channel;
 
-	
+
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		
+
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("R_BChannel");
 		RpgMastersAddon.Channel.register(new RBServerPacketHandler());
 

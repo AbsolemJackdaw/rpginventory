@@ -17,7 +17,7 @@ package addonDread.packets;
 //import rpgInventory.gui.rpginv.PlayerRpgInventory;
 //
 ///**
-// * 
+// *
 // * @author Home
 // */
 //public class RpgPlusPacketHandler implements IPacketHandler {

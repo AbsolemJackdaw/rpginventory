@@ -14,7 +14,6 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.RpgInventoryMod;
-import rpgInventory.config.RpgConfig;
 import rpgInventory.handlers.RPGEventHooks;
 import rpgInventory.utils.RpgUtility;
 import addonDread.items.ItemGrandSword;
@@ -230,13 +229,13 @@ public class RpgDreadAddon {
 			RPGEventHooks.negativeEffects.add(20);
 			RPGEventHooks.negativeEffects.add(decomposePotion.id);
 		}
-		
+
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("DreadPacket");
 		RpgUtility.registerAbilityWeapon(necro_weapon);
 		RpgUtility.registerAbilityWeapon(pala_weapon);
 		RpgDreadAddon.Channel.register(new DreadServerPacketHandler());
 
-		
+
 	}
 
 	@EventHandler

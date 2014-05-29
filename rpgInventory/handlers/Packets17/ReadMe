@@ -1,7 +1,0 @@
-README
-
-Commented out PipeLine 1.7 for reasons : 
--its called the 'hard' way of handling packets
--never found a way to fill packets with info
-
--we will now be using "Noppes' " easy packet handling

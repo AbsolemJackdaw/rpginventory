@@ -1,6 +1,5 @@
 package addonDread.packets;
 
-import addonDread.CommonTickHandlerRpgPlus;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -19,7 +18,7 @@ public class DreadServerPacketHandler {
 
 	@SubscribeEvent
 	public void onServertPacket(ServerCustomPacketEvent event){
-		
+
 		EntityPlayerMP p = ((NetHandlerPlayServer) event.handler).playerEntity;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
 		ByteBuf buf = event.packet.payload();
@@ -37,7 +36,7 @@ public class DreadServerPacketHandler {
 			ItemStack weapon = p.getCurrentEquippedItem();
 			PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 
-			if (inv != null) {
+			if (inv != null)
 				switch (weaponID) {
 				case SKULLRCLICK:
 					new PacketSpawnMinion(weapon, dis, inv, p);
@@ -51,7 +50,6 @@ public class DreadServerPacketHandler {
 				default:
 					break;
 				}
-			}
 		} catch (Exception e) {
 		}
 	}

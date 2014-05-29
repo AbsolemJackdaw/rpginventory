@@ -102,14 +102,6 @@ IEntityAdditionalSpawnData {
 		//this.owner = data.readBytes(owner.getBytes()).toString();
 	}
 
-	@Override
-	public void writeSpawnData(ByteBuf data) {
-		data.writeInt(this.size);
-		data.writeInt(this.type);
-		data.writeInt(this.step);
-		data.writeInt(this.sizeLimit);
-	}
-
 	public void specialAttack(MovingObjectPosition var1, int type) {
 
 		EntityLivingBase p = this.getThrower();
@@ -301,7 +293,7 @@ IEntityAdditionalSpawnData {
 					}
 			}
 
-			if (p != null && p instanceof EntityPlayer){
+			if ((p != null) && (p instanceof EntityPlayer)){
 
 				EntityPlayer pl = (EntityPlayer)p;
 				if ((pl.getDistanceToEntity(this) < 3) && ((pl.rotationPitch > 70) && (pl.rotationPitch < 110))) {
@@ -336,6 +328,14 @@ IEntityAdditionalSpawnData {
 			break;
 		}
 		this.setDead();
+	}
+
+	@Override
+	public void writeSpawnData(ByteBuf data) {
+		data.writeInt(this.size);
+		data.writeInt(this.type);
+		data.writeInt(this.step);
+		data.writeInt(this.sizeLimit);
 	}
 
 

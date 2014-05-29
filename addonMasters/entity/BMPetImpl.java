@@ -37,7 +37,6 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
@@ -177,7 +176,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		if(par1Entity instanceof EntityLiving){
 			EntityLiving el = (EntityLiving) par1Entity;
 			el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)getOwner()), getAttackDamage());
-		}		
+		}
 		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this),
 				0);
 	}
@@ -498,6 +497,12 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		}
 	}
 
+	@Override
+	public void onDeath(DamageSource par1DamageSource) {
+
+		super.onDeath(par1DamageSource);
+	}
+
 	protected boolean onIce() { // just a check.
 		int i = MathHelper.floor_double(posX);
 		int j = MathHelper.floor_double(posY);
@@ -523,7 +528,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
 		EntityPlayer player = (EntityPlayer) getOwner();
 		if(!RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER))
-			if (!worldObj.isRemote) {
+			if (!worldObj.isRemote)
 				if (((player == null))) {
 					try {
 						PlayerRpgInventory inv = PlayerRpgInventory.get(player);
@@ -533,14 +538,12 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 					this.setDead();
 					return;
 				}
-			}
 
-		if (!worldObj.isRemote) {
+		if (!worldObj.isRemote)
 			if ((!IPet.playersWithActivePets.containsKey(this.getOwnerName()) || (this.dimension != getOwner().dimension))) {
 				this.setDead();
 				return;
 			}
-		}
 
 		if (healthregen-- <= 0) {
 			this.heal(1);
@@ -571,16 +574,15 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			sprintToggleTimer--;
 		if (jumpTicks > 0)
 			jumpTicks--;
-		
+
 		List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
-		if ((xps != null) && (xps.size() > 0)){
+		if ((xps != null) && (xps.size() > 0))
 			if (--xpThrottle <= 0)
 				for (EntityPetXP xp : xps) {
 					xpThrottle = 5;
 					this.giveXP(xp.getXpValue());
 					xp.setDead();
 				}
-		}
 
 
 		List<EntityXPOrb> a = this.worldObj.getEntitiesWithinAABB(EntityXPOrb.class,  boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
@@ -590,7 +592,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			totalXP += orb.getXpValue();
 			orb.setDead();
 		}
-		while (totalXP > 0 && !worldObj.isRemote) {
+		while ((totalXP > 0) && !worldObj.isRemote) {
 			int partialXP = EntityXPOrb.getXPSplit(totalXP);
 			totalXP -= partialXP;
 			giveXP(partialXP);
@@ -637,14 +639,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		this.setSaddled(par1NBTTagCompound.getBoolean("Saddle"));
 	}
 
+
 	public abstract int regenDelay();
-
-
-	@Override
-	public void onDeath(DamageSource par1DamageSource) {
-
-		super.onDeath(par1DamageSource);
-	}
 	@Override
 	public void setDead() {
 

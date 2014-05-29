@@ -7,7 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -126,7 +125,7 @@ public class ItemElementalStaff extends ItemRpgSword {
 
 	/**
 	 * Called each tick while using an item.
-	 * 
+	 *
 	 * @param stack
 	 *            The Item being used
 	 * @param player

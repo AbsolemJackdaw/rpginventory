@@ -8,7 +8,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
 /**
- * 
+ *
  * @author Home
  */
 public class ModelRendererSphere extends ModelRenderer {

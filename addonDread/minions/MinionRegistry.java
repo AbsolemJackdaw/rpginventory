@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 
+ *
  * @author Home
  */
 public class MinionRegistry {
