@@ -22,18 +22,18 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 
 	public ItemRpgInvArmorRB(int par4, int maxDamage, String name,
 			String resourcelocation) {
-		super(par4, maxDamage, name, resourcelocation);
+		super(par4, maxDamage, -1, resourcelocation);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public String boundArmorClass() {
+	public String bindShieldToArmorClass() {
 
 		if (this.equals(RpgMastersAddon.beastShield))
 			return RpgMastersAddon.CLASSBEASTMASTER;
 		if (this.equals(RpgMastersAddon.daggers))
 			return RpgMastersAddon.CLASSROGUE;
-		return super.boundArmorClass();
+		return super.bindShieldToArmorClass();
 	}
 
 	@Override

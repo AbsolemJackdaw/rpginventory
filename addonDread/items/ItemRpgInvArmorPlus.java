@@ -13,17 +13,17 @@ public class ItemRpgInvArmorPlus extends ItemRpgInvArmor {
 	private PalaShield pala = new PalaShield();
 
 	public ItemRpgInvArmorPlus(int par4, int maxDamage, String name, String loc) {
-		super(par4, maxDamage, name, loc);
+		super(par4, maxDamage, -1, loc);
 	}
 
 	@Override
-	public String boundArmorClass() {
+	public String bindShieldToArmorClass() {
 
 		if (this.equals(RpgDreadAddon.necro_shield))
 			return RpgDreadAddon.CLASSNECRO;
 		if (this.equals(RpgDreadAddon.pala_shield))
 			return RpgDreadAddon.CLASSPALADIN;
-		return super.boundArmorClass();
+		return super.bindShieldToArmorClass();
 	}
 
 	@Override

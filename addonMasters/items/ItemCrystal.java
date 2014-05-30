@@ -2,6 +2,7 @@ package addonMasters.items;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -19,7 +20,7 @@ public class ItemCrystal extends ItemRpgInvArmor {
 			"Spider", "Bull" };
 
 	public ItemCrystal(int armorType, int maxDamage, String name) {
-		super(armorType, maxDamage, name, "");
+		super(armorType, maxDamage, -1, "");
 		this.setHasSubtypes(true);
 		// Max stack size MUST be 1!
 		this.maxStackSize = 1;
@@ -117,8 +118,9 @@ public class ItemCrystal extends ItemRpgInvArmor {
 	}
 
 	@Override
-	public Item setTextureName(String s) {
-		this.iconString = "rpginventorymod:petcrystal";
-		return this;
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister par1IconRegister) {
+		this.itemIcon = par1IconRegister.registerIcon("rpginventorymod:petCrystal");
+	
 	}
 }

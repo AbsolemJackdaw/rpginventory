@@ -9,12 +9,12 @@ public class ItemRpgInvShields extends ItemRpgInvArmor {
 
 	public ItemRpgInvShields(int par4, int maxDamage, String name,
 			String resourcelocation) {
-		super(par4, maxDamage, name, resourcelocation);
+		super(par4, maxDamage, 17, resourcelocation);
 
 	}
 
 	@Override
-	public String boundArmorClass() {
+	public String bindShieldToArmorClass() {
 		return "none";
 	}
 

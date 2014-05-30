@@ -11,7 +11,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
-import rpgInventory.handlers.CommonTickHandler;
+import rpgInventory.handlers.ServerTickHandler;
 import addonBasic.EntityHellArrow;
 import addonBasic.RpgBaseAddon;
 
@@ -63,11 +63,11 @@ public class PacketArcher {
 						|| (bottom.getItem() != RpgBaseAddon.archerboots))
 					return;
 			}
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p
+			if (!ServerTickHandler.globalCooldownMap.containsKey(p
 					.getDisplayName()))
-				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
-			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
-				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(),
+				ServerTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
+			if (ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
+				ServerTickHandler.globalCooldownMap.put(p.getDisplayName(),
 						30 * 20);
 				if (!RpgInventoryMod.developers.contains(p.getDisplayName()
 						.toLowerCase()))
@@ -118,7 +118,7 @@ public class PacketArcher {
 			} else
 				p.addChatMessage(new ChatComponentText(
 						"You must wait for energy to replenish, left: "
-								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
+								+ Math.floor(1 + (ServerTickHandler.globalCooldownMap
 										.get(p.getDisplayName()) / 20))
 								+ " seconds"));
 		}

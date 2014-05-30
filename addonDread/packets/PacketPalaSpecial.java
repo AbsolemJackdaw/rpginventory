@@ -12,7 +12,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.CommonTickHandler;
+import rpgInventory.handlers.ServerTickHandler;
 import addonDread.RpgDreadAddon;
 
 public class PacketPalaSpecial {
@@ -32,11 +32,11 @@ public class PacketPalaSpecial {
 					.contains(RpgDreadAddon.CLASSPALADIN))
 				return;
 
-		if (!CommonTickHandler.globalCooldownMap
+		if (!ServerTickHandler.globalCooldownMap
 				.containsKey(p.getDisplayName()))
-			CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
-		if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
-			CommonTickHandler.globalCooldownMap.put(p.getDisplayName(),
+			ServerTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
+		if (ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
+			ServerTickHandler.globalCooldownMap.put(p.getDisplayName(),
 					(RpgInventoryMod.donators.contains(p.getDisplayName()) ? 5
 							: 7) * 20);
 			// System.out.println("Healing time!");
@@ -73,7 +73,7 @@ public class PacketPalaSpecial {
 					}
 		} else
 			p.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
-					+ Math.floor(1 + (CommonTickHandler.globalCooldownMap.get(p
+					+ Math.floor(1 + (ServerTickHandler.globalCooldownMap.get(p
 							.getDisplayName()) / 20)) + " seconds"));
 	}
  }

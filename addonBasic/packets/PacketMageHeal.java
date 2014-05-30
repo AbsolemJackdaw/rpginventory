@@ -12,7 +12,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
-import rpgInventory.handlers.CommonTickHandler;
+import rpgInventory.handlers.ServerTickHandler;
 import addonBasic.RpgBaseAddon;
 
 public class PacketMageHeal {
@@ -44,11 +44,11 @@ public class PacketMageHeal {
 						|| (var0.getItem() != RpgBaseAddon.mageboots))
 					return;
 			}
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p
+			if (!ServerTickHandler.globalCooldownMap.containsKey(p
 					.getDisplayName()))
-				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
-			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
-				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(),
+				ServerTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
+			if (ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
+				ServerTickHandler.globalCooldownMap.put(p.getDisplayName(),
 						5 * 20);
 				// System.out.println("Healing time!");
 				// Allow staff/hammer to perform one last aoe then break the
@@ -82,7 +82,7 @@ public class PacketMageHeal {
 			} else
 				p.addChatMessage(new ChatComponentText(
 						"You must wait for energy to replenish, left: "
-								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
+								+ Math.floor(1 + (ServerTickHandler.globalCooldownMap
 										.get(p.getDisplayName()) / 20))
 								+ " seconds"));
 		}

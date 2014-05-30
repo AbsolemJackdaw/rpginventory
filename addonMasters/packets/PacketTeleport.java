@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
-import rpgInventory.handlers.CommonTickHandler;
+import rpgInventory.handlers.ServerTickHandler;
 import addonMasters.RpgMastersAddon;
 import addonMasters.entity.EntityTeleportStone;
 
@@ -26,11 +26,11 @@ public class PacketTeleport {
 				if (!RpgInventoryMod.playerClass
 						.contains(RpgMastersAddon.CLASSROGUE))
 					return;
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p
+			if (!ServerTickHandler.globalCooldownMap.containsKey(p
 					.getDisplayName()))
-				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
-			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
-				CommonTickHandler.globalCooldownMap
+				ServerTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
+			if (ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
+				ServerTickHandler.globalCooldownMap
 						.put(p.getDisplayName(), (RpgInventoryMod.donators
 								.contains(p.getDisplayName()) ? 3 : 5) * 20);
 				if ((dagger.getItemDamage() + 3) >= dagger.getMaxDamage()) {
@@ -55,7 +55,7 @@ public class PacketTeleport {
 
 			} else
 				p.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
-						+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
+						+ Math.floor(1 + (ServerTickHandler.globalCooldownMap
 								.get(p.getDisplayName()) / 20)) + " seconds"));
 		}
 	}

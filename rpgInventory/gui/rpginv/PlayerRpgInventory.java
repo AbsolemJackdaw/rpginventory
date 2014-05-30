@@ -393,4 +393,12 @@ public class PlayerRpgInventory implements IInventory,
 		// to prevent potential conflicts
 		tagcompound.setTag(tagName, nbttaglist);
 	}
+
+	public void copyOver(PlayerRpgInventory playerRpgInventory) {
+
+		for(int i = 0 ; i < 7; i ++){
+			armorSlots[i] = playerRpgInventory.armorSlots[i];
+		}
+		
+	}
 }

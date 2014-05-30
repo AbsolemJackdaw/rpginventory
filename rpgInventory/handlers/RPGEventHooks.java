@@ -14,8 +14,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
@@ -28,6 +28,7 @@ import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.utils.AbstractArmor;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class RPGEventHooks {
@@ -52,10 +53,21 @@ public class RPGEventHooks {
 
 		if (evt.entityPlayer.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")){
 
-			//TODO cant register twice you asshat
-			evt.entityPlayer.registerExtendedProperties(PlayerRpgInventory.EXT_PROP_NAME, 
-					evt.original.getExtendedProperties(PlayerRpgInventory.EXT_PROP_NAME));
-			
+
+			for(int i  = 0 ; i < 7 ; i ++)
+				System.out.println(PlayerRpgInventory.get(evt.original).getStackInSlot(i));
+
+			for(int i  = 0 ; i < 7 ; i ++)
+				System.out.println(PlayerRpgInventory.get(evt.entityPlayer).getStackInSlot(i));
+
+			NBTTagCompound tag = new NBTTagCompound();
+
+			PlayerRpgInventory.get(evt.entityPlayer).writeToNBT(tag);
+
+			PlayerRpgInventory.get(evt.original).loadNBTData(tag);
+
+			//.copyOver(PlayerRpgInventory.get(evt.original));
+
 		}
 	}
 
@@ -98,6 +110,7 @@ public class RPGEventHooks {
 	public void dropJewels(EntityPlayer player) {
 
 		System.out.println("drop");
+
 		if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
 
 			PlayerRpgInventory rpg = PlayerRpgInventory.get(player);
@@ -118,15 +131,27 @@ public class RPGEventHooks {
 		}
 	}
 
+	private boolean hasGraves;
 	@SubscribeEvent
 	public void DeathEvent(LivingDeathEvent evt) {
 
-		if(evt.entityLiving instanceof EntityPlayer){
-			EntityPlayer player = (EntityPlayer)evt.entityLiving;
-			if (!player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
-				dropJewels(player);	
+		try {
+			Class clazz = Class.forName("net.subaraki.gravestone.GraveStones");
+
+			if(clazz != null){
+				hasGraves = true;
+			}
+
+		} catch (Exception e) {
 		}
 
+		if(evt.entityLiving instanceof EntityPlayer){
+			EntityPlayer player = (EntityPlayer)evt.entityLiving;
+
+			if (!player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
+				if(!hasGraves)
+					dropJewels(player);	
+		}
 	}
 
 	protected int decreaseAirSupply(int par1) {
@@ -198,7 +223,7 @@ public class RPGEventHooks {
 				ItemStack shield = inv.getShield();
 				if (shield != null) {
 
-					if ((((ItemRpgInvArmor) inv.getShield().getItem()).boundArmorClass() + ((ItemRpgInvArmor) inv.getShield().getItem()).shieldClass())
+					if ((((ItemRpgInvArmor) inv.getShield().getItem()).bindShieldToArmorClass() + ((ItemRpgInvArmor) inv.getShield().getItem()).shieldClass())
 							.equals(RpgInventoryMod.playerClass))
 						vanillaReduction += 0.6f;
 
@@ -359,12 +384,6 @@ public class RPGEventHooks {
 				}
 				p.capabilities.setPlayerWalkSpeed(0.1f + speedboost);
 
-				/* ==== Invisibility Cloak==== */
-				ItemStack cloak = inv.getCloak();
-				if (cloak != null)
-					if (cloak.getItem() == RpgInventoryMod.cloakI)
-						p.addPotionEffect(new PotionEffect(
-								Potion.invisibility.id, 20, 1));
 			}
 		}
 
@@ -405,7 +424,7 @@ public class RPGEventHooks {
 
 					if (PlayerRpgInventory.get(player).getShield() != null)
 						if (((ItemRpgInvArmor) PlayerRpgInventory.get(player)
-								.getShield().getItem()).boundArmorClass()
+								.getShield().getItem()).bindShieldToArmorClass()
 								.equals(classname))
 							RpgInventoryMod.playerClass = classname
 							+ ((ItemRpgInvArmor) PlayerRpgInventory
@@ -414,7 +433,7 @@ public class RPGEventHooks {
 				} else {
 					RpgInventoryMod.playerClass = "none";
 					if (((ItemRpgInvArmor) PlayerRpgInventory.get(player)
-							.getShield().getItem()).boundArmorClass().equals(
+							.getShield().getItem()).bindShieldToArmorClass().equals(
 									"none"))
 						if (PlayerRpgInventory.get(player).getShield() != null)
 							RpgInventoryMod.playerClass = ((ItemRpgInvArmor) PlayerRpgInventory

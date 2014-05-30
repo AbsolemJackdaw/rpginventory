@@ -12,7 +12,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
-import rpgInventory.handlers.CommonTickHandler;
+import rpgInventory.handlers.ServerTickHandler;
 import addonBasic.RpgBaseAddon;
 
 public class PacketBerserker {
@@ -40,11 +40,11 @@ public class PacketBerserker {
 						|| (var01.getItem() != RpgBaseAddon.berserkerBoots))
 					return;
 			}
-			if (!CommonTickHandler.globalCooldownMap.containsKey(p
+			if (!ServerTickHandler.globalCooldownMap.containsKey(p
 					.getDisplayName()))
-				CommonTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
-			if (CommonTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
-				CommonTickHandler.globalCooldownMap
+				ServerTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
+			if (ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
+				ServerTickHandler.globalCooldownMap
 						.put(p.getDisplayName(), (RpgInventoryMod.donators
 								.contains(p.getDisplayName()) ? 6 : 7) * 20);
 				if ((item1.getItemDamage() + 3) >= item1.getMaxDamage()) {
@@ -113,7 +113,7 @@ public class PacketBerserker {
 			} else
 				p.addChatMessage(new ChatComponentText(
 						"You must wait for energy to replenish, left: "
-								+ Math.floor(1 + (CommonTickHandler.globalCooldownMap
+								+ Math.floor(1 + (ServerTickHandler.globalCooldownMap
 										.get(p.getDisplayName()) / 20))
 								+ " seconds"));
 

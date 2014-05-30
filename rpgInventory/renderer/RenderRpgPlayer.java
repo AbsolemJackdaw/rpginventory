@@ -108,8 +108,20 @@ public class RenderRpgPlayer {
 		}
 	}
 
+
 	@SubscribeEvent
-	public void PlayerPrerenderer(RenderPlayerEvent.Post evt) {
+	public void playerPreRendering(RenderPlayerEvent.Pre evt){
+
+		ItemStack cloak = PlayerRpgInventory.get(evt.entityPlayer).getCloak();
+
+		if(cloak != null)
+			if(cloak.getItem() == RpgInventoryMod.cloakI)
+				evt.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public void PlayerPostrenderer(RenderPlayerEvent.Post evt) {
+
 		/* ===== RENDERING SHIELDS===== */
 		ItemStack shield = PlayerRpgInventory.get(evt.entityPlayer).getShield();
 		if (shield != null)
@@ -132,7 +144,7 @@ public class RenderRpgPlayer {
 
 		/* ===== RENDERING CLOAK===== */
 		ItemStack cloak = PlayerRpgInventory.get(player).getCloak();
-		if (cloak != null)
+		if (cloak != null && cloak.getItem() != RpgInventoryMod.cloakI)
 			rendercape(player, cloak, evt.partialRenderTick);
 
 		/* ===== RENDERING GLOVES===== */
@@ -170,12 +182,7 @@ public class RenderRpgPlayer {
 			float partialTick) {
 		float var11;
 		if ((cloak != null) && !player.getHideCape())
-			if ((cloak.getItem() == RpgInventoryMod.cloak)
-					|| (cloak.getItem() == RpgInventoryMod.cloakYellow)
-					|| (cloak.getItem() == RpgInventoryMod.cloakRed)
-					|| (cloak.getItem() == RpgInventoryMod.cloakBlue)
-					|| (cloak.getItem() == RpgInventoryMod.cloakGreen)
-					|| (cloak.getItem() == RpgInventoryMod.cloakSub)) {
+			if ((cloak.getItem() != null)) {
 				GL11.glPushMatrix();
 
 				mc.renderEngine.bindTexture(((ItemRpgInvArmor) cloak.getItem())
@@ -184,14 +191,14 @@ public class RenderRpgPlayer {
 				/**
 				 * Dev Capes
 				 */
-				if (cloak.getItem() == RpgInventoryMod.cloak)
-					if (CapeRenderer.capes != null)
-						if (CapeRenderer.playersWithCapes.contains(player
-								.getCommandSenderName()))
-							mc.renderEngine.bindTexture(CapeRenderer
-									.getLocationCape(player
-											.getCommandSenderName()));
-				new ResourceLocation("subaraki/playerCapes/"+player.getDisplayName()+".png");
+				//				if (cloak.getItem() == RpgInventoryMod.cloak)
+				//					if (CapeRenderer.capes != null)
+				//						if (CapeRenderer.playersWithCapes.contains(player
+				//								.getCommandSenderName()))
+				//							mc.renderEngine.bindTexture(CapeRenderer
+				//									.getLocationCape(player
+				//											.getCommandSenderName()));
+				//				new ResourceLocation("subaraki/playerCapes/"+player.getDisplayName()+".png");
 
 				GL11.glTranslatef(0.0F, 0.0F, 0.125F);
 				double var22 = (player.field_71091_bM + ((player.field_71094_bP - player.field_71091_bM) * partialTick))
@@ -301,7 +308,6 @@ public class RenderRpgPlayer {
 			rotation = 0;
 
 		mc.renderEngine.bindTexture(new ResourceLocation(s));
-
 
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		GL11.glPushMatrix();

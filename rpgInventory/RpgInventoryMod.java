@@ -11,6 +11,8 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
@@ -19,7 +21,7 @@ import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.block.BlockForge;
 import rpgInventory.block.te.TEMold;
 import rpgInventory.gui.RpgInventoryTab;
-import rpgInventory.handlers.CommonTickHandler;
+import rpgInventory.handlers.ServerTickHandler;
 import rpgInventory.handlers.GuiHandler;
 import rpgInventory.handlers.RPGEventHooks;
 import rpgInventory.handlers.packets.ServerPacketHandler;
@@ -71,8 +73,24 @@ public class RpgInventoryMod {
 	neckgold, neckdia, neckem, necklap, glovesbutter, glovesdia, glovesem,
 	gloveslap, ringgold, ringdia, ringem, ringlap,
 	/* ====cloaks==== */
-	cloak, cloakI, cloakSub, cloakRed, cloakYellow, cloakGreen,
+	cloakWhite, 
+	cloakBlack,
+	cloakRed,
+	cloakGreen,
+	cloakBrown,
 	cloakBlue,
+	cloakPurple,
+	cloakCyan,
+	cloakSilver,
+	cloakGray,
+	cloakPink,
+	cloakLime,
+	cloakYellow,
+	cloakLightblue,
+	cloakMagenta,
+	cloakOrange,
+	cloakI,
+
 	/* ====molds==== */
 	colmold, ringmold, wantmold;
 
@@ -155,7 +173,7 @@ public class RpgInventoryMod {
 
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("RpgInv");
 		proxy.load();
-		FMLCommonHandler.instance().bus().register(new CommonTickHandler());
+		FMLCommonHandler.instance().bus().register(new ServerTickHandler());
 		RpgInventoryMod.Channel.register(new ServerPacketHandler());
 
 		setDonators();
@@ -168,14 +186,13 @@ public class RpgInventoryMod {
 
 		proxy.registerRenderInformation();
 
-		addChestLoot(new ItemStack(RpgInventoryMod.colmold), 1, 1, 20,
-				"Necklace Mold");
-		addChestLoot(new ItemStack(RpgInventoryMod.ringmold), 1, 1, 10,
-				"Ring Mold");
-		addChestLoot(new ItemStack(RpgInventoryMod.wantmold), 1, 1, 20,
-				"Gloves Mold");
-		addRareLoot(new ItemStack(RpgInventoryMod.cloakI), 1, 1, 1,
-				"Gloves Mold");
+		addChestLoot(new ItemStack(RpgInventoryMod.colmold), 1, 1, 15,"Necklace Mold");
+		addChestLoot(new ItemStack(RpgInventoryMod.ringmold), 1, 1, 15,"Ring Mold");
+		addChestLoot(new ItemStack(RpgInventoryMod.wantmold), 1, 1, 15,"Gloves Mold");
+		addRareLoot(new ItemStack(RpgInventoryMod.cloakI), 1, 1, 1,	"Invisibility Cloak");
+
+		addChestLoot(new ItemStack(Items.gold_ingot), 1, 3, 15, "More Golden Ingots");
+		addChestLoot(new ItemStack(Blocks.gold_block), 1, 1, 8, "Golden Blocks");
 
 		GameRegistry.registerTileEntity(TEMold.class, "temold");
 
@@ -212,65 +229,62 @@ public class RpgInventoryMod {
 		tab = new RpgInventoryTab(CreativeTabs.getNextID(),
 				"Rpg Inventory Jewelery");
 
-		neckgold = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, "",
+		neckgold = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,
 				"subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold")
 				.setCreativeTab(tab);
-		neckdia = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, "",
+		neckdia = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,
 				"subaraki:jewels/NeckDia.png").setUnlocalizedName("neckDia")
 				.setCreativeTab(tab);
-		neckem = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, "",
+		neckem = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,
 				"subaraki:jewels/NeckEm.png").setUnlocalizedName("neckEm")
 				.setCreativeTab(tab);
-		necklap = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, "",
+		necklap = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,
 				"subaraki:jewels/NeckLap.png").setUnlocalizedName("neckLap")
 				.setCreativeTab(tab);
 
-		ringgold = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "")
+		ringgold = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "")
 		.setUnlocalizedName("ringGold").setCreativeTab(tab);
-		ringdia = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "")
+		ringdia = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "")
 		.setUnlocalizedName("ringDia").setCreativeTab(tab);
-		ringem = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "")
+		ringem = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "")
 		.setUnlocalizedName("ringEm").setCreativeTab(tab);
-		ringlap = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, "", "")
+		ringlap = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "")
 		.setUnlocalizedName("ringLap").setCreativeTab(tab);
 
-		glovesbutter = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, "",
+		glovesbutter = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,
 				"subaraki:jewels/Glove.png").setUnlocalizedName("gloveGold")
 				.setCreativeTab(tab);
-		glovesdia = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, "",
+		glovesdia = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,
 				"subaraki:jewels/GloveDia.png").setUnlocalizedName("gloveDia")
 				.setCreativeTab(tab);
-		glovesem = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, "",
+		glovesem = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,
 				"subaraki:jewels/GloveEm.png").setUnlocalizedName("gloveEm")
 				.setCreativeTab(tab);
-		gloveslap = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, "",
+		gloveslap = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,
 				"subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap")
 				.setCreativeTab(tab);
 
-		cloak = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
-				"subaraki:capes/GreyCape.png").setFull3D()
-				.setUnlocalizedName("capeGrey").setCreativeTab(tab);
-		cloakI = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
+
+		cloakI = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 17,
 				"subaraki:capes/GreyCape.png").setFull3D()
 				.setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
 
-		cloakRed = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
-				"subaraki:capes/RedCape.png").setFull3D()
-				.setUnlocalizedName("r.capeGrey").setCreativeTab(tab);
-
-		cloakYellow = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
-				"subaraki:capes/GoldCape.png").setFull3D()
-				.setUnlocalizedName("y.capeGrey").setCreativeTab(tab);
-
-		cloakGreen = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
-				"subaraki:capes/GreenCape.png").setFull3D()
-				.setUnlocalizedName("g.capeGrey").setCreativeTab(tab);
-		cloakBlue = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
-				"subaraki:capes/SkyCape.png").setFull3D()
-				.setUnlocalizedName("b.capeGrey").setCreativeTab(tab);
-		cloakSub = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, "",
-				"subaraki:capes/BlaCape.png").setFull3D()
-				.setUnlocalizedName("s.capeGrey").setCreativeTab(tab);
+		cloakBlack 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 0,	"textures/blocks/wool_colored_black.png").setFull3D().setUnlocalizedName("bla.capeGrey").setCreativeTab(tab);
+		cloakRed 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 1,	"textures/blocks/wool_colored_red.png").setFull3D().setUnlocalizedName("red.capeGrey").setCreativeTab(tab);
+		cloakGreen 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 2,	"textures/blocks/wool_colored_green.png").setFull3D().setUnlocalizedName("gre.capeGrey").setCreativeTab(tab);
+		cloakBrown 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 3,	"textures/blocks/wool_colored_brown.png").setFull3D().setUnlocalizedName("bro.capeGrey").setCreativeTab(tab);
+		cloakBlue 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 4,	"textures/blocks/wool_colored_blue.png").setFull3D().setUnlocalizedName("ble.capeGrey").setCreativeTab(tab);
+		cloakPurple = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 5,	"textures/blocks/wool_colored_purple.png").setFull3D().setUnlocalizedName("pur.capeGrey").setCreativeTab(tab);
+		cloakCyan 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 6,	"textures/blocks/wool_colored_cyan.png").setFull3D().setUnlocalizedName("cya.capeGrey").setCreativeTab(tab);
+		cloakSilver = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 7,	"textures/blocks/wool_colored_silver.png").setFull3D().setUnlocalizedName("sil.capeGrey").setCreativeTab(tab);
+		cloakGray 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 8,	"textures/blocks/wool_colored_gray.png").setFull3D().setUnlocalizedName("gra.capeGrey").setCreativeTab(tab);
+		cloakPink	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 9,	"textures/blocks/wool_colored_pink.png").setFull3D().setUnlocalizedName("pin.capeGrey").setCreativeTab(tab);
+		cloakLime 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 10,	"textures/blocks/wool_colored_lime.png").setFull3D().setUnlocalizedName("lim.capeGrey").setCreativeTab(tab);
+		cloakYellow = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 11,	"textures/blocks/wool_colored_yellow.png").setFull3D().setUnlocalizedName("yel.capeGrey").setCreativeTab(tab);
+		cloakLightblue 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 12,	"textures/blocks/wool_colored_light_blue.png").setFull3D().setUnlocalizedName("lig.capeGrey").setCreativeTab(tab);
+		cloakMagenta 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 13,	"textures/blocks/wool_colored_magenta.png").setFull3D().setUnlocalizedName("mag.capeGrey").setCreativeTab(tab);
+		cloakOrange 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 14,	"textures/blocks/wool_colored_orange.png").setFull3D().setUnlocalizedName("ora.capeGrey").setCreativeTab(tab);
+		cloakWhite 		= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 15,	"textures/blocks/wool_colored_white.png").setFull3D().setUnlocalizedName("whi.capeGrey").setCreativeTab(tab);
 
 		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(
 				tab);
@@ -285,10 +299,12 @@ public class RpgInventoryMod {
 
 		allItems = new Item[] { neckgold, neckdia, neckem, necklap,
 				glovesbutter, glovesdia, glovesem, gloveslap, ringgold,
-				ringdia, ringem, ringlap, cloak, cloakI, cloakSub, cloakRed,
-				cloakYellow, cloakGreen, cloakBlue, colmold, ringmold, wantmold };
+				ringdia, ringem, ringlap, colmold, ringmold, wantmold,
+				cloakWhite, cloakBlack,cloakRed,cloakGreen,cloakBrown,cloakBlue,cloakPurple,
+				cloakCyan,cloakSilver,cloakGray,cloakPink,cloakLime,cloakYellow,cloakLightblue,
+				cloakMagenta,cloakOrange,cloakI,		
+		};
 
-		// DONE
 		for (int i = 0; i < allItems.length; i++)
 			if (allItems[i] != null) {
 				String itemName = allItems[i].getUnlocalizedName().substring(
@@ -307,24 +323,6 @@ public class RpgInventoryMod {
 
 			} else
 				System.out.println("Item is null !" + i);
-	}
-
-	@EventHandler
-	public void serverLoad(FMLServerStartingEvent e) {
-		// NetworkRegistry.INSTANCE.newChannel("RpgInv", new
-		// RpgPacketHandler());
-
-	}
-
-	@EventHandler
-	public void serverStarting(FMLServerStartingEvent event) {
-		// TODO get commands back
-
-		// CommandHandler commandManager = (CommandHandler) event.getServer()
-		// .getCommandManager();
-		// commandManager
-		// .registerCommand(new rpgInventory.handlers.CommandPanel());
-		// rpgInventory.handlers.CommandPanel.init();
 	}
 
 	private void setDonators() {

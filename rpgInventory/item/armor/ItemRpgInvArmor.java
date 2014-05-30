@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -36,18 +37,19 @@ public class ItemRpgInvArmor extends Item {
 
 	private ResourceLocation TEXTURE;
 
+	private final int colorState;
 	/**
 	 * second string : name, isn't used.
-	 *
-	 * ItemID ArmorType (aka shield,gloves, cloak, ... )
-	 * the maximum damage this item can take. only used for shields
-	 * name is unused
-	 * location for texture
+	 * @param color is used for cape colors
+	 * @param armorType (shields, gloves,...)
+	 * @param maxDamage only used in shields
+	 * @param resourcelocation for texture. used in rendering. path string
 	 */
-	public ItemRpgInvArmor(int par4, int maxDamage, String name,
+	public ItemRpgInvArmor(int armorType, int maxDamage, int color,
 			String resourcelocation) {
 		super();
-		this.armorType = par4;
+		colorState = color;
+		this.armorType = armorType;
 		this.maxStackSize = 1;
 		this.setCreativeTab(CreativeTabs.tabCombat);
 		this.setMaxDamage(maxDamage);
@@ -111,7 +113,7 @@ public class ItemRpgInvArmor extends Item {
 	 * mods ! If the string is left/set to "none", it will not check for class
 	 * armor and can be used by anyone (like Vanilla Shields)
 	 */
-	public String boundArmorClass() {
+	public String bindShieldToArmorClass() {
 
 		return "none";
 	}
@@ -119,17 +121,11 @@ public class ItemRpgInvArmor extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
-		if (par1ItemStack.getItem() == RpgInventoryMod.cloakRed)
-			return 0xd2120e;
-		if (par1ItemStack.getItem() == RpgInventoryMod.cloakGreen)
-			return 0x0fb15d;
-		if (par1ItemStack.getItem() == RpgInventoryMod.cloakYellow)
-			return 0xf7cd09;
-		if (par1ItemStack.getItem() == RpgInventoryMod.cloakSub)
-			return 0x440001;
-		if (par1ItemStack.getItem() == RpgInventoryMod.cloakBlue)
-			return 0x291ef6;
-
+		
+		if(colorState < 16 && colorState >= 0){
+			return ItemDye.field_150922_c[colorState];
+		}
+		
 		return 0xffffff;
 	}
 

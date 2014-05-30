@@ -13,14 +13,18 @@ public class ItemAddonShields extends ItemRpgInvArmor{
 	private ModelShield ms= new ModelShield();
 	private bookMage bm = new bookMage();
 
-
 	public ItemAddonShields(int par4, int maxDamage, String name,
 			String resourcelocation) {
-		super(par4, maxDamage, name, resourcelocation);
+		super(par4, maxDamage, -1, resourcelocation);
 	}
 
 	@Override
-	public String boundArmorClass() {
+	public String getMantleTexture() {
+		return "subaraki:jewels/talisman.png";
+	}
+	
+	@Override
+	public String bindShieldToArmorClass() {
 		if(this.equals(RpgBaseAddon.berserkerShield))
 			return RpgBaseAddon.CLASSBERSERKER;
 		if(this.equals(RpgBaseAddon.archerShield))
@@ -28,7 +32,7 @@ public class ItemAddonShields extends ItemRpgInvArmor{
 		if(this.equals(RpgBaseAddon.talisman))
 			return RpgBaseAddon.CLASSMAGE;
 
-		return super.boundArmorClass();
+		return super.bindShieldToArmorClass();
 	}
 
 	@Override
@@ -44,7 +48,6 @@ public class ItemAddonShields extends ItemRpgInvArmor{
 
 	@Override
 	public boolean isMantle() {
-		// TODO Auto-generated method stub
 		return this.equals(RpgBaseAddon.talisman);
 	}
 
