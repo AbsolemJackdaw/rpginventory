@@ -91,7 +91,7 @@ public class ItemBeastAxe extends ItemRpgSword {
 					&& world.isRemote
 					&& FMLCommonHandler.instance().getEffectiveSide()
 					.isClient()) {
-				Minecraft mc = Minecraft.getMinecraft();
+				Minecraft.getMinecraft();
 				// Truer Randomization
 				rng = new Random(rng.nextLong() + System.currentTimeMillis());
 				EntityLivingBase el = Targetting.isTargetingLivingEntity(4.0D);
@@ -123,7 +123,7 @@ public class ItemBeastAxe extends ItemRpgSword {
 							out.close();
 						} catch (Exception e) {
 						}
-					} else
+					} else {
 						try{
 							RpgInventoryMod.proxy.spawnCharmParticle(world, el,
 									rng, false);
@@ -137,6 +137,7 @@ public class ItemBeastAxe extends ItemRpgSword {
 						catch(Throwable e){
 
 						}
+					}
 				}
 			}
 		}

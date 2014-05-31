@@ -1,6 +1,5 @@
 package addonMasters.packets;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,17 +17,12 @@ public class RBClientPacketHandler extends RBServerPacketHandler {
 
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
-		ByteBuf buf = event.packet.payload();
+		event.packet.payload();
 
 		World world = p.worldObj;
 
-		int x = (int) p.posX;
-		int y = (int) p.posY;
-		int z = (int) p.posZ;
-
-
 		try {
-			int guiId = dis.readInt();
+			dis.readInt();
 			switch (TELEPORT) {
 			case 14:
 				new PacketTeleport(world, p, dis);
@@ -42,18 +36,18 @@ public class RBClientPacketHandler extends RBServerPacketHandler {
 
 			case STOREPET:
 				//server side
-//				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
-//				if (IPet.playersWithActivePets.containsKey(p.getDisplayName())) {
-//					IPet pet = IPet.playersWithActivePets.get(
-//							p.getDisplayName()).getPet();
-//					if ((pet != null) && !((EntityLiving) pet).isDead) {
-//						inv.setInventorySlotContents(6,
-//								pet.writePetToItemStack());
-//						IPet.playersWithActivePets.remove(p.getDisplayName());
-//						((EntityLiving) pet).setDead();
-//						PacketInventory.sendPacket(p, inv);
-//					}
-//				}
+				//				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+				//				if (IPet.playersWithActivePets.containsKey(p.getDisplayName())) {
+				//					IPet pet = IPet.playersWithActivePets.get(
+				//							p.getDisplayName()).getPet();
+				//					if ((pet != null) && !((EntityLiving) pet).isDead) {
+				//						inv.setInventorySlotContents(6,
+				//								pet.writePetToItemStack());
+				//						IPet.playersWithActivePets.remove(p.getDisplayName());
+				//						((EntityLiving) pet).setDead();
+				//						PacketInventory.sendPacket(p, inv);
+				//					}
+				//				}
 				break;
 			default:
 				break;

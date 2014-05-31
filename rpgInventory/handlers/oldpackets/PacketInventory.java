@@ -24,12 +24,14 @@ public class PacketInventory {
 			ByteBufOutputStream out = new ByteBufOutputStream(buf);
 			out.writeInt(ClientPacketHandler.INVENTORY);
 
-			for (int i = 0; i < inv.getSizeInventory(); i++)
+			for (int i = 0; i < inv.getSizeInventory(); i++) {
 				ByteBufUtils.writeItemStack(buf, inv.armorSlots[i]);
+			}
 
-			if (!player.worldObj.isRemote)
+			if (!player.worldObj.isRemote) {
 				RpgInventoryMod.Channel.sendTo(new FMLProxyPacket(buf,
 						"RpgInv"), player);
+			}
 			out.close();
 		} catch (Exception ex) {
 		}
@@ -46,8 +48,9 @@ public class PacketInventory {
 			out.writeInt(ServerPacketHandler.SMP_INVENTORY_SYNC);
 			out.writeUTF(player.getCommandSenderName());
 
-			for (int i = 0; i < inv.getSizeInventory(); i++)
+			for (int i = 0; i < inv.getSizeInventory(); i++) {
 				ByteBufUtils.writeItemStack(buf, inv.armorSlots[i]);
+			}
 
 			TargetPoint point = new TargetPoint(player.dimension,
 					player.posX, player.posY, player.posZ, 60);

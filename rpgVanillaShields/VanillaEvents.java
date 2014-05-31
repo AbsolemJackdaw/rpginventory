@@ -15,14 +15,16 @@ public class VanillaEvents {
 	public void damageItem(ItemStack item, PlayerRpgInventory inv,
 			EntityPlayer p, int slot, int amount) {
 		if (RpgInventoryMod.developers.contains(p.getDisplayName()
-				.toLowerCase()))
+				.toLowerCase())) {
 			return;
+		}
 		try {
-			if ((item.getItemDamage() + amount) >= item.getMaxDamage())
+			if ((item.getItemDamage() + amount) >= item.getMaxDamage()) {
 				// Trigger item break stuff
 				item = null;
-			else
+			} else {
 				item.damageItem(amount, p);
+			}
 			inv.setInventorySlotContents(slot, item);
 		} catch (Throwable e) {
 		}
@@ -52,17 +54,18 @@ public class VanillaEvents {
 					&& (shield.getItem() instanceof ItemRpgInvShields)) {
 
 				if (RpgInventoryMod.playerClass
-						.contains(RpgVanillaShields.WOODENSHIELD))
+						.contains(RpgVanillaShields.WOODENSHIELD)) {
 					vanillaReduction += 0.27f;
-				else if (RpgInventoryMod.playerClass
-						.contains(RpgVanillaShields.IRONSHIELD))
+				} else if (RpgInventoryMod.playerClass
+						.contains(RpgVanillaShields.IRONSHIELD)) {
 					vanillaReduction += 0.4f;
-				else if (RpgInventoryMod.playerClass
-						.contains(RpgVanillaShields.GOLDENSHIELD))
+				} else if (RpgInventoryMod.playerClass
+						.contains(RpgVanillaShields.GOLDENSHIELD)) {
 					vanillaReduction += 0.7f;
-				else if (RpgInventoryMod.playerClass
-						.contains(RpgVanillaShields.DIAMONDSHIELD))
+				} else if (RpgInventoryMod.playerClass
+						.contains(RpgVanillaShields.DIAMONDSHIELD)) {
 					vanillaReduction += 1.50f;
+				}
 				vanillaReduction += RpgInventoryMod.donators
 						.contains(player.getCommandSenderName()) ? 0.20f
 								: 0;

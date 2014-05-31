@@ -35,18 +35,21 @@ public class PacketMageHeal {
 			if (!RpgInventoryMod.developers.contains(p.getDisplayName()
 					.toLowerCase())) {
 				if ((item == null) || (var3 == null) || (var2 == null)
-						|| (var1 == null) || (var0 == null))
+						|| (var1 == null) || (var0 == null)) {
 					return;
+				}
 				if ((item.getItem() != RpgBaseAddon.staf)
 						|| (var3.getItem() != RpgBaseAddon.magehood)
 						|| (var2.getItem() != RpgBaseAddon.magegown)
 						|| (var1.getItem() != RpgBaseAddon.magepants)
-						|| (var0.getItem() != RpgBaseAddon.mageboots))
+						|| (var0.getItem() != RpgBaseAddon.mageboots)) {
 					return;
+				}
 			}
 			if (!ServerTickHandler.globalCooldownMap.containsKey(p
-					.getDisplayName()))
+					.getDisplayName())) {
 				ServerTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
+			}
 			if (ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				ServerTickHandler.globalCooldownMap.put(p.getDisplayName(),
 						5 * 20);
@@ -61,15 +64,16 @@ public class PacketMageHeal {
 					p.renderBrokenItemStack(item);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else if (!RpgInventoryMod.developers.contains(p
-						.getDisplayName().toLowerCase()))
+						.getDisplayName().toLowerCase())) {
 					item.damageItem(3, p);
+				}
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
 						p.posX - 4.0F, p.posY - 4.0F, p.posZ - 4.0F,
 						p.posX + 4.0F, p.posY + 4.0F, p.posZ + 4.0F);
 				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABB(
 						EntityLivingBase.class, pool);
-				if ((entl != null) && (entl.size() > 0))
-					for (EntityLivingBase el : entl)
+				if ((entl != null) && (entl.size() > 0)) {
+					for (EntityLivingBase el : entl) {
 						if (el != null) {
 							double dist = p.getDistanceSqToEntity(el);
 							double potstrength = 1.0D - (Math.sqrt(dist) / (RpgInventoryMod.donators
@@ -77,14 +81,17 @@ public class PacketMageHeal {
 							Potion.heal.affectEntity(p, el,
 									(RpgInventoryMod.donators.contains(p
 											.getDisplayName()) ? 4 : 2),
-									potstrength);
+											potstrength);
 						}
-			} else
+					}
+				}
+			} else {
 				p.addChatMessage(new ChatComponentText(
 						"You must wait for energy to replenish, left: "
 								+ Math.floor(1 + (ServerTickHandler.globalCooldownMap
 										.get(p.getDisplayName()) / 20))
-								+ " seconds"));
+										+ " seconds"));
+			}
 		}
 	}
 }

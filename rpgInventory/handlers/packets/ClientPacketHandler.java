@@ -25,8 +25,9 @@ public class ClientPacketHandler extends ServerPacketHandler {
 	@SubscribeEvent
 	public void onClientPacket(ClientCustomPacketEvent event) {
 
-		if(!event.packet.channel().equals("RpgInv"))
+		if(!event.packet.channel().equals("RpgInv")) {
 			return;
+		}
 
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
@@ -50,18 +51,20 @@ public class ClientPacketHandler extends ServerPacketHandler {
 			case INVENTORY:
 
 				for (int i = 0; i < PlayerRpgInventory.get(p)
-						.getSizeInventory(); i++)
+						.getSizeInventory(); i++) {
 					PlayerRpgInventory.get(p).setInventorySlotContents(i,
 							ByteBufUtils.readItemStack(buf));
+				}
 				break;
 			case SMP_INVENTORY_SYNC:
 				String otherPlayerName = dis.readUTF();
 				EntityPlayer other = world.getPlayerEntityByName(otherPlayerName);
 
 				for (int i = 0; i < PlayerRpgInventory.get(other)
-						.getSizeInventory(); i++)
+						.getSizeInventory(); i++) {
 					PlayerRpgInventory.get(other).setInventorySlotContents(i,
 							ByteBufUtils.readItemStack(buf));
+				}
 				break;
 
 			default:

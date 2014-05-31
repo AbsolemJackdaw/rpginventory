@@ -15,11 +15,13 @@ public class PlayerRpgContainer extends Container {
 	public PlayerRpgInventory inventory;
 
 	public PlayerRpgContainer(EntityPlayer player, PlayerRpgInventory inv) {
-		if (inv == null)
+		if (inv == null) {
 			inv = PlayerRpgInventory.get(player);
+		}
 
-		if (this.isPlayerNotUsingContainer(player))
+		if (this.isPlayerNotUsingContainer(player)) {
 			this.setPlayerIsPresent(player, true);
+		}
 		this.addSlotToContainer(new SlotRpgArmor(inv, 0, 6, 16, player));// necklace
 		this.addSlotToContainer(new SlotRpgArmor(inv, 1, 6, 37, player));// shield
 		this.addSlotToContainer(new SlotRpgArmor(inv, 2, 82, 16, player));// cloak
@@ -30,15 +32,18 @@ public class PlayerRpgContainer extends Container {
 
 		// ADD THIS FIRST
 		// quickbar inventory
-		for (int var4 = 0; var4 < 9; ++var4)
+		for (int var4 = 0; var4 < 9; ++var4) {
 			this.addSlotToContainer(new Slot(player.inventory, var4,
 					8 + (var4 * 18), 142));
+		}
 		// players inventory
-		for (int var4 = 0; var4 < 3; ++var4)
-			for (int var5 = 0; var5 < 9; ++var5)
+		for (int var4 = 0; var4 < 3; ++var4) {
+			for (int var5 = 0; var5 < 9; ++var5) {
 				this.addSlotToContainer(new Slot(player.inventory,
 						(var5 + ((var4 + 1) * 9)), 8 + (var5 * 18),
 						84 + (var4 * 18)));
+			}
+		}
 		inventory = inv;
 		// Put away pet when gui is opened. This is a nerf and a fix for lag
 		// induced duping.
@@ -58,9 +63,10 @@ public class PlayerRpgContainer extends Container {
 
 		PacketInventory.sendServerPacket(par1EntityPlayer);
 
-		if (!par1EntityPlayer.worldObj.isRemote)
+		if (!par1EntityPlayer.worldObj.isRemote) {
 			PacketInventory.sendPacket((EntityPlayerMP) par1EntityPlayer,
 					this.inventory);
+		}
 
 		super.onContainerClosed(par1EntityPlayer);
 	}
@@ -75,9 +81,10 @@ public class PlayerRpgContainer extends Container {
 			EntityPlayer par4EntityPlayer) {
 		ItemStack rv = super.slotClick(par1, par2, par3, par4EntityPlayer);
 
-		if (!par4EntityPlayer.worldObj.isRemote)
+		if (!par4EntityPlayer.worldObj.isRemote) {
 			PacketInventory.sendPacket((EntityPlayerMP) par4EntityPlayer,
 					this.inventory);
+		}
 		return rv;
 	}
 
@@ -90,32 +97,36 @@ public class PlayerRpgContainer extends Container {
 				ItemRpgInvArmor tmp = (ItemRpgInvArmor) tmp1.getItem();
 				switch (tmp.armorType) {
 				case RpgInventoryMod.ITEMTYPE.NECKLACE:
-					if (((SlotRpgArmor) this.getSlot(0)).getStack() != null)
+					if (((SlotRpgArmor) this.getSlot(0)).getStack() != null) {
 						return null;
+					}
 					player.inventory.setItemStack(player.inventory
 							.getStackInSlot(slotnumber - 7));
 					player.inventory.setInventorySlotContents(slotnumber - 7,
 							null);
 					this.slotClick(0, 0, 0, player);
 				case RpgInventoryMod.ITEMTYPE.SHIELD:
-					if (((SlotRpgArmor) this.getSlot(1)).getStack() != null)
+					if (((SlotRpgArmor) this.getSlot(1)).getStack() != null) {
 						return null;
+					}
 					player.inventory.setItemStack(player.inventory
 							.getStackInSlot(slotnumber - 7));
 					player.inventory.setInventorySlotContents(slotnumber - 7,
 							null);
 					this.slotClick(1, 0, 0, player);
 				case RpgInventoryMod.ITEMTYPE.CLOAK:
-					if (((SlotRpgArmor) this.getSlot(2)).getStack() != null)
+					if (((SlotRpgArmor) this.getSlot(2)).getStack() != null) {
 						return null;
+					}
 					player.inventory.setItemStack(player.inventory
 							.getStackInSlot(slotnumber - 7));
 					player.inventory.setInventorySlotContents(slotnumber - 7,
 							null);
 					this.slotClick(2, 0, 0, player);
 				case RpgInventoryMod.ITEMTYPE.GLOVES:
-					if (((SlotRpgArmor) this.getSlot(3)).getStack() != null)
+					if (((SlotRpgArmor) this.getSlot(3)).getStack() != null) {
 						return null;
+					}
 					player.inventory.setItemStack(player.inventory
 							.getStackInSlot(slotnumber - 7));
 					player.inventory.setInventorySlotContents(slotnumber - 7,
@@ -123,21 +134,25 @@ public class PlayerRpgContainer extends Container {
 					this.slotClick(3, 0, 0, player);
 				case RpgInventoryMod.ITEMTYPE.RING:
 					if ((((SlotRpgArmor) this.getSlot(4)).getStack() != null)
-							&& (((SlotRpgArmor) this.getSlot(5)).getStack() != null))
+							&& (((SlotRpgArmor) this.getSlot(5)).getStack() != null)) {
 						return null;
+					}
 					player.inventory.setItemStack(player.inventory
 							.getStackInSlot(slotnumber - 7));
 					player.inventory.setInventorySlotContents(slotnumber - 7,
 							null);
-					if (((SlotRpgArmor) this.getSlot(4)).getStack() == null)
+					if (((SlotRpgArmor) this.getSlot(4)).getStack() == null) {
 						this.slotClick(4, 0, 0, player);
-					else
+					} else {
 						this.slotClick(5, 0, 0, player);
+					}
 				case RpgInventoryMod.ITEMTYPE.CRYSTAL:
-					if (((SlotRpgArmor) this.getSlot(6)).getStack() != null)
+					if (((SlotRpgArmor) this.getSlot(6)).getStack() != null) {
 						return null;
-					if (tmp1.getItemDamage() == 0)
+					}
+					if (tmp1.getItemDamage() == 0) {
 						return null;
+					}
 
 					player.inventory.setItemStack(player.inventory
 							.getStackInSlot(slotnumber - 7));

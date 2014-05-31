@@ -23,16 +23,18 @@ public class ItemNecroArmor extends AbstractArmor {
 	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
 			int armorSlot) {
 
-		if (stack != null)
+		if (stack != null) {
 			if (stack.getItem() instanceof ItemArmor) {
 
 				int type = ((ItemArmor) stack.getItem()).armorType;
 
-				if ((type == 1) || (type == 3))
+				if ((type == 1) || (type == 3)) {
 					armorModel = RpgDreadAddon.proxy.getArmorModel(0);
-				else
+				} else {
 					armorModel = RpgDreadAddon.proxy.getArmorModel(1);
+				}
 			}
+		}
 	}
 
 	@Override
@@ -41,10 +43,12 @@ public class ItemNecroArmor extends AbstractArmor {
 
 		if ((itemstack.getItem() == RpgDreadAddon.necroHood)
 				|| (itemstack.getItem() == RpgDreadAddon.necroChestplate)
-				|| (itemstack.getItem() == RpgDreadAddon.necroBoots))
+				|| (itemstack.getItem() == RpgDreadAddon.necroBoots)) {
 			return "armor:necro_1.png";
-		if (itemstack.getItem() == RpgDreadAddon.necroLeggings)
+		}
+		if (itemstack.getItem() == RpgDreadAddon.necroLeggings) {
 			return "armor:necro_2.png";
+		}
 		return null;
 	}
 }

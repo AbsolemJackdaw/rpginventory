@@ -23,14 +23,16 @@ public class BaseaddonEventHooks {
 	public void damageItem(ItemStack item, PlayerRpgInventory inv,
 			EntityPlayer p, int slot, int amount) {
 		if (RpgInventoryMod.developers.contains(p.getCommandSenderName()
-				.toLowerCase()))
+				.toLowerCase())) {
 			return;
+		}
 		try {
-			if ((item.getItemDamage() + amount) >= item.getMaxDamage())
+			if ((item.getItemDamage() + amount) >= item.getMaxDamage()) {
 				// Trigger item break stuff
 				item = null;
-			else
+			} else {
 				item.damageItem(amount, p);
+			}
 			inv.setInventorySlotContents(slot, item);
 		} catch (Throwable e) {
 		}
@@ -41,25 +43,30 @@ public class BaseaddonEventHooks {
 		try {
 			/* ADDING EXTRA DAMAGE TO CLASS ARMOR COMBINATIONS */
 			Entity damager = evt.source.getSourceOfDamage();
-			if (damager != null)
+			if (damager != null) {
 				if (damager instanceof EntityPlayer) {
-					float damagebonus = 0.0F;
-					PlayerRpgInventory inv = PlayerRpgInventory
-							.get((EntityPlayer) damager);
+					PlayerRpgInventory
+					.get((EntityPlayer) damager);
 					ItemStack weapon = ((EntityPlayer) damager)
 							.getCurrentEquippedItem();
-					if (weapon != null)
-						if (weapon.getItem() == RpgBaseAddon.hammer)
+					if (weapon != null) {
+						if (weapon.getItem() == RpgBaseAddon.hammer) {
 							if (RpgInventoryMod.playerClass
-									.contains(RpgBaseAddon.CLASSBERSERKER))
+									.contains(RpgBaseAddon.CLASSBERSERKER)) {
 								evt.ammount += 4;
+							}
+						}
+					}
 					if (RpgInventoryMod.playerClass
-							.contains(RpgBaseAddon.CLASSBERSERKER))
+							.contains(RpgBaseAddon.CLASSBERSERKER)) {
 						// hit harder with both hands 'free'
 						if (!RpgInventoryMod.playerClass
-								.contains(RpgBaseAddon.CLASSBERSERKERSHIELD))
+								.contains(RpgBaseAddon.CLASSBERSERKERSHIELD)) {
 							evt.ammount += 2;
+						}
+					}
 				}
+			}
 		} catch (Throwable e) {
 		}
 
@@ -76,24 +83,31 @@ public class BaseaddonEventHooks {
 								.contains(RpgBaseAddon.CLASSMAGESHIELD)) {
 							float damageReduction = 0.20F;
 							EntityLivingBase damagedealer = null;
-							if (evt.source.isMagicDamage())
+							if (evt.source.isMagicDamage()) {
 								damageReduction = 0.50F;
-							else if (evt.source.getSourceOfDamage() != null)
+							} else if (evt.source.getSourceOfDamage() != null) {
 								if (evt.source.isProjectile()) {
-									if (evt.source.getSourceOfDamage() instanceof EntityArrow)
+									if (evt.source.getSourceOfDamage() instanceof EntityArrow) {
 										if (((EntityArrow) evt.source
-												.getSourceOfDamage()).shootingEntity != null)
+												.getSourceOfDamage()).shootingEntity != null) {
 											if (((EntityArrow) evt.source
-													.getSourceOfDamage()).shootingEntity instanceof EntityLivingBase)
+													.getSourceOfDamage()).shootingEntity instanceof EntityLivingBase) {
 												damagedealer = (EntityLivingBase) ((EntityArrow) evt.source
 														.getSourceOfDamage()).shootingEntity;
-									if (evt.source.getSourceOfDamage() instanceof EntityLivingBase)
+											}
+										}
+									}
+									if (evt.source.getSourceOfDamage() instanceof EntityLivingBase) {
 										damagedealer = (EntityLivingBase) evt.source
 												.getSourceOfDamage();
+									}
 								}
-							if (damagedealer != null)
-								if (damagedealer.isEntityUndead())
+							}
+							if (damagedealer != null) {
+								if (damagedealer.isEntityUndead()) {
 									damageReduction = 0.75F;
+								}
+							}
 							evt.ammount -= MathHelper.floor_float((evt.ammount)
 									* damageReduction);
 							damageItem(shield, inv, player, 1, 1);
@@ -102,36 +116,45 @@ public class BaseaddonEventHooks {
 								.contains(RpgBaseAddon.CLASSARCHERSHIELD)) {
 							float damageReduction = 0.25F;
 							EntityLivingBase damagedealer = null;
-							if (evt.source.getSourceOfDamage() != null)
+							if (evt.source.getSourceOfDamage() != null) {
 								if (evt.source.isProjectile()) {
-									if (evt.source.getSourceOfDamage() instanceof EntityArrow)
+									if (evt.source.getSourceOfDamage() instanceof EntityArrow) {
 										if (((EntityArrow) evt.source
-												.getSourceOfDamage()).shootingEntity != null)
+												.getSourceOfDamage()).shootingEntity != null) {
 											if (((EntityArrow) evt.source
 													.getSourceOfDamage()).shootingEntity instanceof EntityLivingBase) {
 												damagedealer = (EntityLivingBase) ((EntityArrow) evt.source
 														.getSourceOfDamage()).shootingEntity;
 												damageReduction = 0.70F;
 											}
-									if (evt.source.getSourceOfDamage() instanceof EntityLivingBase)
+										}
+									}
+									if (evt.source.getSourceOfDamage() instanceof EntityLivingBase) {
 										damagedealer = (EntityLivingBase) evt.source
 												.getSourceOfDamage();
+									}
 								}
-							if (damageReduction < 0.70F)
+							}
+							if (damageReduction < 0.70F) {
 								if (damagedealer != null) {
-									if (damagedealer.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD)
+									if (damagedealer.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD) {
 										damageReduction = 0.40F;
-									if (damagedealer instanceof EntityTameable)
-										if (!damagedealer.isEntityUndead())
+									}
+									if (damagedealer instanceof EntityTameable) {
+										if (!damagedealer.isEntityUndead()) {
 											damageReduction = 0.50F;
+										}
+									}
 								}
-							if (evt.source.isFireDamage())
+							}
+							if (evt.source.isFireDamage()) {
 								evt.ammount += MathHelper
 										.floor_float((evt.ammount) * 0.10F);
-							else
+							} else {
 								evt.ammount -= MathHelper
 										.floor_float((evt.ammount)
 												* damageReduction);
+							}
 							damageItem(shield, inv, player, 1, 1);
 						}
 					} else if (RpgInventoryMod.playerClass
@@ -139,12 +162,13 @@ public class BaseaddonEventHooks {
 						float damageReduction = 0.50F;
 						evt.ammount -= MathHelper.floor_float((evt.ammount)
 								* damageReduction);
-						if (evt.ammount > 1)
+						if (evt.ammount > 1) {
 							// Flat 1 damage absorption on top of resistance if
 							// the damage is greater than 1.
 							// The additional absorbtion alone will never reduce
 							// all damage.
 							evt.ammount -= 1;
+						}
 						damageItem(shield, inv, player, 1, 1);
 					}
 				}
@@ -168,19 +192,20 @@ public class BaseaddonEventHooks {
 
 					/* ==== Something about the archer .__. ==== */
 					if (CommonTickHandler.ArcherRepairTick.containsKey(p
-							.getCommandSenderName()))
+							.getCommandSenderName())) {
 						if (RpgInventoryMod.playerClass
-								.contains(RpgBaseAddon.CLASSARCHER))
+								.contains(RpgBaseAddon.CLASSARCHER)) {
 							p.jumpMovementFactor = 0.09F;
-						else {
+						} else {
 							CommonTickHandler.ArcherRepairTick.remove(p
 									.getCommandSenderName());
 							p.jumpMovementFactor = 0.02F;
 						}
+					}
 
 					ItemStack weapon = p.getCurrentEquippedItem();
-					if (weapon != null)
-						if (weapon.getItem() == RpgBaseAddon.hammer)
+					if (weapon != null) {
+						if (weapon.getItem() == RpgBaseAddon.hammer) {
 							if (RpgInventoryMod.playerClass
 									.contains(RpgBaseAddon.CLASSBERSERKERSHIELD)) {
 								if (((p.getFoodStats().getFoodLevel() < 4) || (p
@@ -209,6 +234,8 @@ public class BaseaddonEventHooks {
 								tmp.remove(Enchantment.knockback.effectId);
 								EnchantmentHelper.setEnchantments(tmp, weapon);
 							}
+						}
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -219,21 +246,23 @@ public class BaseaddonEventHooks {
 				EntityPlayer p = (EntityPlayer) evt.entityLiving;
 				if (p != null) {
 
-					PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+					PlayerRpgInventory.get(p);
 					/* ====ARCHER EFFECTS==== */
 					// doesnt work TODO
 					// needs to be checked if actually works or not
 					float jumpboost = p.jumpMovementFactor;
 					if (RpgInventoryMod.playerClass
-							.contains(RpgBaseAddon.CLASSARCHER))
+							.contains(RpgBaseAddon.CLASSARCHER)) {
 						jumpboost *= RpgInventoryMod.donators.contains(p
 								.getCommandSenderName()) ? 3.0f : 2.0F;
+					}
 					p.jumpMovementFactor = jumpboost;
 
 					/* ====MAGE FALLDAMAGE NEGATION==== */
 					if (RpgInventoryMod.playerClass
-							.contains(RpgBaseAddon.CLASSMAGESHIELD))
+							.contains(RpgBaseAddon.CLASSMAGESHIELD)) {
 						p.fallDistance = 0;
+					}
 				}
 			}
 		} catch (Exception e) {

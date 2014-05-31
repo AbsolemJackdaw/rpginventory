@@ -29,18 +29,20 @@ public class BowRender extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			if (((Entity) data[1] instanceof EntityPlayer)
 					&& (((EntityPlayer) data[1]).getCurrentEquippedItem() != null)) {
-				if (usingItem < 5)
+				if (usingItem < 5) {
 					mc.renderEngine.bindTexture(new ResourceLocation(
 							"subaraki:weapons/bow.png"));
-				else if ((usingItem >= 5) && (usingItem < 25))
+				} else if ((usingItem >= 5) && (usingItem < 25)) {
 					mc.renderEngine.bindTexture(new ResourceLocation(
 							"subaraki:weapons/bow2.png"));
-				else if (usingItem >= 25)
+				} else if (usingItem >= 25) {
 					mc.renderEngine.bindTexture(new ResourceLocation(
 							"subaraki:weapons/bow3.png"));
-			} else
+				}
+			} else {
 				mc.renderEngine.bindTexture(new ResourceLocation(
 						"subaraki:weapons/bow.png"));
+			}
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(150F, 1.0f, 0.0f, 0.0f);
 			GL11.glTranslatef(0F, 0.65F, -0.7F);
@@ -52,16 +54,18 @@ public class BowRender extends RpgItemRenderer {
 
 		case EQUIPPED_FIRST_PERSON:
 			GL11.glPushMatrix();
-			if (((EntityPlayer) data[1]).getCurrentEquippedItem() != null)
-				if (usingItem < 5)
+			if (((EntityPlayer) data[1]).getCurrentEquippedItem() != null) {
+				if (usingItem < 5) {
 					mc.renderEngine.bindTexture(new ResourceLocation(
 							"subaraki:weapons/bow.png"));
-				else if ((usingItem >= 5) && (usingItem < 25))
+				} else if ((usingItem >= 5) && (usingItem < 25)) {
 					mc.renderEngine.bindTexture(new ResourceLocation(
 							"subaraki:weapons/bow2.png"));
-				else if (usingItem >= 25)
+				} else if (usingItem >= 25) {
 					mc.renderEngine.bindTexture(new ResourceLocation(
 							"subaraki:weapons/bow3.png"));
+				}
+			}
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(140F, 1.0f, 0.0f, 0.0f);
 			GL11.glTranslatef(0F, -0.6F, -0.8F);

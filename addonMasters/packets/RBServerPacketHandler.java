@@ -1,6 +1,5 @@
 package addonMasters.packets;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -26,13 +25,9 @@ public class RBServerPacketHandler {
 	public void onServerPacket(ServerCustomPacketEvent event) {
 		EntityPlayerMP p = ((NetHandlerPlayServer) event.handler).playerEntity;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
-		ByteBuf buf = event.packet.payload();
+		event.packet.payload();
 
 		World world = p.worldObj;
-
-		int x = (int) p.posX;
-		int y = (int) p.posY;
-		int z = (int) p.posZ;
 
 		try {
 			int guiId = dis.readInt();

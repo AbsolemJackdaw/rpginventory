@@ -18,7 +18,7 @@ public class WeaponAbility implements ISpecialAbility {
 
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 
-		if(RpgUtility.canSpecial(p, RpgMastersAddon.daggers))
+		if(RpgUtility.canSpecial(p, RpgMastersAddon.daggers)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -27,6 +27,7 @@ public class WeaponAbility implements ISpecialAbility {
 				out.close();
 			} catch (Exception e) {
 			}
+		}
 	}
 
 }

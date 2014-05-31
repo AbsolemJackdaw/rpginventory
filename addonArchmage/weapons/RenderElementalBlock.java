@@ -110,7 +110,7 @@ public class RenderElementalBlock extends Render {
 	public void renderBlockEntity(EntityElementalBlock theEntity, double par2,
 			double par4, double par6, float par8, float par9) {
 
-		Block b = Block.getBlockById((new Random()).nextInt(2) + 1);
+		Block.getBlockById((new Random()).nextInt(2) + 1);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) par2, (float) par4, (float) par6);
 		GL11.glRotatef((new Random()).nextInt(360), 1, 1, 1);
@@ -122,7 +122,7 @@ public class RenderElementalBlock extends Render {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		Random rnd = new Random();
+		new Random();
 		switch (theEntity.type) {
 		case 1:
 			Color clr = getColor(2, 0, 0, 3, 0, 0, (float) theEntity.step / 5);
@@ -156,8 +156,9 @@ public class RenderElementalBlock extends Render {
 		default:
 			break;
 		}
-		if (theEntity.step > 1000)
+		if (theEntity.step > 1000) {
 			theEntity.step = 0;
+		}
 		Render.renderAABB(AxisAlignedBB.getBoundingBox(-0.5, -0.5, -0.5, 0.5,
 				0.5, 0.5));
 		GL11.glPopMatrix();

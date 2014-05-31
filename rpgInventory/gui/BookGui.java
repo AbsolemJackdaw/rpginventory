@@ -12,16 +12,15 @@ public class BookGui extends GuiScreen {
 	public final int xSizeOfTexture = 166;
 
 	public final int ySizeOfTexture = 181;
-	private EntityPlayer player;
-
 	public BookGui(EntityPlayer player) {
 	}
 
 	@Override
 	public void actionPerformed(GuiButton button) {
 
-		if (button.id == 0)
+		if (button.id == 0) {
 			this.mc.thePlayer.closeScreen();
+		}
 	}
 
 	@Override

@@ -53,13 +53,16 @@ public class RpgUtility {
 	 * int time : how long it burns
 	 * */
 	public static void addFuel(ItemStack is, int time){
-		if(is != null)
+		if(is != null) {
 			if(is.getItem() != null){
-				if(is.getItem() instanceof Item)
+				if(is.getItem() instanceof Item) {
 					TEMold.addFuelItem(is.getItem(), time);
-				if(Block.getBlockFromItem(is.getItem())!= null)
+				}
+				if(Block.getBlockFromItem(is.getItem())!= null) {
 					TEMold.addFuelBlock(Block.getBlockFromItem(is.getItem()), time);
+				}
 			}
+		}
 	}
 
 	@Deprecated
@@ -73,16 +76,17 @@ public class RpgUtility {
 		ItemStack stack = p.getCurrentEquippedItem();
 		if(stack != null){
 			Item i = stack.getItem();
-			if(ISpecialAbility.abilityMap.containsKey(i) && i.equals(specialWeapon))
+			if(ISpecialAbility.abilityMap.containsKey(i) && i.equals(specialWeapon)) {
 				return true;
+			}
 		}
 		return false;
 	}
 
 	/**use this to check if the player can launch the special attack.*/
-//	public static boolean canSpecial(Item specialWeapon){
-//		return canSpecial(null, specialWeapon);
-//	}
+	//	public static boolean canSpecial(Item specialWeapon){
+	//		return canSpecial(null, specialWeapon);
+	//	}
 
 	public static PlayerRpgInventory getInventory(EntityPlayer p){
 		return PlayerRpgInventory.get(p);
@@ -90,8 +94,9 @@ public class RpgUtility {
 
 	/**Register the weapon you want to use your special ability with here. If you don't, your ISpecalAbility will not be fired*/
 	public static void registerAbilityWeapon(Item item){
-		if(item == null)
+		if(item == null) {
 			return;
+		}
 		ISpecialAbility.abilityMap.put(item, 0);
 	}
 
@@ -104,10 +109,12 @@ public class RpgUtility {
 	 * case 1 : PacketWeapon2();
 	 * */
 	public static void registerAbilityWeapon(Item item, int packetId){
-		if(item == null)
+		if(item == null) {
 			return;
-		if(ISpecialAbility.abilityMap.containsKey(item))
+		}
+		if(ISpecialAbility.abilityMap.containsKey(item)) {
 			return;
+		}
 		ISpecialAbility.abilityMap.put(item, packetId);
 	}
 

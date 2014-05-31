@@ -51,7 +51,7 @@ public class BlockForge extends BlockContainer {
 			Block b, int par6) {
 
 		TEMold temold = (TEMold) par1World.getTileEntity(par2, par3, par4);
-		if (temold != null)
+		if (temold != null) {
 			for (int var8 = 0; var8 < 5; ++var8) {
 				ItemStack item = temold.getStackInSlot(var8);
 				if (item != null) {
@@ -60,17 +60,19 @@ public class BlockForge extends BlockContainer {
 					float var12 = (this.temoldRand.nextFloat() * 0.8F) + 0.1F;
 					while (item.stackSize > 0) {
 						int var13 = this.temoldRand.nextInt(21) + 10;
-						if (var13 > item.stackSize)
+						if (var13 > item.stackSize) {
 							var13 = item.stackSize;
+						}
 						item.stackSize -= var13;
 						EntityItem var14 = new EntityItem(par1World, par2
 								+ var10, par3 + var11, par4 + var12,
 								new ItemStack(item.getItem(), var13,
 										item.getItemDamage()));
-						if (item.hasTagCompound())
+						if (item.hasTagCompound()) {
 							var14.getEntityItem().setTagCompound(
 									(NBTTagCompound) item.getTagCompound()
-											.copy());
+									.copy());
+						}
 						float var15 = 0.05F;
 						var14.motionX = (float) this.temoldRand.nextGaussian()
 								* var15;
@@ -81,6 +83,7 @@ public class BlockForge extends BlockContainer {
 					}
 				}
 			}
+		}
 
 		super.breakBlock(par1World, par2, par3, par4, b, par6);
 	}
@@ -225,17 +228,21 @@ public class BlockForge extends BlockContainer {
 			Block block3 = par1World.getBlock(par2 + 1, par3, par4);
 			byte b0 = 3;
 
-			if (block.func_149730_j() && !block1.func_149730_j())
+			if (block.func_149730_j() && !block1.func_149730_j()) {
 				b0 = 3;
+			}
 
-			if (block1.func_149730_j() && !block.func_149730_j())
+			if (block1.func_149730_j() && !block.func_149730_j()) {
 				b0 = 2;
+			}
 
-			if (block2.func_149730_j() && !block3.func_149730_j())
+			if (block2.func_149730_j() && !block3.func_149730_j()) {
 				b0 = 5;
+			}
 
-			if (block3.func_149730_j() && !block2.func_149730_j())
+			if (block3.func_149730_j() && !block2.func_149730_j()) {
 				b0 = 4;
+			}
 
 			par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
 		}

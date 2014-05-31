@@ -57,8 +57,9 @@ public class EntityPetXP extends EntityXPOrb {
 	@Override
 	public void onUpdate() {
 		this.xpColor = 0xFF2222;
-		if (this.field_70532_c > 0)
+		if (this.field_70532_c > 0) {
 			--this.field_70532_c;
+		}
 
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
@@ -82,9 +83,10 @@ public class EntityPetXP extends EntityXPOrb {
 
 		if ((this.closestPet == null)
 				|| (((EntityLiving) this.closestPet)
-						.getDistanceSqToEntity(this) > (var1 * var1)))
+						.getDistanceSqToEntity(this) > (var1 * var1))) {
 			this.closestPet = getClosestPet(worldObj, this.posX, this.posY,
 					this.posZ);
+		}
 
 		if (this.closestPet != null) {
 			double var3 = (((EntityLiving) this.closestPet).posX - this.posX)
@@ -115,21 +117,24 @@ public class EntityPetXP extends EntityXPOrb {
 					MathHelper.floor_double(this.boundingBox.minY) - 1,
 					MathHelper.floor_double(this.posZ));
 
-			if (var4 != Blocks.air)
+			if (var4 != Blocks.air) {
 				var13 = var4.slipperiness * 0.98F;
+			}
 		}
 
 		this.motionX *= var13;
 		this.motionY *= 0.9800000190734863D;
 		this.motionZ *= var13;
 
-		if (this.onGround)
+		if (this.onGround) {
 			this.motionY *= -0.8999999761581421D;
+		}
 
 		++this.xpColor;
 		++this.xpOrbAge;
 
-		if (this.xpOrbAge >= 6000)
+		if (this.xpOrbAge >= 6000) {
 			this.setDead();
+		}
 	}
 }

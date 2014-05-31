@@ -57,7 +57,6 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	int sprintToggleTimer;
 	boolean jumping = false;
 	public double speedBonus;
-	private boolean checked = false;
 	private int xpThrottle = 5;
 	int healthregen = 0;
 	int levelcheck = 0;
@@ -104,9 +103,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		if (owner != null) {
 			try {
 				if (is != null) {
-					if (is.getTagCompound().hasKey("RPGPetInfo"))
+					if (is.getTagCompound().hasKey("RPGPetInfo")) {
 						readEntityFromNBT(is.getTagCompound().getCompoundTag(
 								"RPGPetInfo"));
+					}
 					if (is.getTagCompound().hasKey("PetLevel")) {
 						int level = is.getTagCompound().getInteger("PetLevel");
 						setSize(getBaseWidth() + ((level / 200) * 2.0F),
@@ -120,8 +120,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			IPet.playersWithActivePets.put(owner.getDisplayName(), new PetID(
 					this.dimension, this.getEntityId()));
 		}
-		if (!sizeSet)
+		if (!sizeSet) {
 			setSize(getBaseWidth(), getBaseHeight());
+		}
 	}
 
 	// CONSTRUCTORS END
@@ -143,8 +144,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			exp = 0;
 			this.experience = 0.0F;
 			this.experienceTotal = 0;
-		} else
+		} else {
 			heal(200);
+		}
 
 		if ((numLevels > 0) && ((exp % 5) == 0)
 				&& (this.prevTicksExisted < (this.ticksExisted - 100.0F))) {
@@ -153,8 +155,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 					var2 * 0.75F, 1.0F);
 			this.prevTicksExisted = this.ticksExisted;
 		}
-		if (!worldObj.isRemote)
+		if (!worldObj.isRemote) {
 			this.setLevel(exp);
+		}
 
 	}
 
@@ -206,8 +209,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		if (this.getHealth() <= 0)
+		if (this.getHealth() <= 0) {
 			this.heal(1);
+		}
 		this.dataWatcher.addObject(LEVELID, 0);
 		this.dataWatcher.addObject(NAME, getDefaultName());
 		// this.dataWatcher.addObject(HP, this.health);
@@ -259,11 +263,12 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	@Override
 	public EntityLivingBase getOwner() {
 		EntityPlayer player;
-		if (worldObj.isRemote)
+		if (worldObj.isRemote) {
 			player = this.worldObj.getPlayerEntityByName(this.getOwnerName());
-		else
+		} else {
 			player = MinecraftServer.getServer().getConfigurationManager()
-			.getPlayerForUsername(this.getOwnerName());
+					.getPlayerForUsername(this.getOwnerName());
+		}
 		return player;
 	}
 
@@ -293,8 +298,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			if (this.getLevel() < 200) {
 				int var2 = Integer.MAX_VALUE - this.experienceTotal;
 
-				if (amount > var2)
+				if (amount > var2) {
 					amount = var2;
+				}
 				this.experience += (float) amount / (float) this.xpBarCap();
 
 				for (this.experienceTotal += amount; this.experience >= 1.0F; this.experience /= this
@@ -307,8 +313,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 						String.valueOf(this.experience));
 				this.dataWatcher.updateObject(TOTALXP, this.experienceTotal);
 			}
-			if (this.getLevel() >= 200)
+			if (this.getLevel() >= 200) {
 				this.dataWatcher.updateObject(LEVELID, 200);
+			}
 		}
 	}
 
@@ -317,8 +324,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		try {
 			if (((EntityPlayer) par1Entity).isRiding()
 					&& this.getOwnerName().equals(
-							((EntityPlayer) par1Entity).getDisplayName()))
+							((EntityPlayer) par1Entity).getDisplayName())) {
 				return true;
+			}
 		} catch (Throwable ex) {
 		}
 
@@ -331,34 +339,39 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		if (!this.isDead()) {
 			ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
 			if (var2 != null) {
-				if (this.getHealth() < this.getMaxHealth())
+				if (this.getHealth() < this.getMaxHealth()) {
 					if (var2.getItem() instanceof ItemFood) {
 						ItemFood var3 = (ItemFood) var2.getItem();
 						// This is confusing, people dont know pet is saddled.
 						// if (!par1EntityPlayer.capabilities.isCreativeMode) {
-						if (--var2.stackSize == 0)
+						if (--var2.stackSize == 0) {
 							par1EntityPlayer.inventory
 							.setInventorySlotContents(
 									par1EntityPlayer.inventory.currentItem,
 									(ItemStack) null);
+						}
 						// }
-						if (!worldObj.isRemote)
+						if (!worldObj.isRemote) {
 							this.heal(var3.func_150905_g(var2));
+						}
 						return true;
 					}
-				if (!getSaddled() && (this.getLevel() >= 50))
+				}
+				if (!getSaddled() && (this.getLevel() >= 50)) {
 					if (var2.getItem() == Items.saddle) {
 						this.setSaddled(true);
 						// Confusing
 						// if (!par1EntityPlayer.capabilities.isCreativeMode) {
 						--var2.stackSize;
 						// }
-						if (var2.stackSize <= 0)
+						if (var2.stackSize <= 0) {
 							par1EntityPlayer.inventory
 							.setInventorySlotContents(
 									par1EntityPlayer.inventory.currentItem,
 									(ItemStack) null);
+						}
 					}
+				}
 				if ((par1EntityPlayer.getCurrentEquippedItem() != null)
 						&& (par1EntityPlayer.getCurrentEquippedItem().getItem() == RpgMastersAddon.petCandy)) {
 					addExperienceLevel(1);
@@ -396,7 +409,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		if (onGround && (jumpTicks == 0)) {
 			super.jump();
 			if (flag)
+			{
 				motionY += (jumpHeight() / 200) * getLevel(); // makes mount
+			}
 			// jump higher.
 			// Do not use
 			// big values!
@@ -419,15 +434,20 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			 * initiated
 			 */
 			if (onGround && !isSprinting() && !isInWeb)
+			{
 				if (sprintToggleTimer == 0)
+				{
 					sprintToggleTimer = 7; // ... reset...
+				}
+			}
 
 			Block j = worldObj.getBlock(MathHelper.floor_double(posX),
 					MathHelper.floor_double(boundingBox.minY) - 1,
 					MathHelper.floor_double(posZ));
 			float f = 1;
-			if (j == Blocks.ice)
+			if (j == Blocks.ice) {
 				f = j.slipperiness * 0.5F;
+			}
 			// This is currently bugged so temporarily disabled.
 			speedBonus = 1F;
 			if (isSprinting() && onGround) { // if sprinting on the ground
@@ -443,19 +463,24 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			// super.moveEntity(d, d1, d2);
 			setSprinting(entityRider.isSprinting());
 			setSneaking(entityRider.isSneaking());
-			if ((isSprinting() && inWater) || (isSprinting() && isInWeb))
+			if ((isSprinting() && inWater) || (isSprinting() && isInWeb)) {
 				setSprinting(false);
+			}
 			// Autojump
-			if (isCollidedHorizontally)
+			if (isCollidedHorizontally) {
 				jump(false);
+			}
 			// Initiate jumping while ridden via keybind
 			if (((EntityPlayer) riddenByEntity).isAirBorne)
+			{
 				// preset 'jump'
 				// input.
 				jump(true); // this method is seen overridden in here
+			}
 			super.moveEntity(motionX, motionY, motionZ);
-		} else
+		} else {
 			super.moveEntity(d, d1, d2);
+		}
 	}
 
 	@Override
@@ -485,8 +510,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			double d1 = this.posZ - this.prevPosZ;
 			float f4 = MathHelper.sqrt_double((d0 * d0) + (d1 * d1)) * 4.0F;
 
-			if (f4 > 1.0F)
+			if (f4 > 1.0F) {
 				f4 = 1.0F;
+			}
 
 			this.limbSwingAmount += (f4 - this.limbSwingAmount) * 0.4F;
 			this.limbSwing += this.limbSwingAmount;
@@ -508,8 +534,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		int j = MathHelper.floor_double(posY);
 		int k = MathHelper.floor_double(posZ);
 
-		if (worldObj.getBlock(i, j - 1, k) == Blocks.ice)
+		if (worldObj.getBlock(i, j - 1, k) == Blocks.ice) {
 			return true;
+		}
 		return false;
 	}
 
@@ -527,8 +554,8 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	public void onLivingUpdate() {
 
 		EntityPlayer player = (EntityPlayer) getOwner();
-		if(!RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER))
-			if (!worldObj.isRemote)
+		if(!RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER)) {
+			if (!worldObj.isRemote) {
 				if (((player == null))) {
 					try {
 						PlayerRpgInventory inv = PlayerRpgInventory.get(player);
@@ -538,12 +565,15 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 					this.setDead();
 					return;
 				}
+			}
+		}
 
-		if (!worldObj.isRemote)
+		if (!worldObj.isRemote) {
 			if ((!IPet.playersWithActivePets.containsKey(this.getOwnerName()) || (this.dimension != getOwner().dimension))) {
 				this.setDead();
 				return;
 			}
+		}
 
 		if (healthregen-- <= 0) {
 			this.heal(1);
@@ -569,20 +599,24 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 					+ ((levelcheck / 200.0F) * (1.0F + getBaseHeight())));
 		}
 
-		if (sprintToggleTimer > 0)
+		if (sprintToggleTimer > 0) {
 			// activated.
 			sprintToggleTimer--;
-		if (jumpTicks > 0)
+		}
+		if (jumpTicks > 0) {
 			jumpTicks--;
+		}
 
 		List<EntityPetXP> xps = worldObj.getEntitiesWithinAABB(EntityPetXP.class, boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
-		if ((xps != null) && (xps.size() > 0))
-			if (--xpThrottle <= 0)
+		if ((xps != null) && (xps.size() > 0)) {
+			if (--xpThrottle <= 0) {
 				for (EntityPetXP xp : xps) {
 					xpThrottle = 5;
 					this.giveXP(xp.getXpValue());
 					xp.setDead();
 				}
+			}
+		}
 
 
 		List<EntityXPOrb> a = this.worldObj.getEntitiesWithinAABB(EntityXPOrb.class,  boundingBox.copy().expand(0.5D, 0.5D, 0.5D));
@@ -596,9 +630,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			int partialXP = EntityXPOrb.getXPSplit(totalXP);
 			totalXP -= partialXP;
 			giveXP(partialXP);
-//			this.worldObj.spawnEntityInWorld(new EntityPetXP(
-//					this.worldObj, this.posX, this.posY,
-//					this.posZ, partialXP));
+			//			this.worldObj.spawnEntityInWorld(new EntityPetXP(
+			//					this.worldObj, this.posX, this.posY,
+			//					this.posZ, partialXP));
 		}
 		super.onLivingUpdate();
 
@@ -664,8 +698,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 
 	@Override
 	public void setName(String name) {
-		if (!worldObj.isRemote)
+		if (!worldObj.isRemote) {
 			this.dataWatcher.updateObject(NAME, name);
+		}
 	}
 
 	/**
@@ -673,9 +708,10 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	 */
 	@Override
 	public void setSaddled(boolean par1) {
-		if (!worldObj.isRemote)
+		if (!worldObj.isRemote) {
 			this.dataWatcher.updateObject(SADDLE,
 					Byte.valueOf(par1 ? (byte) 1 : (byte) 0));
+		}
 	}
 
 	@Override

@@ -69,9 +69,11 @@ public class ClientTickHandler /* implements ITickHandler */{
 						}
 					}
 				}
-			} else
+			} else {
 				added = false;
-		} else
+			}
+		} else {
 			added = false;
+		}
 	}
 }

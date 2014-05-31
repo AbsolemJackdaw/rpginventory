@@ -28,15 +28,16 @@ public class KeyHandler implements ISpecialAbility {
 		Entity Return = null;
 		float par1 = 1.0F;
 		try {
-			if (mc.renderViewEntity != null)
+			if (mc.renderViewEntity != null) {
 				if (mc.theWorld != null) {
 					double var2 = distance;
 					mc.objectMouseOver = mc.renderViewEntity.rayTrace(distance,
 							1);
 					double var4 = var2;
 					Vec3 var6 = mc.renderViewEntity.getPosition(1);
-					if (mc.objectMouseOver != null)
+					if (mc.objectMouseOver != null) {
 						var4 = mc.objectMouseOver.hitVec.distanceTo(var6);
+					}
 					Vec3 var7 = mc.renderViewEntity.getLook(par1);
 					Vec3 var8 = var6.addVector(var7.xCoord * var2, var7.yCoord
 							* var2, var7.zCoord * var2);
@@ -73,11 +74,13 @@ public class KeyHandler implements ISpecialAbility {
 								}
 							}
 							if ((Return != null)
-									&& (Return instanceof EntityLivingBase))
+									&& (Return instanceof EntityLivingBase)) {
 								return (EntityLivingBase) Return;
+							}
 						}
 					}
 				}
+			}
 		} catch (Throwable e) {
 		}
 
@@ -89,7 +92,7 @@ public class KeyHandler implements ISpecialAbility {
 
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.hammer))
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.hammer)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -99,8 +102,9 @@ public class KeyHandler implements ISpecialAbility {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
 
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.wand))
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.wand)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -112,9 +116,10 @@ public class KeyHandler implements ISpecialAbility {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
 
 
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.staf))
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.staf)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -126,8 +131,9 @@ public class KeyHandler implements ISpecialAbility {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
 
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.elfbow))
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.elfbow)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -146,9 +152,10 @@ public class KeyHandler implements ISpecialAbility {
 					RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
 					out.close();
 				}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

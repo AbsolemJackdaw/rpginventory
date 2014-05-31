@@ -48,13 +48,14 @@ public class ItemStaf extends ItemRpgSword {
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World par2World,
 			EntityPlayer p) {
-		PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+		PlayerRpgInventory.get(p);
 
 		// exception for archmage : this should be evaded any time, but I don't
 		// have a choice here.
 		if (RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSMAGE)
-				|| RpgInventoryMod.playerClass.contains("archMage"))
+				|| RpgInventoryMod.playerClass.contains("archMage")) {
 			p.setItemInUse(is, this.getMaxItemUseDuration(is));
+		}
 		return is;
 	}
 
@@ -70,22 +71,23 @@ public class ItemStaf extends ItemRpgSword {
 				double var4 = p.worldObj.rand.nextGaussian() * 0.02D;
 				double var6 = p.worldObj.rand.nextGaussian() * 0.02D;
 				p.worldObj
-						.spawnParticle(
-								"heart",
-								(p.posX + (p.worldObj.rand.nextFloat()
-										* p.width * 2.0F))
-										- p.width,
+				.spawnParticle(
+						"heart",
+						(p.posX + (p.worldObj.rand.nextFloat()
+								* p.width * 2.0F))
+								- p.width,
 								p.posY
-										+ 0.5D
-										+ (p.worldObj.rand.nextFloat() * p.height),
+								+ 0.5D
+								+ (p.worldObj.rand.nextFloat() * p.height),
 								(p.posZ + (p.worldObj.rand.nextFloat()
 										* p.width * 2.0F))
 										- p.width, var2, var4, var6);
 				int heal = time / 50;
-				if ((p.getHealth() + heal) <= p.getMaxHealth())
+				if ((p.getHealth() + heal) <= p.getMaxHealth()) {
 					p.heal(heal);
-				else
+				} else {
 					p.setHealth(p.getMaxHealth());
+				}
 			}
 			if (time > 100) {
 				// p.spawnExplosionParticle();
@@ -93,22 +95,23 @@ public class ItemStaf extends ItemRpgSword {
 				double var4 = p.worldObj.rand.nextGaussian() * 0.02D;
 				double var6 = p.worldObj.rand.nextGaussian() * 0.02D;
 				p.worldObj
-						.spawnParticle(
-								"heart",
-								(p.posX + (p.worldObj.rand.nextFloat()
-										* p.width * 2.0F))
-										- p.width,
+				.spawnParticle(
+						"heart",
+						(p.posX + (p.worldObj.rand.nextFloat()
+								* p.width * 2.0F))
+								- p.width,
 								p.posY
-										+ 0.5D
-										+ (p.worldObj.rand.nextFloat() * p.height),
+								+ 0.5D
+								+ (p.worldObj.rand.nextFloat() * p.height),
 								(p.posZ + (p.worldObj.rand.nextFloat()
 										* p.width * 2.0F))
 										- p.width, var2, var4, var6);
 				int heal = time / 30;
-				if ((p.getHealth() + heal) <= p.getMaxHealth())
+				if ((p.getHealth() + heal) <= p.getMaxHealth()) {
 					p.heal(heal);
-				else
+				} else {
 					p.setHealth(p.getMaxHealth());
+				}
 			}
 		}
 	}

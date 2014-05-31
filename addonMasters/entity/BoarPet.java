@@ -50,9 +50,9 @@ public class BoarPet extends BMPetImpl {
 		// 7 Base Damage
 		// 30 Damage at level 200
 		return (7 + MathHelper.floor_double(((getLevel()) * /*
-															 * Fix for math
-															 * errors
-															 */1.0D) / 9.52D));
+		 * Fix for math
+		 * errors
+		 */1.0D) / 9.52D));
 	}
 
 	@Override
@@ -104,10 +104,11 @@ public class BoarPet extends BMPetImpl {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (getLevel() <= 200)
+		if (getLevel() <= 200) {
 			petSize = 0.5F + (((getLevel()) / 200.0F) * 1.5F);
-		else
+		} else {
 			petSize = 2.0F;
+		}
 	}
 
 	// @Override
@@ -121,10 +122,10 @@ public class BoarPet extends BMPetImpl {
 		super.onUpdate();
 		if (previousLevel < getLevel()) {
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-					.setBaseValue(
-							20D + MathHelper.floor_double((getLevel()) / 2.5D));
+			.setBaseValue(
+					20D + MathHelper.floor_double((getLevel()) / 2.5D));
 			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-					.setBaseValue(getLevel() / 600D);
+			.setBaseValue(getLevel() / 600D);
 
 			previousLevel = getLevel();
 		}

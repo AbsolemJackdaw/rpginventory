@@ -6,10 +6,8 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayer;
 import rpgInventory.gui.rpginv.RpgGui;
 
-import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -21,14 +19,12 @@ public class ClientTickHandler {
 
 	@SubscribeEvent
 	public void tickEnd(TickEvent.ClientTickEvent ev) {
-		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		// Put away pet when gui is opened. This is a nerf and a fix for lag
 		// induced duping.
 		try {
 			if (Minecraft.getMinecraft().currentScreen instanceof RpgGui) {
 
-				ByteArrayDataOutput out = ByteStreams.newDataOutput();
-				// out.writeInt(RpgRBPacketHandler.STOREPET);
+				ByteStreams.newDataOutput();
 
 				// TODO sendpacket
 				// PacketDispatcher.sendPacketToServer(new
@@ -71,12 +67,12 @@ public class ClientTickHandler {
 											& ~Modifier.PROTECTED);
 									currentButtons = (List) f.get(gui);
 
-									for (int i = 0; i < currentButtons.size(); i++)
-										if (currentButtons.get(i) instanceof ButtonPetGui)
+									for (int i = 0; i < currentButtons.size(); i++) {
+										if (currentButtons.get(i) instanceof ButtonPetGui) {
 											return;
+										}
+									}
 
-									int offsetx = 80;
-									int offsety = 93;
 									int posX = (Minecraft.getMinecraft().currentScreen.width) / 2;
 									int posY = (Minecraft.getMinecraft().currentScreen.height) / 2;
 									currentButtons.add(new ButtonPetGui(
@@ -86,16 +82,19 @@ public class ClientTickHandler {
 								}
 							} catch (Exception e) {
 								System.err
-										.println("Severe error, please report this to the mod author:");
+								.println("Severe error, please report this to the mod author:");
 								System.err.println(e);
 							}
 						}
 					}
-				} else
+				} else {
 					added = false;
-			} else
+				}
+			}
+			else {
 				added = false;
-			// }
+				// }
+			}
 
 		} catch (Exception e) {
 

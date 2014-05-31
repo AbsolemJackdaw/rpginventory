@@ -17,7 +17,7 @@ public class DreadEventHooks {
 		try {
 			if (evt.entityLiving instanceof EntityPlayer) {
 				EntityPlayer p = (EntityPlayer) evt.entityLiving;
-				if (p != null)
+				if (p != null) {
 					// TODO place potion effects under addonDread
 					if ((p.getActivePotionEffects() != null)
 							&& (p.getActivePotionEffects().size() > 0)) {
@@ -35,19 +35,23 @@ public class DreadEventHooks {
 								CustomPotionList.remove(p
 										.getCommandSenderName());
 							} else if (!CustomPotionList.containsKey(p
-									.getCommandSenderName()))
+									.getCommandSenderName())) {
 								CustomPotionList.put(p.getCommandSenderName(),
 										decompose.getDuration());
-						} else if (machicism != null)
+							}
+						} else if (machicism != null) {
 							if (machicism.getDuration() == 0) {
 								p.removePotionEffect(RpgDreadAddon.masochismPotion.id);
 								CustomPotionList.remove(p
 										.getCommandSenderName());
 							} else if (!CustomPotionList.containsKey(p
-									.getCommandSenderName()))
+									.getCommandSenderName())) {
 								CustomPotionList.put(p.getCommandSenderName(),
 										machicism.getDuration());
+							}
+						}
 					}
+				}
 			}
 		} catch (Throwable e) {
 

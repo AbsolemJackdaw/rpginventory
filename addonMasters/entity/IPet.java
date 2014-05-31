@@ -33,11 +33,13 @@ public interface IPet {
 			try {
 				World world = MinecraftServer.getServer()
 						.worldServerForDimension(DIM);
-				if (world == null)
+				if (world == null) {
 					return null;
+				}
 				Entity test = world.getEntityByID(EID);
-				if ((test == null) || !(test instanceof IPet))
+				if ((test == null) || !(test instanceof IPet)) {
 					return null;
+				}
 				return (IPet) test;
 			} catch (Throwable ex) {
 				return null;

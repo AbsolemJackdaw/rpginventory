@@ -77,10 +77,12 @@ public class PetGui extends GuiScreen {
 
 	@Override
 	protected void actionPerformed(GuiButton guibutton) {
-		if (guibutton.id == SUBMIT_BUTTON)
+		if (guibutton.id == SUBMIT_BUTTON) {
 			PetName = textfield.getText();
-		if (guibutton.id == CLOSE_BUTTON)
+		}
+		if (guibutton.id == CLOSE_BUTTON) {
 			this.mc.thePlayer.closeScreen();
+		}
 		if (guibutton.id == BACK_BUTTON) {
 			this.mc.thePlayer.closeScreen();
 
@@ -93,14 +95,14 @@ public class PetGui extends GuiScreen {
 			} catch (Exception e) {
 			}
 		}
-		if (guibutton.id == IMBUE_BUTTON)
+		if (guibutton.id == IMBUE_BUTTON) {
 			// levelInfo = "Imbue to next level : " + (PetLevel/2) +
 			// " Player Levels";
-			if ((playerLevel < ((PetLevel / 2) + 1)) && (PetLevel < 200))
+			if ((playerLevel < ((PetLevel / 2) + 1)) && (PetLevel < 200)) {
 				levelInfo = "You need "
 						+ (MathHelper.floor_float(PetLevel / 2) + 1)
 						+ " levels to level your pet.";
-			else if (PetLevel >= 200) {
+			} else if (PetLevel >= 200) {
 				PetLevel = 200;
 				levelInfo = "Pet has reached maximum level.";
 
@@ -123,6 +125,7 @@ public class PetGui extends GuiScreen {
 				petLevelsAdded++;
 				playerLevelsLost += (Math.floor(PetLevel) / 2.0F) + 1.0F;
 			}
+		}
 	}
 
 	@Override
@@ -137,7 +140,7 @@ public class PetGui extends GuiScreen {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		drawDefaultBackground();
 
-//
+		//
 		try {
 			this.mc.renderEngine.bindTexture(new ResourceLocation(
 					"rpginventorymod:textures/gui/petgui.png"));
@@ -163,20 +166,20 @@ public class PetGui extends GuiScreen {
 
 		drawString(fontRendererObj, info, (this.width / 2) - 85,
 				(this.height / 2) + 45, 0xff00ff);
-//		// Shadow
+		//		// Shadow
 		fontRendererObj.drawSplitString(saddle, ((this.width / 2) - 80) + 1,
 				(this.height / 2) + 55 + 1, xSizeOfTexture - 9, 0x444444);
-//		// text
+		//		// text
 		fontRendererObj.drawSplitString(saddle, (this.width / 2) - 80,
 				(this.height / 2) + 55, xSizeOfTexture - 10, 0xffffff);
-//		// drawString(fontRendererObj, saddle, this.width / 2 - 80, this.height
-//		// / 2
-//		// + 55, 0xffffff);
-//		// Shadow
+		//		// drawString(fontRendererObj, saddle, this.width / 2 - 80, this.height
+		//		// / 2
+		//		// + 55, 0xffffff);
+		//		// Shadow
 		fontRendererObj.drawSplitString(levelInfo, (this.width / 2) + 95 + 1,
 				(this.height / 2) + 65 + 1,
 				(this.width - ((this.width / 2) + 95)) + 1, 0x444444);
-//		// text
+		//		// text
 		fontRendererObj.drawSplitString(levelInfo, (this.width / 2) + 95,
 				(this.height / 2) + 65, this.width - ((this.width / 2) + 95),
 				0xffffff);
@@ -230,8 +233,9 @@ public class PetGui extends GuiScreen {
 				20, "Imbue"));
 
 		NBTTagCompound tags = petCrystal.getTagCompound();
-		if (tags == null)
+		if (tags == null) {
 			petCrystal.setTagCompound(new NBTTagCompound());
+		}
 		try {
 			PetLevel = (short) tags.getInteger("PetLevel");
 		} catch (NullPointerException ex) {
@@ -258,24 +262,31 @@ public class PetGui extends GuiScreen {
 			PetName = petCrystal.getDisplayName();
 		}
 
-		if (petAtk == 0)
+		if (petAtk == 0) {
 			petAtk = 4;
-		if (totalHP == 0)
+		}
+		if (totalHP == 0) {
 			currentHP = totalHP = 18;
-		if (currentHP == 0)
+		}
+		if (currentHP == 0) {
 			currentHP = 1;
-		if ((PetName == null) || PetName.isEmpty())
+		}
+		if ((PetName == null) || PetName.isEmpty()) {
 			PetName = petCrystal.getDisplayName();
+		}
 		if (PetLevel >= 50) {
 			if (tags.hasKey("isSaddled")) {
-				if (tags.getBoolean("isSaddled") == true)
+				if (tags.getBoolean("isSaddled") == true) {
 					saddle = PetName + " is saddled.";
-				else
+				} else {
 					saddle = PetName + " is not saddled.";
-			} else
+				}
+			} else {
 				saddle = PetName + " is not saddled.";
-		} else
+			}
+		} else {
 			saddle = PetName + " needs lv50 to be ridden.";
+		}
 
 		textfield = new GuiTextField(fontRendererObj, posX + 70, posY + 14,
 				100, 20);

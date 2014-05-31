@@ -57,15 +57,16 @@ public class RPGKeyHandler implements ISpecialAbility{
 		Entity Return = null;
 		float par1 = 1.0F;
 		try {
-			if (mc.renderViewEntity != null)
+			if (mc.renderViewEntity != null) {
 				if (mc.theWorld != null) {
 					double var2 = distance;
 					mc.objectMouseOver = mc.renderViewEntity.rayTrace(distance,
 							1);
 					double var4 = var2;
 					Vec3 var6 = mc.renderViewEntity.getPosition(1);
-					if (mc.objectMouseOver != null)
+					if (mc.objectMouseOver != null) {
 						var4 = mc.objectMouseOver.hitVec.distanceTo(var6);
+					}
 					Vec3 var7 = mc.renderViewEntity.getLook(par1);
 					Vec3 var8 = var6.addVector(var7.xCoord * var2, var7.yCoord
 							* var2, var7.zCoord * var2);
@@ -102,11 +103,13 @@ public class RPGKeyHandler implements ISpecialAbility{
 								}
 							}
 							if ((Return != null)
-									&& (Return instanceof EntityLivingBase))
+									&& (Return instanceof EntityLivingBase)) {
 								return (EntityLivingBase) Return;
+							}
 						}
 					}
 				}
+			}
 		} catch (Throwable e) {
 		}
 
@@ -122,13 +125,16 @@ public class RPGKeyHandler implements ISpecialAbility{
 			if (keySpecial.isPressed()) {
 
 				ItemStack item = mc.thePlayer.getCurrentEquippedItem();
-				if ((guiscreen == null) && !(item == null))
-					for(Item i : abilityMap.keySet())
+				if ((guiscreen == null) && !(item == null)) {
+					for(Item i : abilityMap.keySet()) {
 						if(item.getItem().equals(i)){
 							specialAbility(item);
-							for(int c =0; c < RpgUtility.allAbilities.size(); c++)
+							for(int c =0; c < RpgUtility.allAbilities.size(); c++) {
 								RpgUtility.allAbilities.get(c).specialAbility(item);
+							}
 						}
+					}
+				}
 			} else if (keyInventory.isPressed()) {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);

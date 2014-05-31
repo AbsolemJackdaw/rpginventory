@@ -33,18 +33,21 @@ public class ButtonPetGui extends GuiButton {
 	@Override
 	public boolean mousePressed(Minecraft par1Minecraft, int par2, int par3) {
 
-		if ((par2 >= this.xPosition) && (par2 <= (this.xPosition + this.width)))
+		if ((par2 >= this.xPosition) && (par2 <= (this.xPosition + this.width))) {
 			if ((par3 >= this.yPosition)
 					&& (par3 <= (this.yPosition + this.height))) {
 				EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 				PlayerRpgContainer container = ((PlayerRpgContainer) ((RpgGui) gui).inventorySlots);
 				// todo send packet
-				if (container.inventory.getCrystal() != null)
-					if (container.inventory.getCrystal().getItemDamage() > 0)
+				if (container.inventory.getCrystal() != null) {
+					if (container.inventory.getCrystal().getItemDamage() > 0) {
 						RpgMastersAddon.proxy.openGUI(p, container.inventory);
+					}
+				}
 
 				return false;
 			}
+		}
 		return super.mousePressed(par1Minecraft, par2, par3);
 	}
 

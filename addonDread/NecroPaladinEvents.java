@@ -20,32 +20,35 @@ public class NecroPaladinEvents {
 		try {
 			/* ADDING EXTRA DAMAGE TO CLASS ARMOR COMBINATIONS */
 			Entity damager = evt.source.getSourceOfDamage();
-			if (damager != null)
+			if (damager != null) {
 				if (damager instanceof EntityPlayer) {
-					float damagebonus = 0.0F;
-					PlayerRpgInventory inv = PlayerRpgInventory
-							.get((EntityPlayer) damager);
+					PlayerRpgInventory
+					.get((EntityPlayer) damager);
 					ItemStack weapon = ((EntityPlayer) damager)
 							.getCurrentEquippedItem();
 					if (RpgInventoryMod.playerClass
 							.contains(RpgDreadAddon.CLASSPALADIN)) {
 						if (damager.worldObj.isDaytime()) {
 							evt.ammount += 2;
-							if (weapon != null)
-								if (weapon.getItem() == RpgDreadAddon.pala_weapon)
+							if (weapon != null) {
+								if (weapon.getItem() == RpgDreadAddon.pala_weapon) {
 									if (RpgInventoryMod.playerClass
-											.contains(RpgDreadAddon.CLASSPALADIN))
+											.contains(RpgDreadAddon.CLASSPALADIN)) {
 										evt.ammount += 2;
+									}
+								}
+							}
 						}
 						// paladin heals himself when hitting undead
 						if (evt.entityLiving.isEntityUndead()) {
 							if (((EntityPlayer) damager).getHealth() < ((EntityPlayer) damager)
-									.getMaxHealth())
+									.getMaxHealth()) {
 								((EntityPlayer) damager)
-										.heal(RpgInventoryMod.donators
-												.contains(((EntityPlayer) damager)
-														.getDisplayName()) ? 2
-												: 1);
+								.heal(RpgInventoryMod.donators
+										.contains(((EntityPlayer) damager)
+												.getDisplayName()) ? 2
+														: 1);
+							}
 							evt.ammount += 3;
 							evt.entityLiving.setFire(RpgInventoryMod.donators
 									.contains(((EntityPlayer) damager)
@@ -53,13 +56,16 @@ public class NecroPaladinEvents {
 						}
 					}
 					if (RpgInventoryMod.playerClass
-							.contains(RpgDreadAddon.CLASSNECRO))
-						if (!damager.worldObj.isDaytime())
+							.contains(RpgDreadAddon.CLASSNECRO)) {
+						if (!damager.worldObj.isDaytime()) {
 							evt.ammount += 3;
+						}
+					}
 				}
+			}
 		} catch (Exception e) {
 			FMLLog.getLogger()
-					.info("Couldnt add extra damage to paladin weapon. report to mod author.");
+			.info("Couldnt add extra damage to paladin weapon. report to mod author.");
 		}
 	}
 
@@ -71,7 +77,6 @@ public class NecroPaladinEvents {
 
 			double mX = p.motionX;
 			double mZ = p.motionZ;
-			double speedBoost = 0;
 			try {
 				if (RpgInventoryMod.playerClass
 						.contains(RpgDreadAddon.CLASSPALADIN)) {
@@ -92,29 +97,29 @@ public class NecroPaladinEvents {
 					if (p.getActivePotionEffect(Potion.regeneration) != null) {
 						p.addPotionEffect(new PotionEffect(
 								RpgDreadAddon.decomposePotion.id, p
-										.getActivePotionEffect(
-												Potion.regeneration)
+								.getActivePotionEffect(
+										Potion.regeneration)
 										.getDuration() * 2, p
 										.getActivePotionEffect(
 												Potion.regeneration)
-										.getAmplifier()));
+												.getAmplifier()));
 						p.removePotionEffect(Potion.regeneration.id);
 					}
 					if (p.getActivePotionEffect(Potion.poison) != null) {
 						p.addPotionEffect(new PotionEffect(
 								RpgDreadAddon.masochismPotion.id, p
-										.getActivePotionEffect(Potion.poison)
-										.getDuration() / 2, p
-										.getActivePotionEffect(Potion.poison)
-										.getAmplifier()));
+								.getActivePotionEffect(Potion.poison)
+								.getDuration() / 2, p
+								.getActivePotionEffect(Potion.poison)
+								.getAmplifier()));
 						p.removePotionEffect(Potion.poison.id);
 					}
 				}
 			} catch (Exception e) {
 
 				System.out
-						.println("Fack. I crashed. Something went wrong with them potions ! "
-								+ this.getClass().getName());
+				.println("Fack. I crashed. Something went wrong with them potions ! "
+						+ this.getClass().getName());
 			}
 		}
 	}

@@ -18,4 +18,4 @@ public interface ISpecialAbility {
 	 * */
 	public void specialAbility(ItemStack item);
 
- }
+}

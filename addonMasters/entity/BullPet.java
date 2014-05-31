@@ -48,9 +48,9 @@ public class BullPet extends BMPetImpl {
 		// 4 Base Damage
 		// 15 Damage at level 200
 		return (4 + MathHelper.floor_double(((getLevel()) * /*
-															 * Fix for math
-															 * errors
-															 */1.0D) / 18.18D));
+		 * Fix for math
+		 * errors
+		 */1.0D) / 18.18D));
 	}
 
 	// @Override TODO
@@ -108,12 +108,13 @@ public class BullPet extends BMPetImpl {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (getLevel() <= 200)
+		if (getLevel() <= 200) {
 			petSize = 0.5F + (((getLevel()) / 200.0F) * 1.5F);
-		else
+		} else {
 			petSize = 2.0F;
+		}
 
-		if (dataWatcher.getWatchableObjectInt(LEVELID) == 200)
+		if (dataWatcher.getWatchableObjectInt(LEVELID) == 200) {
 			// this.worldObj.spawnParticle("flame", this.posX +
 			// (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY +
 			// this.rand.nextDouble() * (double)this.height, this.posZ +
@@ -121,6 +122,7 @@ public class BullPet extends BMPetImpl {
 			// 0.0D);
 			this.worldObj.spawnParticle("flame", this.posX + 3, this.posY + 2d,
 					this.posZ, 0.0D, 0.0D, 0.0D);
+		}
 	}
 
 	@Override
@@ -128,12 +130,12 @@ public class BullPet extends BMPetImpl {
 		super.onUpdate();
 		if (previousLevel < getLevel()) {
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-					.setBaseValue(
-							30D + MathHelper
-									.floor_double((getLevel()) / 1.538D));
+			.setBaseValue(
+					30D + MathHelper
+					.floor_double((getLevel()) / 1.538D));
 
 			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-					.setBaseValue(0.05D + (getLevel() / 500D));
+			.setBaseValue(0.05D + (getLevel() / 500D));
 
 			previousLevel = getLevel();
 		}

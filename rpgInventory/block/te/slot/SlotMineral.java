@@ -19,9 +19,11 @@ public class SlotMineral extends Slot {
 	public static void addAllowedItem(Item item){
 
 		//If the item is already in the list, no need to put it in there again
-		for(Item i : allItems)
-			if(i.equals(item))
+		for(Item i : allItems) {
+			if(i.equals(item)) {
 				return;
+			}
+		}
 		allItems.add(item);
 	}
 
@@ -37,13 +39,17 @@ public class SlotMineral extends Slot {
 	public boolean isItemValid(ItemStack par1ItemStack) {
 		if (par1ItemStack != null) {
 
-			if (par1ItemStack.getItem() == Items.dye)
-				if (par1ItemStack.getItemDamage() == 4)
+			if (par1ItemStack.getItem() == Items.dye) {
+				if (par1ItemStack.getItemDamage() == 4) {
 					return true;
+				}
+			}
 
-			for(Item i : allItems)
-				if(par1ItemStack.getItem().equals(i))
+			for(Item i : allItems) {
+				if(par1ItemStack.getItem().equals(i)) {
 					return true;
+				}
+			}
 		}
 		return false;
 	}

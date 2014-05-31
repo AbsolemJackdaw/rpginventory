@@ -1,6 +1,5 @@
 package rpgInventory.handlers.packets;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 
 import java.io.IOException;
@@ -23,12 +22,13 @@ public class ServerPacketHandler {
 	@SubscribeEvent
 	public void onServerPacket(ServerCustomPacketEvent event) {
 
-		if(!event.packet.channel().equals("RpgInv"))
+		if(!event.packet.channel().equals("RpgInv")) {
 			return;
+		}
 
 		EntityPlayerMP p = ((NetHandlerPlayServer) event.handler).playerEntity;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
-		ByteBuf buf = event.packet.payload();
+		event.packet.payload();
 
 		World world = p.worldObj;
 
@@ -46,12 +46,12 @@ public class ServerPacketHandler {
 				break;
 
 			case SMP_INVENTORY_SYNC:
-//				String otherPlayerName = dis.readUTF();
-//				EntityPlayer other = world.getPlayerEntityByName(otherPlayerName);
-//				for (int i = 0; i < PlayerRpgInventory.get(other)
-//						.getSizeInventory(); i++)
-//					PlayerRpgInventory.get(other).setInventorySlotContents(i,
-//							ByteBufUtils.readItemStack(buf));
+				//				String otherPlayerName = dis.readUTF();
+				//				EntityPlayer other = world.getPlayerEntityByName(otherPlayerName);
+				//				for (int i = 0; i < PlayerRpgInventory.get(other)
+				//						.getSizeInventory(); i++)
+				//					PlayerRpgInventory.get(other).setInventorySlotContents(i,
+				//							ByteBufUtils.readItemStack(buf));
 
 				break;
 
@@ -63,7 +63,7 @@ public class ServerPacketHandler {
 			}
 			dis.close();
 		} catch (IOException e) {
-//			e.printStackTrace();
+			//			e.printStackTrace();
 			System.out.println("Server packet exception");
 		}
 	}

@@ -90,19 +90,23 @@ public class ItemRpgInvArmor extends Item {
 
 		if ((stack.getItem() == RpgInventoryMod.ringgold)
 				|| (stack.getItem() == RpgInventoryMod.glovesbutter)
-				|| (stack.getItem() == RpgInventoryMod.neckgold))
+				|| (stack.getItem() == RpgInventoryMod.neckgold)) {
 			list.add(StatCollector.translateToLocal("Speed + 12.5%"));
+		}
 
 		if ((stack.getItem() == RpgInventoryMod.ringlap)
 				|| (stack.getItem() == RpgInventoryMod.gloveslap)
 				|| (stack.getItem() == RpgInventoryMod.necklap)) {
 			list.add(StatCollector.translateToLocal("Strength"));
-			if (stack.getItem() == RpgInventoryMod.ringlap)
+			if (stack.getItem() == RpgInventoryMod.ringlap) {
 				list.add(StatCollector.translateToLocal("+0.5"));
-			if (stack.getItem() == RpgInventoryMod.gloveslap)
+			}
+			if (stack.getItem() == RpgInventoryMod.gloveslap) {
 				list.add(StatCollector.translateToLocal("+1"));
-			if (stack.getItem() == RpgInventoryMod.necklap)
+			}
+			if (stack.getItem() == RpgInventoryMod.necklap) {
 				list.add(StatCollector.translateToLocal("+1.5"));
+			}
 			list.add(StatCollector
 					.translateToLocal("-1 Dmg on Held Weapon every 20s"));
 		}
@@ -121,11 +125,11 @@ public class ItemRpgInvArmor extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
-		
-		if(colorState < 16 && colorState >= 0){
+
+		if((colorState < 16) && (colorState >= 0)){
 			return ItemDye.field_150922_c[colorState];
 		}
-		
+
 		return 0xffffff;
 	}
 
@@ -157,8 +161,9 @@ public class ItemRpgInvArmor extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack) {
-		if (par1ItemStack.getItem() == RpgInventoryMod.cloakI)
+		if (par1ItemStack.getItem() == RpgInventoryMod.cloakI) {
 			return true;
+		}
 		return false;
 	}
 
@@ -172,14 +177,16 @@ public class ItemRpgInvArmor extends Item {
 
 		PlayerRpgInventory inv = PlayerRpgInventory.get(par3EntityPlayer);
 
-		for (int i = 0; i < inv.getSizeInventory(); i++)
-			if (inv.getStackInSlot(i) == null)
+		for (int i = 0; i < inv.getSizeInventory(); i++) {
+			if (inv.getStackInSlot(i) == null) {
 				if (inv.isItemValidForSlot(i, par1ItemStack)) {
 					inv.setInventorySlotContents(i, par1ItemStack);
 					par3EntityPlayer.destroyCurrentEquippedItem();
 					break;
 					// break, or right-clicking a ring will set both ring slots.
 				}
+			}
+		}
 
 		return super.onItemRightClick(par1ItemStack, par2World,
 				par3EntityPlayer);

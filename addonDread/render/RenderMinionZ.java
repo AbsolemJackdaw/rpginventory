@@ -23,8 +23,6 @@ public class RenderMinionZ extends RenderBiped {
 	protected ModelBiped field_82435_l;
 	protected ModelBiped field_82436_m;
 	protected ModelBiped field_82433_n;
-	private int field_82431_q = 1;
-
 	public RenderMinionZ() {
 		super(new ModelZombie(), 0.5F, 1.0F);
 		this.field_82434_o = this.modelBipedMain;

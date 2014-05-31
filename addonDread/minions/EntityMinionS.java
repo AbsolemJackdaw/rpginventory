@@ -33,7 +33,7 @@ import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
 
 public class EntityMinionS extends EntityTameable implements IRangedAttackMob,
-		IMob, IMinion {
+IMob, IMinion {
 
 	private EntityPlayer player;
 	public boolean invulnerable = false;
@@ -49,7 +49,7 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob,
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		// Follow around the owner
 		this.tasks
-				.addTask(2, new EntityAIFollowOwner(this, 0.32f, 15.0F, 2.0F));
+		.addTask(2, new EntityAIFollowOwner(this, 0.32f, 15.0F, 2.0F));
 		// allows the minion to walk around a bit and attack aggressives that
 		// get too close.
 		this.tasks.addTask(3, new EntityAIWander(this, 0.32f));
@@ -96,13 +96,15 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob,
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this,
 				EntityLiving.class, 0, true, false,
 				new CustomMinionEntitySelector(player)));
-		if (!MinionRegistry.playerMinions.containsKey(player.getDisplayName()))
+		if (!MinionRegistry.playerMinions.containsKey(player.getDisplayName())) {
 			MinionRegistry.playerMinions.put(player.getDisplayName(),
 					new ArrayList<IMinion>());
+		}
 		List<IMinion> list = MinionRegistry.playerMinions.get(player
 				.getDisplayName());
-		if (!list.contains(this))
+		if (!list.contains(this)) {
 			list.add(this);
+		}
 	}
 
 	@Override
@@ -142,8 +144,9 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob,
 				PathEntity var2 = this.worldObj.getPathEntityToEntity(this,
 						this.player, 16.0F, true, false, false, true);
 				this.setPathToEntity(var2);
-			} else
+			} else {
 				this.setPathToEntity((PathEntity) null);
+			}
 		}
 	}
 
@@ -169,11 +172,12 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob,
 	@Override
 	public void Harvest() {
 		this.damageEntity(DamageSource.magic, this.getHealth());
-		if ((player.getHealth() + 2) <= player.getMaxHealth())
+		if ((player.getHealth() + 2) <= player.getMaxHealth()) {
 			player.heal(RpgInventoryMod.donators.contains(getMaster()
 					.getDisplayName()) ? 2 : 1);
-		else
+		} else {
 			player.setHealth(player.getMaxHealth());
+		}
 	}
 
 	@Override
@@ -188,14 +192,16 @@ public class EntityMinionS extends EntityTameable implements IRangedAttackMob,
 
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
-		if (player != null)
+		if (player != null) {
 			if (MinionRegistry.playerMinions.containsKey(player
 					.getDisplayName())) {
 				List<IMinion> list = MinionRegistry.playerMinions.get(player
 						.getDisplayName());
-				if (list.contains(this))
+				if (list.contains(this)) {
 					list.remove(this);
+				}
 			}
+		}
 		super.onDeath(par1DamageSource);
 	}
 

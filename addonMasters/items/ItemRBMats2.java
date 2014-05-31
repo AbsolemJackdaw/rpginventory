@@ -26,10 +26,10 @@ public class ItemRBMats2 extends Item {
 		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 		ItemStack stack = inv.getCrystal();
 
-		if (!world.isRemote && (player.ridingEntity == null) )
-			if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER))
+		if (!world.isRemote && (player.ridingEntity == null) ) {
+			if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER)) {
 				try {
-					if (stack != null)
+					if (stack != null) {
 						// Pet is in the world.
 						if (IPet.playersWithActivePets.containsKey(player
 								.getDisplayName())) {
@@ -62,13 +62,15 @@ public class ItemRBMats2 extends Item {
 											.getInteger("PetLevel"));
 									Boar.setHealth(stack.stackTagCompound
 											.getFloat("PetHealth"));
-									if (Boar.getHealth() <= 0)
+									if (Boar.getHealth() <= 0) {
 										Boar.setHealth(1);
+									}
 								} catch (Throwable ex) {
 
 								}
-								if(!world.isRemote)
+								if(!world.isRemote) {
 									world.spawnEntityInWorld(Boar);
+								}
 								break;
 							case 2:
 								SpiderPet spider = new SpiderPet(world, player,	stack);
@@ -81,11 +83,13 @@ public class ItemRBMats2 extends Item {
 									spider.setName(stack.stackTagCompound.getString("PetName"));
 									spider.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
 									spider.setHealth(stack.stackTagCompound.getFloat("PetHealth"));
-									if (spider.getHealth() <= 0)
+									if (spider.getHealth() <= 0) {
 										spider.setHealth(1);
+									}
 								}
-								if(!world.isRemote)
+								if(!world.isRemote) {
 									world.spawnEntityInWorld(spider);
+								}
 
 								break;
 							case 3:
@@ -100,19 +104,24 @@ public class ItemRBMats2 extends Item {
 											.getInteger("PetLevel"));
 									bull.setHealth(stack.stackTagCompound
 											.getFloat("PetHealth"));
-									if (bull.getHealth() <= 0)
+									if (bull.getHealth() <= 0) {
 										bull.setHealth(1);
+									}
 								} catch (Throwable ex) {
 								}
-								if(!world.isRemote)
+								if(!world.isRemote) {
 									world.spawnEntityInWorld(bull);
+								}
 								break;
 							}
 							inv.setInventorySlotContents(6, stack);
 						}
+					}
 				} catch (Throwable ex) {
 					ex.printStackTrace();
 				}
+			}
+		}
 		return whistle;
 
 	}

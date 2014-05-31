@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -14,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
@@ -96,7 +94,7 @@ public class ItemMageSphere extends ItemRpgWeapon {
 			if (item.equals(RpgBaseAddon.magehood)
 					&& item1.equals(RpgBaseAddon.magegown)
 					&& item2.equals(RpgBaseAddon.magepants)
-					&& item3.equals(RpgBaseAddon.mageboots))
+					&& item3.equals(RpgBaseAddon.mageboots)) {
 				if (par3EntityPlayer.inventory.hasItem(Items.blaze_powder)
 						|| RpgInventoryMod.donators.contains(par3EntityPlayer
 								.getCommandSenderName())) {
@@ -111,10 +109,12 @@ public class ItemMageSphere extends ItemRpgWeapon {
 					ball.accelerationY = look.yCoord * 0.1;
 					ball.accelerationZ = look.zCoord * 0.1;
 
-					if (!par2World.isRemote)
+					if (!par2World.isRemote) {
 						par2World.spawnEntityInWorld(ball);
+					}
 					par1ItemStack.damageItem(5, par3EntityPlayer);
 				}
+			}
 		}
 		return par1ItemStack;
 	}
@@ -142,8 +142,8 @@ public class ItemMageSphere extends ItemRpgWeapon {
 
 				if ((RpgConfig.instance.useSpell == true)
 						&& par2EntityPlayer.inventory
-								.hasItem(Items.glowstone_dust)
-						&& par2EntityPlayer.isSneaking())
+						.hasItem(Items.glowstone_dust)
+						&& par2EntityPlayer.isSneaking()) {
 					if (par3World.isDaytime()) {
 						par3World.setWorldTime(13000);
 						par1ItemStack.damageItem(1, par2EntityPlayer);
@@ -151,6 +151,7 @@ public class ItemMageSphere extends ItemRpgWeapon {
 						par3World.setWorldTime(300);
 						par1ItemStack.damageItem(1, par2EntityPlayer);
 					}
+				}
 
 				if (RpgConfig.instance.useSpell == false) {
 					// TODO
@@ -159,37 +160,44 @@ public class ItemMageSphere extends ItemRpgWeapon {
 				}
 
 				if (par2EntityPlayer.inventory.hasItem(Items.speckled_melon)
-						&& par2EntityPlayer.isSneaking())
+						&& par2EntityPlayer.isSneaking()) {
 					if (!par3World.isRemote) {
 						par2EntityPlayer.inventory
-								.consumeInventoryItem(Items.speckled_melon);
+						.consumeInventoryItem(Items.speckled_melon);
 						par2EntityPlayer.addPotionEffect(new PotionEffect(
 								Potion.regeneration.id, 200, 0));
 					}
+				}
 
 				if (par2EntityPlayer.inventory.hasItem(Items.gold_ingot)) {
 					int var1 = (int) par2EntityPlayer.posX;
 					int var2 = (int) par2EntityPlayer.posY;
 					int var3 = (int) par2EntityPlayer.posZ;
-					Block var13 = par3World.getBlock(par4, par5, par6);
+					par3World.getBlock(par4, par5, par6);
 
 					for (int x = 0; x < 1; x++) {
 
 						Block var12 = par3World.getBlock(par4, par5, par6);
 
-						if (par5 > var2)
+						if (par5 > var2) {
 							par3World.getBlock(par4, par5, par6);
+						}
 
-						if (par5 < var2)
+						if (par5 < var2) {
 							par3World.getBlock(par4, par5, par6);
-						if ((par4 < var1) && (par6 == var3) && (par5 == var2))
+						}
+						if ((par4 < var1) && (par6 == var3) && (par5 == var2)) {
 							par3World.getBlock(par4 - x, par5, par6);
-						if ((par4 > var1) && (par6 == var3) && (par5 == var2))
+						}
+						if ((par4 > var1) && (par6 == var3) && (par5 == var2)) {
 							par3World.getBlock(par4 + x, par5, par6);
-						if ((par6 < var3) && (par5 == var2))
+						}
+						if ((par6 < var3) && (par5 == var2)) {
 							par3World.getBlock(par4, par5, par6 - x);
-						if ((par6 > var3) && (par5 == var2))
+						}
+						if ((par6 > var3) && (par5 == var2)) {
 							par3World.getBlock(par4, par5, par6 + x);
+						}
 
 						if ((var12 == Blocks.iron_ore)
 								|| (var12 == Blocks.coal_ore)
@@ -202,9 +210,9 @@ public class ItemMageSphere extends ItemRpgWeapon {
 							par3World.setBlock(par4, par5, par6,
 									Blocks.lapis_block);
 							par1ItemStack
-									.damageItem(
-											RpgInventoryMod.donators.contains(par2EntityPlayer
-													.getCommandSenderName()) ? 50
+							.damageItem(
+									RpgInventoryMod.donators.contains(par2EntityPlayer
+											.getCommandSenderName()) ? 50
 													: 151, par2EntityPlayer);
 						}
 
@@ -213,31 +221,5 @@ public class ItemMageSphere extends ItemRpgWeapon {
 			}
 		}
 		return false;
-	}
-
-	private void setThrowableHeading(EntityLargeFireball ball, double par1,
-			double par3, double par5, float par7, float par8) {
-		float f2 = MathHelper.sqrt_double((par1 * par1) + (par3 * par3)
-				+ (par5 * par5));
-		par1 /= f2;
-		par3 /= f2;
-		par5 /= f2;
-		par1 += rand.nextGaussian() * (rand.nextBoolean() ? -1 : 1)
-				* 0.007499999832361937D * par8;
-		par3 += rand.nextGaussian() * (rand.nextBoolean() ? -1 : 1)
-				* 0.007499999832361937D * par8;
-		par5 += rand.nextGaussian() * (rand.nextBoolean() ? -1 : 1)
-				* 0.007499999832361937D * par8;
-		par1 *= par7;
-		par3 *= par7;
-		par5 *= par7;
-		ball.motionX = par1;
-		ball.motionY = par3;
-		ball.motionZ = par5;
-		float f3 = MathHelper.sqrt_double((par1 * par1) + (par5 * par5));
-		ball.prevRotationYaw = ball.rotationYaw = (float) ((Math.atan2(par1,
-				par5) * 180.0D) / Math.PI);
-		ball.prevRotationPitch = ball.rotationPitch = (float) ((Math.atan2(
-				par3, f3) * 180.0D) / Math.PI);
 	}
 }

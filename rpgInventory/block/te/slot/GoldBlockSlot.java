@@ -18,9 +18,11 @@ public class GoldBlockSlot extends Slot {
 	private static ArrayList<Item> allBlocks = new ArrayList<Item>();
 
 	public static void addCatalist(Item b){
-		for(Item b2 : allBlocks)
-			if(b2.equals(b))
+		for(Item b2 : allBlocks) {
+			if(b2.equals(b)) {
 				return;
+			}
+		}
 		allBlocks.add(b);
 	}
 
@@ -36,11 +38,15 @@ public class GoldBlockSlot extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack) {
-		if (par1ItemStack != null)
-			if (par1ItemStack.getItem() instanceof ItemBlock)
-				for(Item b : allBlocks)
-					if (par1ItemStack.getItem().equals(b))
+		if (par1ItemStack != null) {
+			if (par1ItemStack.getItem() instanceof ItemBlock) {
+				for(Item b : allBlocks) {
+					if (par1ItemStack.getItem().equals(b)) {
 						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 

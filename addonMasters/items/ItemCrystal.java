@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemCrystal extends ItemRpgInvArmor {
 
 	public static final String[] pets = new String[] { "Empty Crystal", "Boar",
-			"Spider", "Bull" };
+		"Spider", "Bull" };
 
 	public ItemCrystal(int armorType, int maxDamage, String name) {
 		super(armorType, maxDamage, -1, "");
@@ -35,45 +35,56 @@ public class ItemCrystal extends ItemRpgInvArmor {
 		if (var2 > 0) {
 		}
 		if (tags != null) {
-			if (tags.hasKey("PetLevel"))
+			if (tags.hasKey("PetLevel")) {
 				list.add(StatCollector.translateToLocal("Level : "
 						+ String.valueOf(tags.getInteger("PetLevel"))));
-			if (tags.hasKey("PetAttack"))
+			}
+			if (tags.hasKey("PetAttack")) {
 				list.add(StatCollector.translateToLocal("ATK : "
 						+ String.valueOf(tags.getInteger("PetAttack"))));
-			if (tags.hasKey("PetHealth") && tags.hasKey("PetHealth"))
+			}
+			if (tags.hasKey("PetHealth") && tags.hasKey("PetHealth")) {
 				list.add(StatCollector.translateToLocal("HP : "
 						+ String.valueOf(tags.getFloat("PetHealth") + "/"
 								+ String.valueOf(tags.getFloat("PetMaxHealth")))));
-			if (tags.hasKey("PetLevel"))
+			}
+			if (tags.hasKey("PetLevel")) {
 				if (tags.getInteger("PetLevel") >= 50) {
 					if (tags.hasKey("isSaddled")) {
-						if (tags.getBoolean("isSaddled") == true)
+						if (tags.getBoolean("isSaddled") == true) {
 							list.add(StatCollector.translateToLocal("Saddled"));
-						if (tags.getBoolean("isSaddled") == false)
+						}
+						if (tags.getBoolean("isSaddled") == false) {
 							list.add(StatCollector
 									.translateToLocal("No Saddle"));
+						}
 					}
-				} else
+				} else {
 					list.add(StatCollector
 							.translateToLocal("Levels left to saddle: ")
 							+ String.valueOf(50 - tags.getInteger("PetLevel")));
-			if (tags.hasKey("OwnerName"))
+				}
+			}
+			if (tags.hasKey("OwnerName")) {
 				list.add(StatCollector.translateToLocal("Owner :"
 						+ tags.getString("OwnerName")));
+			}
 		}
 	}
 
 	@Override
 	public int getColorFromItemStack(ItemStack b2, int par2) {
-		if (b2.getItemDamage() == 1)
+		if (b2.getItemDamage() == 1) {
 			return 0xc36113;
+		}
 
-		if (b2.getItemDamage() == 2)
+		if (b2.getItemDamage() == 2) {
 			return 0x0a8274;
+		}
 
-		if (b2.getItemDamage() == 3)
+		if (b2.getItemDamage() == 3) {
 			return 0xe71809;
+		}
 
 		return 0xffffff;
 	}
@@ -84,9 +95,11 @@ public class ItemCrystal extends ItemRpgInvArmor {
 		String itemname = pets[var2];
 		if (var2 > 0) {
 			NBTTagCompound tags = par1ItemStack.getTagCompound();
-			if (tags != null)
-				if (tags.hasKey("PetLevel") && tags.hasKey("PetName"))
+			if (tags != null) {
+				if (tags.hasKey("PetLevel") && tags.hasKey("PetName")) {
 					itemname = tags.getString("PetName");
+				}
+			}
 		}
 		return itemname;
 	}
@@ -112,8 +125,9 @@ public class ItemCrystal extends ItemRpgInvArmor {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack is) {
-		if (is.getItemDamage() > 0)
+		if (is.getItemDamage() > 0) {
 			return true;
+		}
 		return is.isItemEnchanted();
 	}
 
@@ -121,6 +135,6 @@ public class ItemCrystal extends ItemRpgInvArmor {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister) {
 		this.itemIcon = par1IconRegister.registerIcon("rpginventorymod:petCrystal");
-	
+
 	}
 }

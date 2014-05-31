@@ -29,10 +29,12 @@ public class ItemArcherArmor extends AbstractArmor {
 			String type) {
 		if ((itemstack.getItem() == RpgBaseAddon.archerboots)
 				|| (itemstack.getItem() == RpgBaseAddon.archerchest)
-				|| (itemstack.getItem() == RpgBaseAddon.archerhood))
+				|| (itemstack.getItem() == RpgBaseAddon.archerhood)) {
 			return "armor:arch_1.png";
-		if (itemstack.getItem() == RpgBaseAddon.archerpants)
+		}
+		if (itemstack.getItem() == RpgBaseAddon.archerpants) {
 			return "armor:arch_2.png";
+		}
 		return super.getArmorTexture(itemstack, entity, slot, type);
 	}
 }

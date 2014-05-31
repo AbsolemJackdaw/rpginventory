@@ -38,18 +38,21 @@ public class PacketMageVortex {
 			if (!RpgInventoryMod.developers.contains(p.getDisplayName()
 					.toLowerCase())) {
 				if ((wand == null) || (hat == null) || (chest == null)
-						|| (legs == null) || (boots == null))
+						|| (legs == null) || (boots == null)) {
 					return;
+				}
 				if ((wand.getItem() != RpgBaseAddon.wand)
 						|| (hat.getItem() != RpgBaseAddon.magehood)
 						|| (chest.getItem() != RpgBaseAddon.magegown)
 						|| (legs.getItem() != RpgBaseAddon.magepants)
-						|| (boots.getItem() != RpgBaseAddon.mageboots))
+						|| (boots.getItem() != RpgBaseAddon.mageboots)) {
 					return;
+				}
 			}
 			if (!ServerTickHandler.globalCooldownMap.containsKey(p
-					.getDisplayName()))
+					.getDisplayName())) {
 				ServerTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
+			}
 			if (ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				ServerTickHandler.globalCooldownMap.put(p.getDisplayName(),
 						7 * 20);
@@ -63,26 +66,28 @@ public class PacketMageVortex {
 					// delete the item
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else if (!RpgInventoryMod.developers.contains(p
-						.getDisplayName().toLowerCase()))
+						.getDisplayName().toLowerCase())) {
 					wand.damageItem(RpgInventoryMod.donators.contains(p
 							.getDisplayName()) ? 1 : 3, p);
+				}
 				float f = RpgInventoryMod.donators
 						.contains(p.getDisplayName()) ? 20.0f : 10.0f;
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - f, p.posY - f, p.posZ - f, p.posX + f,p.posY + f, p.posZ + f);
 				List<EntityLivingBase> entl = p.worldObj
 						.getEntitiesWithinAABBExcludingEntity(p, pool);
 
-				if ((entl != null) && (entl.size() > 0))
-					for (Entity el : entl)
+				if ((entl != null) && (entl.size() > 0)) {
+					for (Entity el : entl) {
 						if ((el != null) && (el != p)) {
 
 							int var4;
 
 							var4 = 10;
-							if (entl instanceof EntityLivingBase)
+							if (entl instanceof EntityLivingBase) {
 								var4 += EnchantmentHelper.getKnockbackModifier(
 										p, (EntityLivingBase) el);
-							if (var4 > 0)
+							}
+							if (var4 > 0) {
 								try {
 									Vec3 posPlayer = Vec3.createVectorHelper(
 											el.posX, el.posY, el.posZ);
@@ -91,12 +96,12 @@ public class PacketMageVortex {
 									Vec3 posFinal = posPlayer.myVec3LocalPool
 											.getVecFromPool(
 													posEntity.xCoord
-															- posPlayer.xCoord,
+													- posPlayer.xCoord,
 													posEntity.yCoord
-															- posPlayer.yCoord,
+													- posPlayer.yCoord,
 													posEntity.zCoord
-															- posPlayer.zCoord)
-											.normalize();
+													- posPlayer.zCoord)
+													.normalize();
 									el.setVelocity(posFinal.xCoord * 4,
 											posFinal.yCoord * 4,
 											posFinal.zCoord * 4);
@@ -105,16 +110,20 @@ public class PacketMageVortex {
 											(RpgInventoryMod.donators
 													.contains(p
 															.getDisplayName()) ? 3
-													: 1));
+																	: 1));
 								} catch (Throwable ex) {
 								}
+							}
 						}
-			} else
+					}
+				}
+			} else {
 				p.addChatMessage(new ChatComponentText(
 						"You must wait for energy to replenish, left: "
 								+ Math.floor(1 + (ServerTickHandler.globalCooldownMap
 										.get(p.getDisplayName()) / 20))
-								+ " seconds"));
+										+ " seconds"));
+			}
 		}
 	}
 }

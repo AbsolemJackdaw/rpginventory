@@ -39,8 +39,9 @@ public class Targetting {
 			Vec3 playerPosition = viewEntity.getPosition(1);
 
 			double farDist = parDistance;
-			if (objectMouseOver != null)
+			if (objectMouseOver != null) {
 				farDist = objectMouseOver.hitVec.distanceTo(playerPosition);
+			}
 			double closest = farDist;
 
 			Vec3 dirVec = viewEntity.getLookVec();
@@ -55,24 +56,27 @@ public class Targetting {
 									dirVec.xCoord * parDistance,
 									dirVec.yCoord * parDistance,
 									dirVec.zCoord * parDistance).expand(0.1,
-									0.1, 0.1));
+											0.1, 0.1));
 			targettedEntities.remove(viewEntity);
 
-			for (EntityLivingBase targettedEntity : targettedEntities)
+			for (EntityLivingBase targettedEntity : targettedEntities) {
 				if (targettedEntity != null) {
 					double precheck = viewEntity
 							.getDistanceToEntity(targettedEntity);
 					MovingObjectPosition mopElIntercept = targettedEntity.boundingBox
 							.calculateIntercept(playerPosition, lookFarCoord);
-					if (mopElIntercept != null)
+					if (mopElIntercept != null) {
 						if (precheck < closest) {
 							Return = targettedEntity;
 							closest = precheck;
 						}
+					}
 				}
+			}
 		}
-		if ((Return != null) && (Return instanceof EntityLivingBase))
+		if ((Return != null) && (Return instanceof EntityLivingBase)) {
 			return (EntityLivingBase) Return;
+		}
 		return null;
 	}
 }

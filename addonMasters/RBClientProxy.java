@@ -85,8 +85,8 @@ public class RBClientProxy extends RBCommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class,
 				new RenderXPOrb());
 		RenderingRegistry
-				.registerEntityRenderingHandler(EntityTeleportStone.class,
-						new RenderSnowball(Items.feather, 1));
+		.registerEntityRenderingHandler(EntityTeleportStone.class,
+				new RenderSnowball(Items.feather, 1));
 
 		// RPGKeyHandler.registerKeyhandler(new RpgKeyHandlerRB(),
 		// IKeyHandler.bindKeys, IKeyHandler.reps);

@@ -82,9 +82,9 @@ public class RpgDreadAddon {
 	pala_weapon, necro_weapon,
 	/* ====armor==== */
 	necroHood, necroChestplate, necroLeggings, necroBoots, palaHelm, palaChest,
-			palaLeggings, palaBoots,
-			/* ====leathers/skins==== */
-			necro_skin, pala_steel;
+	palaLeggings, palaBoots,
+	/* ====leathers/skins==== */
+	necro_skin, pala_steel;
 
 	@SidedProxy(serverSide = "addonDread.CommonProxyRpgplus", clientSide = "addonDread.ClientProxyRpgPlus")
 	public static CommonProxyRpgplus proxy;
@@ -102,22 +102,22 @@ public class RpgDreadAddon {
 
 
 		GameRegistry.addRecipe(new ItemStack(necro_skin, 1), new Object[] {
-				"BWB", "WLW", "BWB", 'W', Items.spider_eye, 'B', Items.bone,
-				'L', Items.leather });
+			"BWB", "WLW", "BWB", 'W', Items.spider_eye, 'B', Items.bone,
+			'L', Items.leather });
 		GameRegistry.addRecipe(new ItemStack(pala_steel, 1),
 				new Object[] { "GGG", "BIB", "GGG", 'G', Items.gold_ingot, 'B',
-						(new ItemStack(Items.potionitem, 1, 0)), 'I',
-						Items.iron_ingot });
+			(new ItemStack(Items.potionitem, 1, 0)), 'I',
+			Items.iron_ingot });
 		GameRegistry.addRecipe(new ItemStack(necro_shield, 1), new Object[] {
-				"WWW", "WBW", " W ", 'W', necro_skin, 'B',
-				new ItemStack(Items.skull, 1, 1) });
+			"WWW", "WBW", " W ", 'W', necro_skin, 'B',
+			new ItemStack(Items.skull, 1, 1) });
 		GameRegistry.addRecipe(new ItemStack(pala_shield, 1), new Object[] {
-				"WWW", "WBW", " W ", 'W', pala_steel, 'B', Blocks.iron_block });
+			"WWW", "WBW", " W ", 'W', pala_steel, 'B', Blocks.iron_block });
 		GameRegistry.addRecipe(new ItemStack(necro_weapon, 1), new Object[] {
-				"WWW", "WBW", "WWW", 'W', Items.bone, 'B',
-				new ItemStack(Items.skull, 1, 1) });
+			"WWW", "WBW", "WWW", 'W', Items.bone, 'B',
+			new ItemStack(Items.skull, 1, 1) });
 		GameRegistry.addRecipe(new ItemStack(pala_weapon, 1), new Object[] {
-				"S", "S", "G", 'S', pala_steel, 'G', Items.gold_ingot });
+			"S", "S", "G", 'S', pala_steel, 'G', Items.gold_ingot });
 
 		recipePatterns = new String[][] { { "XXX", "X X" },
 				{ "X X", "XXX", "XXX" }, { "XXX", "X X", "X X" },
@@ -132,7 +132,7 @@ public class RpgDreadAddon {
 			for (int var4 = 0; var4 < (this.recipeItems.length - 1); ++var4) {
 				Item var5 = (Item) this.recipeItems[var4 + 1][var2];
 				GameRegistry.addRecipe(new ItemStack(var5), new Object[] {
-						this.recipePatterns[var4], 'X', var3 });
+					this.recipePatterns[var4], 'X', var3 });
 			}
 		}
 
@@ -162,11 +162,12 @@ public class RpgDreadAddon {
 			boolean found = false;
 			Field fallbackfield = null;
 			Potion[] potionTypes = null;
-			for (Field f : Potion.class.getDeclaredFields())
+			for (Field f : Potion.class.getDeclaredFields()) {
 				try {
 					if ((fallbackfield != null)
-							&& (f.getType() == Potion[].class))
+							&& (f.getType() == Potion[].class)) {
 						fallbackfield = f;
+					}
 					if (f.getName().equals("potionTypes")
 							|| f.getName().equals("a")
 							|| f.getName().equals("field_76425_a")) {
@@ -185,9 +186,10 @@ public class RpgDreadAddon {
 					}
 				} catch (Exception e) {
 					System.err
-							.println("Severe error, please report this to the mod author:");
+					.println("Severe error, please report this to the mod author:");
 					System.err.println(e);
 				}
+			}
 			try {
 				if ((fallbackfield != null) && !found) {
 					Field modfield = Field.class.getDeclaredField("modifiers");
@@ -203,21 +205,23 @@ public class RpgDreadAddon {
 				}
 			} catch (Exception ex) {
 				System.err
-						.println("Severe error, please report this to the mod author:");
+				.println("Severe error, please report this to the mod author:");
 				System.err.println(ex);
 			}
 		}
 
 		for (int pos = 32; pos < Potion.potionTypes.length; pos++) {
-			if (Potion.potionTypes[pos] == null)
+			if (Potion.potionTypes[pos] == null) {
 				if (decomposePotion == null) {
 					decomposePotion = new DecomposePotion(pos);
 					Potion.potionTypes[pos] = decomposePotion;
 				} else if (masochismPotion == null) {
 					masochismPotion = new MasochismPotion(pos);
 					Potion.potionTypes[pos] = masochismPotion;
-				} else
+				} else {
 					break;
+				}
+			}
 
 			RPGEventHooks.negativeEffects.add(2);
 			RPGEventHooks.negativeEffects.add(4);
@@ -266,47 +270,47 @@ public class RpgDreadAddon {
 		tab = new PlusTab(CreativeTabs.getNextID(), "Necromancer Paladin Addon");
 
 		necroHood = new ItemNecroArmor(necroArmor, 4, 0)
-				.setUnlocalizedName("necro1");
+		.setUnlocalizedName("necro1");
 		necroChestplate = new ItemNecroArmor(necroArmor, 4, 1)
-				.setUnlocalizedName("necro2");
+		.setUnlocalizedName("necro2");
 		necroLeggings = new ItemNecroArmor(necroArmor, 4, 2)
-				.setUnlocalizedName("necro3");
+		.setUnlocalizedName("necro3");
 		necroBoots = new ItemNecroArmor(necroArmor, 4, 3)
-				.setUnlocalizedName("necro4");
+		.setUnlocalizedName("necro4");
 
 		palaHelm = new ItemPaladinArmor(paladin, 4, 0)
-				.setUnlocalizedName("paladin1");
+		.setUnlocalizedName("paladin1");
 		palaChest = new ItemPaladinArmor(paladin, 4, 1)
-				.setUnlocalizedName("paladin2");
+		.setUnlocalizedName("paladin2");
 		palaLeggings = new ItemPaladinArmor(paladin, 4, 2)
-				.setUnlocalizedName("paladin3");
+		.setUnlocalizedName("paladin3");
 		palaBoots = new ItemPaladinArmor(paladin, 4, 3)
-				.setUnlocalizedName("paladin4");
+		.setUnlocalizedName("paladin4");
 
 		necro_shield = new ItemRpgInvArmorPlus(1, 250, "necro",
 				"subaraki:jewels/NecroShield.png")
-				.setUnlocalizedName("shieldNecro");
+		.setUnlocalizedName("shieldNecro");
 		necro_weapon = new ItemNecroSkull(NecroToolMaterial).setFull3D()
 				.setUnlocalizedName("Skull");
 
 		pala_shield = new ItemRpgInvArmorPlus(1, 450, "pala",
 				"subaraki:jewels/PaladinShield.png")
-				.setUnlocalizedName("shieldPaladin");
+		.setUnlocalizedName("shieldPaladin");
 		pala_weapon = new ItemGrandSword(0,
 				PalaToolMaterial).setFull3D()
 				.setUnlocalizedName("paladinPride");
 
 		necro_skin = new ItemNecroPaladinMats(0)
-				.setUnlocalizedName("n.leather");
+		.setUnlocalizedName("n.leather");
 		pala_steel = new ItemNecroPaladinMats(0)
-				.setUnlocalizedName("p.iron_ingot");
+		.setUnlocalizedName("p.iron_ingot");
 
 		allItems = new Item[] { pala_shield, necro_shield, pala_weapon,
 				necro_weapon, necroHood, necroChestplate, necroLeggings,
 				necroBoots, palaHelm, palaChest, palaLeggings, palaBoots,
 				necro_skin, pala_steel };
 
-		for (int i = 0; i < allItems.length; i++)
+		for (int i = 0; i < allItems.length; i++) {
 			if (allItems[i] != null) {
 
 				String itemName = allItems[i].getUnlocalizedName().substring(
@@ -315,17 +319,20 @@ public class RpgDreadAddon {
 				String itemNameCropped = itemName.substring(itemName
 						.indexOf(".") + 1);
 
-				if ((allItems[i] == necro_skin) || (allItems[i] == pala_steel))
+				if ((allItems[i] == necro_skin) || (allItems[i] == pala_steel)) {
 					allItems[i].setTextureName("minecraft:" + itemNameCropped);
-				else
+				} else {
 					allItems[i].setTextureName(RpgInventoryMod.name + ":"
 							+ itemNameCropped);
+				}
 
 				GameRegistry
-						.registerItem(allItems[i],
-								allItems[i].getUnlocalizedName(),
-								RpgInventoryMod.name);
-			} else
+				.registerItem(allItems[i],
+						allItems[i].getUnlocalizedName(),
+						RpgInventoryMod.name);
+			} else {
 				System.out.println("Item is null !" + i);
+			}
+		}
 	}
 }

@@ -27,14 +27,17 @@ public class PacketPalaSpecial {
 
 
 		if (!RpgInventoryMod.developers.contains(p.getDisplayName()
-				.toLowerCase()) || (weapon == null))
+				.toLowerCase()) || (weapon == null)) {
 			if (!RpgInventoryMod.playerClass.toLowerCase()
-					.contains(RpgDreadAddon.CLASSPALADIN))
+					.contains(RpgDreadAddon.CLASSPALADIN)) {
 				return;
+			}
+		}
 
 		if (!ServerTickHandler.globalCooldownMap
-				.containsKey(p.getDisplayName()))
+				.containsKey(p.getDisplayName())) {
 			ServerTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
+		}
 		if (ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 			ServerTickHandler.globalCooldownMap.put(p.getDisplayName(),
 					(RpgInventoryMod.donators.contains(p.getDisplayName()) ? 5
@@ -50,8 +53,9 @@ public class PacketPalaSpecial {
 				p.renderBrokenItemStack(weapon);
 				p.setCurrentItemOrArmor(0, (ItemStack) null);
 			} else if (!RpgInventoryMod.developers.contains(p.getDisplayName()
-					.toLowerCase()))
+					.toLowerCase())) {
 				weapon.damageItem(3, p);
+			}
 
 			float rad = 6.0f;
 			AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
@@ -62,8 +66,8 @@ public class PacketPalaSpecial {
 
 			System.out.println("heal" + entl);
 
-			if ((entl != null) && (entl.size() > 0))
-				for (EntityLivingBase el : entl)
+			if ((entl != null) && (entl.size() > 0)) {
+				for (EntityLivingBase el : entl) {
 					if (el != null) {
 						double dist = (p.getDistanceSqToEntity(el));
 						double potstrength = 1.0D - (Math.sqrt(dist) / 4.0D);
@@ -71,9 +75,12 @@ public class PacketPalaSpecial {
 								potstrength * 2);
 
 					}
-		} else
+				}
+			}
+		} else {
 			p.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
 					+ Math.floor(1 + (ServerTickHandler.globalCooldownMap.get(p
 							.getDisplayName()) / 20)) + " seconds"));
+		}
 	}
- }
+}

@@ -41,8 +41,8 @@ public class RpgArchmageAddon {
 	public static CreativeTabs tab;
 
 	public static Item archBook, fireStaff, frostStaff, earthStaff, windStaff,
-			ultimateStaff, archmageHood, archmageChest, archmageLegs,
-			archMageBoots, archMageLeather;
+	ultimateStaff, archmageHood, archmageChest, archmageLegs,
+	archMageBoots, archMageLeather;
 
 	public Item[] allItems;
 
@@ -66,32 +66,32 @@ public class RpgArchmageAddon {
 		// LanguageRegistry.addName(archMageBoots, "Arch Mage Boots");
 
 		GameRegistry.addShapelessRecipe(new ItemStack(ultimateStaff),
-                windStaff, earthStaff, frostStaff, fireStaff,
-                Items.nether_star);
+				windStaff, earthStaff, frostStaff, fireStaff,
+				Items.nether_star);
 		GameRegistry.addRecipe(new ItemStack(windStaff),
-                "III", "DSD", "III", 'I', Items.feather, 'D', Items.diamond, 'S',
-                RpgBaseAddon.staf);
+				"III", "DSD", "III", 'I', Items.feather, 'D', Items.diamond, 'S',
+				RpgBaseAddon.staf);
 		GameRegistry.addRecipe(new ItemStack(frostStaff),
-                "III", "DSD", "III", 'I', Blocks.ice, 'D', Items.diamond, 'S',
-                RpgBaseAddon.staf);
+				"III", "DSD", "III", 'I', Blocks.ice, 'D', Items.diamond, 'S',
+				RpgBaseAddon.staf);
 		GameRegistry.addRecipe(new ItemStack(earthStaff),
-                "III", "DSD", "III", 'I', Blocks.grass, 'D', Items.diamond, 'S',
-                RpgBaseAddon.staf);
+				"III", "DSD", "III", 'I', Blocks.grass, 'D', Items.diamond, 'S',
+				RpgBaseAddon.staf);
 		GameRegistry.addRecipe(new ItemStack(fireStaff),
-                "III", "DSD", "III", 'I', Items.blaze_powder, 'D', Items.diamond, 'S',
-                RpgBaseAddon.staf);
+				"III", "DSD", "III", 'I', Items.blaze_powder, 'D', Items.diamond, 'S',
+				RpgBaseAddon.staf);
 		GameRegistry.addRecipe(new ItemStack(archBook),
-                "III", "IBI", " I ", 'I', new ItemStack(Items.dye, 1, 4), 'B',
-                Items.book);
+				"III", "IBI", " I ", 'I', new ItemStack(Items.dye, 1, 4), 'B',
+				Items.book);
 		GameRegistry.addRecipe(new ItemStack(archMageBoots),
-                "III", "IBI", "III", 'B', RpgBaseAddon.mageboots, 'I',
-                Items.gold_nugget);
+				"III", "IBI", "III", 'B', RpgBaseAddon.mageboots, 'I',
+				Items.gold_nugget);
 		GameRegistry.addRecipe(new ItemStack(archmageLegs),
-                "III", "IBI", "III", 'B', RpgBaseAddon.magepants, 'I',
-                Items.gold_nugget);
+				"III", "IBI", "III", 'B', RpgBaseAddon.magepants, 'I',
+				Items.gold_nugget);
 		GameRegistry.addRecipe(new ItemStack(archmageChest),
-                "III", "IBI", "III", 'B', RpgBaseAddon.magegown, 'I',
-                Items.gold_nugget);
+				"III", "IBI", "III", 'B', RpgBaseAddon.magegown, 'I',
+				Items.gold_nugget);
 		GameRegistry.addRecipe(new ItemStack(archmageHood),
 				"III", "IBI", "III", 'B', RpgBaseAddon.magehood, 'I',
 				Items.gold_nugget );
@@ -126,16 +126,16 @@ public class RpgArchmageAddon {
 				.setMaxDamage(150).setUnlocalizedName("staffElemental");
 		archBook = new ItemMageShield(1, 300, "",
 				"subaraki:jewels/archMageShield.png")
-				.setUnlocalizedName("archTome");
+		.setUnlocalizedName("archTome");
 
 		archmageHood = new ItemMageARmor(archMage, 4, 0)
-				.setUnlocalizedName("archMage1");
+		.setUnlocalizedName("archMage1");
 		archmageChest = new ItemMageARmor(archMage, 4, 1)
-				.setUnlocalizedName("archMage2");
+		.setUnlocalizedName("archMage2");
 		archmageLegs = new ItemMageARmor(archMage, 4, 2)
-				.setUnlocalizedName("archMage3");
+		.setUnlocalizedName("archMage3");
 		archMageBoots = new ItemMageARmor(archMage, 4, 3)
-				.setUnlocalizedName("archMage4");
+		.setUnlocalizedName("archMage4");
 
 		fireStaff.setCreativeTab(tab);
 		frostStaff.setCreativeTab(tab);
@@ -151,7 +151,7 @@ public class RpgArchmageAddon {
 		allItems = new Item[] { archBook, fireStaff, frostStaff, earthStaff,
 				windStaff, ultimateStaff, archmageHood, archmageChest,
 				archmageLegs, archMageBoots, archMageLeather };
-		for (int i = 0; i < allItems.length; i++)
+		for (int i = 0; i < allItems.length; i++) {
 			if (allItems[i] != null) {
 
 				String itemName = allItems[i].getUnlocalizedName().substring(
@@ -166,7 +166,9 @@ public class RpgArchmageAddon {
 				GameRegistry.registerItem(allItems[i],
 						allItems[i].getUnlocalizedName(), name);
 
-			} else
+			} else {
 				System.out.println("Item is null !" + i);
+			}
+		}
 	}
 }

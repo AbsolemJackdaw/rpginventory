@@ -33,9 +33,9 @@ public class EntityPetXPBottle extends EntityExpBottle {
 	protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
 		if (!this.worldObj.isRemote) {
 			this.worldObj
-					.playAuxSFX(2002, (int) Math.round(this.posX),
-							(int) Math.round(this.posY),
-							(int) Math.round(this.posZ), 0);
+			.playAuxSFX(2002, (int) Math.round(this.posX),
+					(int) Math.round(this.posY),
+					(int) Math.round(this.posZ), 0);
 			int i = 3 + this.worldObj.rand.nextInt(5)
 					+ this.worldObj.rand.nextInt(5);
 

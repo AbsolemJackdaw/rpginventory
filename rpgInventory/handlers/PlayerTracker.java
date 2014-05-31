@@ -16,17 +16,19 @@ public class PlayerTracker{
 
 	@SubscribeEvent
 	public void onPlayerChangedDimension(PlayerChangedDimensionEvent e) {
-		if (!e.player.worldObj.isRemote)
+		if (!e.player.worldObj.isRemote) {
 			PacketInventory.sendPacket((EntityPlayerMP) e.player,
 					PlayerRpgInventory.get(e.player));
+		}
 		PlayerRpgInventory.get(e.player);
 	}
 
 	@SubscribeEvent
 	public void onPlayerLogin(PlayerLoggedInEvent e) {
-		if (!e.player.worldObj.isRemote)
+		if (!e.player.worldObj.isRemote) {
 			PacketInventory.sendPacket((EntityPlayerMP) e.player,
 					PlayerRpgInventory.get(e.player));
+		}
 		PlayerRpgInventory.get(e.player);
 	}
 
@@ -36,9 +38,10 @@ public class PlayerTracker{
 
 	@SubscribeEvent
 	public void onPlayerRespawn(PlayerRespawnEvent e) {
-		if (!e.player.worldObj.isRemote)
+		if (!e.player.worldObj.isRemote) {
 			PacketInventory.sendPacket((EntityPlayerMP) e.player,
 					PlayerRpgInventory.get(e.player));
+		}
 		PlayerRpgInventory.get(e.player);
 	}
 }

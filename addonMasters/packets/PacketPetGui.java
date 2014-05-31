@@ -17,9 +17,8 @@ public class PacketPetGui {
 			short hpmax = dis.readShort();
 			short atk = dis.readShort();
 			int playerLevelsLost = dis.readShort();
-			// currently unused
-			int petLevelsAdded = dis.readShort();
-			int petcandyConsumed = dis.readShort();
+			dis.readShort();
+			dis.readShort();
 
 			PlayerRpgInventory inv = PlayerRpgInventory.get(p);
 			ItemStack crystal = inv.getCrystal();
@@ -55,4 +54,4 @@ public class PacketPetGui {
 		} catch (Throwable ex) {
 		}
 	}
- }
+}

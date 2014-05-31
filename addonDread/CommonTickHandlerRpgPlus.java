@@ -16,9 +16,11 @@ public class CommonTickHandlerRpgPlus /* implements ITickHandler */{
 		/*
 		 * Manage cooldown mapused for spawning minions
 		 */
-		for (Entry<String, Integer> entry : rpgPluscooldownMap.entrySet())
-			if (entry.getValue() > 0)
+		for (Entry<String, Integer> entry : rpgPluscooldownMap.entrySet()) {
+			if (entry.getValue() > 0) {
 				entry.setValue(entry.getValue() - 1);
+			}
+		}
 
 	}
 }

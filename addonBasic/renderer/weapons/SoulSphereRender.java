@@ -41,11 +41,11 @@ public class SoulSphereRender extends RpgItemRenderer {
 			turn += 0.01f;
 			if ((data[1] != null) && (data[1] instanceof EntityPlayer)) {
 				EntityPlayer p = (EntityPlayer) data[1];
-				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+				PlayerRpgInventory.get(p);
 
 				if (RpgInventoryMod.playerClass.contains("archMage")
 						|| RpgInventoryMod.playerClass
-								.contains(RpgBaseAddon.CLASSMAGE)) {
+						.contains(RpgBaseAddon.CLASSMAGE)) {
 					swordmodel.renderFloatingShpere((Entity) data[1], turn,
 							0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 					swordmodel.renderFloatingShpere((Entity) data[1],
@@ -69,11 +69,11 @@ public class SoulSphereRender extends RpgItemRenderer {
 			turn += 0.01f;
 			if ((data[1] != null) && (data[1] instanceof EntityPlayer)) {
 				EntityPlayer p = (EntityPlayer) data[1];
-				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+				PlayerRpgInventory.get(p);
 
 				if (RpgInventoryMod.playerClass.contains("archMage")
 						|| RpgInventoryMod.playerClass
-								.contains(RpgBaseAddon.CLASSMAGE)) {
+						.contains(RpgBaseAddon.CLASSMAGE)) {
 					swordmodel.renderFloatingShpere((Entity) data[1], turn,
 							0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 					swordmodel.renderFloatingShpere((Entity) data[1],

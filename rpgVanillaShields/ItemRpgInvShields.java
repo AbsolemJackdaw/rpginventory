@@ -24,22 +24,27 @@ public class ItemRpgInvShields extends ItemRpgInvArmor {
 		if (this.equals(RpgVanillaShields.shieldDiamond)
 				|| this.equals(RpgVanillaShields.shieldGold)
 				|| this.equals(RpgVanillaShields.shieldIron)
-				|| this.equals(RpgVanillaShields.shieldWood))
+				|| this.equals(RpgVanillaShields.shieldWood)) {
 			return van;
+		}
 
 		return new MainShield();
 	}
 
 	@Override
 	public String shieldClass() {
-		if (this.equals(RpgVanillaShields.shieldWood))
+		if (this.equals(RpgVanillaShields.shieldWood)) {
 			return RpgVanillaShields.WOODENSHIELD;
-		if (this.equals(RpgVanillaShields.shieldIron))
+		}
+		if (this.equals(RpgVanillaShields.shieldIron)) {
 			return RpgVanillaShields.IRONSHIELD;
-		if (this.equals(RpgVanillaShields.shieldGold))
+		}
+		if (this.equals(RpgVanillaShields.shieldGold)) {
 			return RpgVanillaShields.GOLDENSHIELD;
-		if (this.equals(RpgVanillaShields.shieldDiamond))
+		}
+		if (this.equals(RpgVanillaShields.shieldDiamond)) {
 			return RpgVanillaShields.DIAMONDSHIELD;
+		}
 		return super.shieldClass();
 	}
 

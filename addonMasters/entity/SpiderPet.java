@@ -67,10 +67,11 @@ public class SpiderPet extends BMPetImpl {
 		if (super.attackEntityAsMob(par1Entity)) {
 			if (par1Entity instanceof EntityLiving) {
 				int level = getLevel();
-				if (level > 10)
+				if (level > 10) {
 					((EntityLiving) par1Entity)
-							.addPotionEffect(new PotionEffect(Potion.poison.id,
-									200, level < 50 ? 1 : 2));
+					.addPotionEffect(new PotionEffect(Potion.poison.id,
+							200, level < 50 ? 1 : 2));
+				}
 			}
 			return true;
 		}
@@ -140,9 +141,9 @@ public class SpiderPet extends BMPetImpl {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (getLevel() <= 200)
+		if (getLevel() <= 200) {
 			petSize = 0.5F + (((getLevel()) / 200.0F) * 1.5F);
-		else {
+		} else {
 			setLevel(200);
 			petSize = 2.0F;
 		}
@@ -153,11 +154,11 @@ public class SpiderPet extends BMPetImpl {
 		super.onUpdate();
 		if (previousLevel < getLevel()) {
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-					.setBaseValue(
-							25D + MathHelper
-									.floor_double(((getLevel()) * 1.0D) / 1.6D));
+			.setBaseValue(
+					25D + MathHelper
+					.floor_double(((getLevel()) * 1.0D) / 1.6D));
 			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-					.setBaseValue(0.1D + (getLevel() / 400D));
+			.setBaseValue(0.1D + (getLevel() / 400D));
 			previousLevel = getLevel();
 		}
 	}

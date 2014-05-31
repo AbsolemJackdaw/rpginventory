@@ -55,9 +55,10 @@ public abstract class AbstractArmor extends ItemArmor {
 				armorModel.isChild = entityLiving.isChild();
 				armorModel.heldItemRight = entityLiving.getEquipmentInSlot(0) != null ? 1
 						: 0;
-				if (entityLiving instanceof EntityPlayer)
+				if (entityLiving instanceof EntityPlayer) {
 					armorModel.aimedBow = ((EntityPlayer) entityLiving)
 							.getItemInUseDuration() > 2;
+				}
 				return armorModel;
 			}
 		}

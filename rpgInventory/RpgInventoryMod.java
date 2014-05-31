@@ -21,9 +21,9 @@ import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.block.BlockForge;
 import rpgInventory.block.te.TEMold;
 import rpgInventory.gui.RpgInventoryTab;
-import rpgInventory.handlers.ServerTickHandler;
 import rpgInventory.handlers.GuiHandler;
 import rpgInventory.handlers.RPGEventHooks;
+import rpgInventory.handlers.ServerTickHandler;
 import rpgInventory.handlers.packets.ServerPacketHandler;
 import rpgInventory.handlers.proxy.ClientProxy;
 import rpgInventory.handlers.proxy.CommonProxy;
@@ -37,7 +37,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -73,7 +72,7 @@ public class RpgInventoryMod {
 	neckgold, neckdia, neckem, necklap, glovesbutter, glovesdia, glovesem,
 	gloveslap, ringgold, ringdia, ringem, ringlap,
 	/* ====cloaks==== */
-	cloakWhite, 
+	cloakWhite,
 	cloakBlack,
 	cloakRed,
 	cloakGreen,
@@ -302,10 +301,10 @@ public class RpgInventoryMod {
 				ringdia, ringem, ringlap, colmold, ringmold, wantmold,
 				cloakWhite, cloakBlack,cloakRed,cloakGreen,cloakBrown,cloakBlue,cloakPurple,
 				cloakCyan,cloakSilver,cloakGray,cloakPink,cloakLime,cloakYellow,cloakLightblue,
-				cloakMagenta,cloakOrange,cloakI,		
+				cloakMagenta,cloakOrange,cloakI,
 		};
 
-		for (int i = 0; i < allItems.length; i++)
+		for (int i = 0; i < allItems.length; i++) {
 			if (allItems[i] != null) {
 				String itemName = allItems[i].getUnlocalizedName().substring(
 						allItems[i].getUnlocalizedName().indexOf(".") + 1);
@@ -321,8 +320,10 @@ public class RpgInventoryMod {
 						allItems[i].getUnlocalizedName(),
 						RpgInventoryMod.name);
 
-			} else
+			} else {
 				System.out.println("Item is null !" + i);
+			}
+		}
 	}
 
 	private void setDonators() {
@@ -332,8 +333,9 @@ public class RpgInventoryMod {
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					url.openStream()));
 			String str;
-			while ((str = in.readLine()) != null)
+			while ((str = in.readLine()) != null) {
 				donators.add(str);
+			}
 			FMLLog.getLogger().info(
 					"Added Dev-Donation rank for : " + donators.toString());
 

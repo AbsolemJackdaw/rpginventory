@@ -22,11 +22,11 @@ public class PacketCrystal {
 		try {
 			entityid = dis.readInt();
 
-			if (entityid == 0)
+			if (entityid == 0) {
 				p.attackEntityFrom(DamageSource.magic, 1);
-			else {
+			} else {
 				Entity e = p.worldObj.getEntityByID(entityid);
-				if (e != null)
+				if (e != null) {
 					if (e instanceof EntityPig) {
 						ItemStack is = new ItemStack(RpgMastersAddon.crystal, 1, 1);
 						e.entityDropItem(is, 0.5F);
@@ -41,9 +41,10 @@ public class PacketCrystal {
 						e.entityDropItem(is, 0.5F);
 						e.setDead();
 					}
+				}
 			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 	}
- }
+}

@@ -24,12 +24,13 @@ public class RenderDagger extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			scale = 0.9F;
 			GL11.glScalef(scale, scale, scale);
-			if (((Entity) data[1]).worldObj.isDaytime())
+			if (((Entity) data[1]).worldObj.isDaytime()) {
 				mc.renderEngine.bindTexture(new ResourceLocation(
 						"subaraki:weapons/dagger.png"));
-			else
+			} else {
 				mc.renderEngine.bindTexture(new ResourceLocation(
 						"subaraki:weapons/daggerNight.png"));
+			}
 			GL11.glRotatef(-150F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(-100F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(160F, 0.0f, 0.0f, 1.0f);
@@ -44,12 +45,13 @@ public class RenderDagger extends RpgItemRenderer {
 			float scale = 0.6F;
 			GL11.glScalef(scale, scale, scale);
 			if (((Entity) data[1] != null)
-					&& ((Entity) data[1]).worldObj.isDaytime())
+					&& ((Entity) data[1]).worldObj.isDaytime()) {
 				mc.renderEngine.bindTexture(new ResourceLocation(
 						"subaraki:weapons/dagger.png"));
-			else
+			} else {
 				mc.renderEngine.bindTexture(new ResourceLocation(
 						"subaraki:weapons/daggerNight.png"));
+			}
 			GL11.glRotatef(180F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(-70F, 0.0f, 0.0f, 1.0f);
@@ -63,12 +65,13 @@ public class RenderDagger extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			scale = 1F;
 			GL11.glScalef(scale, scale, scale);
-			if (((Entity) data[1]).worldObj.isDaytime())
+			if (((Entity) data[1]).worldObj.isDaytime()) {
 				mc.renderEngine.bindTexture(new ResourceLocation(
 						"subaraki:weapons/dagger.png"));
-			else
+			} else {
 				mc.renderEngine.bindTexture(new ResourceLocation(
 						"subaraki:weapons/daggerNight.png"));
+			}
 
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);

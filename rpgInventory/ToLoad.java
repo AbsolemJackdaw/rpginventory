@@ -3,7 +3,6 @@ package rpgInventory;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import rpgInventory.utils.RpgUtility;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -28,7 +27,7 @@ public class ToLoad {
 		GameRegistry.addRecipe(new ItemStack(RpgInventoryMod.cloakLightblue, 1)	, new Object[] {"PPP", "PCP", "PPP", 'C', RpgInventoryMod.cloakWhite, 'P',new ItemStack(Items.dye, 1, 12) });
 		GameRegistry.addRecipe(new ItemStack(RpgInventoryMod.cloakMagenta, 1)	, new Object[] {"PPP", "PCP", "PPP", 'C', RpgInventoryMod.cloakWhite, 'P',new ItemStack(Items.dye, 1, 13) });
 		GameRegistry.addRecipe(new ItemStack(RpgInventoryMod.cloakOrange, 1)	, new Object[] {"PPP", "PCP", "PPP", 'C', RpgInventoryMod.cloakWhite, 'P',new ItemStack(Items.dye, 1, 14) });
-		
+
 		GameRegistry.addRecipe(new ItemStack(RpgInventoryMod.forgeBlock, 1), new Object[] {"BBB", "BOB", "BBB", 'B', Blocks.brick_block, 'O',Blocks.obsidian });
 
 	}
@@ -42,7 +41,7 @@ public class ToLoad {
 		RpgUtility.addFuel(new ItemStack(Items.blaze_rod), 1600);
 		RpgUtility.addFuel(new ItemStack(Blocks.coal_block), 800);
 
-		
+
 		RpgUtility.addForgeMoldRecipe(RpgInventoryMod.ringmold, Items.gold_ingot, Blocks.gold_block, new ItemStack(RpgInventoryMod.ringgold));
 		RpgUtility.addForgeMoldRecipe(RpgInventoryMod.ringmold, Items.diamond,Blocks.gold_block, new ItemStack(RpgInventoryMod.ringdia));
 		RpgUtility.addForgeMoldRecipe(RpgInventoryMod.ringmold, Items.dye, Blocks.gold_block,new ItemStack(RpgInventoryMod.ringlap));

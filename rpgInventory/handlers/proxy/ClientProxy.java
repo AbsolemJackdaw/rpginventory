@@ -16,7 +16,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.Sphere;
 
-import rpgInventory.CapeRenderer;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.BookGui;
 import rpgInventory.handlers.ClientTickHandler;
@@ -36,7 +35,7 @@ public class ClientProxy extends CommonProxy {
 	@SideOnly(Side.CLIENT)
 	public static void renderHandler() {
 
-//		new CapeRenderer();
+		//		new CapeRenderer();
 		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
 	}
 
@@ -58,11 +57,12 @@ public class ClientProxy extends CommonProxy {
 		switch (id) {
 		case 1:
 			// back button in rpg inventory
-			if (Minecraft.getMinecraft().playerController.isInCreativeMode())
+			if (Minecraft.getMinecraft().playerController.isInCreativeMode()) {
 				Minecraft.getMinecraft().displayGuiScreen(
 						new GuiContainerCreative(p1));
-			else
+			} else {
 				Minecraft.getMinecraft().displayGuiScreen(new GuiInventory(p1));
+			}
 			break;
 		case 2:
 			Minecraft.getMinecraft().displayGuiScreen(new BookGui(p1));
@@ -116,10 +116,11 @@ public class ClientProxy extends CommonProxy {
 		EntityLargeExplodeFX exfx = new net.minecraft.client.particle.EntityLargeExplodeFX(
 				mc.renderEngine, world, el.posX, el.posY + 0.5F, el.posZ,
 				rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
-		if (success)
+		if (success) {
 			exfx.setRBGColorF(0F, 1.0F, 0F);
-		else
+		} else {
 			exfx.setRBGColorF(1.0F, 0F, 0F);
+		}
 		mc.effectRenderer.addEffect(exfx);
 	}
 

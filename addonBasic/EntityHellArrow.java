@@ -22,15 +22,17 @@ public class EntityHellArrow extends EntityArrow {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (!world.isRemote)
+		if (!world.isRemote) {
 			if (!world.isAirBlock(MathHelper.floor_double(posX),
 					MathHelper.floor_double(posY),
-					MathHelper.floor_double(posZ)))
+					MathHelper.floor_double(posZ))) {
 				setDead();
-			else if (!world.isAirBlock(MathHelper.floor_double(posX),
+			} else if (!world.isAirBlock(MathHelper.floor_double(posX),
 					MathHelper.floor_double(posY) - 1,
-					MathHelper.floor_double(posZ)))
+					MathHelper.floor_double(posZ))) {
 				setDead();
+			}
+		}
 
 	}
 

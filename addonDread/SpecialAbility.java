@@ -19,7 +19,7 @@ public class SpecialAbility implements ISpecialAbility {
 
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 
-		if(RpgUtility.canSpecial(p, RpgDreadAddon.necro_weapon))
+		if(RpgUtility.canSpecial(p, RpgDreadAddon.necro_weapon)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -30,8 +30,9 @@ public class SpecialAbility implements ISpecialAbility {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
 
-		if(RpgUtility.canSpecial(p, RpgDreadAddon.pala_weapon))
+		if(RpgUtility.canSpecial(p, RpgDreadAddon.pala_weapon)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -42,6 +43,7 @@ public class SpecialAbility implements ISpecialAbility {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
 
 	}
 }

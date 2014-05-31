@@ -16,10 +16,12 @@ public class BeastMasterEvent {
 			EntityXPOrb orb = (EntityXPOrb) e.entity;
 			List<BMPetImpl> pets = orb.worldObj.getEntitiesWithinAABB(BMPetImpl.class, orb.boundingBox.expand(3d, 3d, 3d));
 			if(pets.size() > 0)
+			{
 				orb.worldObj.spawnEntityInWorld(new EntityPetXP(
 						orb.worldObj, orb.posX, orb.posY,
 						orb.posZ, orb.getXpValue()));
-//				System.out.println("a pet was detected");
+				//				System.out.println("a pet was detected");
+			}
 		}
 	}
 	//	@SubscribeEvent

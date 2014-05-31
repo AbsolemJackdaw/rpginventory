@@ -209,8 +209,6 @@ public class ModelStaf extends ModelBase {
 			float f4, float f5, Entity et) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, et);
 		float x7 = 1f;
-		float zc = 0f;
-
 		this.FloatingSphere1.rotateAngleY = (MathHelper.sin(f) * x7) + 0F;
 		this.FloatingSphere1.rotateAngleX = (MathHelper.sin(f) * 10f);
 

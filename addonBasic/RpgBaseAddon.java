@@ -267,7 +267,7 @@ public class RpgBaseAddon {
 				berserkerChest, berserkerLegs, berserkerBoots, animalskin,
 				tanHide, magecloth };
 
-		for (int i = 0; i < allItems.length; i++)
+		for (int i = 0; i < allItems.length; i++) {
 			if (allItems[i] != null) {
 
 				String itemName = allItems[i].getUnlocalizedName().substring(
@@ -279,17 +279,20 @@ public class RpgBaseAddon {
 				if ((allItems[i] == rageSeed) || (allItems[i] == animalskin)
 						|| (allItems[i] == tanHide)
 						|| (allItems[i] == magecloth)
-						|| (allItems[i] == wizardBook))
+						|| (allItems[i] == wizardBook)) {
 					allItems[i].setTextureName("minecraft:" + itemNameCropped);
-				else
+				} else {
 					allItems[i].setTextureName(RpgInventoryMod.name + ":"
 							+ itemNameCropped);
+				}
 
 				GameRegistry
 				.registerItem(allItems[i],
 						allItems[i].getUnlocalizedName(),
 						RpgInventoryMod.name);
-			} else
+			} else {
 				System.out.println("Item is null !" + i);
+			}
+		}
 	}
 }

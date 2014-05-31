@@ -22,9 +22,10 @@ public class PacketSpawnMinion {
 
 
 		if (weapon.getItem().equals(RpgDreadAddon.necro_weapon)) {
-			if (!CommonTickHandlerRpgPlus.rpgPluscooldownMap.containsKey(p.getDisplayName()))
+			if (!CommonTickHandlerRpgPlus.rpgPluscooldownMap.containsKey(p.getDisplayName())) {
 				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(
 						p.getDisplayName(), 0);
+			}
 
 
 			if (CommonTickHandlerRpgPlus.rpgPluscooldownMap.get(p
@@ -32,7 +33,7 @@ public class PacketSpawnMinion {
 				// 2 second cooldown
 				CommonTickHandlerRpgPlus.rpgPluscooldownMap.put(p
 						.getDisplayName(), 20 * (RpgInventoryMod.donators
-						.contains(p.getDisplayName()) ? 1 : 2));
+								.contains(p.getDisplayName()) ? 1 : 2));
 
 				// Allow staff/hammer to perform one last aoe then break the
 				// weapon if its damaged enough.
@@ -44,8 +45,9 @@ public class PacketSpawnMinion {
 					// delete the item
 					p.renderBrokenItemStack(weapon);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else
+				} else {
 					weapon.damageItem(2, p);
+				}
 				World world = p.worldObj;
 				if (RpgInventoryMod.playerClass
 						.contains(RpgDreadAddon.CLASSNECROSHIELD)) {
@@ -67,10 +69,11 @@ public class PacketSpawnMinion {
 						var4.setOwner(p.getDisplayName());
 					}
 				}
-			} else
+			} else {
 				p.addChatMessage(new ChatComponentText("You must wait for energy to replenish, left: "
 						+ Math.floor(1 + (CommonTickHandlerRpgPlus.rpgPluscooldownMap
 								.get(p.getDisplayName()) / 20)) + " seconds"));
+			}
 		}
 	}
- }
+}

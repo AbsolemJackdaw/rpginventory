@@ -68,8 +68,9 @@ public class RpgGui extends GuiContainer {
 	@Override
 	public void actionPerformed(GuiButton button) {
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-		if (button.id == 0)
+		if (button.id == 0) {
 			RpgInventoryMod.proxy.openGUI(p, 1);
+		}
 
 	}
 
@@ -84,8 +85,6 @@ public class RpgGui extends GuiContainer {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.renderEngine.bindTexture(new ResourceLocation(
 				"rpginventorymod:textures/gui/RpgInv.png"));
-		int var5 = this.height;
-		int var6 = this.width;
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
 		drawTexturedModalRect(posX, posY, 0, 0, xSize, ySize);

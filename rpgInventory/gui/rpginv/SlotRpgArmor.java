@@ -36,39 +36,48 @@ class SlotRpgArmor extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack) {
-		if (par1ItemStack == null)
+		if (par1ItemStack == null) {
 			return true;
+		}
 		if ((par1ItemStack.getItem() instanceof ItemRpgInvArmor)) {
 			ItemRpgInvArmor tmp = (ItemRpgInvArmor) par1ItemStack.getItem();
 			switch (slotIndex) {
 			case 0:
-				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.NECKLACE)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.NECKLACE) {
 					return true;
+				}
 				return false;
 			case 1:
-				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.SHIELD)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.SHIELD) {
 					return true;
+				}
 				return false;
 			case 2:
-				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.CLOAK)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.CLOAK) {
 					return true;
+				}
 				return false;
 			case 3:
-				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.GLOVES)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.GLOVES) {
 					return true;
+				}
 				return false;
 			case 4:
-				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.RING)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.RING) {
 					return true;
+				}
 				return false;
 			case 5:
-				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.RING)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.RING) {
 					return true;
+				}
 				return false;
 			case 6:
-				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.CRYSTAL)
-					if (par1ItemStack.getItemDamage() > 0)
+				if (tmp.armorType == RpgInventoryMod.ITEMTYPE.CRYSTAL) {
+					if (par1ItemStack.getItemDamage() > 0) {
 						return true;
+					}
+				}
 				return false;
 			default:
 				return false;
@@ -85,9 +94,10 @@ class SlotRpgArmor extends Slot {
 
 	@Override
 	public void putStack(ItemStack par1ItemStack) {
-		if (this.inventory != null)
+		if (this.inventory != null) {
 			this.inventory.setInventorySlotContents(this.slotIndex,
 					par1ItemStack);
+		}
 		this.onSlotChanged();
 	}
 

@@ -21,16 +21,8 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 public class EntityElementalBlock extends EntityThrowable implements
 IEntityAdditionalSpawnData {
 
-	private EntityLivingBase shootingEntity;
 	public String owner;
 
-	private int xTile = -1;
-	private int yTile = -1;
-	private int zTile = -1;
-	private int inTile = 0;
-	private boolean inGround = false;
-	private int ticksAlive;
-	private int ticksInAir = 0;
 	public int size = 0;
 	public int type = 1;
 	public int contacts = 0;
@@ -52,7 +44,6 @@ IEntityAdditionalSpawnData {
 		this.sizeLimit = sizeLimit;
 		this.type = type;
 		this.noClip = true;
-		this.shootingEntity = e;
 
 	}
 
@@ -123,8 +114,8 @@ IEntityAdditionalSpawnData {
 					var1.hitVec.zCoord + this.size);
 			List<EntityLivingBase> entl = this.worldObj.getEntitiesWithinAABB(
 					EntityLivingBase.class, pool);
-			if ((entl != null) && (entl.size() > 0))
-				for (EntityLivingBase el : entl)
+			if ((entl != null) && (entl.size() > 0)) {
+				for (EntityLivingBase el : entl) {
 					if ((el != null) && (el != p)) {
 						el.setFire(30);
 						if (this.getThrower() instanceof EntityPlayer) {
@@ -132,24 +123,30 @@ IEntityAdditionalSpawnData {
 									.causePlayerDamage((EntityPlayer) this
 											.getThrower()), 1);
 							el.attackEntityFrom(DamageSource.onFire, 2);
-						} else
+						} else {
 							el.attackEntityFrom(DamageSource.onFire, 2);
+						}
 
 					}
+				}
+			}
 			if (var1.typeOfHit == MovingObjectType.BLOCK) {
 			} else if (var1.typeOfHit == MovingObjectType.ENTITY) {
-				if (!(var1.entityHit instanceof EntityLivingBase))
+				if (!(var1.entityHit instanceof EntityLivingBase)) {
 					break;
-				if (var1.entityHit == p)
+				}
+				if (var1.entityHit == p) {
 					break;
+				}
 				var1.entityHit.setFire(30);
 				if (p instanceof EntityPlayer) {
 					var1.entityHit
 					.attackEntityFrom(DamageSource
 							.causePlayerDamage((EntityPlayer) p), 1);
 					var1.entityHit.attackEntityFrom(DamageSource.onFire, 2);
-				} else
+				} else {
 					var1.entityHit.attackEntityFrom(DamageSource.onFire, 2);
+				}
 			}
 			break;
 		case 2:
@@ -163,8 +160,8 @@ IEntityAdditionalSpawnData {
 						var1.hitVec.zCoord + this.size);
 				List<EntityLivingBase> entl1 = this.worldObj.getEntitiesWithinAABB(
 						EntityLivingBase.class, pool1);
-				if ((entl1 != null) && (entl1.size() > 0))
-					for (EntityLivingBase el : entl1)
+				if ((entl1 != null) && (entl1.size() > 0)) {
+					for (EntityLivingBase el : entl1) {
 						if ((el != null) && (el != p)) {
 							if (el.isEntityUndead()) {
 								el.addPotionEffect(new PotionEffect(
@@ -182,14 +179,18 @@ IEntityAdditionalSpawnData {
 								el.attackEntityFrom(DamageSource
 										.causePlayerDamage((EntityPlayer) p), 1);
 								el.attackEntityFrom(DamageSource.drown, 2);
-							} else
+							} else {
 								el.attackEntityFrom(DamageSource.drown, 2);
+							}
 
 						}
+					}
+				}
 				if (var1.typeOfHit == MovingObjectType.BLOCK) {
 				} else if (var1.typeOfHit == MovingObjectType.ENTITY) {
-					if (var1.entityHit == p)
+					if (var1.entityHit == p) {
 						break;
+					}
 					if (var1.entityHit instanceof EntityLivingBase) {
 						EntityLivingBase el = (EntityLivingBase) var1.entityHit;
 						if (el.isEntityUndead()) {
@@ -204,15 +205,17 @@ IEntityAdditionalSpawnData {
 							el.addPotionEffect(new PotionEffect(
 									Potion.moveSlowdown.id, 120, 2));
 						}
-						if (!worldObj.isRemote)
+						if (!worldObj.isRemote) {
 							el.addPotionEffect(new PotionEffect(
 									Potion.weakness.id, 120, 5));
+						}
 						if (p instanceof EntityPlayer) {
 							el.attackEntityFrom(DamageSource
 									.causePlayerDamage((EntityPlayer) p), 1);
 							el.attackEntityFrom(DamageSource.drown, 2);
-						} else
+						} else {
 							el.attackEntityFrom(DamageSource.drown, 2);
+						}
 					}
 				}
 			}
@@ -228,31 +231,38 @@ IEntityAdditionalSpawnData {
 					var1.hitVec.zCoord + this.size);
 			entl = this.worldObj
 					.getEntitiesWithinAABB(EntityLivingBase.class, pool);
-			if ((entl != null) && (entl.size() > 0))
-				for (EntityLivingBase el : entl)
+			if ((entl != null) && (entl.size() > 0)) {
+				for (EntityLivingBase el : entl) {
 					if ((el != null) && (el != p)) {
-						if (p instanceof EntityPlayer)
+						if (p instanceof EntityPlayer) {
 							el.attackEntityFrom(DamageSource
 									.causePlayerDamage((EntityPlayer) p), dmg);
-						else
+						} else {
 							el.attackEntityFrom(DamageSource.anvil, dmg);
-						if (!worldObj.isRemote)
+						}
+						if (!worldObj.isRemote) {
 							el.addPotionEffect(new PotionEffect(
 									Potion.blindness.id, 120, 2));
+						}
 					}
+				}
+			}
 			if (var1.typeOfHit == MovingObjectType.ENTITY) {
-				if (!(var1.entityHit instanceof EntityLivingBase))
+				if (!(var1.entityHit instanceof EntityLivingBase)) {
 					break;
+				}
 				EntityLivingBase el = (EntityLivingBase) var1.entityHit;
 				if ((el != null) && (el != p)) {
-					if (p instanceof EntityPlayer)
+					if (p instanceof EntityPlayer) {
 						el.attackEntityFrom(DamageSource
 								.causePlayerDamage((EntityPlayer) p), dmg);
-					else
+					} else {
 						el.attackEntityFrom(DamageSource.anvil, dmg);
-					if (!worldObj.isRemote)
+					}
+					if (!worldObj.isRemote) {
 						el.addPotionEffect(new PotionEffect(
 								Potion.blindness.id, 120, 2));
+					}
 				}
 			}
 
@@ -267,9 +277,9 @@ IEntityAdditionalSpawnData {
 					var1.hitVec.zCoord + this.size);
 			entl = this.worldObj
 					.getEntitiesWithinAABB(EntityLivingBase.class, pool);
-			if ((entl != null) && (entl.size() > 0))
-				for (EntityLivingBase el : entl)
-					if ((el != null) && (el != p))
+			if ((entl != null) && (entl.size() > 0)) {
+				for (EntityLivingBase el : entl) {
+					if ((el != null) && (el != p)) {
 						try {
 							double xdir = el.posX - this.getThrower().posX;
 							double zdir = el.posZ - this.getThrower().posZ;
@@ -278,11 +288,15 @@ IEntityAdditionalSpawnData {
 							el.motionZ = zdir * 0.1F;
 						} catch (Throwable ex) {
 						}
+					}
+				}
+			}
 			if (var1.typeOfHit == MovingObjectType.ENTITY) {
-				if (!(var1.entityHit instanceof EntityLivingBase))
+				if (!(var1.entityHit instanceof EntityLivingBase)) {
 					break;
+				}
 				EntityLivingBase el = (EntityLivingBase) var1.entityHit;
-				if ((el != null) && (el != p))
+				if ((el != null) && (el != p)) {
 					try {
 						double xdir = el.posX - this.getThrower().posX;
 						double zdir = el.posZ - this.getThrower().posZ;
@@ -291,6 +305,7 @@ IEntityAdditionalSpawnData {
 						el.motionZ = zdir * 0.1F;
 					} catch (Throwable ex) {
 					}
+				}
 			}
 
 			if ((p != null) && (p instanceof EntityPlayer)){
@@ -303,20 +318,26 @@ IEntityAdditionalSpawnData {
 					pl.motionX = pl.motionX * 5F;
 					pl.motionY = ydir * 0.5F;
 					pl.motionZ = pl.motionZ * 5F;
-					if (pl.motionX < -5)
+					if (pl.motionX < -5) {
 						pl.motionX = -4;
-					if (pl.motionX > 5)
+					}
+					if (pl.motionX > 5) {
 						pl.motionX = 4;
-					if (pl.motionY < -5)
+					}
+					if (pl.motionY < -5) {
 						pl.motionY = -4;
-					if (pl.motionY > 5)
+					}
+					if (pl.motionY > 5) {
 						pl.motionY = 4;
-					if (pl.motionZ < -5)
+					}
+					if (pl.motionZ < -5) {
 						pl.motionZ = -4;
-					if (pl.motionZ > 5)
+					}
+					if (pl.motionZ > 5) {
 						pl.motionZ = 4;
+					}
 				}
-				}
+			}
 			break;
 		case 5:
 			specialAttack(var1, 1);

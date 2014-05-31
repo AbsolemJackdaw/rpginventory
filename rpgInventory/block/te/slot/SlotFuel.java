@@ -26,10 +26,11 @@ public class SlotFuel extends Slot {
 		if ((par1ItemStack.getItem() == Items.coal)
 				|| par1ItemStack.getItem().equals(Items.lava_bucket)
 				|| par1ItemStack.getItem().equals(Items.blaze_rod)
-				|| (Item.getItemFromBlock(Blocks.coal_block) == par1ItemStack.getItem()))
+				|| (Item.getItemFromBlock(Blocks.coal_block) == par1ItemStack.getItem())) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 
 	@Override

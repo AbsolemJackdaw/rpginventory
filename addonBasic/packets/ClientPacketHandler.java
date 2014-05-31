@@ -1,6 +1,5 @@
 package addonBasic.packets;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,19 +17,15 @@ public class ClientPacketHandler extends ServerPacketHandler{
 	@SubscribeEvent
 	public void onClientPacket(ClientCustomPacketEvent event) {
 
-		if(!event.packet.channel().equals("BaseAddon"))
+		if(!event.packet.channel().equals("BaseAddon")) {
 			return;
+		}
 
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		ByteBufInputStream dis = new ByteBufInputStream(event.packet.payload());
-		ByteBuf buf = event.packet.payload();
+		event.packet.payload();
 
 		World world = p.worldObj;
-
-		int x = (int) p.posX;
-		int y = (int) p.posY;
-		int z = (int) p.posZ;
-
 
 		try {
 			int guiID = dis.readInt();

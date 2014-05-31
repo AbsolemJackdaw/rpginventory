@@ -31,8 +31,9 @@ public class MoldRecipes {
 		a.put(catalist, mineral);
 		b.put(mold, (HashMap<Block, Item>) a);
 
-		if(test.containsKey(b))
+		if(test.containsKey(b)) {
 			return test.get(b);
+		}
 
 		return null;
 

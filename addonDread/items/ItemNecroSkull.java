@@ -51,9 +51,9 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 			World world = p.worldObj;
 			if (!world.isRemote) {
 				ItemStack weapon = p.getCurrentEquippedItem();
-				PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+				PlayerRpgInventory.get(p);
 
-				if (weapon != null)
+				if (weapon != null) {
 					if (weapon.getItem().equals(RpgDreadAddon.necro_weapon)
 							&& RpgInventoryMod.playerClass
 							.contains(RpgDreadAddon.CLASSNECRO)) {
@@ -66,8 +66,9 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 							// delete the item
 							p.renderBrokenItemStack(weapon);
 							p.setCurrentItemOrArmor(0, (ItemStack) null);
-						} else
+						} else {
 							weapon.damageItem(2, p);
+						}
 
 						if (mob.getClass() == EntityZombie.class) {
 
@@ -76,8 +77,9 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 
 							for (int i = 0; i < 5; i++) {
 								ItemStack stack = mob.getEquipmentInSlot(i);
-								if (stack != null)
+								if (stack != null) {
 									var4.setCurrentItemOrArmor(i, stack);
+								}
 							}
 							mob.setDead();
 
@@ -107,9 +109,11 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 									Potion.wither.id, RpgInventoryMod.donators
 									.contains(p.getDisplayName()) ? 60
 											: 40, 1));
-						} else
+						} else {
 							mob.heal(3);
+						}
 					}
+				}
 
 			}
 		}
@@ -120,7 +124,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 	public ItemStack onItemRightClick(ItemStack is, World world,
 			EntityPlayer player) {
 
-		if(RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSNECRO))
+		if(RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSNECRO)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out =new ByteBufOutputStream(buf);
@@ -133,17 +137,18 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 				System.out.println("skull");
 
 			}
+		}
 		return is;
 	}
 
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer p,
 			Entity entity) {
-		PlayerRpgInventory inv = PlayerRpgInventory.get(p);
+		PlayerRpgInventory.get(p);
 
 		ItemStack weapon = p.getCurrentEquippedItem();
 
-		if (RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSNECRO))
+		if (RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSNECRO)) {
 			if (entity instanceof IMinion) {
 				if ((weapon.getItemDamage() + 2) >= weapon.getMaxDamage()) {
 					// Trigger item break stuff
@@ -153,12 +158,14 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 					// delete the item
 					p.renderBrokenItemStack(weapon);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else
+				} else {
 					weapon.damageItem(RpgInventoryMod.donators.contains(p
 							.getDisplayName()) ? 1 : 2, p);
+				}
 				((EntityLiving) entity).heal(3);
 				return true;
 			}
+		}
 		return false;
 	}
 }

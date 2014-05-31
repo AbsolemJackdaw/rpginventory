@@ -24,9 +24,9 @@ public class RenderMinionS extends RenderBiped {
 
 	@Override
 	protected void func_82422_c()
-    {
-        GL11.glTranslatef(0.09375F, 0.1875F, 0.0F);
-    }
+	{
+		GL11.glTranslatef(0.09375F, 0.1875F, 0.0F);
+	}
 
 	/**
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.

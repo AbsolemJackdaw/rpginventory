@@ -22,27 +22,33 @@ public class ItemAddonShields extends ItemRpgInvArmor{
 	public String getMantleTexture() {
 		return "subaraki:jewels/talisman.png";
 	}
-	
+
 	@Override
 	public String bindShieldToArmorClass() {
-		if(this.equals(RpgBaseAddon.berserkerShield))
+		if(this.equals(RpgBaseAddon.berserkerShield)) {
 			return RpgBaseAddon.CLASSBERSERKER;
-		if(this.equals(RpgBaseAddon.archerShield))
+		}
+		if(this.equals(RpgBaseAddon.archerShield)) {
 			return RpgBaseAddon.CLASSARCHER;
-		if(this.equals(RpgBaseAddon.talisman))
+		}
+		if(this.equals(RpgBaseAddon.talisman)) {
 			return RpgBaseAddon.CLASSMAGE;
+		}
 
 		return super.bindShieldToArmorClass();
 	}
 
 	@Override
 	public MainShield getShieldModel() {
-		if(this.equals(RpgBaseAddon.berserkerShield))
+		if(this.equals(RpgBaseAddon.berserkerShield)) {
 			return it;
-		if(this.equals(RpgBaseAddon.archerShield))
+		}
+		if(this.equals(RpgBaseAddon.archerShield)) {
 			return ms;
-		if(this.equals(RpgBaseAddon.talisman))
+		}
+		if(this.equals(RpgBaseAddon.talisman)) {
 			return bm;
+		}
 		return super.getShieldModel();
 	}
 
@@ -53,12 +59,15 @@ public class ItemAddonShields extends ItemRpgInvArmor{
 
 	@Override
 	public String shieldClass() {
-		if(this.equals(RpgBaseAddon.berserkerShield))
+		if(this.equals(RpgBaseAddon.berserkerShield)) {
 			return RpgBaseAddon.CLASSBERSERKERSHIELD;
-		if(this.equals(RpgBaseAddon.archerShield))
+		}
+		if(this.equals(RpgBaseAddon.archerShield)) {
 			return RpgBaseAddon.CLASSARCHERSHIELD;
-		if(this.equals(RpgBaseAddon.talisman))
+		}
+		if(this.equals(RpgBaseAddon.talisman)) {
 			return RpgBaseAddon.CLASSMAGESHIELD;
+		}
 		return super.shieldClass();
 	}
 }
