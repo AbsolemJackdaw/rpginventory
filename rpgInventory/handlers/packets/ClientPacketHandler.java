@@ -57,19 +57,20 @@ public class ClientPacketHandler extends ServerPacketHandler {
 			case SMP_INVENTORY_SYNC:
 				String otherPlayerName = dis.readUTF();
 				EntityPlayer other = world.getPlayerEntityByName(otherPlayerName);
-				PlayerRpgInventory rpg = PlayerRpgInventory.get(other);
 
-				if(rpg != null){
-					if(other != null){
+				if(other != null){
+					PlayerRpgInventory rpg = PlayerRpgInventory.get(other);
+					if(rpg != null){
 						for (int i = 0; i < 7; i++){
 							rpg.setInventorySlotContents(i,ByteBufUtils.readItemStack(buf));
 						}
 					}else{
-						FMLLog.getLogger().info("packet info. 'other' was null. dropping packet");
+						FMLLog.getLogger().info("packet info. 'inventory' was null. dropping packet");
 					}
 				}else{
-					FMLLog.getLogger().info("packet info. 'inventory' was null. dropping packet");
+					FMLLog.getLogger().info("packet info. 'other' was null. dropping packet");
 				}
+
 				break;
 
 			default:
