@@ -52,8 +52,7 @@ public class PacketInventory {
 				ByteBufUtils.writeItemStack(buf, inv.armorSlots[i]);
 			}
 
-			TargetPoint point = new TargetPoint(player.dimension,
-					player.posX, player.posY, player.posZ, 60);
+			TargetPoint point = new TargetPoint(player.dimension,player.posX, player.posY, player.posZ, 60);
 
 			RpgInventoryMod.Channel.sendToAllAround(new FMLProxyPacket(buf,"RpgInv"), point);
 

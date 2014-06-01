@@ -34,8 +34,6 @@ IExtendedEntityProperties {
 		return (PlayerRpgInventory) p.getExtendedProperties(EXT_PROP_NAME);
 	}
 
-
-
 	/* =====SAVING ENTITY DATA ===== */
 
 	public static final void register(EntityPlayer player) {

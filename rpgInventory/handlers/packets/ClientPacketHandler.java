@@ -18,10 +18,6 @@ import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 
 public class ClientPacketHandler extends ServerPacketHandler {
 
-	public static final int OPENRPGINV = 1;
-	public static final int INVENTORY = 15;
-	public static final int SMP_INVENTORY_SYNC = 20;
-
 	@SubscribeEvent
 	public void onClientPacket(ClientCustomPacketEvent event) {
 
@@ -55,15 +51,24 @@ public class ClientPacketHandler extends ServerPacketHandler {
 					PlayerRpgInventory.get(p).setInventorySlotContents(i,
 							ByteBufUtils.readItemStack(buf));
 				}
+
 				break;
+
 			case SMP_INVENTORY_SYNC:
 				String otherPlayerName = dis.readUTF();
 				EntityPlayer other = world.getPlayerEntityByName(otherPlayerName);
+				PlayerRpgInventory rpg = PlayerRpgInventory.get(other);
 
-				for (int i = 0; i < PlayerRpgInventory.get(other)
-						.getSizeInventory(); i++) {
-					PlayerRpgInventory.get(other).setInventorySlotContents(i,
-							ByteBufUtils.readItemStack(buf));
+				if(rpg != null){
+					if(other != null){
+						for (int i = 0; i < 7; i++){
+							rpg.setInventorySlotContents(i,ByteBufUtils.readItemStack(buf));
+						}
+					}else{
+						FMLLog.getLogger().info("packet info. 'other' was null. dropping packet");
+					}
+				}else{
+					FMLLog.getLogger().info("packet info. 'inventory' was null. dropping packet");
 				}
 				break;
 

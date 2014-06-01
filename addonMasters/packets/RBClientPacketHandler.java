@@ -22,8 +22,8 @@ public class RBClientPacketHandler extends RBServerPacketHandler {
 		World world = p.worldObj;
 
 		try {
-			dis.readInt();
-			switch (TELEPORT) {
+			int id = dis.readInt();
+			switch (id) {
 			case 14:
 				new PacketTeleport(world, p, dis);
 				break;

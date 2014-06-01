@@ -122,6 +122,7 @@ public class RPGEventHooks {
 	}
 
 	private boolean hasGraves;
+	
 	@SubscribeEvent
 	public void DeathEvent(LivingDeathEvent evt) {
 
@@ -141,6 +142,11 @@ public class RPGEventHooks {
 			if (!player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
 				if(!hasGraves) {
 					dropJewels(player);
+				}else{
+					PlayerRpgInventory rpg = PlayerRpgInventory.get(player);
+					for (int var1 = 0; var1 < rpg.armorSlots.length; ++var1){
+						rpg.setInventorySlotContents(var1, null);
+					}
 				}
 			}
 		}
