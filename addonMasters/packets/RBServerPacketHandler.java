@@ -51,7 +51,7 @@ public class RBServerPacketHandler {
 								pet.writePetToItemStack());
 						IPet.playersWithActivePets.remove(p.getDisplayName());
 						((EntityLiving) pet).setDead();
-						PacketInventory.sendPacket(p, inv);
+						PacketInventory.syncOwnInventory(p, inv);
 					}
 				}
 				break;

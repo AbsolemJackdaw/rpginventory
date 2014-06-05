@@ -11,7 +11,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.utils.RpgUtility;
-import addonBasic.items.ItemRageFood;
 import addonBasic.items.ItemRpg;
 import addonBasic.items.armor.ItemAddonShields;
 import addonBasic.items.armor.ItemArcherArmor;
@@ -76,9 +75,9 @@ public class RpgBaseAddon {
 
 	public static Item
 	/* ====weapons==== */
-	elfbow, claymore, hammer, wand, staf,
+	elfbow, hammer, wand, staf,
 	/* ====extra items==== */
-	rageSeed, wizardBook,
+	wizardBook,
 	/* ====armor==== */
 	magehood, magegown, magepants, mageboots, archerhood, archerchest,
 	archerpants, archerboots, berserkerHood, berserkerChest,
@@ -98,11 +97,9 @@ public class RpgBaseAddon {
 	public final ArmorMaterial berserker = EnumHelper.addArmorMaterial(
 			"berserker", 20, new int[] { 2, 4, 3, 2 }, 5);
 
-	ToolMaterial clay = EnumHelper
-			.addToolMaterial("claymore", 0, 750, 5F, 6, 0);
+	ToolMaterial clay = EnumHelper.addToolMaterial("claymore", 0, 500, 5F, 4, 0);
 
-	ToolMaterial stone = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 5F,
-			4, 0);
+	ToolMaterial rageBreaker = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 4F, 2, 0);
 
 	@SidedProxy(serverSide = "addonBasic.CommonAddonProxy", clientSide = "addonBasic.ClientAddonProxy")
 	public static CommonAddonProxy proxy;
@@ -113,8 +110,6 @@ public class RpgBaseAddon {
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("BaseAddon");
 		proxy.registerRenderInformation();
 		RpgBaseAddon.Channel.register(new ServerPacketHandler());
-
-		MinecraftForge.addGrassSeed(new ItemStack(rageSeed, 1), 1);
 
 		// SKINS
 		GameRegistry.addRecipe(new ItemStack(animalskin, 1), new Object[] {
@@ -135,9 +130,9 @@ public class RpgBaseAddon {
 		GameRegistry.addRecipe(new ItemStack(staf, 1), new Object[] { " ML",
 			" SM", "S  ", 'M', Items.speckled_melon, 'S', Items.stick, 'L',
 			new ItemStack(Items.dye, 1, 4) });
-		GameRegistry.addRecipe(new ItemStack(claymore, 1), new Object[] {
-			" S ", " S ", "LIL", 'I', Items.iron_ingot, 'S', Blocks.stone,
-			'L', Items.leather });
+//		GameRegistry.addRecipe(new ItemStack(claymore, 1), new Object[] {
+//			" S ", " S ", "LIL", 'I', Items.iron_ingot, 'S', Blocks.stone,
+//			'L', Items.leather });
 		GameRegistry.addRecipe(new ItemStack(hammer, 1), new Object[] { "SSS",
 			"LI ", "LI ", 'I', Items.iron_ingot, 'S', Blocks.iron_block,
 			'L', Items.leather });
@@ -182,8 +177,6 @@ public class RpgBaseAddon {
 		RpgUtility.registerAbilityWeapon(elfbow, ServerPacketHandler.ARCHER);
 		RpgUtility.registerAbilityWeapon(wand, ServerPacketHandler.MAGE2);
 
-
-
 		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow",
 				EntityRegistry.findGlobalUniqueEntityId(), this, 250, 1, true);
 
@@ -194,16 +187,15 @@ public class RpgBaseAddon {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
 
-		tab = new AddonTab(CreativeTabs.getNextID(),
-				"Mage Archer Berserker Addon");
+		tab = new AddonTab(CreativeTabs.getNextID(),"Mage Archer Berserker Addon");
 
 		archerShield = new ItemAddonShields(1, 200, "",
 				"subaraki:jewels/Shield1.png").setUnlocalizedName(
 						"shieldArcher").setCreativeTab(tab);
-		berserkerShield = new ItemAddonShields(1, 350, "",
+		berserkerShield = new ItemAddonShields(1, 450, "",
 				"subaraki:jewels/IronThorn.png").setUnlocalizedName(
 						"shieldBerserker").setCreativeTab(tab);
-		talisman = new ItemAddonShields(1, 200, "",
+		talisman = new ItemAddonShields(1, 500, "",
 				"subaraki:jewels/mageShield.png").setUnlocalizedName(
 						"shieldMage").setCreativeTab(tab);
 
@@ -234,8 +226,7 @@ public class RpgBaseAddon {
 		berserkerBoots = new ItemBerserkerArmor(berserker, 4, 3)
 		.setUnlocalizedName("berserk4").setCreativeTab(tab);
 
-		claymore = new ItemClaymore(clay).setFull3D().setMaxDamage(1024)
-				.setUnlocalizedName("claymore").setCreativeTab(tab);
+//		claymore = new ItemClaymore(clay).setFull3D().setUnlocalizedName("claymore").setCreativeTab(tab);
 		wand = new ItemMageSphere().setFull3D().setMaxDamage(400)
 				.setUnlocalizedName("soulsphere").setCreativeTab(tab);
 		elfbow = new ItemArcherBow().setFull3D().setMaxDamage(350)
@@ -251,17 +242,12 @@ public class RpgBaseAddon {
 		wizardBook = new ItemRpg().setUnlocalizedName("a.book_normal")
 				.setCreativeTab(tab);
 
-		hammer = new ItemHammer(stone).setMaxDamage(750)
-				.setUnlocalizedName("rageBreaker").setCreativeTab(tab);
-		staf = new ItemStaf().setMaxStackSize(1).setMaxDamage(1500)
-				.setUnlocalizedName("lunarStaff").setCreativeTab(tab);
+		hammer = new ItemHammer(rageBreaker).setUnlocalizedName("rageBreaker").setCreativeTab(tab);
+		
+		staf = new ItemStaf().setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);
 
-		rageSeed = new ItemRageFood(0, 0f, false).setAlwaysEdible()
-				.setUnlocalizedName("r.seeds_melon").setMaxStackSize(8)
-				.setCreativeTab(tab);
-
-		allItems = new Item[] { elfbow, claymore, hammer, wand, staf,
-				berserkerShield, archerShield, talisman, rageSeed, wizardBook,
+		allItems = new Item[] { elfbow, /*claymore,*/ hammer, wand, staf,
+				berserkerShield, archerShield, talisman, wizardBook,
 				magehood, magegown, magepants, mageboots, archerhood,
 				archerchest, archerpants, archerboots, berserkerHood,
 				berserkerChest, berserkerLegs, berserkerBoots, animalskin,
@@ -276,7 +262,7 @@ public class RpgBaseAddon {
 				String itemNameCropped = itemName.substring(itemName
 						.indexOf(".") + 1);
 
-				if ((allItems[i] == rageSeed) || (allItems[i] == animalskin)
+				if ((allItems[i] == animalskin)
 						|| (allItems[i] == tanHide)
 						|| (allItems[i] == magecloth)
 						|| (allItems[i] == wizardBook)) {

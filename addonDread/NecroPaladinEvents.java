@@ -17,55 +17,39 @@ public class NecroPaladinEvents {
 	@SubscribeEvent
 	public void PlayerDamage(LivingHurtEvent evt) {
 
-		try {
-			/* ADDING EXTRA DAMAGE TO CLASS ARMOR COMBINATIONS */
-			Entity damager = evt.source.getSourceOfDamage();
-			if (damager != null) {
-				if (damager instanceof EntityPlayer) {
-					PlayerRpgInventory
-					.get((EntityPlayer) damager);
-					ItemStack weapon = ((EntityPlayer) damager)
-							.getCurrentEquippedItem();
-					if (RpgInventoryMod.playerClass
-							.contains(RpgDreadAddon.CLASSPALADIN)) {
-						if (damager.worldObj.isDaytime()) {
-							evt.ammount += 2;
-							if (weapon != null) {
-								if (weapon.getItem() == RpgDreadAddon.pala_weapon) {
-									if (RpgInventoryMod.playerClass
-											.contains(RpgDreadAddon.CLASSPALADIN)) {
-										evt.ammount += 2;
-									}
+		Entity damager = evt.source.getSourceOfDamage();
+		if (damager != null) {
+			if (damager instanceof EntityPlayer) {
+				PlayerRpgInventory.get((EntityPlayer) damager);
+				ItemStack weapon = ((EntityPlayer) damager).getCurrentEquippedItem();
+				if (RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSPALADIN)) {
+					System.out.println(damager.worldObj.isDaytime());
+					if (damager.worldObj.isDaytime()) {
+						evt.ammount += 2;
+						if (weapon != null) {
+							if (weapon.getItem() == RpgDreadAddon.paladinSword) {
+								if (RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSPALADIN)) {
+									evt.ammount += 1;
 								}
 							}
 						}
-						// paladin heals himself when hitting undead
-						if (evt.entityLiving.isEntityUndead()) {
-							if (((EntityPlayer) damager).getHealth() < ((EntityPlayer) damager)
-									.getMaxHealth()) {
-								((EntityPlayer) damager)
-								.heal(RpgInventoryMod.donators
-										.contains(((EntityPlayer) damager)
-												.getDisplayName()) ? 2
-														: 1);
-							}
-							evt.ammount += 3;
-							evt.entityLiving.setFire(RpgInventoryMod.donators
-									.contains(((EntityPlayer) damager)
-											.getDisplayName()) ? 5 : 2);
-						}
 					}
-					if (RpgInventoryMod.playerClass
-							.contains(RpgDreadAddon.CLASSNECRO)) {
-						if (!damager.worldObj.isDaytime()) {
-							evt.ammount += 3;
+					// paladin heals himself when hitting undead
+					if (evt.entityLiving.isEntityUndead()) {
+						if (((EntityPlayer) damager).getHealth() < ((EntityPlayer) damager).getMaxHealth()) {
+							if (RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSPALADINSHIELD))
+								((EntityPlayer) damager).heal(RpgInventoryMod.donators.contains(((EntityPlayer) damager).getDisplayName()) ? 2: 1);
 						}
+						evt.ammount += 3;
+						evt.entityLiving.setFire(RpgInventoryMod.donators.contains(((EntityPlayer) damager).getDisplayName()) ? 5 : 2);
+					}
+				}
+				if (RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSNECRO)) {
+					if (!damager.worldObj.isDaytime()) {
+						evt.ammount += 3;
 					}
 				}
 			}
-		} catch (Exception e) {
-			FMLLog.getLogger()
-			.info("Couldnt add extra damage to paladin weapon. report to mod author.");
 		}
 	}
 
@@ -77,18 +61,12 @@ public class NecroPaladinEvents {
 
 			double mX = p.motionX;
 			double mZ = p.motionZ;
-			try {
-				if (RpgInventoryMod.playerClass
-						.contains(RpgDreadAddon.CLASSPALADIN)) {
-					mX *= 0.75F;// slows down
-					mZ *= 0.75F;
-				}
-				p.motionX = mX;
-				p.motionZ = mZ;
-
-			} catch (Exception e) {
-				// TODO: handle exception
+			if (RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSPALADIN)) {
+				mX *= 0.9F;// slows down
+				mZ *= 0.9F;
 			}
+			p.motionX = mX;
+			p.motionZ = mZ;
 
 			try {
 

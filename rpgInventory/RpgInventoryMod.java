@@ -315,10 +315,7 @@ public class RpgInventoryMod {
 				allItems[i].setTextureName(RpgInventoryMod.name + ":"
 						+ itemNameCropped);
 
-				GameRegistry
-				.registerItem(allItems[i],
-						allItems[i].getUnlocalizedName(),
-						RpgInventoryMod.name);
+				GameRegistry.registerItem(allItems[i],allItems[i].getUnlocalizedName(),RpgInventoryMod.name);
 
 			} else {
 				System.out.println("Item is null !" + i);

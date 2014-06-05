@@ -58,8 +58,8 @@ public class ClientAddonProxy extends CommonAddonProxy {
 
 
 		if (RpgConfig.instance.render3D == true) {
-			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.claymore,
-					new ClaymoreRenderer());
+//			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.claymore,
+//					new ClaymoreRenderer());
 			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.hammer,
 					new HammerRender());
 			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.wand,

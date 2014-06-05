@@ -4,14 +4,17 @@ import io.netty.buffer.ByteBufInputStream;
 
 import java.io.IOException;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
+import cpw.mods.fml.relauncher.Side;
 
 public class ServerPacketHandler {
 
@@ -39,20 +42,10 @@ public class ServerPacketHandler {
 		try {
 
 			int guiId = dis.readInt();
+
 			switch (guiId) {
 			case OPENRPGINV:
-				FMLNetworkHandler.openGui(p, RpgInventoryMod.instance, 1,
-						world, x, y, z);
-				break;
-
-			case SMP_INVENTORY_SYNC:
-				//				String otherPlayerName = dis.readUTF();
-				//				EntityPlayer other = world.getPlayerEntityByName(otherPlayerName);
-				//				for (int i = 0; i < PlayerRpgInventory.get(other)
-				//						.getSizeInventory(); i++)
-				//					PlayerRpgInventory.get(other).setInventorySlotContents(i,
-				//							ByteBufUtils.readItemStack(buf));
-
+				FMLNetworkHandler.openGui(p, RpgInventoryMod.instance, 1, world, x, y, z);
 				break;
 
 			default:
@@ -63,7 +56,6 @@ public class ServerPacketHandler {
 			}
 			dis.close();
 		} catch (IOException e) {
-			//			e.printStackTrace();
 			System.out.println("Server packet exception");
 		}
 	}

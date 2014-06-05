@@ -50,7 +50,7 @@ public class RpgVanillaShields {
 		GameRegistry.addRecipe(new ItemStack(shieldGold, 1), new Object[] {
 			"WWW", "WWW", " W ", 'W', Items.gold_ingot });
 		GameRegistry.addRecipe(new ItemStack(shieldDiamond, 1), new Object[] {
-			"WWW", "WBW", " W ", 'W', Items.diamond, 'B',
+			"WWW", "WwW", " W ", 'W', Items.diamond, 'B',
 			Blocks.diamond_block });
 
 		proxy.registerRenderers();

@@ -61,10 +61,10 @@ public class PlayerRpgContainer extends Container {
 	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 
-		PacketInventory.sendServerPacket(par1EntityPlayer);
+		PacketInventory.sendDataToPlayersAround(par1EntityPlayer);
 
 		if (!par1EntityPlayer.worldObj.isRemote) {
-			PacketInventory.sendPacket((EntityPlayerMP) par1EntityPlayer,
+			PacketInventory.syncOwnInventory((EntityPlayerMP) par1EntityPlayer,
 					this.inventory);
 		}
 
@@ -82,7 +82,7 @@ public class PlayerRpgContainer extends Container {
 		ItemStack rv = super.slotClick(par1, par2, par3, par4EntityPlayer);
 
 		if (!par4EntityPlayer.worldObj.isRemote) {
-			PacketInventory.sendPacket((EntityPlayerMP) par4EntityPlayer,
+			PacketInventory.syncOwnInventory((EntityPlayerMP) par4EntityPlayer,
 					this.inventory);
 		}
 		return rv;

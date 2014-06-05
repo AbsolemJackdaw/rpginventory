@@ -16,11 +16,11 @@ import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.RPGEventHooks;
 import rpgInventory.utils.RpgUtility;
-import addonDread.items.ItemGrandSword;
 import addonDread.items.ItemNecroArmor;
 import addonDread.items.ItemNecroPaladinMats;
 import addonDread.items.ItemNecroSkull;
 import addonDread.items.ItemPaladinArmor;
+import addonDread.items.ItemPaladinSword;
 import addonDread.items.ItemRpgInvArmorPlus;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
@@ -40,15 +40,15 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "RPGPlusPlus", name = "Necro Paladin Addon", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
-// @NetworkMod(clientSideRequired = true, serverSideRequired = false,
-// clientPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgPlusPlus" },
-// packetHandler = RpgPlusPacketHandler.class), serverPacketHandlerSpec =
-// @SidedPacketHandler(channels = { "RpgPlusPlus" }, packetHandler =
-// RpgPlusPacketHandler.class))
 public class RpgDreadAddon {
 
+	@SidedProxy(serverSide = "addonDread.CommonProxyRpgplus", clientSide = "addonDread.ClientProxyRpgPlus")
+	public static CommonProxyRpgplus proxy;
+	
 	public static String CLASSNECRO = "necro";
 	public static String CLASSNECROSHIELD = "shieldedNecro";
 	public static String CLASSPALADIN = "paladin";
@@ -60,69 +60,56 @@ public class RpgDreadAddon {
 	private String[][] recipePatterns;
 	private Object[][] recipeItems;
 
-	public final static ArmorMaterial necroArmor = EnumHelper.addArmorMaterial(
-			"necromancer", 20, new int[] { 2, 5, 1, 1 }, 5); // use
-	// of
-	// Souls
-	public final static ArmorMaterial paladin = EnumHelper.addArmorMaterial(
-			"paladin", 20, new int[] { 4, 7, 2, 1 }, 5); // use
-	// of
-	// Steel
+	public static final ArmorMaterial NECROARMOR = EnumHelper.addArmorMaterial("necromancer", 20, new int[] { 2, 5, 1, 1 }, 5);
 
-	public ToolMaterial NecroToolMaterial = EnumHelper.addToolMaterial("souls",
-			0, 1024, 5F, 1, 0);
-	public ToolMaterial PalaToolMaterial = EnumHelper.addToolMaterial("steel",
-			0, 1024, 5F, 1, 0);
+	public static final ArmorMaterial PALADINARMOR = EnumHelper.addArmorMaterial("paladin", 20, new int[] { 4, 7, 2, 1 }, 5);
 
+	public static final ToolMaterial NECRO = EnumHelper.addToolMaterial("souls",0, 1024, 5F, 1, 0);
+	public static final ToolMaterial PALADIN = EnumHelper.addToolMaterial("steel",0, 1024, 5F, 0, 0);
+
+	public static FMLEventChannel Channel;
+
+	public static PlusTab tab;
+	
 	public static Item allItems[];
 	public static Item
 	/* ====shields==== */
-	pala_shield, necro_shield,
+	paladinShield, necroShield,
 	/* ====weapons==== */
-	pala_weapon, necro_weapon,
+	paladinSword, necroSkull,
 	/* ====armor==== */
 	necroHood, necroChestplate, necroLeggings, necroBoots, palaHelm, palaChest,
 	palaLeggings, palaBoots,
 	/* ====leathers/skins==== */
-	necro_skin, pala_steel;
-
-	@SidedProxy(serverSide = "addonDread.CommonProxyRpgplus", clientSide = "addonDread.ClientProxyRpgPlus")
-	public static CommonProxyRpgplus proxy;
-
-	public static FMLEventChannel Channel;
-
-	public static CreativeTabs tab;
+	necroleather, paladinSteel;
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 
-		FMLLog.info(
-				"Rpg++ Necromancer and Paladin is installed. Renderers can be Used",
-				1);
+		FMLLog.info("Rpg++ Necromancer and Paladin is installed. Renderers can be Used",1);
 
-
-		GameRegistry.addRecipe(new ItemStack(necro_skin, 1), new Object[] {
+		GameRegistry.addRecipe(new ItemStack(necroleather, 1), new Object[] {
 			"BWB", "WLW", "BWB", 'W', Items.spider_eye, 'B', Items.bone,
 			'L', Items.leather });
-		GameRegistry.addRecipe(new ItemStack(pala_steel, 1),
-				new Object[] { "GGG", "BIB", "GGG", 'G', Items.gold_ingot, 'B',
-			(new ItemStack(Items.potionitem, 1, 0)), 'I',
+		GameRegistry.addRecipe(new ItemStack(paladinSteel, 1),
+				new Object[] { "GGG", "BIB", "GGG", 'I', Items.gold_ingot, 'B',
+			(new ItemStack(Items.potionitem, 1, 0)), 'G',
 			Items.iron_ingot });
-		GameRegistry.addRecipe(new ItemStack(necro_shield, 1), new Object[] {
-			"WWW", "WBW", " W ", 'W', necro_skin, 'B',
+		GameRegistry.addRecipe(new ItemStack(necroShield, 1), new Object[] {
+			"WWW", "WBW", " W ", 'W', necroleather, 'B',
 			new ItemStack(Items.skull, 1, 1) });
-		GameRegistry.addRecipe(new ItemStack(pala_shield, 1), new Object[] {
-			"WWW", "WBW", " W ", 'W', pala_steel, 'B', Blocks.iron_block });
-		GameRegistry.addRecipe(new ItemStack(necro_weapon, 1), new Object[] {
+		GameRegistry.addRecipe(new ItemStack(paladinShield, 1), new Object[] {
+			"WWW", "WBW", " W ", 'W', paladinSteel, 'B', Blocks.iron_block });
+		GameRegistry.addRecipe(new ItemStack(necroSkull, 1), new Object[] {
 			"WWW", "WBW", "WWW", 'W', Items.bone, 'B',
 			new ItemStack(Items.skull, 1, 1) });
-		GameRegistry.addRecipe(new ItemStack(pala_weapon, 1), new Object[] {
-			"S", "S", "G", 'S', pala_steel, 'G', Items.gold_ingot });
+		GameRegistry.addRecipe(new ItemStack(paladinSword, 1), new Object[] {
+			"S", "S", "G", 'S', Items.iron_ingot, 'G', paladinSteel });
 
 		recipePatterns = new String[][] { { "XXX", "X X" },
 				{ "X X", "XXX", "XXX" }, { "XXX", "X X", "X X" },
 				{ "X X", "X X" } };
-		recipeItems = new Object[][] { { pala_steel, necro_skin },
+		recipeItems = new Object[][] { { paladinSteel, necroleather },
 				{ palaHelm, necroHood }, { palaChest, necroChestplate },
 				{ palaLeggings, necroLeggings }, { palaBoots, necroBoots } };
 
@@ -146,12 +133,12 @@ public class RpgDreadAddon {
 		palaLeggings.setCreativeTab(tab);
 		palaBoots.setCreativeTab(tab);
 
-		necro_shield.setCreativeTab(tab);
-		necro_weapon.setCreativeTab(tab);
-		pala_shield.setCreativeTab(tab);
-		pala_weapon.setCreativeTab(tab);
-		necro_skin.setCreativeTab(tab);
-		pala_steel.setCreativeTab(tab);
+		necroShield.setCreativeTab(tab);
+		necroSkull.setCreativeTab(tab);
+		paladinShield.setCreativeTab(tab);
+		paladinSword.setCreativeTab(tab);
+		necroleather.setCreativeTab(tab);
+		paladinSteel.setCreativeTab(tab);
 
 		MinecraftForge.EVENT_BUS.register(new NecroPaladinEvents());
 		FMLCommonHandler.instance().bus().register(new CommonTickHandlerRpgPlus());
@@ -185,8 +172,7 @@ public class RpgDreadAddon {
 						break;
 					}
 				} catch (Exception e) {
-					System.err
-					.println("Severe error, please report this to the mod author:");
+					System.err.println("Severe error, please report this to the mod author:");
 					System.err.println(e);
 				}
 			}
@@ -204,8 +190,7 @@ public class RpgDreadAddon {
 					fallbackfield.set(null, newPotionTypes);
 				}
 			} catch (Exception ex) {
-				System.err
-				.println("Severe error, please report this to the mod author:");
+				System.err.println("Severe error, please report this to the mod author:");
 				System.err.println(ex);
 			}
 		}
@@ -235,8 +220,8 @@ public class RpgDreadAddon {
 		}
 
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("DreadPacket");
-		RpgUtility.registerAbilityWeapon(necro_weapon);
-		RpgUtility.registerAbilityWeapon(pala_weapon);
+		RpgUtility.registerAbilityWeapon(necroSkull);
+		RpgUtility.registerAbilityWeapon(paladinSword);
 		RpgDreadAddon.Channel.register(new DreadServerPacketHandler());
 
 
@@ -255,13 +240,6 @@ public class RpgDreadAddon {
 				"entity.EntityMinionS.name", "Skeleton Minion");
 		LanguageRegistry.instance().addStringLocalization(
 				"entity.EntityMinionZ.name", "Zombie Minion");
-
-		/**
-		 * TODO TickRegistry.registerTickHandler(new CommonTickHandlerRpgPlus(),
-		 * Side.SERVER); TickRegistry.registerTickHandler(new
-		 * CommonTickHandlerRpgPlus(), Side.CLIENT);
-		 */
-
 	}
 
 	@EventHandler
@@ -269,46 +247,28 @@ public class RpgDreadAddon {
 
 		tab = new PlusTab(CreativeTabs.getNextID(), "Necromancer Paladin Addon");
 
-		necroHood = new ItemNecroArmor(necroArmor, 4, 0)
-		.setUnlocalizedName("necro1");
-		necroChestplate = new ItemNecroArmor(necroArmor, 4, 1)
-		.setUnlocalizedName("necro2");
-		necroLeggings = new ItemNecroArmor(necroArmor, 4, 2)
-		.setUnlocalizedName("necro3");
-		necroBoots = new ItemNecroArmor(necroArmor, 4, 3)
-		.setUnlocalizedName("necro4");
+		necroHood = new ItemNecroArmor(NECROARMOR, 4, 0).setUnlocalizedName("necro1");
+		necroChestplate = new ItemNecroArmor(NECROARMOR, 4, 1).setUnlocalizedName("necro2");
+		necroLeggings = new ItemNecroArmor(NECROARMOR, 4, 2).setUnlocalizedName("necro3");
+		necroBoots = new ItemNecroArmor(NECROARMOR, 4, 3).setUnlocalizedName("necro4");
 
-		palaHelm = new ItemPaladinArmor(paladin, 4, 0)
-		.setUnlocalizedName("paladin1");
-		palaChest = new ItemPaladinArmor(paladin, 4, 1)
-		.setUnlocalizedName("paladin2");
-		palaLeggings = new ItemPaladinArmor(paladin, 4, 2)
-		.setUnlocalizedName("paladin3");
-		palaBoots = new ItemPaladinArmor(paladin, 4, 3)
-		.setUnlocalizedName("paladin4");
+		palaHelm = new ItemPaladinArmor(PALADINARMOR, 4, 0).setUnlocalizedName("paladin1");
+		palaChest = new ItemPaladinArmor(PALADINARMOR, 4, 1).setUnlocalizedName("paladin2");
+		palaLeggings = new ItemPaladinArmor(PALADINARMOR, 4, 2).setUnlocalizedName("paladin3");
+		palaBoots = new ItemPaladinArmor(PALADINARMOR, 4, 3).setUnlocalizedName("paladin4");
 
-		necro_shield = new ItemRpgInvArmorPlus(1, 250, "necro",
-				"subaraki:jewels/NecroShield.png")
-		.setUnlocalizedName("shieldNecro");
-		necro_weapon = new ItemNecroSkull(NecroToolMaterial).setFull3D()
-				.setUnlocalizedName("Skull");
+		necroShield = new ItemRpgInvArmorPlus(1, 250, "necro","subaraki:jewels/NecroShield.png").setUnlocalizedName("shieldNecro");
+		necroSkull = new ItemNecroSkull(NECRO).setFull3D().setUnlocalizedName("Skull");
+		paladinShield = new ItemRpgInvArmorPlus(1, 450, "pala","subaraki:jewels/PaladinShield.png").setUnlocalizedName("shieldPaladin");
+		paladinSword = new ItemPaladinSword(0,PALADIN).setFull3D().setUnlocalizedName("paladinPride");
 
-		pala_shield = new ItemRpgInvArmorPlus(1, 450, "pala",
-				"subaraki:jewels/PaladinShield.png")
-		.setUnlocalizedName("shieldPaladin");
-		pala_weapon = new ItemGrandSword(0,
-				PalaToolMaterial).setFull3D()
-				.setUnlocalizedName("paladinPride");
+		necroleather = new ItemNecroPaladinMats(0).setUnlocalizedName("n.leather");
+		paladinSteel = new ItemNecroPaladinMats(0).setUnlocalizedName("p.iron_ingot");
 
-		necro_skin = new ItemNecroPaladinMats(0)
-		.setUnlocalizedName("n.leather");
-		pala_steel = new ItemNecroPaladinMats(0)
-		.setUnlocalizedName("p.iron_ingot");
-
-		allItems = new Item[] { pala_shield, necro_shield, pala_weapon,
-				necro_weapon, necroHood, necroChestplate, necroLeggings,
+		allItems = new Item[] { paladinShield, necroShield, paladinSword,
+				necroSkull, necroHood, necroChestplate, necroLeggings,
 				necroBoots, palaHelm, palaChest, palaLeggings, palaBoots,
-				necro_skin, pala_steel };
+				necroleather, paladinSteel };
 
 		for (int i = 0; i < allItems.length; i++) {
 			if (allItems[i] != null) {
@@ -319,20 +279,35 @@ public class RpgDreadAddon {
 				String itemNameCropped = itemName.substring(itemName
 						.indexOf(".") + 1);
 
-				if ((allItems[i] == necro_skin) || (allItems[i] == pala_steel)) {
+				if ((allItems[i] == necroleather) || (allItems[i] == paladinSteel)) {
 					allItems[i].setTextureName("minecraft:" + itemNameCropped);
 				} else {
 					allItems[i].setTextureName(RpgInventoryMod.name + ":"
 							+ itemNameCropped);
 				}
 
-				GameRegistry
-				.registerItem(allItems[i],
-						allItems[i].getUnlocalizedName(),
-						RpgInventoryMod.name);
+				GameRegistry.registerItem(allItems[i],allItems[i].getUnlocalizedName(),RpgInventoryMod.name);
 			} else {
 				System.out.println("Item is null !" + i);
 			}
+		}
+	}
+
+	public class PlusTab extends CreativeTabs {
+
+		public PlusTab(int par1, String label) {
+			super(par1, label);
+		}
+
+		@Override
+		@SideOnly(Side.CLIENT)
+		public Item getTabIconItem() {
+			return RpgDreadAddon.necroSkull;
+		}
+
+		@Override
+		public String getTranslatedTabLabel() {
+			return this.getTabLabel();
 		}
 	}
 }

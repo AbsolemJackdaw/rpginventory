@@ -8,35 +8,29 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import rpgInventory.item.ItemRpgWeapon;
+import rpgInventory.item.ItemRpgSword;
 import addonBasic.RpgBaseAddon;
 
-public class ItemClaymore extends ItemRpgWeapon {
+public class ItemClaymore extends ItemRpgSword {
 
-	private int weaponDamage;
 	Random rand = new Random();
 
 	public ItemClaymore(ToolMaterial mat) {
-		super();
-		this.maxStackSize = 1;
-		this.setMaxDamage(mat.getMaxUses());
+		super(mat);
 		this.setCreativeTab(CreativeTabs.tabCombat);
-		this.weaponDamage = (int) (4 + mat.getDamageVsEntity());
 	}
 
 	@Override
 	public boolean hitEntity(ItemStack is, EntityLivingBase mob,
 			EntityLivingBase player) {
-		is.damageItem(1, mob);
-		mob.attackEntityFrom(
-				DamageSource.causePlayerDamage((EntityPlayer) player), 7);
-
+		super.hitEntity(is, mob, player);
+		
 		if (mob instanceof EntityPlayer) {
 			String name = ((EntityPlayer) mob).getCommandSenderName();
 			ItemStack skull = new ItemStack(Items.skull, 1, 3);

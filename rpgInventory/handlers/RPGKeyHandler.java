@@ -25,9 +25,12 @@ import rpgInventory.handlers.packets.ServerPacketHandler;
 import rpgInventory.utils.ISpecialAbility;
 import rpgInventory.utils.RpgUtility;
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class RPGKeyHandler implements ISpecialAbility{
 
@@ -116,34 +119,40 @@ public class RPGKeyHandler implements ISpecialAbility{
 		return null;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void keys(KeyInputEvent evt) {
 
-		try {
-			Minecraft mc = Minecraft.getMinecraft();
-			GuiScreen guiscreen = mc.currentScreen;
-			if (keySpecial.isPressed()) {
-
-				ItemStack item = mc.thePlayer.getCurrentEquippedItem();
-				if ((guiscreen == null) && !(item == null)) {
-					for(Item i : abilityMap.keySet()) {
-						if(item.getItem().equals(i)){
-							specialAbility(item);
-							for(int c =0; c < RpgUtility.allAbilities.size(); c++) {
-								RpgUtility.allAbilities.get(c).specialAbility(item);
-							}
+		Minecraft mc = Minecraft.getMinecraft();
+		GuiScreen guiscreen = mc.currentScreen;
+		if (keySpecial.isPressed()) {
+			ItemStack item = mc.thePlayer.getCurrentEquippedItem();
+			if ((guiscreen == null) && !(item == null)) {
+				for(Item i : abilityMap.keySet()) {
+					if(item.getItem().equals(i)){
+						specialAbility(item);
+						for(int c =0; c < RpgUtility.allAbilities.size(); c++) {
+							RpgUtility.allAbilities.get(c).specialAbility(item);
 						}
 					}
 				}
-			} else if (keyInventory.isPressed()) {
+			}
+		} 
+
+		try {
+			if (keyInventory.isPressed()) {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(ServerPacketHandler.OPENRPGINV);
-				RpgInventoryMod.Channel.sendToServer(new FMLProxyPacket(buf,
-						"RpgInv"));
+				
+				//temp fix for packet. packet reads out twice. once 1 and then 0. writing this will make it rpint out 1 twice, solving the problem
+				out.writeInt(ServerPacketHandler.OPENRPGINV);
+				
 				out.close();
+				RpgInventoryMod.Channel.sendToServer(new FMLProxyPacket(buf,"RpgInv"));
 			}
 		} catch (Throwable e) {
+			e.printStackTrace();
 		}
 	}
 

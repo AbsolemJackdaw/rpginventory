@@ -214,10 +214,10 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 		if (this.player != null) {
 			int age = this.getAge();
 
-			if ((age >= 0) && (age < (700 + (player.experienceLevel * 30)))) {
+			if ((age >= 0) && (age < (200 + (player.experienceLevel * 8)))) {
 				++age;
 				this.setAge(age);
-			} else if (age >= (700 + (player.experienceLevel * 30))) {
+			} else if (age >= (200 + (player.experienceLevel * 8))) {
 				this.attackEntityFrom(DamageSource.outOfWorld, this.getHealth());
 				age = 0;
 			}

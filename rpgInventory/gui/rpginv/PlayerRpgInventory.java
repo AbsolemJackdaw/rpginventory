@@ -53,7 +53,7 @@ IExtendedEntityProperties {
 	@Override
 	public void closeInventory() {
 		if (!player.worldObj.isRemote) {
-			PacketInventory.sendPacket((EntityPlayerMP) player, this);
+			PacketInventory.syncOwnInventory((EntityPlayerMP) player, this);
 		}
 	}
 
@@ -197,7 +197,7 @@ IExtendedEntityProperties {
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
 		if (!player.worldObj.isRemote) {
-			PacketInventory.sendPacket((EntityPlayerMP) player, this);
+			PacketInventory.syncOwnInventory((EntityPlayerMP) player, this);
 		}
 		return null;
 	}
@@ -284,15 +284,15 @@ IExtendedEntityProperties {
 	}
 
 	@Override
-	// onInventoryChanged
+
 	public void markDirty() {
 
 		try {
 
-			// TODO send packet
+
 
 			if (!player.worldObj.isRemote) {
-				PacketInventory.sendPacket((EntityPlayerMP) player, this);
+				PacketInventory.syncOwnInventory((EntityPlayerMP) player, this);
 			}
 
 			EntityPlayer player = MinecraftServer.getServer()

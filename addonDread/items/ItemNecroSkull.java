@@ -21,6 +21,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.item.ItemRpgSword;
 import rpgInventory.item.ItemRpgWeapon;
 import addonDread.RpgDreadAddon;
 import addonDread.minions.EntityMinionS;
@@ -29,18 +30,11 @@ import addonDread.minions.IMinion;
 import addonDread.packets.DreadServerPacketHandler;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
-public class ItemNecroSkull extends ItemRpgWeapon {
-
-	private int weaponDamage;
-	private final ToolMaterial toolMaterial;
+public class ItemNecroSkull extends ItemRpgSword  {
 
 	public ItemNecroSkull(ToolMaterial par2EnumToolMaterial) {
-		super();
-		this.toolMaterial = par2EnumToolMaterial;
+		super(par2EnumToolMaterial);
 		this.maxStackSize = 1;
-		this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
-		this.setCreativeTab(CreativeTabs.tabCombat);
-		this.weaponDamage = (int) (4 + this.toolMaterial.getDamageVsEntity());
 	}
 
 	@Override
@@ -54,38 +48,26 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 				PlayerRpgInventory.get(p);
 
 				if (weapon != null) {
-					if (weapon.getItem().equals(RpgDreadAddon.necro_weapon)
-							&& RpgInventoryMod.playerClass
-							.contains(RpgDreadAddon.CLASSNECRO)) {
-
-						if ((weapon.getItemDamage() + 2) >= weapon
-								.getMaxDamage()) {
-							// Trigger item break stuff
-							weapon.damageItem((weapon.getMaxDamage() - weapon
-									.getItemDamage()) + 1, p);
-							// delete the item
-							p.renderBrokenItemStack(weapon);
-							p.setCurrentItemOrArmor(0, (ItemStack) null);
-						} else {
-							weapon.damageItem(2, p);
-						}
+					if (weapon.getItem().equals(RpgDreadAddon.necroSkull)&& RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSNECRO)) {
 
 						if (mob.getClass() == EntityZombie.class) {
 
 							EntityMinionZ var4 = new EntityMinionZ(world, p);
 							var4.setPosition(mob.posX, mob.posY, mob.posZ);
-
+							
 							for (int i = 0; i < 5; i++) {
 								ItemStack stack = mob.getEquipmentInSlot(i);
 								if (stack != null) {
 									var4.setCurrentItemOrArmor(i, stack);
 								}
 							}
+							
 							mob.setDead();
 
 							world.spawnEntityInWorld(var4);
 							var4.setTamed(true);
 							var4.setOwner(p.getDisplayName());
+
 						} else if (mob.getClass() == EntitySkeleton.class) {
 							EntityMinionS var4 = new EntityMinionS(world, p);
 							var4.setPosition(mob.posX, mob.posY, mob.posZ);
@@ -93,22 +75,8 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 							world.spawnEntityInWorld(var4);
 							var4.setTamed(true);
 							var4.setOwner(p.getDisplayName());
-						} else if (mob.getClass() == EntityPigZombie.class) {
-							EntityPigZombie pigzombie = new EntityPigZombie(
-									world);
-							pigzombie.setPosition(mob.posX, mob.posY, mob.posZ);
-							mob.setDead();
-							world.spawnEntityInWorld(pigzombie);
-							// necromancers can not make pig zombies angry !
-
 						} else if (!(mob instanceof IMinion)) {
-							mob.attackEntityFrom(DamageSource.wither,
-									RpgInventoryMod.donators.contains(p
-											.getDisplayName()) ? 6 : 4);
-							mob.addPotionEffect(new PotionEffect(
-									Potion.wither.id, RpgInventoryMod.donators
-									.contains(p.getDisplayName()) ? 60
-											: 40, 1));
+							mob.addPotionEffect(new PotionEffect(Potion.wither.id, RpgInventoryMod.donators.contains(p.getDisplayName()) ? 80: 60, 1));
 						} else {
 							mob.heal(3);
 						}
@@ -151,11 +119,7 @@ public class ItemNecroSkull extends ItemRpgWeapon {
 		if (RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSNECRO)) {
 			if (entity instanceof IMinion) {
 				if ((weapon.getItemDamage() + 2) >= weapon.getMaxDamage()) {
-					// Trigger item break stuff
-					weapon.damageItem(
-							(weapon.getMaxDamage() - weapon.getItemDamage()) + 1,
-							p);
-					// delete the item
+					weapon.damageItem((weapon.getMaxDamage() - weapon.getItemDamage()) + 1,p);
 					p.renderBrokenItemStack(weapon);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {

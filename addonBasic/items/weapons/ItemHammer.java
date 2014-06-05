@@ -18,9 +18,7 @@ public class ItemHammer extends ItemRpgSword {
 	Random rand = new Random();
 
 	public ItemHammer(ToolMaterial mat) {
-		super(ToolMaterial.STONE);
-		this.maxStackSize = 1;
-		this.setMaxDamage(ToolMaterial.IRON.getMaxUses() + 300);
+		super(mat);
 		this.setCreativeTab(CreativeTabs.tabCombat);
 	}
 
@@ -30,10 +28,8 @@ public class ItemHammer extends ItemRpgSword {
 		PlayerRpgInventory.get(player);
 
 		if (RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSBERSERKER)) {
-			if (RpgInventoryMod.playerClass
-					.contains(RpgBaseAddon.CLASSBERSERKERSHIELD)) {
-				if ((player.getFoodStats().getFoodLevel() < 6)
-						|| (player.getHealth() < 6)) {
+			if (RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSBERSERKERSHIELD)) {
+				if ((player.getFoodStats().getFoodLevel() < 6)|| (player.getHealth() < 6)) {
 					player.addPotionEffect(new PotionEffect(
 							Potion.damageBoost.id, 200, 1));
 				} else if ((player.getFoodStats().getFoodLevel() < 3)
@@ -41,8 +37,7 @@ public class ItemHammer extends ItemRpgSword {
 					player.addPotionEffect(new PotionEffect(
 							Potion.damageBoost.id, 200, 2));
 				}
-			} else if ((player.getFoodStats().getFoodLevel() < 4)
-					|| (player.getHealth() < 4)) {
+			} else if ((player.getFoodStats().getFoodLevel() < 4)|| (player.getHealth() < 4)) {
 				player.addPotionEffect(new PotionEffect(Potion.damageBoost.id,
 						200, 1));
 			}

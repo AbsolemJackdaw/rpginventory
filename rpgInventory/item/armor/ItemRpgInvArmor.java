@@ -63,6 +63,15 @@ public class ItemRpgInvArmor extends Item {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer p1, List list,
 			boolean yesno) {
+
+		switch (((ItemRpgInvArmor)stack.getItem()).armorType) {
+		case SHIELD:
+			list.add(StatCollector.translateToLocal(""));
+			list.add(StatCollector.translateToLocal("Max damage : " + getMaxDamage()));
+		default:
+			break;
+		}
+
 		if (stack.getItem() == RpgInventoryMod.ringem) {
 			list.add(StatCollector
 					.translateToLocal("Left: Dispell Negative Effects"));

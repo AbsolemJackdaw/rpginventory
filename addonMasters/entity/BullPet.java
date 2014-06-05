@@ -114,28 +114,25 @@ public class BullPet extends BMPetImpl {
 			petSize = 2.0F;
 		}
 
-		if (dataWatcher.getWatchableObjectInt(LEVELID) == 200) {
-			// this.worldObj.spawnParticle("flame", this.posX +
-			// (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY +
-			// this.rand.nextDouble() * (double)this.height, this.posZ +
-			// (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D,
-			// 0.0D);
-			this.worldObj.spawnParticle("flame", this.posX + 3, this.posY + 2d,
-					this.posZ, 0.0D, 0.0D, 0.0D);
-		}
+//		if (dataWatcher.getWatchableObjectInt(LEVELID) == 200) {
+//			// this.worldObj.spawnParticle("flame", this.posX +
+//			// (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY +
+//			// this.rand.nextDouble() * (double)this.height, this.posZ +
+//			// (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D,
+//			// 0.0D);
+//			this.worldObj.spawnParticle("flame", this.posX + 3, this.posY + 2d,
+//					this.posZ, 0.0D, 0.0D, 0.0D);
+//		}
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (previousLevel < getLevel()) {
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-			.setBaseValue(
-					30D + MathHelper
-					.floor_double((getLevel()) / 1.538D));
 
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-			.setBaseValue(0.05D + (getLevel() / 500D));
+		if (previousLevel < getLevel()) {
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30D + MathHelper.floor_double((getLevel()) / 1.538D));
+
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.075D + (getLevel() / 500D));
 
 			previousLevel = getLevel();
 		}

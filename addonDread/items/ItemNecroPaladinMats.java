@@ -15,10 +15,10 @@ public class ItemNecroPaladinMats extends ItemMats {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack is, int par2) {
-		if (is.getItem() == RpgDreadAddon.necro_skin) {
+		if (is.getItem() == RpgDreadAddon.necroleather) {
 			return 0xee0e1d;
 		}
-		if (is.getItem() == RpgDreadAddon.pala_steel) {
+		if (is.getItem() == RpgDreadAddon.paladinSteel) {
 			return 0xf9f925;
 		}
 		return 16777215;

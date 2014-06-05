@@ -9,11 +9,11 @@ import org.lwjgl.opengl.GL11;
 import rpgInventory.renderer.RpgItemRenderer;
 import addonDread.models.GrandSword;
 
-public class GrandSwordRender extends RpgItemRenderer {
+public class PaladinSwordRenderer extends RpgItemRenderer {
 
 	GrandSword swordmodel;
 
-	public GrandSwordRender() {
+	public PaladinSwordRenderer() {
 		swordmodel = new GrandSword();
 	}
 
@@ -24,13 +24,11 @@ public class GrandSwordRender extends RpgItemRenderer {
 		case EQUIPPED:
 			GL11.glPushMatrix();
 			mc.renderEngine.bindTexture(new ResourceLocation(
-					"subaraki:weapons/pride.png"));
-			scale = 1.5F;
-			GL11.glScalef(scale, scale, scale);
+					"subaraki:weapons/paladinClaymore.png"));
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
-			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
-			GL11.glRotatef(-140F, 0.0f, 0.0f, 1.0f);
-			GL11.glTranslatef(-0.47F, -0.225F, 0F);
+			GL11.glRotatef(-5F, 0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(-150F, 0.0f, 0.0f, 1.0f);
+			GL11.glTranslatef(-0.8F, 0.6F, -0.1F);
 			swordmodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
 					0.0625F);
 			GL11.glPopMatrix();
@@ -39,13 +37,11 @@ public class GrandSwordRender extends RpgItemRenderer {
 		case EQUIPPED_FIRST_PERSON:
 			GL11.glPushMatrix();
 			mc.renderEngine.bindTexture(new ResourceLocation(
-					"subaraki:weapons/pride.png"));
-			scale = 1.5F;
-			GL11.glScalef(scale, scale, scale);
+					"subaraki:weapons/paladinClaymore.png"));
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
-			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
-			GL11.glRotatef(-140F, 0.0f, 0.0f, 1.0f);
-			GL11.glTranslatef(-0.47F, -0.15F, 0F);
+			GL11.glRotatef(-5F, 0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(-150F, 0.0f, 0.0f, 1.0f);
+			GL11.glTranslatef(-0.8F, 0.9F, -0.1F);
 			swordmodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
 					0.0625F);
 			GL11.glPopMatrix();
@@ -53,14 +49,14 @@ public class GrandSwordRender extends RpgItemRenderer {
 
 		case ENTITY:
 			GL11.glPushMatrix();
-			scale = 1.8F;
+			scale = 1.5F;
 			GL11.glScalef(scale, scale, scale);
 			mc.renderEngine.bindTexture(new ResourceLocation(
-					"subaraki:weapons/pride.png"));
+					"subaraki:weapons/paladinClaymore.png"));
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
-			GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
-			GL11.glTranslatef(0F, 0F, 0.0F);
+			GL11.glRotatef(45F, 0.0f, 0.0f, 1.0f);
+			GL11.glTranslatef(-0.2F, 1F, 0F);
 			swordmodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
 					0.0625F);
 			GL11.glPopMatrix();
@@ -68,14 +64,15 @@ public class GrandSwordRender extends RpgItemRenderer {
 
 		case INVENTORY:
 			GL11.glPushMatrix();
-			mc.renderEngine.bindTexture(new ResourceLocation(
-					"subaraki:weapons/pride.png"));
-			scale = 1.2f;
+			scale = 0.7F;
 			GL11.glScalef(scale, scale, scale);
+			mc.renderEngine.bindTexture(new ResourceLocation(
+					"subaraki:weapons/paladinClaymore.png"));
+
 			GL11.glRotatef(200F, 1.0f, 0.0f, 0.0f);
-			GL11.glRotatef(-85F, 0.0f, 1.0f, 0.0f);
-			GL11.glTranslatef(-0.1F, 0.2F, -0.1F);
-			swordmodel.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			GL11.glRotatef(-80F, 0.0f, 1.0f, 0.0f);
+			GL11.glTranslatef(0.0F, 1.2F, 0F);
+			swordmodel.render(0.0625F);
 			GL11.glPopMatrix();
 			break;
 

@@ -16,8 +16,7 @@ import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 public class PacketInventory {
 
 	/** Destined for the owner of the inventory */
-	public static void sendPacket(EntityPlayerMP player, PlayerRpgInventory inv) {
-
+	public static void syncOwnInventory(EntityPlayerMP player, PlayerRpgInventory inv) {
 
 		try {
 			ByteBuf buf = Unpooled.buffer();
@@ -29,8 +28,7 @@ public class PacketInventory {
 			}
 
 			if (!player.worldObj.isRemote) {
-				RpgInventoryMod.Channel.sendTo(new FMLProxyPacket(buf,
-						"RpgInv"), player);
+				RpgInventoryMod.Channel.sendTo(new FMLProxyPacket(buf,"RpgInv"), player);
 			}
 			out.close();
 		} catch (Exception ex) {
@@ -38,7 +36,7 @@ public class PacketInventory {
 	}
 
 	/** Destined to all other players */
-	public static void sendServerPacket(EntityPlayer player) {
+	public static void sendDataToPlayersAround(EntityPlayer player) {
 
 		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 

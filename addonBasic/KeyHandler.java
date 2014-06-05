@@ -6,6 +6,7 @@ import io.netty.buffer.Unpooled;
 
 import java.util.List;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,9 +16,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import rpgInventory.RpgInventoryMod;
+import rpgInventory.handlers.ServerTickHandler;
 import rpgInventory.utils.ISpecialAbility;
 import rpgInventory.utils.RpgUtility;
 import addonBasic.packets.ClientPacketHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class KeyHandler implements ISpecialAbility {
@@ -93,12 +96,19 @@ public class KeyHandler implements ISpecialAbility {
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 
 		if(RpgUtility.canSpecial(p, RpgBaseAddon.hammer)) {
+
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(ClientPacketHandler.BERSERKER);
 				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
 				out.close();
+
+				if(ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) / 20 <= 0){
+					RpgUtility.spawnParticle(p, 6, "smoke", 5, 1);
+					RpgUtility.spawnParticle(p, 8, "largeexplode", 6, 1);
+
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

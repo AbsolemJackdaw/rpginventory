@@ -12,6 +12,7 @@ import rpgInventory.block.te.TEMold;
 import rpgInventory.block.te.slot.GoldBlockSlot;
 import rpgInventory.block.te.slot.SlotMineral;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
+import rpgInventory.handlers.ServerTickHandler;
 
 public class RpgUtility {
 
@@ -121,6 +122,40 @@ public class RpgUtility {
 
 	/**Register a class that implements ISpecialAbility. Registering that class here will allow you to hook up to the "F" special ability key*/
 	public static void registerSpecialAbility(ISpecialAbility keyhandler) {
-		allAbilities.add(keyhandler);
+		if(!allAbilities.contains(keyhandler))
+			allAbilities.add(keyhandler);
+	}
+
+	/**Method that spawns in particles in a certain radius of the player
+	 * 
+	 * @param p EntityPlayer the player to spawn particles from
+	 * @param radius the radius in blocks
+	 * @param particle the particle to be rendered
+	 * */
+	public static void spawnParticle(EntityPlayer p, int radius, String particle, int velocitySpeed, int yOffset){
+		int x = (int)p.posX;
+		int y = (int)p.posY;
+		int z = (int)p.posZ;
+
+		int X = radius, Z = radius;
+		int x2=0, z2=0, dx = 0, dz = -1;
+		int t = Math.max(X,Z);
+		int maxI = t*t;
+		boolean flag = false;
+
+		for (int i=0; i < maxI; i++){
+
+			if (((-X/2) <= x2) && (x2 <= (X/2)) && ((-Z/2) <= z2) && (z2 <= (Z/2))) {
+				p.worldObj.spawnParticle(particle, x+x2 - 1, p.posY-yOffset, z+z2-1, (double)((double)(x2/(double)velocitySpeed)), 0.0D, (double)((double)z2/(double)velocitySpeed));
+				flag = true;
+				//break;
+			}
+
+			if( (x2 == z2) || ((x2 < 0) && (x2 == -z2)) || ((x2 > 0) && (x2 == (1-z2)))) {
+				t=dx; dx=-dz; dz=t;
+			}
+			x2+=dx; z2+=dz;
+		}		if(ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) / 20 <= 0){
+		}
 	}
 }

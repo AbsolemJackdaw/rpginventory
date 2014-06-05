@@ -1,12 +1,22 @@
 package addonDread;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
+
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import rpgInventory.RpgInventoryMod;
+import addonBasic.CommonTickHandler;
+import addonBasic.RpgBaseAddon;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 
-public class CommonTickHandlerRpgPlus /* implements ITickHandler */{
+public class CommonTickHandlerRpgPlus {
 
 	public static HashMap<String, Integer> rpgPluscooldownMap = new HashMap();
 
@@ -21,6 +31,6 @@ public class CommonTickHandlerRpgPlus /* implements ITickHandler */{
 				entry.setValue(entry.getValue() - 1);
 			}
 		}
-
 	}
+
 }

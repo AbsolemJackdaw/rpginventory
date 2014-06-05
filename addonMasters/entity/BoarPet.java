@@ -121,12 +121,8 @@ public class BoarPet extends BMPetImpl {
 	public void onUpdate() {
 		super.onUpdate();
 		if (previousLevel < getLevel()) {
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-			.setBaseValue(
-					20D + MathHelper.floor_double((getLevel()) / 2.5D));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-			.setBaseValue(getLevel() / 600D);
-
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20D + MathHelper.floor_double((getLevel()) / 2.5D));
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.1d + getLevel() / 600D);
 			previousLevel = getLevel();
 		}
 	}

@@ -209,11 +209,12 @@ IMob, IMinion {
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		if (this.player != null) {
-			int age = getAge();
-			if ((age >= 0) && (age < (700 + (player.experienceLevel * 20)))) {
+			int age = this.getAge();
+
+			if ((age >= 0) && (age < (200 + (player.experienceLevel * 8)))) {
 				++age;
 				this.setAge(age);
-			} else if (age >= (700 + (player.experienceLevel * 20))) {
+			} else if (age >= (200 + (player.experienceLevel * 8))) {
 				this.attackEntityFrom(DamageSource.outOfWorld, this.getHealth());
 				age = 0;
 			}

@@ -6,6 +6,7 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import rpgInventory.handlers.ServerTickHandler;
 import rpgInventory.utils.ISpecialAbility;
 import rpgInventory.utils.RpgUtility;
 import addonDread.packets.DreadServerPacketHandler;
@@ -19,7 +20,7 @@ public class SpecialAbility implements ISpecialAbility {
 
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 
-		if(RpgUtility.canSpecial(p, RpgDreadAddon.necro_weapon)) {
+		if(RpgUtility.canSpecial(p, RpgDreadAddon.necroSkull)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -32,14 +33,17 @@ public class SpecialAbility implements ISpecialAbility {
 			}
 		}
 
-		if(RpgUtility.canSpecial(p, RpgDreadAddon.pala_weapon)) {
+		if(RpgUtility.canSpecial(p, RpgDreadAddon.paladinSword)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(DreadServerPacketHandler.PALADINSPECIAL);
 				RpgDreadAddon.Channel.sendToServer(new FMLProxyPacket(buf,"DreadPacket"));
 				out.close();
-
+				
+				if(ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) / 20 <= 0){
+					RpgUtility.spawnParticle(p, 9, "crit", 100, 0);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

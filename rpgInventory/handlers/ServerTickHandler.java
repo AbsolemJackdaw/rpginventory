@@ -49,7 +49,7 @@ public class ServerTickHandler{
 				break;
 			}
 
-			PacketInventory.sendServerPacket(player);
+			PacketInventory.sendDataToPlayersAround(player);
 		}
 
 		countdown--;

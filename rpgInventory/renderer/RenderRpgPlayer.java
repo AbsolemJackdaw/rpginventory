@@ -39,7 +39,6 @@ public class RenderRpgPlayer {
 
 	float rotation = 0;
 
-
 	float i = 0;
 
 	private void hurtCameraEffect(float par1)
@@ -374,16 +373,18 @@ public class RenderRpgPlayer {
 	}
 
 	private void renderShield(ItemRpgInvArmor armor) {
-		GL11.glPushMatrix();
 
-		for (int i = 0; i < armor.getShieldModel().parts.size(); i++) {
-			armor.getShieldModel().parts.get(i).rotateAngleX = main.bipedLeftArm.rotateAngleX;
-			armor.getShieldModel().parts.get(i).rotateAngleY = main.bipedLeftArm.rotateAngleY;
-			armor.getShieldModel().parts.get(i).rotateAngleZ = main.bipedLeftArm.rotateAngleZ;
-			armor.getShieldModel().parts.get(i).rotationPointX = main.bipedLeftArm.rotationPointX;
-			armor.getShieldModel().parts.get(i).rotationPointY = main.bipedLeftArm.rotationPointY;
-			armor.getShieldModel().parts.get(i).rotationPointZ = main.bipedLeftArm.rotationPointZ;
-		}
+
+		GL11.glPushMatrix();
+		if(this.mc.gameSettings.thirdPersonView != 0)
+			for (int i = 0; i < armor.getShieldModel().parts.size(); i++) {
+				armor.getShieldModel().parts.get(i).rotateAngleX = main.bipedLeftArm.rotateAngleX;
+				armor.getShieldModel().parts.get(i).rotateAngleY = main.bipedLeftArm.rotateAngleY;
+				armor.getShieldModel().parts.get(i).rotateAngleZ = main.bipedLeftArm.rotateAngleZ;
+				armor.getShieldModel().parts.get(i).rotationPointX = main.bipedLeftArm.rotationPointX;
+				armor.getShieldModel().parts.get(i).rotationPointY = main.bipedLeftArm.rotationPointY;
+				armor.getShieldModel().parts.get(i).rotationPointZ = main.bipedLeftArm.rotationPointZ;
+			}
 		try {
 			if (armor.shieldClass().contains("vanilla")) {
 				armor.getShieldModel().parts.get(64 - 1).rotateAngleZ = main.bipedLeftArm.rotateAngleZ + 0.356f;

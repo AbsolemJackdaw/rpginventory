@@ -18,10 +18,7 @@ import addonBasic.RpgBaseAddon;
 public class PacketBerserker {
 
 	public PacketBerserker(World world, EntityPlayer p, ByteBufInputStream dis) {
-
-
-
-		//System.out.println("Hammer time!");
+		
 		ItemStack item1 = p.getCurrentEquippedItem();
 		ItemStack var31 = p.inventory.armorItemInSlot(3);
 		ItemStack var21 = p.inventory.armorItemInSlot(2);
@@ -42,19 +39,15 @@ public class PacketBerserker {
 				return;
 			}
 		}
-		if (!ServerTickHandler.globalCooldownMap.containsKey(p
-				.getDisplayName())) {
+		if (!ServerTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
 			ServerTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 		}
 		if (ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
-			ServerTickHandler.globalCooldownMap
-			.put(p.getDisplayName(), (RpgInventoryMod.donators
-					.contains(p.getDisplayName()) ? 6 : 7) * 20);
+			ServerTickHandler.globalCooldownMap.put(p.getDisplayName(), (RpgInventoryMod.donators.contains(p.getDisplayName()) ? 6 : 7) * 20);
 			if ((item1.getItemDamage() + 3) >= item1.getMaxDamage()) {
 				// Trigger item break stuff
 				// Only damage what is left
-				if (!RpgInventoryMod.developers.contains(p
-						.getDisplayName().toLowerCase())) {
+				if (!RpgInventoryMod.developers.contains(p.getDisplayName().toLowerCase())) {
 					item1.damageItem(
 							item1.getMaxDamage() - item1.getItemDamage(), p);
 				}
@@ -62,18 +55,15 @@ public class PacketBerserker {
 				p.renderBrokenItemStack(item1);
 				// delete the item
 				p.setCurrentItemOrArmor(0, (ItemStack) null);
-			} else if (!RpgInventoryMod.developers.contains(p
-					.getDisplayName().toLowerCase())) {
+			} else if (!RpgInventoryMod.developers.contains(p.getDisplayName().toLowerCase())) {
 				item1.damageItem(3, p);
 			}
 
 			float range = 4.0f;
-			if (RpgInventoryMod.developers.contains(p.getDisplayName()
-					.toLowerCase())) {
+			if (RpgInventoryMod.developers.contains(p.getDisplayName().toLowerCase())) {
 				range = 8.0f;
 			} else {
-				range = RpgInventoryMod.donators.contains(p
-						.getDisplayName()) ? 5.5f : 4.0f;
+				range = RpgInventoryMod.donators.contains(p.getDisplayName()) ? 5.5f : 4.0f;
 			}
 
 			AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
@@ -111,10 +101,9 @@ public class PacketBerserker {
 							}
 						} catch (Throwable ex) {
 						}
-						el.attackEntityFrom(DamageSource
-								.causePlayerDamage(p),
-								RpgInventoryMod.donators.contains(p
-										.getDisplayName()) ? 10 : 8);
+						el.attackEntityFrom(DamageSource.causePlayerDamage(p),RpgInventoryMod.donators.contains(p.getDisplayName()) ? 10 : 8);
+						p.worldObj.playSoundAtEntity(p, "random.explode", 1.0f, 1.0f);
+
 					}
 				}
 			}

@@ -186,7 +186,7 @@ public class BaseaddonEventHooks {
 				EntityPlayer p = (EntityPlayer) evt.entityLiving;
 				if (p != null) {
 
-					/* BERSEKRER KNOCKBACK */
+					/* BERSERKER KNOCKBACK */
 					// sets Berserker weapon with knockback if the apropiate
 					// classes match
 
@@ -259,14 +259,12 @@ public class BaseaddonEventHooks {
 					p.jumpMovementFactor = jumpboost;
 
 					/* ====MAGE FALLDAMAGE NEGATION==== */
-					if (RpgInventoryMod.playerClass
-							.contains(RpgBaseAddon.CLASSMAGESHIELD)) {
+					if (RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSMAGESHIELD)) {
 						p.fallDistance = 0;
 					}
 				}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 	}
 }

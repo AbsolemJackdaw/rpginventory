@@ -1,17 +1,23 @@
 package addonMasters;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
+import addonMasters.packets.RBServerPacketHandler;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.RpgGui;
-
-import com.google.common.io.ByteStreams;
-
+import rpgInventory.handlers.packets.ServerPacketHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class ClientTickHandler {
 
@@ -24,13 +30,11 @@ public class ClientTickHandler {
 		try {
 			if (Minecraft.getMinecraft().currentScreen instanceof RpgGui) {
 
-				ByteStreams.newDataOutput();
-
-				// TODO sendpacket
-				// PacketDispatcher.sendPacketToServer(new
-				// Packet250CustomPayload(
-				// "RpgRBPacket", out.toByteArray()));
-
+				ByteBuf buf = Unpooled.buffer();
+				ByteBufOutputStream out = new ByteBufOutputStream(buf);
+				out.writeInt(RBServerPacketHandler.STOREPET);
+				RpgInventoryMod.Channel.sendToServer(new FMLProxyPacket(buf, "R_BChannel"));
+				out.close();
 
 				// This will only inject our buttons into the existing
 				// GuiInventory
@@ -93,7 +97,6 @@ public class ClientTickHandler {
 			}
 			else {
 				added = false;
-				// }
 			}
 
 		} catch (Exception e) {
