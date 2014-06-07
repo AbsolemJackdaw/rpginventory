@@ -65,9 +65,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 		super.onUpdate();
 		this.size++;
 		if (this.size >= this.sizeLimit) {
-			MovingObjectPosition pos = new MovingObjectPosition(
-					(int) this.posX, (int) this.posY, (int) this.posZ, 4,
-					Vec3.createVectorHelper(this.posX, this.posY, this.posZ));
+			MovingObjectPosition pos = new MovingObjectPosition((int) this.posX, (int) this.posY, (int) this.posZ, 4,Vec3.createVectorHelper(this.posX, this.posY, this.posZ));
 			this.onImpact(pos);
 			this.setDead();
 		}
@@ -77,7 +75,6 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		//this.owner = nbt.getString("creator");
 		this.size = nbt.getInteger("size_");
 		this.sizeLimit = nbt.getInteger("sizeLimit_");
 
@@ -89,7 +86,6 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 		this.type = data.readInt();
 		this.step = data.readInt();
 		this.sizeLimit = data.readInt();
-		//this.owner = data.readBytes(owner.getBytes()).toString();
 	}
 
 	public void specialAttack(MovingObjectPosition var1, int type) {
@@ -118,9 +114,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 					if ((el != null) && (el != p)) {
 						el.setFire(30);
 						if (this.getThrower() instanceof EntityPlayer) {
-							el.attackEntityFrom(DamageSource
-									.causePlayerDamage((EntityPlayer) this
-											.getThrower()), 1);
+							el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) this.getThrower()), 1);
 							el.attackEntityFrom(DamageSource.onFire, 2);
 						} else {
 							el.attackEntityFrom(DamageSource.onFire, 2);
