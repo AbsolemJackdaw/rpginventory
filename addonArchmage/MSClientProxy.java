@@ -7,6 +7,7 @@ import addonArchmage.weapons.RenderElementalBlock;
 import addonBasic.models.item.ModelMageArmor;
 import addonBasic.models.item.ModelMageBook;
 import addonBasic.renderer.shields.BookRenderer;
+import addonBasic.renderer.weapons.StaffRenderer;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class MSClientProxy extends MSCommonProxy {

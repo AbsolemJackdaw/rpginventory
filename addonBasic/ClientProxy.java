@@ -17,7 +17,7 @@ import addonBasic.renderer.shields.BookRenderer;
 import addonBasic.renderer.weapons.BowRender;
 import addonBasic.renderer.weapons.HammerRender;
 import addonBasic.renderer.weapons.SoulSphereRender;
-import addonBasic.renderer.weapons.StafRender;
+import addonBasic.renderer.weapons.StaffRenderer;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends ServerProxy {
@@ -60,7 +60,7 @@ public class ClientProxy extends ServerProxy {
 		if (RpgConfig.instance.render3D == true) {
 			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.hammer,new HammerRender());
 			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.soulSphere,new SoulSphereRender());
-			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.lunarStaff,new StafRender());
+			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.lunarStaff,new StaffRenderer());
 			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.elfbow,new BowRender());
 
 			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.berserkerShield, new BerserkerShield(new ModelIronThorn(), "rpginventorymod:jewels/IronThorn.png"));

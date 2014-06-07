@@ -209,14 +209,14 @@ public class ModelStaf extends ModelBase {
 			float f4, float f5, Entity et) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, et);
 		float x7 = 1f;
-		this.FloatingSphere1.rotateAngleY = (MathHelper.sin(f) * x7) + 0F;
-		this.FloatingSphere1.rotateAngleX = (MathHelper.sin(f) * 10f);
+		this.FloatingSphere1.rotateAngleY = f;// (MathHelper.sin(f) * x7) + 0F;
+		this.FloatingSphere1.rotateAngleX = f*10;//(MathHelper.sin(f) * 10f);
 
-		this.FloatingSphere2.rotateAngleZ = (MathHelper.sin(f) * x7) + 0f;
-		this.FloatingSphere2.rotateAngleY = (MathHelper.sin(f) * 10F);
+		this.FloatingSphere2.rotateAngleZ = f;//(MathHelper.sin(f) * x7) + 0f;
+		this.FloatingSphere2.rotateAngleY = f*10;//(MathHelper.sin(f) * 10F);
 
-		this.FloatingSphere3.rotateAngleX = (MathHelper.sin(f) * x7) + 0f;
-		this.FloatingSphere3.rotateAngleZ = (MathHelper.sin(f) * 10f);
+		this.FloatingSphere3.rotateAngleX = f;//(MathHelper.sin(f) * x7) + 0f;
+		this.FloatingSphere3.rotateAngleZ = f*10;//(MathHelper.sin(f) * 10f);
 
 	}
 
