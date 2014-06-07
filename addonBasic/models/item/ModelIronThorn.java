@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import rpgInventory.models.MainShield;
 
-public class IronThorn extends MainShield {
+public class ModelIronThorn extends MainShield {
 	// fields
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
@@ -79,7 +79,7 @@ public class IronThorn extends MainShield {
 	ModelRenderer Shape71;
 	ModelRenderer Shape72;
 
-	public IronThorn() {
+	public ModelIronThorn() {
 		textureWidth = 64;
 		textureHeight = 48;
 

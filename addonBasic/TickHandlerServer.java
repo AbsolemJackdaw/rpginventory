@@ -10,7 +10,7 @@ import rpgInventory.handlers.RPGEventHooks;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 
-public class CommonTickHandler {
+public class TickHandlerServer {
 
 	public static Map<String, Integer> ArcherRepairTick = new ConcurrentHashMap();
 
@@ -23,9 +23,7 @@ public class CommonTickHandler {
 					ArcherRepairTick.put(username,
 							ArcherRepairTick.get(username) - 1);
 				} else {
-					EntityPlayer player = MinecraftServer.getServer()
-							.getConfigurationManager()
-							.getPlayerForUsername(username);
+					EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
 					if (player == null) {
 						ArcherRepairTick.remove(username);
 						continue;

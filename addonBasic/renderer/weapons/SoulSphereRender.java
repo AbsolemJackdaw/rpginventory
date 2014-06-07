@@ -22,6 +22,7 @@ public class SoulSphereRender extends RpgItemRenderer {
 	Random random = new Random();
 	float turn = 0;
 
+	private static final ResourceLocation texture = new ResourceLocation("rpginventorymod:weapons/SoulSphere.png");
 	public SoulSphereRender() {
 		swordmodel = new ModelSoulSphere();
 		this.hoverStart = (float) (Math.random() * Math.PI * 2.0D);
@@ -33,8 +34,7 @@ public class SoulSphereRender extends RpgItemRenderer {
 		switch (type) {
 		case EQUIPPED:
 			GL11.glPushMatrix();
-			mc.renderEngine.bindTexture(new ResourceLocation(
-					"rpginventorymod:weapons/SoulSphere.png"));
+			mc.renderEngine.bindTexture(texture);
 			scale = 0.45F;
 			GL11.glScalef(scale, scale, scale);
 			GL11.glTranslatef(1.2F, 1F, -0.2F);
@@ -43,26 +43,19 @@ public class SoulSphereRender extends RpgItemRenderer {
 				EntityPlayer p = (EntityPlayer) data[1];
 				PlayerRpgInventory.get(p);
 
-				if (RpgInventoryMod.playerClass.contains("archMage")
-						|| RpgInventoryMod.playerClass
-						.contains(RpgBaseAddon.CLASSMAGE)) {
-					swordmodel.renderFloatingShpere((Entity) data[1], turn,
-							0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-					swordmodel.renderFloatingShpere((Entity) data[1],
-							-(turn) + 100, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-					swordmodel.renderFloatingShpere((Entity) data[1],
-							-(turn) / 2, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+				if (RpgInventoryMod.playerClass.contains("archMage")|| RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSALCHEMIST)) {
+					swordmodel.renderFloatingShpere((Entity) data[1], turn,0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+					swordmodel.renderFloatingShpere((Entity) data[1],-(turn) + 100, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+					swordmodel.renderFloatingShpere((Entity) data[1],-(turn) / 2, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 				}
 			}
-			swordmodel.render((Entity) data[1], 0, 0.0F, 0.0F, 0.0F, 0.0F,
-					0.0625F);
+			swordmodel.render((Entity) data[1], 0, 0.0F, 0.0F, 0.0F, 0.0F,0.0625F);
 			GL11.glPopMatrix();
 			break;
 
 		case EQUIPPED_FIRST_PERSON:
 			GL11.glPushMatrix();
-			mc.renderEngine.bindTexture(new ResourceLocation(
-					"rpginventorymod:weapons/SoulSphere.png"));
+			mc.renderEngine.bindTexture(texture);
 			scale = 0.45F;
 			GL11.glScalef(scale, scale, scale);
 			GL11.glTranslatef(0.8F, 1.2F, -0.2F);
@@ -71,15 +64,10 @@ public class SoulSphereRender extends RpgItemRenderer {
 				EntityPlayer p = (EntityPlayer) data[1];
 				PlayerRpgInventory.get(p);
 
-				if (RpgInventoryMod.playerClass.contains("archMage")
-						|| RpgInventoryMod.playerClass
-						.contains(RpgBaseAddon.CLASSMAGE)) {
-					swordmodel.renderFloatingShpere((Entity) data[1], turn,
-							0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-					swordmodel.renderFloatingShpere((Entity) data[1],
-							-(turn) + 100, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-					swordmodel.renderFloatingShpere((Entity) data[1],
-							-(turn) / 2, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+				if (RpgInventoryMod.playerClass.contains("archMage")|| RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSALCHEMIST)) {
+					swordmodel.renderFloatingShpere((Entity) data[1], turn,0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+					swordmodel.renderFloatingShpere((Entity) data[1],-(turn) + 100, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+					swordmodel.renderFloatingShpere((Entity) data[1],-(turn) / 2, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 				}
 			}
 			swordmodel.render((Entity) data[1], 0, 0.0F, 0.0F, 0.0F, 0.0F,
@@ -89,8 +77,7 @@ public class SoulSphereRender extends RpgItemRenderer {
 
 		case ENTITY:
 			GL11.glPushMatrix();
-			mc.renderEngine.bindTexture(new ResourceLocation(
-					"rpginventorymod:weapons/SoulSphere.png"));
+			mc.renderEngine.bindTexture(texture);
 			float scale = 0.8F;
 			GL11.glScalef(scale, scale, scale);
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
@@ -105,8 +92,7 @@ public class SoulSphereRender extends RpgItemRenderer {
 
 		case INVENTORY:
 			GL11.glPushMatrix();
-			mc.renderEngine.bindTexture(new ResourceLocation(
-					"rpginventorymod:weapons/SoulSphere.png"));
+			mc.renderEngine.bindTexture(texture);
 			scale = 1.9F;
 			GL11.glScalef(scale, scale, scale);
 			GL11.glTranslatef(0.0F, 0.2F, 0F);

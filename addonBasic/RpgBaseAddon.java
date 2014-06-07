@@ -17,10 +17,9 @@ import addonBasic.items.armor.ItemArcherArmor;
 import addonBasic.items.armor.ItemBerserkerArmor;
 import addonBasic.items.armor.ItemMageArmor;
 import addonBasic.items.weapons.ItemArcherBow;
-import addonBasic.items.weapons.ItemClaymore;
 import addonBasic.items.weapons.ItemHammer;
-import addonBasic.items.weapons.ItemMageSphere;
-import addonBasic.items.weapons.ItemStaf;
+import addonBasic.items.weapons.ItemSoulSphere;
+import addonBasic.items.weapons.ItemLunarStaff;
 import addonBasic.packets.ServerPacketHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -59,13 +58,13 @@ public class RpgBaseAddon {
 
 	public static String CLASSARCHER = "archer";
 	public static String CLASSBERSERKER = "berserker";
-	public static String CLASSMAGE = "basicMage";
+	public static String CLASSALCHEMIST = "basicalchemist";
 	public static String CLASSARCHERSHIELD = "shieldedArcher";
 	public static String CLASSBERSERKERSHIELD = "shieldedBerserker";
-	public static String CLASSMAGESHIELD = "shieldedBasicMage";
+	public static String CLASSALCHEMISTSHIELD = "shieldedBasicalchemist";
 
 	public static final String id = "RpgBase";
-	public static final String name = "Berserker, Mage and Archer Patch";
+	public static final String name = "Berserker, alchemist and Archer Patch";
 
 	public static FMLEventChannel Channel;
 
@@ -76,33 +75,28 @@ public class RpgBaseAddon {
 	public static Item
 	/* ====weapons==== */
 	elfbow, hammer, soulSphere, lunarStaff,
-	/* ====extra items==== */
-	wizardBook,
 	/* ====armor==== */
-	magehood, magegown, magepants, mageboots, archerhood, archerchest,
+	alchemisthood, alchemistgown, alchemistpants, alchemistboots, archerhood, archerchest,
 	archerpants, archerboots, berserkerHood, berserkerChest,
 	berserkerLegs, berserkerBoots,
 	/* ====leathers/skins==== */
-	animalskin, tanHide, magecloth,
+	animalskin, tanHide, alchemistcloth,
 	/* ====shields==== */
 	archerShield, berserkerShield, talisman;
 
 	private String[][] recipePatterns;
 	private Object[][] recipeItems;
 
-	public final ArmorMaterial mage = EnumHelper.addArmorMaterial("mage", 20,
-			new int[] { 2, 2, 2, 1 }, 5);
-	public final ArmorMaterial archer = EnumHelper.addArmorMaterial("archer",
-			20, new int[] { 2, 3, 2, 2 }, 5);
-	public final ArmorMaterial berserker = EnumHelper.addArmorMaterial(
-			"berserker", 20, new int[] { 2, 4, 3, 2 }, 5);
+	public final ArmorMaterial alchemist = EnumHelper.addArmorMaterial("alchemist", 40,new int[] { 2, 2, 2, 1 }, 5);
+	public final ArmorMaterial archer = EnumHelper.addArmorMaterial("archer",40, new int[] { 2, 3, 2, 2 }, 5);
+	public final ArmorMaterial berserker = EnumHelper.addArmorMaterial("berserker", 40, new int[] { 2, 4, 3, 2 }, 5);
 
 	ToolMaterial clay = EnumHelper.addToolMaterial("claymore", 0, 500, 5F, 4, 0);
-
+	ToolMaterial lunarstaff = EnumHelper.addToolMaterial("lunarstaff", 0, 750, 0F, 0, 0);
 	ToolMaterial rageBreaker = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 4F, 2, 0);
 
-	@SidedProxy(serverSide = "addonBasic.CommonAddonProxy", clientSide = "addonBasic.ClientAddonProxy")
-	public static CommonAddonProxy proxy;
+	@SidedProxy(serverSide = "addonBasic.ServerProxy", clientSide = "addonBasic.ClientProxy")
+	public static ServerProxy proxy;
 
 	@EventHandler
 	public void load(FMLInitializationEvent evt) {
@@ -118,7 +112,7 @@ public class RpgBaseAddon {
 		GameRegistry.addShapelessRecipe(new ItemStack(tanHide, 1),
 				new Object[] { Items.leather, Items.string, Items.string,
 			Items.string, Items.string });
-		GameRegistry.addRecipe(new ItemStack(magecloth, 1), new Object[] {
+		GameRegistry.addRecipe(new ItemStack(alchemistcloth, 1), new Object[] {
 			"WWW", "WLW", "WWW", 'W', new ItemStack(Items.dye, 1, 4), 'L',
 			Items.leather });
 		// WEAPONRY
@@ -130,9 +124,6 @@ public class RpgBaseAddon {
 		GameRegistry.addRecipe(new ItemStack(lunarStaff, 1), new Object[] { " ML",
 			" SM", "S  ", 'M', Items.speckled_melon, 'S', Items.stick, 'L',
 			new ItemStack(Items.dye, 1, 4) });
-//		GameRegistry.addRecipe(new ItemStack(claymore, 1), new Object[] {
-//			" S ", " S ", "LIL", 'I', Items.iron_ingot, 'S', Blocks.stone,
-//			'L', Items.leather });
 		GameRegistry.addRecipe(new ItemStack(hammer, 1), new Object[] { "SSS",
 			"LI ", "LI ", 'I', Items.iron_ingot, 'S', Blocks.iron_block,
 			'L', Items.leather });
@@ -147,20 +138,15 @@ public class RpgBaseAddon {
 			"WWW", "WBW", " W ", 'W', new ItemStack(Items.dye, 1, 4), 'B',
 			Blocks.lapis_block });
 
-		// MageBook
-		GameRegistry
-		.addShapelessRecipe(new ItemStack(wizardBook, 1), new Object[] {
-			magecloth, Items.paper, Items.paper, Items.paper });
-
 		// ARMOR
 		recipePatterns = new String[][] { { "XXX", "X X" },
 				{ "X X", "XXX", "XXX" }, { "XXX", "X X", "X X" },
 				{ "X X", "X X" } };
-		recipeItems = new Object[][] { { animalskin, tanHide, magecloth },
-				{ berserkerHood, archerhood, magehood },
-				{ berserkerChest, archerchest, magegown },
-				{ berserkerLegs, archerpants, magepants },
-				{ berserkerBoots, archerboots, mageboots } };
+		recipeItems = new Object[][] { { animalskin, tanHide, alchemistcloth },
+				{ berserkerHood, archerhood, alchemisthood },
+				{ berserkerChest, archerchest, alchemistgown },
+				{ berserkerLegs, archerpants, alchemistpants },
+				{ berserkerBoots, archerboots, alchemistboots } };
 
 		for (int var2 = 0; var2 < this.recipeItems[0].length; ++var2) {
 			Object var3 = this.recipeItems[0][var2];
@@ -172,115 +158,75 @@ public class RpgBaseAddon {
 			}
 		}
 
-//		RpgUtility.registerAbilityWeapon(lunarStaff, ServerPacketHandler.MAGE1);
-//		RpgUtility.registerAbilityWeapon(hammer, ServerPacketHandler.BERSERKER);
-//		RpgUtility.registerAbilityWeapon(elfbow, ServerPacketHandler.ARCHER);
-//		RpgUtility.registerAbilityWeapon(soulSphere, ServerPacketHandler.MAGE2);
-		
 		RpgUtility.registerAbilityWeapon(lunarStaff);
 		RpgUtility.registerAbilityWeapon(hammer);
 		RpgUtility.registerAbilityWeapon(elfbow);
 		RpgUtility.registerAbilityWeapon(soulSphere);
 
-		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow",
-				EntityRegistry.findGlobalUniqueEntityId(), this, 250, 1, true);
+		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow",EntityRegistry.findGlobalUniqueEntityId(), this, 250, 1, true);
 
-		FMLCommonHandler.instance().bus().register(new CommonTickHandler());
+		FMLCommonHandler.instance().bus().register(new TickHandlerServer());
 		MinecraftForge.EVENT_BUS.register(new BaseaddonEventHooks());
 	}
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
 
-		tab = new AddonTab(CreativeTabs.getNextID(),"Mage Archer Berserker Addon");
+		tab = new AddonTab(CreativeTabs.getNextID(),"alchemist Archer Berserker Addon");
 
-		archerShield = new ItemAddonShields(1, 200, "",
-				"rpginventorymod:jewels/Shield1.png").setUnlocalizedName(
-						"shieldArcher").setCreativeTab(tab);
-		berserkerShield = new ItemAddonShields(1, 450, "",
-				"rpginventorymod:jewels/IronThorn.png").setUnlocalizedName(
-						"shieldBerserker").setCreativeTab(tab);
-		talisman = new ItemAddonShields(1, 500, "",
-				"rpginventorymod:jewels/mageShield.png").setUnlocalizedName(
-						"shieldMage").setCreativeTab(tab);
+		archerShield = new ItemAddonShields(1, 200, "","rpginventorymod:jewels/Shield1.png").setUnlocalizedName("shieldArcher").setCreativeTab(tab);
+		berserkerShield = new ItemAddonShields(1, 450, "","rpginventorymod:jewels/IronThorn.png").setUnlocalizedName("shieldBerserker").setCreativeTab(tab);
+		talisman = new ItemAddonShields(1, 500, "","rpginventorymod:jewels/alchemistShield.png").setUnlocalizedName("shieldalchemist").setCreativeTab(tab);
 
-		magehood = new ItemMageArmor(mage, 4, 0).setUnlocalizedName("mage1")
-				.setCreativeTab(tab);
-		magegown = new ItemMageArmor(mage, 4, 1).setUnlocalizedName("mage2")
-				.setCreativeTab(tab);
-		magepants = new ItemMageArmor(mage, 4, 2).setUnlocalizedName("mage3")
-				.setCreativeTab(tab);
-		mageboots = new ItemMageArmor(mage, 4, 3).setUnlocalizedName("mage4")
-				.setCreativeTab(tab);
+		alchemisthood = new ItemMageArmor(alchemist, 4, 0).setUnlocalizedName("mage1").setCreativeTab(tab);
+		alchemistgown = new ItemMageArmor(alchemist, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);
+		alchemistpants = new ItemMageArmor(alchemist, 4, 2).setUnlocalizedName("mage3").setCreativeTab(tab);
+		alchemistboots = new ItemMageArmor(alchemist, 4, 3).setUnlocalizedName("mage4").setCreativeTab(tab);
 
-		archerhood = new ItemArcherArmor(archer, 4, 0).setUnlocalizedName(
-				"archer1").setCreativeTab(tab);
-		archerchest = new ItemArcherArmor(archer, 4, 1).setUnlocalizedName(
-				"archer2").setCreativeTab(tab);
-		archerpants = new ItemArcherArmor(archer, 4, 2).setUnlocalizedName(
-				"archer3").setCreativeTab(tab);
-		archerboots = new ItemArcherArmor(archer, 4, 3).setUnlocalizedName(
-				"archer4").setCreativeTab(tab);
+		archerhood = new ItemArcherArmor(archer, 4, 0).setUnlocalizedName("archer1").setCreativeTab(tab);
+		archerchest = new ItemArcherArmor(archer, 4, 1).setUnlocalizedName("archer2").setCreativeTab(tab);
+		archerpants = new ItemArcherArmor(archer, 4, 2).setUnlocalizedName("archer3").setCreativeTab(tab);
+		archerboots = new ItemArcherArmor(archer, 4, 3).setUnlocalizedName("archer4").setCreativeTab(tab);
 
-		berserkerHood = new ItemBerserkerArmor(berserker, 4, 0)
-		.setUnlocalizedName("berserk1").setCreativeTab(tab);
-		berserkerChest = new ItemBerserkerArmor(berserker, 4, 1)
-		.setUnlocalizedName("berserk2").setCreativeTab(tab);
-		berserkerLegs = new ItemBerserkerArmor(berserker, 4, 2)
-		.setUnlocalizedName("berserk3").setCreativeTab(tab);
-		berserkerBoots = new ItemBerserkerArmor(berserker, 4, 3)
-		.setUnlocalizedName("berserk4").setCreativeTab(tab);
+		berserkerHood = new ItemBerserkerArmor(berserker, 4, 0).setUnlocalizedName("berserk1").setCreativeTab(tab);
+		berserkerChest = new ItemBerserkerArmor(berserker, 4, 1).setUnlocalizedName("berserk2").setCreativeTab(tab);
+		berserkerLegs = new ItemBerserkerArmor(berserker, 4, 2).setUnlocalizedName("berserk3").setCreativeTab(tab);
+		berserkerBoots = new ItemBerserkerArmor(berserker, 4, 3).setUnlocalizedName("berserk4").setCreativeTab(tab);
 
-//		claymore = new ItemClaymore(clay).setFull3D().setUnlocalizedName("claymore").setCreativeTab(tab);
-		soulSphere = new ItemMageSphere().setFull3D().setMaxDamage(400)
-				.setUnlocalizedName("soulsphere").setCreativeTab(tab);
-		elfbow = new ItemArcherBow().setFull3D().setMaxDamage(350)
-				.setUnlocalizedName("elmBow").setCreativeTab(tab);
+		soulSphere = new ItemSoulSphere().setFull3D().setMaxDamage(750).setUnlocalizedName("soulsphere").setCreativeTab(tab);
+		elfbow = new ItemArcherBow().setFull3D().setMaxDamage(350).setUnlocalizedName("elmBow").setCreativeTab(tab);
 
-		animalskin = new ItemRpg().setUnlocalizedName("a.leather")
-				.setCreativeTab(tab);
-		tanHide = new ItemRpg().setUnlocalizedName("t.leather").setCreativeTab(
-				tab);
-		magecloth = new ItemRpg().setUnlocalizedName("m.leather")
-				.setCreativeTab(tab);
-
-		wizardBook = new ItemRpg().setUnlocalizedName("a.book_normal")
-				.setCreativeTab(tab);
+		animalskin = new ItemRpg().setUnlocalizedName("a.leather").setCreativeTab(tab);
+		tanHide = new ItemRpg().setUnlocalizedName("t.leather").setCreativeTab(tab);
+		alchemistcloth = new ItemRpg().setUnlocalizedName("m.leather").setCreativeTab(tab);
 
 		hammer = new ItemHammer(rageBreaker).setUnlocalizedName("rageBreaker").setCreativeTab(tab);
 		
-		lunarStaff = new ItemStaf().setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);
+		lunarStaff = new ItemLunarStaff(lunarstaff).setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);
 
 		allItems = new Item[] { elfbow, /*claymore,*/ hammer, soulSphere, lunarStaff,
-				berserkerShield, archerShield, talisman, wizardBook,
-				magehood, magegown, magepants, mageboots, archerhood,
+				berserkerShield, archerShield, talisman,
+				alchemisthood, alchemistgown, alchemistpants, alchemistboots, archerhood,
 				archerchest, archerpants, archerboots, berserkerHood,
 				berserkerChest, berserkerLegs, berserkerBoots, animalskin,
-				tanHide, magecloth };
+				tanHide, alchemistcloth };
 
 		for (int i = 0; i < allItems.length; i++) {
 			if (allItems[i] != null) {
 
-				String itemName = allItems[i].getUnlocalizedName().substring(
-						allItems[i].getUnlocalizedName().indexOf(".") + 1);
+				String itemName = allItems[i].getUnlocalizedName().substring(allItems[i].getUnlocalizedName().indexOf(".") + 1);
 
-				String itemNameCropped = itemName.substring(itemName
-						.indexOf(".") + 1);
+				String itemNameCropped = itemName.substring(itemName.indexOf(".") + 1);
 
 				if ((allItems[i] == animalskin)
 						|| (allItems[i] == tanHide)
-						|| (allItems[i] == magecloth)
-						|| (allItems[i] == wizardBook)) {
+						|| (allItems[i] == alchemistcloth)) {
 					allItems[i].setTextureName("minecraft:" + itemNameCropped);
 				} else {
-					allItems[i].setTextureName(RpgInventoryMod.name + ":"
-							+ itemNameCropped);
+					allItems[i].setTextureName(RpgInventoryMod.name + ":"+ itemNameCropped);
 				}
 
-				GameRegistry
-				.registerItem(allItems[i],
-						allItems[i].getUnlocalizedName(),
-						RpgInventoryMod.name);
+				GameRegistry.registerItem(allItems[i],allItems[i].getUnlocalizedName(),RpgInventoryMod.name);
 			} else {
 				System.out.println("Item is null !" + i);
 			}

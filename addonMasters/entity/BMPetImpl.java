@@ -260,8 +260,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 		if (worldObj.isRemote) {
 			player = this.worldObj.getPlayerEntityByName(this.getOwnerName());
 		} else {
-			player = MinecraftServer.getServer().getConfigurationManager()
-					.getPlayerForUsername(this.getOwnerName());
+			player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(this.getOwnerName());
 		}
 		return player;
 	}

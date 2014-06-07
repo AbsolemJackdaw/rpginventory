@@ -21,7 +21,7 @@ public class ItemRpg extends Item {
 		if (is.getItem() == RpgBaseAddon.tanHide) {
 			return 0xa24203;
 		}
-		if (is.getItem() == RpgBaseAddon.magecloth) {
+		if (is.getItem() == RpgBaseAddon.alchemistcloth) {
 			return 0x000080;
 		}
 		if (is.getItem() == RpgBaseAddon.animalskin) {
@@ -33,20 +33,9 @@ public class ItemRpg extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack) {
-		if ((par1ItemStack.getItem() == RpgBaseAddon.magecloth)
-				|| (par1ItemStack.getItem() == RpgBaseAddon.wizardBook)) {
+		if ((par1ItemStack.getItem() == RpgBaseAddon.alchemistcloth)) {
 			return true;
 		}
 		return false;
 	}
-
-	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
-			EntityPlayer player) {
-		if (par1ItemStack.getItem() == RpgBaseAddon.wizardBook) {
-			RpgInventoryMod.proxy.openGUI(player, 2);
-		}
-		return par1ItemStack;
-	}
-
 }

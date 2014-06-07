@@ -15,7 +15,7 @@ public class ItemMageArmor extends AbstractArmor {
 
 	@Override
 	public String armorClassName() {
-		return RpgBaseAddon.CLASSMAGE;
+		return RpgBaseAddon.CLASSALCHEMIST;
 	}
 
 	@Override
@@ -38,12 +38,12 @@ public class ItemMageArmor extends AbstractArmor {
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
 			String type) {
-		if ((itemstack.getItem() == RpgBaseAddon.magehood)
-				|| (itemstack.getItem() == RpgBaseAddon.magegown)
-				|| (itemstack.getItem() == RpgBaseAddon.mageboots)) {
+		if ((itemstack.getItem() == RpgBaseAddon.alchemisthood)
+				|| (itemstack.getItem() == RpgBaseAddon.alchemistgown)
+				|| (itemstack.getItem() == RpgBaseAddon.alchemistboots)) {
 			return "armor:mage_1.png";
 		}
-		if (itemstack.getItem() == RpgBaseAddon.magepants) {
+		if (itemstack.getItem() == RpgBaseAddon.alchemistpants) {
 			return "armor:mage_2.png";
 		}
 		return super.getArmorTexture(itemstack, entity, slot, type);

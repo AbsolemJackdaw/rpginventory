@@ -20,7 +20,6 @@ public class ItemArcherArmor extends AbstractArmor {
 	@Override
 	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
 			int armorSlot) {
-		// archers dont have a custom model
 		this.armorModel = null;
 	}
 

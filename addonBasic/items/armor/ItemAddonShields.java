@@ -4,15 +4,15 @@ import net.minecraft.util.ResourceLocation;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.MainShield;
 import addonBasic.RpgBaseAddon;
-import addonBasic.models.item.IronThorn;
+import addonBasic.models.item.ModelIronThorn;
+import addonBasic.models.item.ModelMageBook;
 import addonBasic.models.item.ModelShield;
-import addonBasic.models.item.bookMage;
 
 public class ItemAddonShields extends ItemRpgInvArmor{
 
-	private IronThorn it = new IronThorn();
+	private ModelIronThorn it = new ModelIronThorn();
 	private ModelShield ms= new ModelShield();
-	private bookMage bm = new bookMage();
+	private ModelMageBook bm = new ModelMageBook();
 
 	public static final ResourceLocation mantle = new ResourceLocation("rpginventorymod:jewels/talisman.png");
 	
@@ -35,7 +35,7 @@ public class ItemAddonShields extends ItemRpgInvArmor{
 			return RpgBaseAddon.CLASSARCHER;
 		}
 		if(this.equals(RpgBaseAddon.talisman)) {
-			return RpgBaseAddon.CLASSMAGE;
+			return RpgBaseAddon.CLASSALCHEMIST;
 		}
 
 		return super.bindShieldToArmorClass();
@@ -69,7 +69,7 @@ public class ItemAddonShields extends ItemRpgInvArmor{
 			return RpgBaseAddon.CLASSARCHERSHIELD;
 		}
 		if(this.equals(RpgBaseAddon.talisman)) {
-			return RpgBaseAddon.CLASSMAGESHIELD;
+			return RpgBaseAddon.CLASSALCHEMISTSHIELD;
 		}
 		return super.shieldClass();
 	}

@@ -21,13 +21,6 @@ public class PacketArcher {
 	private double yy;
 	private double zz;
 
-	// TODO move packet
-
-	/*
-	 * MOVE PACKET TO API
-	 */
-
-	/** Move packet to API */
 	public PacketArcher(ByteBufInputStream dis, EntityPlayer p, World world) {
 		if (!world.isRemote) {
 			boolean self = false;

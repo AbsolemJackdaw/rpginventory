@@ -10,7 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import rpgInventory.RpgInventoryMod;
-import addonBasic.CommonTickHandler;
+import addonBasic.TickHandlerServer;
 import addonBasic.RpgBaseAddon;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

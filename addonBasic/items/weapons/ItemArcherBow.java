@@ -38,11 +38,8 @@ public class ItemArcherBow extends Item {
 	@Override
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player,
 			ItemStack usingItem, int useRemaining) {
-		// This never get called.
-		// Now it gets called, added a hook in our custom renderer.
 		if (stack == usingItem) {
-			if ((usingItem != null)
-					&& (usingItem.getItem() == RpgBaseAddon.elfbow)) {
+			if ((usingItem != null) && (usingItem.getItem() == RpgBaseAddon.elfbow)) {
 				if (useRemaining > 21) {
 					return IconArray[3];
 				} else if (useRemaining > 14) {
@@ -101,8 +98,7 @@ public class ItemArcherBow extends Item {
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack par1ItemStack, World par2World,
-			EntityPlayer par3EntityPlayer) {
+	public ItemStack onEaten(ItemStack par1ItemStack, World par2World,EntityPlayer par3EntityPlayer) {
 		return par1ItemStack;
 	}
 
@@ -111,15 +107,9 @@ public class ItemArcherBow extends Item {
 	 * pressed. Args: itemStack, world, entityPlayer
 	 */
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
-			EntityPlayer player) {
-		ArrowNockEvent event = new ArrowNockEvent(player, par1ItemStack);
-		MinecraftForge.EVENT_BUS.post(event);
-		if (event.isCanceled()) {
-			return event.result;
-		}
-		player.setItemInUse(par1ItemStack,
-				this.getMaxItemUseDuration(par1ItemStack));
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,EntityPlayer player) {
+
+		player.setItemInUse(par1ItemStack,this.getMaxItemUseDuration(par1ItemStack));
 		return par1ItemStack;
 	}
 
@@ -128,88 +118,52 @@ public class ItemArcherBow extends Item {
 	 * world, entityplayer, itemInUseCount
 	 */
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World par2World,
-			EntityPlayer player, int par4) {
+	public void onPlayerStoppedUsing(ItemStack stack, World par2World,EntityPlayer player, int par4) {
 		super.onPlayerStoppedUsing(stack, par2World, player, par4);
 		usingItem = 0;
 		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 		ItemStack shield = inv.getJewelInSlot(1);
 
 		int j = this.getMaxItemUseDuration(stack) - par4;
-		ArrowLooseEvent event = new ArrowLooseEvent(player, stack, j);
-		MinecraftForge.EVENT_BUS.post(event);
-		if (event.isCanceled()) {
-			return;
-		}
-		j = event.charge;
 
-		ItemStack var3 = player.inventory.armorItemInSlot(3);
-		ItemStack var2 = player.inventory.armorItemInSlot(2);
-		ItemStack var1 = player.inventory.armorItemInSlot(1);
-		ItemStack var0 = player.inventory.armorItemInSlot(0);
+		if(RpgInventoryMod.playerClass.equals(RpgBaseAddon.CLASSARCHER)) {
+			boolean flag = ((shield != null) && (shield.getItem() == RpgBaseAddon.archerShield))
+					|| player.capabilities.isCreativeMode;
+			if (player.inventory.hasItem(Items.arrow) || flag) {
 
-		if ((var3 != null) && (var2 != null) && (var1 != null)
-				&& (var0 != null)) {
-			Item item = var3.getItem();
-			Item item1 = var2.getItem();
-			Item item2 = var1.getItem();
-			Item item3 = var0.getItem();
+				float f = j / 20.0F;
+				f = ((f * f) + (f * 2.0F)) / 3.0F;
 
-			if (item.equals(RpgBaseAddon.archerhood)
-					&& item1.equals(RpgBaseAddon.archerchest)
-					&& item2.equals(RpgBaseAddon.archerpants)
-					&& item3.equals(RpgBaseAddon.archerboots)) {
-				boolean flag = ((shield != null) && (shield.getItem() == RpgBaseAddon.archerShield))
-						|| player.capabilities.isCreativeMode;
-				if (player.inventory.hasItem(Items.arrow) || flag) {
-
-					float f = j / 20.0F;
-					f = ((f * f) + (f * 2.0F)) / 3.0F;
-
-					if (f < (RpgInventoryMod.donators.contains(player
-							.getCommandSenderName()) ? 0.2d : 0.5D)) {
-						return;
-					}
-
-					if (f > 1.0F) {
-						f = 1.0F;
-					}
-
-					EntityArrow entityarrow = new EntityArrow(par2World,
-							player, f * 2.0F);
-					boolean crit = RpgInventoryMod.donators.contains(player
-							.getCommandSenderName()) ? true : false;
-					entityarrow.setIsCritical(crit);
-
-					if (f == 1.0F) {
-						entityarrow.setIsCritical(true);
-					}
-
-					entityarrow.setDamage(entityarrow.getDamage()
-							+ (flag ? 2D : 1D));
-					entityarrow.setKnockbackStrength(RpgInventoryMod.donators
-							.contains(player.getCommandSenderName()) ? 2 : 1);
-					entityarrow.setFire(RpgInventoryMod.donators
-							.contains(player.getCommandSenderName()) ? 10 : 5);
-
-					if (flag) {
-						entityarrow.canBePickedUp = 2;
-					} else {
-						player.inventory.consumeInventoryItem(Items.arrow);
-					}
-					if (!par2World.isRemote) {
-						par2World.spawnEntityInWorld(entityarrow);
-						if (RpgInventoryMod.donators.contains(player
-								.getCommandSenderName())) {
-							par2World.spawnEntityInWorld(new EntityArrow(
-									par2World, player, f * 2.0f));
-						}
-					}
-					stack.damageItem(1, player);
-					par2World.playSoundAtEntity(player, "random.bow", 1.0F,
-							(1.0F / ((itemRand.nextFloat() * 0.4F) + 1.2F))
-							+ (f * 0.5F));
+				if (f < 0.5d) {
+					return;
 				}
+
+				EntityArrow entityarrow = new EntityArrow(par2World,player, f * 2.0F);
+				boolean crit = RpgInventoryMod.donators.contains(player.getCommandSenderName()) ? true : false;
+				entityarrow.setIsCritical(crit);
+
+				if (f >= 1.0F && f <1.5F) {
+					entityarrow.setIsCritical(true);
+				}
+				
+				if (f > 1.0F) {
+					f = 1.0F;
+				}
+
+				entityarrow.setDamage(entityarrow.getDamage()+ (flag ? 2D : 1D));
+				entityarrow.setKnockbackStrength(RpgInventoryMod.donators.contains(player.getCommandSenderName()) ? 2 : 1);
+				entityarrow.setFire(RpgInventoryMod.donators.contains(player.getCommandSenderName()) ? 10 : 5);
+
+				if (flag) {
+					entityarrow.canBePickedUp = 2;
+				} else {
+					player.inventory.consumeInventoryItem(Items.arrow);
+				}
+				if (!par2World.isRemote) {
+					par2World.spawnEntityInWorld(entityarrow);
+				}
+				stack.damageItem(1, player);
+				par2World.playSoundAtEntity(player, "random.bow", 1.0F,(1.0F / ((itemRand.nextFloat() * 0.4F) + 1.2F))+ (f * 0.5F));
 			}
 		}
 	}
@@ -226,8 +180,7 @@ public class ItemArcherBow extends Item {
 
 		for (int i = 0; i < this.IconArray.length; ++i) {
 			String prefix = "rpginventorymod:";
-			this.IconArray[i] = par1IconRegister.registerIcon(prefix
-					+ ItemNameArray[i]);
+			this.IconArray[i] = par1IconRegister.registerIcon(prefix+ ItemNameArray[i]);
 		}
 		this.itemIcon = this.IconArray[0];
 	}

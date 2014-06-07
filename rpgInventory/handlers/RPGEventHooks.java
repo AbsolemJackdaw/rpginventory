@@ -254,7 +254,7 @@ public class RPGEventHooks {
 
 	private void keepJewelMapsSynced(PlayerRpgInventory inv){
 
-		EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(inv.player.getCommandSenderName());
+		EntityPlayer player = inv.getPlayer();
 		boolean addtoticks[] = new boolean[3];
 
 		if (((inv.getNecklace() != null) && (inv.getNecklace().getItem() == RpgInventoryMod.neckdia))
@@ -270,7 +270,7 @@ public class RPGEventHooks {
 			}
 		} else {
 			// keep the cooldown hashmap clean
-			RPGEventHooks.HealerTick.remove(player.getCommandSenderName());
+				RPGEventHooks.HealerTick.remove(player.getCommandSenderName());
 		}
 
 		if (addtoticks[2]) {
@@ -281,7 +281,7 @@ public class RPGEventHooks {
 			}
 		} else {
 			// keep the cooldown hashmap clean
-			RPGEventHooks.DiamondTick.remove(player.getCommandSenderName());
+				RPGEventHooks.DiamondTick.remove(player.getCommandSenderName());
 		}
 	}
 

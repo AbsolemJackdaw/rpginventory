@@ -80,7 +80,7 @@ public class BaseaddonEventHooks {
 					ItemStack shield = inv.getShield();
 					if (shield != null) {
 						if (RpgInventoryMod.playerClass
-								.contains(RpgBaseAddon.CLASSMAGESHIELD)) {
+								.contains(RpgBaseAddon.CLASSALCHEMISTSHIELD)) {
 							float damageReduction = 0.20F;
 							EntityLivingBase damagedealer = null;
 							if (evt.source.isMagicDamage()) {
@@ -191,13 +191,13 @@ public class BaseaddonEventHooks {
 					// classes match
 
 					/* ==== Something about the archer .__. ==== */
-					if (CommonTickHandler.ArcherRepairTick.containsKey(p
+					if (TickHandlerServer.ArcherRepairTick.containsKey(p
 							.getCommandSenderName())) {
 						if (RpgInventoryMod.playerClass
 								.contains(RpgBaseAddon.CLASSARCHER)) {
 							p.jumpMovementFactor = 0.09F;
 						} else {
-							CommonTickHandler.ArcherRepairTick.remove(p
+							TickHandlerServer.ArcherRepairTick.remove(p
 									.getCommandSenderName());
 							p.jumpMovementFactor = 0.02F;
 						}
@@ -259,7 +259,7 @@ public class BaseaddonEventHooks {
 					p.jumpMovementFactor = jumpboost;
 
 					/* ====MAGE FALLDAMAGE NEGATION==== */
-					if (RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSMAGESHIELD)) {
+					if (RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSALCHEMISTSHIELD)) {
 						p.fallDistance = 0;
 					}
 				}

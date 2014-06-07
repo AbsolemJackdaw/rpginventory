@@ -268,8 +268,7 @@ IExtendedEntityProperties {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-		EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(par1EntityPlayer.getCommandSenderName());
-		return player.isDead ? false : par1EntityPlayer.getDistanceSqToEntity(player) <= 64.0D;
+		return  par1EntityPlayer.getDistanceSqToEntity(player) <= 64.0D;
 	}
 
 	@Override

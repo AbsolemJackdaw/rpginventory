@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import rpgInventory.models.MainShield;
 
-public class bookMage extends MainShield {
+public class ModelMageBook extends MainShield {
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
 	ModelRenderer Shape3;
@@ -23,7 +23,7 @@ public class bookMage extends MainShield {
 
 	float c = 0;
 
-	public bookMage() {
+	public ModelMageBook() {
 		textureWidth = 64;
 		textureHeight = 32;
 

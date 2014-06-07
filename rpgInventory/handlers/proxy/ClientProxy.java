@@ -17,7 +17,6 @@ import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.Sphere;
 
 import rpgInventory.RpgInventoryMod;
-import rpgInventory.gui.BookGui;
 import rpgInventory.handlers.ClientTickHandler;
 import rpgInventory.handlers.RPGKeyHandler;
 import rpgInventory.handlers.packets.ClientPacketHandler;
@@ -53,18 +52,10 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void openGUI(EntityPlayer p1, int id) {
-		switch (id) {
-		case 1:
-			// back button in rpg inventory
-			if (Minecraft.getMinecraft().playerController.isInCreativeMode()) {
-				Minecraft.getMinecraft().displayGuiScreen(new GuiContainerCreative(p1));
-			} else {
-				Minecraft.getMinecraft().displayGuiScreen(new GuiInventory(p1));
-			}
-			break;
-		case 2:
-			Minecraft.getMinecraft().displayGuiScreen(new BookGui(p1));
-			break;
+		if (Minecraft.getMinecraft().playerController.isInCreativeMode()) {
+			Minecraft.getMinecraft().displayGuiScreen(new GuiContainerCreative(p1));
+		} else {
+			Minecraft.getMinecraft().displayGuiScreen(new GuiInventory(p1));
 		}
 	}
 

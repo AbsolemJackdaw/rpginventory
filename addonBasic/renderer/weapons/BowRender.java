@@ -13,11 +13,14 @@ import addonBasic.models.weapons.ModelBow;
 
 public class BowRender extends RpgItemRenderer {
 
-	ModelBow swordmodel;
+	ModelBow model;
+
+	private ResourceLocation bow_pull_1 = new ResourceLocation("rpginventorymod:weapons/bow.png");
+	private ResourceLocation bow_pull_2 = new ResourceLocation("rpginventorymod:weapons/bow2.png");
+	private ResourceLocation bow_pull_3 = new ResourceLocation("rpginventorymod:weapons/bow3.png");
 
 	public BowRender() {
-		swordmodel = new ModelBow();
-
+		model = new ModelBow();
 	}
 
 	@Override
@@ -27,28 +30,22 @@ public class BowRender extends RpgItemRenderer {
 		switch (type) {
 		case EQUIPPED:
 			GL11.glPushMatrix();
-			if (((Entity) data[1] instanceof EntityPlayer)
-					&& (((EntityPlayer) data[1]).getCurrentEquippedItem() != null)) {
+			if (((Entity) data[1] instanceof EntityPlayer)&& (((EntityPlayer) data[1]).getCurrentEquippedItem() != null)) {
 				if (usingItem < 5) {
-					mc.renderEngine.bindTexture(new ResourceLocation(
-							"rpginventorymod:weapons/bow.png"));
+					mc.renderEngine.bindTexture(bow_pull_1);
 				} else if ((usingItem >= 5) && (usingItem < 25)) {
-					mc.renderEngine.bindTexture(new ResourceLocation(
-							"rpginventorymod:weapons/bow2.png"));
+					mc.renderEngine.bindTexture(bow_pull_2);
 				} else if (usingItem >= 25) {
-					mc.renderEngine.bindTexture(new ResourceLocation(
-							"rpginventorymod:weapons/bow3.png"));
+					mc.renderEngine.bindTexture(bow_pull_3);
 				}
 			} else {
-				mc.renderEngine.bindTexture(new ResourceLocation(
-						"rpginventorymod:weapons/bow.png"));
+				mc.renderEngine.bindTexture(bow_pull_1);
 			}
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(150F, 1.0f, 0.0f, 0.0f);
 			GL11.glTranslatef(0F, 0.65F, -0.7F);
 			GL11.glRotatef(180, 0, 0, 01);
-			swordmodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
-					0.0625F);
+			model.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,0.0625F);
 			GL11.glPopMatrix();
 			break;
 
@@ -56,21 +53,19 @@ public class BowRender extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			if (((EntityPlayer) data[1]).getCurrentEquippedItem() != null) {
 				if (usingItem < 5) {
-					mc.renderEngine.bindTexture(new ResourceLocation(
-							"rpginventorymod:weapons/bow.png"));
+					mc.renderEngine.bindTexture(bow_pull_1);
 				} else if ((usingItem >= 5) && (usingItem < 25)) {
-					mc.renderEngine.bindTexture(new ResourceLocation(
-							"rpginventorymod:weapons/bow2.png"));
+					mc.renderEngine.bindTexture(bow_pull_2);
 				} else if (usingItem >= 25) {
-					mc.renderEngine.bindTexture(new ResourceLocation(
-							"rpginventorymod:weapons/bow3.png"));
+					mc.renderEngine.bindTexture(bow_pull_3);
 				}
+			} else {
+				mc.renderEngine.bindTexture(bow_pull_1);
 			}
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(140F, 1.0f, 0.0f, 0.0f);
 			GL11.glTranslatef(0F, -0.6F, -0.8F);
-			swordmodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
-					0.0625F);
+			model.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,0.0625F);
 			GL11.glPopMatrix();
 
 			break;
@@ -78,25 +73,22 @@ public class BowRender extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			scale = 1.5F;
 			GL11.glScalef(scale, scale, scale);
-			mc.renderEngine.bindTexture(new ResourceLocation(
-					"rpginventorymod:weapons/bow.png"));
+			mc.renderEngine.bindTexture(bow_pull_1);
 			GL11.glRotatef(0f, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(90F, 0.0f, 0.0f, 1.0f);
 			GL11.glTranslatef(0F, -0.4F, 0F);
-			swordmodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
-					0.0625F);
+			model.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,0.0625F);
 			GL11.glPopMatrix();
 			break;
 		case INVENTORY:
 			GL11.glPushMatrix();
-			mc.renderEngine.bindTexture(new ResourceLocation(
-					"rpginventorymod:weapons/bow.png"));
+			mc.renderEngine.bindTexture(bow_pull_1);
 			scale = 1F;
 			GL11.glScalef(scale, scale, scale);
 			GL11.glRotatef(200F, 1.0f, 0.0f, 0.0f);
 			GL11.glTranslatef(0.0F, -0.4F, 0F);
-			swordmodel.render(0.0625F);
+			model.render(0.0625F);
 			GL11.glPopMatrix();
 			break;
 

@@ -84,16 +84,16 @@ public class RpgArchmageAddon {
 				"III", "IBI", " I ", 'I', new ItemStack(Items.dye, 1, 4), 'B',
 				Items.book);
 		GameRegistry.addRecipe(new ItemStack(archMageBoots),
-				"III", "IBI", "III", 'B', RpgBaseAddon.mageboots, 'I',
+				"III", "IBI", "III", 'B', RpgBaseAddon.alchemistboots, 'I',
 				Items.gold_nugget);
 		GameRegistry.addRecipe(new ItemStack(archmageLegs),
-				"III", "IBI", "III", 'B', RpgBaseAddon.magepants, 'I',
+				"III", "IBI", "III", 'B', RpgBaseAddon.alchemistpants, 'I',
 				Items.gold_nugget);
 		GameRegistry.addRecipe(new ItemStack(archmageChest),
-				"III", "IBI", "III", 'B', RpgBaseAddon.magegown, 'I',
+				"III", "IBI", "III", 'B', RpgBaseAddon.alchemistgown, 'I',
 				Items.gold_nugget);
 		GameRegistry.addRecipe(new ItemStack(archmageHood),
-				"III", "IBI", "III", 'B', RpgBaseAddon.magehood, 'I',
+				"III", "IBI", "III", 'B', RpgBaseAddon.alchemisthood, 'I',
 				Items.gold_nugget );
 
 		// EntityRegistry.registerGlobalEntityID(EntityElementalBlocks.class,

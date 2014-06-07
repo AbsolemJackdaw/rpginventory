@@ -20,61 +20,36 @@ import addonBasic.RpgBaseAddon;
 
 public class PacketMageVortex {
 
-	// TODO move packet
-
-	/*
-	 * MOVE PACKET TO API
-	 */
-
-	/** Move packet to API */
 	public PacketMageVortex(ByteBufInputStream dis, World world, EntityPlayer p) {
 		if (!world.isRemote) {
 			ItemStack wand = p.getCurrentEquippedItem();
-			ItemStack hat = p.inventory.armorItemInSlot(3);
-			ItemStack chest = p.inventory.armorItemInSlot(2);
-			ItemStack legs = p.inventory.armorItemInSlot(1);
-			ItemStack boots = p.inventory.armorItemInSlot(0);
+			ItemStack item = p.getCurrentEquippedItem();
 
-			if (!RpgInventoryMod.developers.contains(p.getDisplayName()
-					.toLowerCase())) {
-				if ((wand == null) || (hat == null) || (chest == null)
-						|| (legs == null) || (boots == null)) {
+			if (!RpgInventoryMod.developers.contains(p.getDisplayName().toLowerCase())) {
+				if(!RpgInventoryMod.playerClass.equals(RpgBaseAddon.CLASSALCHEMIST))
 					return;
-				}
-				if ((wand.getItem() != RpgBaseAddon.soulSphere)
-						|| (hat.getItem() != RpgBaseAddon.magehood)
-						|| (chest.getItem() != RpgBaseAddon.magegown)
-						|| (legs.getItem() != RpgBaseAddon.magepants)
-						|| (boots.getItem() != RpgBaseAddon.mageboots)) {
+				if ((item.getItem() != RpgBaseAddon.lunarStaff))
 					return;
-				}
+
+				if ((wand.getItem() != RpgBaseAddon.soulSphere))
+					return;
 			}
-			if (!ServerTickHandler.globalCooldownMap.containsKey(p
-					.getDisplayName())) {
+			if (!ServerTickHandler.globalCooldownMap.containsKey(p.getDisplayName())) {
 				ServerTickHandler.globalCooldownMap.put(p.getDisplayName(), 0);
 			}
 			if (ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) <= 0) {
 				ServerTickHandler.globalCooldownMap.put(p.getDisplayName(),
 						7 * 20);
 				if ((wand.getItemDamage() + 3) >= wand.getMaxDamage()) {
-					// Trigger item break stuff
-					// Only damage what is left
-					wand.damageItem(wand.getMaxDamage() - wand.getItemDamage(),
-							p);
-					// Do the break item stuff
+					wand.damageItem(wand.getMaxDamage() - wand.getItemDamage(),p);
 					p.renderBrokenItemStack(wand);
-					// delete the item
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
-				} else if (!RpgInventoryMod.developers.contains(p
-						.getDisplayName().toLowerCase())) {
-					wand.damageItem(RpgInventoryMod.donators.contains(p
-							.getDisplayName()) ? 1 : 3, p);
+				} else if (!RpgInventoryMod.developers.contains(p.getDisplayName().toLowerCase())) {
+					wand.damageItem(RpgInventoryMod.donators.contains(p.getDisplayName()) ? 1 : 3, p);
 				}
-				float f = RpgInventoryMod.donators
-						.contains(p.getDisplayName()) ? 20.0f : 10.0f;
+				float f = RpgInventoryMod.donators.contains(p.getDisplayName()) ? 20.0f : 10.0f;
 				AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(p.posX - f, p.posY - f, p.posZ - f, p.posX + f,p.posY + f, p.posZ + f);
-				List<EntityLivingBase> entl = p.worldObj
-						.getEntitiesWithinAABBExcludingEntity(p, pool);
+				List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABBExcludingEntity(p, pool);
 
 				if ((entl != null) && (entl.size() > 0)) {
 					for (Entity el : entl) {
@@ -89,28 +64,10 @@ public class PacketMageVortex {
 							}
 							if (var4 > 0) {
 								try {
-									Vec3 posPlayer = Vec3.createVectorHelper(
-											el.posX, el.posY, el.posZ);
-									Vec3 posEntity = Vec3.createVectorHelper(
-											p.posX, p.posY, p.posZ);
-									Vec3 posFinal = posPlayer.myVec3LocalPool
-											.getVecFromPool(
-													posEntity.xCoord
-													- posPlayer.xCoord,
-													posEntity.yCoord
-													- posPlayer.yCoord,
-													posEntity.zCoord
-													- posPlayer.zCoord)
-													.normalize();
-									el.setVelocity(posFinal.xCoord * 4,
-											posFinal.yCoord * 4,
-											posFinal.zCoord * 4);
-									el.attackEntityFrom(
-											DamageSource.causePlayerDamage(p),
-											(RpgInventoryMod.donators
-													.contains(p
-															.getDisplayName()) ? 3
-																	: 1));
+									Vec3 posPlayer = Vec3.createVectorHelper(el.posX, el.posY, el.posZ);
+									Vec3 posEntity = Vec3.createVectorHelper(p.posX, p.posY, p.posZ);
+									Vec3 posFinal = posPlayer.myVec3LocalPool.getVecFromPool(posEntity.xCoord- posPlayer.xCoord,posEntity.yCoord- posPlayer.yCoord,posEntity.zCoord- posPlayer.zCoord).normalize();
+									el.setVelocity(posFinal.xCoord * 4,posFinal.yCoord * 4,posFinal.zCoord * 4);el.attackEntityFrom(DamageSource.causePlayerDamage(p),(RpgInventoryMod.donators.contains(p.getDisplayName()) ? 3: 1));
 								} catch (Throwable ex) {
 								}
 							}

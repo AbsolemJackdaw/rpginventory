@@ -31,8 +31,7 @@ public interface IPet {
 
 		public IPet getPet() {
 			try {
-				World world = MinecraftServer.getServer()
-						.worldServerForDimension(DIM);
+				World world = MinecraftServer.getServer().worldServerForDimension(DIM);
 				if (world == null) {
 					return null;
 				}

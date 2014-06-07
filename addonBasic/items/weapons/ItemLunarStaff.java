@@ -14,12 +14,12 @@ import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.ItemRpgSword;
 import addonBasic.RpgBaseAddon;
 
-public class ItemStaf extends ItemRpgSword {
+public class ItemLunarStaff extends ItemRpgSword {
 
 	protected boolean hasAttacked = false;
 
-	public ItemStaf() {
-		super(ToolMaterial.STONE);
+	public ItemLunarStaff(ToolMaterial mat) {
+		super(mat);
 	}
 
 	@Override
@@ -46,42 +46,27 @@ public class ItemStaf extends ItemRpgSword {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack is, World par2World,
-			EntityPlayer p) {
+	public ItemStack onItemRightClick(ItemStack is, World par2World,EntityPlayer p) {
 		PlayerRpgInventory.get(p);
 
 		// exception for archmage : this should be evaded any time, but I don't
 		// have a choice here.
-		if (RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSMAGE)
-				|| RpgInventoryMod.playerClass.contains("archMage")) {
+		if (RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSALCHEMIST)|| RpgInventoryMod.playerClass.contains("archMage")) {
 			p.setItemInUse(is, this.getMaxItemUseDuration(is));
 		}
 		return is;
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,
-			EntityPlayer p, int par4) {
+	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,EntityPlayer p, int par4) {
 		int time = this.getMaxItemUseDuration(par1ItemStack) - par4;
 
 		if (p.isSneaking()) {
 			if ((time > 0) && (time <= 100)) {
-				// p.spawnExplosionParticle();
 				double var2 = p.worldObj.rand.nextGaussian() * 0.02D;
 				double var4 = p.worldObj.rand.nextGaussian() * 0.02D;
 				double var6 = p.worldObj.rand.nextGaussian() * 0.02D;
-				p.worldObj
-				.spawnParticle(
-						"heart",
-						(p.posX + (p.worldObj.rand.nextFloat()
-								* p.width * 2.0F))
-								- p.width,
-								p.posY
-								+ 0.5D
-								+ (p.worldObj.rand.nextFloat() * p.height),
-								(p.posZ + (p.worldObj.rand.nextFloat()
-										* p.width * 2.0F))
-										- p.width, var2, var4, var6);
+				p.worldObj.spawnParticle("heart",(p.posX + (p.worldObj.rand.nextFloat()* p.width * 2.0F))- p.width,p.posY+ 0.5D+ (p.worldObj.rand.nextFloat() * p.height),(p.posZ + (p.worldObj.rand.nextFloat()* p.width * 2.0F))- p.width, var2, var4, var6);
 				int heal = time / 50;
 				if ((p.getHealth() + heal) <= p.getMaxHealth()) {
 					p.heal(heal);
@@ -90,22 +75,10 @@ public class ItemStaf extends ItemRpgSword {
 				}
 			}
 			if (time > 100) {
-//				 p.spawnExplosionParticle();
 				double var2 = p.worldObj.rand.nextGaussian() * 0.02D;
 				double var4 = p.worldObj.rand.nextGaussian() * 0.02D;
 				double var6 = p.worldObj.rand.nextGaussian() * 0.02D;
-				p.worldObj
-				.spawnParticle(
-						"heart",
-						(p.posX + (p.worldObj.rand.nextFloat()
-								* p.width * 2.0F))
-								- p.width,
-								p.posY
-								+ 0.5D
-								+ (p.worldObj.rand.nextFloat() * p.height),
-								(p.posZ + (p.worldObj.rand.nextFloat()
-										* p.width * 2.0F))
-										- p.width, var2, var4, var6);
+				p.worldObj.spawnParticle("heart",(p.posX + (p.worldObj.rand.nextFloat()* p.width * 2.0F))- p.width,p.posY+ 0.5D+ (p.worldObj.rand.nextFloat() * p.height),(p.posZ + (p.worldObj.rand.nextFloat()* p.width * 2.0F))- p.width, var2, var4, var6);
 				int heal = time / 30;
 				if ((p.getHealth() + heal) <= p.getMaxHealth()) {
 					p.heal(heal);

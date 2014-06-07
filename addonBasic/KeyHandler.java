@@ -95,7 +95,7 @@ public class KeyHandler implements ISpecialAbility {
 
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.hammer)) {
+		if((item.getItem() == RpgBaseAddon.hammer)) {
 
 			try {
 				ByteBuf buf = Unpooled.buffer();
@@ -114,7 +114,7 @@ public class KeyHandler implements ISpecialAbility {
 			}
 		}
 
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.soulSphere)) {
+		if((item.getItem() == RpgBaseAddon.soulSphere)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -129,12 +129,11 @@ public class KeyHandler implements ISpecialAbility {
 		}
 
 
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.lunarStaff)) {
+		if((item.getItem() == RpgBaseAddon.lunarStaff)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(ClientPacketHandler.MAGE1);
-				//				if(!p.worldObj.isRemote)
 				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
 				out.close();
 
@@ -143,17 +142,13 @@ public class KeyHandler implements ISpecialAbility {
 			}
 		}
 
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.elfbow)) {
+		if((item.getItem() ==  RpgBaseAddon.elfbow)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
 				out.writeInt(ClientPacketHandler.ARCHER);
 
-				EntityLivingBase target = isTargetingEntity(
-						Minecraft.getMinecraft().thePlayer,
-						RpgInventoryMod.donators.contains(Minecraft
-								.getMinecraft().thePlayer
-								.getCommandSenderName()) ? 60 : 40);
+				EntityLivingBase target = isTargetingEntity(Minecraft.getMinecraft().thePlayer,RpgInventoryMod.donators.contains(Minecraft.getMinecraft().thePlayer.getCommandSenderName()) ? 60 : 40);
 				if (target != null) {
 					out.writeBoolean(false);
 					out.writeInt((int) Math.floor(target.posX));

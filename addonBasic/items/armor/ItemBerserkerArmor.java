@@ -18,8 +18,7 @@ public class ItemBerserkerArmor extends AbstractArmor {
 	}
 
 	@Override
-	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,
-			int armorSlot) {
+	protected void get3DArmorModel(EntityLivingBase elb, ItemStack stack,int armorSlot) {
 		if (stack != null) {
 			if (stack.getItem() instanceof AbstractArmor) {
 

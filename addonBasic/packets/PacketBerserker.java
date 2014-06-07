@@ -70,8 +70,7 @@ public class PacketBerserker {
 					p.posX - range, p.posY - range, p.posZ - range,
 					p.posX + range, p.posY + range, p.posZ + range);
 
-			List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABB(
-					EntityLivingBase.class, pool);
+			List<EntityLivingBase> entl = p.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, pool);
 			if ((entl != null) && (entl.size() > 0)) {
 				for (EntityLivingBase el : entl) {
 					if ((el != null) && (el != p)) {
@@ -79,25 +78,14 @@ public class PacketBerserker {
 							double xdir = el.posX - p.posX;
 							double zdir = el.posZ - p.posZ;
 
-							if (RpgInventoryMod.developers.contains(p
-									.getDisplayName().toLowerCase())) {
+							if (RpgInventoryMod.developers.contains(p.getDisplayName().toLowerCase())) {
 								el.motionX = xdir * 3F;
 								el.motionY = 3F;
 								el.motionZ = zdir * 3F;
 							} else {
-								el.motionX = xdir
-										* (RpgInventoryMod.donators
-												.contains(p
-														.getDisplayName()) ? 2.2f
-																: 1.5F);
-								el.motionY = RpgInventoryMod.donators
-										.contains(p.getDisplayName()) ? 2.2f
-												: 3F;
-								el.motionZ = zdir
-										* (RpgInventoryMod.donators
-												.contains(p
-														.getDisplayName()) ? 2.2f
-																: 3F);
+								el.motionX = xdir* (RpgInventoryMod.donators.contains(p.getDisplayName()) ? 2.2f: 1.5F);
+								el.motionY = RpgInventoryMod.donators.contains(p.getDisplayName()) ? 2.2f: 3F;
+								el.motionZ = zdir* (RpgInventoryMod.donators.contains(p.getDisplayName()) ? 2.2f: 3F);
 							}
 						} catch (Throwable ex) {
 						}
