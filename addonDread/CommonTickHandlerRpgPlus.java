@@ -1,27 +1,17 @@
 package addonDread;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import rpgInventory.RpgInventoryMod;
-import addonBasic.TickHandlerServer;
-import addonBasic.RpgBaseAddon;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 
 public class CommonTickHandlerRpgPlus {
 
 	public static HashMap<String, Integer> rpgPluscooldownMap = new HashMap();
 
 	@SubscribeEvent
-	public void tickEnd(TickEvent.ServerTickEvent ev) {
+	public void onServerTick(ServerTickEvent ev) {
 
 		/*
 		 * Manage cooldown mapused for spawning minions

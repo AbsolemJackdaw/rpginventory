@@ -47,7 +47,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RpgDreadAddon {
 
 	@SidedProxy(serverSide = "addonDread.CommonProxyRpgplus", clientSide = "addonDread.ClientProxyRpgPlus")
-	public static CommonProxyRpgplus proxy;
+	public static ServerProxy proxy;
 	
 	public static String CLASSNECRO = "necro";
 	public static String CLASSNECROSHIELD = "shieldedNecro";
@@ -140,7 +140,6 @@ public class RpgDreadAddon {
 		necroleather.setCreativeTab(tab);
 		paladinSteel.setCreativeTab(tab);
 
-		MinecraftForge.EVENT_BUS.register(new NecroPaladinEvents());
 		FMLCommonHandler.instance().bus().register(new CommonTickHandlerRpgPlus());
 		MinecraftForge.EVENT_BUS.register(new DreadEventHooks());
 		// hack to increase the number of potion types allowed

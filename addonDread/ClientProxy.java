@@ -19,14 +19,12 @@ import addonDread.render.RenderMinionS;
 import addonDread.render.RenderMinionZ;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class ClientProxyRpgPlus extends CommonProxyRpgplus {
+public class ClientProxy extends ServerProxy {
 
-	private static final ModelNecroArmor armorNecroChest = new ModelNecroArmor(
-			1.0f);
+	private static final ModelNecroArmor armorNecroChest = new ModelNecroArmor(1.0f);
 
 	private static final ModelNecroArmor armorNecro = new ModelNecroArmor(0.5f);
-	private static ModelPaladinArmor armorPaladinChest = new ModelPaladinArmor(
-			1.0f);
+	private static ModelPaladinArmor armorPaladinChest = new ModelPaladinArmor(1.0f);
 
 	private static ModelPaladinArmor armorPaladin = new ModelPaladinArmor(0.5f);
 
@@ -57,27 +55,16 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 		RpgUtility.registerSpecialAbility(RpgDreadAddon.paladinSword, ability);
 
 		if (RpgConfig.instance.render3D) {
-			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.necroSkull,
-					new NecroRenderer());
-			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.paladinSword,
-					new PaladinSwordRenderer());
+			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.necroSkull,new NecroRenderer());
+			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.paladinSword,new PaladinSwordRenderer());
 
-			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.necroShield,
-					new NecroShieldRenderer(new NecroShield(),
-							"rpginventorymod:jewels/NecroShield.png"));
+			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.necroShield,new NecroShieldRenderer(new NecroShield(),"rpginventorymod:jewels/NecroShield.png"));
 
-			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.paladinShield,
-					new PalaRenderer(new PalaShield(),
-							"rpginventorymod:jewels/PaladinShield.png"));
+			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.paladinShield,new PalaRenderer(new PalaShield(),"rpginventorymod:jewels/PaladinShield.png"));
 		}
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityMinionS.class,
-				new RenderMinionS());
-		RenderingRegistry.registerEntityRenderingHandler(EntityMinionZ.class,
-				new RenderMinionZ());
-
-		// RPGKeyHandler.registerKeyhandler(new RpgPlusKeyHandling(),
-		// IKeyHandler.bindKeys, IKeyHandler.reps);
+		RenderingRegistry.registerEntityRenderingHandler(EntityMinionS.class,new RenderMinionS());
+		RenderingRegistry.registerEntityRenderingHandler(EntityMinionZ.class,new RenderMinionZ());
 
 	}
 }
