@@ -5,7 +5,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import rpgInventory.config.RpgConfig;
 import addonArchmage.weapons.RenderElementalBlock;
 import addonBasic.models.item.ModelMageArmor;
-import addonBasic.models.item.bookMage;
+import addonBasic.models.item.ModelMageBook;
 import addonBasic.renderer.shields.BookRenderer;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -48,7 +48,7 @@ public class MSClientProxy extends MSCommonProxy {
 					RpgArchmageAddon.ultimateStaff, new StaffRenderer());
 
 			MinecraftForgeClient.registerItemRenderer(RpgArchmageAddon.archBook,
-					new BookRenderer(new bookMage(),
+					new BookRenderer(new ModelMageBook(),
 							"rpginventorymod:jewels/archMageShield.png"));
 		}
 	}
