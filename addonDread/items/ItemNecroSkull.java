@@ -38,8 +38,7 @@ public class ItemNecroSkull extends ItemRpgSword  {
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase mob,
-			EntityLivingBase player) {
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase mob,EntityLivingBase player) {
 		if ((player instanceof EntityPlayer)) {
 			EntityPlayer p = (EntityPlayer) player;
 			World world = p.worldObj;

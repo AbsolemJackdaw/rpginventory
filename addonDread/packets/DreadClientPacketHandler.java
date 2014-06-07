@@ -26,18 +26,20 @@ public class DreadClientPacketHandler extends DreadServerPacketHandler{
 			if (inv != null) {
 				switch (weaponID) {
 				case SKULLRCLICK:
-					new PacketSpawnMinion(weapon, dis, inv, p);
+					new PacketSpawnMinion(weapon, inv, p);
 					break;
 				case NECROSPECIAL:
-					new PacketNecroSpecial(weapon, dis, inv, p);
+					new PacketNecroSpecial(weapon, inv, p);
 					break;
 				case PALADINSPECIAL:
-					new PacketPalaSpecial( p, dis, weapon, inv);
+					new PacketPalaSpecial( p, weapon, inv);
 					break;
 				default:
 					break;
 				}
 			}
+			
+			dis.close();
 		} catch (Exception e) {
 		}
 	}

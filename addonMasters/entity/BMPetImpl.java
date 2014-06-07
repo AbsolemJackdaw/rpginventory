@@ -162,7 +162,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.1);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2);
 		// this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.22499999403953552D);
 
 	}
@@ -174,8 +174,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			EntityLiving el = (EntityLiving) par1Entity;
 			el.attackEntityFrom(DamageSource.causeMobDamage(this), getAttackDamage());
 		}
-		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this),
-				0);
+		return par1Entity.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) getOwner()),0);
 	}
 
 	@Override

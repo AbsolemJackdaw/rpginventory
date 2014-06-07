@@ -14,13 +14,7 @@ import addonDread.minions.MinionRegistry;
 
 public class PacketNecroSpecial {
 
-	public PacketNecroSpecial(ItemStack weapon, ByteBufInputStream dis,
-			PlayerRpgInventory inv, EntityPlayer p) {
-		try {
-			dis.close();
-		} catch (Throwable ex) {
-			ex.printStackTrace();
-		}
+	public PacketNecroSpecial(ItemStack weapon,PlayerRpgInventory inv, EntityPlayer p) {
 
 		System.out.println("paf");
 		if (weapon.getItem().equals(RpgDreadAddon.necroSkull)

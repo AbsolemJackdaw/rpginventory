@@ -15,8 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderMinionS extends RenderBiped {
 
-	private static final ResourceLocation skeletonTexture = new ResourceLocation(
-			"textures/entity/skeleton/skeleton.png");
+	private static final ResourceLocation skeletonTexture = new ResourceLocation("textures/entity/skeleton/skeleton.png");
 
 	public RenderMinionS() {
 		super(new ModelDeath(), 0.5F);

@@ -40,14 +40,14 @@ public class RenderMinionZ extends RenderBiped {
 	@Override
 	public void doRender(Entity par1Entity, double par2, double par4,
 			double par6, float par8, float par9) {
-		this.func_82426_a((EntityMinionZ) par1Entity, par2, par4, par6, par8,
+		this.renderMinionZombie((EntityMinionZ) par1Entity, par2, par4, par6, par8,
 				par9);
 	}
 
 
 	public void doRenderLiving(EntityLiving par1EntityLiving, double par2,
 			double par4, double par6, float par8, float par9) {
-		this.func_82426_a((EntityMinionZ) par1EntityLiving, par2, par4, par6,
+		this.renderMinionZombie((EntityMinionZ) par1EntityLiving, par2, par4, par6,
 				par8, par9);
 	}
 
@@ -61,7 +61,7 @@ public class RenderMinionZ extends RenderBiped {
 		this.field_82433_n = new ModelZombieVillager(0.5F, 0.0F, true);
 	}
 
-	public void func_82426_a(EntityMinionZ par1EntityMinionZ, double par2,
+	public void renderMinionZombie(EntityMinionZ par1EntityMinionZ, double par2,
 			double par4, double par6, float par8, float par9) {
 		this.func_82427_a(par1EntityMinionZ);
 		super.doRender(par1EntityMinionZ, par2, par4, par6, par8, par9);
@@ -90,9 +90,11 @@ public class RenderMinionZ extends RenderBiped {
 		GL11.glScalef(0.8F, 0.8F, 0.8F);
 	}
 
+	
+	private static final ResourceLocation loc = new ResourceLocation("textures/entity/zombie/zombie.png");
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return new ResourceLocation("textures/entity/zombie/zombie.png");
+		return loc;
 	}
 
 	@Override

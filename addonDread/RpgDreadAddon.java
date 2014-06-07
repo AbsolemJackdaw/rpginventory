@@ -46,7 +46,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @Mod(modid = "RPGPlusPlus", name = "Necro Paladin Addon", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
 public class RpgDreadAddon {
 
-	@SidedProxy(serverSide = "addonDread.CommonProxyRpgplus", clientSide = "addonDread.ClientProxyRpgPlus")
+	@SidedProxy(serverSide = "addonDread.ServerPoxy", clientSide = "addonDread.ClientProxy")
 	public static ServerProxy proxy;
 	
 	public static String CLASSNECRO = "necro";

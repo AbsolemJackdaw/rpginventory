@@ -15,7 +15,6 @@ public class ItemPaladinArmor extends AbstractArmor {
 
 	@Override
 	public String armorClassName() {
-		// TODO Auto-generated method stub
 		return RpgDreadAddon.CLASSPALADIN;
 	}
 

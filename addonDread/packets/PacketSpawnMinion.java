@@ -18,8 +18,7 @@ import addonDread.minions.EntityMinionZ;
 
 public class PacketSpawnMinion {
 
-	public PacketSpawnMinion(ItemStack weapon, ByteBufInputStream dis,
-			PlayerRpgInventory inv, EntityPlayer p) {
+	public PacketSpawnMinion(ItemStack weapon, PlayerRpgInventory inv, EntityPlayer p) {
 
 		System.out.println(CommonTickHandlerRpgPlus.rpgPluscooldownMap + " " +RpgInventoryMod.playerClass);
 

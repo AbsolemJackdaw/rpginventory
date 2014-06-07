@@ -13,6 +13,8 @@ public class NecroRenderer extends RpgItemRenderer {
 
 	NecroSkull skull;
 
+	private static final ResourceLocation loc = new ResourceLocation("rpginventorymod:weapons/Skull.png");
+	
 	public NecroRenderer() {
 		skull = new NecroSkull();
 	}
@@ -24,8 +26,7 @@ public class NecroRenderer extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			scale = 0.5F;
 			GL11.glScalef(scale, scale, scale);
-			mc.renderEngine.bindTexture(new ResourceLocation(
-					"rpginventorymod:weapons/Skull.png"));
+			mc.renderEngine.bindTexture(loc);
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(5F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(-80F, 0.0f, 0.0f, 1.0f);
@@ -39,8 +40,7 @@ public class NecroRenderer extends RpgItemRenderer {
 			GL11.glPushMatrix();
 			scale = 0.5F;
 			GL11.glScalef(scale, scale, scale);
-			mc.renderEngine.bindTexture(new ResourceLocation(
-					"rpginventorymod:weapons/Skull.png"));
+			mc.renderEngine.bindTexture(loc);
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(5F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(-80F, 0.0f, 0.0f, 1.0f);
@@ -57,8 +57,7 @@ public class NecroRenderer extends RpgItemRenderer {
 
 		case ENTITY:
 			GL11.glPushMatrix();
-			mc.renderEngine.bindTexture(new ResourceLocation(
-					"rpginventorymod:weapons/Skull.png"));
+			mc.renderEngine.bindTexture(loc);
 			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(180F, 0.0f, 0.0f, 1.0f);
@@ -70,8 +69,7 @@ public class NecroRenderer extends RpgItemRenderer {
 
 		case INVENTORY:
 			GL11.glPushMatrix();
-			mc.renderEngine.bindTexture(new ResourceLocation(
-					"rpginventorymod:weapons/Skull.png"));
+			mc.renderEngine.bindTexture(loc);
 			scale = 1F;
 			GL11.glScalef(scale, scale, scale);
 			GL11.glRotatef(200F, 1.0f, 0.0f, 0.0f);

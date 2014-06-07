@@ -38,8 +38,6 @@ public class ItemBeastAxe extends ItemRpgSword {
 
 	public ItemBeastAxe(ToolMaterial mat) {
 		super(mat);
-		this.maxStackSize = 1;
-		this.setMaxDamage(1500);
 	}
 
 	public boolean canHarvestBlock(Block par2Block) {
@@ -47,23 +45,6 @@ public class ItemBeastAxe extends ItemRpgSword {
 				&& ((par2Block.getMaterial() == Material.wood)
 						|| (par2Block.getMaterial() == Material.plants) || (par2Block
 								.getMaterial() == Material.vine)) ? true : false;
-	}
-
-	// public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
-	// return (par2Block != null)
-	// && ((par2Block.getMaterial() == Material.wood)
-	// || (par2Block.getMaterial() == Material.plants) ||
-	// (par2Block.getMaterial() == Material.vine)) ? 15f
-	// : super.getStrVsBlock(par1ItemStack, par2Block);
-	// }
-
-	@Override
-	public boolean hitEntity(ItemStack par1ItemStack,
-			EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving) {
-		par2EntityLiving
-		.attackEntityFrom(DamageSource
-				.causePlayerDamage((EntityPlayer) par3EntityLiving), 6);
-		return false;
 	}
 
 	@Override

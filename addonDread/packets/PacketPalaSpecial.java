@@ -20,12 +20,7 @@ import addonDread.RpgDreadAddon;
 
 public class PacketPalaSpecial {
 
-	public PacketPalaSpecial(EntityPlayer p,ByteBufInputStream dis, ItemStack weapon, PlayerRpgInventory inv) {
-		try {
-			dis.close();
-		} catch (Throwable ex) {
-			ex.printStackTrace();
-		}
+	public PacketPalaSpecial(EntityPlayer p, ItemStack weapon, PlayerRpgInventory inv) {
 		inv.markDirty();
 
 		if (!RpgInventoryMod.developers.contains(p.getDisplayName()
