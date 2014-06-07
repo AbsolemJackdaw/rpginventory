@@ -44,7 +44,7 @@ public class RpgVanillaShields {
 		shieldDiamond.setCreativeTab(tab);
 
 		GameRegistry.addRecipe(new ItemStack(shieldWood, 1), new Object[] {
-			"WWW", "WBW", " W ", 'W', Blocks.planks, 'B', Blocks.log });
+			"BBB", "BBB", " B ", 'W', Blocks.planks, 'B', Blocks.log });
 		GameRegistry.addRecipe(new ItemStack(shieldIron, 1), new Object[] {
 			"WWW", "WWW", " W ", 'W', Items.iron_ingot, });
 		GameRegistry.addRecipe(new ItemStack(shieldGold, 1), new Object[] {
@@ -63,38 +63,23 @@ public class RpgVanillaShields {
 
 		tab = new ShieldTab(CreativeTabs.getNextID(), "ShieldTab");
 
-		shieldWood = new ItemRpgInvShields(1, 50, "wood",
-				"subaraki:jewels/ShieldWood.png")
-		.setUnlocalizedName("shieldWood");
-		shieldIron = new ItemRpgInvShields(1, 125, "iron",
-				"subaraki:jewels/ShieldIron.png")
-		.setUnlocalizedName("shieldIron");
-		shieldGold = new ItemRpgInvShields(1, 250, "gold",
-				"subaraki:jewels/ShieldGold.png")
-		.setUnlocalizedName("shieldGold");
-		shieldDiamond = new ItemRpgInvShields(1, 500, "diamond",
-				"subaraki:jewels/ShieldDiamond.png")
-		.setUnlocalizedName("shieldDiamond");
+		shieldWood = new ItemRpgInvShields(1, 75, "wood","rpginventorymod:jewels/ShieldWood.png").setUnlocalizedName("shieldWood");
+		shieldIron = new ItemRpgInvShields(1, 200, "iron","rpginventorymod:jewels/ShieldIron.png").setUnlocalizedName("shieldIron");
+		shieldGold = new ItemRpgInvShields(1, 250, "gold","rpginventorymod:jewels/ShieldGold.png").setUnlocalizedName("shieldGold");
+		shieldDiamond = new ItemRpgInvShields(1, 500, "diamond","rpginventorymod:jewels/ShieldDiamond.png").setUnlocalizedName("shieldDiamond");
 
-		allItems = new Item[] { shieldWood, shieldIron, shieldGold,
-				shieldDiamond };
+		allItems = new Item[] { shieldWood, shieldIron, shieldGold,shieldDiamond };
 
 		for (int i = 0; i < allItems.length; i++) {
 			if (allItems[i] != null) {
 
-				String itemName = allItems[i].getUnlocalizedName().substring(
-						allItems[i].getUnlocalizedName().indexOf(".") + 1);
+				String itemName = allItems[i].getUnlocalizedName().substring(allItems[i].getUnlocalizedName().indexOf(".") + 1);
 
-				String itemNameCropped = itemName.substring(itemName
-						.indexOf(".") + 1);
+				String itemNameCropped = itemName.substring(itemName.indexOf(".") + 1);
 
-				allItems[i].setTextureName(RpgInventoryMod.name + ":"
-						+ itemNameCropped);
+				allItems[i].setTextureName(RpgInventoryMod.name + ":"+ itemNameCropped);
 
-				GameRegistry
-				.registerItem(allItems[i],
-						allItems[i].getUnlocalizedName(),
-						RpgInventoryMod.name);
+				GameRegistry.registerItem(allItems[i],allItems[i].getUnlocalizedName(),RpgInventoryMod.name);
 			} else {
 				System.out.println("Item is null !" + i);
 			}

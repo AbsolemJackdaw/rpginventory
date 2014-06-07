@@ -73,7 +73,7 @@ public class RBClientProxy extends RBCommonProxy {
 
 			MinecraftForgeClient.registerItemRenderer(RpgMastersAddon.beastShield,
 					new LionHeadRenderer(new LionHead(),
-							"subaraki:jewels/lion.png"));
+							"rpginventorymod:jewels/lion.png"));
 		}
 
 		RenderingRegistry.registerEntityRenderingHandler(BullPet.class,
@@ -96,7 +96,10 @@ public class RBClientProxy extends RBCommonProxy {
 		MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
 
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
-		RpgUtility.registerSpecialAbility(new WeaponAbility());
+		
+		WeaponAbility ability = new WeaponAbility();
+		RpgUtility.registerSpecialAbility(RpgMastersAddon.beastAxe, ability);
+		RpgUtility.registerSpecialAbility(RpgMastersAddon.daggers, ability);
 
 		// TickRegistry.registerTickHandler(new ClientTickHandler(),
 		// Side.CLIENT);

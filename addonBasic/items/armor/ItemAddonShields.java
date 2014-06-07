@@ -1,5 +1,6 @@
 package addonBasic.items.armor;
 
+import net.minecraft.util.ResourceLocation;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.MainShield;
 import addonBasic.RpgBaseAddon;
@@ -13,14 +14,16 @@ public class ItemAddonShields extends ItemRpgInvArmor{
 	private ModelShield ms= new ModelShield();
 	private bookMage bm = new bookMage();
 
+	public static final ResourceLocation mantle = new ResourceLocation("rpginventorymod:jewels/talisman.png");
+	
 	public ItemAddonShields(int par4, int maxDamage, String name,
 			String resourcelocation) {
 		super(par4, maxDamage, -1, resourcelocation);
 	}
 
 	@Override
-	public String getMantleTexture() {
-		return "subaraki:jewels/talisman.png";
+	public ResourceLocation getMantleTexture() {
+		return mantle;
 	}
 
 	@Override

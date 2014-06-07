@@ -56,6 +56,15 @@ public class ItemRpgInvArmor extends Item {
 		TEXTURE = new ResourceLocation(resourcelocation);
 	}
 
+	/**armor type only. can be used for rings*/
+	public ItemRpgInvArmor(int armorType){
+		this(armorType, 0 , -1, null);
+	}
+	
+	public ItemRpgInvArmor(int armortype, int maxdamage, String resourcelocation){
+		this(armortype, maxdamage, -1, resourcelocation);
+	}
+	
 	/**
 	 * allows items to add custom lines of information to the mouseover
 	 * description
@@ -142,8 +151,8 @@ public class ItemRpgInvArmor extends Item {
 		return 0xffffff;
 	}
 
-	public String getMantleTexture() {
-		return "";
+	public ResourceLocation getMantleTexture() {
+		return null;
 	}
 
 	/**

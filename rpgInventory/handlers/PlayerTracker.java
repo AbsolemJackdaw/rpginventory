@@ -2,7 +2,7 @@ package rpgInventory.handlers;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.oldpackets.PacketInventory;
+import rpgInventory.handlers.packets.PacketHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -17,8 +17,7 @@ public class PlayerTracker{
 	@SubscribeEvent
 	public void onPlayerChangedDimension(PlayerChangedDimensionEvent e) {
 		if (!e.player.worldObj.isRemote) {
-			PacketInventory.syncOwnInventory((EntityPlayerMP) e.player,
-					PlayerRpgInventory.get(e.player));
+			PacketHelper.syncOwnInventory((EntityPlayerMP) e.player,PlayerRpgInventory.get(e.player));
 		}
 		PlayerRpgInventory.get(e.player);
 	}
@@ -26,8 +25,7 @@ public class PlayerTracker{
 	@SubscribeEvent
 	public void onPlayerLogin(PlayerLoggedInEvent e) {
 		if (!e.player.worldObj.isRemote) {
-			PacketInventory.syncOwnInventory((EntityPlayerMP) e.player,
-					PlayerRpgInventory.get(e.player));
+			PacketHelper.syncOwnInventory((EntityPlayerMP) e.player,PlayerRpgInventory.get(e.player));
 		}
 		PlayerRpgInventory.get(e.player);
 	}
@@ -39,8 +37,7 @@ public class PlayerTracker{
 	@SubscribeEvent
 	public void onPlayerRespawn(PlayerRespawnEvent e) {
 		if (!e.player.worldObj.isRemote) {
-			PacketInventory.syncOwnInventory((EntityPlayerMP) e.player,
-					PlayerRpgInventory.get(e.player));
+			PacketHelper.syncOwnInventory((EntityPlayerMP) e.player,PlayerRpgInventory.get(e.player));
 		}
 		PlayerRpgInventory.get(e.player);
 	}

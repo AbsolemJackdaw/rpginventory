@@ -18,16 +18,13 @@ public class VanillaEvents {
 				.toLowerCase())) {
 			return;
 		}
-		try {
-			if ((item.getItemDamage() + amount) >= item.getMaxDamage()) {
-				// Trigger item break stuff
-				item = null;
-			} else {
-				item.damageItem(amount, p);
-			}
-			inv.setInventorySlotContents(slot, item);
-		} catch (Throwable e) {
+		if ((item.getItemDamage() + amount) >= item.getMaxDamage()) {
+			// Trigger item break stuff
+			item = null;
+		} else {
+			item.damageItem(amount, p);
 		}
+		inv.setInventorySlotContents(slot, item);
 	}
 
 	@SubscribeEvent

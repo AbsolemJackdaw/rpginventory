@@ -70,16 +70,16 @@ public class RpgArchmageAddon {
 				Items.nether_star);
 		GameRegistry.addRecipe(new ItemStack(windStaff),
 				"III", "DSD", "III", 'I', Items.feather, 'D', Items.diamond, 'S',
-				RpgBaseAddon.staf);
+				RpgBaseAddon.lunarStaff);
 		GameRegistry.addRecipe(new ItemStack(frostStaff),
 				"III", "DSD", "III", 'I', Blocks.ice, 'D', Items.diamond, 'S',
-				RpgBaseAddon.staf);
+				RpgBaseAddon.lunarStaff);
 		GameRegistry.addRecipe(new ItemStack(earthStaff),
 				"III", "DSD", "III", 'I', Blocks.grass, 'D', Items.diamond, 'S',
-				RpgBaseAddon.staf);
+				RpgBaseAddon.lunarStaff);
 		GameRegistry.addRecipe(new ItemStack(fireStaff),
 				"III", "DSD", "III", 'I', Items.blaze_powder, 'D', Items.diamond, 'S',
-				RpgBaseAddon.staf);
+				RpgBaseAddon.lunarStaff);
 		GameRegistry.addRecipe(new ItemStack(archBook),
 				"III", "IBI", " I ", 'I', new ItemStack(Items.dye, 1, 4), 'B',
 				Items.book);
@@ -125,7 +125,7 @@ public class RpgArchmageAddon {
 		ultimateStaff = new ItemElementalStaff(5, 300).setMaxStackSize(1)
 				.setMaxDamage(150).setUnlocalizedName("staffElemental");
 		archBook = new ItemMageShield(1, 300, "",
-				"subaraki:jewels/archMageShield.png")
+				"rpginventorymod:jewels/archMageShield.png")
 		.setUnlocalizedName("archTome");
 
 		archmageHood = new ItemMageARmor(archMage, 4, 0)

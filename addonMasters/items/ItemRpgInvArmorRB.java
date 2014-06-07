@@ -23,7 +23,6 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 	public ItemRpgInvArmorRB(int par4, int maxDamage, String name,
 			String resourcelocation) {
 		super(par4, maxDamage, -1, resourcelocation);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -53,40 +52,20 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 	public boolean hitEntity(ItemStack par1ItemStack,
 			EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving) {
 
-		PlayerRpgInventory
-		.get((EntityPlayer) par3EntityLiving);
+		PlayerRpgInventory.get((EntityPlayer) par3EntityLiving);
 
-		// RpgInv inv = mod_RpgInventory.proxy.getInventory(((EntityPlayer)
-		// par3EntityLiving).getDisplayName());
 
-		if (((EntityPlayer) par3EntityLiving).getCurrentEquippedItem()
-				.getItem() == RpgMastersAddon.daggers) {
-			if (RpgInventoryMod.playerClass
-					.contains(RpgMastersAddon.CLASSROGUESHIELDED)) {
-				par2EntityLiving.addPotionEffect(new PotionEffect(
-						Potion.poison.id, RpgInventoryMod.donators
-						.contains(((EntityPlayer) par3EntityLiving)
-								.getDisplayName()) ? 80 : 60, 1));
-			} else if (RpgInventoryMod.playerClass
-					.contains(RpgMastersAddon.CLASSROGUE)) {
-				par2EntityLiving.addPotionEffect(new PotionEffect(
-						Potion.poison.id, RpgInventoryMod.donators
-						.contains(((EntityPlayer) par3EntityLiving)
-								.getDisplayName()) ? 40 : 30, 0));
+		if (((EntityPlayer) par3EntityLiving).getCurrentEquippedItem().getItem() == RpgMastersAddon.daggers) {
+			if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSROGUESHIELDED)) {
+				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, RpgInventoryMod.donators.contains(((EntityPlayer) par3EntityLiving).getDisplayName()) ? 80 : 60, 1));
+			} else if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSROGUE)) {
+				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, RpgInventoryMod.donators.contains(((EntityPlayer) par3EntityLiving).getDisplayName()) ? 40 : 30, 0));
 				if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
-					par2EntityLiving
-					.attackEntityFrom(
-							DamageSource
-							.causePlayerDamage((EntityPlayer) par3EntityLiving),
-							10);
+					par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving),10);
 				}
 			}
 			if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
-				par2EntityLiving
-				.attackEntityFrom(
-						DamageSource
-						.causePlayerDamage((EntityPlayer) par3EntityLiving),
-						10);
+				par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving),10);
 			} else {
 				par2EntityLiving.attackEntityFrom(DamageSource
 						.causePlayerDamage((EntityPlayer) par3EntityLiving), 6);

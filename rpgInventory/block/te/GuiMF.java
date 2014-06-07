@@ -11,6 +11,10 @@ public class GuiMF extends GuiContainer {
 
 	private TEMold forgeInventory;
 
+	public static final ResourceLocation icons = new ResourceLocation("rpginventorymod:textures/gui/RPGinventoryTM.png");
+	public static final ResourceLocation gui = new ResourceLocation("rpginventorymod:textures/gui/Forge.png");
+	
+	
 	public GuiMF(InventoryPlayer inventory, TEMold te) {
 		super(new MoldContainer(inventory, te));
 		forgeInventory = te;
@@ -30,13 +34,12 @@ public class GuiMF extends GuiContainer {
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
 
-		mc.renderEngine.bindTexture(new ResourceLocation(
-				"rpginventorymod:textures/gui/Forge.png"));
+		mc.renderEngine.bindTexture(gui);
 		drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
 
 		if (forgeInventory.isBurning()) {
 			int burn = forgeInventory.getTimeRemainingScaled(33);
-			drawTexturedModalRect(j + 33, k + 58/*-burn+33*/, 176, 0/* * 33-burn*/,45, burn);
+			drawTexturedModalRect(j + 33, k + 58, 176, 0, 45, burn);
 		}
 
 		int update = forgeInventory.getProgressScaled(60);
@@ -48,8 +51,7 @@ public class GuiMF extends GuiContainer {
 		float x = 1 * ratio;
 		float y = 6 * ratio;
 
-		mc.renderEngine.bindTexture(new ResourceLocation(
-				"rpginventorymod:textures/gui/RPGinventoryTM.png"));
+		mc.renderEngine.bindTexture(icons);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.85F);
@@ -101,9 +103,7 @@ public class GuiMF extends GuiContainer {
 	 */
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		fontRendererObj.drawString(
-				StatCollector.translateToLocal("container.inventory"), 8,
-				(ySize - 96) + 2, 0xffffff);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8,(ySize - 96) + 2, 0xffffff);
 		fontRendererObj.drawString("Mold Forge", 5, (ySize - 180), 0xffffff);
 	}
 }

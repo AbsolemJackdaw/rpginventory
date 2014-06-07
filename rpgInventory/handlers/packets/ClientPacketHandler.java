@@ -74,9 +74,7 @@ public class ClientPacketHandler extends ServerPacketHandler {
 				break;
 
 			default:
-				FMLLog.getLogger().info(
-						"[SEVERE] Client:  RpgInventory Send Unused packet !! Packet ID "
-								+ guiId + ". Please report to mod author.");
+				FMLLog.getLogger().info("[SEVERE] Client:  RpgInventory Send Unused packet !! Packet ID "+ guiId + ". Please report to mod author.");
 				break;
 			}
 			dis.close();

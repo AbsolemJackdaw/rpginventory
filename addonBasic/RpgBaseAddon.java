@@ -75,7 +75,7 @@ public class RpgBaseAddon {
 
 	public static Item
 	/* ====weapons==== */
-	elfbow, hammer, wand, staf,
+	elfbow, hammer, soulSphere, lunarStaff,
 	/* ====extra items==== */
 	wizardBook,
 	/* ====armor==== */
@@ -125,9 +125,9 @@ public class RpgBaseAddon {
 		GameRegistry.addRecipe(new ItemStack(elfbow, 1), new Object[] { "EPP",
 			"P S", "PS ", 'E', Items.emerald, 'S', Items.string, 'P',
 			new ItemStack(Blocks.log, 1, 2) });
-		GameRegistry.addRecipe(new ItemStack(wand, 1), new Object[] { "GGG",
+		GameRegistry.addRecipe(new ItemStack(soulSphere, 1), new Object[] { "GGG",
 			"GLG", "GGG", 'L', Blocks.lapis_block, 'G', Items.gold_ingot });
-		GameRegistry.addRecipe(new ItemStack(staf, 1), new Object[] { " ML",
+		GameRegistry.addRecipe(new ItemStack(lunarStaff, 1), new Object[] { " ML",
 			" SM", "S  ", 'M', Items.speckled_melon, 'S', Items.stick, 'L',
 			new ItemStack(Items.dye, 1, 4) });
 //		GameRegistry.addRecipe(new ItemStack(claymore, 1), new Object[] {
@@ -172,10 +172,15 @@ public class RpgBaseAddon {
 			}
 		}
 
-		RpgUtility.registerAbilityWeapon(staf, ServerPacketHandler.MAGE1);
-		RpgUtility.registerAbilityWeapon(hammer, ServerPacketHandler.BERSERKER);
-		RpgUtility.registerAbilityWeapon(elfbow, ServerPacketHandler.ARCHER);
-		RpgUtility.registerAbilityWeapon(wand, ServerPacketHandler.MAGE2);
+//		RpgUtility.registerAbilityWeapon(lunarStaff, ServerPacketHandler.MAGE1);
+//		RpgUtility.registerAbilityWeapon(hammer, ServerPacketHandler.BERSERKER);
+//		RpgUtility.registerAbilityWeapon(elfbow, ServerPacketHandler.ARCHER);
+//		RpgUtility.registerAbilityWeapon(soulSphere, ServerPacketHandler.MAGE2);
+		
+		RpgUtility.registerAbilityWeapon(lunarStaff);
+		RpgUtility.registerAbilityWeapon(hammer);
+		RpgUtility.registerAbilityWeapon(elfbow);
+		RpgUtility.registerAbilityWeapon(soulSphere);
 
 		EntityRegistry.registerModEntity(EntityHellArrow.class, "hellArrow",
 				EntityRegistry.findGlobalUniqueEntityId(), this, 250, 1, true);
@@ -190,13 +195,13 @@ public class RpgBaseAddon {
 		tab = new AddonTab(CreativeTabs.getNextID(),"Mage Archer Berserker Addon");
 
 		archerShield = new ItemAddonShields(1, 200, "",
-				"subaraki:jewels/Shield1.png").setUnlocalizedName(
+				"rpginventorymod:jewels/Shield1.png").setUnlocalizedName(
 						"shieldArcher").setCreativeTab(tab);
 		berserkerShield = new ItemAddonShields(1, 450, "",
-				"subaraki:jewels/IronThorn.png").setUnlocalizedName(
+				"rpginventorymod:jewels/IronThorn.png").setUnlocalizedName(
 						"shieldBerserker").setCreativeTab(tab);
 		talisman = new ItemAddonShields(1, 500, "",
-				"subaraki:jewels/mageShield.png").setUnlocalizedName(
+				"rpginventorymod:jewels/mageShield.png").setUnlocalizedName(
 						"shieldMage").setCreativeTab(tab);
 
 		magehood = new ItemMageArmor(mage, 4, 0).setUnlocalizedName("mage1")
@@ -227,7 +232,7 @@ public class RpgBaseAddon {
 		.setUnlocalizedName("berserk4").setCreativeTab(tab);
 
 //		claymore = new ItemClaymore(clay).setFull3D().setUnlocalizedName("claymore").setCreativeTab(tab);
-		wand = new ItemMageSphere().setFull3D().setMaxDamage(400)
+		soulSphere = new ItemMageSphere().setFull3D().setMaxDamage(400)
 				.setUnlocalizedName("soulsphere").setCreativeTab(tab);
 		elfbow = new ItemArcherBow().setFull3D().setMaxDamage(350)
 				.setUnlocalizedName("elmBow").setCreativeTab(tab);
@@ -244,9 +249,9 @@ public class RpgBaseAddon {
 
 		hammer = new ItemHammer(rageBreaker).setUnlocalizedName("rageBreaker").setCreativeTab(tab);
 		
-		staf = new ItemStaf().setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);
+		lunarStaff = new ItemStaf().setMaxStackSize(1).setMaxDamage(1500).setUnlocalizedName("lunarStaff").setCreativeTab(tab);
 
-		allItems = new Item[] { elfbow, /*claymore,*/ hammer, wand, staf,
+		allItems = new Item[] { elfbow, /*claymore,*/ hammer, soulSphere, lunarStaff,
 				berserkerShield, archerShield, talisman, wizardBook,
 				magehood, magegown, magepants, mageboots, archerhood,
 				archerchest, archerpants, archerboots, berserkerHood,

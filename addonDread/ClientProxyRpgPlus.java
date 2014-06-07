@@ -51,8 +51,10 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 	public void registerRenderInformation() {
 
 		RpgDreadAddon.Channel.register(new DreadClientPacketHandler());
-		RpgUtility.registerSpecialAbility(new SpecialAbility());
-
+		
+		SpecialAbility ability = new SpecialAbility();
+		RpgUtility.registerSpecialAbility(RpgDreadAddon.necroSkull, ability);
+		RpgUtility.registerSpecialAbility(RpgDreadAddon.paladinSword, ability);
 
 		if (RpgConfig.instance.render3D) {
 			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.necroSkull,
@@ -62,11 +64,11 @@ public class ClientProxyRpgPlus extends CommonProxyRpgplus {
 
 			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.necroShield,
 					new NecroShieldRenderer(new NecroShield(),
-							"subaraki:jewels/NecroShield.png"));
+							"rpginventorymod:jewels/NecroShield.png"));
 
 			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.paladinShield,
 					new PalaRenderer(new PalaShield(),
-							"subaraki:jewels/PaladinShield.png"));
+							"rpginventorymod:jewels/PaladinShield.png"));
 		}
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinionS.class,

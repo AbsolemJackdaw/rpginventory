@@ -54,7 +54,12 @@ public class ClientAddonProxy extends CommonAddonProxy {
 	@Override
 	public void registerRenderInformation() {
 		RpgBaseAddon.Channel.register(new ClientPacketHandler());
-		RpgUtility.registerSpecialAbility(new KeyHandler());
+		
+		KeyHandler ability = new KeyHandler();
+		RpgUtility.registerSpecialAbility(RpgBaseAddon.hammer, ability);
+		RpgUtility.registerSpecialAbility(RpgBaseAddon.soulSphere, ability);
+		RpgUtility.registerSpecialAbility(RpgBaseAddon.elfbow, ability);
+
 
 
 		if (RpgConfig.instance.render3D == true) {
@@ -62,22 +67,22 @@ public class ClientAddonProxy extends CommonAddonProxy {
 //					new ClaymoreRenderer());
 			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.hammer,
 					new HammerRender());
-			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.wand,
+			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.soulSphere,
 					new SoulSphereRender());
-			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.staf,
+			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.lunarStaff,
 					new StafRender());
 			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.elfbow,
 					new BowRender());
 
 			MinecraftForgeClient.registerItemRenderer(
 					RpgBaseAddon.berserkerShield, new BerserkerShield(
-							new IronThorn(), "subaraki:jewels/IronThorn.png"));
+							new IronThorn(), "rpginventorymod:jewels/IronThorn.png"));
 			MinecraftForgeClient.registerItemRenderer(
 					RpgBaseAddon.archerShield, new ArcherShield(
-							new ModelShield(), "subaraki:jewels/Shield1.png"));
+							new ModelShield(), "rpginventorymod:jewels/Shield1.png"));
 			MinecraftForgeClient.registerItemRenderer(RpgBaseAddon.talisman,
 					new BookRenderer(new bookMage(),
-							"subaraki:jewels/mageShield.png"));
+							"rpginventorymod:jewels/mageShield.png"));
 
 			RenderingRegistry.registerEntityRenderingHandler(EntityHellArrow.class,
 					new RenderArrow());

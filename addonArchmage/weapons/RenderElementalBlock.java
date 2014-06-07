@@ -46,12 +46,12 @@ public class RenderElementalBlock extends Render {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		// TODO Auto-generated method stub
-		return new ResourceLocation("subaraki:weapons/elementum.png");
+		return new ResourceLocation("rpginventorymod:weapons/elementum.png");
 	}
 
 	// @Override
 	// protected ResourceLocation func_110775_a(Entity entity) {
-	// return new ResourceLocation("subaraki:weapons/elementum.png");
+	// return new ResourceLocation("rpginventorymod:weapons/elementum.png");
 	// }
 	public void renderAABBwithUV(AxisAlignedBB par0AxisAlignedBB) {
 		Tessellator tess = Tessellator.instance;
@@ -118,7 +118,7 @@ public class RenderElementalBlock extends Render {
 		GL11.glScalef(0.0F + (size * 0.3F), 0.0F + (size * 0.3F),
 				0.0F + (size * 0.3F));
 		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(
-				"subaraki:weapons/elementum.png"));
+				"rpginventorymod:weapons/elementum.png"));
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);

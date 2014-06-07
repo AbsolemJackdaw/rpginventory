@@ -25,7 +25,7 @@ public class AxeRender extends RpgItemRenderer {
 			float f = 0.8f;
 			GL11.glScalef(f, f, f);
 			mc.renderEngine.bindTexture(new ResourceLocation(
-					"subaraki:weapons/axe.png"));
+					"rpginventorymod:weapons/axe.png"));
 			GL11.glTranslatef(0.2F, 1.35F, 0F);
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(140F, 1.0f, 0.0f, 0.0f);
@@ -38,7 +38,7 @@ public class AxeRender extends RpgItemRenderer {
 			scale = 0.8f;
 			GL11.glScalef(scale, scale, scale);
 			mc.renderEngine.bindTexture(new ResourceLocation(
-					"subaraki:weapons/axe.png"));
+					"rpginventorymod:weapons/axe.png"));
 			GL11.glTranslatef(0.2F, 1.35F, 0F);
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(140F, 1.0f, 0.0f, 0.0f);
@@ -53,7 +53,7 @@ public class AxeRender extends RpgItemRenderer {
 			scale = 1.5F;
 			GL11.glScalef(scale, scale, scale);
 			mc.renderEngine.bindTexture(new ResourceLocation(
-					"subaraki:weapons/axe.png"));
+					"rpginventorymod:weapons/axe.png"));
 			GL11.glRotatef(90F, 1.0f, 0.0f, 0.0f);
 			GL11.glRotatef(90F, 0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(0F, 0.0f, 0.0f, 1.0f);
@@ -65,7 +65,7 @@ public class AxeRender extends RpgItemRenderer {
 		case INVENTORY:
 			GL11.glPushMatrix();
 			mc.renderEngine.bindTexture(new ResourceLocation(
-					"subaraki:weapons/axe.png"));
+					"rpginventorymod:weapons/axe.png"));
 			scale = 1F;
 			GL11.glScalef(scale, scale - 0.1f, scale);
 			GL11.glRotatef(200F, 1.0f, 0.0f, 0.0f);

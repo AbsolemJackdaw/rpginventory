@@ -52,33 +52,28 @@ public class BlockForge extends BlockContainer {
 
 		TEMold temold = (TEMold) par1World.getTileEntity(par2, par3, par4);
 		if (temold != null) {
-			for (int var8 = 0; var8 < 5; ++var8) {
-				ItemStack item = temold.getStackInSlot(var8);
+			for (int slot = 0; slot < 5; ++slot) {
+				ItemStack item = temold.getStackInSlot(slot);
 				if (item != null) {
 					float var10 = (this.temoldRand.nextFloat() * 0.8F) + 0.1F;
 					float var11 = (this.temoldRand.nextFloat() * 0.8F) + 0.1F;
 					float var12 = (this.temoldRand.nextFloat() * 0.8F) + 0.1F;
+					
 					while (item.stackSize > 0) {
 						int var13 = this.temoldRand.nextInt(21) + 10;
 						if (var13 > item.stackSize) {
 							var13 = item.stackSize;
 						}
 						item.stackSize -= var13;
-						EntityItem var14 = new EntityItem(par1World, par2
-								+ var10, par3 + var11, par4 + var12,
-								new ItemStack(item.getItem(), var13,
-										item.getItemDamage()));
+						EntityItem var14 = new EntityItem(par1World, par2+ var10, par3 + var11, par4 + var12,
+								new ItemStack(item.getItem(), var13,item.getItemDamage()));
 						if (item.hasTagCompound()) {
-							var14.getEntityItem().setTagCompound(
-									(NBTTagCompound) item.getTagCompound()
-									.copy());
+							var14.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
 						}
 						float var15 = 0.05F;
-						var14.motionX = (float) this.temoldRand.nextGaussian()
-								* var15;
+						var14.motionX = (float) this.temoldRand.nextGaussian()* var15;
 						var14.motionY = ((float) this.temoldRand.nextGaussian() * var15) + 0.2F;
-						var14.motionZ = (float) this.temoldRand.nextGaussian()
-								* var15;
+						var14.motionZ = (float) this.temoldRand.nextGaussian()* var15;
 						par1World.spawnEntityInWorld(var14);
 					}
 				}
@@ -96,12 +91,8 @@ public class BlockForge extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		return side == 1 ? this.blockIcon
-				: (side == 0 ? this.blockIcon
-						: (side != meta ? this.blockIcon
-								: (isBurning ? temoldOvenFrontActive
-										: temoldOvenFront)));
-	}
+		return side == 1 ? this.blockIcon: (side == 0 ? this.blockIcon: (side != meta ? this.blockIcon: (isBurning ? temoldOvenFrontActive: temoldOvenFront)));
+		}
 
 	/**
 	 * Returns the ID of the items to drop on destruction.
@@ -133,8 +124,8 @@ public class BlockForge extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World w, int x, int y, int z,
 			EntityLivingBase entity, ItemStack par6ItemStack) {
-		int var = MathHelper
-				.floor_double(((entity.rotationYaw * 4.0F) / 360.0F) + 0.5D) & 3;
+		
+		int var = MathHelper.floor_double(((entity.rotationYaw * 4.0F) / 360.0F) + 0.5D) & 3;
 		// Unsure what the last var is for, 0 seems to skip what it does tho...
 		switch (var) {
 		case 0:
@@ -164,56 +155,39 @@ public class BlockForge extends BlockContainer {
 	}
 
 	@Override
-	public void randomDisplayTick(World par1World, int x, int y, int z,
-			Random par5Random) {
-		try {
-			TEMold tile = (TEMold) Minecraft.getMinecraft().theWorld
-					.getTileEntity(x, y, z);
-			if (tile.isActive()) {
-				int var6 = par1World.getBlockMetadata(x, y, z);
-				float var7 = x + 0.5F;
-				float var8 = y + 0.0F
-						+ ((par5Random.nextFloat() * 6.0F) / 16.0F);
-				float var9 = z + 0.5F;
-				float var10 = 0.52F;
-				float var11 = (par5Random.nextFloat() * 0.6F) - 0.3F;
+	public void randomDisplayTick(World par1World, int x, int y, int z,Random par5Random) {
+		TEMold tile = (TEMold) Minecraft.getMinecraft().theWorld.getTileEntity(x, y, z);
+		
+		if (tile.isActive()) {
+			int var6 = par1World.getBlockMetadata(x, y, z);
+			float var7 = x + 0.5F;
+			float var8 = y + 0.0F+ ((par5Random.nextFloat() * 6.0F) / 16.0F);
+			float var9 = z + 0.5F;
+			float var10 = 0.52F;
+			float var11 = (par5Random.nextFloat() * 0.6F) - 0.3F;
 
-				if (var6 == 4) {
-					par1World.spawnParticle("smoke", var7 - var10, var8, var9
-							+ var11, 0.0D, 0.0D, 0.0D);
-					par1World.spawnParticle("flame", var7 - var10, var8, var9
-							+ var11, 0.0D, 0.0D, 0.0D);
-				} else if (var6 == 5) {
-					par1World.spawnParticle("smoke", var7 + var10, var8, var9
-							+ var11, 0.0D, 0.0D, 0.0D);
-					par1World.spawnParticle("flame", var7 + var10, var8, var9
-							+ var11, 0.0D, 0.0D, 0.0D);
-				} else if (var6 == 2) {
-					par1World.spawnParticle("smoke", var7 + var11, var8, var9
-							- var10, 0.0D, 0.0D, 0.0D);
-					par1World.spawnParticle("flame", var7 + var11, var8, var9
-							- var10, 0.0D, 0.0D, 0.0D);
-				} else if (var6 == 3) {
-					par1World.spawnParticle("smoke", var7 + var11, var8, var9
-							+ var10, 0.0D, 0.0D, 0.0D);
-					par1World.spawnParticle("flame", var7 + var11, var8, var9
-							+ var10, 0.0D, 0.0D, 0.0D);
-				}
+			if (var6 == 4) {
+				par1World.spawnParticle("smoke", var7 - var10, var8, var9+ var11, 0.0D, 0.0D, 0.0D);
+				par1World.spawnParticle("flame", var7 - var10, var8, var9+ var11, 0.0D, 0.0D, 0.0D);
+			} else if (var6 == 5) {
+				par1World.spawnParticle("smoke", var7 + var10, var8, var9+ var11, 0.0D, 0.0D, 0.0D);
+				par1World.spawnParticle("flame", var7 + var10, var8, var9+ var11, 0.0D, 0.0D, 0.0D);
+			} else if (var6 == 2) {
+				par1World.spawnParticle("smoke", var7 + var11, var8, var9- var10, 0.0D, 0.0D, 0.0D);
+				par1World.spawnParticle("flame", var7 + var11, var8, var9- var10, 0.0D, 0.0D, 0.0D);
+			} else if (var6 == 3) {
+				par1World.spawnParticle("smoke", var7 + var11, var8, var9+ var10, 0.0D, 0.0D, 0.0D);
+				par1World.spawnParticle("flame", var7 + var11, var8, var9+ var10, 0.0D, 0.0D, 0.0D);
 			}
-		} catch (Throwable ex) {
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = temoldOvenSide = reg
-				.registerIcon("rpginventorymod:ovenSide");
-
+		this.blockIcon = temoldOvenSide = reg.registerIcon("rpginventorymod:ovenSide");
 		temoldOvenFront = reg.registerIcon("rpginventorymod:ovenFront");
-
-		temoldOvenFrontActive = reg
-				.registerIcon("rpginventorymod:ovenFrontBurning");
+		temoldOvenFrontActive = reg.registerIcon("rpginventorymod:ovenFrontBurning");
 	}
 
 	/**

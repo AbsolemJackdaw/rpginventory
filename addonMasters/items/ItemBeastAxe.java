@@ -87,10 +87,7 @@ public class ItemBeastAxe extends ItemRpgSword {
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
 		if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSBEASTMASTER)) {
 			World world = player != null ? player.worldObj : null;
-			if ((world != null)
-					&& world.isRemote
-					&& FMLCommonHandler.instance().getEffectiveSide()
-					.isClient()) {
+			if ((world != null)&& world.isRemote&& FMLCommonHandler.instance().getEffectiveSide().isClient()) {
 				Minecraft.getMinecraft();
 				// Truer Randomization
 				rng = new Random(rng.nextLong() + System.currentTimeMillis());
@@ -110,10 +107,8 @@ public class ItemBeastAxe extends ItemRpgSword {
 				if (charmTime >= 100) {
 					charmTime = 0;
 					float num = rng.nextFloat();
-					if (num > (RpgInventoryMod.donators.contains(player
-							.getDisplayName()) ? 0.50F : 0.80F)) {
-						RpgInventoryMod.proxy.spawnCharmParticle(world, el,
-								rng, true);
+					if (num > (RpgInventoryMod.donators.contains(player.getDisplayName()) ? 0.50F : 0.80F)) {
+						RpgInventoryMod.proxy.spawnCharmParticle(world, el,rng, true);
 						try {
 							ByteBuf buf = Unpooled.buffer();
 							ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -125,8 +120,7 @@ public class ItemBeastAxe extends ItemRpgSword {
 						}
 					} else {
 						try{
-							RpgInventoryMod.proxy.spawnCharmParticle(world, el,
-									rng, false);
+							RpgInventoryMod.proxy.spawnCharmParticle(world, el,rng, false);
 							ByteBuf buf = Unpooled.buffer();
 							ByteBufOutputStream out = new ByteBufOutputStream(buf);
 							out.writeInt(RBServerPacketHandler.CRYSTAL);

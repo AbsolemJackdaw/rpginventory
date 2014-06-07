@@ -11,14 +11,16 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import rpgInventory.gui.ButtonInventory;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientTickHandler /* implements ITickHandler */{
 
 	boolean added = false;
 
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void tickEnd(TickEvent.ClientTickEvent ev) {
-
+	public void clientTick(TickEvent.ClientTickEvent ev) {
 
 		// This will only inject our buttons into the existing GuiInventory
 		// object.

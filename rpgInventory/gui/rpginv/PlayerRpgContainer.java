@@ -7,7 +7,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import rpgInventory.RpgInventoryMod;
-import rpgInventory.handlers.oldpackets.PacketInventory;
+import rpgInventory.handlers.packets.PacketHelper;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 
 public class PlayerRpgContainer extends Container {
@@ -61,11 +61,8 @@ public class PlayerRpgContainer extends Container {
 	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 
-		PacketInventory.sendDataToPlayersAround(par1EntityPlayer);
-
 		if (!par1EntityPlayer.worldObj.isRemote) {
-			PacketInventory.syncOwnInventory((EntityPlayerMP) par1EntityPlayer,
-					this.inventory);
+			PacketHelper.syncOwnInventory((EntityPlayerMP) par1EntityPlayer, this.inventory);
 		}
 
 		super.onContainerClosed(par1EntityPlayer);
@@ -82,7 +79,7 @@ public class PlayerRpgContainer extends Container {
 		ItemStack rv = super.slotClick(par1, par2, par3, par4EntityPlayer);
 
 		if (!par4EntityPlayer.worldObj.isRemote) {
-			PacketInventory.syncOwnInventory((EntityPlayerMP) par4EntityPlayer,
+			PacketHelper.syncOwnInventory((EntityPlayerMP) par4EntityPlayer,
 					this.inventory);
 		}
 		return rv;

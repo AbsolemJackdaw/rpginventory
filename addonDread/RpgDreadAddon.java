@@ -257,9 +257,9 @@ public class RpgDreadAddon {
 		palaLeggings = new ItemPaladinArmor(PALADINARMOR, 4, 2).setUnlocalizedName("paladin3");
 		palaBoots = new ItemPaladinArmor(PALADINARMOR, 4, 3).setUnlocalizedName("paladin4");
 
-		necroShield = new ItemRpgInvArmorPlus(1, 250, "necro","subaraki:jewels/NecroShield.png").setUnlocalizedName("shieldNecro");
+		necroShield = new ItemRpgInvArmorPlus(1, 250, "necro","rpginventorymod:jewels/NecroShield.png").setUnlocalizedName("shieldNecro");
 		necroSkull = new ItemNecroSkull(NECRO).setFull3D().setUnlocalizedName("Skull");
-		paladinShield = new ItemRpgInvArmorPlus(1, 450, "pala","subaraki:jewels/PaladinShield.png").setUnlocalizedName("shieldPaladin");
+		paladinShield = new ItemRpgInvArmorPlus(1, 450, "pala","rpginventorymod:jewels/PaladinShield.png").setUnlocalizedName("shieldPaladin");
 		paladinSword = new ItemPaladinSword(0,PALADIN).setFull3D().setUnlocalizedName("paladinPride");
 
 		necroleather = new ItemNecroPaladinMats(0).setUnlocalizedName("n.leather");

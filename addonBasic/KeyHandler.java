@@ -114,7 +114,7 @@ public class KeyHandler implements ISpecialAbility {
 			}
 		}
 
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.wand)) {
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.soulSphere)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);
@@ -129,7 +129,7 @@ public class KeyHandler implements ISpecialAbility {
 		}
 
 
-		if(RpgUtility.canSpecial(p, RpgBaseAddon.staf)) {
+		if(RpgUtility.canSpecial(p, RpgBaseAddon.lunarStaff)) {
 			try {
 				ByteBuf buf = Unpooled.buffer();
 				ByteBufOutputStream out = new ByteBufOutputStream(buf);

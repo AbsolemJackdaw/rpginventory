@@ -41,7 +41,7 @@ public class PacketMageVortex {
 						|| (legs == null) || (boots == null)) {
 					return;
 				}
-				if ((wand.getItem() != RpgBaseAddon.wand)
+				if ((wand.getItem() != RpgBaseAddon.soulSphere)
 						|| (hat.getItem() != RpgBaseAddon.magehood)
 						|| (chest.getItem() != RpgBaseAddon.magegown)
 						|| (legs.getItem() != RpgBaseAddon.magepants)

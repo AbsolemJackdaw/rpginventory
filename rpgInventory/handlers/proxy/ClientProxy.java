@@ -35,7 +35,6 @@ public class ClientProxy extends CommonProxy {
 	@SideOnly(Side.CLIENT)
 	public static void renderHandler() {
 
-		//		new CapeRenderer();
 		MinecraftForge.EVENT_BUS.register(new RenderRpgPlayer());
 	}
 
@@ -58,8 +57,7 @@ public class ClientProxy extends CommonProxy {
 		case 1:
 			// back button in rpg inventory
 			if (Minecraft.getMinecraft().playerController.isInCreativeMode()) {
-				Minecraft.getMinecraft().displayGuiScreen(
-						new GuiContainerCreative(p1));
+				Minecraft.getMinecraft().displayGuiScreen(new GuiContainerCreative(p1));
 			} else {
 				Minecraft.getMinecraft().displayGuiScreen(new GuiInventory(p1));
 			}

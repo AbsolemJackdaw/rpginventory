@@ -57,6 +57,7 @@ public class ServerPacketHandler {
 			dis.close();
 		} catch (IOException e) {
 			System.out.println("Server packet exception");
+			e.printStackTrace();
 		}
 	}
 }

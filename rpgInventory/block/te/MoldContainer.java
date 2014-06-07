@@ -30,24 +30,20 @@ public class MoldContainer extends Container {
 		this.addSlotToContainer(new GoldBlockSlot(par2TileEntityGoldOven, 1,
 				48, 32)); // gold block
 		this.addSlotToContainer(new MoldSlot(par2TileEntityGoldOven, 2, 96, 51)); // mold
-		this.addSlotToContainer(new SlotMineral(par2TileEntityGoldOven, 3, 96,
-				32)); // mineral
+		this.addSlotToContainer(new SlotMineral(par2TileEntityGoldOven, 3, 96,32)); // mineral
 
-		this.addSlotToContainer(new SlotMold(par1InventoryPlayer.player,
-				par2TileEntityGoldOven, 4, 136, 40));
+		this.addSlotToContainer(new SlotMold(par1InventoryPlayer.player,par2TileEntityGoldOven, 4, 136, 40));
 
 		// 5-32
 		for (int i = 0; i < 3; i++) {
 			for (int k = 0; k < 9; k++) {
-				addSlotToContainer(new Slot(par1InventoryPlayer, k + (i * 9)
-						+ 9, 8 + (k * 18), 84 + (i * 18) + 18));
+				addSlotToContainer(new Slot(par1InventoryPlayer, k + (i * 9)+ 9, 8 + (k * 18), 84 + (i * 18) + 18));
 			}
 		}
 
 		// 32-41
 		for (int j = 0; j < 9; j++) {
-			addSlotToContainer(new Slot(par1InventoryPlayer, j, 8 + (j * 18),
-					142 + 18));
+			addSlotToContainer(new Slot(par1InventoryPlayer, j, 8 + (j * 18),142 + 18));
 		}
 	}
 

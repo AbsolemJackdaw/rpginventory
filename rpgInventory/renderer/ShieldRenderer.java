@@ -44,17 +44,17 @@ public abstract class ShieldRenderer implements IItemRenderer {
 		}
 		if (type == ItemRenderType.ENTITY) {
 			renderEntity();
-			model.render((Entity) data[1], 0, 0, 0, 0, 0, 0.0625f);
+			model.render(null, 0, 0, 0, 0, 0, 0.0625f);
 
 		}
 		if (type == ItemRenderType.EQUIPPED) {
 			renderEquipped();
-			model.render((Entity) data[1], 0, 0, 0, 0, 0, 0.0625f);
+			model.render(null, 0, 0, 0, 0, 0, 0.0625f);
 
 		}
 		if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
 			renderEquippedFP();
-			model.render((Entity) data[1], 0, 0, 0, 0, 0, 0.0625f);
+			model.render(null, 0, 0, 0, 0, 0, 0.0625f);
 		}
 	}
 

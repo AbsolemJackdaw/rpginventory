@@ -1,5 +1,6 @@
 package addonArchmage;
 
+import net.minecraft.util.ResourceLocation;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.MainShield;
 import addonBasic.models.item.bookMage;
@@ -8,6 +9,8 @@ public class ItemMageShield extends ItemRpgInvArmor {
 
 	private bookMage book = new bookMage();
 
+	public static final ResourceLocation mantle = new ResourceLocation("rpginventorymod:jewels/magemantle.png");
+	
 	public ItemMageShield(int par4, int maxDamage, String name,
 			String resourcelocation) {
 		super(par4, maxDamage, -1, resourcelocation);
@@ -19,8 +22,8 @@ public class ItemMageShield extends ItemRpgInvArmor {
 	}
 
 	@Override
-	public String getMantleTexture() {
-		return "subaraki:jewels/magemantle.png";
+	public ResourceLocation getMantleTexture() {
+		return mantle;
 	}
 
 	@Override

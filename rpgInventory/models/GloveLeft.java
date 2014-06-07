@@ -14,19 +14,19 @@ import net.minecraft.entity.Entity;
 
 public class GloveLeft extends ModelBase {
 	// fields
-	ModelRenderer Shape1;
-	ModelRenderer Shape2;
-	ModelRenderer Shape3;
-	ModelRenderer Shape4;
-	ModelRenderer Shape5;
-	ModelRenderer Shape6;
-	ModelRenderer Shape7;
+	public ModelRenderer Shape1;
+	public ModelRenderer Shape2;
+	public ModelRenderer Shape3;
+	public ModelRenderer Shape4;
+	public ModelRenderer Shape5;
+	public ModelRenderer Shape6;
+	public ModelRenderer Shape7;
 	public ModelRenderer Shape8;
-	ModelRenderer Shape9;
-	ModelRenderer Shape10;
-	ModelRenderer Shape11;
-	ModelRenderer Shape12;
-	ModelRenderer Shape13;
+	public ModelRenderer Shape9;
+	public ModelRenderer Shape10;
+	public ModelRenderer Shape11;
+	public ModelRenderer Shape12;
+	public ModelRenderer Shape13;
 
 	public ArrayList<ModelRenderer> parts = new ArrayList<ModelRenderer>();
 

@@ -24,9 +24,12 @@ public class RpgGui extends GuiContainer {
 
 	public static String rpg = "Rpg";
 	public static String hi = "Inventory";
+	
+	public static final ResourceLocation gui = new ResourceLocation("rpginventorymod:textures/gui/RpgInv.png");
 
 	public static void renderPlayerinInv(Minecraft par0Minecraft, int par1,
 			int par2, int par3, float par4, float par5) {
+		
 		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(par1, par2, 50.0F);
@@ -38,18 +41,14 @@ public class RpgGui extends GuiContainer {
 		GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
 		RenderHelper.enableStandardItemLighting();
 		GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(-((float) Math.atan(par5 / 40.0F)) * 20.0F, 1.0F, 0.0F,
-				0.0F);
-		par0Minecraft.thePlayer.renderYawOffset = (float) Math
-				.atan(par4 / 40.0F) * 20.0F;
+		GL11.glRotatef(-((float) Math.atan(par5 / 40.0F)) * 20.0F, 1.0F, 0.0F,0.0F);
+		par0Minecraft.thePlayer.renderYawOffset = (float) Math.atan(par4 / 40.0F) * 20.0F;
 		par0Minecraft.thePlayer.rotationYaw = (float) Math.atan(par4 / 40.0F) * 40.0F;
-		par0Minecraft.thePlayer.rotationPitch = -((float) Math
-				.atan(par5 / 40.0F)) * 20.0F;
+		par0Minecraft.thePlayer.rotationPitch = -((float) Math.atan(par5 / 40.0F)) * 20.0F;
 		par0Minecraft.thePlayer.rotationYawHead = par0Minecraft.thePlayer.rotationYaw;
 		GL11.glTranslatef(0.0F, par0Minecraft.thePlayer.yOffset, 0.0F);
 		RenderManager.instance.playerViewY = 180.0F;
-		RenderManager.instance.renderEntityWithPosYaw(par0Minecraft.thePlayer,
-				0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
+		RenderManager.instance.renderEntityWithPosYaw(par0Minecraft.thePlayer,0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
 		par0Minecraft.thePlayer.renderYawOffset = var6;
 		par0Minecraft.thePlayer.rotationYaw = var7;
 		par0Minecraft.thePlayer.rotationPitch = var8;
@@ -83,18 +82,14 @@ public class RpgGui extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2,
 			int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(new ResourceLocation(
-				"rpginventorymod:textures/gui/RpgInv.png"));
+		this.mc.renderEngine.bindTexture(gui);
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
 		drawTexturedModalRect(posX, posY, 0, 0, xSize, ySize);
-		drawString(fontRendererObj, rpg, (this.width / 2) + 39,
-				(this.height / 2) - 23, 0xffffff);
-		drawString(fontRendererObj, hi, (this.width / 2) + 39,
-				(this.height / 2) - 15, 0xffffff);
+		drawString(fontRendererObj, rpg, (this.width / 2) + 39,(this.height / 2) - 23, 0xffffff);
+		drawString(fontRendererObj, hi, (this.width / 2) + 39,(this.height / 2) - 15, 0xffffff);
 
-		renderPlayerinInv(this.mc, posX + 51, posY + 75, 30, (posX + 51)
-				- this.xSize_lo, (posY + 75) - 50 - this.ySize_lo);
+		renderPlayerinInv(this.mc, posX + 51, posY + 75, 30, (posX + 51)- this.xSize_lo, (posY + 75) - 50 - this.ySize_lo);
 	}
 
 	@Override
@@ -112,8 +107,7 @@ public class RpgGui extends GuiContainer {
 		int posX = (this.width - xSize) / 2;
 		int posY = (this.height - ySize) / 2;
 
-		this.buttonList.add(new GuiButton(0, posX + 130, posY + 1, 50, 20,
-				"Back"));
+		this.buttonList.add(new GuiButton(0, posX + 130, posY + 1, 50, 20,"Back"));
 
 	}
 }

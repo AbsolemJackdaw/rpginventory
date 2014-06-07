@@ -62,31 +62,38 @@ public class CommonTickHandler {
 		 * hook onto already existing healing ticks and heal player every 30
 		 * ticks if using the lunar staff
 		 */
-		for (String username : RPGEventHooks.HealerTick.keySet()) {
-			try {
-				if (RPGEventHooks.HealerTick.get(username) <= 0) {
-					EntityPlayer player = MinecraftServer.getServer()
-							.getConfigurationManager()
-							.getPlayerForUsername(username);
 
-					if (player.getCurrentEquippedItem() != null) {
-						if (player.getCurrentEquippedItem().getItem()
-								.equals(RpgBaseAddon.staf)) {
-							if (player.isUsingItem()) {
-								RPGEventHooks.HealerTick.put(
-										player.getCommandSenderName(), 30);
-								if (player.getHealth() < player.getMaxHealth()) {
-									// while staf is being used, regen the
-									// healer
-									player.heal(1);
-								}
+		for (String username : RPGEventHooks.HealerTick.keySet()) {
+			if (RPGEventHooks.HealerTick.get(username) > 0) {
+				RPGEventHooks.HealerTick.put(username,
+						RPGEventHooks.HealerTick.get(username) - 1);
+			} else {
+				EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
+				if (player == null) {
+					RPGEventHooks.HealerTick.remove(username);
+					continue;
+				}
+			}
+		}
+
+
+		for (String username : RPGEventHooks.HealerTick.keySet()) {
+			if (RPGEventHooks.HealerTick.get(username) <= 0) {
+				EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
+
+				if (player.getCurrentEquippedItem() != null) {
+					if (player.getCurrentEquippedItem().getItem().equals(RpgBaseAddon.lunarStaff)) {
+						if (player.isUsingItem()) {
+							RPGEventHooks.HealerTick.put(player.getCommandSenderName(), 30);
+							if (player.getHealth() < player.getMaxHealth()) {
+								// while staf is being used, regen the
+								// healer
+								player.heal(1);
 							}
 						}
 					}
 				}
-			} catch (Throwable ex) {
 			}
 		}
-
 	}
 }

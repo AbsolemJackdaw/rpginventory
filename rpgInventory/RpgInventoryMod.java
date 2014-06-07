@@ -106,9 +106,7 @@ public class RpgInventoryMod {
 	public static CreativeTabs tab;
 
 	public static ArrayList<String> donators = new ArrayList<String>();
-	/**this boolean gets manually changed by the creator before obfuscating the mod to false
-	 * this field is used for Reflection */
-	public static boolean isDev;
+
 	public static final String channelName = "RpgInv";
 
 	public RpgInventoryMod() {
@@ -164,24 +162,19 @@ public class RpgInventoryMod {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 
-
-		isDev = true;
-
 		ToLoad.loadMoldRecipes();
 		ToLoad.loadGameRecipes();
 
 		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("RpgInv");
 		proxy.load();
-		FMLCommonHandler.instance().bus().register(new ServerTickHandler());
+		
 		RpgInventoryMod.Channel.register(new ServerPacketHandler());
 
 		setDonators();
-		// GameRegistry.registerPlayerTracker(new OnPlayerLogin(version, name));
 
 		developers.add("unjustice");
 		developers.add("artix_all_mighty");
 		developers.add("rich1051414");
-		developers.add("darkhax");
 
 		proxy.registerRenderInformation();
 
@@ -195,11 +188,10 @@ public class RpgInventoryMod {
 
 		GameRegistry.registerTileEntity(TEMold.class, "temold");
 
-		// DONE ?
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-
 		MinecraftForge.EVENT_BUS.register(new RPGEventHooks());
-
+		FMLCommonHandler.instance().bus().register(new ServerTickHandler());
+		
 		ClientProxy.renderHandler();
 
 	}
@@ -210,17 +202,11 @@ public class RpgInventoryMod {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt) {
-		// PIPELINE.postInitialise();
-
 		proxy.registerLate();
-		// All mods should be initialized now, check what potion effects are
-		// installed
-		// and list the bad ones for later reference.
 	}
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		// loadConfig(event.getSuggestedConfigurationFile());
 
 		// NOTHING BEFORE THE GOD DAMN TAB !
 		// any items that need to be in it, put in it BEFORE the tab exists will
@@ -228,45 +214,23 @@ public class RpgInventoryMod {
 		tab = new RpgInventoryTab(CreativeTabs.getNextID(),
 				"Rpg Inventory Jewelery");
 
-		neckgold = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,
-				"subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold")
-				.setCreativeTab(tab);
-		neckdia = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,
-				"subaraki:jewels/NeckDia.png").setUnlocalizedName("neckDia")
-				.setCreativeTab(tab);
-		neckem = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,
-				"subaraki:jewels/NeckEm.png").setUnlocalizedName("neckEm")
-				.setCreativeTab(tab);
-		necklap = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,
-				"subaraki:jewels/NeckLap.png").setUnlocalizedName("neckLap")
-				.setCreativeTab(tab);
+		neckgold = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,"rpginventorymod:jewels/NeckGold.png").setUnlocalizedName("neckGold").setCreativeTab(tab);
+		neckdia = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,"rpginventorymod:jewels/NeckDia.png").setUnlocalizedName("neckDia").setCreativeTab(tab);
+		neckem = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,"rpginventorymod:jewels/NeckEm.png").setUnlocalizedName("neckEm").setCreativeTab(tab);
+		necklap = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,"rpginventorymod:jewels/NeckLap.png").setUnlocalizedName("neckLap").setCreativeTab(tab);
 
-		ringgold = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "")
-		.setUnlocalizedName("ringGold").setCreativeTab(tab);
-		ringdia = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "")
-		.setUnlocalizedName("ringDia").setCreativeTab(tab);
-		ringem = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "")
-		.setUnlocalizedName("ringEm").setCreativeTab(tab);
-		ringlap = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "")
-		.setUnlocalizedName("ringLap").setCreativeTab(tab);
+		ringgold = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "").setUnlocalizedName("ringGold").setCreativeTab(tab);
+		ringdia = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "").setUnlocalizedName("ringDia").setCreativeTab(tab);
+		ringem = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "").setUnlocalizedName("ringEm").setCreativeTab(tab);
+		ringlap = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "").setUnlocalizedName("ringLap").setCreativeTab(tab);
 
-		glovesbutter = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,
-				"subaraki:jewels/Glove.png").setUnlocalizedName("gloveGold")
-				.setCreativeTab(tab);
-		glovesdia = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,
-				"subaraki:jewels/GloveDia.png").setUnlocalizedName("gloveDia")
-				.setCreativeTab(tab);
-		glovesem = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,
-				"subaraki:jewels/GloveEm.png").setUnlocalizedName("gloveEm")
-				.setCreativeTab(tab);
-		gloveslap = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,
-				"subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap")
-				.setCreativeTab(tab);
+		glovesbutter = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,"rpginventorymod:jewels/Glove.png").setUnlocalizedName("gloveGold").setCreativeTab(tab);
+		glovesdia = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,"rpginventorymod:jewels/GloveDia.png").setUnlocalizedName("gloveDia").setCreativeTab(tab);
+		glovesem = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,"rpginventorymod:jewels/GloveEm.png").setUnlocalizedName("gloveEm").setCreativeTab(tab);
+		gloveslap = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,"rpginventorymod:jewels/GloveLap.png").setUnlocalizedName("gloveLap").setCreativeTab(tab);
 
 
-		cloakI = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 17,
-				"subaraki:capes/GreyCape.png").setFull3D()
-				.setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
+		cloakI = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 17,"subaraki:capes/GreyCape.png").setFull3D().setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
 
 		cloakBlack 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 0,	"textures/blocks/wool_colored_black.png").setFull3D().setUnlocalizedName("bla.capeGrey").setCreativeTab(tab);
 		cloakRed 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 1,	"textures/blocks/wool_colored_red.png").setFull3D().setUnlocalizedName("red.capeGrey").setCreativeTab(tab);
@@ -285,15 +249,11 @@ public class RpgInventoryMod {
 		cloakOrange 	= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 14,	"textures/blocks/wool_colored_orange.png").setFull3D().setUnlocalizedName("ora.capeGrey").setCreativeTab(tab);
 		cloakWhite 		= new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 15,	"textures/blocks/wool_colored_white.png").setFull3D().setUnlocalizedName("whi.capeGrey").setCreativeTab(tab);
 
-		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(
-				tab);
-		ringmold = new ItemMold().setUnlocalizedName("moldRing")
-				.setCreativeTab(tab);
-		wantmold = new ItemMold().setUnlocalizedName("moldGlove")
-				.setCreativeTab(tab);
+		colmold = new ItemMold().setUnlocalizedName("moldNeck").setCreativeTab(tab);
+		ringmold = new ItemMold().setUnlocalizedName("moldRing").setCreativeTab(tab);
+		wantmold = new ItemMold().setUnlocalizedName("moldGlove").setCreativeTab(tab);
 
-		forgeBlock = new BlockForge(Material.rock).setHardness(5f)
-				.setBlockName("MoldForge").setCreativeTab(tab);
+		forgeBlock = new BlockForge(Material.rock).setHardness(5f).setBlockName("MoldForge").setCreativeTab(tab);
 		GameRegistry.registerBlock(forgeBlock, "MoldForge");
 
 		allItems = new Item[] { neckgold, neckdia, neckem, necklap,
@@ -306,14 +266,11 @@ public class RpgInventoryMod {
 
 		for (int i = 0; i < allItems.length; i++) {
 			if (allItems[i] != null) {
-				String itemName = allItems[i].getUnlocalizedName().substring(
-						allItems[i].getUnlocalizedName().indexOf(".") + 1);
+				String itemName = allItems[i].getUnlocalizedName().substring(allItems[i].getUnlocalizedName().indexOf(".") + 1);
 
-				String itemNameCropped = itemName.substring(itemName
-						.indexOf(".") + 1);
+				String itemNameCropped = itemName.substring(itemName.indexOf(".") + 1);
 
-				allItems[i].setTextureName(RpgInventoryMod.name + ":"
-						+ itemNameCropped);
+				allItems[i].setTextureName(RpgInventoryMod.name + ":"+ itemNameCropped);
 
 				GameRegistry.registerItem(allItems[i],allItems[i].getUnlocalizedName(),RpgInventoryMod.name);
 

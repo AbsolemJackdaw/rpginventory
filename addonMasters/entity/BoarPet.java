@@ -23,9 +23,8 @@ public class BoarPet extends BMPetImpl {
 	float petSize = 0.5F;
 	ModelBoar model = new ModelBoar();
 
-	ResourceLocation normal = new ResourceLocation("subaraki:mobs/boar.png");
-	ResourceLocation saddled = new ResourceLocation(
-			"subaraki:mobs/boar_saddled.png");
+	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/boar.png");
+	ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/boar_saddled.png");
 
 	public BoarPet(World par1World) {
 		this(par1World, null, null);
@@ -122,7 +121,7 @@ public class BoarPet extends BMPetImpl {
 		super.onUpdate();
 		if (previousLevel < getLevel()) {
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20D + MathHelper.floor_double((getLevel()) / 2.5D));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.1d + getLevel() / 600D);
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2d + getLevel() / 600D);
 			previousLevel = getLevel();
 		}
 	}

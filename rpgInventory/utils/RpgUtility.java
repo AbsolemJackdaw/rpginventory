@@ -1,7 +1,9 @@
 package rpgInventory.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,8 +18,11 @@ import rpgInventory.handlers.ServerTickHandler;
 
 public class RpgUtility {
 
+//	/**Use registerSpecialAbility to fill this list*/
+//	public static List<ISpecialAbility> allAbilities = new ArrayList();
+
 	/**Use registerSpecialAbility to fill this list*/
-	public static List<ISpecialAbility> allAbilities = new ArrayList();
+	public static Map<Item, ISpecialAbility> allAbilities = new HashMap<Item, ISpecialAbility>();
 
 
 	/**add a block that can be used to be molten in the mold*/
@@ -72,22 +77,16 @@ public class RpgUtility {
 		System.out.println("[MESSAGE]~ Extend your item with ItemMold so it can be recognized by the Mold Furnace");
 	}
 
-	@Deprecated
 	public static boolean canSpecial(EntityPlayer p, Item specialWeapon){
 		ItemStack stack = p.getCurrentEquippedItem();
 		if(stack != null){
 			Item i = stack.getItem();
-			if(ISpecialAbility.abilityMap.containsKey(i) && i.equals(specialWeapon)) {
+			if(ISpecialAbility.abilityMap.contains(i) && i.equals(specialWeapon)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
-	/**use this to check if the player can launch the special attack.*/
-	//	public static boolean canSpecial(Item specialWeapon){
-	//		return canSpecial(null, specialWeapon);
-	//	}
 
 	public static PlayerRpgInventory getInventory(EntityPlayer p){
 		return PlayerRpgInventory.get(p);
@@ -98,32 +97,13 @@ public class RpgUtility {
 		if(item == null) {
 			return;
 		}
-		ISpecialAbility.abilityMap.put(item, 0);
+		ISpecialAbility.abilityMap.add(item);
 	}
-
-	/**Use this method if you want to register more then one weapon
-	 * Item : item to be registered to use the special ability with
-	 * packetId : used to switch between packets.
-	 * example :
-	 * switch(packetId)
-	 * case 0 : PacketWeapon1();
-	 * case 1 : PacketWeapon2();
-	 * */
-	public static void registerAbilityWeapon(Item item, int packetId){
-		if(item == null) {
-			return;
-		}
-		if(ISpecialAbility.abilityMap.containsKey(item)) {
-			return;
-		}
-		ISpecialAbility.abilityMap.put(item, packetId);
-	}
-
 
 	/**Register a class that implements ISpecialAbility. Registering that class here will allow you to hook up to the "F" special ability key*/
-	public static void registerSpecialAbility(ISpecialAbility keyhandler) {
-		if(!allAbilities.contains(keyhandler))
-			allAbilities.add(keyhandler);
+	public static void registerSpecialAbility(Item item, ISpecialAbility keyhandler) {
+		if(!allAbilities.containsKey(item))
+			allAbilities.put(item, keyhandler);
 	}
 
 	/**Method that spawns in particles in a certain radius of the player

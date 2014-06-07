@@ -36,7 +36,6 @@ public class RenderPet extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		// TODO Auto-generated method stub
 		return ((BMPetImpl) entity).getTexture();
 	}
 

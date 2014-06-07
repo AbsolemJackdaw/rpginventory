@@ -1,4 +1,4 @@
-package rpgInventory.handlers.oldpackets;
+package rpgInventory.handlers.packets;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
@@ -7,13 +7,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.packets.ClientPacketHandler;
-import rpgInventory.handlers.packets.ServerPacketHandler;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
-public class PacketInventory {
+public class PacketHelper {
 
 	/** Destined for the owner of the inventory */
 	public static void syncOwnInventory(EntityPlayerMP player, PlayerRpgInventory inv) {

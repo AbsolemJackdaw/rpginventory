@@ -18,8 +18,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
-public class EntityElementalBlock extends EntityThrowable implements
-IEntityAdditionalSpawnData {
+public class EntityElementalBlock extends EntityThrowable implements IEntityAdditionalSpawnData {
 
 	public String owner;
 

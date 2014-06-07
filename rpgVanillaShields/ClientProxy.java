@@ -9,15 +9,15 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(
 				RpgVanillaShields.shieldDiamond, new VanillaShieldRenderer(
 						new VanillaShield(),
-						"subaraki:jewels/ShieldDiamond.png"));
+						"rpginventorymod:jewels/ShieldDiamond.png"));
 		MinecraftForgeClient.registerItemRenderer(
 				RpgVanillaShields.shieldGold, new VanillaShieldRenderer(
-						new VanillaShield(), "subaraki:jewels/ShieldGold.png"));
+						new VanillaShield(), "rpginventorymod:jewels/ShieldGold.png"));
 		MinecraftForgeClient.registerItemRenderer(
 				RpgVanillaShields.shieldIron, new VanillaShieldRenderer(
-						new VanillaShield(), "subaraki:jewels/ShieldIron.png"));
+						new VanillaShield(), "rpginventorymod:jewels/ShieldIron.png"));
 		MinecraftForgeClient.registerItemRenderer(
 				RpgVanillaShields.shieldWood, new VanillaShieldRenderer(
-						new VanillaShield(), "subaraki:jewels/ShieldWood.png"));
+						new VanillaShield(), "rpginventorymod:jewels/ShieldWood.png"));
 	}
 }

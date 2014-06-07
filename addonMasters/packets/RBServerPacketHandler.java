@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.world.World;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.oldpackets.PacketInventory;
+import rpgInventory.handlers.packets.PacketHelper;
 import addonMasters.entity.IPet;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -51,7 +51,7 @@ public class RBServerPacketHandler {
 								pet.writePetToItemStack());
 						IPet.playersWithActivePets.remove(p.getDisplayName());
 						((EntityLiving) pet).setDead();
-						PacketInventory.syncOwnInventory(p, inv);
+						PacketHelper.syncOwnInventory(p, inv);
 					}
 				}
 				break;

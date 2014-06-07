@@ -11,6 +11,7 @@ public class BookGui extends GuiScreen {
 	public static String hi = "Wizard's Knowledge";
 	public final int xSizeOfTexture = 166;
 
+	private static final ResourceLocation gui = new ResourceLocation("rpginventorymod:textures/gui/bookgui.png");
 	public final int ySizeOfTexture = 181;
 	public BookGui(EntityPlayer player) {
 	}
@@ -34,8 +35,7 @@ public class BookGui extends GuiScreen {
 		drawDefaultBackground();
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(new ResourceLocation(
-				"rpginventorymod:textures/gui/bookgui.png"));
+		this.mc.renderEngine.bindTexture(gui);
 
 		int posX = (this.width - xSizeOfTexture) / 2;
 		int posY = (this.height - ySizeOfTexture) / 2;

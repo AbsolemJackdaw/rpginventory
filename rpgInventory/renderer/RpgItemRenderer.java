@@ -16,6 +16,8 @@ public abstract class RpgItemRenderer implements IItemRenderer {
 
 	public float scale = 1f;
 
+	public static final ResourceLocation glint = new ResourceLocation("textures/misc/enchanted_item_glint.png");
+	
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return true;
@@ -29,8 +31,7 @@ public abstract class RpgItemRenderer implements IItemRenderer {
 		if (item.hasEffect(item.getItemDamage())) {
 			GL11.glDepthFunc(GL11.GL_EQUAL);
 			GL11.glDisable(GL11.GL_LIGHTING);
-			texturemanager.bindTexture(new ResourceLocation(
-					"textures/misc/enchanted_item_glint.png"));
+			texturemanager.bindTexture(glint);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
 			float f7 = 0.76F;

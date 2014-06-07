@@ -9,8 +9,6 @@ import net.minecraft.world.World;
 
 public class CommonProxy {
 
-	public static final String RPG_DIR = "RPG_Inventories";
-
 	public static void renderHandler() {
 	}
 

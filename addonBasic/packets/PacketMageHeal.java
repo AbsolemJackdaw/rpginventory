@@ -38,7 +38,7 @@ public class PacketMageHeal {
 						|| (var1 == null) || (var0 == null)) {
 					return;
 				}
-				if ((item.getItem() != RpgBaseAddon.staf)
+				if ((item.getItem() != RpgBaseAddon.lunarStaff)
 						|| (var3.getItem() != RpgBaseAddon.magehood)
 						|| (var2.getItem() != RpgBaseAddon.magegown)
 						|| (var1.getItem() != RpgBaseAddon.magepants)

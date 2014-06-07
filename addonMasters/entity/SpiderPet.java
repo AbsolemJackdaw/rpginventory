@@ -27,9 +27,8 @@ public class SpiderPet extends BMPetImpl {
 	float petSize = 0.5F;
 	ModelSpiderB model = new ModelSpiderB();
 
-	ResourceLocation normal = new ResourceLocation("subaraki:mobs/spider.png");
-	ResourceLocation saddled = new ResourceLocation(
-			"subaraki:mobs/spider_saddled.png");
+	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/spider.png");
+	ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/spider_saddled.png");
 
 	public SpiderPet(World par1World) {
 		super(par1World, 2, null, null);
@@ -122,8 +121,7 @@ public class SpiderPet extends BMPetImpl {
 
 	@Override
 	public ResourceLocation getTexture() {
-		return dataWatcher.getWatchableObjectByte(SADDLE) == 0 ? normal
-				: saddled;
+		return dataWatcher.getWatchableObjectByte(SADDLE) == 0 ? normal: saddled;
 	}
 
 	@Override
@@ -154,7 +152,7 @@ public class SpiderPet extends BMPetImpl {
 		super.onUpdate();
 		if (previousLevel < getLevel()) {
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25D + MathHelper.floor_double(((getLevel()) * 1.0D) / 1.6D));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.1D + (getLevel() / 400D));
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D + (getLevel() / 400D));
 			previousLevel = getLevel();
 		}
 	}

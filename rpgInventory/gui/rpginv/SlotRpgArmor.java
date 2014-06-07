@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import rpgInventory.RpgInventoryMod;
-import rpgInventory.handlers.oldpackets.PacketInventory;
+import rpgInventory.handlers.packets.PacketHelper;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 
 class SlotRpgArmor extends Slot {
@@ -88,7 +88,7 @@ class SlotRpgArmor extends Slot {
 
 	@Override
 	public void onSlotChanged() {
-		PacketInventory.sendDataToPlayersAround(player);
+		PacketHelper.sendDataToPlayersAround(player);
 		super.onSlotChanged();
 	}
 

@@ -47,10 +47,5 @@ public class RpgConfig {
 				"Set to false for alternative PetGui Pet Rotation if default fails.");
 		DefaultRotation = config.get("Rotation", "Default Rotation", true)
 				.getBoolean(true);
-
-		useSpell = config.get(Configuration.CATEGORY_GENERAL,
-				"Allow Day/Night Cycle Spell", true,
-				"Disable the spell that toggles the day night cycle.")
-				.getBoolean(true);
 	}
 }

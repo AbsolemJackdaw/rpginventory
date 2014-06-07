@@ -140,32 +140,11 @@ public class ItemMageSphere extends ItemRpgWeapon {
 					&& item2.equals(RpgBaseAddon.magepants)
 					&& item3.equals(RpgBaseAddon.mageboots)) {
 
-				if ((RpgConfig.instance.useSpell == true)
-						&& par2EntityPlayer.inventory
-						.hasItem(Items.glowstone_dust)
-						&& par2EntityPlayer.isSneaking()) {
-					if (par3World.isDaytime()) {
-						par3World.setWorldTime(13000);
-						par1ItemStack.damageItem(1, par2EntityPlayer);
-					} else {
-						par3World.setWorldTime(300);
-						par1ItemStack.damageItem(1, par2EntityPlayer);
-					}
-				}
-
-				if (RpgConfig.instance.useSpell == false) {
-					// TODO
-					// par2EntityPlayer
-					// .addChatMessage("You can't use the Day/Night Cycle Spell on this Server !");
-				}
-
 				if (par2EntityPlayer.inventory.hasItem(Items.speckled_melon)
 						&& par2EntityPlayer.isSneaking()) {
 					if (!par3World.isRemote) {
-						par2EntityPlayer.inventory
-						.consumeInventoryItem(Items.speckled_melon);
-						par2EntityPlayer.addPotionEffect(new PotionEffect(
-								Potion.regeneration.id, 200, 0));
+						par2EntityPlayer.inventory.consumeInventoryItem(Items.speckled_melon);
+						par2EntityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.id, 200, 0));
 					}
 				}
 
@@ -199,21 +178,14 @@ public class ItemMageSphere extends ItemRpgWeapon {
 							par3World.getBlock(par4, par5, par6 + x);
 						}
 
-						if ((var12 == Blocks.iron_ore)
-								|| (var12 == Blocks.coal_ore)
-								|| (var12 == Blocks.diamond_ore)) {
-							par3World.setBlock(par4, par5, par6,
-									Blocks.gold_ore);
+						if ((var12 == Blocks.iron_ore)|| (var12 == Blocks.coal_ore)|| (var12 == Blocks.diamond_ore)) {
+							par3World.setBlock(par4, par5, par6,Blocks.gold_ore);
 							par1ItemStack.damageItem(4, par2EntityPlayer);
 						}
 						if (var12 == Blocks.lapis_ore) {
 							par3World.setBlock(par4, par5, par6,
 									Blocks.lapis_block);
-							par1ItemStack
-							.damageItem(
-									RpgInventoryMod.donators.contains(par2EntityPlayer
-											.getCommandSenderName()) ? 50
-													: 151, par2EntityPlayer);
+							par1ItemStack.damageItem(RpgInventoryMod.donators.contains(par2EntityPlayer.getCommandSenderName()) ? 50: 151, par2EntityPlayer);
 						}
 
 					}

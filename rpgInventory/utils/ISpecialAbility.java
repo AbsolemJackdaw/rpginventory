@@ -1,16 +1,15 @@
 package rpgInventory.utils;
 
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public interface ISpecialAbility {
 
-
-	public static Map<Item, Integer> abilityMap = new HashMap();
-
+	public static List<Item> abilityMap = new ArrayList();
 
 	/**This method gets fired every time the special ability key is pressed
 	 *Make sure to check for your ability weapon and/or armor class as all

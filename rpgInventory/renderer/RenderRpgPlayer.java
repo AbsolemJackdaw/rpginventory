@@ -3,8 +3,7 @@ package rpgInventory.renderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -21,7 +20,6 @@ import org.lwjgl.opengl.GL11;
 
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.gui.rpginv.RpgGui;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.GloveLeft;
 import rpgInventory.models.GloveRight;
@@ -34,35 +32,12 @@ public class RenderRpgPlayer {
 	private GloveLeft leftglove = new GloveLeft();
 	private ModelNecklace necklace = new ModelNecklace();
 
-	Minecraft mc = Minecraft.getMinecraft();
+	private static final Minecraft mc = Minecraft.getMinecraft();
 	ModelBiped main;
 
 	float rotation = 0;
 
 	float i = 0;
-
-	private void hurtCameraEffect(float par1)
-	{
-		EntityLivingBase entitylivingbase = this.mc.renderViewEntity;
-		float f1 = entitylivingbase.hurtTime - par1;
-		float f2;
-
-		if (entitylivingbase.getHealth() <= 0.0F)
-		{
-			f2 = entitylivingbase.deathTime + par1;
-			GL11.glRotatef(40.0F - (8000.0F / (f2 + 200.0F)), 0.0F, 0.0F, 1.0F);
-		}
-
-		if (f1 >= 0.0F)
-		{
-			f1 /= entitylivingbase.maxHurtTime;
-			f1 = MathHelper.sin(f1 * f1 * f1 * f1 * (float)Math.PI);
-			f2 = entitylivingbase.attackedAtYaw;
-			GL11.glRotatef(-f2, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(-f1 * 14.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glRotatef(f2, 0.0F, 1.0F, 0.0F);
-		}
-	}
 
 	@SubscribeEvent
 	public void PlayerFPRenderer(RenderHandEvent e){
@@ -155,16 +130,14 @@ public class RenderRpgPlayer {
 		/* ===== RENDERING GLOVES===== */
 		ItemStack gloves = PlayerRpgInventory.get(player).getGloves();
 		if (gloves != null) {
-			mc.renderEngine.bindTexture(((ItemRpgInvArmor) gloves.getItem())
-					.getTexture());
+			mc.renderEngine.bindTexture(((ItemRpgInvArmor) gloves.getItem()).getTexture());
 			renderGloves();
 		}
 
 		/* ===== RENDERING NECKLACE===== */
 		ItemStack necklace = PlayerRpgInventory.get(player).getNecklace();
 		if (necklace != null) {
-			mc.renderEngine.bindTexture(((ItemRpgInvArmor) necklace.getItem())
-					.getTexture());
+			mc.renderEngine.bindTexture(((ItemRpgInvArmor) necklace.getItem()).getTexture());
 			renderNecklace(evt.entityPlayer);
 		}
 
@@ -173,9 +146,7 @@ public class RenderRpgPlayer {
 		ItemStack shield = PlayerRpgInventory.get(player).getShield();
 		if (shield != null) {
 
-
-			mc.renderEngine.bindTexture(((ItemRpgInvArmor) shield.getItem())
-					.getTexture());
+			mc.renderEngine.bindTexture(((ItemRpgInvArmor) shield.getItem()).getTexture());
 
 			if((main != null) && ((ItemRpgInvArmor) shield.getItem() != null)) {
 				renderShield((ItemRpgInvArmor) shield.getItem());
@@ -186,39 +157,28 @@ public class RenderRpgPlayer {
 
 	private void rendercape(EntityPlayer player, ItemStack cloak,
 			float partialTick) {
-		float var11;
 		if ((cloak != null) && !player.getHideCape()) {
 			if ((cloak.getItem() != null)) {
 				GL11.glPushMatrix();
 
-				mc.renderEngine.bindTexture(((ItemRpgInvArmor) cloak.getItem())
-						.getTexture());
+				mc.renderEngine.bindTexture(((ItemRpgInvArmor) cloak.getItem()).getTexture());
 
 				/**
 				 * Dev Capes
 				 */
 				//				if (cloak.getItem() == RpgInventoryMod.cloak)
 				//					if (CapeRenderer.capes != null)
-				//						if (CapeRenderer.playersWithCapes.contains(player
-				//								.getCommandSenderName()))
-				//							mc.renderEngine.bindTexture(CapeRenderer
-				//									.getLocationCape(player
-				//											.getCommandSenderName()));
+				//						if (CapeRenderer.playersWithCapes.contains(player.getCommandSenderName()))
+				//							mc.renderEngine.bindTexture(CapeRenderer.getLocationCape(player.getCommandSenderName()));
 				//				new ResourceLocation("subaraki/playerCapes/"+player.getDisplayName()+".png");
 
 				GL11.glTranslatef(0.0F, 0.0F, 0.125F);
-				double var22 = (player.field_71091_bM + ((player.field_71094_bP - player.field_71091_bM) * partialTick))
-						- (player.prevPosX + ((player.posX - player.prevPosX) * partialTick));
-				double var24 = (player.field_71096_bN + ((player.field_71095_bQ - player.field_71096_bN) * partialTick))
-						- (player.prevPosY + ((player.posY - player.prevPosY) * partialTick));
-				double var9 = (player.field_71097_bO + ((player.field_71085_bR - player.field_71097_bO) * partialTick))
-						- (player.prevPosZ + ((player.posZ - player.prevPosZ) * partialTick));
-				var11 = player.prevRenderYawOffset
-						+ ((player.renderYawOffset - player.prevRenderYawOffset) * partialTick);
-				double var12 = MathHelper
-						.sin((var11 * (float) Math.PI) / 180.0F);
-				double var14 = (-MathHelper
-						.cos((var11 * (float) Math.PI) / 180.0F));
+				double var22 = (player.field_71091_bM + ((player.field_71094_bP - player.field_71091_bM) * partialTick))- (player.prevPosX + ((player.posX - player.prevPosX) * partialTick));
+				double var24 = (player.field_71096_bN + ((player.field_71095_bQ - player.field_71096_bN) * partialTick))- (player.prevPosY + ((player.posY - player.prevPosY) * partialTick));
+				double var9 = (player.field_71097_bO + ((player.field_71085_bR - player.field_71097_bO) * partialTick))- (player.prevPosZ + ((player.posZ - player.prevPosZ) * partialTick));
+				float var11 = player.prevRenderYawOffset+ ((player.renderYawOffset - player.prevRenderYawOffset) * partialTick);
+				double var12 = MathHelper.sin((var11 * (float) Math.PI) / 180.0F);
+				double var14 = (-MathHelper.cos((var11 * (float) Math.PI) / 180.0F));
 				float var16 = (float) var24 * 10.0F;
 
 				if (var16 < -6.0F) {
@@ -236,11 +196,8 @@ public class RenderRpgPlayer {
 					var17 = 0.0F;
 				}
 
-				float var19 = player.prevCameraYaw
-						+ ((player.cameraYaw - player.prevCameraYaw) * partialTick);
-				var16 += MathHelper
-						.sin((player.prevDistanceWalkedModified + ((player.distanceWalkedModified - player.prevDistanceWalkedModified) * partialTick)) * 6.0F)
-						* 32.0F * var19;
+				float var19 = player.prevCameraYaw+ ((player.cameraYaw - player.prevCameraYaw) * partialTick);
+				var16 += MathHelper.sin((player.prevDistanceWalkedModified + ((player.distanceWalkedModified - player.prevDistanceWalkedModified) * partialTick)) * 6.0F)* 32.0F * var19;
 
 				if (player.isSneaking()) {
 					var16 += 25.0F;
@@ -249,6 +206,7 @@ public class RenderRpgPlayer {
 				GL11.glRotatef(var18 / 2.0F, 0.0F, 0.0F, 1.0F);
 				GL11.glRotatef(-var18 / 2.0F, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
+				GL11.glColor4f(1,1,1,1);
 				this.main.renderCloak(0.0625F);
 				GL11.glPopMatrix();
 			}
@@ -282,7 +240,8 @@ public class RenderRpgPlayer {
 			i =0f;
 		}
 
-		GL11.glTranslated(0f, 0.5f, -1.1f);
+		GL11.glTranslatef(0f, 0.5f, -1.1f);
+		GL11.glColor4f(1,1,1,1);
 		armor.getShieldModel().renderShield(0.0625f);
 		GL11.glPopMatrix();
 	}
@@ -297,6 +256,7 @@ public class RenderRpgPlayer {
 			leftglove.parts.get(i).rotationPointY = main.bipedLeftArm.rotationPointY;
 			leftglove.parts.get(i).rotationPointZ = main.bipedLeftArm.rotationPointZ;
 		}
+		GL11.glColor4f(1,1,1,1);
 		leftglove.renderLeftGlove(0.0625f);
 		GL11.glPopMatrix();
 
@@ -309,26 +269,25 @@ public class RenderRpgPlayer {
 			rightglove.parts.get(i).rotationPointY = main.bipedRightArm.rotationPointY;
 			rightglove.parts.get(i).rotationPointZ = main.bipedRightArm.rotationPointZ;
 		}
+		GL11.glColor4f(1,1,1,1);
 		rightglove.renderRightGlove(0.0625f);
 		GL11.glPopMatrix();
 	}
 
-	private void renderMantle(EntityPlayer player, String s) {
+	private void renderMantle(EntityPlayer player, ResourceLocation texture) {
 		rotation += 1f;
 		if (rotation == 360) {
 			rotation = 0;
 		}
 
-		mc.renderEngine.bindTexture(new ResourceLocation(s));
+		mc.renderEngine.bindTexture(texture);
 
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		GL11.glPushMatrix();
 		GL11.glScalef(3F, 3F, 3F);
 		GL11.glTranslatef(-0.5F, -0.65F, -0.5F);
 		if (player == Minecraft.getMinecraft().thePlayer) {
-			if (!(((Minecraft.getMinecraft().currentScreen instanceof GuiInventory)
-					|| (Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) || (Minecraft
-							.getMinecraft().currentScreen instanceof RpgGui)) && (RenderManager.instance.playerViewY == 180.0F))) {
+			if (!(Minecraft.getMinecraft().currentScreen instanceof GuiScreen) && (RenderManager.instance.playerViewY == 180.0F)){
 
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glDisable(GL11.GL_LIGHTING);
@@ -354,6 +313,7 @@ public class RenderRpgPlayer {
 
 	private void renderNecklace(EntityPlayer player) {
 		ItemStack chest = player.inventory.armorItemInSlot(2);
+
 		GL11.glPushMatrix();
 		for (int i = 0; i < necklace.parts.size(); i++) {
 			necklace.parts.get(i).rotateAngleX = main.bipedBody.rotateAngleX;
@@ -368,12 +328,12 @@ public class RenderRpgPlayer {
 		} else {
 			GL11.glTranslatef(0F, 0F, 0.0F);
 		}
+		GL11.glColor4f(1,1,1,1);
 		necklace.renderNecklace(0.0625f);
 		GL11.glPopMatrix();
 	}
 
 	private void renderShield(ItemRpgInvArmor armor) {
-
 
 		GL11.glPushMatrix();
 		if(this.mc.gameSettings.thirdPersonView != 0)
@@ -385,16 +345,15 @@ public class RenderRpgPlayer {
 				armor.getShieldModel().parts.get(i).rotationPointY = main.bipedLeftArm.rotationPointY;
 				armor.getShieldModel().parts.get(i).rotationPointZ = main.bipedLeftArm.rotationPointZ;
 			}
-		try {
-			if (armor.shieldClass().contains("vanilla")) {
-				armor.getShieldModel().parts.get(64 - 1).rotateAngleZ = main.bipedLeftArm.rotateAngleZ + 0.356f;
-			}
-		} catch (Exception e) {
+		if (armor.shieldClass().contains("vanilla")) {
+			armor.getShieldModel().parts.get(64 - 1).rotateAngleZ = main.bipedLeftArm.rotateAngleZ + 0.356f;
 		}
-
+		GL11.glColor4f(1,1,1,1);
 		armor.getShieldModel().renderShield(0.0625f);
 		GL11.glPopMatrix();
 	}
+
+
 	private void setupViewBobbing(float par1)
 	{
 		if (this.mc.renderViewEntity instanceof EntityPlayer)
@@ -404,6 +363,29 @@ public class RenderRpgPlayer {
 			float f2 = -(entityplayer.distanceWalkedModified + (f1 * par1));
 			float f3 = entityplayer.prevCameraYaw + ((entityplayer.cameraYaw - entityplayer.prevCameraYaw) * par1);
 			GL11.glTranslatef(-MathHelper.cos(f2 * (float)Math.PI) * f3 * 0.3F, -Math.abs(MathHelper.cos(f2 * (float)Math.PI) * f3), 0.0F);
+		}
+	}
+	
+	private void hurtCameraEffect(float par1)
+	{
+		EntityLivingBase entitylivingbase = this.mc.renderViewEntity;
+		float f1 = entitylivingbase.hurtTime - par1;
+		float f2;
+
+		if (entitylivingbase.getHealth() <= 0.0F)
+		{
+			f2 = entitylivingbase.deathTime + par1;
+			GL11.glRotatef(40.0F - (8000.0F / (f2 + 200.0F)), 0.0F, 0.0F, 1.0F);
+		}
+
+		if (f1 >= 0.0F)
+		{
+			f1 /= entitylivingbase.maxHurtTime;
+			f1 = MathHelper.sin(f1 * f1 * f1 * f1 * (float)Math.PI);
+			f2 = entitylivingbase.attackedAtYaw;
+			GL11.glRotatef(-f2, 0.0F, 1.0F, 0.0F);
+			GL11.glRotatef(-f1 * 14.0F, 0.0F, 0.0F, 1.0F);
+			GL11.glRotatef(f2, 0.0F, 1.0F, 0.0F);
 		}
 	}
 }

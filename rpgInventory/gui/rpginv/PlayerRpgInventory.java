@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.RPGEventHooks;
-import rpgInventory.handlers.oldpackets.PacketInventory;
+import rpgInventory.handlers.packets.PacketHelper;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import cpw.mods.fml.common.FMLLog;
 
@@ -21,9 +21,6 @@ public class PlayerRpgInventory implements IInventory,
 IExtendedEntityProperties {
 
 	public ItemStack[] armorSlots = new ItemStack[7];
-	// public String playername;
-	// public EnumSet<EnumRpgClass> classSets;
-	// public LinkedList classSets;
 	public EntityPlayer player;
 
 	public final static String EXT_PROP_NAME = "RpgInventory";
@@ -53,7 +50,7 @@ IExtendedEntityProperties {
 	@Override
 	public void closeInventory() {
 		if (!player.worldObj.isRemote) {
-			PacketInventory.syncOwnInventory((EntityPlayerMP) player, this);
+			PacketHelper.syncOwnInventory((EntityPlayerMP) player, this);
 		}
 	}
 
@@ -197,7 +194,7 @@ IExtendedEntityProperties {
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
 		if (!player.worldObj.isRemote) {
-			PacketInventory.syncOwnInventory((EntityPlayerMP) player, this);
+			PacketHelper.syncOwnInventory((EntityPlayerMP) player, this);
 		}
 		return null;
 	}
@@ -271,11 +268,8 @@ IExtendedEntityProperties {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-		EntityPlayer player = MinecraftServer.getServer()
-				.getConfigurationManager()
-				.getPlayerForUsername(par1EntityPlayer.getCommandSenderName());
-		return player.isDead ? false : par1EntityPlayer
-				.getDistanceSqToEntity(player) <= 64.0D;
+		EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(par1EntityPlayer.getCommandSenderName());
+		return player.isDead ? false : par1EntityPlayer.getDistanceSqToEntity(player) <= 64.0D;
 	}
 
 	@Override
@@ -286,49 +280,8 @@ IExtendedEntityProperties {
 	@Override
 
 	public void markDirty() {
-
-		try {
-
-
-
-			if (!player.worldObj.isRemote) {
-				PacketInventory.syncOwnInventory((EntityPlayerMP) player, this);
-			}
-
-			EntityPlayer player = MinecraftServer.getServer()
-					.getConfigurationManager()
-					.getPlayerForUsername(this.player.getCommandSenderName());
-			boolean addtoticks[] = new boolean[3];
-
-			if (((getNecklace() != null) && (getNecklace().getItem() == RpgInventoryMod.neckdia))
-					|| ((getRing1() != null) && (getRing1().getItem() == RpgInventoryMod.ringdia))
-					|| ((getRing2() != null) && (getRing2().getItem() == RpgInventoryMod.ringdia))
-					|| ((getGloves() != null) && (getGloves().getItem() == RpgInventoryMod.glovesdia))) {
-				addtoticks[2] = true;
-			}
-
-			if (addtoticks[1]) {
-				if (!RPGEventHooks.HealerTick.containsKey(player
-						.getCommandSenderName())) {
-					RPGEventHooks.HealerTick.put(player.getCommandSenderName(),
-							0);
-				}
-			} else {
-				// keep the cooldown hashmap clean
-				RPGEventHooks.HealerTick.remove(player.getCommandSenderName());
-			}
-
-			if (addtoticks[2]) {
-				if (!RPGEventHooks.DiamondTick.containsKey(player
-						.getCommandSenderName())) {
-					RPGEventHooks.DiamondTick.put(
-							player.getCommandSenderName(), 0);
-				}
-			} else {
-				// keep the cooldown hashmap clean
-				RPGEventHooks.DiamondTick.remove(player.getCommandSenderName());
-			}
-		} catch (Throwable ex) {
+		if (!player.worldObj.isRemote) {
+			PacketHelper.syncOwnInventory((EntityPlayerMP) player, this);
 		}
 	}
 
