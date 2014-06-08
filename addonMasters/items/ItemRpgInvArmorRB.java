@@ -68,8 +68,7 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 			if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
 				par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving),10);
 			} else {
-				par2EntityLiving.attackEntityFrom(DamageSource
-						.causePlayerDamage((EntityPlayer) par3EntityLiving), 6);
+				par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving), 6);
 			}
 		}
 		return false;

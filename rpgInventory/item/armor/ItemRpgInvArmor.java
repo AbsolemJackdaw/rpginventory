@@ -35,7 +35,7 @@ public class ItemRpgInvArmor extends Item {
 	 */
 	public int armorType;
 
-	private ResourceLocation TEXTURE;
+	private final ResourceLocation TEXTURE;
 
 	private final int colorState;
 	/**

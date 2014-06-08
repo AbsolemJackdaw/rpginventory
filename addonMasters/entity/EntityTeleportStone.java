@@ -90,7 +90,6 @@ public class EntityTeleportStone extends EntityThrowable {
 
 							this.getThrower().setPositionAndUpdate(this.posX,this.posY, this.posZ);
 							this.getThrower().fallDistance = 0.0F;
-							this.getThrower().attackEntityFrom(DamageSource.fall, 2.0F);
 						}
 					}
 				}

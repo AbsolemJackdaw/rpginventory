@@ -154,14 +154,10 @@ public class RpgMastersAddon {
 		EntityRegistry.registerGlobalEntityID(BoarPet.class, "BoarPet",EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(ChickenPet.class, "RoosterPet",EntityRegistry.findGlobalUniqueEntityId());
 
-		//		EntityRegistry.registerGlobalEntityID(EntityTeleportStone.class,
-		//				"TelePortStone", EntityRegistry.findGlobalUniqueEntityId());
-
 		EntityRegistry.registerModEntity(EntityPetXP.class, "PetXP",RpgInventoryMod.instance.getUniqueID(), this, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityTeleportStone.class,"TelePortStone", RpgInventoryMod.instance.getUniqueID(), this,80, 1, true);
 
 		MinecraftForge.EVENT_BUS.register(new BeastMasterEvent());
-		//		FMLCommonHandler.instance().bus().register(new BeastMasterEvent());
 
 	}
 
@@ -170,33 +166,23 @@ public class RpgMastersAddon {
 
 		tab = new RBTab(CreativeTabs.getNextID(), "Rogue Beastmaster Addon");
 
-		daggers = new ItemRpgInvArmorRB(1, 800, "",
-				"rpginventorymod:weapons/dagger.png").setUnlocalizedName("dagger");
-		beastAxe = new ItemBeastAxe(BeastAxeMaterial).setFull3D()
-				.setUnlocalizedName("forestAxe");
+		daggers = new ItemRpgInvArmorRB(1, 800, "","rpginventorymod:jewels/DaggerShield.png").setUnlocalizedName("dagger");
+		beastAxe = new ItemBeastAxe(BeastAxeMaterial).setFull3D().setUnlocalizedName("forestAxe");
 
 		rogueLeather = new ItemRBMats().setUnlocalizedName("r.leather");
 		beastLeather = new ItemRBMats().setUnlocalizedName("b.leather");
 
 		beastShield = new ItemRpgInvArmorRB(1, 250, "","rpginventorymod:jewels/lion.png").setUnlocalizedName("shieldBeastMaster");
 
-		rogueHood = new ItemRogueArmor(rogueArmor, 4, 0)
-		.setUnlocalizedName("rogue1");
-		rogueChest = new ItemRogueArmor(rogueArmor, 4, 1)
-		.setUnlocalizedName("rogue2");
-		rogueLegs = new ItemRogueArmor(rogueArmor, 4, 2)
-		.setUnlocalizedName("rogue3");
-		rogueBoots = new ItemRogueArmor(rogueArmor, 4, 3)
-		.setUnlocalizedName("rogue4");
+		rogueHood = new ItemRogueArmor(rogueArmor, 4, 0).setUnlocalizedName("rogue1");
+		rogueChest = new ItemRogueArmor(rogueArmor, 4, 1).setUnlocalizedName("rogue2");
+		rogueLegs = new ItemRogueArmor(rogueArmor, 4, 2).setUnlocalizedName("rogue3");
+		rogueBoots = new ItemRogueArmor(rogueArmor, 4, 3).setUnlocalizedName("rogue4");
 
-		beastHood = new ItemBeastMasterArmor(beastMaster, 4, 0)
-		.setUnlocalizedName("beast1");
-		beastChest = new ItemBeastMasterArmor(beastMaster, 4, 1)
-		.setUnlocalizedName("beast2");
-		beastLegs = new ItemBeastMasterArmor(beastMaster, 4, 2)
-		.setUnlocalizedName("beast3");
-		beastBoots = new ItemBeastMasterArmor(beastMaster, 4, 3)
-		.setUnlocalizedName("beast4");
+		beastHood = new ItemBeastMasterArmor(beastMaster, 4, 0).setUnlocalizedName("beast1");
+		beastChest = new ItemBeastMasterArmor(beastMaster, 4, 1).setUnlocalizedName("beast2");
+		beastLegs = new ItemBeastMasterArmor(beastMaster, 4, 2).setUnlocalizedName("beast3");
+		beastBoots = new ItemBeastMasterArmor(beastMaster, 4, 3).setUnlocalizedName("beast4");
 
 		whistle = new ItemPetWhistle().setUnlocalizedName("whistle");
 
