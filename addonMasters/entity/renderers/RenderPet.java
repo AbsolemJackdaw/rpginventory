@@ -50,8 +50,7 @@ public class RenderPet extends RenderLiving {
 		this.mainModel = pet.getModel();
 		super.doRender(pet, par2, par4, par6, par8, par9);
 		if (pet.riddenByEntity == null) {
-			super.func_147906_a(pet,
-					pet.getEntityName() + " Lvl." + pet.getLevel(), par2,
+			super.func_147906_a(pet,pet.getEntityName() + " Lvl." + pet.getLevel(), par2,
 					(par4 + pet.height) - 0.2F, par6, 32);
 		} else {
 			// render living label

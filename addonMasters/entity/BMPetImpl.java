@@ -172,7 +172,9 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	public boolean attackEntityAsMob(Entity par1Entity) {
 		if(par1Entity instanceof EntityLiving){
 			EntityLiving el = (EntityLiving) par1Entity;
-			el.attackEntityFrom(DamageSource.causeMobDamage(this), getAttackDamage());
+			//TODO this should become mob damage. and a death event should handle the experience dropped
+			//once my pull request is submitted
+			el.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) getOwner()), getAttackDamage());
 		}
 		return par1Entity.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) getOwner()),0);
 	}
