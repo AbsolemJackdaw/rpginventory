@@ -6,7 +6,6 @@ import io.netty.buffer.Unpooled;
 
 import java.util.List;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,7 +19,6 @@ import rpgInventory.handlers.ServerTickHandler;
 import rpgInventory.utils.ISpecialAbility;
 import rpgInventory.utils.RpgUtility;
 import addonBasic.packets.ClientPacketHandler;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class KeyHandler implements ISpecialAbility {

@@ -2,26 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package addonMasters.entity;
+package addonMasters.entity.pet;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.client.model.ModelPig;
+import net.minecraft.client.renderer.entity.RenderPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import addonMasters.entity.BeastMasterPet;
 import addonMasters.entity.models.ModelBoar;
 
 /**
  *
  * @author Home
  */
-public class BoarPet extends BMPetImpl {
+public class BoarPet extends BeastMasterPet {
 
 	boolean checked = false;
-	ModelBoar model = new ModelBoar();
+	
+	private ModelBoar model = new ModelBoar();
+	private ModelPig modelpig = new ModelPig();
 
+	RenderPig e;
+
+	ResourceLocation pig = new ResourceLocation("textures/entity/pig/pig.png");
 	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/boar.png");
 	ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/boar_saddled.png");
 
@@ -41,6 +48,7 @@ public class BoarPet extends BMPetImpl {
 		this.getNavigator().setBreakDoors(true);
 		this.getNavigator().setSpeed(this.moveSpeed);
 		this.getNavigator().setCanSwim(true);
+
 	}
 
 	@Override
@@ -67,7 +75,7 @@ public class BoarPet extends BMPetImpl {
 
 	@Override
 	public ModelBase getModel() {
-		return model;
+		return getLevel() < 50 ? modelpig : model;
 	}
 
 	@Override
@@ -87,8 +95,8 @@ public class BoarPet extends BMPetImpl {
 
 	@Override
 	public ResourceLocation getTexture() {
-		return dataWatcher.getWatchableObjectByte(SADDLE) == 0 ? normal
-				: saddled;
+
+		return  getLevel() < 50 ? pig : isSaddled() ? normal: saddled;
 	}
 
 	@Override
@@ -98,6 +106,7 @@ public class BoarPet extends BMPetImpl {
 
 	@Override
 	public void onLivingUpdate() {
+
 		super.onLivingUpdate();
 		if (getLevel() <= 200) {
 			petSize = 0.5F + (((getLevel()) / 200.0F) * 1.5F);
@@ -110,7 +119,7 @@ public class BoarPet extends BMPetImpl {
 	public double getHealthIncreaseForLeveling() {
 		return 20D + MathHelper.floor_double((getLevel()) / 2.5D);
 	}
-	
+
 	@Override
 	public double getSpeedIncreaseForLeveling() {
 		return 0.2d + getLevel() / 600D;

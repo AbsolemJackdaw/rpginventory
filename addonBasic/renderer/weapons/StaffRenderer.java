@@ -1,7 +1,5 @@
 package addonBasic.renderer.weapons;
 
-import java.util.Random;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;

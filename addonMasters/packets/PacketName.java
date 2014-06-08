@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import addonMasters.entity.BMPetImpl;
+import addonMasters.entity.BeastMasterPet;
 import addonMasters.entity.IPet;
 
 public class PacketName {
@@ -27,9 +27,9 @@ public class PacketName {
 	public void setPetName(EntityPlayer p, String newName) {
 
 		ItemStack petCrystal = PlayerRpgInventory.get(p).getCrystal();
-		BMPetImpl thePet = null;
+		BeastMasterPet thePet = null;
 		if (IPet.playersWithActivePets.containsKey(p.getDisplayName())) {
-			thePet = (BMPetImpl) IPet.playersWithActivePets.get(
+			thePet = (BeastMasterPet) IPet.playersWithActivePets.get(
 					p.getDisplayName()).getPet();
 		}
 		if ((thePet != null) && !((EntityLiving) thePet).isDead) {

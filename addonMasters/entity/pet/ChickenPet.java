@@ -1,23 +1,28 @@
-package addonMasters.entity;
+package addonMasters.entity.pet;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import addonMasters.entity.BeastMasterPet;
 import addonMasters.entity.models.ModelRooster;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ChickenPet extends BMPetImpl {
+public class ChickenPet extends BeastMasterPet {
 
 	private static final ModelRooster model = new ModelRooster();
-	
+	private static final ModelChicken chick = new ModelChicken();
+
 	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/rooster.png");
 	ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/rooster_saddled.png");
-	
-	public ChickenPet(World par1World, EntityPlayer owner,ItemStack is) {
+    private static final ResourceLocation chickenTexture = new ResourceLocation("textures/entity/chicken.png");
+
+    
+    public ChickenPet(World par1World, EntityPlayer owner,ItemStack is) {
 		super(par1World, 4, owner, is);
 		this.getNavigator().setCanSwim(true);
 	}
@@ -34,12 +39,12 @@ public class ChickenPet extends BMPetImpl {
 
 	@Override
 	protected float getBaseHeight() {
-		return 0.5f;
+		return 0.3f;
 	}
 
 	@Override
 	protected float getBaseWidth() {
-		return 0.5f;
+		return 0.2f;
 	}
 
 	@Override
@@ -50,7 +55,7 @@ public class ChickenPet extends BMPetImpl {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ModelBase getModel() {
-		return model;
+		return getLevel() < 50 ? chick : model;
 	}
 
 	@Override
@@ -60,7 +65,6 @@ public class ChickenPet extends BMPetImpl {
 
 	@Override
 	public double getMountedYOffset() {
-		//TODO test and change
 		return this.height + (getLevel() / 400);
 	}
 
@@ -71,7 +75,7 @@ public class ChickenPet extends BMPetImpl {
 
 	@Override
 	public ResourceLocation getTexture() {
-		return dataWatcher.getWatchableObjectByte(SADDLE) == 0 ? normal: saddled;
+		return getLevel() < 50 ? chickenTexture : !isSaddled() ? normal: saddled;
 	}
 
 	@Override
@@ -91,7 +95,7 @@ public class ChickenPet extends BMPetImpl {
 
 	@Override
 	public double getSpeedIncreaseForLeveling() {
-		return 0.3D + ((double)getLevel()*1.0D)/250D;
+		return 0.3D + ((double)getLevel()*1.0D)/400D;
 	}
 
 	
@@ -130,8 +134,20 @@ public class ChickenPet extends BMPetImpl {
         {
             this.motionY *= 0.6D;
         }
+        
+        this.fallDistance = 0f;
+        if(ridingEntity != null)
+        	ridingEntity.fallDistance = 0f;
 
         this.field_70886_e += this.field_70889_i * 2.0F;
+        
+        
+        if (getLevel() <= 200) {
+			petSize = 0.5F + (((getLevel()) / 200.0F) * 2F);
+		} else {
+			setLevel(200);
+			petSize = 2.0F;
+		}
     }
 	
 }

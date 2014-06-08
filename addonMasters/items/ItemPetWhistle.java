@@ -8,12 +8,12 @@ import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import addonMasters.RpgMastersAddon;
-import addonMasters.entity.BoarPet;
-import addonMasters.entity.BullPet;
-import addonMasters.entity.ChickenPet;
 import addonMasters.entity.IPet;
 import addonMasters.entity.IPet.PetID;
-import addonMasters.entity.SpiderPet;
+import addonMasters.entity.pet.BoarPet;
+import addonMasters.entity.pet.BullPet;
+import addonMasters.entity.pet.ChickenPet;
+import addonMasters.entity.pet.SpiderPet;
 
 public class ItemPetWhistle extends Item {
 

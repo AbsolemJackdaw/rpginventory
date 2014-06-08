@@ -1,9 +1,9 @@
 package addonArchmage;
 
-import addonBasic.models.item.ModelMageBook;
 import net.minecraft.util.ResourceLocation;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.MainShield;
+import addonBasic.models.item.ModelMageBook;
 
 public class ItemMageShield extends ItemRpgInvArmor {
 

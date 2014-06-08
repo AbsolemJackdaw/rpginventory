@@ -336,6 +336,7 @@ public class RenderRpgPlayer {
 	private void renderShield(ItemRpgInvArmor armor) {
 
 		GL11.glPushMatrix();
+		
 		if(this.mc.gameSettings.thirdPersonView != 0)
 			for (int i = 0; i < armor.getShieldModel().parts.size(); i++) {
 				armor.getShieldModel().parts.get(i).rotateAngleX = main.bipedLeftArm.rotateAngleX;

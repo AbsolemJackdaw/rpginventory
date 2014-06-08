@@ -6,6 +6,8 @@ package addonMasters.entity;
 
 import java.util.HashMap;
 
+import cpw.mods.fml.common.FMLLog;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
@@ -43,6 +45,30 @@ public interface IPet {
 			} catch (Throwable ex) {
 				return null;
 			}
+		}
+
+		public void retrievePet(){
+			World world = MinecraftServer.getServer().worldServerForDimension(DIM);
+			if (world == null) {
+				FMLLog.getLogger().info("world in which the pet was present was null");
+				return ;
+			}
+			Entity test = world.getEntityByID(EID);
+			if ((test == null) || !(test instanceof IPet)) {
+				FMLLog.getLogger().info("Potential pet was null, or no pet.");
+				return ;
+			}
+
+			try {
+				BeastMasterPet pet = (BeastMasterPet)test;
+				pet.setDead();
+				FMLLog.getLogger().info("Pet was succesfully retrieved ");
+				
+			} catch (Exception e) {
+				FMLLog.getLogger().info("Couldnt cast potential subclass of pet to BeastMasterPet.");
+				e.printStackTrace();
+			}
+
 		}
 	}
 
@@ -82,7 +108,7 @@ public interface IPet {
 	/**
 	 * @return returns rather the pet is saddled or not
 	 */
-	public boolean getSaddled();
+	public boolean isSaddled();
 
 	/**
 	 *
@@ -133,10 +159,10 @@ public interface IPet {
 	 */
 	@Deprecated
 	public ItemStack writePetToItemStack(ItemStack is);
-	
+
 	/**Used to update the pet's health when the previous level is lower then the current one. */
 	public double getHealthIncreaseForLeveling();
-	
+
 	/**Used to update the pet's speed when the previous level is lower then the current one. */
 	public double getSpeedIncreaseForLeveling();
 

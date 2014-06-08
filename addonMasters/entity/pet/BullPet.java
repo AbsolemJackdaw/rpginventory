@@ -2,43 +2,41 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package addonMasters.entity;
+package addonMasters.entity.pet;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.client.model.ModelCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import addonMasters.entity.BeastMasterPet;
 import addonMasters.entity.models.ModelBull;
 
 /**
  *
  * @author Home
  */
-public class BullPet extends BMPetImpl {
+public class BullPet extends BeastMasterPet {
 
-	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/bull.png");
-	ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/bull_saddled.png");
+	private static final ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/bull.png");
+	private static final ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/bull_saddled.png");
+	private static final ResourceLocation cowTexture = new ResourceLocation("textures/entity/cow/cow.png");
 
-	ModelBull model = new ModelBull();
+	private ModelBull model = new ModelBull();
+	private ModelCow cow = new ModelCow();
 
 	public BullPet(World par1World) {
 		super(par1World, 3, null, null);
-		// this.moveSpeed = 0.38F;
-		// //Likes to swim.
 		this.getNavigator().setAvoidsWater(false);
 		this.getNavigator().setCanSwim(true);
-		// this.getNavigator().setSpeed(this.moveSpeed);
 	}
 
 	public BullPet(World par1World, EntityPlayer owner, ItemStack is) {
 		super(par1World, 3, owner, is);
-		// this.moveSpeed = 0.38F;
 		this.getNavigator().setAvoidsWater(true);
 		this.getNavigator().setCanSwim(true);
-		// this.getNavigator().setSpeed(this.moveSpeed);
 	}
 
 	@Override
@@ -65,7 +63,7 @@ public class BullPet extends BMPetImpl {
 
 	@Override
 	public ModelBase getModel() {
-		return model;
+		return getLevel() < 50 ? cow : model;
 	}
 
 	@Override
@@ -85,7 +83,7 @@ public class BullPet extends BMPetImpl {
 
 	@Override
 	public ResourceLocation getTexture() {
-		return dataWatcher.getWatchableObjectByte(SADDLE) == 0 ? normal
+		return getLevel() < 50 ? cowTexture : !isSaddled() ? normal
 				: saddled;
 	}
 
@@ -96,6 +94,7 @@ public class BullPet extends BMPetImpl {
 
 	@Override
 	public void onLivingUpdate() {
+		
 		super.onLivingUpdate();
 		if (getLevel() <= 200) {
 			petSize = 0.5F + (((getLevel()) / 200.0F) * 1.5F);
@@ -108,7 +107,7 @@ public class BullPet extends BMPetImpl {
 	public double getHealthIncreaseForLeveling() {
 		return 30D + MathHelper.floor_double((getLevel()) / 1.538D);
 	}
-	
+
 	@Override
 	public double getSpeedIncreaseForLeveling() {
 		return 0.2D + (getLevel() / 500D);

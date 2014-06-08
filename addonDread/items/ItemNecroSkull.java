@@ -6,23 +6,19 @@ import io.netty.buffer.Unpooled;
 
 import java.io.IOException;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.ItemRpgSword;
-import rpgInventory.item.ItemRpgWeapon;
 import addonDread.RpgDreadAddon;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;

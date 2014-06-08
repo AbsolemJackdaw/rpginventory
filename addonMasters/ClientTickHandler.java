@@ -8,13 +8,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
-import addonMasters.packets.RBServerPacketHandler;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.RpgGui;
-import rpgInventory.handlers.packets.ServerPacketHandler;
+import addonMasters.packets.RBServerPacketHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;

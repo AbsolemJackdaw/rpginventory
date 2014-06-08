@@ -25,7 +25,6 @@ import rpgInventory.handlers.packets.ServerPacketHandler;
 import rpgInventory.utils.ISpecialAbility;
 import rpgInventory.utils.RpgUtility;
 import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;

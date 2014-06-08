@@ -5,7 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelSpiderB extends ModelBase {
+public class ModelRpgSpider extends ModelBase {
 	// fields
 
 	ModelRenderer Head;
@@ -30,7 +30,7 @@ public class ModelSpiderB extends ModelBase {
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
 
-	public ModelSpiderB() {
+	public ModelRpgSpider() {
 		textureWidth = 64;
 		textureHeight = 64;
 		Head = new ModelRenderer(this, 32, 4);

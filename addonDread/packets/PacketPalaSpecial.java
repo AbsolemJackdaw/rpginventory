@@ -1,11 +1,8 @@
 package addonDread.packets;
 
-import io.netty.buffer.ByteBufInputStream;
-
 import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;

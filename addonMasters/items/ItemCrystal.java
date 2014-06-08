@@ -51,23 +51,19 @@ public class ItemCrystal extends ItemRpgInvArmor {
 			if (tags.hasKey("PetLevel")) {
 				if (tags.getInteger("PetLevel") >= 50) {
 					if (tags.hasKey("isSaddled")) {
-						if (tags.getBoolean("isSaddled") == true) {
+						if (tags.getBoolean("isSaddled")) {
 							list.add(StatCollector.translateToLocal("Saddled"));
 						}
-						if (tags.getBoolean("isSaddled") == false) {
-							list.add(StatCollector
-									.translateToLocal("No Saddle"));
+						if (!tags.getBoolean("isSaddled")) {
+							list.add(StatCollector.translateToLocal("No Saddle"));
 						}
 					}
 				} else {
-					list.add(StatCollector
-							.translateToLocal("Levels left to saddle: ")
-							+ String.valueOf(50 - tags.getInteger("PetLevel")));
+					list.add(StatCollector.translateToLocal("Levels left to saddle: ")+ String.valueOf(50 - tags.getInteger("PetLevel")));
 				}
 			}
 			if (tags.hasKey("OwnerName")) {
-				list.add(StatCollector.translateToLocal("Owner :"
-						+ tags.getString("OwnerName")));
+				list.add(StatCollector.translateToLocal("Owner :"+ tags.getString("OwnerName")));
 			}
 		}
 	}
@@ -95,7 +91,7 @@ public class ItemCrystal extends ItemRpgInvArmor {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		int var2 = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 3);
+		int var2 = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 4);
 		String itemname = pets[var2];
 		if (var2 > 0) {
 			NBTTagCompound tags = par1ItemStack.getTagCompound();

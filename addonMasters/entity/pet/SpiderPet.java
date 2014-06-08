@@ -2,12 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package addonMasters.entity;
+package addonMasters.entity.pet;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -16,18 +15,22 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import addonMasters.entity.models.ModelSpiderB;
+import addonMasters.entity.BeastMasterPet;
+import addonMasters.entity.models.ModelRpgSpider;
+import addonMasters.entity.models.ModelSpiderDub;
 
 /**
  *
  * @author Home
  */
-public class SpiderPet extends BMPetImpl {
+public class SpiderPet extends BeastMasterPet {
 
-	ModelSpiderB model = new ModelSpiderB();
+	ModelRpgSpider model = new ModelRpgSpider();
+	ModelSpiderDub spider = new ModelSpiderDub();
 
-	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/spider.png");
-	ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/spider_saddled.png");
+	private static final ResourceLocation spiderTexture = new ResourceLocation("textures/entity/spider/cave_spider.png");
+	private static final ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/spider.png");
+	private static final ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/spider_saddled.png");
 
 	public SpiderPet(World par1World) {
 		super(par1World, 2, null, null);
@@ -42,7 +45,6 @@ public class SpiderPet extends BMPetImpl {
 		// other.
 		this.getNavigator().setAvoidsWater(true);
 		this.getNavigator().setAvoidSun(true);
-		// Spider Cant Swim
 		this.getNavigator().setCanSwim(false);
 	}
 
@@ -59,11 +61,9 @@ public class SpiderPet extends BMPetImpl {
 	public boolean attackEntityAsMob(Entity par1Entity) {
 		if (super.attackEntityAsMob(par1Entity)) {
 			if (par1Entity instanceof EntityLiving) {
-				int level = getLevel();
-				if (level > 10) {
-					((EntityLiving) par1Entity)
-					.addPotionEffect(new PotionEffect(Potion.poison.id,
-							200, level < 50 ? 1 : 2));
+				if (getLevel() > 10) {
+					if(rand.nextInt(10) ==0)
+						((EntityLiving) par1Entity).addPotionEffect(new PotionEffect(Potion.poison.id,200, getLevel() < 50 ? 1 : 2));
 				}
 			}
 			return true;
@@ -95,7 +95,7 @@ public class SpiderPet extends BMPetImpl {
 
 	@Override
 	public ModelBase getModel() {
-		return model;
+		return getLevel() < 50 ? spider : model;
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class SpiderPet extends BMPetImpl {
 
 	@Override
 	public ResourceLocation getTexture() {
-		return dataWatcher.getWatchableObjectByte(SADDLE) == 0 ? normal: saddled;
+		return getLevel() < 50 ? spiderTexture : !isSaddled() ? normal: saddled;
 	}
 
 	@Override
@@ -123,15 +123,8 @@ public class SpiderPet extends BMPetImpl {
 		return 0.3F;
 	}
 
-	// @Override TODO
-	// public float getMaxHealth() {
-	// //150 health at level 200
-	// return 25 + MathHelper.floor_double((((double) getLevel()) * 1.0D) /
-	// 1.6D);
-	// }
-
 	@Override
-	public void onLivingUpdate() {
+	public void onLivingUpdate(){
 		super.onLivingUpdate();
 		if (getLevel() <= 200) {
 			petSize = 0.5F + (((getLevel()) / 200.0F) * 1.5F);
@@ -145,13 +138,13 @@ public class SpiderPet extends BMPetImpl {
 	public double getHealthIncreaseForLeveling() {
 		return 25D + MathHelper.floor_double(((getLevel()) * 1.0D) / 1.6D);
 	}
-	
+
 	@Override
 	public double getSpeedIncreaseForLeveling() {
 		return 0.2D + (getLevel() / 400D);
 	}
-	
-	
+
+
 	@Override
 	public int regenDelay() {
 		return 50;

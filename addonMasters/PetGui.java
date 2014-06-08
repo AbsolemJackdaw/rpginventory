@@ -26,17 +26,17 @@ import org.lwjgl.opengl.GL11;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.handlers.packets.ServerPacketHandler;
-import addonMasters.entity.BMPetImpl;
-import addonMasters.entity.BoarPet;
-import addonMasters.entity.BullPet;
+import addonMasters.entity.BeastMasterPet;
 import addonMasters.entity.IPet;
-import addonMasters.entity.SpiderPet;
+import addonMasters.entity.pet.BoarPet;
+import addonMasters.entity.pet.BullPet;
+import addonMasters.entity.pet.SpiderPet;
 import addonMasters.packets.RBServerPacketHandler;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class PetGui extends GuiScreen {
 
-	BMPetImpl thePet;
+	BeastMasterPet thePet;
 	int petType; /* Spider 2, bull 3, boar 1 */
 
 	EntityPlayer p;
@@ -207,7 +207,7 @@ public class PetGui extends GuiScreen {
 	public void initGui() {
 		petCrystal = this.inv.getCrystal();
 		if (IPet.playersWithActivePets.containsKey(p.getCommandSenderName())) {
-			thePet = (BMPetImpl) IPet.playersWithActivePets.get(
+			thePet = (BeastMasterPet) IPet.playersWithActivePets.get(
 					p.getCommandSenderName()).getPet();
 			if (thePet != null) {
 				// make sure crystal is updated with the mob info
@@ -276,7 +276,7 @@ public class PetGui extends GuiScreen {
 		}
 		if (PetLevel >= 50) {
 			if (tags.hasKey("isSaddled")) {
-				if (tags.getBoolean("isSaddled") == true) {
+				if (tags.getBoolean("isSaddled")) {
 					saddle = PetName + " is saddled.";
 				} else {
 					saddle = PetName + " is not saddled.";

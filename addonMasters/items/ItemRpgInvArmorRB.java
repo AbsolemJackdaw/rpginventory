@@ -11,6 +11,7 @@ import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import rpgInventory.models.MainShield;
 import addonMasters.RpgMastersAddon;
+import addonMasters.models.DaggerShield;
 import addonMasters.models.LionHead;
 import addonMasters.models.ModelDaggerL;
 
@@ -18,7 +19,7 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 
 	private LionHead lion = new LionHead();
 
-	private ModelDaggerL dagger = new ModelDaggerL();
+	private DaggerShield dagger = new DaggerShield();
 
 	public ItemRpgInvArmorRB(int par4, int maxDamage, String name,
 			String resourcelocation) {

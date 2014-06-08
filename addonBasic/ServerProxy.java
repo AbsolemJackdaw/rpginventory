@@ -1,8 +1,6 @@
 package addonBasic;
 
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.entity.player.EntityPlayer;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
 
 public class ServerProxy {
 

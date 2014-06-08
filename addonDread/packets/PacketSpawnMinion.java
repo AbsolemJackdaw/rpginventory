@@ -1,8 +1,6 @@
 package addonDread.packets;
 
 
-import io.netty.buffer.ByteBufInputStream;
-
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;

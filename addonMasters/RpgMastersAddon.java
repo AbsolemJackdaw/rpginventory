@@ -12,18 +12,20 @@ import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.RpgInventoryMod.ITEMTYPE;
 import rpgInventory.utils.RpgUtility;
-import addonMasters.entity.BoarPet;
-import addonMasters.entity.BullPet;
-import addonMasters.entity.ChickenPet;
 import addonMasters.entity.EntityPetXP;
 import addonMasters.entity.EntityTeleportStone;
-import addonMasters.entity.SpiderPet;
+import addonMasters.entity.IPet;
+import addonMasters.entity.IPet.PetID;
+import addonMasters.entity.pet.BoarPet;
+import addonMasters.entity.pet.BullPet;
+import addonMasters.entity.pet.ChickenPet;
+import addonMasters.entity.pet.SpiderPet;
 import addonMasters.items.ItemBeastAxe;
 import addonMasters.items.ItemBeastMasterArmor;
 import addonMasters.items.ItemCandy;
 import addonMasters.items.ItemCrystal;
-import addonMasters.items.ItemRBMats;
 import addonMasters.items.ItemPetWhistle;
+import addonMasters.items.ItemRBMats;
 import addonMasters.items.ItemRogueArmor;
 import addonMasters.items.ItemRpgInvArmorRB;
 import addonMasters.items.PetExpPotion;
@@ -34,6 +36,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -151,13 +154,14 @@ public class RpgMastersAddon {
 		EntityRegistry.registerGlobalEntityID(BoarPet.class, "BoarPet",EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(ChickenPet.class, "RoosterPet",EntityRegistry.findGlobalUniqueEntityId());
 
-//		EntityRegistry.registerGlobalEntityID(EntityTeleportStone.class,
-//				"TelePortStone", EntityRegistry.findGlobalUniqueEntityId());
-		
+		//		EntityRegistry.registerGlobalEntityID(EntityTeleportStone.class,
+		//				"TelePortStone", EntityRegistry.findGlobalUniqueEntityId());
+
 		EntityRegistry.registerModEntity(EntityPetXP.class, "PetXP",RpgInventoryMod.instance.getUniqueID(), this, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityTeleportStone.class,"TelePortStone", RpgInventoryMod.instance.getUniqueID(), this,80, 1, true);
 
 		MinecraftForge.EVENT_BUS.register(new BeastMasterEvent());
+		//		FMLCommonHandler.instance().bus().register(new BeastMasterEvent());
 
 	}
 
@@ -249,5 +253,14 @@ public class RpgMastersAddon {
 				System.out.println("Item is null !" + i);
 			}
 		}
+	}
+
+
+	@EventHandler
+	public void onServerStopping(FMLServerStoppingEvent evt){
+		if(IPet.playersWithActivePets.size() > 0)
+			for(PetID pet : IPet.playersWithActivePets.values()){
+				pet.retrievePet();
+			}
 	}
 }
