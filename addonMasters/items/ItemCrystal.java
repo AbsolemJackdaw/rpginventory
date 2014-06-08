@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemCrystal extends ItemRpgInvArmor {
 
 	public static final String[] pets = new String[] { "Empty Crystal", "Boar",
-		"Spider", "Bull" };
+		"Spider", "Bull", "Chicken" };
 
 	public ItemCrystal(int armorType, int maxDamage, String name) {
 		super(armorType, maxDamage, -1, "");
@@ -30,7 +30,7 @@ public class ItemCrystal extends ItemRpgInvArmor {
 	public void addInformation(ItemStack stack, EntityPlayer p1, List list,
 			boolean yesno) {
 		NBTTagCompound tags = stack.getTagCompound();
-		int var2 = MathHelper.clamp_int(stack.getItemDamage(), 0, 3);
+		int var2 = MathHelper.clamp_int(stack.getItemDamage(), 0, 4);
 
 		if (var2 > 0) {
 		}
@@ -86,6 +86,10 @@ public class ItemCrystal extends ItemRpgInvArmor {
 			return 0xe71809;
 		}
 
+		if (b2.getItemDamage() == 4) {
+			return 0x41ed84;
+		}
+		
 		return 0xffffff;
 	}
 
@@ -120,6 +124,8 @@ public class ItemCrystal extends ItemRpgInvArmor {
 		par3List.add(new ItemStack(par1, 1, 1));
 		par3List.add(new ItemStack(par1, 1, 2));
 		par3List.add(new ItemStack(par1, 1, 3));
+		par3List.add(new ItemStack(par1, 1, 4));
+
 	}
 
 	@Override

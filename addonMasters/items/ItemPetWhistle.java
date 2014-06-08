@@ -10,13 +10,14 @@ import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import addonMasters.RpgMastersAddon;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
+import addonMasters.entity.ChickenPet;
 import addonMasters.entity.IPet;
 import addonMasters.entity.IPet.PetID;
 import addonMasters.entity.SpiderPet;
 
-public class ItemRBMats2 extends Item {
+public class ItemPetWhistle extends Item {
 
-	public ItemRBMats2() {
+	public ItemPetWhistle() {
 		super();
 	}
 
@@ -31,12 +32,9 @@ public class ItemRBMats2 extends Item {
 				try {
 					if (stack != null) {
 						// Pet is in the world.
-						if (IPet.playersWithActivePets.containsKey(player
-								.getDisplayName())) {
-							EntityLiving e = (EntityLiving) IPet.playersWithActivePets
-									.get(player.getDisplayName()).getPet();
-							IPet.playersWithActivePets.remove(player
-									.getDisplayName());
+						if (IPet.playersWithActivePets.containsKey(player.getDisplayName())) {
+							EntityLiving e = (EntityLiving) IPet.playersWithActivePets.get(player.getDisplayName()).getPet();
+							IPet.playersWithActivePets.remove(player.getDisplayName());
 							if ((e != null) && !e.isDead) {
 								stack = ((IPet) e).writePetToItemStack();
 								inv.setInventorySlotContents(6, stack);
@@ -45,8 +43,8 @@ public class ItemRBMats2 extends Item {
 							}
 							// pet is not in the world
 						} else {
-							world.playSoundAtEntity(player,
-									"subaraki:petWhistle", 1f, 1f);
+							//							world.playSoundAtEntity(player,
+							//									"subaraki:petWhistle", 1f, 1f);
 
 							switch (stack.getItemDamage()) {
 							case 1:
@@ -94,16 +92,12 @@ public class ItemRBMats2 extends Item {
 								break;
 							case 3:
 								BullPet bull = new BullPet(world, player, stack);
-								bull.setPosition(player.posX,
-										player.posY + 0.5F, player.posZ);
+								bull.setPosition(player.posX,player.posY + 0.5F, player.posZ);
 								bull.setTamed(true);
 								try {
-									bull.setName(stack.stackTagCompound
-											.getString("PetName"));
-									bull.setLevel(stack.stackTagCompound
-											.getInteger("PetLevel"));
-									bull.setHealth(stack.stackTagCompound
-											.getFloat("PetHealth"));
+									bull.setName(stack.stackTagCompound.getString("PetName"));
+									bull.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
+									bull.setHealth(stack.stackTagCompound.getFloat("PetHealth"));
 									if (bull.getHealth() <= 0) {
 										bull.setHealth(1);
 									}
@@ -112,6 +106,27 @@ public class ItemRBMats2 extends Item {
 								if(!world.isRemote) {
 									world.spawnEntityInWorld(bull);
 								}
+								break;
+
+							case 4:
+								ChickenPet rooster = new ChickenPet(world, player,stack);
+								rooster.setPosition(player.posX,player.posY + 0.5F, player.posZ);
+								rooster.setOwner(player.getDisplayName());
+								rooster.setTamed(true);
+								IPet.playersWithActivePets.put(player.getDisplayName(), new PetID(
+										rooster.dimension, rooster.getEntityId()));
+								if(stack.stackTagCompound != null){
+									rooster.setName(stack.stackTagCompound.getString("PetName"));
+									rooster.setLevel(stack.stackTagCompound.getInteger("PetLevel"));
+									rooster.setHealth(stack.stackTagCompound.getFloat("PetHealth"));
+									if (rooster.getHealth() <= 0) {
+										rooster.setHealth(1);
+									}
+								}
+								if(!world.isRemote) {
+									world.spawnEntityInWorld(rooster);
+								}
+
 								break;
 							}
 							inv.setInventorySlotContents(6, stack);

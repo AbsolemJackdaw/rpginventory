@@ -22,7 +22,6 @@ public class BullPet extends BMPetImpl {
 	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/bull.png");
 	ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/bull_saddled.png");
 
-	float petSize = 0.5F;
 	ModelBull model = new ModelBull();
 
 	public BullPet(World par1World) {
@@ -46,7 +45,7 @@ public class BullPet extends BMPetImpl {
 	public int getAttackDamage() {
 		// 4 Base Damage
 		// 15 Damage at level 200
-		return (4 + MathHelper.floor_double(((getLevel()) * 1.0D) / 18.18D));
+		return (4 + MathHelper.floor_double(((getLevel()) * 1.0D) / 14.18D));
 	}
 
 	@Override
@@ -106,16 +105,13 @@ public class BullPet extends BMPetImpl {
 	}
 
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
-
-		if (previousLevel < getLevel()) {
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30D + MathHelper.floor_double((getLevel()) / 1.538D));
-
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D + (getLevel() / 500D));
-
-			previousLevel = getLevel();
-		}
+	public double getHealthIncreaseForLeveling() {
+		return 30D + MathHelper.floor_double((getLevel()) / 1.538D);
+	}
+	
+	@Override
+	public double getSpeedIncreaseForLeveling() {
+		return 0.2D + (getLevel() / 500D);
 	}
 
 	@Override

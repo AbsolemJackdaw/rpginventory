@@ -20,7 +20,6 @@ import addonMasters.entity.models.ModelBoar;
 public class BoarPet extends BMPetImpl {
 
 	boolean checked = false;
-	float petSize = 0.5F;
 	ModelBoar model = new ModelBoar();
 
 	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/boar.png");
@@ -48,10 +47,7 @@ public class BoarPet extends BMPetImpl {
 	public int getAttackDamage() {
 		// 7 Base Damage
 		// 30 Damage at level 200
-		return (7 + MathHelper.floor_double(((getLevel()) * /*
-		 * Fix for math
-		 * errors
-		 */1.0D) / 9.52D));
+		return (7 + MathHelper.floor_double(((getLevel()) *1.0D) / 9.52D));
 	}
 
 	@Override
@@ -111,13 +107,13 @@ public class BoarPet extends BMPetImpl {
 	}
 
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (previousLevel < getLevel()) {
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20D + MathHelper.floor_double((getLevel()) / 2.5D));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2d + getLevel() / 600D);
-			previousLevel = getLevel();
-		}
+	public double getHealthIncreaseForLeveling() {
+		return 20D + MathHelper.floor_double((getLevel()) / 2.5D);
+	}
+	
+	@Override
+	public double getSpeedIncreaseForLeveling() {
+		return 0.2d + getLevel() / 600D;
 	}
 
 	@Override

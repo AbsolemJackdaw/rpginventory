@@ -24,7 +24,6 @@ import addonMasters.entity.models.ModelSpiderB;
  */
 public class SpiderPet extends BMPetImpl {
 
-	float petSize = 0.5F;
 	ModelSpiderB model = new ModelSpiderB();
 
 	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/spider.png");
@@ -32,11 +31,8 @@ public class SpiderPet extends BMPetImpl {
 
 	public SpiderPet(World par1World) {
 		super(par1World, 2, null, null);
-		// this.moveSpeed = 0.45F;
 		this.getNavigator().setAvoidsWater(true);
 		this.getNavigator().setAvoidSun(true);
-		// this.getNavigator().setSpeed(this.moveSpeed);
-		// Spider Cant Swim
 		this.getNavigator().setCanSwim(false);
 	}
 
@@ -44,10 +40,8 @@ public class SpiderPet extends BMPetImpl {
 		super(par1World, 2, owner, is);
 		// These get called for both, server calls this one, client gets the
 		// other.
-		// this.moveSpeed = 0.45F;
 		this.getNavigator().setAvoidsWater(true);
 		this.getNavigator().setAvoidSun(true);
-		// this.getNavigator().setSpeed(this.moveSpeed);
 		// Spider Cant Swim
 		this.getNavigator().setCanSwim(false);
 	}
@@ -148,15 +142,16 @@ public class SpiderPet extends BMPetImpl {
 	}
 
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (previousLevel < getLevel()) {
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25D + MathHelper.floor_double(((getLevel()) * 1.0D) / 1.6D));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D + (getLevel() / 400D));
-			previousLevel = getLevel();
-		}
+	public double getHealthIncreaseForLeveling() {
+		return 25D + MathHelper.floor_double(((getLevel()) * 1.0D) / 1.6D);
 	}
-
+	
+	@Override
+	public double getSpeedIncreaseForLeveling() {
+		return 0.2D + (getLevel() / 400D);
+	}
+	
+	
 	@Override
 	public int regenDelay() {
 		return 50;

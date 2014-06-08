@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +32,8 @@ import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 public class ItemBeastAxe extends ItemRpgSword {
 
 	private List<Class> pettypes = Arrays.asList(new Class[] { EntityPig.class,
-			EntityCow.class, EntitySpider.class, EntityCaveSpider.class });
+			EntityCow.class, EntitySpider.class, EntityCaveSpider.class, EntityChicken.class });
+	
 	private int charmTime;
 	private int particleTime;
 	private Random rng = new Random(1051414);

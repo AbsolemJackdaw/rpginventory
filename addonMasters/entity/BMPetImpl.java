@@ -64,6 +64,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	int prevLevel = 0;
 	int jumpTicks;
 	protected float moveSpeed;
+	float petSize = 0.5F;
 
 	protected int previousLevel = 0;
 
@@ -250,6 +251,7 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 	public abstract ModelBase getModel();
 
 	// ABSTRACTS START
+	/**Unused method*/@Deprecated
 	public abstract float getMountedSpeed();
 
 	@Override
@@ -630,6 +632,13 @@ public abstract class BMPetImpl extends EntityTameable implements IPet {
 			// Control where the pet is facing (doesn't work while standing
 			// still)
 			rotationYaw = prevRotationYaw = riddenByEntity.rotationYaw;
+		}
+		
+		
+		if (previousLevel < getLevel()) {
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getHealthIncreaseForLeveling());
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(getSpeedIncreaseForLeveling());
+			previousLevel = getLevel();
 		}
 	}
 

@@ -14,6 +14,7 @@ import rpgInventory.RpgInventoryMod.ITEMTYPE;
 import rpgInventory.utils.RpgUtility;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
+import addonMasters.entity.ChickenPet;
 import addonMasters.entity.EntityPetXP;
 import addonMasters.entity.EntityTeleportStone;
 import addonMasters.entity.SpiderPet;
@@ -22,7 +23,7 @@ import addonMasters.items.ItemBeastMasterArmor;
 import addonMasters.items.ItemCandy;
 import addonMasters.items.ItemCrystal;
 import addonMasters.items.ItemRBMats;
-import addonMasters.items.ItemRBMats2;
+import addonMasters.items.ItemPetWhistle;
 import addonMasters.items.ItemRogueArmor;
 import addonMasters.items.ItemRpgInvArmorRB;
 import addonMasters.items.PetExpPotion;
@@ -145,21 +146,16 @@ public class RpgMastersAddon {
 
 		proxy.registerRendering();
 
-		EntityRegistry.registerGlobalEntityID(BullPet.class, "BullPet",
-				EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerGlobalEntityID(SpiderPet.class, "SpiderPet",
-				EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerGlobalEntityID(BoarPet.class, "BoarPet",
-				EntityRegistry.findGlobalUniqueEntityId());
-		
+		EntityRegistry.registerGlobalEntityID(BullPet.class, "BullPet",EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerGlobalEntityID(SpiderPet.class, "SpiderPet",EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerGlobalEntityID(BoarPet.class, "BoarPet",EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerGlobalEntityID(ChickenPet.class, "RoosterPet",EntityRegistry.findGlobalUniqueEntityId());
+
 //		EntityRegistry.registerGlobalEntityID(EntityTeleportStone.class,
 //				"TelePortStone", EntityRegistry.findGlobalUniqueEntityId());
 		
-		EntityRegistry.registerModEntity(EntityPetXP.class, "PetXP",
-				RpgInventoryMod.instance.getUniqueID(), this, 80, 1, true);
-		EntityRegistry.registerModEntity(EntityTeleportStone.class,
-				"TelePortStone", RpgInventoryMod.instance.getUniqueID(), this,
-				80, 1, true);
+		EntityRegistry.registerModEntity(EntityPetXP.class, "PetXP",RpgInventoryMod.instance.getUniqueID(), this, 80, 1, true);
+		EntityRegistry.registerModEntity(EntityTeleportStone.class,"TelePortStone", RpgInventoryMod.instance.getUniqueID(), this,80, 1, true);
 
 		MinecraftForge.EVENT_BUS.register(new BeastMasterEvent());
 
@@ -198,7 +194,7 @@ public class RpgMastersAddon {
 		beastBoots = new ItemBeastMasterArmor(beastMaster, 4, 3)
 		.setUnlocalizedName("beast4");
 
-		whistle = new ItemRBMats2().setUnlocalizedName("whistle");
+		whistle = new ItemPetWhistle().setUnlocalizedName("whistle");
 
 		petCandy = new ItemCandy(0).setUnlocalizedName("petCandy");tangledBrench = new ItemCandy(0)
 		.setUnlocalizedName("tangledBrench");

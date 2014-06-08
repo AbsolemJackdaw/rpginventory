@@ -7,6 +7,7 @@ import java.io.IOException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,6 +39,10 @@ public class PacketCrystal {
 						e.setDead();
 					} else if (e instanceof EntityCow) {
 						ItemStack is = new ItemStack(RpgMastersAddon.crystal, 1, 3);
+						e.entityDropItem(is, 0.5F);
+						e.setDead();
+					}else if (e instanceof EntityChicken) {
+						ItemStack is = new ItemStack(RpgMastersAddon.crystal, 1, 4);
 						e.entityDropItem(is, 0.5F);
 						e.setDead();
 					}

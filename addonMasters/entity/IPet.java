@@ -133,4 +133,11 @@ public interface IPet {
 	 */
 	@Deprecated
 	public ItemStack writePetToItemStack(ItemStack is);
+	
+	/**Used to update the pet's health when the previous level is lower then the current one. */
+	public double getHealthIncreaseForLeveling();
+	
+	/**Used to update the pet's speed when the previous level is lower then the current one. */
+	public double getSpeedIncreaseForLeveling();
+
 }

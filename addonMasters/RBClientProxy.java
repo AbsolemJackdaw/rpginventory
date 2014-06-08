@@ -13,6 +13,7 @@ import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import rpgInventory.utils.RpgUtility;
 import addonMasters.entity.BoarPet;
 import addonMasters.entity.BullPet;
+import addonMasters.entity.ChickenPet;
 import addonMasters.entity.EntityPetXP;
 import addonMasters.entity.EntityTeleportStone;
 import addonMasters.entity.SpiderPet;
@@ -76,17 +77,12 @@ public class RBClientProxy extends RBCommonProxy {
 							"rpginventorymod:jewels/lion.png"));
 		}
 
-		RenderingRegistry.registerEntityRenderingHandler(BullPet.class,
-				new RenderPet());
-		RenderingRegistry.registerEntityRenderingHandler(SpiderPet.class,
-				new RenderPet());
-		RenderingRegistry.registerEntityRenderingHandler(BoarPet.class,
-				new RenderPet());
-		RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class,
-				new RenderXPOrb());
-		RenderingRegistry
-		.registerEntityRenderingHandler(EntityTeleportStone.class,
-				new RenderSnowball(Items.feather, 1));
+		RenderingRegistry.registerEntityRenderingHandler(BullPet.class,new RenderPet());
+		RenderingRegistry.registerEntityRenderingHandler(SpiderPet.class,new RenderPet());
+		RenderingRegistry.registerEntityRenderingHandler(BoarPet.class,new RenderPet());
+		RenderingRegistry.registerEntityRenderingHandler(ChickenPet.class,new RenderPet());
+		RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class,new RenderXPOrb());
+		RenderingRegistry.registerEntityRenderingHandler(EntityTeleportStone.class,new RenderSnowball(Items.feather, 1));
 
 		// RPGKeyHandler.registerKeyhandler(new RpgKeyHandlerRB(),
 		// IKeyHandler.bindKeys, IKeyHandler.reps);
