@@ -4,15 +4,9 @@ import java.util.List;
 
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import addonMasters.entity.BeastMasterPet;
 import addonMasters.entity.EntityPetXP;
-import addonMasters.entity.IPet;
-import addonMasters.entity.IPet.PetID;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 
 public class BeastMasterEvent {
 

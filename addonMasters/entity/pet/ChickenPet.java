@@ -1,21 +1,16 @@
 package addonMasters.entity.pet;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import addonMasters.entity.BeastMasterPet;
-import addonMasters.entity.models.ModelRooster;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ChickenPet extends BeastMasterPet {
-
-	private static final ModelRooster model = new ModelRooster();
-	private static final ModelChicken chick = new ModelChicken();
 
 	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/rooster.png");
 	ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/rooster_saddled.png");
@@ -55,7 +50,7 @@ public class ChickenPet extends BeastMasterPet {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ModelBase getModel() {
-		return getLevel() < 50 ? chick : model;
+		return getLevel() < 50 ? getModel(2) : getModel(3);
 	}
 
 	@Override

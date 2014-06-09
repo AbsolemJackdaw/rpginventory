@@ -13,7 +13,6 @@ import rpgInventory.models.MainShield;
 import addonMasters.RpgMastersAddon;
 import addonMasters.models.DaggerShield;
 import addonMasters.models.LionHead;
-import addonMasters.models.ModelDaggerL;
 
 public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 

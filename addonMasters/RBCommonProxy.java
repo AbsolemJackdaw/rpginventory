@@ -4,6 +4,7 @@
  */
 package addonMasters;
 
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
@@ -19,5 +20,9 @@ public class RBCommonProxy {
 	}
 
 	public void registerRendering() {
+	}
+	
+	public ModelBase getpetmodel(int i){
+		return null;
 	}
 }

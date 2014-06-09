@@ -16,17 +16,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import addonMasters.entity.BeastMasterPet;
-import addonMasters.entity.models.ModelRpgSpider;
-import addonMasters.entity.models.ModelSpiderDub;
 
 /**
  *
  * @author Home
  */
 public class SpiderPet extends BeastMasterPet {
-
-	ModelRpgSpider model = new ModelRpgSpider();
-	ModelSpiderDub spider = new ModelSpiderDub();
 
 	private static final ResourceLocation spiderTexture = new ResourceLocation("textures/entity/spider/cave_spider.png");
 	private static final ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/spider.png");
@@ -95,7 +90,7 @@ public class SpiderPet extends BeastMasterPet {
 
 	@Override
 	public ModelBase getModel() {
-		return getLevel() < 50 ? spider : model;
+		return getLevel() < 50 ? getModel(0) : getModel(1);
 	}
 
 	@Override

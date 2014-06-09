@@ -752,5 +752,9 @@ public abstract class BeastMasterPet extends EntityTameable implements IPet {
 		int exp = getLevel();
 		return exp >= 30 ? 62 + ((exp - 30) * 7): (exp >= 15 ? 17 + ((exp - 15) * 3) : 17);
 	}
+	
+	protected ModelBase getModel(int id){
+		return RpgMastersAddon.proxy.getpetmodel(id);
+	}
 
 }

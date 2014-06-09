@@ -75,8 +75,8 @@ public class ItemPetWhistle extends Item {
 								spider.setPosition(player.posX,player.posY + 0.5F, player.posZ);
 								spider.setOwner(player.getDisplayName());
 								spider.setTamed(true);
-								IPet.playersWithActivePets.put(player.getDisplayName(), new PetID(
-										spider.dimension, spider.getEntityId()));
+								IPet.playersWithActivePets.put(player.getDisplayName(), new PetID(spider.dimension, spider.getEntityId()));
+								
 								if(stack.stackTagCompound != null){
 									spider.setName(stack.stackTagCompound.getString("PetName"));
 									spider.setLevel(stack.stackTagCompound.getInteger("PetLevel"));

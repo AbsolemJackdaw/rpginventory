@@ -62,7 +62,8 @@ public class PlayerRpgContainer extends Container {
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 
 		if (!par1EntityPlayer.worldObj.isRemote) {
-			PacketHelper.syncOwnInventory((EntityPlayerMP) par1EntityPlayer, this.inventory);
+			if(inventory != null && par1EntityPlayer != null)
+				PacketHelper.syncOwnInventory((EntityPlayerMP) par1EntityPlayer, this.inventory);
 		}
 
 		super.onContainerClosed(par1EntityPlayer);

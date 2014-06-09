@@ -10,7 +10,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class ToLoad {
 
 	public static void loadGameRecipes(){
-		GameRegistry.addRecipe(new ItemStack(RpgInventoryMod.cloakWhite, 1), new Object[] { "SS","II", "II", 'I', new ItemStack(Blocks.wool,1,15), 'S', Items.string });
+		GameRegistry.addRecipe(new ItemStack(RpgInventoryMod.cloakWhite, 1), new Object[] { "SS","II", "II", 'I', new ItemStack(Blocks.wool,1,0), 'S', Items.string });
 
 		GameRegistry.addRecipe(new ItemStack(RpgInventoryMod.cloakBlack, 1)		, new Object[] {"PPP", "PCP", "PPP", 'C', RpgInventoryMod.cloakWhite, 'P',new ItemStack(Items.dye, 1, 0) });
 		GameRegistry.addRecipe(new ItemStack(RpgInventoryMod.cloakRed, 1)		, new Object[] {"PPP", "PCP", "PPP", 'C', RpgInventoryMod.cloakWhite, 'P',new ItemStack(Items.dye, 1, 1) });

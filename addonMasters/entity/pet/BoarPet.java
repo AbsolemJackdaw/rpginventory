@@ -5,15 +5,12 @@
 package addonMasters.entity.pet;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelPig;
-import net.minecraft.client.renderer.entity.RenderPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import addonMasters.entity.BeastMasterPet;
-import addonMasters.entity.models.ModelBoar;
 
 /**
  *
@@ -22,11 +19,6 @@ import addonMasters.entity.models.ModelBoar;
 public class BoarPet extends BeastMasterPet {
 
 	boolean checked = false;
-	
-	private ModelBoar model = new ModelBoar();
-	private ModelPig modelpig = new ModelPig();
-
-	RenderPig e;
 
 	ResourceLocation pig = new ResourceLocation("textures/entity/pig/pig.png");
 	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/boar.png");
@@ -75,7 +67,7 @@ public class BoarPet extends BeastMasterPet {
 
 	@Override
 	public ModelBase getModel() {
-		return getLevel() < 50 ? modelpig : model;
+		return getLevel() < 50 ? getModel(6) : getModel(7);
 	}
 
 	@Override

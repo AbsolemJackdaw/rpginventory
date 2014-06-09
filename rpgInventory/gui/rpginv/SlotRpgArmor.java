@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.packets.PacketHelper;
 import rpgInventory.item.armor.ItemRpgInvArmor;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 class SlotRpgArmor extends Slot {
 
@@ -88,15 +89,16 @@ class SlotRpgArmor extends Slot {
 
 	@Override
 	public void onSlotChanged() {
-		PacketHelper.sendDataToPlayersAround(player);
+		if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+			PacketHelper.sendDataToPlayersAround(player);
+		
 		super.onSlotChanged();
 	}
 
 	@Override
 	public void putStack(ItemStack par1ItemStack) {
 		if (this.inventory != null) {
-			this.inventory.setInventorySlotContents(this.slotIndex,
-					par1ItemStack);
+			this.inventory.setInventorySlotContents(this.slotIndex,par1ItemStack);
 		}
 		this.onSlotChanged();
 	}

@@ -6,12 +6,11 @@ package addonMasters.entity;
 
 import java.util.HashMap;
 
-import cpw.mods.fml.common.FMLLog;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLLog;
 
 /**
  *

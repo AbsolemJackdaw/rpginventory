@@ -7,7 +7,6 @@ import addonArchmage.weapons.RenderElementalBlock;
 import addonBasic.models.item.ModelMageArmor;
 import addonBasic.models.item.ModelMageBook;
 import addonBasic.renderer.shields.BookRenderer;
-import addonBasic.renderer.weapons.StaffRenderer;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class MSClientProxy extends MSCommonProxy {
@@ -38,15 +37,15 @@ public class MSClientProxy extends MSCommonProxy {
 
 		if (RpgConfig.instance.render3D) {
 			MinecraftForgeClient.registerItemRenderer(
-					RpgArchmageAddon.frostStaff, new StaffRenderer());
+					RpgArchmageAddon.frostStaff, new RenderElementStaff());
 			MinecraftForgeClient.registerItemRenderer(RpgArchmageAddon.fireStaff,
-					new StaffRenderer());
+					new RenderElementStaff());
 			MinecraftForgeClient.registerItemRenderer(
-					RpgArchmageAddon.earthStaff, new StaffRenderer());
+					RpgArchmageAddon.earthStaff, new RenderElementStaff());
 			MinecraftForgeClient.registerItemRenderer(RpgArchmageAddon.windStaff,
-					new StaffRenderer());
+					new RenderElementStaff());
 			MinecraftForgeClient.registerItemRenderer(
-					RpgArchmageAddon.ultimateStaff, new StaffRenderer());
+					RpgArchmageAddon.ultimateStaff, new RenderElementStaff());
 
 			MinecraftForgeClient.registerItemRenderer(RpgArchmageAddon.archBook,
 					new BookRenderer(new ModelMageBook(),

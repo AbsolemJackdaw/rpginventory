@@ -5,14 +5,12 @@
 package addonMasters.entity.pet;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import addonMasters.entity.BeastMasterPet;
-import addonMasters.entity.models.ModelBull;
 
 /**
  *
@@ -23,9 +21,6 @@ public class BullPet extends BeastMasterPet {
 	private static final ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/bull.png");
 	private static final ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/bull_saddled.png");
 	private static final ResourceLocation cowTexture = new ResourceLocation("textures/entity/cow/cow.png");
-
-	private ModelBull model = new ModelBull();
-	private ModelCow cow = new ModelCow();
 
 	public BullPet(World par1World) {
 		super(par1World, 3, null, null);
@@ -63,7 +58,7 @@ public class BullPet extends BeastMasterPet {
 
 	@Override
 	public ModelBase getModel() {
-		return getLevel() < 50 ? cow : model;
+		return getLevel() < 50 ? getModel(4) : getModel(5);
 	}
 
 	@Override
