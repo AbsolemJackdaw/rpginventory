@@ -1,0 +1,142 @@
+
+#capes
+item.r.capeGrey.name=Red Cape
+item.y.capeGrey.name=Yellow Cape
+item.g.capeGrey.name=Green Cape
+item.b.capeGrey.name=Blue Cape
+item.s.capeGrey.name=Black Cape
+item.capeGrey.name=Grey Cape
+item.i.capeGrey.name=Invisibility Cloak
+
+#jewels necklace
+item.neckDia.name=Health Necklace
+item.neckEm.name=Buffed Necklace
+item.neckLap.name=Strength Necklace
+item.neckGold.name=Speed Necklace
+
+#jewels ring
+item.ringDia.name=Health Ring
+item.ringEm.name=Buffed Ring
+item.ringLap.name=Strength Ring
+item.ringGold.name=Speed Ring
+
+#jewels gloves
+item.gloveDia.name=Health Gloves
+item.gloveEm.name=Buffed Gloves
+item.gloveLap.name=Strength Gloves
+item.gloveGold.name=Speed Gloves
+
+#molds
+item.moldRing.name=Ring Mold
+item.moldNeck.name=Necklace Mold
+item.moldGlove.name=Glove Mold
+
+#block
+tile.MoldForge.name=Jewel Forge
+
+#armor materials
+item.n.leather.name=Necromancer Leather
+item.p.iron_ingot.name=Paladin Steel
+item.r.leather.name=Rogue Leather
+item.b.leather.name=Beastmaster Hide
+item.a.leather.name=Berserker Leather
+item.t.leather.name=Archer Leather
+item.m.leather.name=Magic Leather
+
+
+#armor
+item.necro1.name=NecroMancer Hood
+item.necro2.name=NecroMancer Vest
+item.necro3.name=NecroMancer Pants
+item.necro4.name=NecroMancer Boots
+
+item.paladin1.name=Paladin Helm
+item.paladin2.name=Paladin Chestplate
+item.paladin3.name=Paladin Platelegs
+item.paladin4.name=Paladin Boots
+
+item.beast1.name=Beastmaster Hood
+item.beast2.name=Beastmaster Body
+item.beast3.name=Beastmaster Chaps
+item.beast4.name=Beastmaster Shoes
+
+item.rogue1.name=Rogue Hood
+item.rogue2.name=Rogue Breast Plate
+item.rogue3.name=Rogue Chaps
+item.rogue4.name=Rogue Boots
+
+item.archMage1.name=Archmage Hat
+item.archMage2.name=Archmage Gown
+item.archMage3.name=Archmage Undergown
+item.archMage4.name=Archmage Boots
+
+item.archer1.name=Archer Cap
+item.archer2.name=Archer Chest
+item.archer3.name=Archer Leggings
+item.archer4.name=Archer Boots
+
+item.mage1.name=Mage Hat
+item.mage2.name=Mage Gown
+item.mage3.name=Mage Undergown
+item.mage4.name=Mage Shoes
+
+item.berserk1.name=Berserker Cap
+item.berserk2.name=Berserker Chest 
+item.berserk3.name=Berserker Chaps
+item.bersker4.name=Berserker Footwear
+
+
+#shields
+item.shieldPaladin.name=Paladin Shield
+item.shieldNecro.name=Necromancer Shield
+
+item.shieldBeastMaster.name=Lionhead Shield
+
+item.shieldWood.name=Wooden Shield
+item.shieldIron.name=iron Shield
+item.shieldGold.name=Golden Shield
+item.shieldDiamond.name=Diamond Shield
+
+item.archTome.name=Archmage Aura
+
+item.shieldMage.name=Mage Aura
+item.shieldBerserker.name=Iron Thorn
+item.shieldArcher.name=Small Wooden Shield
+
+
+#weapons
+item.paladinPride.name=Paladin Greatsword
+item.Skull.name=Necromancer Skull
+
+item.forestAxe.name=Beastmaster Axe
+item.dagger.name=Rogue Dagger
+
+item.staffFire.name=Firestaff
+item.staffIce.name=Icestaff
+item.staffEarth.name=EarthStaff
+item.staffWind.name=Windstaff
+item.staffElemental.name=Staff Of Elements
+
+item.elmBow.name=Archer Ultrabow
+item.claymore.name=Claymore
+item.rageBreaker.name=Ragebreaker
+item.soulsphere.name=Soul Sphere
+item.lunarStaff.name=Lunarstaff
+
+
+
+#various items
+item.petCrystal.name=Crystal
+item.petCandy.name=Rare Pet Candy
+item.whistle.name=Pet Whistle
+item.tangledBrench.name=Tangled Brench
+item.PetXPBottle.name=Bottle O' PetXp
+item.r.seeds_melon.name=Rage Seeds
+item.a.book_normal.name=Spell Tome
+
+
+
+
+
+
+
