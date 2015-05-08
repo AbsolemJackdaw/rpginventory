@@ -1,9 +1,5 @@
 package addonBasic;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
@@ -14,12 +10,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
-import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.ServerTickHandler;
 import rpgInventory.utils.ISpecialAbility;
 import rpgInventory.utils.RpgUtility;
-import addonBasic.packets.ClientPacketHandler;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+import addonBasic.packets.PacketArcher;
+import addonBasic.packets.PacketBerserker;
+import addonBasic.packets.PacketMageHeal;
+import addonBasic.packets.PacketMageVortex;
 
 public class KeyHandler implements ISpecialAbility {
 
@@ -95,70 +92,27 @@ public class KeyHandler implements ISpecialAbility {
 
 		if((item.getItem() == RpgBaseAddon.hammer)) {
 
-			try {
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-				out.writeInt(ClientPacketHandler.BERSERKER);
-				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
-				out.close();
+			RpgBaseAddon.SNW.sendToServer(new PacketBerserker());
 
-				if(ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) / 20 <= 0){
-					RpgUtility.spawnParticle(p, 6, "smoke", 5, 1);
-					RpgUtility.spawnParticle(p, 8, "largeexplode", 6, 1);
-
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			if(ServerTickHandler.globalCooldownMap.get(p.getDisplayName()) / 20 <= 0){
+				RpgUtility.spawnParticle(p, 6, "smoke", 5, 1);
+				RpgUtility.spawnParticle(p, 8, "largeexplode", 6, 1);
 			}
 		}
 
-		if((item.getItem() == RpgBaseAddon.soulSphere)) {
-			try {
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-				out.writeInt(ClientPacketHandler.MAGE2);
-				//				if(!p.worldObj.isRemote)
-				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
-				out.close();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		if((item.getItem() == RpgBaseAddon.soulSphere))
+			RpgBaseAddon.SNW.sendToServer(new PacketMageVortex());
 
 
 		if((item.getItem() == RpgBaseAddon.lunarStaff)) {
-			try {
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-				out.writeInt(ClientPacketHandler.MAGE1);
-				RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
-				out.close();
+			RpgBaseAddon.SNW.sendToServer(new PacketMageHeal());
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 
 		if((item.getItem() ==  RpgBaseAddon.elfbow)) {
-			try {
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-				out.writeInt(ClientPacketHandler.ARCHER);
-
-				EntityLivingBase target = isTargetingEntity(Minecraft.getMinecraft().thePlayer,RpgInventoryMod.donators.contains(Minecraft.getMinecraft().thePlayer.getCommandSenderName()) ? 60 : 40);
-				if (target != null) {
-					out.writeBoolean(false);
-					out.writeInt((int) Math.floor(target.posX));
-					out.writeInt((int) Math.floor(target.posY));
-					out.writeInt((int) Math.floor(target.posZ));
-					RpgBaseAddon.Channel.sendToServer(new FMLProxyPacket(buf,"BaseAddon"));
-					out.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			EntityLivingBase target = isTargetingEntity(Minecraft.getMinecraft().thePlayer,40);
+			if (target != null) 
+				RpgBaseAddon.SNW.sendToServer(new PacketArcher(target.posX, target.posY, target.posZ));
 		}
 	}
-
 }

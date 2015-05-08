@@ -47,5 +47,22 @@ public class ItemRpgInvShields extends ItemRpgInvArmor {
 		}
 		return super.shieldClass();
 	}
+	
+	@Override
+	public int getBlockChance() {
+		if (this.equals(RpgVanillaShields.shieldWood)) {
+			return 75;
+		}
+		if (this.equals(RpgVanillaShields.shieldIron)) {
+			return 50;
+		}
+		if (this.equals(RpgVanillaShields.shieldGold)) {
+			return 25;
+		}
+		if (this.equals(RpgVanillaShields.shieldDiamond)) {
+			return 10;
+		}
+		return super.getBlockChance();
+	}
 
 }

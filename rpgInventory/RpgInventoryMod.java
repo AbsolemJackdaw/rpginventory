@@ -1,10 +1,5 @@
 package rpgInventory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +15,20 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.block.BlockForge;
 import rpgInventory.block.te.TEMold;
+import rpgInventory.config.RpgConfig;
 import rpgInventory.gui.RpgInventoryTab;
 import rpgInventory.handlers.GuiHandler;
+import rpgInventory.handlers.MouseHandler;
 import rpgInventory.handlers.RPGEventHooks;
 import rpgInventory.handlers.ServerTickHandler;
-import rpgInventory.handlers.packets.ServerPacketHandler;
+import rpgInventory.handlers.packets.PacketOpenRpgInventory;
+import rpgInventory.handlers.packets.PacketOpenRpgInventory.HandlerOpenRpgInventory;
+import rpgInventory.handlers.packets.PacketSyncBlockShield;
+import rpgInventory.handlers.packets.PacketSyncBlockShield.HandlerSyncBlockShield;
+import rpgInventory.handlers.packets.PacketSyncOtherInventory;
+import rpgInventory.handlers.packets.PacketSyncOtherInventory.HandlerSyncOtherInventory;
+import rpgInventory.handlers.packets.PacketSyncOwnInventory;
+import rpgInventory.handlers.packets.PacketSyncOwnInventory.HandlerSyncOwnInventory;
 import rpgInventory.handlers.proxy.ClientProxy;
 import rpgInventory.handlers.proxy.CommonProxy;
 import rpgInventory.item.ItemMold;
@@ -37,9 +41,10 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = RpgInventoryMod.name, name = RpgInventoryMod.ID, version = RpgInventoryMod.version)
 public class RpgInventoryMod {
@@ -62,7 +67,10 @@ public class RpgInventoryMod {
 	public static String playerClass = "none";
 	public static RpgInventoryMod instance;
 
-	public static FMLEventChannel Channel;
+	//	public static FMLEventChannel Channel;
+	public static final String channelName = "RpgInv";
+
+	public static final SimpleNetworkWrapper SNW = NetworkRegistry.INSTANCE.newSimpleChannel(channelName);
 
 	@SidedProxy(serverSide = "rpgInventory.handlers.proxy.CommonProxy", clientSide = "rpgInventory.handlers.proxy.ClientProxy")
 	public static CommonProxy proxy;
@@ -105,16 +113,11 @@ public class RpgInventoryMod {
 
 	public static CreativeTabs tab;
 
-	public static ArrayList<String> donators = new ArrayList<String>();
-
-	public static final String channelName = "RpgInv";
-
 	public RpgInventoryMod() {
 		instance = this;
 	}
 
-	public void addCandyChestLoot(ItemStack is, int min, int max, int rarity,
-			String item) {
+	public void addCandyChestLoot(ItemStack is, int min, int max, int rarity,String item) {
 		FMLLog.info("Adding to chests: " + item, min);
 		WeightedRandomChestContent chestGen = new WeightedRandomChestContent(
 				is.copy(), min, max, rarity);
@@ -165,10 +168,7 @@ public class RpgInventoryMod {
 		ToLoad.loadMoldRecipes();
 		ToLoad.loadGameRecipes();
 
-		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("RpgInv");
 		proxy.load();
-		
-		RpgInventoryMod.Channel.register(new ServerPacketHandler());
 
 		setDonators();
 
@@ -192,6 +192,9 @@ public class RpgInventoryMod {
 		MinecraftForge.EVENT_BUS.register(new RPGEventHooks());
 		FMLCommonHandler.instance().bus().register(new ServerTickHandler());
 		
+		if(FMLCommonHandler.instance().getSide().isClient())
+			FMLCommonHandler.instance().bus().register(new MouseHandler());
+
 		ClientProxy.renderHandler();
 
 	}
@@ -207,27 +210,29 @@ public class RpgInventoryMod {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-
+		
+ 		RpgConfig.instance.loadConfig(event.getSuggestedConfigurationFile());
+		
 		// NOTHING BEFORE THE GOD DAMN TAB !
 		// any items that need to be in it, put in it BEFORE the tab exists will
 		// not be in
 		tab = new RpgInventoryTab(CreativeTabs.getNextID(),
 				"Rpg Inventory Jewelery");
 
-		neckgold = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,"rpginventorymod:jewels/NeckGold.png").setUnlocalizedName("neckGold").setCreativeTab(tab);
-		neckdia = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,"rpginventorymod:jewels/NeckDia.png").setUnlocalizedName("neckDia").setCreativeTab(tab);
-		neckem = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,"rpginventorymod:jewels/NeckEm.png").setUnlocalizedName("neckEm").setCreativeTab(tab);
-		necklap = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,"rpginventorymod:jewels/NeckLap.png").setUnlocalizedName("neckLap").setCreativeTab(tab);
+		neckgold = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,"subaraki:jewels/NeckGold.png").setUnlocalizedName("neckGold").setCreativeTab(tab);
+		neckdia = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,"subaraki:jewels/NeckDia.png").setUnlocalizedName("neckDia").setCreativeTab(tab);
+		neckem = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,"subaraki:jewels/NeckEm.png").setUnlocalizedName("neckEm").setCreativeTab(tab);
+		necklap = new ItemRpgInvArmor(ItemRpgInvArmor.NECKLACE, -1, 17,"subaraki:jewels/NeckLap.png").setUnlocalizedName("neckLap").setCreativeTab(tab);
 
 		ringgold = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "").setUnlocalizedName("ringGold").setCreativeTab(tab);
 		ringdia = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "").setUnlocalizedName("ringDia").setCreativeTab(tab);
 		ringem = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "").setUnlocalizedName("ringEm").setCreativeTab(tab);
 		ringlap = new ItemRpgInvArmor(ItemRpgInvArmor.RING, -1, 17, "").setUnlocalizedName("ringLap").setCreativeTab(tab);
 
-		glovesbutter = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,"rpginventorymod:jewels/Glove.png").setUnlocalizedName("gloveGold").setCreativeTab(tab);
-		glovesdia = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,"rpginventorymod:jewels/GloveDia.png").setUnlocalizedName("gloveDia").setCreativeTab(tab);
-		glovesem = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,"rpginventorymod:jewels/GloveEm.png").setUnlocalizedName("gloveEm").setCreativeTab(tab);
-		gloveslap = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,"rpginventorymod:jewels/GloveLap.png").setUnlocalizedName("gloveLap").setCreativeTab(tab);
+		glovesbutter = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,"subaraki:jewels/Glove.png").setUnlocalizedName("gloveGold").setCreativeTab(tab);
+		glovesdia = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,"subaraki:jewels/GloveDia.png").setUnlocalizedName("gloveDia").setCreativeTab(tab);
+		glovesem = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,"subaraki:jewels/gloveem.png").setUnlocalizedName("gloveEm").setCreativeTab(tab);
+		gloveslap = new ItemRpgInvArmor(ItemRpgInvArmor.GLOVES, -1, 17,"subaraki:jewels/GloveLap.png").setUnlocalizedName("gloveLap").setCreativeTab(tab);
 
 
 		cloakI = new ItemRpgInvArmor(ItemRpgInvArmor.CLOAK, -1, 17,"subaraki:capes/GreyCape.png").setFull3D().setUnlocalizedName("i.capeGrey").setCreativeTab(tab);
@@ -278,28 +283,34 @@ public class RpgInventoryMod {
 				System.out.println("Item is null !" + i);
 			}
 		}
+
+		SNW.registerMessage(HandlerOpenRpgInventory.class, PacketOpenRpgInventory.class, 0, Side.SERVER);
+		SNW.registerMessage(HandlerSyncOtherInventory.class, PacketSyncOtherInventory.class, 1, Side.CLIENT);
+		SNW.registerMessage(HandlerSyncOwnInventory.class, PacketSyncOwnInventory.class, 2, Side.CLIENT);
+		SNW.registerMessage(HandlerSyncBlockShield.class, PacketSyncBlockShield.class, 3, Side.SERVER);
+
 	}
 
 	private void setDonators() {
-		try {
-			URL url = new URL(
-					"http://www.dnstechpack.com/user/subaraki/rpgcapes/donatorList.txt");
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					url.openStream()));
-			String str;
-			while ((str = in.readLine()) != null) {
-				donators.add(str);
-			}
-			FMLLog.getLogger().info(
-					"Added Dev-Donation rank for : " + donators.toString());
-
-			in.close();
-		} catch (MalformedURLException e) {
-			FMLLog.getLogger().info(
-					"[ERROR] Couldn't Handle Donators. Index 1.");
-		} catch (IOException e) {
-			FMLLog.getLogger().info(
-					"[ERROR] Couldn't Handle Donators. Index 2.");
-		}
+		//		try {
+		//			URL url = new URL(
+		//					"http://www.dnstechpack.com/user/subaraki/rpgcapes/donatorList.txt");
+		//			BufferedReader in = new BufferedReader(new InputStreamReader(
+		//					url.openStream()));
+		//			String str;
+		//			while ((str = in.readLine()) != null) {
+		//				donators.add(str);
+		//			}
+		//			FMLLog.getLogger().info(
+		//					"Added Dev-Donation rank for : " + donators.toString());
+		//
+		//			in.close();
+		//		} catch (MalformedURLException e) {
+		//			FMLLog.getLogger().info(
+		//					"[ERROR] Couldn't Handle Donators. Index 1.");
+		//		} catch (IOException e) {
+		//			FMLLog.getLogger().info(
+		//					"[ERROR] Couldn't Handle Donators. Index 2.");
+		//		}
 	}
 }

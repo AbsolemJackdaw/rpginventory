@@ -6,8 +6,10 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.WorldServer;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.packets.PacketHelper;
+import rpgInventory.handlers.packets.PacketSyncOtherInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 
 public class PlayerRpgContainer extends Container {
@@ -64,6 +66,10 @@ public class PlayerRpgContainer extends Container {
 		if (!par1EntityPlayer.worldObj.isRemote) {
 			if(inventory != null && par1EntityPlayer != null)
 				PacketHelper.syncOwnInventory((EntityPlayerMP) par1EntityPlayer, this.inventory);
+			
+			((WorldServer)par1EntityPlayer.worldObj).getEntityTracker().func_151248_b(
+					par1EntityPlayer, RpgInventoryMod.SNW.getPacketFrom(new PacketSyncOtherInventory(par1EntityPlayer)));
+
 		}
 
 		super.onContainerClosed(par1EntityPlayer);
@@ -80,8 +86,7 @@ public class PlayerRpgContainer extends Container {
 		ItemStack rv = super.slotClick(par1, par2, par3, par4EntityPlayer);
 
 		if (!par4EntityPlayer.worldObj.isRemote) {
-			PacketHelper.syncOwnInventory((EntityPlayerMP) par4EntityPlayer,
-					this.inventory);
+			PacketHelper.syncOwnInventory((EntityPlayerMP) par4EntityPlayer,this.inventory);
 		}
 		return rv;
 	}
@@ -164,9 +169,13 @@ public class PlayerRpgContainer extends Container {
 			int i = 0;
 			for (ItemStack is : player.inventory.mainInventory) {
 				if (is == null) {
-					player.inventory.setInventorySlotContents(i,
-							this.inventory.getStackInSlot(slotnumber));
+					player.inventory.setInventorySlotContents(i,this.inventory.getStackInSlot(slotnumber));
 					this.inventory.setInventorySlotContents(slotnumber, null);
+
+					if(!player.worldObj.isRemote){
+						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(
+								player, RpgInventoryMod.SNW.getPacketFrom(new PacketSyncOtherInventory(player)));
+					}
 					return null;
 				}
 				i++;

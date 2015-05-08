@@ -11,6 +11,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.RpgInventoryMod.ITEMTYPE;
+import rpgInventory.gui.rpginv.PacketNotify;
+import rpgInventory.gui.rpginv.PacketNotify.HandlerPacketNotify;
 import rpgInventory.utils.RpgUtility;
 import addonMasters.entity.EntityPetXP;
 import addonMasters.entity.EntityTeleportStone;
@@ -29,7 +31,16 @@ import addonMasters.items.ItemRBMats;
 import addonMasters.items.ItemRogueArmor;
 import addonMasters.items.ItemRpgInvArmorRB;
 import addonMasters.items.PetExpPotion;
-import addonMasters.packets.RBServerPacketHandler;
+import addonMasters.packets.PacketCrystal;
+import addonMasters.packets.PacketCrystal.HandlerPacketCrystal;
+import addonMasters.packets.PacketName;
+import addonMasters.packets.PacketName.HandlerPacketName;
+import addonMasters.packets.PacketPetGui;
+import addonMasters.packets.PacketPetGui.HandlerPacketPetGui;
+import addonMasters.packets.PacketStorePet;
+import addonMasters.packets.PacketStorePet.HandlerPacketStorePet;
+import addonMasters.packets.PacketTeleport;
+import addonMasters.packets.PacketTeleport.HandlerPacketTeleport;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -37,11 +48,11 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
-import cpw.mods.fml.common.network.FMLEventChannel;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = "RPGRB", name = "Rogue Beastmaster Addon", version = "RpgInv8.4", dependencies = "required-after:rpginventorymod")
 public class RpgMastersAddon {
@@ -70,13 +81,11 @@ public class RpgMastersAddon {
 
 	ToolMaterial BeastAxeMaterial = EnumHelper.addToolMaterial("BeastAxe", 4,1280, 6.0F, 3, 22);
 
-	public static FMLEventChannel Channel;
-
+	public static final SimpleNetworkWrapper SNW = new SimpleNetworkWrapper("R_BChannel");
+	
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 
-		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("R_BChannel");
-		RpgMastersAddon.Channel.register(new RBServerPacketHandler());
 
 		RpgUtility.registerAbilityWeapon(daggers);
 
@@ -164,15 +173,22 @@ public class RpgMastersAddon {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
 
+		SNW.registerMessage(HandlerPacketCrystal.class, PacketCrystal.class, 1, Side.SERVER);
+		SNW.registerMessage(HandlerPacketName.class, PacketName.class, 2, Side.SERVER);
+		SNW.registerMessage(HandlerPacketPetGui.class, PacketPetGui.class, 3, Side.SERVER);
+		SNW.registerMessage(HandlerPacketTeleport.class, PacketTeleport.class, 4, Side.SERVER);
+		SNW.registerMessage(HandlerPacketStorePet.class, PacketStorePet.class, 5, Side.SERVER);
+		SNW.registerMessage(HandlerPacketNotify.class, PacketNotify.class, 6, Side.SERVER);
+
 		tab = new RBTab(CreativeTabs.getNextID(), "Rogue Beastmaster Addon");
 
-		daggers = new ItemRpgInvArmorRB(1, 800, "","rpginventorymod:jewels/DaggerShield.png").setUnlocalizedName("dagger");
+		daggers = new ItemRpgInvArmorRB(1, 800, "","subaraki:jewels/DaggerShield.png").setUnlocalizedName("dagger");
 		beastAxe = new ItemBeastAxe(BeastAxeMaterial).setFull3D().setUnlocalizedName("forestAxe");
 
 		rogueLeather = new ItemRBMats().setUnlocalizedName("r.leather");
 		beastLeather = new ItemRBMats().setUnlocalizedName("b.leather");
 
-		beastShield = new ItemRpgInvArmorRB(1, 250, "","rpginventorymod:jewels/lion.png").setUnlocalizedName("shieldBeastMaster");
+		beastShield = new ItemRpgInvArmorRB(1, 250, "","subaraki:jewels/lion.png").setUnlocalizedName("shieldBeastMaster");
 
 		rogueHood = new ItemRogueArmor(rogueArmor, 4, 0).setUnlocalizedName("rogue1");
 		rogueChest = new ItemRogueArmor(rogueArmor, 4, 1).setUnlocalizedName("rogue2");

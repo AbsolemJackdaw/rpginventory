@@ -18,8 +18,8 @@ import addonMasters.entity.BeastMasterPet;
  */
 public class BullPet extends BeastMasterPet {
 
-	private static final ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/bull.png");
-	private static final ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/bull_saddled.png");
+	private static final ResourceLocation normal = new ResourceLocation("subaraki:mob/bull.png");
+	private static final ResourceLocation saddled = new ResourceLocation("subaraki:mob/bull_saddled.png");
 	private static final ResourceLocation cowTexture = new ResourceLocation("textures/entity/cow/cow.png");
 
 	public BullPet(World par1World) {

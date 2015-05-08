@@ -57,9 +57,9 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 
 		if (((EntityPlayer) par3EntityLiving).getCurrentEquippedItem().getItem() == RpgMastersAddon.daggers) {
 			if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSROGUESHIELDED)) {
-				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, RpgInventoryMod.donators.contains(((EntityPlayer) par3EntityLiving).getDisplayName()) ? 80 : 60, 1));
+				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 60, 1));
 			} else if (RpgInventoryMod.playerClass.contains(RpgMastersAddon.CLASSROGUE)) {
-				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, RpgInventoryMod.donators.contains(((EntityPlayer) par3EntityLiving).getDisplayName()) ? 40 : 30, 0));
+				par2EntityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 30, 0));
 				if (((EntityPlayer) par3EntityLiving).worldObj.isDaytime()) {
 					par2EntityLiving.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLiving),10);
 				}
@@ -83,5 +83,15 @@ public class ItemRpgInvArmorRB extends ItemRpgInvArmor {
 		}
 		return super.shieldClass();
 	}
-
+	
+	@Override
+	public int getBlockChance() {
+		if (this.equals(RpgMastersAddon.beastShield)) {
+			return 60;
+		}
+		if (this.equals(RpgMastersAddon.daggers)) {
+			return 35;
+		}
+		return super.getBlockChance();
+	}
 }

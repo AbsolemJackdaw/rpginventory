@@ -49,4 +49,15 @@ public class ItemRpgInvArmorPlus extends ItemRpgInvArmor {
 		}
 		return super.shieldClass();
 	}
+
+	@Override
+	public int getBlockChance() {
+		if (this.equals(RpgDreadAddon.necroShield)) {
+			return 45;
+		}
+		if (this.equals(RpgDreadAddon.paladinShield)) {
+			return 45;
+		}
+		return super.getBlockChance();
+	}
 }

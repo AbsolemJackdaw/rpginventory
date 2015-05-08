@@ -59,10 +59,10 @@ public class DreadEventHooks {
 					if (evt.entityLiving.isEntityUndead()) {
 						if (((EntityPlayer) damager).getHealth() < ((EntityPlayer) damager).getMaxHealth()) {
 							if (RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSPALADINSHIELD))
-								((EntityPlayer) damager).heal(RpgInventoryMod.donators.contains(((EntityPlayer) damager).getDisplayName()) ? 2: 1);
+								((EntityPlayer) damager).heal(1);
 						}
 						evt.ammount += 3;
-						evt.entityLiving.setFire(RpgInventoryMod.donators.contains(((EntityPlayer) damager).getDisplayName()) ? 5 : 2);
+						evt.entityLiving.setFire(2);
 					}
 				}
 				if (RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSNECRO)) {
@@ -105,21 +105,21 @@ public class DreadEventHooks {
 				if ((decompose != null) && (machicism != null)) {
 					p.removePotionEffect(RpgDreadAddon.decomposePotion.id);
 					p.removePotionEffect(RpgDreadAddon.masochismPotion.id);
-					CustomPotionList.remove(p.getCommandSenderName());
+					CustomPotionList.remove(p.getDisplayName());
 				} else if (decompose != null) {
 					if (decompose.getDuration() == 0) {
 						p.removePotionEffect(RpgDreadAddon.decomposePotion.id);
-						CustomPotionList.remove(p.getCommandSenderName());
-					} else if (!CustomPotionList.containsKey(p.getCommandSenderName())) {
-						CustomPotionList.put(p.getCommandSenderName(),
+						CustomPotionList.remove(p.getDisplayName());
+					} else if (!CustomPotionList.containsKey(p.getDisplayName())) {
+						CustomPotionList.put(p.getDisplayName(),
 								decompose.getDuration());
 					}
 				} else if (machicism != null) {
 					if (machicism.getDuration() == 0) {
 						p.removePotionEffect(RpgDreadAddon.masochismPotion.id);
-						CustomPotionList.remove(p.getCommandSenderName());
-					} else if (!CustomPotionList.containsKey(p							.getCommandSenderName())) {
-						CustomPotionList.put(p.getCommandSenderName(),machicism.getDuration());
+						CustomPotionList.remove(p.getDisplayName());
+					} else if (!CustomPotionList.containsKey(p							.getDisplayName())) {
+						CustomPotionList.put(p.getDisplayName(),machicism.getDuration());
 					}
 				}
 			}

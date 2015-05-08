@@ -16,11 +16,10 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.Sphere;
 
-import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.ClientTickHandler;
 import rpgInventory.handlers.RPGKeyHandler;
-import rpgInventory.handlers.packets.ClientPacketHandler;
 import rpgInventory.renderer.RenderRpgPlayer;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -29,6 +28,8 @@ public class ClientProxy extends CommonProxy {
 	// Testing
 
 	public static int sphereID;
+	public static int sphereID2;
+
 	public static boolean firstUpdate = false;
 
 	@SideOnly(Side.CLIENT)
@@ -38,14 +39,13 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public int getSphereID() {
-		return sphereID;
+	public int getSphereID(boolean isFirstPerson) {
+		return isFirstPerson ? sphereID2 : sphereID;
 	}
 
 	@Override
 	public void load() {
 
-		RpgInventoryMod.Channel.register(new ClientPacketHandler());
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 		FMLCommonHandler.instance().bus().register(new RPGKeyHandler());
 	}
@@ -95,6 +95,21 @@ public class ClientProxy extends CommonProxy {
 		// Drawing done, unbind our texture
 		// Tell LWJGL that we are done creating our list.
 		GL11.glEndList();
+		
+		
+		
+		Sphere sphereInside = new Sphere();
+		sphereInside.setDrawStyle(GLU.GLU_FILL);
+		sphereInside.setNormals(GLU.GLU_NONE);
+		sphereInside.setOrientation(GLU.GLU_INSIDE);
+
+		sphereInside.setTextureFlag(true);
+		sphereID2 = GL11.glGenLists(1);
+		GL11.glNewList(sphereID2, GL11.GL_COMPILE);
+		GL11.glTranslatef(0.50F, 0.50F, 0.50F);
+
+		sphereInside.draw(0.5F, 12, 24);
+		GL11.glEndList();
 
 	}
 
@@ -120,5 +135,9 @@ public class ClientProxy extends CommonProxy {
 				+ rng.nextFloat(), el.posZ, rng.nextFloat(),
 				rng.nextFloat() + 0.4F, rng.nextFloat());
 		mc.effectRenderer.addEffect(efx);
+	}
+
+	public EntityPlayer getClientPlayer(){
+		return FMLClientHandler.instance().getClientPlayerEntity();
 	}
 }

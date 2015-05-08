@@ -1,9 +1,5 @@
 package addonMasters.items;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -24,15 +20,14 @@ import rpgInventory.RpgInventoryMod;
 import rpgInventory.item.ItemRpgSword;
 import rpgInventory.richUtil.Targetting;
 import addonMasters.RpgMastersAddon;
-import addonMasters.packets.RBServerPacketHandler;
+import addonMasters.packets.PacketCrystal;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class ItemBeastAxe extends ItemRpgSword {
 
 	private List<Class> pettypes = Arrays.asList(new Class[] { EntityPig.class,
 			EntityCow.class, EntitySpider.class, EntityCaveSpider.class, EntityChicken.class });
-	
+
 	private int charmTime;
 	private int particleTime;
 	private Random rng = new Random(1051414);
@@ -89,30 +84,12 @@ public class ItemBeastAxe extends ItemRpgSword {
 				if (charmTime >= 100) {
 					charmTime = 0;
 					float num = rng.nextFloat();
-					if (num > (RpgInventoryMod.donators.contains(player.getDisplayName()) ? 0.50F : 0.80F)) {
+					if (num > (0.80F)) {
 						RpgInventoryMod.proxy.spawnCharmParticle(world, el,rng, true);
-						try {
-							ByteBuf buf = Unpooled.buffer();
-							ByteBufOutputStream out = new ByteBufOutputStream(buf);
-							out.writeInt(RBServerPacketHandler.CRYSTAL);
-							out.writeInt(el.getEntityId());
-							RpgMastersAddon.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
-							out.close();
-						} catch (Exception e) {
-						}
+						RpgMastersAddon.SNW.sendToServer(new PacketCrystal(el.getEntityId()));
 					} else {
-						try{
-							RpgInventoryMod.proxy.spawnCharmParticle(world, el,rng, false);
-							ByteBuf buf = Unpooled.buffer();
-							ByteBufOutputStream out = new ByteBufOutputStream(buf);
-							out.writeInt(RBServerPacketHandler.CRYSTAL);
-							out.writeInt(0);
-							RpgMastersAddon.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
-							out.close();
-						}
-						catch(Throwable e){
-
-						}
+						RpgInventoryMod.proxy.spawnCharmParticle(world, el,rng, false);
+						RpgMastersAddon.SNW.sendToServer(new PacketCrystal(0));
 					}
 				}
 			}

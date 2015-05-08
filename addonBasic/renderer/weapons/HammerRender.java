@@ -15,7 +15,7 @@ public class HammerRender extends RpgItemRenderer {
 	ModelHammer swordmodel;
 	double pulse = 0f;
 
-	private static final ResourceLocation hammer = new ResourceLocation("rpginventorymod:weapons/Hammer.png");
+	private static final ResourceLocation hammer = new ResourceLocation("subaraki:weapons/Hammer.png");
 	
 	public HammerRender() {
 		swordmodel = new ModelHammer();

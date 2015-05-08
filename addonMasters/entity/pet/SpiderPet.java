@@ -24,8 +24,8 @@ import addonMasters.entity.BeastMasterPet;
 public class SpiderPet extends BeastMasterPet {
 
 	private static final ResourceLocation spiderTexture = new ResourceLocation("textures/entity/spider/cave_spider.png");
-	private static final ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/spider.png");
-	private static final ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/spider_saddled.png");
+	private static final ResourceLocation normal = new ResourceLocation("subaraki:mob/spider.png");
+	private static final ResourceLocation saddled = new ResourceLocation("subaraki:mob/spider_saddled.png");
 
 	public SpiderPet(World par1World) {
 		super(par1World, 2, null, null);

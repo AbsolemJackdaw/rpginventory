@@ -24,7 +24,12 @@ import addonDread.items.ItemPaladinSword;
 import addonDread.items.ItemRpgInvArmorPlus;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
-import addonDread.packets.DreadServerPacketHandler;
+import addonDread.packets.PacketNecroSpecial;
+import addonDread.packets.PacketNecroSpecial.HandlerNecroSpecial;
+import addonDread.packets.PacketPalaSpecial;
+import addonDread.packets.PacketPalaSpecial.HandlerPacketPalaSpecial;
+import addonDread.packets.PacketSpawnMinion;
+import addonDread.packets.PacketSpawnMinion.HandlerPacketSpawnMinion;
 import addonDread.richutils.potions.DecomposePotion;
 import addonDread.richutils.potions.MasochismPotion;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -35,8 +40,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -48,7 +53,7 @@ public class RpgDreadAddon {
 
 	@SidedProxy(serverSide = "addonDread.ServerProxy", clientSide = "addonDread.ClientProxy")
 	public static ServerProxy proxy;
-	
+
 	public static String CLASSNECRO = "necro";
 	public static String CLASSNECROSHIELD = "shieldedNecro";
 	public static String CLASSPALADIN = "paladin";
@@ -67,10 +72,10 @@ public class RpgDreadAddon {
 	public static final ToolMaterial NECRO = EnumHelper.addToolMaterial("souls",0, 1024, 5F, 1, 0);
 	public static final ToolMaterial PALADIN = EnumHelper.addToolMaterial("steel",0, 1024, 5F, 0, 0);
 
-	public static FMLEventChannel Channel;
+	public static final SimpleNetworkWrapper SNW = NetworkRegistry.INSTANCE.newSimpleChannel("DreadPacket");
 
 	public static PlusTab tab;
-	
+
 	public static Item allItems[];
 	public static Item
 	/* ====shields==== */
@@ -218,10 +223,8 @@ public class RpgDreadAddon {
 			RPGEventHooks.negativeEffects.add(decomposePotion.id);
 		}
 
-		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("DreadPacket");
 		RpgUtility.registerAbilityWeapon(necroSkull);
 		RpgUtility.registerAbilityWeapon(paladinSword);
-		RpgDreadAddon.Channel.register(new DreadServerPacketHandler());
 
 
 	}
@@ -244,6 +247,10 @@ public class RpgDreadAddon {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
 
+		SNW.registerMessage(HandlerNecroSpecial.class, PacketNecroSpecial.class, 0, Side.SERVER);
+		SNW.registerMessage(HandlerPacketPalaSpecial.class, PacketPalaSpecial.class, 1, Side.SERVER);
+		SNW.registerMessage(HandlerPacketSpawnMinion.class, PacketSpawnMinion.class, 2, Side.SERVER);
+
 		tab = new PlusTab(CreativeTabs.getNextID(), "Necromancer Paladin Addon");
 
 		necroHood = new ItemNecroArmor(NECROARMOR, 4, 0).setUnlocalizedName("necro1");
@@ -256,9 +263,9 @@ public class RpgDreadAddon {
 		palaLeggings = new ItemPaladinArmor(PALADINARMOR, 4, 2).setUnlocalizedName("paladin3");
 		palaBoots = new ItemPaladinArmor(PALADINARMOR, 4, 3).setUnlocalizedName("paladin4");
 
-		necroShield = new ItemRpgInvArmorPlus(1, 250, "necro","rpginventorymod:jewels/NecroShield.png").setUnlocalizedName("shieldNecro");
+		necroShield = new ItemRpgInvArmorPlus(1, 250, "necro","subaraki:jewels/NecroShield.png").setUnlocalizedName("shieldNecro");
 		necroSkull = new ItemNecroSkull(NECRO).setFull3D().setUnlocalizedName("Skull");
-		paladinShield = new ItemRpgInvArmorPlus(1, 450, "pala","rpginventorymod:jewels/PaladinShield.png").setUnlocalizedName("shieldPaladin");
+		paladinShield = new ItemRpgInvArmorPlus(1, 450, "pala","subaraki:jewels/PaladinShield.png").setUnlocalizedName("shieldPaladin");
 		paladinSword = new ItemPaladinSword(0,PALADIN).setFull3D().setUnlocalizedName("paladinPride");
 
 		necroleather = new ItemNecroPaladinMats(0).setUnlocalizedName("n.leather");

@@ -30,7 +30,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import rpgInventory.RpgInventoryMod;
 
 public class EntityMinionS extends EntityTameable implements IRangedAttackMob,
 IMob, IMinion {
@@ -173,8 +172,7 @@ IMob, IMinion {
 	public void Harvest() {
 		this.damageEntity(DamageSource.magic, this.getHealth());
 		if ((player.getHealth() + 2) <= player.getMaxHealth()) {
-			player.heal(RpgInventoryMod.donators.contains(getMaster()
-					.getDisplayName()) ? 2 : 1);
+			player.heal(1);
 		} else {
 			player.setHealth(player.getMaxHealth());
 		}

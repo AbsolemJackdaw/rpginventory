@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import rpgInventory.RpgInventoryMod;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -56,6 +57,7 @@ public class RpgVanillaShields {
 		proxy.registerRenderers();
 
 		MinecraftForge.EVENT_BUS.register(new VanillaEvents());
+		FMLCommonHandler.instance().bus().register(new VanillaEvents());
 	}
 
 	@EventHandler
@@ -63,10 +65,10 @@ public class RpgVanillaShields {
 
 		tab = new ShieldTab(CreativeTabs.getNextID(), "ShieldTab");
 
-		shieldWood = new ItemRpgInvShields(1, 75, "wood","rpginventorymod:jewels/ShieldWood.png").setUnlocalizedName("shieldWood");
-		shieldIron = new ItemRpgInvShields(1, 200, "iron","rpginventorymod:jewels/ShieldIron.png").setUnlocalizedName("shieldIron");
-		shieldGold = new ItemRpgInvShields(1, 250, "gold","rpginventorymod:jewels/ShieldGold.png").setUnlocalizedName("shieldGold");
-		shieldDiamond = new ItemRpgInvShields(1, 500, "diamond","rpginventorymod:jewels/ShieldDiamond.png").setUnlocalizedName("shieldDiamond");
+		shieldWood = new ItemRpgInvShields(1, 75, "wood","subaraki:jewels/ShieldWood.png").setUnlocalizedName("shieldWood");
+		shieldIron = new ItemRpgInvShields(1, 200, "iron","subaraki:jewels/ShieldIron.png").setUnlocalizedName("shieldIron");
+		shieldGold = new ItemRpgInvShields(1, 250, "gold","subaraki:jewels/ShieldGold.png").setUnlocalizedName("shieldGold");
+		shieldDiamond = new ItemRpgInvShields(1, 500, "diamond","subaraki:jewels/ShieldDiamond.png").setUnlocalizedName("shieldDiamond");
 
 		allItems = new Item[] { shieldWood, shieldIron, shieldGold,shieldDiamond };
 

@@ -60,11 +60,11 @@ public class ItemRpgInvArmor extends Item {
 	public ItemRpgInvArmor(int armorType){
 		this(armorType, 0 , -1, null);
 	}
-	
+
 	public ItemRpgInvArmor(int armortype, int maxdamage, String resourcelocation){
 		this(armortype, maxdamage, -1, resourcelocation);
 	}
-	
+
 	/**
 	 * allows items to add custom lines of information to the mouseover
 	 * description
@@ -155,6 +155,10 @@ public class ItemRpgInvArmor extends Item {
 		return null;
 	}
 
+	/**used by shields to determine a chance of blocking 100% of incoming damage*/
+	public int getBlockChance(){
+		return 0;
+	}
 	/**
 	 * Returns the 'max damage' factor array for the armor, each piece of armor
 	 * have a durability factor (that gets multiplied by armor material factor)
@@ -218,4 +222,16 @@ public class ItemRpgInvArmor extends Item {
 
 		return "none";
 	}
+
+//	public boolean isBlocking(ItemStack stack){
+//		return stack != null ? stack.hasTagCompound() ? stack.getTagCompound().getBoolean("blocking") : false : false;
+//	}
+//
+//	public void setBlocking(ItemStack stack, boolean b){
+//		if(stack != null){
+//			NBTTagCompound tag = new NBTTagCompound();
+//			tag.setBoolean("blocking", b);
+//			stack.setTagCompound(tag);
+//		}
+//	}
 }

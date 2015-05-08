@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -109,5 +110,15 @@ public class RpgGui extends GuiContainer {
 
 		this.buttonList.add(new GuiButton(0, posX + 130, posY + 1, 50, 20,"Back"));
 
+	}
+	
+	@Override
+	protected void keyTyped(char c, int i)
+	{
+		super.keyTyped(c, i);
+
+		if(i == Keyboard.KEY_ESCAPE){
+			mc.thePlayer.closeScreen();
+		}
 	}
 }

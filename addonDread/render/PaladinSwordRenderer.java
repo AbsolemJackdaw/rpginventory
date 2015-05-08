@@ -13,7 +13,7 @@ public class PaladinSwordRenderer extends RpgItemRenderer {
 
 	GrandSword swordmodel;
 	
-	private static final ResourceLocation loc = new ResourceLocation("rpginventorymod:weapons/paladinClaymore.png");
+	private static final ResourceLocation loc = new ResourceLocation("subaraki:weapons/paladinClaymore.png");
 
 	public PaladinSwordRenderer() {
 		swordmodel = new GrandSword();

@@ -14,7 +14,7 @@ public class ItemAddonShields extends ItemRpgInvArmor{
 	private ModelShield ms= new ModelShield();
 	private ModelMageBook bm = new ModelMageBook();
 
-	public static final ResourceLocation mantle = new ResourceLocation("rpginventorymod:jewels/talisman.png");
+	public static final ResourceLocation mantle = new ResourceLocation("subaraki:jewels/talisman.png");
 	
 	public ItemAddonShields(int par4, int maxDamage, String name,
 			String resourcelocation) {
@@ -72,5 +72,19 @@ public class ItemAddonShields extends ItemRpgInvArmor{
 			return RpgBaseAddon.CLASSALCHEMISTSHIELD;
 		}
 		return super.shieldClass();
+	}
+	
+	@Override
+	public int getBlockChance() {
+		if(this.equals(RpgBaseAddon.berserkerShield)) {
+			return 43;
+		}
+		if(this.equals(RpgBaseAddon.archerShield)) {
+			return 75;
+		}
+		if(this.equals(RpgBaseAddon.talisman)) {
+			return 50;
+		}
+		return super.getBlockChance();
 	}
 }

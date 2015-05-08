@@ -17,8 +17,8 @@ public class StaffRenderer extends RpgItemRenderer {
 	public int step;
 	protected float rotate = 0;
 
-	protected static final ResourceLocation texture = new ResourceLocation("rpginventorymod:weapons/ElementalStaff.png");
-	protected static final ResourceLocation staff = new ResourceLocation("rpginventorymod:weapons/Staff.png");
+	protected static final ResourceLocation texture = new ResourceLocation("subaraki:weapons/ElementalStaff.png");
+	protected static final ResourceLocation staff = new ResourceLocation("subaraki:weapons/Staff.png");
 
 	protected static final Minecraft mc = Minecraft.getMinecraft();
 

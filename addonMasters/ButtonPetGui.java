@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import rpgInventory.gui.rpginv.PacketNotify;
 import rpgInventory.gui.rpginv.PlayerRpgContainer;
 import rpgInventory.gui.rpginv.RpgGui;
 import cpw.mods.fml.relauncher.Side;
@@ -34,15 +35,20 @@ public class ButtonPetGui extends GuiButton {
 	public boolean mousePressed(Minecraft par1Minecraft, int par2, int par3) {
 
 		if ((par2 >= this.xPosition) && (par2 <= (this.xPosition + this.width))) {
-			if ((par3 >= this.yPosition)
-					&& (par3 <= (this.yPosition + this.height))) {
+			if ((par3 >= this.yPosition)&& (par3 <= (this.yPosition + this.height))) {
+
 				EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 				PlayerRpgContainer container = ((PlayerRpgContainer) ((RpgGui) gui).inventorySlots);
-				// todo send packet
-				if (container.inventory.getCrystal() != null) {
-					if (container.inventory.getCrystal().getItemDamage() > 0) {
-						RpgMastersAddon.proxy.openGUI(p, container.inventory);
+
+				if(container.inventory.getCrystal() != null)
+					if(container.inventory.getCrystal().getTagCompound() == null){
+						Minecraft.getMinecraft().thePlayer.closeScreen();
+						RpgMastersAddon.SNW.sendToServer(new PacketNotify("You need to summon your pet at least once !"));
 					}
+
+				if (container.inventory.getCrystal() != null && container.inventory.getCrystal().getTagCompound() != null) {
+					if (container.inventory.getCrystal().getItemDamage() > 0) 
+						RpgMastersAddon.proxy.openGUI(p, container.inventory);
 				}
 
 				return false;

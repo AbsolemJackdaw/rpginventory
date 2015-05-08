@@ -20,15 +20,22 @@ import addonBasic.items.weapons.ItemArcherBow;
 import addonBasic.items.weapons.ItemHammer;
 import addonBasic.items.weapons.ItemLunarStaff;
 import addonBasic.items.weapons.ItemSoulSphere;
-import addonBasic.packets.ServerPacketHandler;
+import addonBasic.packets.PacketArcher;
+import addonBasic.packets.PacketArcher.HandlerPacketArcher;
+import addonBasic.packets.PacketBerserker;
+import addonBasic.packets.PacketBerserker.HandlerPacketBerserker;
+import addonBasic.packets.PacketMageHeal;
+import addonBasic.packets.PacketMageHeal.HandlerPacketMageHeal;
+import addonBasic.packets.PacketMageVortex;
+import addonBasic.packets.PacketMageVortex.HandlerPacketMageVortex;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -66,9 +73,6 @@ public class RpgBaseAddon {
 	public static final String id = "RpgBase";
 	public static final String name = "Berserker, alchemist and Archer Patch";
 
-	public static FMLEventChannel Channel;
-
-
 	public static CreativeTabs tab;
 	public Item[] allItems;
 
@@ -95,15 +99,15 @@ public class RpgBaseAddon {
 	ToolMaterial lunarstaff = EnumHelper.addToolMaterial("lunarstaff", 0, 750, 0F, 0, 0);
 	ToolMaterial rageBreaker = EnumHelper.addToolMaterial("RageBreaker", 0, 1024, 4F, 2, 0);
 
+	public static final SimpleNetworkWrapper SNW = NetworkRegistry.INSTANCE.newSimpleChannel("BaseAddon");
+
 	@SidedProxy(serverSide = "addonBasic.ServerProxy", clientSide = "addonBasic.ClientProxy")
 	public static ServerProxy proxy;
 
 	@EventHandler
 	public void load(FMLInitializationEvent evt) {
 
-		Channel = NetworkRegistry.INSTANCE.newEventDrivenChannel("BaseAddon");
 		proxy.registerRenderInformation();
-		RpgBaseAddon.Channel.register(new ServerPacketHandler());
 
 		// SKINS
 		GameRegistry.addRecipe(new ItemStack(animalskin, 1), new Object[] {
@@ -172,11 +176,16 @@ public class RpgBaseAddon {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
 
+		SNW.registerMessage(HandlerPacketArcher.class, PacketArcher.class, 0, Side.SERVER);
+		SNW.registerMessage(HandlerPacketMageVortex.class, PacketMageVortex.class, 1, Side.SERVER);
+		SNW.registerMessage(HandlerPacketBerserker.class, PacketBerserker.class, 2, Side.SERVER);
+		SNW.registerMessage(HandlerPacketMageHeal.class, PacketMageHeal.class, 3, Side.SERVER);
+		
 		tab = new AddonTab(CreativeTabs.getNextID(),"alchemist Archer Berserker Addon");
 
-		archerShield = new ItemAddonShields(1, 200, "","rpginventorymod:jewels/Shield1.png").setUnlocalizedName("shieldArcher").setCreativeTab(tab);
-		berserkerShield = new ItemAddonShields(1, 450, "","rpginventorymod:jewels/IronThorn.png").setUnlocalizedName("shieldBerserker").setCreativeTab(tab);
-		talisman = new ItemAddonShields(1, 500, "","rpginventorymod:jewels/alchemistShield.png").setUnlocalizedName("shieldalchemist").setCreativeTab(tab);
+		archerShield = new ItemAddonShields(1, 200, "","subaraki:jewels/Shield1.png").setUnlocalizedName("shieldArcher").setCreativeTab(tab);
+		berserkerShield = new ItemAddonShields(1, 450, "","subaraki:jewels/IronThorn.png").setUnlocalizedName("shieldBerserker").setCreativeTab(tab);
+		talisman = new ItemAddonShields(1, 500, "","subaraki:jewels/alchemistShield.png").setUnlocalizedName("shieldalchemist").setCreativeTab(tab);
 
 		alchemisthood = new ItemMageArmor(alchemist, 4, 0).setUnlocalizedName("mage1").setCreativeTab(tab);
 		alchemistgown = new ItemMageArmor(alchemist, 4, 1).setUnlocalizedName("mage2").setCreativeTab(tab);

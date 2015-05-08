@@ -1,5 +1,7 @@
 package addonBasic.items.weapons;
 
+import java.util.Random;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +15,7 @@ import net.minecraft.world.World;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
 import addonBasic.RpgBaseAddon;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -21,7 +24,8 @@ public class ItemArcherBow extends Item {
 	public static final String[] ItemNameArray = new String[] { "elmBow",
 		"elmBow2", "elmBow3", "elmBow4" };
 
-	public int usingItem = 0;
+	public int usingItem = 72000;
+	
 	@SideOnly(Side.CLIENT)
 	private IIcon[] IconArray;
 
@@ -107,6 +111,7 @@ public class ItemArcherBow extends Item {
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,EntityPlayer player) {
 
 		player.setItemInUse(par1ItemStack,this.getMaxItemUseDuration(par1ItemStack));
+		
 		return par1ItemStack;
 	}
 
@@ -117,15 +122,17 @@ public class ItemArcherBow extends Item {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World par2World,EntityPlayer player, int par4) {
 		super.onPlayerStoppedUsing(stack, par2World, player, par4);
-		usingItem = 0;
+		
+		usingItem = 72000;
+		
 		PlayerRpgInventory inv = PlayerRpgInventory.get(player);
 		ItemStack shield = inv.getJewelInSlot(1);
 
 		int j = this.getMaxItemUseDuration(stack) - par4;
 
-		if(RpgInventoryMod.playerClass.equals(RpgBaseAddon.CLASSARCHER)) {
-			boolean flag = ((shield != null) && (shield.getItem() == RpgBaseAddon.archerShield))
-					|| player.capabilities.isCreativeMode;
+		if(RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSARCHER)) {
+			boolean flag = ((shield != null) && (shield.getItem() == RpgBaseAddon.archerShield))|| player.capabilities.isCreativeMode;
+			
 			if (player.inventory.hasItem(Items.arrow) || flag) {
 
 				float f = j / 20.0F;
@@ -136,7 +143,8 @@ public class ItemArcherBow extends Item {
 				}
 
 				EntityArrow entityarrow = new EntityArrow(par2World,player, f * 2.0F);
-				boolean crit = RpgInventoryMod.donators.contains(player.getCommandSenderName()) ? true : false;
+				boolean crit = new Random().nextInt(10) == 0 ? true : false;
+				
 				entityarrow.setIsCritical(crit);
 
 				if (f >= 1.0F && f <1.5F) {
@@ -148,8 +156,8 @@ public class ItemArcherBow extends Item {
 				}
 
 				entityarrow.setDamage(entityarrow.getDamage()+ (flag ? 2D : 1D));
-				entityarrow.setKnockbackStrength(RpgInventoryMod.donators.contains(player.getCommandSenderName()) ? 2 : 1);
-				entityarrow.setFire(RpgInventoryMod.donators.contains(player.getCommandSenderName()) ? 10 : 5);
+				entityarrow.setKnockbackStrength(1);
+				entityarrow.setFire(5);
 
 				if (flag) {
 					entityarrow.canBePickedUp = 2;
@@ -167,8 +175,12 @@ public class ItemArcherBow extends Item {
 
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
+		
 		player.setItemInUse(stack, count);
-		usingItem++;
+		
+		usingItem = count;
+		FMLLog.getLogger().info(count);
+		
 	}
 
 	@Override

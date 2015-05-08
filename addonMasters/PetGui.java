@@ -1,9 +1,5 @@
 package addonMasters;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,14 +21,14 @@ import org.lwjgl.opengl.GL11;
 
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.packets.ServerPacketHandler;
+import rpgInventory.handlers.packets.PacketOpenRpgInventory;
 import addonMasters.entity.BeastMasterPet;
 import addonMasters.entity.IPet;
 import addonMasters.entity.pet.BoarPet;
 import addonMasters.entity.pet.BullPet;
+import addonMasters.entity.pet.ChickenPet;
 import addonMasters.entity.pet.SpiderPet;
-import addonMasters.packets.RBServerPacketHandler;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+import addonMasters.packets.PacketPetGui;
 
 public class PetGui extends GuiScreen {
 
@@ -85,15 +81,7 @@ public class PetGui extends GuiScreen {
 		}
 		if (guibutton.id == BACK_BUTTON) {
 			this.mc.thePlayer.closeScreen();
-
-			try {
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-				out.writeInt(ServerPacketHandler.OPENRPGINV);
-				RpgInventoryMod.Channel.sendToServer(new FMLProxyPacket(buf,RpgInventoryMod.channelName));
-				out.close();
-			} catch (Exception e) {
-			}
+			RpgInventoryMod.SNW.sendToServer(new PacketOpenRpgInventory());
 		}
 		if (guibutton.id == IMBUE_BUTTON) {
 			// levelInfo = "Imbue to next level : " + (PetLevel/2) +
@@ -117,11 +105,7 @@ public class PetGui extends GuiScreen {
 						+ playerLevel;
 
 				PetLevel += 1;
-				currentHP = totalHP = (short) (petType == 1 ? 15 + MathHelper
-						.floor_float((PetLevel) / 2.5F)
-						: petType == 2 ? 18 + MathHelper
-								.floor_float((PetLevel) / 2.2F)
-								: 20 + MathHelper.floor_float((PetLevel) / 2F));
+				currentHP = totalHP = (short) (petType == 1 ? 15 + MathHelper.floor_float((PetLevel) / 2.5F): petType == 2 ? 18 + MathHelper.floor_float((PetLevel) / 2.2F): 20 + MathHelper.floor_float((PetLevel) / 2F));
 				petLevelsAdded++;
 				playerLevelsLost += (Math.floor(PetLevel) / 2.0F) + 1.0F;
 			}
@@ -206,9 +190,9 @@ public class PetGui extends GuiScreen {
 	@Override
 	public void initGui() {
 		petCrystal = this.inv.getCrystal();
-		if (IPet.playersWithActivePets.containsKey(p.getCommandSenderName())) {
+		if (IPet.playersWithActivePets.containsKey(p.getDisplayName())) {
 			thePet = (BeastMasterPet) IPet.playersWithActivePets.get(
-					p.getCommandSenderName()).getPet();
+					p.getDisplayName()).getPet();
 			if (thePet != null) {
 				// make sure crystal is updated with the mob info
 				petCrystal = thePet.writePetToItemStack();
@@ -288,8 +272,7 @@ public class PetGui extends GuiScreen {
 			saddle = PetName + " needs lv50 to be ridden.";
 		}
 
-		textfield = new GuiTextField(fontRendererObj, posX + 70, posY + 14,
-				100, 20);
+		textfield = new GuiTextField(fontRendererObj, posX + 70, posY + 14,100, 20);
 		textfield.setText(PetName);
 		textfield.setMaxStringLength(32);
 		playerLevel = (short) Minecraft.getMinecraft().thePlayer.experienceLevel;
@@ -297,13 +280,10 @@ public class PetGui extends GuiScreen {
 		levelInfo = "Imbue to next level : " + ((PetLevel / 2) + 1)
 				+ " Player Levels";
 
-		clazz = petType == 1 ? BoarPet.class : petType == 2 ? SpiderPet.class
-				: BullPet.class;
-		ren = (RenderLiving) RenderManager.instance
-				.getEntityClassRenderObject(clazz);
+		clazz = petType == 1 ? BoarPet.class : petType == 2 ? SpiderPet.class: petType == 3 ? ChickenPet.class : BullPet.class;
+		ren = (RenderLiving) RenderManager.instance.getEntityClassRenderObject(clazz);
 		try {
-			fake = (EntityLiving) clazz.getConstructor(World.class)
-					.newInstance(p.worldObj);
+			fake = (EntityLiving) clazz.getConstructor(World.class).newInstance(p.worldObj);
 		} catch (Throwable ex) {
 			Logger.getLogger(PetGui.class.getName())
 			.log(Level.SEVERE, null, ex);
@@ -330,27 +310,9 @@ public class PetGui extends GuiScreen {
 
 	public void sendChanges() {
 
+		RpgMastersAddon.SNW.sendToServer(new PacketPetGui(PetName, PetLevel, currentHP, totalHP, petAtk, playerLevelsLost));
 
-		try {
-			try {
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-				out.writeInt(RBServerPacketHandler.PETGUI);
-				out.writeUTF(new String(PetName.getBytes("UTF-8"), "UTF-8"));
-				out.writeShort(PetLevel);
-				out.writeShort(currentHP);
-				out.writeShort(totalHP);
-				out.writeShort(petAtk);
-				out.writeShort(playerLevelsLost);
-				out.writeShort(petLevelsAdded);
-				out.writeShort(petcandyConsumed);
-
-				RpgMastersAddon.Channel.sendToServer(new FMLProxyPacket(buf,"R_BChannel"));
-				out.close();
-			} catch (Exception e) {
-			}
-		} catch (Throwable ex) {
-			ex.printStackTrace();
-		}
+		//				out.writeShort(petLevelsAdded);
+		//				out.writeShort(petcandyConsumed);
 	}
 }

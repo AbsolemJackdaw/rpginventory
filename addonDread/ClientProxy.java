@@ -10,7 +10,6 @@ import addonDread.models.ModelNecroArmor;
 import addonDread.models.ModelPaladinArmor;
 import addonDread.models.NecroShield;
 import addonDread.models.PalaShield;
-import addonDread.packets.DreadClientPacketHandler;
 import addonDread.render.NecroRenderer;
 import addonDread.render.NecroShieldRenderer;
 import addonDread.render.PalaRenderer;
@@ -48,8 +47,6 @@ public class ClientProxy extends ServerProxy {
 	@Override
 	public void registerRenderInformation() {
 
-		RpgDreadAddon.Channel.register(new DreadClientPacketHandler());
-		
 		SpecialAbility ability = new SpecialAbility();
 		RpgUtility.registerSpecialAbility(RpgDreadAddon.necroSkull, ability);
 		RpgUtility.registerSpecialAbility(RpgDreadAddon.paladinSword, ability);
@@ -58,9 +55,9 @@ public class ClientProxy extends ServerProxy {
 			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.necroSkull,new NecroRenderer());
 			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.paladinSword,new PaladinSwordRenderer());
 
-			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.necroShield,new NecroShieldRenderer(new NecroShield(),"rpginventorymod:jewels/NecroShield.png"));
+			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.necroShield,new NecroShieldRenderer(new NecroShield(),"subaraki:jewels/NecroShield.png"));
 
-			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.paladinShield,new PalaRenderer(new PalaShield(),"rpginventorymod:jewels/PaladinShield.png"));
+			MinecraftForgeClient.registerItemRenderer(RpgDreadAddon.paladinShield,new PalaRenderer(new PalaShield(),"subaraki:jewels/PaladinShield.png"));
 		}
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinionS.class,new RenderMinionS());

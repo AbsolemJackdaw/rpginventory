@@ -73,7 +73,8 @@ public class ItemPetWhistle extends Item {
 							case 2:
 								SpiderPet spider = new SpiderPet(world, player,	stack);
 								spider.setPosition(player.posX,player.posY + 0.5F, player.posZ);
-								spider.setOwner(player.getDisplayName());
+//								spider.setOwner(player.getDisplayName());
+								spider.func_152115_b(player.getDisplayName());
 								spider.setTamed(true);
 								IPet.playersWithActivePets.put(player.getDisplayName(), new PetID(spider.dimension, spider.getEntityId()));
 								
@@ -111,7 +112,7 @@ public class ItemPetWhistle extends Item {
 							case 4:
 								ChickenPet rooster = new ChickenPet(world, player,stack);
 								rooster.setPosition(player.posX,player.posY + 0.5F, player.posZ);
-								rooster.setOwner(player.getDisplayName());
+								rooster.func_152115_b(player.getDisplayName());
 								rooster.setTamed(true);
 								IPet.playersWithActivePets.put(player.getDisplayName(), new PetID(
 										rooster.dimension, rooster.getEntityId()));

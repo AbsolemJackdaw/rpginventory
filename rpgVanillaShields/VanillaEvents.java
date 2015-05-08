@@ -47,25 +47,17 @@ public class VanillaEvents {
 					.get(player);
 
 			ItemStack shield = inv.getShield();
-			if ((shield != null)
-					&& (shield.getItem() instanceof ItemRpgInvShields)) {
+			if ((shield != null)&& (shield.getItem() instanceof ItemRpgInvShields)) {
 
-				if (RpgInventoryMod.playerClass
-						.contains(RpgVanillaShields.WOODENSHIELD)) {
+				if (RpgInventoryMod.playerClass.contains(RpgVanillaShields.WOODENSHIELD)) {
 					vanillaReduction += 0.27f;
-				} else if (RpgInventoryMod.playerClass
-						.contains(RpgVanillaShields.IRONSHIELD)) {
+				} else if (RpgInventoryMod.playerClass.contains(RpgVanillaShields.IRONSHIELD)) {
 					vanillaReduction += 0.4f;
-				} else if (RpgInventoryMod.playerClass
-						.contains(RpgVanillaShields.GOLDENSHIELD)) {
+				} else if (RpgInventoryMod.playerClass.contains(RpgVanillaShields.GOLDENSHIELD)) {
 					vanillaReduction += 0.7f;
-				} else if (RpgInventoryMod.playerClass
-						.contains(RpgVanillaShields.DIAMONDSHIELD)) {
+				} else if (RpgInventoryMod.playerClass.contains(RpgVanillaShields.DIAMONDSHIELD)) {
 					vanillaReduction += 1.50f;
 				}
-				vanillaReduction += RpgInventoryMod.donators
-						.contains(player.getCommandSenderName()) ? 0.20f
-								: 0;
 				if (vanillaReduction > 1f) {
 					damageReduction = 1f + (vanillaReduction - 1f);
 					vanillaReduction = 0;

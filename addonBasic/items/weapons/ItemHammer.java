@@ -24,8 +24,10 @@ public class ItemHammer extends ItemRpgSword {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,EntityPlayer player) {
-		PlayerRpgInventory.get(player);
 
+		if(PlayerRpgInventory.get(player).isBlocking())
+			return par1ItemStack;
+		
 		if (RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSBERSERKER)) {
 			if (RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSBERSERKERSHIELD)) {
 				if ((player.getFoodStats().getFoodLevel() < 6)|| (player.getHealth() < 6)) {

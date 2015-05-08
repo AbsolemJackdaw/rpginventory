@@ -1,9 +1,6 @@
 package addonMasters.packets;
 
-import io.netty.buffer.ByteBufInputStream;
-
-import java.io.IOException;
-
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntitySpider;
@@ -14,19 +11,42 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import addonMasters.RpgMastersAddon;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketCrystal {
+public class PacketCrystal implements IMessage{
 
-	public PacketCrystal(ByteBufInputStream dis, EntityPlayer p) {
+	public PacketCrystal() {
+	}
 
-		int entityid;
-		try {
-			entityid = dis.readInt();
+	public int entityID;
+	
+	public PacketCrystal(int entityID) {
+		this.entityID = entityID;
+	}
 
-			if (entityid == 0) {
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		entityID = buf.readInt();
+	}
+
+	@Override
+	public void toBytes(ByteBuf buf) {
+		buf.writeInt(entityID);
+	}
+
+	public static class HandlerPacketCrystal implements IMessageHandler<PacketCrystal, IMessage>{
+
+		@Override
+		public IMessage onMessage(PacketCrystal message, MessageContext ctx) {
+
+			EntityPlayer p = ctx.getServerHandler().playerEntity;
+
+			if (message.entityID == 0) {
 				p.attackEntityFrom(DamageSource.magic, 1);
 			} else {
-				Entity e = p.worldObj.getEntityByID(entityid);
+				Entity e = p.worldObj.getEntityByID(message.entityID);
 				if (e != null) {
 					if (e instanceof EntityPig) {
 						ItemStack is = new ItemStack(RpgMastersAddon.crystal, 1, 1);
@@ -48,8 +68,7 @@ public class PacketCrystal {
 					}
 				}
 			}
-		} catch (IOException e1) {
-			e1.printStackTrace();
+			return null;
 		}
 	}
 }

@@ -30,13 +30,12 @@ public class ItemSoulSphere extends ItemRpgWeapon {
 	}
 
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player,
-			Entity entity) {
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player,Entity entity) {
 
 		if(entity instanceof EntityPlayer){
 			EntityPlayer other = (EntityPlayer)entity;
 			other.addPotionEffect(new PotionEffect(Potion.resistance.id, 800, 1));
-			stack.damageItem(10, player);
+			stack.damageItem(2, player);
 			return true;
 		}
 
@@ -48,7 +47,8 @@ public class ItemSoulSphere extends ItemRpgWeapon {
 		par1ItemStack.damageItem(1, par2EntityLiving);
 
 		EntityPlayer player = (EntityPlayer) par3EntityLiving;
-		if(RpgInventoryMod.playerClass.equals(RpgBaseAddon.CLASSALCHEMIST)){
+		
+		if(RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSALCHEMIST)){
 
 			int k = Item.itemRand.nextInt(5);
 			switch (k) {
@@ -72,7 +72,7 @@ public class ItemSoulSphere extends ItemRpgWeapon {
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,EntityPlayer par3EntityPlayer) {
 
-		if(RpgInventoryMod.playerClass.equals(RpgBaseAddon.CLASSALCHEMIST)){
+		if(RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSALCHEMIST)){
 
 			if (par3EntityPlayer.inventory.hasItem(Items.blaze_powder)) {
 
@@ -88,7 +88,7 @@ public class ItemSoulSphere extends ItemRpgWeapon {
 				}
 				par1ItemStack.damageItem(1, par3EntityPlayer);
 
-				if(!par3EntityPlayer.capabilities.isCreativeMode || !RpgInventoryMod.donators.contains(par3EntityPlayer.getCommandSenderName()))
+				if(!par3EntityPlayer.capabilities.isCreativeMode)
 					par3EntityPlayer.inventory.consumeInventoryItem(Items.blaze_powder);
 			}
 		}
@@ -98,7 +98,7 @@ public class ItemSoulSphere extends ItemRpgWeapon {
 	@Override
 	public boolean onItemUse(ItemStack stack,EntityPlayer player, World world, int x, int y,int z, int par7, float par8, float par9, float par10) {
 
-		if(RpgInventoryMod.playerClass.equals(RpgBaseAddon.CLASSALCHEMIST)){
+		if(RpgInventoryMod.playerClass.contains(RpgBaseAddon.CLASSALCHEMIST)){
 			Block b = world.getBlock(x, y, z);
 
 			if(b instanceof BlockOre){
@@ -112,7 +112,7 @@ public class ItemSoulSphere extends ItemRpgWeapon {
 					world.setBlock(x, y, z, Blocks.gold_ore);
 
 				world.markBlockForUpdate(x, y, z);
-				stack.damageItem(7, player);
+				stack.damageItem(5, player);
 			}
 		}
 

@@ -16,7 +16,7 @@ public class CommonProxy {
 		player.inventory.consumeInventoryItem(itemID);
 	}
 
-	public int getSphereID() {
+	public int getSphereID(boolean isFirstperson) {
 		return 0;
 	}
 
@@ -43,5 +43,9 @@ public class CommonProxy {
 
 	public void spawnParticle(World world, EntityLivingBase el, Random rng) {
 
+	}
+	
+	public EntityPlayer getClientPlayer(){
+		return null;
 	}
 }

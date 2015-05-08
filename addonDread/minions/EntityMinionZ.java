@@ -27,7 +27,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import rpgInventory.RpgInventoryMod;
 
 public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 
@@ -58,7 +57,7 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		this.tasks.addTask(2, this.aiSit);
-		this.player = this.worldObj.getPlayerEntityByName(this.getOwnerName());
+		this.player = this.worldObj.getPlayerEntityByName(this.func_152113_b()); //getOwnerName
 		this.setSize(0.7F, 1.7F);
 
 	}
@@ -159,8 +158,7 @@ public class EntityMinionZ extends EntityTameable implements IMob, IMinion {
 	public void Harvest() {
 		this.damageEntity(DamageSource.magic, this.getHealth());
 		if ((player.getHealth() + 2) <= player.getMaxHealth()) {
-			player.heal(RpgInventoryMod.donators.contains(getMaster()
-					.getDisplayName()) ? 2 : 1);
+			player.heal(1);
 		} else {
 			player.setHealth(player.getMaxHealth());
 		}

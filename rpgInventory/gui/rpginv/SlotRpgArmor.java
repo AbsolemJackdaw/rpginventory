@@ -3,10 +3,10 @@ package rpgInventory.gui.rpginv;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.WorldServer;
 import rpgInventory.RpgInventoryMod;
-import rpgInventory.handlers.packets.PacketHelper;
+import rpgInventory.handlers.packets.PacketSyncOtherInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
-import cpw.mods.fml.common.FMLCommonHandler;
 
 class SlotRpgArmor extends Slot {
 
@@ -89,9 +89,12 @@ class SlotRpgArmor extends Slot {
 
 	@Override
 	public void onSlotChanged() {
-		if(FMLCommonHandler.instance().getEffectiveSide().isServer())
-			PacketHelper.sendDataToPlayersAround(player);
-		
+
+		if(!player.worldObj.isRemote){
+			((WorldServer)player.worldObj).getEntityTracker().func_151248_b(
+					player, RpgInventoryMod.SNW.getPacketFrom(new PacketSyncOtherInventory(player)));
+		}
+
 		super.onSlotChanged();
 	}
 

@@ -1,6 +1,5 @@
 package rpgInventory.handlers;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,8 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import rpgInventory.RpgInventoryMod;
+import rpgInventory.config.RpgConfig;
 import rpgInventory.gui.rpginv.PlayerRpgInventory;
-import rpgInventory.handlers.packets.PacketHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 
@@ -42,21 +41,6 @@ public class ServerTickHandler{
 
 	private void sendInventoryToAllAround(){
 
-		List<EntityPlayer> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
-
-		for (EntityPlayer player : players) {
-
-			if (countdown > 0) {
-				break;
-			}
-
-			PacketHelper.sendDataToPlayersAround(player);
-		}
-
-		countdown--;
-		if (countdown < 0) {
-			countdown = 20;
-		}
 	}
 
 
@@ -79,7 +63,7 @@ public class ServerTickHandler{
 			if (RPGEventHooks.DiamondTick.get(username) > 0) {
 				RPGEventHooks.DiamondTick.put(username,RPGEventHooks.DiamondTick.get(username) - 1);
 			} else {
-				EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
+				EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(username);//getPlayerForUsername
 				if (player == null) {
 					RPGEventHooks.DiamondTick.remove(username);
 					continue;
@@ -91,7 +75,7 @@ public class ServerTickHandler{
 				}
 
 				int delay;
-				delay = RpgInventoryMod.donators.contains(player.getCommandSenderName()) ? 65 : 75;
+				delay = 75;
 
 				if ((rpginv.getNecklace() != null)&& rpginv.getNecklace().getItem().equals(RpgInventoryMod.neckdia)) {
 					delay -= 10;
@@ -105,7 +89,7 @@ public class ServerTickHandler{
 				if ((rpginv.getRing2() != null)&& rpginv.getRing2().getItem().equals(RpgInventoryMod.ringdia)) {
 					delay -= 10;
 				}
-				RPGEventHooks.DiamondTick.put(player.getCommandSenderName(), delay);
+				RPGEventHooks.DiamondTick.put(player.getDisplayName(), delay);
 				if (player.getHealth() < player.getMaxHealth()) {
 					player.heal(1);
 				}
@@ -119,7 +103,7 @@ public class ServerTickHandler{
 			if (RPGEventHooks.LapisTick.get(username) > 0) {
 				RPGEventHooks.LapisTick.put(username,RPGEventHooks.LapisTick.get(username) - 1);
 			} else {
-				EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
+				EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(username);//getPlayerForUsername
 				if (player == null) {
 					RPGEventHooks.LapisTick.remove(username);
 					continue;
@@ -143,18 +127,19 @@ public class ServerTickHandler{
 					heal++;
 				}
 
-				if (player.getCurrentEquippedItem() != null) {
-					ItemStack stack = player.getCurrentEquippedItem();
-					countDownLapis--;
-					if (stack.isItemDamaged() && (stack.stackSize == 1)&& (stack.getMaxStackSize() == 1)) {
-						if (stack.getItemDamage() <= stack.getMaxDamage()) {
-							if (countDownLapis <= 0) {
-								stack.setItemDamage(stack.getItemDamage()- heal);
-								countDownLapis = RpgInventoryMod.donators.contains(player.getCommandSenderName()) ? 15 * 20: lapisTimer;
+				if(RpgConfig.instance.lapisWeaponRepair)
+					if (player.getCurrentEquippedItem() != null) {
+						ItemStack stack = player.getCurrentEquippedItem();
+						countDownLapis--;
+						if (stack.isItemDamaged() && (stack.stackSize == 1)&& (stack.getMaxStackSize() == 1)) {
+							if (stack.getItemDamage() <= stack.getMaxDamage()) {
+								if (countDownLapis <= 0) {
+									stack.setItemDamage(stack.getItemDamage()- heal);
+									countDownLapis = lapisTimer;
+								}
 							}
 						}
 					}
-				}
 			}
 		}
 	}

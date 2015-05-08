@@ -22,7 +22,7 @@ public class SoulSphereRender extends RpgItemRenderer {
 	Random random = new Random();
 	float turn = 0;
 
-	private static final ResourceLocation texture = new ResourceLocation("rpginventorymod:weapons/SoulSphere.png");
+	private static final ResourceLocation texture = new ResourceLocation("subaraki:weapons/SoulSphere.png");
 	public SoulSphereRender() {
 		swordmodel = new ModelSoulSphere();
 		this.hoverStart = (float) (Math.random() * Math.PI * 2.0D);

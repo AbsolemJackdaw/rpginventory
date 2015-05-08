@@ -9,9 +9,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import rpgInventory.RpgInventoryMod;
 import rpgInventory.handlers.packets.PacketHelper;
+import rpgInventory.handlers.packets.PacketSyncOtherInventory;
 import rpgInventory.item.armor.ItemRpgInvArmor;
 import cpw.mods.fml.common.FMLLog;
 
@@ -20,6 +22,7 @@ IExtendedEntityProperties {
 
 	public ItemStack[] armorSlots = new ItemStack[7];
 	public EntityPlayer player;
+	private boolean isBlocking;
 
 	public final static String EXT_PROP_NAME = "RpgInventory";
 
@@ -287,6 +290,9 @@ IExtendedEntityProperties {
 	}
 
 	public void readFromNBT(NBTTagCompound tagcompound) {
+
+		setBlocking(tagcompound.getBoolean("isBlocking"));
+
 		NBTTagList nbttaglist = tagcompound.getTagList(tagName, 10);
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
@@ -310,6 +316,8 @@ IExtendedEntityProperties {
 	}
 
 	public void writeToNBT(NBTTagCompound tagcompound) {
+
+		tagcompound.setBoolean("isBlocking", isBlocking());
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < this.getSizeInventory(); ++i) {
@@ -328,5 +336,15 @@ IExtendedEntityProperties {
 		for(int i = 0 ; i < 7; i ++){
 			armorSlots[i] = playerRpgInventory.armorSlots[i];
 		}
+	}
+
+	public boolean isBlocking(){
+		return isBlocking;
+	}
+
+	public void setBlocking(boolean b){
+		isBlocking = b;
+		if(!player.worldObj.isRemote)
+			((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, RpgInventoryMod.SNW.getPacketFrom(new PacketSyncOtherInventory(player)));
 	}
 }

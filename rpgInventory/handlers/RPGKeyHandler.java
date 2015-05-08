@@ -1,9 +1,5 @@
 package rpgInventory.handlers;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
@@ -21,13 +17,12 @@ import net.minecraft.util.Vec3;
 import org.lwjgl.input.Keyboard;
 
 import rpgInventory.RpgInventoryMod;
-import rpgInventory.handlers.packets.ServerPacketHandler;
+import rpgInventory.handlers.packets.PacketOpenRpgInventory;
 import rpgInventory.utils.ISpecialAbility;
 import rpgInventory.utils.RpgUtility;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -115,22 +110,9 @@ public class RPGKeyHandler implements ISpecialAbility{
 				}
 			}
 		} 
+		if(keyInventory.isPressed())
+			RpgInventoryMod.SNW.sendToServer(new PacketOpenRpgInventory());
 
-		try {
-			if (keyInventory.isPressed()) {
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-				out.writeInt(ServerPacketHandler.OPENRPGINV);
-
-				//temp fix for packet. packet reads out twice. once 1 and then 0. writing this will make it print out 1 twice, solving the problem
-				out.writeInt(ServerPacketHandler.OPENRPGINV);
-
-				out.close();
-				RpgInventoryMod.Channel.sendToServer(new FMLProxyPacket(buf,"RpgInv"));
-			}
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override

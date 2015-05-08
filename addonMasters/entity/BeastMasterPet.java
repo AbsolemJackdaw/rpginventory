@@ -112,7 +112,7 @@ public abstract class BeastMasterPet extends EntityTameable implements IPet {
 				}
 			} catch (Throwable ex) {
 			}
-			this.setOwner(owner.getDisplayName());
+			this.func_152115_b(owner.getDisplayName());
 			IPet.playersWithActivePets.put(owner.getDisplayName(), new PetID(
 					this.dimension, this.getEntityId()));
 		}
@@ -257,9 +257,9 @@ public abstract class BeastMasterPet extends EntityTameable implements IPet {
 	public EntityLivingBase getOwner() {
 		EntityPlayer player;
 		if (worldObj.isRemote) {
-			player = this.worldObj.getPlayerEntityByName(this.getOwnerName());
+			player = this.worldObj.getPlayerEntityByName(this.func_152113_b());//getOwnerName
 		} else {
-			player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(this.getOwnerName());
+			player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.func_152113_b());//GetPlayerForUsername
 		}
 		return player;
 	}
@@ -315,7 +315,7 @@ public abstract class BeastMasterPet extends EntityTameable implements IPet {
 	public boolean hitByEntity(Entity par1Entity) {
 		try {
 			if (((EntityPlayer) par1Entity).isRiding()
-					&& this.getOwnerName().equals(((EntityPlayer) par1Entity).getDisplayName())) {
+					&& this.func_152113_b().equals(((EntityPlayer) par1Entity).getDisplayName())) {
 				return true;
 			}
 		} catch (Throwable ex) {
@@ -544,7 +544,7 @@ public abstract class BeastMasterPet extends EntityTameable implements IPet {
 		}
 
 		if (!worldObj.isRemote) {
-			if ((!IPet.playersWithActivePets.containsKey(this.getOwnerName()) || (this.dimension != getOwner().dimension))) {
+			if ((!IPet.playersWithActivePets.containsKey(this.func_152113_b()) || (this.dimension != getOwner().dimension))) {
 				this.setDead();
 				return;
 			}
@@ -661,12 +661,12 @@ public abstract class BeastMasterPet extends EntityTameable implements IPet {
 	@Override
 	public void setDead() {
 
-		if (IPet.playersWithActivePets.containsKey(this.getOwnerName())) {
+		if (IPet.playersWithActivePets.containsKey(this.func_152113_b())) {
 			PlayerRpgInventory inv = PlayerRpgInventory.get((EntityPlayer) getOwner());
 
 			ItemStack itemizedPet = writePetToItemStack(new ItemStack(RpgMastersAddon.crystal));
 			inv.setInventorySlotContents(6, itemizedPet);
-			IPet.playersWithActivePets.remove(this.getOwnerName());
+			IPet.playersWithActivePets.remove(this.func_152113_b());
 		}
 		super.setDead();
 	}
@@ -732,7 +732,7 @@ public abstract class BeastMasterPet extends EntityTameable implements IPet {
 		itemstacknbt.setTag("RPGPetInfo", petnbt);
 		itemstacknbt.setInteger("PetLevel",this.dataWatcher.getWatchableObjectInt(LEVELID));
 		itemstacknbt.setString("PetName", getEntityName());
-		itemstacknbt.setString("OwnerName", getOwnerName());
+		itemstacknbt.setString("OwnerName", func_152113_b());
 		itemstacknbt.setInteger("PetAttack", getAttackDamage());
 		itemstacknbt.setFloat("PetMaxHealth", getMaxHealth());
 		itemstacknbt.setFloat("PetHealth", getHealth());

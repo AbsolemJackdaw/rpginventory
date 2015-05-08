@@ -13,7 +13,7 @@ public class NecroRenderer extends RpgItemRenderer {
 
 	NecroSkull skull;
 
-	private static final ResourceLocation loc = new ResourceLocation("rpginventorymod:weapons/Skull.png");
+	private static final ResourceLocation loc = new ResourceLocation("subaraki:weapons/Skull.png");
 	
 	public NecroRenderer() {
 		skull = new NecroSkull();

@@ -15,9 +15,9 @@ public class BowRender extends RpgItemRenderer {
 
 	ModelBow model;
 
-	private ResourceLocation bow_pull_1 = new ResourceLocation("rpginventorymod:weapons/bow.png");
-	private ResourceLocation bow_pull_2 = new ResourceLocation("rpginventorymod:weapons/bow2.png");
-	private ResourceLocation bow_pull_3 = new ResourceLocation("rpginventorymod:weapons/bow3.png");
+	private ResourceLocation bow_pull_1 = new ResourceLocation("subaraki:weapons/bow.png");
+	private ResourceLocation bow_pull_2 = new ResourceLocation("subaraki:weapons/bow2.png");
+	private ResourceLocation bow_pull_3 = new ResourceLocation("subaraki:weapons/bow3.png");
 
 	public BowRender() {
 		model = new ModelBow();
@@ -25,8 +25,10 @@ public class BowRender extends RpgItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		int usingItem = ((ItemArcherBow) item.getItem()).usingItem;
-
+		int usingItem = 72000 - ((ItemArcherBow) item.getItem()).usingItem;
+		
+//		System.out.println(usingItem);
+		
 		switch (type) {
 		case EQUIPPED:
 			GL11.glPushMatrix();

@@ -22,6 +22,11 @@ public class RpgConfig {
 	public boolean useSpell = true;
 
 	public boolean DefaultRotation = true;
+	
+	public boolean lapisWeaponRepair = true;
+	
+	public boolean glovesFprendering = false;
+
 
 	// This is to prevent accidintally creating a new instance.
 	private RpgConfig() {
@@ -45,7 +50,21 @@ public class RpgConfig {
 
 		config.addCustomCategoryComment("Rotation",
 				"Set to false for alternative PetGui Pet Rotation if default fails.");
+		
 		DefaultRotation = config.get("Rotation", "Default Rotation", true)
 				.getBoolean(true);
+		
+		config.addCustomCategoryComment("Weapon Repair",
+				"set to false to disable lapis jewelery from repairing held weapons.");
+		
+		lapisWeaponRepair = config.get("Weapon Repair", "Lapis Jewelery Repairs Weapons", true)
+				.getBoolean(true);
+		
+		config.addCustomCategoryComment("Experimental First person Gloves",
+				"sets rendering of first person gloves if any are worn. warning : experimental version and unfinished");
+		
+		glovesFprendering = config.get("Experimental First person Gloves", "Experimental Glove Rendering", false)
+				.getBoolean(false);
+		
 	}
 }

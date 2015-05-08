@@ -12,8 +12,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ChickenPet extends BeastMasterPet {
 
-	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/rooster.png");
-	ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/rooster_saddled.png");
+	ResourceLocation normal = new ResourceLocation("subaraki:mob/rooster.png");
+	ResourceLocation saddled = new ResourceLocation("subaraki:mob/rooster_saddled.png");
     private static final ResourceLocation chickenTexture = new ResourceLocation("textures/entity/chicken.png");
 
     

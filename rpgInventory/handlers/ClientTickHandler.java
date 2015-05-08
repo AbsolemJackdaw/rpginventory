@@ -22,6 +22,11 @@ public class ClientTickHandler /* implements ITickHandler */{
 	@SubscribeEvent
 	public void clientTick(TickEvent.ClientTickEvent ev) {
 
+//		net.minecraft.entity.player.EntityPlayer p = Minecraft.getMinecraft().thePlayer;
+//		System.out.println(p.getDisplayName() + " " +rpgInventory.gui.rpginv.PlayerRpgInventory.get(p).armorSlots.toString());
+//		
+//		System.out.println(rpgInventory.gui.rpginv.PlayerRpgInventory.get(p).getShield());
+		
 		// This will only inject our buttons into the existing GuiInventory
 		// object.
 		// The button prevents calls to the parent GUI if clicked, and calls our

@@ -1,21 +1,15 @@
 package addonMasters;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import rpgInventory.RpgInventoryMod;
 import rpgInventory.gui.rpginv.RpgGui;
-import addonMasters.packets.RBServerPacketHandler;
+import addonMasters.packets.PacketStorePet;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class ClientTickHandler {
 
@@ -28,19 +22,12 @@ public class ClientTickHandler {
 		try {
 			if (Minecraft.getMinecraft().currentScreen instanceof RpgGui) {
 
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out = new ByteBufOutputStream(buf);
-				out.writeInt(RBServerPacketHandler.STOREPET);
-				RpgInventoryMod.Channel.sendToServer(new FMLProxyPacket(buf, "R_BChannel"));
-				out.close();
-
+				RpgMastersAddon.SNW.sendToServer(new PacketStorePet());
+				
 				// This will only inject our buttons into the existing
-				// GuiInventory
-				// object.
+				// GuiInventory object.
 				// The button prevents calls to the parent GUI if clicked, and
-				// calls our
-				// packet
-				// instead. I see no incompatibilies.
+				// calls our packet instead. I see no incompatibilies.
 				// added = false;
 
 				if ((Minecraft.getMinecraft().currentScreen != null)

@@ -21,8 +21,8 @@ public class BoarPet extends BeastMasterPet {
 	boolean checked = false;
 
 	ResourceLocation pig = new ResourceLocation("textures/entity/pig/pig.png");
-	ResourceLocation normal = new ResourceLocation("rpginventorymod:pet/boar.png");
-	ResourceLocation saddled = new ResourceLocation("rpginventorymod:pet/boar_saddled.png");
+	ResourceLocation normal = new ResourceLocation("subaraki:mob/boar.png");
+	ResourceLocation saddled = new ResourceLocation("subaraki:mob/boar_saddled.png");
 
 	public BoarPet(World par1World) {
 		this(par1World, null, null);

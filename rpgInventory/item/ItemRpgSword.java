@@ -12,5 +12,4 @@ public class ItemRpgSword extends ItemSword {
 		super(etm);
 		this.maxStackSize = 1;
 	}
-
 }

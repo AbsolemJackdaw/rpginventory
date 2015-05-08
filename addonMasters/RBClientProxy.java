@@ -30,7 +30,6 @@ import addonMasters.entity.renderers.RenderPet;
 import addonMasters.models.LionHead;
 import addonMasters.models.ModelBeastArmor;
 import addonMasters.models.ModelRogueArmor;
-import addonMasters.packets.RBClientPacketHandler;
 import addonMasters.render.AxeRender;
 import addonMasters.render.LionHeadRenderer;
 import addonMasters.render.RenderDagger;
@@ -107,18 +106,12 @@ public class RBClientProxy extends RBCommonProxy {
 
 	@Override
 	public void registerRendering() {
-		RpgMastersAddon.Channel.register(new RBClientPacketHandler());
-
 
 		if (RpgConfig.instance.render3D == true) {
-			MinecraftForgeClient.registerItemRenderer(RpgMastersAddon.beastAxe,
-					new AxeRender());
-			MinecraftForgeClient.registerItemRenderer(RpgMastersAddon.daggers,
-					new RenderDagger());
+			MinecraftForgeClient.registerItemRenderer(RpgMastersAddon.beastAxe,new AxeRender());
+			MinecraftForgeClient.registerItemRenderer(RpgMastersAddon.daggers,new RenderDagger());
 
-			MinecraftForgeClient.registerItemRenderer(RpgMastersAddon.beastShield,
-					new LionHeadRenderer(new LionHead(),
-							"rpginventorymod:jewels/lion.png"));
+			MinecraftForgeClient.registerItemRenderer(RpgMastersAddon.beastShield,new LionHeadRenderer(new LionHead(),"subaraki:jewels/lion.png"));
 		}
 
 		RenderingRegistry.registerEntityRenderingHandler(BullPet.class,new RenderPet());
@@ -127,9 +120,6 @@ public class RBClientProxy extends RBCommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(ChickenPet.class,new RenderPet());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPetXP.class,new RenderXPOrb());
 		RenderingRegistry.registerEntityRenderingHandler(EntityTeleportStone.class,new RenderSnowball(Items.feather, 1));
-
-		// RPGKeyHandler.registerKeyhandler(new RpgKeyHandlerRB(),
-		// IKeyHandler.bindKeys, IKeyHandler.reps);
 
 		MinecraftForge.EVENT_BUS.register(new SoundManager());
 
@@ -140,9 +130,5 @@ public class RBClientProxy extends RBCommonProxy {
 		WeaponAbility ability = new WeaponAbility();
 		RpgUtility.registerSpecialAbility(RpgMastersAddon.beastAxe, ability);
 		RpgUtility.registerSpecialAbility(RpgMastersAddon.daggers, ability);
-
-		// TickRegistry.registerTickHandler(new ClientTickHandler(),
-		// Side.CLIENT);
-
 	}
 }

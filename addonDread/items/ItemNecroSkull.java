@@ -1,11 +1,5 @@
 package addonDread.items;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-
-import java.io.IOException;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,8 +17,7 @@ import addonDread.RpgDreadAddon;
 import addonDread.minions.EntityMinionS;
 import addonDread.minions.EntityMinionZ;
 import addonDread.minions.IMinion;
-import addonDread.packets.DreadServerPacketHandler;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+import addonDread.packets.PacketSpawnMinion;
 
 public class ItemNecroSkull extends ItemRpgSword  {
 
@@ -49,19 +42,19 @@ public class ItemNecroSkull extends ItemRpgSword  {
 
 							EntityMinionZ var4 = new EntityMinionZ(world, p);
 							var4.setPosition(mob.posX, mob.posY, mob.posZ);
-							
+
 							for (int i = 0; i < 5; i++) {
 								ItemStack stack = mob.getEquipmentInSlot(i);
 								if (stack != null) {
 									var4.setCurrentItemOrArmor(i, stack);
 								}
 							}
-							
+
 							mob.setDead();
 
 							world.spawnEntityInWorld(var4);
 							var4.setTamed(true);
-							var4.setOwner(p.getDisplayName());
+							var4.func_152115_b(p.getDisplayName());//setOwner
 
 						} else if (mob.getClass() == EntitySkeleton.class) {
 							EntityMinionS var4 = new EntityMinionS(world, p);
@@ -69,9 +62,9 @@ public class ItemNecroSkull extends ItemRpgSword  {
 							mob.setDead();
 							world.spawnEntityInWorld(var4);
 							var4.setTamed(true);
-							var4.setOwner(p.getDisplayName());
+							var4.func_152115_b(p.getDisplayName());//setOwner
 						} else if (!(mob instanceof IMinion)) {
-							mob.addPotionEffect(new PotionEffect(Potion.wither.id, RpgInventoryMod.donators.contains(p.getDisplayName()) ? 80: 60, 1));
+							mob.addPotionEffect(new PotionEffect(Potion.wither.id, 60, 1));
 						} else {
 							mob.heal(3);
 						}
@@ -87,20 +80,9 @@ public class ItemNecroSkull extends ItemRpgSword  {
 	public ItemStack onItemRightClick(ItemStack is, World world,
 			EntityPlayer player) {
 
-		if(RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSNECRO)) {
-			try {
-				ByteBuf buf = Unpooled.buffer();
-				ByteBufOutputStream out =new ByteBufOutputStream(buf);
-				out.writeInt(DreadServerPacketHandler.SKULLRCLICK);
-				RpgDreadAddon.Channel.sendToServer(new FMLProxyPacket(buf, "DreadPacket"));
-				out.close();
-
-			} catch (IOException ex) {
-				ex.printStackTrace();
-				System.out.println("skull");
-
-			}
-		}
+		if(RpgInventoryMod.playerClass.contains(RpgDreadAddon.CLASSNECRO))
+			RpgDreadAddon.SNW.sendToServer(new PacketSpawnMinion());
+		
 		return is;
 	}
 
@@ -118,8 +100,7 @@ public class ItemNecroSkull extends ItemRpgSword  {
 					p.renderBrokenItemStack(weapon);
 					p.setCurrentItemOrArmor(0, (ItemStack) null);
 				} else {
-					weapon.damageItem(RpgInventoryMod.donators.contains(p
-							.getDisplayName()) ? 1 : 2, p);
+					weapon.damageItem(2, p);
 				}
 				((EntityLiving) entity).heal(3);
 				return true;
