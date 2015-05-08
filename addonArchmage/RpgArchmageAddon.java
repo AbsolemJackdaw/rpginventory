@@ -22,11 +22,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = RpgArchmageAddon.id, name = RpgArchmageAddon.id, version = "RpgInv8.4", dependencies = "required-after:RpgBase")
-// @NetworkMod(clientSideRequired = true, serverSideRequired = false,
-// clientPacketHandlerSpec = @SidedPacketHandler(channels = { "RpgMSPacket" },
-// packetHandler = RpgMSPacketHandler.class), serverPacketHandlerSpec =
-// @SidedPacketHandler(channels = { "RpgMSPacket" }, packetHandler =
-// RpgMSPacketHandler.class))
 public class RpgArchmageAddon {
 
 	public static final String name = "RPGMS";
@@ -53,17 +48,6 @@ public class RpgArchmageAddon {
 	public void load(FMLInitializationEvent event) {
 
 		FMLLog.info("Rpg++ ArchMage Installed. Renderers can be Used");
-
-		// LanguageRegistry.addName(fireStaff, "Fire Staff");
-		// LanguageRegistry.addName(frostStaff, "Frost Staff");
-		// LanguageRegistry.addName(earthStaff, "Earth Staff");
-		// LanguageRegistry.addName(windStaff, "Wind Staff");
-		// LanguageRegistry.addName(ultimateStaff, "Ultimate Staff");
-		// LanguageRegistry.addName(archBook, "Archmage Aura Shield");
-		// LanguageRegistry.addName(archmageHood, "Arch Mage Hat");
-		// LanguageRegistry.addName(archmageChest, "Arch Mage Gown");
-		// LanguageRegistry.addName(archmageLegs, "Arch Mage Leggings");
-		// LanguageRegistry.addName(archMageBoots, "Arch Mage Boots");
 
 		GameRegistry.addShapelessRecipe(new ItemStack(ultimateStaff),
 				windStaff, earthStaff, frostStaff, fireStaff,
@@ -96,8 +80,6 @@ public class RpgArchmageAddon {
 				"III", "IBI", "III", 'B', RpgBaseAddon.alchemisthood, 'I',
 				Items.gold_nugget );
 
-		// EntityRegistry.registerGlobalEntityID(EntityElementalBlocks.class,
-		// "Elemental", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityElementalBlock.class,
 				"Elemental", RpgInventoryMod.instance.getUniqueID(), this,
 				250, 1, true);
@@ -125,7 +107,7 @@ public class RpgArchmageAddon {
 		ultimateStaff = new ItemElementalStaff(5, 300).setMaxStackSize(1)
 				.setMaxDamage(150).setUnlocalizedName("staffElemental");
 		archBook = new ItemMageShield(1, 300, "",
-				"rpginventorymod:jewels/archMageShield.png")
+				"subaraki:jewels/archMageShield.png")
 		.setUnlocalizedName("archTome");
 
 		archmageHood = new ItemMageARmor(archMage, 4, 0)
@@ -160,8 +142,7 @@ public class RpgArchmageAddon {
 				String itemNameCropped = itemName.substring(itemName
 						.indexOf(".") + 1);
 
-				allItems[i].setTextureName(RpgInventoryMod.name + ":"
-						+ itemNameCropped);
+				allItems[i].setTextureName(RpgInventoryMod.name + ":"+ itemNameCropped);
 
 				GameRegistry.registerItem(allItems[i],
 						allItems[i].getUnlocalizedName(), name);

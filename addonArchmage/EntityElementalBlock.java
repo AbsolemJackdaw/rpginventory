@@ -100,7 +100,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 
 		switch (type) {
 		case 1:
-			AxisAlignedBB pool = AxisAlignedBB.getAABBPool().getAABB(
+			AxisAlignedBB pool = AxisAlignedBB.getBoundingBox(
 					var1.hitVec.xCoord - getRadius(),
 					var1.hitVec.yCoord - getRadius(),
 					var1.hitVec.zCoord - getRadius(),
@@ -144,7 +144,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			break;
 		case 2:
 			if (!worldObj.isRemote) {
-				AxisAlignedBB pool1 = AxisAlignedBB.getAABBPool().getAABB(
+				AxisAlignedBB pool1 = AxisAlignedBB.getBoundingBox(
 						var1.hitVec.xCoord - getRadius(),
 						var1.hitVec.yCoord - getRadius(),
 						var1.hitVec.zCoord - getRadius(),
@@ -215,7 +215,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 			break;
 		case 3:
 			int dmg = (int) (5 + Math.floor(getRadius()));
-			pool = AxisAlignedBB.getAABBPool().getAABB(
+			pool = AxisAlignedBB.getBoundingBox(
 					var1.hitVec.xCoord - getRadius(),
 					var1.hitVec.yCoord - getRadius(),
 					var1.hitVec.zCoord - getRadius(),
@@ -261,7 +261,7 @@ public class EntityElementalBlock extends EntityThrowable implements IEntityAddi
 
 			break;
 		case 4:
-			pool = AxisAlignedBB.getAABBPool().getAABB(
+			pool = AxisAlignedBB.getBoundingBox(
 					var1.hitVec.xCoord - getRadius(),
 					var1.hitVec.yCoord - getRadius(),
 					var1.hitVec.zCoord - getRadius(),

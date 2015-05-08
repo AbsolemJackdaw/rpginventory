@@ -49,7 +49,7 @@ public class MSClientProxy extends MSCommonProxy {
 
 			MinecraftForgeClient.registerItemRenderer(RpgArchmageAddon.archBook,
 					new BookRenderer(new ModelMageBook(),
-							"rpginventorymod:jewels/archMageShield.png"));
+							"subaraki:jewels/talisman.png"));
 		}
 	}
 }

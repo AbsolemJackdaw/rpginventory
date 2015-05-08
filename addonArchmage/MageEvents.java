@@ -19,43 +19,29 @@ public class MageEvents {
 				ItemStack weapon = p.getCurrentEquippedItem();
 				if (weapon != null) {
 					/* ==== ARCHMAGE EFFECTS ==== */
-					if (RpgInventoryMod.playerClass
-							.contains(RpgArchmageAddon.CLASSARCHMAGESHIELD)
-							|| RpgInventoryMod.developers.contains(p
-									.getDisplayName().toLowerCase())) {
-						if (weapon.getItem().equals(RpgArchmageAddon.fireStaff)
-								|| weapon.getItem().equals(
-										RpgArchmageAddon.ultimateStaff)) {
+					if (RpgInventoryMod.playerClass.contains(RpgArchmageAddon.CLASSARCHMAGESHIELD)
+							|| RpgInventoryMod.developers.contains(p.getDisplayName().toLowerCase())) {
+						if (weapon.getItem().equals(RpgArchmageAddon.fireStaff)|| weapon.getItem().equals(RpgArchmageAddon.ultimateStaff)) {
 							if (p.isBurning()) {
-								if (p.getHealth() < 6) {
-									p.setHealth(RpgInventoryMod.donators
-											.contains(p.getDisplayName()) ? 8
-													: 6);
-								}
+								if (p.getHealth() < 6) 
+									p.setHealth(6);
 								p.extinguish();
 							}
 						}
-						if (weapon.getItem().equals(RpgArchmageAddon.windStaff)
-								|| weapon.getItem().equals(
-										RpgArchmageAddon.ultimateStaff))
+						if (weapon.getItem().equals(RpgArchmageAddon.windStaff)|| weapon.getItem().equals(RpgArchmageAddon.ultimateStaff))
 						{
 							p.fallDistance = 0; // negates fall damage
 						}
-						if (weapon.getItem().equals(RpgArchmageAddon.frostStaff)
-								|| weapon.getItem().equals(
-										RpgArchmageAddon.ultimateStaff))
+						if (weapon.getItem().equals(RpgArchmageAddon.frostStaff)|| weapon.getItem().equals(RpgArchmageAddon.ultimateStaff))
 						{
 							if (p.getAir() < 20)
 							{
 								p.setAir(20); // you can not drown !
 							}
 						}
-						if (weapon.getItem().equals(RpgArchmageAddon.earthStaff)
-								|| weapon.getItem().equals(
-										RpgArchmageAddon.ultimateStaff))
+						if (weapon.getItem().equals(RpgArchmageAddon.earthStaff)|| weapon.getItem().equals(RpgArchmageAddon.ultimateStaff))
 						{
-							p.curePotionEffects(new ItemStack(
-									Items.milk_bucket, 1)); // cure all negative
+							p.curePotionEffects(new ItemStack(Items.milk_bucket, 1)); // cure all negative
 							// potion effects
 						}
 					}

@@ -9,7 +9,7 @@ public class ItemMageShield extends ItemRpgInvArmor {
 
 	private ModelMageBook book = new ModelMageBook();
 
-	public static final ResourceLocation mantle = new ResourceLocation("rpginventorymod:jewels/magemantle.png");
+	public static final ResourceLocation mantle = new ResourceLocation("subaraki:jewels/magemantle.png");
 	
 	public ItemMageShield(int par4, int maxDamage, String name,
 			String resourcelocation) {
@@ -42,5 +42,10 @@ public class ItemMageShield extends ItemRpgInvArmor {
 	@Override
 	public String shieldClass() {
 		return RpgArchmageAddon.CLASSARCHMAGESHIELD;
+	}
+	
+	@Override
+	public int getBlockChance() {
+		return 35;
 	}
 }
